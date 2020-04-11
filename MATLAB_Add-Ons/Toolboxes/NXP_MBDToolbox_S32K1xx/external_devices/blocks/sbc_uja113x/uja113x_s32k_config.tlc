@@ -1,0 +1,157 @@
+%implements uja113x_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja113x.h")>
+    %<LibAddToCommonIncludes("sbc_uja113x_map.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_uja113x_config_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %openfile tmpFcnBuf
+        void uja113x_init0(void);
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(LibGetModelDotHFile(), "Functions", tmpFcnBuf)>
+
+        %openfile tmpFcnBuf
+            /* Configure sbc uja113x init structure. */
+            const uja113x_drv_cfg_t drvConfig = {
+                .chipType = %<user_config.chipType>,
+                .lpspiInstance = %<user_config.lpspiInstance>,
+                .timeout = 500U
+            };
+
+            const uja113x_lckc_cfg_t m_lockRegCfg = {
+                .lock6 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock6>,
+                .lock5 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock5>,
+                .lock4 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock4>,
+                .lock3 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock3>,
+                .lock2 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock2>,
+                .lock1 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock1>,
+                .lock0 = (uja113x_lckc_lkxc_t)%<user_config.lockMask.lock0>
+            };
+            %if (user_config.bankCfg == "0")
+            const uja113x_hvio_bank_cfg_t hvioBank0Cfg ={
+                .bankWupIntMask = (uint8_t)(%<user_config.wakePin.wpre> | %<user_config.wakePin.wpfe>),
+                .hvioConfig[%<user_config.WakeUpPin>].ionActivateCtrl = IONAC_ENABLED,
+                .hvioConfig[%<user_config.WakeUpPin>].ionConfCtrl = IONCC_WUP,
+                .hvioConfig[%<user_config.WakeUpPin>].ionShutdownCtrl = IONSC_NONE
+            };
+            %endif
+             %if (user_config.bankCfg == "1")
+            const uja113x_hvio_bank_cfg_t hvioBank0Cfg ={
+                .hvioConfig[%<user_config.WakeUpPin>].ionActivateCtrl = IONAC_ENABLED,
+                .hvioConfig[%<user_config.WakeUpPin>].ionConfCtrl = IONCC_WUP,
+                .hvioConfig[%<user_config.WakeUpPin>].ionShutdownCtrl = IONSC_NONE,
+                .bankWupIntMask = (uint8_t)(%<user_config.wakePin.wpre> | %<user_config.wakePin.wpfe>)
+            };
+            %endif
+
+            const uja113x_init_cfg_t deviceConfig = {
+                .wdcWatchdogCfg = {
+                    .wtdModeCtrl = %<user_config.wdcWatchdogCfg.wtdModeCtrl>,
+                    .nomWtdPeriod = %<user_config.wdcWatchdogCfg.nomWtdPeriod>
+                },
+                .mcSbcMode = (uja113x_mc_mc_t)%<user_config.mode>,
+                .fscCfg.limpHomeCtrl = %<user_config.lhc>,
+                .sysieMask = (uint8_t) (%<user_config.sysEvnt.owte> | %<user_config.sysEvnt.spife>),
+                .rcRegulatorCfg = {
+                    .v2ShutdownCtrl = %<user_config.regulatorCtr.v2ShutdownCtrl>,
+                    .v2Ctrl = %<user_config.regulatorCtr.regulator.v2c>,
+                    .v1RstThrCtrl = %<user_config.regulatorCtr.regulator.v1rtc>
+                },
+                .supieMask = (uint8_t)(%<user_config.regulatorCtr.supplyEvnt.v2oe> | %<user_config.regulatorCtr.supplyEvnt.v2ue> | %<user_config.regulatorCtr.supplyEvnt.v1ue>),
+                .cancCanCfg = {
+                    .canFDCtrl = %<user_config.can.canConf.cfdc>,
+                    .canPartNetCtrl = %<user_config.can.canConf.cpnc>,
+                    .canModeCtrl = %<user_config.can.canConf.cmc>
+                },
+                .cpncCanPartNetCfg = {
+                    .canDataRate = %<user_config.can.datRate>,
+                    .id = (uja113x_id_id_t)(%<user_config.can.identif1> | %<user_config.can.identif2> | %<user_config.can.identif3> | %<user_config.can.identif4>),
+                    .idMask = (uja113x_idm_idm_t)(%<user_config.can.mask1> | %<user_config.can.mask2> | %<user_config.can.mask3> | %<user_config.can.mask4>),
+                    .ide = %<user_config.can.frame.ide>,
+                    .partNetDataMask = %<user_config.can.frame.pndm>,
+                    .dataLenCode = %<user_config.can.frame.dlc>
+                },
+                .dmCanDataMaskCfg = {
+                    .dm0 = %<user_config.can.dataMask0>,
+                    .dm1 = %<user_config.can.dataMask1>,
+                    .dm2 = %<user_config.can.dataMask2>,
+                    .dm3 = %<user_config.can.dataMask3>,
+                    .dm4 = %<user_config.can.dataMask4>,
+                    .dm5 = %<user_config.can.dataMask5>,
+                    .dm6 = %<user_config.can.dataMask6>,
+                    .dm7 = %<user_config.can.dataMask7>
+                    },
+                .tieMask = (uint8_t)(%<user_config.can.canTransEvnt.cbse> | %<user_config.can.canTransEvnt.cfe> | %<user_config.can.canTransEvnt.cwe> | %<user_config.Lin1WkUpEvnt> | %<user_config.Lin2WkUpEvnt>),
+                %if (user_config.bankCfg == "0")
+                .hvioBank0Cfg = &hvioBank0Cfg,
+                %endif
+                %if (user_config.bankCfg == "1")
+                .hvioBank1Cfg =  &hvioBank1Cfg,
+                %endif
+                .lckcLockRegCfg = &m_lockRegCfg
+            };
+            void uja113x_init0()
+            {
+                uint8_t txData[4U] = {0U};
+                uint8_t rxData[4U] = {0U};
+
+                UJA113X_RegisterDevice(%<user_config.instance>, &drvConfig);
+
+                txData[0U] = MTPNVS_ADDRESS;
+                UJA113X_SbcTransfer(%<user_config.instance>, true, txData, rxData, 2U);
+                if (0U != (rxData[1U] & UJA113X_MTPNVS_NVMPS_MASK))
+                {
+                    /* Program MTPVN memory. */
+                    uja113x_mtpnv_cfg_t mtpnvCfg;
+                    mtpnvCfg.highSideCtrl   = HHSDC_IO8HOC_ENABLED | HHSDC_IO7HOC_ENABLED |
+                                              HHSDC_IO6HOC_ENABLED | HHSDC_IO5HOC_ENABLED |
+                                              HHSDC_IO4HOC_ENABLED | HHSDC_IO3HOC_ENABLED |
+                                              HHSDC_IO2HOC_ENABLED | HHSDC_IO1HOC_ENABLED;
+                    mtpnvCfg.lowSideCtrl    = HLSDC_IO8LOC_ENABLED | HLSDC_IO7LOC_ENABLED |
+                                              HLSDC_IO6LOC_ENABLED | HLSDC_IO5LOC_ENABLED |
+                                              HLSDC_IO4LOC_ENABLED | HLSDC_IO3LOC_ENABLED |
+                                              HLSDC_IO2LOC_ENABLED | HLSDC_IO1LOC_ENABLED;
+
+                    mtpnvCfg.startupCtrl    = RLC_PULSE_WIDTH_20_25_MS | V2SUC_ALWAYS_OFF |
+                                              IO4SFC_STD_IO            | IO3SFC_STD_IO    |
+                                              IO2SFC_STD_IO;
+
+                    mtpnvCfg.sbcConfigCtrl  = V1RTSUC_90_NOM       | FNMC_DISABLE         |
+                                              VEXTAC_NO_PROTECTION | SLPC_SLEEP_SUPPORTED;
+                    UJA113X_SetMtpnv(%<user_config.instance>, &mtpnvCfg);
+                }
+
+                UJA113X_Init(0, &deviceConfig, &drvConfig);
+            }
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", tmpFcnBuf)>
+    }
+    %endwith
+
+    %endif
+%endfunction

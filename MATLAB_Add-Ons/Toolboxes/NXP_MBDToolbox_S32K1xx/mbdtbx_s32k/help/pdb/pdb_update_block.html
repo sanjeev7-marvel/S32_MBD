@@ -1,0 +1,91 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Programmable Delay Update Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+<div class="content">
+<!--Page-title-->
+	<h1>Programmable Delay Update Block</h1>
+	<!--Page-description-->
+	<p>This block is used to update the MOD, IDLY, CHnDLYm registers, after 1 is written to LDOK.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="pdb_update_block_files/image_block.jpg" width="300px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs (if selected):</h2>
+	<ul>
+		<li>Modulus (uint16)</li>
+		<li>Interrupt Delay (uint16)</li>
+		<li>Ch0 Delay (uint16)</li>
+		<li>Ch1 Delay (uint16)</li>
+		<li>Pulse-Out 0 Delay 0</li>
+		<li>Pulse-Out 0 Delay 1</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<p>The block dialog consists of the following tabs:</p>
+	<ul>
+		<li><a href="#LoadMode_tab">Load Mode</a></li>
+		<li><a href="#BlockInputs_tab">Block Inputs</a></li>
+	</ul>
+	<!--Table of contents-->
+    <!--Window tab-->
+		<h4><a name="LoadMode_tab"></a>Load Mode</h4>
+		<img vspace="10" src="pdb_update_block_files/image_param_1.jpg" width="450px" height="auto">
+			<p>The Load Mode tab contains the following parameters:</p>
+
+			<h3>PDB Module</h3>
+			<p>Selects which PDB module to use.</p>
+			
+			<h3>Load Mode Select</h3>
+			<p>Selects the mode to load the MOD, IDLY, CHnDLYm, INTx, and POyDLY registers.</p>
+			<ul>
+				<li>Immediately</li>
+				<li>PDB Counter reaches MOD reg value</li>
+				<li>Trigger input event is detected</li>
+				<li>PDB Counter reaches the MOD register value or a trigger input event is detected</li>
+			</ul>
+
+	<h4><a name="BlockInputs_tab"></a>Block Inputs</h4>
+	<img vspace="10" src="pdb_update_block_files/image_param_2.jpg" width="450px" height="auto">
+		<!--Tab-->
+			<h3>Modulus Input Enable</h3>
+			<p>When enabled input will show up on block.</p>
+
+			<h3>Interrupt Delay Input Enable</h3>
+			<p>When enabled input will show up on block.</p>
+
+			<h3>Ch0 Delay Inputs Enable</h3>
+			<p>When enabled input will show up on block.</p>
+
+			<h3>Ch1 Delay Inputs Enable</h3>
+			<p>When enabled input will show up on block.</p>
+
+			<h3>Pulse-Out 0 Delay Inputs Enable</h3>
+			<p>When enabled input will show up on block.</p>
+
+
+	<p>*Read Hardware Manual documentation to get more information.</p>
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+		<li>Use <a href="pdb_config_block.html">PDB_Config Block</a> to configure PDB</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+		<p>*Read Hardware Manual documentation to get more information.</p>
+	</div>
+	</body>
+</html>

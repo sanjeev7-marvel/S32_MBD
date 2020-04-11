@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>RTC Configuration Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>RTC Configuration Block</h1>
+        <!--Page-description-->
+        <p>This block allows the user to configure the LPTMR module.</p>
+        <p>The Real Time Clock Module is an independent timer that keeps track of the exact date and time with no software overhead and low power usage.</p>
+        <!--Library block image-->
+        <h2>Block Image</h2>
+        <img vspace="0" src="rtc_config_files/block_config.jpg" width="200px" height="auto" />
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+        <!--Table of contents-->
+        <p>The block dialog consists of the following tabs: </p>
+        <ul>
+            <li><a href="#general_tab">General</a></li>
+            <!--If need be for another subclass, another ul instances must be placed-->
+            <li><a href="#advanced_tab">Advanced</a></li>
+        </ul>
+        <!--Window tab-->
+        <h4><a name="general_tab"></a>General</h4>
+        <img vspace="10" src="rtc_config_files/block_config_general.jpg" width="450px" height="auto">
+        <h3>Time configuration</h3>
+        <p>Sets the initial time for the RTC counter.</p>
+        <ul>
+            <li>Date - format dd/mm/yyyy</li>
+            <li>Time - format hh:mm:ss</li>
+        </ul>
+        <h3>Show advanced options</h3>
+        <p>Shows or hides the Advanced options tab.</p>
+        <!--Advanced tab-->
+        <h4><a name="advanced_tab"></a>Advanced</h4>
+        <img vspace="10" src="rtc_config_files/block_config_advanced.jpg" width="450px" height="auto">
+        <!--Tab-->
+        <h3>Input Clock</h3>
+        <p>RTC Clock Select</p>
+        <ul>
+            <li>32KHz crystal</li>
+            <li>1KHz LPO</li>
+        </ul>
+        <h3>Clock output</h3>
+        <p>RTC Clock Out Source</p>
+        <ul>
+            <li>Disabled</li>
+            <li>Prescaler output</li>
+            <li>32KHz clock</li>
+        </ul>
+        <h3>Compensation</h3>
+        <p>When unchecked, the selected prescaler clock in Time Counter mode or selected input source in Pulse Counter mode directly clocks the counter. When checked, the counter is clocked by the output of the prescaler/glitch filter.</p>
+        <h3>Compensation value [-127,128]</h3>
+        <p>This field represents the current value used by the compensation logic for the present second interval.</p>
+        <h3>Compensation interval [1,255]</h3>
+        <p>This field configures the compensation interval in seconds from 1 to 256 to control how frequently the TCR should adjust the number of 32.768 kHz cycles in each second. The value written should be one less than the number of seconds.</p>
+        <h3>Non-supervisor write access</h3>
+        <p>When set this checkbox writes to the registers in non Supervisor Mode</p>
+        <h3>Read-only</h3>
+        <p>Enable changing the Time Counter Enable bit even if the Status register is locked</p>
+        <h3>Start RTC counter immediatly after initialization</h3>
+        <p>When unchecked, the timer counter is not enabled after initialization done. It can be enabled using the RTC_Counter_Start_Stop. When checked the counter is started immediatly after initialization done.</p>
+        <p>Default value is checked, even if the advanced configuration is unavailable.</p>
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Miscellaneous-Details-->
+        <h2>Block Miscellaneous Details</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+    </div>
+</body>
+</html>

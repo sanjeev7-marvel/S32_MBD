@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Quadrature Decoder Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <h1>Quadrature Decoder Block</h1>
+
+    <p>The main functionality of the block is to take input signals phase A and phase B to control the FTM counter increment and decrement.</p>
+
+    <h2>Block Image</h2>
+    <img vspace="0" src="quadrature_decoder_files/ftm_qd_block.jpg" width="350px" height="auto"/>
+
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Outputs:</h2>
+    <ul>
+        <li>FTM Counter value</li>
+        <li>FTM Counter direction - Indicates that the counting direction is up</li>
+        <li>FTM Overflow - Indicates that the FTM counter changed from maximum value to minimum value or vice versa</li>
+        <li>FTM Overflow direction - Indicates that the counting was up when the FTM counter overflow occurred</li>
+    </ul>
+
+
+    <h2>Parameters and Dialog Box</h2>
+
+
+    <p>The block dialog consists of the following tabs:</p>
+    <ul class="shifted">
+        <li><a href="#General_tab">General</a></li>
+        <li><a href="#Phase_A_tab">Phase A</a></li>
+        <li><a href="#Phase_B_tab">Phase B</a></li>
+    </ul>
+
+
+    <h4><a name="General_tab"></a>General</h4>
+    <p>The General tab contains the following parameters:</p>
+    <img vspace="15" src="quadrature_decoder_files/ftm_qd_general.jpg" width="450px" height="auto"/>
+
+    <h3>FTM Module</h3>
+    <p>Select which FTM module to use.</p>
+    <ul>Range: 1 &ndash; 2</ul>
+
+    <h3>Encoding Mode</h3>
+    <p>Initial frequency of PWM output signals</p>
+    <ul>
+        <li>Phase A and Phase B</li>
+        <li>Count and Direction</li>
+    </ul>
+
+    <h3>Prescale factor to apply on input</h3>
+    <p>Initial frequency of PWM output signals</p>
+    <ul>
+        <li>1 &ndash; 2 &ndash; 4 &ndash; 8 &ndash; 16 &ndash; 32 &ndash; 64 &ndash; 128</li>
+    </ul>
+
+    <h3>Counter minimum value</h3>
+    <p>Starting value of FTM counter</p>
+    <ul>Range: 0 &ndash; 65535</ul>
+
+    <h3>Counter maximum value</h3>
+    <p>The largest value on the FTM counter</p>
+    <ul>Range: 1 &ndash; 65535</ul>
+
+
+
+    <h4><a name="Phase_A_tab"></a>Phase A</h4>
+    <p>The Phase A tab contains the following parameters:</p>
+    <img vspace="15" src="quadrature_decoder_files/ftm_qd_pha_pins.jpg" width="450px" height="auto"/>
+
+    <h3>Phase A Filter Enable</h3>
+    <p>When enabled will show value field</p>
+    <ul>
+        <li>Enable/Disable</li>
+    </ul>
+
+    <h3>Phase A input pin</h3>
+    <p>Pin selection</p>
+    <ul>
+        <li>Pin list varies depending on the selected MCU in the main config block.</li>
+    </ul>
+
+    <h3>Phase polarity</h3>
+    <p>Pin selection</p>
+    <ul>
+        <li>Normal</li>
+        <li>Inverted</li>
+    </ul>
+
+
+
+
+    <h4><a name="Phase_B_tab"></a>Phase B</h4>
+    <p>The Phase B tab contains the following parameters:</p>
+    <img vspace="15" src="quadrature_decoder_files/ftm_qd_phb_pins.jpg" width="450px" height="auto"/>
+
+    <h3>Phase B Filter Enable</h3>
+    <p>When enabled will show value field</p>
+    <ul>
+        <li>Enable/Disable</li>
+    </ul>
+
+    <h3>Phase B input pin</h3>
+    <p>Pin selection</p>
+    <ul>
+        <li>Pin list varies depending on the selected MCU in the main config block.</li>
+    </ul>
+
+    <h3>Phase polarity</h3>
+    <p>Pin selection</p>
+    <ul>
+        <li>Normal</li>
+        <li>Inverted</li>
+    </ul>
+
+
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>TPP Write Register Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>TPP Write Register Block</h1>
+        <!--Page-description-->
+        <p>This block allows the user to write a TPP register at a time.</p>
+
+        <h2>Block Image</h2>
+        <img vspace="0" src="images/tpp_write_reg_block.jpg" width="300px" height="auto">
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>Data to be written in a specified register.</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+         <!--Table of contents-->
+        <img vspace="10" src="images/tpp_write_reg_param.jpg" width="450px" height="auto">
+        <p>The block has two parameter:</p>
+		
+		<h3>Instance</h3>
+		<p>Selects the TPP instance to be used.</p>
+		<p><b>Note:</b>Currently limited to only 1 instace (#0).</p>
+		
+        <h3>Register</h3>
+        <p>Available register who can be writen on TPP integrated circuit.</p>
+		<p><b>Note: </b>TPP register who can be writen are:</p>
+		<ul>
+			<li>TPP_MASK0: used to enable interrupt for following events: overtemperature, desaturation, VLS, overcurrent error.</li>
+			<li>TPP_MASK0: used to enable interrupt for following events: phase error, framing error, write error, reset.</li>
+			<li>TPP_MODE: used to enable following modes for TPP: lock, fullon and desaturation. </li>
+				<ul>
+			<p>If DESATURATION mode is disabled (the corresponding bit is cleared), then at a desaturation event, or if a phase error event is detected on any channel, all channels turn off and generates an Interrupt, if interrupts are enabled.</p>
+			<p>If DESATURATION mode is enabled (the corresponding bit is set), then at a desaturation event/phase error channel shutdown is disabled, but interrupts are still possible if unmasked.</p>
+			</ul>
+				<ul>
+					<p>If FULLON mode is enabled, then programmed deadtime control is disabled, making it is possible to have both high and Low-side
+					drivers in a phase on simultaneously. This could be useful in special applications such as alternator regulators, or switched-reluctance
+					motor drive applications. There is no deadtime control in fullon mode. Input signals directly control the output stages, synchronized
+					with the internal clock</p>
+				</ul>
+				<ul>
+				 <p>If LOCK mode is enabled, then this mode can only be cleared with a device reset. Since the mode lock mode
+					can only be set, this bit prevents any subsequent, and likely erroneous, mode, deadtime, or mask register changes from being
+					received. If an attempt is made to write to a register when mode lock is enabled, a write error fault is generated.</p>
+				</ul>
+			<li>TPP_CLINT0: used to clear interrupt due following events: overtemperature, desaturation, VLS, overcurrent error.</li>
+			<li>TPP_CLINT1: used to clear interrupt due following events: phase error, framing error, write error, reset.</li>
+		</ul>
+	
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+                <li>Configure the <a href="tpp_config.html">TPP Configuration</a> block.</li>
+				<li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+	
+	<p>* Read Hardware Manual documentation to get more information (<a href="https://www.nxp.com/products/power-management/motor-and-solenoid-drivers/bldc-h-bridge-stepper/3-phase-brushless-motor-pre-driver:GD3000?fpsp=1&tab=Documentation_Tab">GD3000).</a></p>
+   </div>
+  </body>
+</html>

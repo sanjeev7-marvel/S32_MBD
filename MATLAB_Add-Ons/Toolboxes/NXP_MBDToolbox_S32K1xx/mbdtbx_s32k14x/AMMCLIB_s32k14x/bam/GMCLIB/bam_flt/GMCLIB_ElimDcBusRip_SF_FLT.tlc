@@ -1,0 +1,60 @@
+
+%implements GMCLIB_ElimDcBusRip_SF_FLT "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GMCLIB_INCLUDED")
+      %assign ::GMCLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gmclib.h\"" + "\n")>
+   %endif 
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+  %assign fltModIndex     = CAST("Real32",Parameter[0].Value[0])
+  
+  %assign alphaIn  = LibBlockInputSignal(0, "", "", 0)
+  %assign betaIn   = LibBlockInputSignal(1, "", "", 0)
+  %assign fltArgDcBusMsr = LibBlockInputSignal(2, "", "", 0)
+  %assign alphaOut = LibBlockOutputSignal(0, "", "", 0)
+  %assign betaOut  = LibBlockOutputSignal(1, "", "", 0)
+  
+  {  
+    SWLIBS_2Syst_FLT Out;
+	SWLIBS_2Syst_FLT In;
+	const SWLIBS_2Syst_FLT *const pIn = &In;
+    static GMCLIB_ELIMDCBUSRIP_T_FLT param = { 0, %<fltModIndex> };
+	static const GMCLIB_ELIMDCBUSRIP_T_FLT *const pParam = &param;
+	
+	In.fltArg1 = %<alphaIn>;
+	In.fltArg2 = %<betaIn>;
+    param.fltArgDcBusMsr = %<fltArgDcBusMsr>;
+    GMCLIB_ElimDcBusRip_FLT(&Out, pIn, pParam);
+	%<alphaOut> = Out.fltArg1;
+	%<betaOut>  = Out.fltArg2;
+  }
+
+%endfunction

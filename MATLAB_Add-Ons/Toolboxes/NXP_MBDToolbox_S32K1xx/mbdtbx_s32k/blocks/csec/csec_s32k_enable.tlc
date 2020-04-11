@@ -1,0 +1,64 @@
+%implements csec_s32k_enable "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flash_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_csec_enable_sdk_params", blockPath)
+    %with sdk_params
+
+    const flash_user_config_t flash1_InitConfig0 = {
+        .PFlashBase  = 0x00000000U,
+        .PFlashSize  = 0x00080000U,
+        .DFlashBase  = 0x10000000U,
+        .EERAMBase   = 0x14000000U,
+        /* If using callback, any code reachable from this function must not be placed in a Flash block targeted for a program/erase operation.*/
+        .CallBack    = NULL_CALLBACK
+    };
+    flash_ssd_config_t flashSSDConfig;
+
+    FLASH_DRV_Init(&flash1_InitConfig0, &flashSSDConfig);
+
+    if (flashSSDConfig.EEESize == 0) {
+        uint32_t address;
+        uint32_t size;
+
+        uint8_t unsecure_key[FTFx_PHRASE_SIZE] = {0xFFu, 0xFFu, 0xFFu, 0xFFu, 0xFEu, 0xFFu, 0xFFu, 0xFFu};
+
+        /* First, erase all Flash blocks to ensure the IFR region is blank
+         * before partitioning FlexNVM and FlexRAM */
+        FLASH_DRV_EraseAllBlock(&flashSSDConfig);
+        /* Reprogram secure byte in Flash configuration field */
+
+        address = 0x408u;
+        size = FTFx_PHRASE_SIZE;
+        FLASH_DRV_Program(&flashSSDConfig, address, size, unsecure_key);
+
+        FLASH_DRV_DEFlashPartition(&flashSSDConfig, 0x2, 0x4, %<uCSEcKeySize>, false, true);
+    }
+    %endwith
+
+    %endif
+%endfunction

@@ -1,0 +1,43 @@
+%implements lptmr_s32k_set_compare "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lptmr_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output 
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign instance = 0
+    %assign value_type = FEVAL("mbd_s32k_lptmr_set_compare_params", blockPath)
+    //SET COMPARE
+    LPTMR_DRV_StopCounter(INST_LPTMR%<instance>);
+    %if ISEQUAL(value_type, "count")
+        uint16_t comp_value_set = %<LibBlockInputSignal(0,"","",0)>;
+        status_t set_status = LPTMR_DRV_SetCompareValueByCount(INST_LPTMR%<instance>, comp_value_set);	
+    %elseif ISEQUAL(value_type, "us")
+        uint32_t comp_value_set = %<LibBlockInputSignal(0,"","",0)>;
+        status_t set_status = LPTMR_DRV_SetCompareValueByUs(INST_LPTMR%<instance>, comp_value_set);	
+    %endif
+    LPTMR_DRV_StartCounter(INST_LPTMR%<instance>);
+
+    %endif 
+%endfunction

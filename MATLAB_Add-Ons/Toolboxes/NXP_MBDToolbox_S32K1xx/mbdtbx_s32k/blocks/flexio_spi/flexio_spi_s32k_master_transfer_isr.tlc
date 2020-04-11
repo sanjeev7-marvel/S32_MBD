@@ -1,0 +1,69 @@
+%implements flexio_spi_s32k_master_transfer_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flexio_spi_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %openfile triggerFcnBuffer
+        void flexio_spi_master_transfer_callback(void *driverState, spi_event_t event, void *userData){
+                 /* Trigger subsystem after transfer finished */
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+        } /* end of flexio_spi_master_transfer_callback */
+    %closefile triggerFcnBuffer
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions",  triggerFcnBuffer)>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_spi_master_transfer_isr_sdk_params", blockPath)
+    %with sdk_params
+    {
+        FLEXIO_SPI_DRV_MasterTransfer(&flexioSPIMasterState%<user_config.InstanceNumber>,
+        %<LibBlockInputSignalAddr(0, "", "", 0)>, %<LibBlockOutputSignalAddr(1, "", "", 0)>,
+        %<LibBlockInputSignalWidth(0)>);
+    }
+    %endwith
+
+    %endif
+%endfunction

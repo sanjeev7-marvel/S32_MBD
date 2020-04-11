@@ -1,0 +1,4441 @@
+Model {
+  Name			  "ammclib_amclib_observer_F32_s32k11x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.311"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 20
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/  MLIB_MulSat_F32  "
+      SID		      "1148"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/ MLIB_MulSat_F32"
+      SID		      "1146"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/ MLIB_MulSat_F32 "
+      SID		      "1147"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/GFLIB_Sin_F32"
+      SID		      "1012"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/GFLIB_Sin_F32 "
+      SID		      "1021"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/GFLIB_Sin_F32  "
+      SID		      "1022"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_ConvertPU_F32F16"
+      SID		      "1181"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_ConvertPU_F32F16    "
+      SID		      "1183"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Div_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_Div_F32"
+      SID		      "1028"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Div_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_Div_F32  "
+      SID		      "1145"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_MulSat_F32"
+      SID		      "1031"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_MulSat_F32 "
+      SID		      "1033"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/3 Phase Symmetric System/MLIB_MulSat_F32  "
+      SID		      "1034"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/AMCLIB/bam_f32/AMCLIB_BemfObsrvDQ_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/AMCLIB_BemfObsrvDQ_F32"
+      SID		      "1129"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/AMCLIB/bam_f32/AMCLIB_TrackObsrv_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/AMCLIB_TrackObsrv_F32"
+      SID		      "1165"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/FreeMaster_Config"
+      SID		      "564"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/GMCLIB/bam_f32/GMCLIB_Clark_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/GMCLIB_Clark_F32"
+      SID		      "1035"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/GMCLIB/bam_f32/GMCLIB_Clark_F32"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/GMCLIB_Clark_F32 "
+      SID		      "1159"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "ammclib_amclib_observer_F32_s32k11x/Model Info"
+      SID		      "524"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This model tests the AMMCLIB AMCLIB OBSERVER F32 blocks\n\nValidation:\n- Run the model in Simulatio"
+  "n and check the results\n- Open Freemaster (ammclib_amclib_observer_F32_s32k11x.pmp) and compare the HW results agai"
+  "nst the Simulated ones"
+  PostLoadFcn		  "ammclib_amclib_observer_s32k11x_param();"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  CloseFcn		  "clear all;"
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [8.0, 8.0, 1550.0, 838.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1875.0, 833.0]
+	ZoomFactor		[1.0]
+	Offset			[968.56287057122245, -226.8646059291398]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAX+AAACygAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Wed Jul 29 12:18:26 2015"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:53:52 2019"
+  RTWModifiedTimeStamp	  485682832
+  ModelVersionFormat	  "1.%<AutoIncrement:311>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "ammclib_amclib_observer_F32_s32k11x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "ammclib_amclib_observer_F32_s32k11x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.001"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "1"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "none"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "none"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  off
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      256
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k14.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  256
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant on
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  off
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases off
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Diagnostics/Data Validity"
+      ConfigPrmDlgPosition    [ 357, 82, 1466, 794 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      ShareAcrossModelInstances	off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Delay
+      DelayLengthSource	      "Dialog"
+      DelayLength	      "2"
+      DelayLengthUpperLimit   "100"
+      InitialConditionSource  "Dialog"
+      InitialCondition	      "0.0"
+      ExternalReset	      "None"
+      ShowEnablePort	      off
+      PreventDirectFeedthrough off
+      DiagnosticForDelayLength "None"
+      RemoveDelayLengthCheckInGeneratedCode off
+      InputProcessing	      "Elements as channels (sample based)"
+      UseCircularBuffer	      off
+      SampleTime	      "-1"
+      StateMustResolveToSignalObject off
+      CodeGenStateStorageClass "Auto"
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      EnsureOutportIsVirtual  off
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+      MustResolveToSignalObject	off
+      OutputWhenUnConnected   off
+      OutputWhenUnconnectedValue "0"
+      VectorParamsAs1DForOutWhenUnconnected off
+    }
+    Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+    }
+    Block {
+      BlockType		      Scope
+      DefaultConfigurationName "Simulink.scopes.TimeScopeBlockCfg"
+      Floating		      off
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      GeneratePreprocessorConditionals off
+      AllowZeroVariantControls off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
+      ContentPreviewEnabled   off
+      IsWebBlock	      off
+      IsObserver	      off
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      CollapseMode	      "All dimensions"
+      CollapseDim	      "1"
+      InputSameDT	      on
+      AccumDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as first input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  System {
+    Name		    "ammclib_amclib_observer_F32_s32k11x"
+    Location		    [8, 8, 1558, 846]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "1184"
+    Block {
+      BlockType		      DataStoreRead
+      Name		      " Read ThreePhase_Current_Amplitude1"
+      SID		      "1142"
+      Ports		      [0, 1]
+      Position		      [645, 547, 805, 583]
+      ZOrder		      2520
+      ForegroundColor	      "red"
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "ThreePhase_Current_Amplitude"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      " Read ThreePhase_Voltage_Amplitude"
+      SID		      "989"
+      Ports		      [0, 1]
+      Position		      [645, 372, 805, 408]
+      ZOrder		      2409
+      ForegroundColor	      "red"
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "ThreePhase_Voltage_Amplitude"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "3 Phase Symmetric System"
+      SID		      "990"
+      Ports		      [2, 7]
+      Position		      [845, 301, 1000, 649]
+      ZOrder		      2410
+      RequestExecContextInheritance off
+      Variant		      off
+      Port {
+	PortNumber		4
+	Name			"PHASE_A"
+      }
+      Port {
+	PortNumber		5
+	Name			"PHASE_B"
+      }
+      Port {
+	PortNumber		6
+	Name			"PHASE_C"
+      }
+      Port {
+	PortNumber		7
+	Name			"THETA"
+      }
+      System {
+	Name			"3 Phase Symmetric System"
+	Location		[-7, -7, 1543, 841]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"87"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Voltage_Amplitude "
+	  SID			  "991"
+	  Position		  [220, 278, 250, 292]
+	  ZOrder		  2174
+	  ForegroundColor	  "red"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Current_Amplitude"
+	  SID			  "1141"
+	  Position		  [220, 403, 250, 417]
+	  ZOrder		  2441
+	  ForegroundColor	  "red"
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  " "
+	  SID			  "1017"
+	  Position		  [-295, 45, -265, 75]
+	  ZOrder		  2419
+	  Value			  "32767"
+	  OutDataTypeStr	  "int16"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "  MLIB_MulSat_F32  "
+	  SID			  "1148"
+	  Ports			  [2, 1]
+	  Position		  [625, 521, 845, 594]
+	  ZOrder		  2451
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  " MLIB_MulSat_F32"
+	  SID			  "1146"
+	  Ports			  [2, 1]
+	  Position		  [625, 306, 845, 379]
+	  ZOrder		  2449
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  " MLIB_MulSat_F32 "
+	  SID			  "1147"
+	  Ports			  [2, 1]
+	  Position		  [625, 411, 845, 484]
+	  ZOrder		  2450
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "2/3"
+	  SID			  "1182"
+	  Position		  [115, 170, 145, 200]
+	  ZOrder		  2456
+	  Value			  "2/3*(2^31-1)"
+	  OutDataTypeStr	  "int32"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Add"
+	  SID			  "996"
+	  Ports			  [2, 1]
+	  Position		  [285, 52, 315, 83]
+	  ZOrder		  2177
+	  Inputs		  "+-"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Chart"
+	  SID			  "992"
+	  Ports			  [1, 1]
+	  Position		  [-195, 1, 0, 119]
+	  ZOrder		  2136
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  SFBlockType		  "Chart"
+	  Variant		  off
+	  System {
+	    Name		    "Chart"
+	    Location		    [-7, -7, 1543, 841]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "33"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Input_Amplitude"
+	      SID		      "992::30"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      21
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "992::32"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      23
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "992::31"
+	      Tag		      "Stateflow S-Function ammclib_amclib_observer_F32_s32k11x 4"
+	      Ports		      [1, 2]
+	      Position		      [180, 100, 230, 160]
+	      ZOrder		      22
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[1 2]"
+	      SFunctionDeploymentMode off
+	      EnableBusSupport	      on
+	      SFcnIsStateOwnerBlock   off
+	      Port {
+		PortNumber		2
+		Name			"value"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "992::33"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      24
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "value"
+	      SID		      "992::5"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -5
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      5
+	      SrcBlock		      "Input_Amplitude"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "value"
+	      ZOrder		      6
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "value"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      7
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      8
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GFLIB_Sin_F32"
+	  SID			  "1012"
+	  Ports			  [1, 1]
+	  Position		  [340, -69, 560, -1]
+	  ZOrder		  2414
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+	  SourceType		  "GFLIB_Sin_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GFLIB_Sin_F32 "
+	  SID			  "1021"
+	  Ports			  [1, 1]
+	  Position		  [340, 36, 560, 104]
+	  ZOrder		  2423
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+	  SourceType		  "GFLIB_Sin_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GFLIB_Sin_F32  "
+	  SID			  "1022"
+	  Ports			  [1, 1]
+	  Position		  [340, 146, 560, 214]
+	  ZOrder		  2424
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/GFLIB/bam_f32/GFLIB_Sin_F32"
+	  SourceType		  "GFLIB_Sin_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "I_PHASE_A_F32"
+	  SID			  "1149"
+	  Ports			  [1]
+	  Position		  [910, 265, 1015, 305]
+	  ZOrder		  2452
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "I_PHASE_A_F32"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "I_PHASE_B_F32"
+	  SID			  "1150"
+	  Ports			  [1]
+	  Position		  [910, 385, 1015, 425]
+	  ZOrder		  2453
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "I_PHASE_B_F32"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "I_PHASE_C_F32"
+	  SID			  "1151"
+	  Ports			  [1]
+	  Position		  [910, 490, 1015, 530]
+	  ZOrder		  2454
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "I_PHASE_C_F32"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_ConvertPU_F32F16"
+	  SID			  "1181"
+	  Ports			  [1, 1]
+	  Position		  [20, 26, 240, 94]
+	  ZOrder		  2455
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+	  SourceType		  "MLIB_ConvertPU_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_ConvertPU_F32F16    "
+	  SID			  "1183"
+	  Ports			  [1, 1]
+	  Position		  [-205, 346, 15, 414]
+	  ZOrder		  2457
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+	  SourceType		  "MLIB_ConvertPU_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_Div_F32"
+	  SID			  "1028"
+	  Ports			  [2, 1]
+	  Position		  [340, 266, 560, 339]
+	  ZOrder		  2430
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Div_F32"
+	  SourceType		  "MLIB_Div_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_Div_F32  "
+	  SID			  "1145"
+	  Ports			  [2, 1]
+	  Position		  [340, 391, 560, 464]
+	  ZOrder		  2445
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Div_F32"
+	  SourceType		  "MLIB_Div_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_MulSat_F32"
+	  SID			  "1031"
+	  Ports			  [2, 1]
+	  Position		  [625, -54, 845, 19]
+	  ZOrder		  2433
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_MulSat_F32 "
+	  SID			  "1033"
+	  Ports			  [2, 1]
+	  Position		  [625, 51, 845, 124]
+	  ZOrder		  2435
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "MLIB_MulSat_F32  "
+	  SID			  "1034"
+	  Ports			  [2, 1]
+	  Position		  [625, 161, 845, 234]
+	  ZOrder		  2436
+	  LibraryVersion	  "1.726"
+	  SourceBlock		  "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+	  SourceType		  "MLIB_MulSat_F32"
+	  ContentPreviewEnabled	  off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sub"
+	  SID			  "998"
+	  Ports			  [2, 1]
+	  Position		  [285, 162, 315, 193]
+	  ZOrder		  2179
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "U_PHASE_A_F32"
+	  SID			  "1077"
+	  Ports			  [1]
+	  Position		  [910, -95, 1015, -55]
+	  ZOrder		  2438
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "U_PHASE_A_F32"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "U_PHASE_B_F32"
+	  SID			  "1078"
+	  Ports			  [1]
+	  Position		  [910, 25, 1015, 65]
+	  ZOrder		  2439
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "U_PHASE_B_F32"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "U_PHASE_C_F32"
+	  SID			  "1079"
+	  Ports			  [1]
+	  Position		  [910, 130, 1015, 170]
+	  ZOrder		  2440
+	  BackgroundColor	  "lightBlue"
+	  DataStoreName		  "U_PHASE_C_F32"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "IA-phase"
+	  SID			  "1152"
+	  Position		  [910, 338, 940, 352]
+	  ZOrder		  2446
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "IB-phase"
+	  SID			  "1153"
+	  Position		  [910, 443, 940, 457]
+	  ZOrder		  2447
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "IC-phase"
+	  SID			  "1154"
+	  Position		  [910, 553, 940, 567]
+	  ZOrder		  2448
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "UA-phase"
+	  SID			  "994"
+	  Position		  [910, -22, 940, -8]
+	  ZOrder		  2175
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "UB-phase"
+	  SID			  "995"
+	  Position		  [910, 83, 940, 97]
+	  ZOrder		  2176
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "UC-phase"
+	  SID			  "997"
+	  Position		  [910, 193, 940, 207]
+	  ZOrder		  2178
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Theta"
+	  SID			  "1049"
+	  Position		  [905, -132, 935, -118]
+	  ZOrder		  2437
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "Chart"
+	  SrcPort		  1
+	  DstBlock		  "MLIB_ConvertPU_F32F16"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  205
+	  SrcBlock		  "2/3"
+	  SrcPort		  1
+	  Points		  [119, 0]
+	  Branch {
+	    ZOrder		    102
+	    Points		    [0, -110]
+	    DstBlock		    "Add"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    18
+	    DstBlock		    "Sub"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  ZOrder		  47
+	  SrcBlock		  "Sub"
+	  SrcPort		  1
+	  DstBlock		  "GFLIB_Sin_F32  "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  48
+	  SrcBlock		  "Add"
+	  SrcPort		  1
+	  DstBlock		  "GFLIB_Sin_F32 "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  69
+	  SrcBlock		  "Voltage_Amplitude "
+	  SrcPort		  1
+	  DstBlock		  "MLIB_Div_F32"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  72
+	  SrcBlock		  "MLIB_Div_F32"
+	  SrcPort		  1
+	  Points		  [19, 0; 0, -90]
+	  Branch {
+	    ZOrder		    96
+	    DstBlock		    "MLIB_MulSat_F32  "
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    95
+	    Points		    [0, -110]
+	    Branch {
+	      ZOrder		      94
+	      DstBlock		      "MLIB_MulSat_F32 "
+	      DstPort		      2
+	    }
+	    Branch {
+	      ZOrder		      93
+	      Points		      [0, -105]
+	      DstBlock		      "MLIB_MulSat_F32"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Line {
+	  ZOrder		  90
+	  SrcBlock		  "GFLIB_Sin_F32"
+	  SrcPort		  1
+	  Points		  [43, 0]
+	  Branch {
+	    ZOrder		    163
+	    Points		    [0, 360]
+	    DstBlock		    " MLIB_MulSat_F32"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    162
+	    DstBlock		    "MLIB_MulSat_F32"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  91
+	  SrcBlock		  "GFLIB_Sin_F32 "
+	  SrcPort		  1
+	  Points		  [35, 0]
+	  Branch {
+	    ZOrder		    165
+	    Points		    [0, 360]
+	    DstBlock		    " MLIB_MulSat_F32 "
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    164
+	    DstBlock		    "MLIB_MulSat_F32 "
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  92
+	  SrcBlock		  "GFLIB_Sin_F32  "
+	  SrcPort		  1
+	  Points		  [27, 0]
+	  Branch {
+	    ZOrder		    170
+	    Points		    [0, 360]
+	    DstBlock		    "  MLIB_MulSat_F32  "
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    169
+	    DstBlock		    "MLIB_MulSat_F32  "
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  100
+	  SrcBlock		  "MLIB_MulSat_F32 "
+	  SrcPort		  1
+	  Points		  [39, 0]
+	  Branch {
+	    ZOrder		    133
+	    Points		    [0, -45]
+	    DstBlock		    "U_PHASE_B_F32"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    132
+	    DstBlock		    "UB-phase"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  101
+	  SrcBlock		  "MLIB_MulSat_F32  "
+	  SrcPort		  1
+	  Points		  [37, 0]
+	  Branch {
+	    ZOrder		    135
+	    Points		    [0, -50]
+	    DstBlock		    "U_PHASE_C_F32"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    134
+	    DstBlock		    "UC-phase"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  142
+	  SrcBlock		  " "
+	  SrcPort		  1
+	  Points		  [24, 0]
+	  Branch {
+	    ZOrder		    202
+	    DstBlock		    "Chart"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    71
+	    Points		    [0, 320]
+	    DstBlock		    "MLIB_ConvertPU_F32F16    "
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  144
+	  SrcBlock		  "MLIB_MulSat_F32"
+	  SrcPort		  1
+	  Points		  [39, 0]
+	  Branch {
+	    ZOrder		    131
+	    Points		    [0, -60]
+	    DstBlock		    "U_PHASE_A_F32"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    130
+	    DstBlock		    "UA-phase"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  145
+	  SrcBlock		  "Current_Amplitude"
+	  SrcPort		  1
+	  DstBlock		  "MLIB_Div_F32  "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  150
+	  SrcBlock		  " MLIB_MulSat_F32 "
+	  SrcPort		  1
+	  Points		  [39, 0]
+	  Branch {
+	    ZOrder		    149
+	    DstBlock		    "IB-phase"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    148
+	    Points		    [0, -45]
+	    DstBlock		    "I_PHASE_B_F32"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  153
+	  SrcBlock		  "  MLIB_MulSat_F32  "
+	  SrcPort		  1
+	  Points		  [37, 0]
+	  Branch {
+	    ZOrder		    152
+	    DstBlock		    "IC-phase"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    151
+	    Points		    [0, -50]
+	    DstBlock		    "I_PHASE_C_F32"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  156
+	  SrcBlock		  " MLIB_MulSat_F32"
+	  SrcPort		  1
+	  Points		  [39, 0]
+	  Branch {
+	    ZOrder		    155
+	    DstBlock		    "IA-phase"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    154
+	    Points		    [0, -60]
+	    DstBlock		    "I_PHASE_A_F32"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  157
+	  SrcBlock		  "MLIB_Div_F32  "
+	  SrcPort		  1
+	  Points		  [13, 0]
+	  Branch {
+	    ZOrder		    159
+	    Points		    [1, 0; 0, 35]
+	    Branch {
+	      ZOrder		      161
+	      Points		      [0, 110]
+	      DstBlock		      "  MLIB_MulSat_F32  "
+	      DstPort		      2
+	    }
+	    Branch {
+	      ZOrder		      160
+	      DstBlock		      " MLIB_MulSat_F32 "
+	      DstPort		      2
+	    }
+	  }
+	  Branch {
+	    ZOrder		    158
+	    Points		    [0, -70]
+	    DstBlock		    " MLIB_MulSat_F32"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  ZOrder		  204
+	  SrcBlock		  "MLIB_ConvertPU_F32F16"
+	  SrcPort		  1
+	  Points		  [18, 0]
+	  Branch {
+	    ZOrder		    104
+	    Points		    [0, -95]
+	    Branch {
+	      ZOrder		      106
+	      Points		      [0, -90]
+	      DstBlock		      "Theta"
+	      DstPort		      1
+	    }
+	    Branch {
+	      ZOrder		      105
+	      DstBlock		      "GFLIB_Sin_F32"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    ZOrder		    51
+	    Points		    [0, 110]
+	    DstBlock		    "Sub"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    50
+	    DstBlock		    "Add"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  208
+	  SrcBlock		  "MLIB_ConvertPU_F32F16    "
+	  SrcPort		  1
+	  Points		  [83, 0]
+	  Branch {
+	    ZOrder		    212
+	    Points		    [0, -60]
+	    DstBlock		    "MLIB_Div_F32"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    211
+	    Points		    [0, 65]
+	    DstBlock		    "MLIB_Div_F32  "
+	    DstPort		    2
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "AMCLIB_BemfObsrvDQ_F32"
+      SID		      "1129"
+      Ports		      [6, 3]
+      Position		      [1505, 298, 1830, 757]
+      ZOrder		      2508
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/AMCLIB/bam_f32/AMCLIB_BemfObsrvDQ_F32"
+      SourceType	      "AMCLIB_BemfObsrvDQ_F32"
+      ContentPreviewEnabled   off
+      f32IGain		      "f32IGain"
+      f32UGain		      "f32UGain"
+      f32WIGain		      "f32WIGain"
+      f32EGain		      "f32EGain"
+      s16Shift		      "s16Shift"
+      f32CC1sc_D	      "f32CC1sc_D"
+      f32CC1sc_Q	      "f32CC1sc_Q"
+      f32CC2sc_D	      "f32CC2sc_D"
+      f32CC2sc_Q	      "f32CC2sc_Q"
+      f32UpperLimit_D	      "f32UpperLimit_D"
+      f32UpperLimit_Q	      "f32UpperLimit_Q"
+      f32LowerLimit_D	      "f32LowerLimit_D"
+      f32LowerLimit_Q	      "f32LowerLimit_Q"
+      u16NShift		      "u16NShift"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "AMCLIB_TrackObsrv_F32"
+      SID		      "1165"
+      Ports		      [3, 2]
+      Position		      [2120, 350, 2445, 490]
+      ZOrder		      2531
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/AMCLIB/bam_f32/AMCLIB_TrackObsrv_F32"
+      SourceType	      "AMCLIB_TrackObsrv_F32"
+      ContentPreviewEnabled   off
+      f32CC1sc		      "f32CC1sc"
+      f32CC2sc		      "f32CC2sc"
+      u16NShift		      "u16NShift"
+      f32C1		      "f32C1"
+      u16IntegNShift	      "u16IntegNShift"
+      Port {
+	PortNumber		1
+	Name			"THETA_EST_F32"
+      }
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant"
+      SID		      "1166"
+      Position		      [2000, 450, 2085, 480]
+      ZOrder		      2532
+      ShowName		      off
+      Value		      "-(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant1"
+      SID		      "1168"
+      Position		      [2000, 405, 2085, 435]
+      ZOrder		      2534
+      ShowName		      off
+      Value		      "(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay"
+      SID		      "1171"
+      Ports		      [1, 1]
+      Position		      [2065, 823, 2100, 857]
+      ZOrder		      2537
+      BlockMirror	      on
+      ShowName		      off
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay1"
+      SID		      "1172"
+      Ports		      [1, 1]
+      Position		      [2065, 768, 2100, 802]
+      ZOrder		      2538
+      BlockMirror	      on
+      ShowName		      off
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FreeMaster_Config"
+      SID		      "564"
+      Ports		      []
+      Position		      [1886, -187, 2196, -131]
+      ZOrder		      2040
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      SourceType	      "fm_s32k_config"
+      interface		      "LPUART0"
+      baudrate		      "19200"
+      rxd		      "PTB0: [LPUART0_RX | Receive]"
+      txd		      "PTB1: [LPUART0_TX | Transmit]"
+      mode		      "Short Interrupt"
+      isr_prio		      "1"
+      show_adv_opts	      on
+      use_scope		      on
+      max_scope_vars	      "8"
+      use_recorder	      on
+      max_rec_vars	      "8"
+      rec_buff_size	      "1024"
+      rec_timebase	      "0"
+      rec_timebase_unit	      "milliseconds"
+      comm_buffer_size_auto   on
+      comm_buffer_size	      "255"
+      comm_rqueue_size_default on
+      comm_rqueue_size	      "32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "GMCLIB_Clark_F32"
+      SID		      "1035"
+      Ports		      [3, 2]
+      Position		      [1090, 302, 1360, 448]
+      ZOrder		      2421
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/GMCLIB/bam_f32/GMCLIB_Clark_F32"
+      SourceType	      "GMCLIB_Clark_F32"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "GMCLIB_Clark_F32 "
+      SID		      "1159"
+      Ports		      [3, 2]
+      Position		      [1090, 452, 1360, 598]
+      ZOrder		      2525
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/GMCLIB/bam_f32/GMCLIB_Clark_F32"
+      SourceType	      "GMCLIB_Clark_F32"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "I_PHASE_A_F32_declaration"
+      SID		      "1155"
+      Position		      [1471, 50, 1573, 90]
+      ZOrder		      2521
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "I_PHASE_A_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		22
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  23
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    24
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  25
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "I_PHASE_B_F32_declaration"
+      SID		      "1156"
+      Position		      [1471, 110, 1573, 150]
+      ZOrder		      2522
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "I_PHASE_B_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		26
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  27
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    28
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  29
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "I_PHASE_C_F32_declaration"
+      SID		      "1157"
+      Position		      [1471, 170, 1573, 210]
+      ZOrder		      2523
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "I_PHASE_C_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		30
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  31
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    32
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  33
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Ports		      []
+      Position		      [1534, -190, 1844, -18]
+      ZOrder		      1
+      ForegroundColor	      "red"
+      Priority		      "0"
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K142-16KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : GCC\nTarget Type : FLASH\nDownload Code after build : (OpenSDA: E)\nStep Tick Interrupt Priority "
+      ": 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K116"
+      mcu_target_package      "48-LQFP"
+      mcu_target_sram_size    "17KB"
+      mcu_system_clock_freq   "40"
+      mcu_xtal_freq	      "External 40"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "0"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m0plus -mthumb -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m0plus -mthumb -g"
+      gcc_target_link_opts    "-mcpu=cortex-m0plus -mthumb"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K116_17_flash.ld"
+      ghs_target_compile_opts "-mcpu=cortexm0plus -mthumb -fsoft -Ogeneral -Wundef -Wimplicit-int -Wshadow -Wtrigraphs"
+      " --no_commons --gnu_asm -gnu99 -gdwarf-2 -G "
+      ghs_target_assemble_opts "-mcpu=cortexm0plus -mthumb -fsoft --gnu_asm"
+      ghs_target_link_opts    "-mcpu=cortexm0plus -mthumb -fsoft"
+      ghs_target_default_lcf  off
+      ghs_target_user_lcf     "S32K116_17_flash.ld"
+      iar_target_compile_opts "--thumb -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--thumb"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  off
+      iar_target_user_lcf     "S32K116_17_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "524"
+      Ports		      []
+      Position		      [965, -191, 1528, -12]
+      ZOrder		      1976
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: ammclib_amclib_observer_F32_s32k11x\\n\\nDescription: This model tests the "
+      "AMMCLIB AMCLIB OBSERVER F32 blocks\\n\\nValidation:\\n- Run the model in Simulation and check the results\\n- Op"
+      "en Freemaster (ammclib_amclib_observer_F32_s32k11x.pmp) and compare the HW results against the Simulated ones"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      SID		      "1174"
+      Ports		      [2, 1]
+      Position		      [2535, 376, 2540, 414]
+      ZOrder		      2540
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "PHASE_ERR_F32"
+      SID		      "1178"
+      Ports		      [1]
+      Position		      [2120, 280, 2225, 320]
+      ZOrder		      2544
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "PHASE_ERR_F32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "PHASE_ERR_declaration"
+      SID		      "1177"
+      Position		      [2081, 170, 2183, 210]
+      ZOrder		      2543
+      ForegroundColor	      "red"
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "PHASE_ERR_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		34
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  35
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    36
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  37
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "POSITION"
+      SID		      "1175"
+      Ports		      [1]
+      Position		      [2590, 379, 2620, 411]
+      ZOrder		      2541
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Mi"
+      "nYLimReal','-2684011024.625','MaxYLimReal','2684243571.625','YLabelReal','','MinYLimMag','        0.00000','MaxY"
+      "LimMag','2684243571.625','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 "
+      "0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666666666666"
+      "7;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137254901960"
+      "8 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.6509803"
+      "92156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',2,'LineN"
+      "ames',{{'THETA_EST_F32','THETA'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimRe"
+      "al','-2684011024.625','MaxYLimReal','2684243571.625','YLabelReal','','MinYLimMag','        0.00000','MaxYLimMag'"
+      ",'2684243571.625','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'A"
+      "xesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.6235294"
+      "11764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.3"
+      "92156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.65098039215686"
+      "3])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Vers"
+      "ion','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Phase_Err_F32"
+      SID		      "1135"
+      Ports		      [1]
+      Position		      [1945, 284, 1975, 316]
+      ZOrder		      2514
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-721.25','MaxYLimReal','1481.25','YLabelReal','','MinYLimMag'"
+      ",' 0.00000','MaxYLimMag','1481.25','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'Axes"
+      "Color',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666"
+      "66666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313"
+      "72549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686"
+      " 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines"
+      "',1,'LineNames',{{'AMCLIB_BemfObsrvDQ_F32/1'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',stru"
+      "ct('MinYLimReal','-721.25','MaxYLimReal','1481.25','YLabelReal','','MinYLimMag',' 0.00000','MaxYLimMag','1481.25"
+      "','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0"
+      ".686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4"
+      "11764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0"
+      ".831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Conf"
+      "iguration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'"
+      "Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "SPEED"
+      SID		      "1170"
+      Ports		      [1]
+      Position		      [2590, 439, 2620, 471]
+      ZOrder		      2536
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData9'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-7907686.375','MaxYLimReal','27660357.375','YLabelReal','','M"
+      "inYLimMag','     0.00000','MaxYLimMag','27660357.375','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMa"
+      "gPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'Color"
+      "Order',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392"
+      "156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1"
+      " 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNa"
+      "mes',{{}},'NumLines',1,'LineNames',{{'AMCLIB_TrackObsrv_F32/2'}},'ShowContent',true,'Placement',1)},'DisplayProp"
+      "ertyDefaults',struct('MinYLimReal','-7907686.375','MaxYLimReal','27660357.375','YLabelReal','','MinYLimMag','   "
+      "  0.00000','MaxYLimMag','27660357.375','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
+      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.07450"
+      "98039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0."
+      "274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.074509803921"
+      "5686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Mea"
+      "surements',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "SPEED_EST_F32"
+      SID		      "1180"
+      Ports		      [1]
+      Position		      [2340, 510, 2445, 550]
+      ZOrder		      2546
+      BlockMirror	      on
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "SPEED_EST_F32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "SPEED_EST_F32_declaration"
+      SID		      "1176"
+      Position		      [2081, 110, 2183, 150]
+      ZOrder		      2542
+      ForegroundColor	      "red"
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "SPEED_EST_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		38
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  39
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    40
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  41
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope1"
+      SID		      "1136"
+      Ports		      [1]
+      Position		      [1880, 514, 1910, 546]
+      ZOrder		      2515
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-2105.625','MaxYLimReal','320.625','YLabelReal','','MinYLimMa"
+      "g','  0.00000','MaxYLimMag','2105.625','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
+      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0"
+      "666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0."
+      "831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803921"
+      "5686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumL"
+      "ines',1,'LineNames',{{'AMCLIB_BemfObsrvDQ_F32/2'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',"
+      "struct('MinYLimReal','-2105.625','MaxYLimReal','320.625','YLabelReal','','MinYLimMag','  0.00000','MaxYLimMag','"
+      "2105.625','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickC"
+      "olor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706"
+      " 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862"
+      "745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),ext"
+      "mgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','20"
+      "16b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope2"
+      SID		      "1137"
+      Ports		      [1]
+      Position		      [1880, 669, 1910, 701]
+      ZOrder		      2516
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData3'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-10322.00000','MaxYLimReal','18958.00000','YLabelReal','','Mi"
+      "nYLimMag','   0.00000','MaxYLimMag','18958.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPha"
+      "se',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrde"
+      "r',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568"
+      "62745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0"
+      "745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames'"
+      ",{{}},'NumLines',1,'LineNames',{{'AMCLIB_BemfObsrvDQ_F32/3'}},'ShowContent',true,'Placement',1)},'DisplayPropert"
+      "yDefaults',struct('MinYLimReal','-10322.00000','MaxYLimReal','18958.00000','YLabelReal','','MinYLimMag','   0.00"
+      "000','MaxYLimMag','18958.00000','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesCol"
+      "or',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.074509803921"
+      "5686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.2745098"
+      "03921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0."
+      "650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measuremen"
+      "ts',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "THETA_EST_F32"
+      SID		      "1179"
+      Ports		      [1]
+      Position		      [2340, 280, 2445, 320]
+      ZOrder		      2545
+      BlockMirror	      on
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "THETA_EST_F32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "THETA_EST_F32_declaration"
+      SID		      "1173"
+      Position		      [2081, 50, 2183, 90]
+      ZOrder		      2539
+      ForegroundColor	      "red"
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "THETA_EST_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		42
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  43
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    44
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  45
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "THETA_IN_F32_declaration"
+      SID		      "580"
+      Position		      [1776, 50, 1878, 90]
+      ZOrder		      2056
+      ForegroundColor	      "red"
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "THETA_IN_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		46
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  47
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    48
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  49
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "THETA_IN_res"
+      SID		      "707"
+      Ports		      [1]
+      Position		      [1170, 665, 1275, 705]
+      ZOrder		      2135
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "THETA_IN_F32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "ThreePhase_Current_Amplitude_declaration"
+      SID		      "1140"
+      Position		      [975, 130, 1162, 170]
+      ZOrder		      2519
+      ForegroundColor	      "red"
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "ThreePhase_Current_Amplitude"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "0.3*(2^31-1)"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		50
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  51
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    52
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  53
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-(2^31-1)"
+      OutMax		      "2^31-1"
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "ThreePhase_Voltage_Amplitude_declaration"
+      SID		      "988"
+      Position		      [975, 70, 1162, 110]
+      ZOrder		      2408
+      ForegroundColor	      "red"
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "ThreePhase_Voltage_Amplitude"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "0.61*(2^31-1)"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		54
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  55
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    56
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  57
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-(2^31-1)"
+      OutMax		      "2^31-1"
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "U_PHASE_A_F32_declaration"
+      SID		      "778"
+      Position		      [1321, 50, 1423, 90]
+      ZOrder		      2202
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "U_PHASE_A_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		58
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  59
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    60
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  61
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "U_PHASE_B_F32_declaration"
+      SID		      "1075"
+      Position		      [1321, 110, 1423, 150]
+      ZOrder		      2459
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "U_PHASE_B_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		62
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  63
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    64
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  65
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "U_PHASE_C_F32_declaration"
+      SID		      "1076"
+      Position		      [1321, 170, 1423, 210]
+      ZOrder		      2460
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "U_PHASE_C_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		66
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  67
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    68
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  69
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Line {
+      Name		      "THETA"
+      ZOrder		      1425
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      7
+      Points		      [80, 0; 0, 60]
+      Branch {
+	ZOrder			1846
+	Labels			[2, 1]
+	Points			[0, 186; 1435, 0]
+	DstBlock		"Mux"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			1845
+	DstBlock		"THETA_IN_res"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      1350
+      SrcBlock		      " Read ThreePhase_Voltage_Amplitude"
+      SrcPort		      1
+      DstBlock		      "3 Phase Symmetric System"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      1750
+      SrcBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      SrcPort		      2
+      DstBlock		      "Scope1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      1751
+      SrcBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      SrcPort		      3
+      DstBlock		      "Scope2"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      1759
+      SrcBlock		      " Read ThreePhase_Current_Amplitude1"
+      SrcPort		      1
+      DstBlock		      "3 Phase Symmetric System"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      1784
+      SrcBlock		      "GMCLIB_Clark_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      1785
+      SrcBlock		      "GMCLIB_Clark_F32"
+      SrcPort		      2
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      1786
+      SrcBlock		      "GMCLIB_Clark_F32 "
+      SrcPort		      1
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      1787
+      SrcBlock		      "GMCLIB_Clark_F32 "
+      SrcPort		      2
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      4
+    }
+    Line {
+      ZOrder		      1788
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      1
+      DstBlock		      "GMCLIB_Clark_F32"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      1789
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      2
+      DstBlock		      "GMCLIB_Clark_F32"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      1790
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      3
+      DstBlock		      "GMCLIB_Clark_F32"
+      DstPort		      3
+    }
+    Line {
+      Name		      "PHASE_A"
+      ZOrder		      1791
+      Labels		      [0, 0]
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      4
+      DstBlock		      "GMCLIB_Clark_F32 "
+      DstPort		      1
+    }
+    Line {
+      Name		      "PHASE_B"
+      ZOrder		      1792
+      Labels		      [0, 0]
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      5
+      DstBlock		      "GMCLIB_Clark_F32 "
+      DstPort		      2
+    }
+    Line {
+      Name		      "PHASE_C"
+      ZOrder		      1793
+      Labels		      [0, 0]
+      SrcBlock		      "3 Phase Symmetric System"
+      SrcPort		      6
+      DstBlock		      "GMCLIB_Clark_F32 "
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      1749
+      SrcBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      SrcPort		      1
+      Points		      [89, 0]
+      Branch {
+	ZOrder			1826
+	Points			[149, 0]
+	Branch {
+	  ZOrder		  1849
+	  Points		  [0, -75]
+	  DstBlock		  "PHASE_ERR_F32"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  1848
+	  DstBlock		  "AMCLIB_TrackObsrv_F32"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	ZOrder			1825
+	Points			[0, -75]
+	DstBlock		"Phase_Err_F32"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      1827
+      SrcBlock		      "Constant"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_TrackObsrv_F32"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      1828
+      SrcBlock		      "Constant1"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_TrackObsrv_F32"
+      DstPort		      2
+    }
+    Line {
+      Name		      "THETA_EST_F32"
+      ZOrder		      1829
+      Labels		      [1, 1]
+      SrcBlock		      "AMCLIB_TrackObsrv_F32"
+      SrcPort		      1
+      Points		      [22, 0]
+      Branch {
+	ZOrder			1850
+	Points			[0, -85]
+	DstBlock		"THETA_EST_F32"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			1844
+	DstBlock		"Mux"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			1843
+	Points			[0, 400]
+	DstBlock		"Delay1"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      1830
+      SrcBlock		      "AMCLIB_TrackObsrv_F32"
+      SrcPort		      2
+      Points		      [41, 0]
+      Branch {
+	ZOrder			1842
+	Points			[0, 75]
+	Branch {
+	  ZOrder		  1852
+	  DstBlock		  "SPEED_EST_F32"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  1851
+	  Points		  [0, 310]
+	  DstBlock		  "Delay"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	ZOrder			1832
+	DstBlock		"SPEED"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      1834
+      SrcBlock		      "Delay"
+      SrcPort		      1
+      Points		      [-640, 0; 0, -200]
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      5
+    }
+    Line {
+      ZOrder		      1837
+      SrcBlock		      "Delay1"
+      SrcPort		      1
+      Points		      [-613, 0; 0, -70]
+      DstBlock		      "AMCLIB_BemfObsrvDQ_F32"
+      DstPort		      6
+    }
+    Line {
+      ZOrder		      1847
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      DstBlock		      "POSITION"
+      DstPort		      1
+    }
+    Annotation {
+      SID		      "1184"
+      Name		      "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+      "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }"
+      "\n</style></head><body style=\" font-family:'Arial'; font-size:10px; font-weight:400; font-style:normal;\">\n<p "
+      "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0"
+      "px; line-height:100%;\"><span style=\" font-size:10px;\">Expected results:</span></p>\n<p style=\" margin-top:0p"
+      "x; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;\""
+      "><img src=\"[$unpackedFolder]/simulink/resources/mwimg_e7d17252-b99d-440c-8f94-b230e6612864.png\" /><img src=\"["
+      "$unpackedFolder]/simulink/resources/mwimg_dfeac646-2433-4824-830c-bb111d83365d.png\" /></p></body></html>"
+      Position		      [2683, 257, 4089, 900]
+      InternalMargins	      [0, 0, 0, 0]
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      Interpreter	      "rich"
+      ZOrder		      -1
+    }
+    Annotation {
+      SID		      "592"
+      Name		      "S32K11x EVB Config and example description"
+      Position		      [955, -216, 2238, 13]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      4879
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "593"
+      Name		      "Data Initializations"
+      Position		      [955, 32, 2240, 245]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      4880
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "594"
+      Name		      "F32 FOC Calculations"
+      Position		      [615, 260, 2644, 908]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      4881
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+MatResources {
+  NumRecords		  2
+  ResourceRecord {
+    Path		    /simulink/resources/mwimg_dfeac646-2433-4824-830c-bb111d83365d.png
+    Data		    "B5!.1PT*&@H    -24A$4@   KX   )U\" (   \"PRF15    \"7!(67,  !)T   2= '>9A]X   @ $E$051XG.S=>704YYWO_Z>Z"
+    "6ZVED5H;V@4\":P$A81:QVN/8.. !$QN2F&LGSO&,3P9?G,QQ[\"3.F25S[^_X9OR;W(R=W\"0F9GY)AAN3<< >L >#68R7F,T(Q+Y(0D@L$A):6DO"
+    "OM?S^*&@:;:T2+74CWJ^<X]-575W]?:H5ZM//\\U2U]/0WGA0   !#8Q%\"_&'#?T2Z#   < ?XUC>?,D6Z!@  <\"<A.@    .(#@  P \"B P  ,"
+    "(#H    #\" Z     X@.  #  ,O@3]<V-%ZXTC*,_4XKG)\"3D3JLD@  0/0*$1T^^^+8%8\\Y;7R&HJJRHBF**BNJHJJ*HLFJ*JN:HNHK-473%$65"
+    "5551M9Z6*ZOF=WQMV4.CTP8  #!J0D0'U>=MKF]V=K2KJJJJFJ)JJJJIVO4'BJ9IFE!4]>9*3:B:YG&T^MR9H],    PFD)$A_*B_.E3\"NQ)20-MH"
+    "&EZF-#C@YXAU([VCA@+LR@  !B#0D2'N#AK;DY.>GI:O\\^J@<\"@*JJJ*LKUI:8X:WM;^PA4\"P# B),D*>0VFJ:-0B5#)$E2967E[-FS^WWV\\.'"
+    "#%14582QX^'T#JJJ>.'9VYXLKFG>\\I?C]BJ*JJJHHBJ*/6PQ@^W/23<]M[V>E=-\\O:J]O7/N+^R2IGZ>&O#YH7P  #)DVJ$A7UUME965%1<7APX?"
+    "[/J7GALK*RC\"^W3\"C@ZJJ+I^\\Y8];LXLONRYL\\;2WJYJJJ#>Z'52UOQ?5_N(^:9G8%CCTVTJK R?VA3^OT5?6_%Q\\KRCHC+]Z6]\"'M?>%0D/"
+    "KMY5]K^AF0@$ 8\"R:/7MVO^DAD!L&ZI 8GA#1H=]LI:IJC]OWZT_JO)_O2$Y1+?X+[56'@@8O5$U3A>CSPMH/-NY;^/,?+@VL6/K\"S3-^0.$+ZW^"
+    "^<-_&#\\+26[#T3:WFYPO7+2,\\  #&M+[I881R@QA*=.B5'F1%/='4\\S\\V'WWOG>V%W0TQ;BT^7K1_LDOV^=3K%$55^\\D<A<5E8M_IFO#6'U+A"
+    "\"_^X6JS;0G8  (QMP>EAY'*#\"#E-4E.UX/X#557K+S7_TZ^WM]9?R+MP:'RL9+ZF6F*%=J6NY^+%^/P)U_L>E/ZB@UCZPY\\O+%HFG?QYS=Y^NAM"
+    "N458<8@,#BDH7BHW5M6)I^'8) ##DCIMX>(<*I <AQ CE!A&RUT'55/VC=/O54U>=_]_G%U]^]W1;NR.YOBJ_[;P]UBPUJU*'&NMLZJ@\\=.,Z\"T5"
+    "5E7[_ @I?V*O/91AD N/VYXJ^MV_UBL\"PQKIE_4]Z'&A]/^]:7#9X(P$ (VSP68?1.?<0 QG*7 >ML=/SR\\\\N_^LGC;O/.:P62TKNA%1?5Z;FL\\"
+    "5)DJH)5=@2E,[//]4OLM T3;^]0_][+'QAKZ9IVU;O^UY1\\/S%?=\\KTF/ LI,_K]'>O#DA(GC:8W!GQ4#K^ZJM/CF4(P$ P!TN,$XQR#47MV\\H<"
+    "QU$2HPZP=1A\\KLTDUGUN!+VOY??<3$O-F9<DF2R\",DB$NQ\"J3[AO'(Y,-E!$_U>9''#]?F+_RO071\"XPB)$#AB&FM/[%JYZE-$* ,\"8%CR_8:"
+    "!K+L(B5'10-5558ZS6I;,G_TUYS-2$[GLZ3A75?U%FLQ1FQR2F:FJLM3'C_@M_L5J:5M:\\?;LBRS?Z'D*]\\RC-FMS^W+)UJ_\\QW'$$ (!HTG=>Y"
+    ",BEAU\"_8:&I>A*(M<:4%4W,3+9YRAZYTGXXO^=88J;)8E:OYLZ7[G\\N.S&YHW!NRXX/O1T=%KN]_P&+VE_<][^+]]X8BZC]Q?]:)U9O6]I[JW\"J"
+    "_<5]1=_;MWJ;-J+O @! 1 UT/44@/81WRF2H:9+7;S*M*(JJJEI*2DI&7E[!LT^F+Q]GJQ MI0_$/+ Z,76\\Q6))R\\W->V*52+ IBJK?4;+WO@J+"
+    "RX+F-A9]KVQ;\\)R&@01/APR^N]-0UA>=_D=-&\\J;   03!I4I*OK;9!P$'S-1;A(3W_CR3]L^(^!GOY\\[[Z\\W-R,C/'Z[U,HBJ*JFMO9I9[X!Y"
+    "?/*D]\\+C$M1UQ/&#<U-36KBG_QXB^'L5   !!QW_KF4Z'NZZ!IU^_Q=/U>D9JJJC&Q\"<VY+YLMEJ2DI, &FG;]O_HU%EQD P# F!0B.BB*<J6QT>"
+    "ERJ4'775[_K]?;U=VM:=K-ZS%55;](HKV]/3G9/CH-    HRE$=+AG\\N2:FMJFIB9#.TU.MF=E9=Y&50  ($J%B [Y^7GY^7FC4PH  (A^P_S1;0 "
+    " <'<B.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P "
+    "\"B P  ,(#H    #\" Z     T)$A^W/2<&>VQY8J3\\4VY^3%KY>$\\:\">KWC+6\\\\W!V&L<+MS_533&!E\\)$99;<<MQLEA+&>81S&43X:-:\\"
+    "O[/>C\"5EVV/^& 6!L\"]WKL.\"U:NV&-Y<*(<32-P,/PV_IF]??:]MJ(59ON^6-H\\#2%:O%NBVWGJ\"V;UDG5J]8*D;XR RLYO6%TC*Q+? Q;9MR"
+    "5C\\3CG8]MYZ$(W0T  \"&-30TO''#H4.'A! NEVO]^O7U]?5]-V; PJ\"^V>%F<HB0FJV;]B]X[0<W*UCZXHM%D2L' '!G:6AHV+ESYUMOO?7BBR]"
+    "^YSO?^?6O?WWRY,G.SLZ___N_/W'B1-_MAQ,=!NG@K7E]X8U.\\Q'I P[:?^^^\\$&>NNEFM_ZPR^N='8*30Z\\CT_=HW#K><<M2O_WM0U(TI5SL/U"
+    "O;SS/!]6Q_3EKX^O9 1<]M#ZXO\\,:WMF\"@FH*/]8W-MS\\G2<O6B?TO%4LWAV\\&.!K!!T%_C\\\"3(SMT$/+O4Z_YYF:,9 \"X\"VS:M.F33S[9"
+    "O'ES24F)U6I=OW[]2R^]U-;6IJIJO]N'L]>AYO6%Q9N>N#Z\\L:W\\I>(PCW/7O+ZP^*7R&_WRU:^=6!8X PWRU\"VO7W;B^O#+MB>&7<:MV:'F[(G"
+    "^^QSZ/1I+5ZP6)\\[>.)EO62=N[JGV[/[A]ETL_<%K\"]8M\"WV:V__2*V*]?H 6K%LF2<\\$+1GYK&JVGKW1L.K7Q/7/>>F;FK9M]?7QK3[#%(-_0"
+    ".N672]EV^K]+STS4F?K(?Y][G^I^'HU0:T#@#%LS9HU;[SQQOCQX_?LV?/@@P\\*(3[[[+.''GJHI:6EW^U#1P?]:^00)BMN_]E+XK7U-[K*E_[@M0"
+    "6])P7<GNT_>TF\\5ATX*16]N#[P#H,\\U4OY%+V^V^G3#S[_UVS=U/\\9?X\"C43AEP?Y-6_4>B\"WK5K_VVH+K>]J^9=V\"*87#K*CHQ7WZ:2[$]^"
+    "35/]8+*GKQQZM[+04\"S9#>[LT;#1OB:T-\\0 MN'*FE/WAM0?\\=*$.S;EFO^;7+UMU:PU#^/E=OVW=]*[W.5^AY #\"VV6PVN]UN,IG2T]-_]K.?"
+    "_=5?_977ZVUM;1U^KT/0-,E!I[QMW[(N.&9(Q2_M'V8;!M[_C1._KFA*N7[6&N2I8$7+GUBP;ED8)OTO7;'Z^OE_X.0PP-$H6O[$]7/C]BWK5J]X<4"
+    "JYOJ?M6]8M>&+Y[<Q0*'IQW_6O[<4#M?#6;#+\\I\"*\">_Z#3LX#\"O4!W?J<D133R^J;<T5O3K:]6<.0_CYO.2Y%4\\J'6PL W%FZNKK^X1_^X<T"
+    "WWSQ]^O3@6X9WFF3O?[FC;'I]T8O[KG>6WV9^N)$=!DP.0H@!CD;1\\B<6K-NR7=2</;%@2J%8NF+U_K.UHN;LB=M,#C<J>U.K'NDORMN?DZ2@GO_5"
+    "H5\\1+:+\\[Q, (BGP;V-%1<7S-Q04%/3=TA*V]RR<LD!L.ELCEH[0Y/Z^^Z\\Y>T*4KR@20@SR5!]%+^[3EK^^L/B5UW^P=-B#%DM7K%[VRM;M8M/"
+    "^U3_N]_0S\\-$H6O[$@DUGMV_=))Y87R1$T8K5R[:\\/N7$_O(?A^G !69-WO[^:L_V\\\\V\\YNR)H#[]FK,GA)@28C^#?7:C9<A_G[<<N^U;UHGR"
+    ";5RO N N8+?;__F?_WDH6X:OUZ'HQ1^OWA\\TJ:SF]>?\"^M6W[_Z?>4GHER0.\\E2P[<\\%=S7<VDENU-(5J_>_M.RE ?L<!CD:15/*][^T[\"5QO"
+    "9>A<,J\"$YL&Z[P(J>;UA4$-JWG]E=NX6+1PRH+]+_WLQNV^!AR,\"$SU>/V97OW^_<Y4&.('-**&_O=Y<\\[H]N>6K5LPRG4\"0-0+YX#%TC>U;:L"
+    "#$]6*-TT)1P_\\K?N_/MJ@[_^)ZGV!26\\#/W53X90;6Q1O>J+Z-CNKEZY8+<1@I^B!C\\;2%:N%\"(Q/%\"U_0NR_G>0@BJ:4!TT/+'ZI?-OP>^*+"
+    "7MP7J'K+BNK7%O2WR?KK,S(EZ1FQ/GC XOJE'OT,!PWI QIA0_S[7/#:MBFOW)C'<;-[!0!PG?3T-Y[\\PX;_B'090%38_ISTRI0(Q!H N%-\\ZYM/"
+    "#3;709*DOBLU31NQ>@9\\TU%XWR$:J#P1-14&!)<:;;6%W2\"?BV[,'P$ &#6#18>(_&L;Y?_$1WEYP>Z@4F_?7=58 (BL\\%UA =SYEKZI,2D2  ;"
+    "'SU\\!   #B X  ,  H@,  #\" Z     P@.@    ,L0HCUZ]='N@P  '!GL @AGGGFF4B7 0  [@\"[=WYH$4)T=G9&NA(  '!G8*X#   P((JBPY"
+    "8M6^QV>Z2K&/NB\\SA'9U61Q3$!$)VB*#H  (#HQV]8\"\"&$7_9>:#QZJN;/YR\\=;7,T!M:GVK,+)\\PL*WY@4LX,B]D:P0IU;K?[XX\\_]G@\\J"
+    "JJJJAI8;S*93\"93?'S\\0P\\]%!<7%\\$*$4$;-V[<N''C0,^N6K5JU:I5HUD/@+'JCH\\.?EDY5==XJ<,S*2O%%A?S7X?.Z^OG%F7/+\\D.^7)'5"
+    "TM#XYFZRU6-U\\XGVI*G3EZ0.\"[%8HZ1-;?'U]WM;&_OO++SS_\\W)V/_Y+Q[)V1/3;%GCG\"#^G?Y\\N6+%R^JJNKW^\\UFL\\5BZ?6;VJJJ>KW>"
+    "RLI*D\\F4GY^?GY\\_[/=*D\"]8>DYJSH;>3YBL4LI,E[5$-B4->^=WHI=??KG?]8JB>+U>(41L;*S9;.YWFY_^]*<C6%D?65E9\"Q?>UW?]_OW[AO"
+    "+RW__^]\\-^Z[_^Z[\\>]FL!W%F&&AV.'CUZYLR9E)04(41'1\\>4*5-FSIPYDH4-B=/CNW#5\\=G)BTV='FN,.3/9=K;AVJ**XB/G+C5W](1\\N:."
+    "KY4S=%V?J#O2XVO.RBN[)+\\_.F)0X+L5DDGQJM]O7WMY]I;&E[N+EVKK&(^V=S4YW]]3)<T.FAW-7VL]>:M,?SRO)\\<K*U79G9G)\"7GJBQ3R<$:"
+    "++ER]?N'#AVK5KDB29S6:SV6PRF0+10=,T/3HHBG+MVC555659%D(,.SUHSHNN<Y6>NC.]UDO6N*1Y%I&1(ZP1BPZMK:W'CQ\\WF\\V!?A?]F*BJ.G"
+    "'BQ,F3)X_$FVJ:]NBCCTZ:-\"EX97=W]_'CQ]]__WTAQ/+ERZ=/GSXN,5'3-/WS4#6MH:%AYXX=(U'/('7&Q<7GYN8>.W;,Y_,%/^5RN8?RN^2JJLZ"
+    "?/S\\K*VN0MQ!\"G#ESYIUWWOGN=[^;F)BH:5IS<_/APX=OOWX =XK!HD-W=W=]?7US<[/-9KMPX4)'1T=Q<;$0XOSY\\Z=/G_9X/$ZG,S,SLZ\"@("
+    "#$Q<;0*OL[1[>IT>EJ[W+5-#I]F[NIQN]T>+2DN1LB+9A5=:FS1%'_(G=1?/GVZ]H\"CNZ6T:-Y]LY9GI.598^(TH2J:SZ?$QBL6F]V:DCXN/=-^['"
+    "CEQ?IJ55$3XI)\"1H>S%UL_.G$I.R/EPJ66@@S[M2[G_K.-DS/M#Y1-R$A.B(TQW--S\\>+%EI86D\\EDL5CT_H;@+@<AA+[&9#+)LJQIVK5KURP6R"
+    "_ ['N1N;UNSN\\,SKJA,:)HF^U2?V]_9[FMN3)S>)M30!W:$7+UZM;JZ^O+ERUE966EI:?'Q\\9(D^?W^]O;VYN9FO0-@)-*#JJH%!073IT\\/K.GN"
+    "[CYTZ%!=79U^8?.%\"Q>*BXO+RLILX\\9IJJIJFJJJJG++H-(H4%55EA6WV[U__X&<G&P]Z.LF39J4E16Z$TY5U<S,S'Z/H1X:-$VKJJJZ>*6Q=-:\\"
+    "RL-''E[T4$Y.CJ(HH]Q2 )$UX&FLN[O[XL6+IT^?[NGIL=EL5JOUWGOOG3-GCA#\"[78W-C;6U=5U=W>WM+1(DC1QXL313 ]>OWSB?./I^N9NCS\\S"
+    "/>6KBV:]O6VOILA\"5?U>3ZM+]GB\\FA(_^$[\\?N^Y\"T<<G:U3\"N<^_O#J6&N\\)$FR(BN*7[+(BN97-5G59+-%2DU+GK-@AE_V-5UJ.%M7.:UP"
+    "?DQ,[\"![UE0Y)VW<UQ;/^>7ZK9JF]#C=%ZZTM'9TF25IWI3<S.0$B\\5LM?3?O]V7V^U6%$7/#3$Q,4*(OKE!TS1]I<5BT31-4119EMUN=WQ\\B(/"
+    "05U5556Q/4UR3.R4V.6':?*'*BL>I=+?+%\\\\[+S5W7KPJNXXH,9>%$*:8V+B\"Z:9!#T48-3<WGSY]NJFI*3<WM[\"P<,*$\"8F)B9H07H_WXJ6+"
+    "%DM,8^.5$R=.Q,3$9&=G6RSA'(E3%*775_93IT[MV;/GY,F3Z>GI^J+5:HV/CY\\S9\\[UW*\"J>C]0&,L87'=WC]/IDF79[U=D65ZV;.G\"A0N-_@"
+    "'T;:DND!O.G#ESL/)PCT]]>/F*/[SYJP3;%W-FSQKEE@*(N '_A:VKJSM]^K3=;E^^?'E75U=L;&Q24I+3Z11\"S)X]>_+DR4ZG,RXN;N_>O5555:J"
+    "J!G\\G&U%>OWSPY(6]QVJ3$L?=-W-*?EZV3S++LJS)LJ8JBL_3Z?;YO%Y-E@??3W7]X8N--7G9]]P_>[F>&X00ERY=='2VEDPKD#6/HGH4S:MJ/E7X"
+    "S1:ML#2[NZ?[8F--=?WA:44+!]FS*LN*W^>7%<7GT515E>6TQ/C9TTLJJT[7U%^9G#>^[)[<>R=E#+&]'W_\\L=?KU:.#N)$;>DUTT-.#OMYBL:BJV"
+    "MK:^O'''R];MFR([Q+PN]_]3E(]<RP=#T^.EQTMFBJKGAZEI\\/7Y>CN]'D^JQ*F,\\)DT62?,%LG?N]WHQ8=#AX\\>/GRY<F3)S_PP .IJ:F2)'5V"
+    "=;L]GL0D>][$22FIZ>:J(\\>.5NW8L>.IIYX*;W3H>S;=NW=O8V-C:6EI3DZ.IFE-34U-34U[]^Z=75$1R VJI@YEC\"!<WGCCC;U[]^;DY,JR(LOR"
+    "KW[UZ_;VCB>>^+JAG?0;'?0UBJ(X'(ZW-OPQLZ#P*__M\"5F6G_KO+_S?-UYO;V^OF#63Z #<50;\\%[:QL;&CH^.QQQZSV6P)\"0D.A^/HT:,G3IS"
+    "0.V\\G3)A@M]M]/E]Y>?F''W[8V-@X\"M&A\\5KGN?K&BXTM7EDK+9J8F94QSI[L\\ N_JGC:+E76'VY(28SK;/_DO;>O7G65Y8:X(+[RQ*?Q<;:\""
+    "_)*TM/&J\\ M-:$+9M^_SG;MVS5TPX\\O+YL0G\"45X9=6KJ#Y5^,;9+:F9<5>ZNRM/?#IX=- 4V>_UNKVRXO,(5=$4.=8B39J8&Q\\?6U]_^6Q]T["
+    "76=M5?7#8Y)V8(?0]NMUN_@\"(0%]K;VST>3Z_-8F-C4U-3]7_E]9$+M]L=<N=]O?+**W$=NUL_^]!UJ<5_K4%39=7C5'HZO!UM/F&=^OA#:OYR)3:"
+    "_Z^RARYO?&,4SHQ!\"9&=G3YDR)34U51/\"[?.O_<UOJHX>?>W_O*$)(4F6\\=FY^1T=35<NA_U]>YU0-4U;M6J5U^OMZ.BHK*S4A%BU:I7=;@_,P+"
+    "@^6J$HHW-\"[>[N_N4O?W7T:%5F9N:T:662))663CMUZL3[[[_G<CD-W69>'_ *7A/H;W X'-___O<7KU@U;=8<ORP[/;YNKW_>X]\\\\^LF.RM_\\"
+    "1A_*!'\"7&# ZQ,?'Q\\7%.1R.A(2$JJJJSS[[[/CQXYV=G9JFV6RVJ5.G5E14W'///9V=G7%Q<</H&#?J2G/;D=-UYR^W)\"8FYN1F961G61-L32W"
+    "73E=]8;;$:#W7<M/MQ47W%$WV'3EVLOMJVXDCWGR[F#MW[D [/'FVLKQTYOCQXX79[U=[A-!43;EZK?'(X6-M;:W=/6WWSI^4/<%FB?<IFD=6O9)93"
+    "DR),<5UGCQ;.7BIFB++/H_+ZU.\\'DU5-446BC\\F-C8G)TLRF2TQ,8ZVMC\\?/MO<TI:3E9&7F9*:.-C1DV4Y+B[.9#*)&YT-7J]7[_X9B#[UP>\\"
+    "?SJ2$Y.3D>\"7.83)?N^QP[:@20M,465/\\LL>OFBSFA#A38HJ(2U>MB2[/:'ZI%AZ/)RTM;<*$\"9(DN;U^I\\?;[73U]#A=7K\\00I)$K\"TQ,3F"
+    "MMOI<V,OJE1N$$!D9&==72I*D:<G)R=G9V3>'*A15415%&8U>AXL7+[[__G_]^<]_SL[.R<N;$!<7KVDB)R?'Z>RY<*'NPP]W6*VQCS_^6$)\"PE#V"
+    "UC<DB1OC%&]M^./B%:N*2J=+EICJ,Z?W;/^ON8]_TV>.2RJ9W>73#A_^\\TBU$$#TZ3\\Z'#APX.S9LW%Q<;&QL=>N7?OLL\\\\.'CP8$Q.S:-$B(<"
+    "3!@P>/'CVJ*$IR<K(^G__DR9-6JW7!@@4C5VC#E>;3Y^JZ7-[\"R079$_+=JOE::]>EFNJZJKTYN7E3)^?-F3UKVK1I+I=+EF4ASG2T7#YTZ-#DR9/"
+    "UT>B^FIHOS9NS(-X6XU4<DF060M,T13++0I,N-31MW=S5VG%M^MR\\O'MLX](46?7(JM<<*T2,TM1\\9?!2-<7O]WI=7K_L\\VBJ$E@40J2FI\\4EQ"
+    "#==L=6>K6DY5CO^4NN,D@GW%N8F)]D&VIO^S56/#OK8A#XCLM=FP4,8^N/A?^6-'9]:5*0JO4][EKA8BWWBI19';>.!*V=.=8KTKGT')]Q3F).3,]("
+    "S77;OWMW8V)B=G3TN,='1V;7VS3?;.QQ?'-C?W-S\\R]?^MQ!BV6,K\"B9-MEBM'D_X$XVJJH&3J+XF)B9&T[24E)29,V9HFF9/3C9;+-*MN4%11WS"
+    "R8$-#P\\Z=N_[TIXTY.3D3)T[2-/7*E2MV>W)[>T=&1J8L*[6UU;___>_M]J1Y\\^:EI:4-O:7BUGF1!RL/9Q843ILY1UAB>CQ^CQ1C&I=Z>,^':5,"
+    "KNCL[/%WM\\;9Q(]I2 %&E_^APY,B1UM;6!0L6V.WV0X<.G3QY,BXN[I%''EFY<J40(CT]?<>.'=75U5.G3LW-S8V-C:VNKE8499#H\\\"__\\B\\'"
+    "#AQH:VL30J2FIBY8L.!'/_J1L4HU+<8DJ7[?I2M76[6X^'%);8WUSFM7OK1P_D,//10?'R_+<FMKJRS+\"Q<NG#%CQIDS9ZY<N7SPX,%''WVTW_W)L"
+    "F:.D839ZU4<DF32A*9IBLFLZ-_/_#[USSM/7FZXNF!Q_IPOCY=5MT_QRIJB\"$V60YR9;@Q8^ .]#GZOU^6],??\";,W,RTU*3CE][/C1$Z<[6YOCS"
+    "-J\\>TL&;O?-?\\KU3& RF?K>12 X3.B7:PY>Y\"#4^(+D<BFY>&KO)R2+-&[RB4_.U-8WJZIDG?ZEE@Z'^]PYL]D\\>'2X_4__RI4KW=W=BJ((3?2"
+    "XW$>.5+6UM5UK:?%YW#5G3EK,)LV_--9J$4+X_?XAMGWH5>G?Q8,_\"%UB4M+,F3.#YT7JJ>'&8,5@DP?#\\/\\((7;LV/&[W_U[6EK:[-ESG4[GV;"
+    ".G)<E44##I\\\\\\_*R^?GI.3)X0X<J3RG_[I?[S^^FM_\\1=_$7*'@8)[S8OL]JF/K?JZQZ]T>WQ='I\\I*;WXOL6?_^<?W*:3L;(S17/9)A6,:$L"
+    "!1)7^HT-*2LJT:=,>>N@AE\\M56UOK\\7B^]*4OK5RY,C8V5@CQ^../=W=W[]RY\\\\*%\"ZFIJ24E)8JBZ)/_!_*C'_UH[=JU'WWTD1!BT:)%SS__"
+    "O-%\"*\\J+S4+;^\\6QDU5'/)5'\"LIFNMHOI8CN![_Z=')R\\KY]^W;MVJ5W?BQ<N'#V[-GCQX_OZ&C?OOV#@:.#ZG1W.;WM\\8I)$B8AA\"84Z49"
+    "TT,58S:KD\\ZM.O^KVR'ZOJLF:D.407R551?;[O&ZOK/@]0E7TQ9O100A553Q>O]_G47P>K\\?M]7@'V5O@1!7H5Q@H.@2V%#=N$C5XG0/QFC.%+5,"
+    ",T ]R[-0'$R<6Z\"%2\"/'NN^_4U]?K73O)R<G]ON3V/_UGGGGFW_[MW]QNM]/ELB4F_?3GO_+)RN:-_]%T\\<(K__S_)B;$FB3I6D>GXO<-?9AFZ%"
+    "7US0UJX&8: ^8&9:\"K%8R^^R T34M,3\"PM+>OJZCQVK.KJU::)$R?Y_;+;[3YX\\,\"T:64Y.7DE)5-/GSXYQ#@5')*\"YT4^MNKK7EGN<GN[/')"
+    ";5X_#Z?%(,<6+OUZ[X^WRLJ*R!U?L_'#[B+840%3I/SH$W^?89#+%Q,28S>; J4N?QJ]?!ZC?><;G\\_6Z8K\"O-6O6Y.;F\"B$>>^RQ811JM<9,+2"
+    "XPF223)\"FJ5E]SJO%2;5Y:0F/C%:O5>N3(D8R,C*\\\\_K6-6SZL/%R5DY.3D)#0W=V=G3W@M>RR7W.ZNUW>=J]BD80DA% U53(K\\?$)DB0L,:8I"
+    "%?;)TQ,R)UI\\BLOM][I\\_AZ7W^GTR_[0O0ZRU^OR^!6O5]/4P*+^K-?E;&NZ?*7ZM.SJ*<BTSYLY=5IQ08@=WH@.@5F0@_0ZW#BCC> HN\\?C<3@"
+    "<^F._W__QQQ^_]]Y[0HA?_O*7 [WD-C]](80D24U-3;6UM05%)8JF\"J'%QEH3$\\?IN4'3M);FYH:&>D/-'F)5@1 P]-P@R[(2:IKD[1\\35=4<CH"
+    "XC1RJ%$%U=G5ZO5Y9E69;]?K_;[3IUZN2%\"W4NE\\OK]0WQST&69?W_^,'S(DMGSG'[Y2Z7M\\OC=WC\\1_^\\N['A0O'BKQ]ZZ^??^-J*63/N;;G"
+    ":) ]Z0=/MMQ1 5.D_.C0U-1T_?KRGIV?)DB4E)24G3YX\\=^[<[MV[%R]>+(3XZ-0\\3L4  \"  241!5*./]#M+IJ>GZQ,=:FMK\"PL+0[[9;?[#D"
+    "90XKJ2P(-9J%4)\\\\OFAUDO575U=;6UMX\\>/=[O=Q<7%V?F3I:V?*HK'Y7+I<PG'C1MP\"#8]-;?3T=W6T9R<'B.N]SJHDD6QIXQ+2C/GE\\1-*H"
+    "M/S3:9XOQNO\\?I\\_?XE(X.C[M+I*?F#EZGIBA^O\\_M]2M^GZ:J^J+3XU=5N:OE:ON5BU['M918T[2YTW(RTPLFY*2E#'9S1I/)I)^;]%D.@?30:"
+    "S/]*3TTZ/_MNTU83)LV[?SY\\V^]]8>8&&MLK#4Y.?DO__(O!SG. ;?YZ7L\\GOKZ>DN,-2DU7<3$\"2'==_\\#5DG5<T-C2VO5T:/'#E?Z_3Y#W2U"
+    "#J4H+,F!N4&_)#;*BR(/V.@S]W0=145$1_!9??/%%:VN[?G'FXL6+ [>_E\"1IPH0)0]EAH-<A,\"_RGJGEJLE2<^;T)Q]NG;G\\*9\\Y+G'2M$2_J"
+    "-WQ]C>^MJ)LZI18:TS(D\"0(#<#8TG]TJ*BH^.*++\\Z?/]_<W)R5E5586%A=77WX\\&']'^6JJBI%4?+S\\Y.2DCH[.[NZNB9/GCQ__OQ1*#<IT39"
+    "]6I'^N*/U2G/3):O5ZO7ZQH\\?KVE:6VM+JCTA)RU-\".'W^V39[W!T#[2K\\BD55UMK+EZZG)$7%V/51UO4A&2U8.JXG'LLA3/C+/&RK'E</I_+Y^"
+    "_Q*5T]OM8FE]P54SXEQ!VX-4WU^V67UZ]?ZJ9IJM?C[6AOZVYM[KA4YVEOR4E+?/B^^RIF38NU#C;*H]/OTR#+LCX[4I*D?L>&]$Z@P)V(5%6]G7L;"
+    "Z#^9T6ME;&QL>7GYM&G3DI*23ITZ=?SX\\25+EA05%65F9B8EC?BMJ6?/GNURN4Z=/&DR6R86%F=FYZ:-STA*B&MS=%UL:#AV_/BA+P[6UE3[_?Y__"
+    "_=_7[ERY<2)$\\/UUGH4\"XH/UW.#P^&H.W]>5;7\\\"1-L-MLMN4&6E1O?X$?.G#D5<^94!!9E6=ZV[4.]XV'ITJ6+%CUD=(?ZWT]@7F3IS#F*R=+"
+    "I]CDUB[\"E'/UD1WIIA;/3$2<[IY<5S9IQ;ZPUYOJT#NXF\"=Q-^C^[//C@@]W=W2=/GNSL[,S(R\"@I*1%\"7+UZ]>#!@T((B\\62EY>7GIYN-IOU"
+    ">QU.GS[]P0<?',VZIT\\K:J@K.67VV>W)LBQ/G#BQOKZ^_?SY>TMR$Q,3;PS\\BX:&^H'VL*#BH0WOUM967\\J>&)^5ERQ)FB:TS,FR/3LN.5M35)="
+    "'\\7MDV>577%ZEQZM<:W9=N^A,].8NJ CQ+[*JJGY9=GEE/3JHJNKJ[KQX]E3+F:J4<;$ED_/GSBJ_;_Z,(;8T,3&QIZ='EF5]D$*2)'TVACY\"%-R"
+    "1KO\\+KI_ 3\";3[5SU4%]??^S8L;R\\O,\":GIX>A\\-14E*2DY.3DY-CM5JKJJH6+EPXT/R&L%NP8(')9/KPPP]W[MA>>OGRQ'N*4E-3K=88O\\]"
+    "[[NS94\\>/7;YTL;V]P^GLV;!A0V)BXB.//!)<_^T(?!</=.EXO5Y54=O;VH\\<J=(T+<%F,YO-BJ)(DJ3G!OG&B$58\"NA79V=GK]M[Z'\\GLBS[_"
+    ";UOSS!$BJ*</GVZO;.KVZ<N7_5UM]??Z?8YW#XI*?V>!5\\^]/X&O^54G.PL2+0L6[9,J#>BDBQS2RC@KC+@%]/.SLZVMC:;S>;W^[.SLQ,2$EI;6U"
+    "M;6U55M=EL^MUO_'Z_U6IM;6T-C'R/IGONN<?AZ-BQ8WM%Q=S8V-B)$R>.'S]>_T%JO]]W^?)%C\\?SV&,K!GKYC&GS#ASZ\\_'JO?L_._OEQPMC8L"
+    "U\"TLSCU-AXQ>E5?8KB552W7W7[99=/Z>[QUU6U>EO-]TXMF3%MWN\"%::KJ\\\\MNKRPKLOXEM:OUJESU^0/S9O[EP_=-R,NV#J&S(>\"AAQ[:MV]"
+    "?2TN+S^>+B8G1.QX\"(Q<BZ.>OM!NWH%95-2,C8^'\"P>Y;-1#]H^SIZ4E+2UNUZK\\%UI\\]>^:==][I[.S41[4'O['$\")DW;UYL;.SKK[]>5UM]"
+    "[LPI_70E29+5:O5ZO1Z/Q^GLL5JM\"0D);[_]MJ(H3SWU5%BN&M5#@QK4W]!\\M=GC]3@<#OVND1T=[7Z_3Y),Z>/'!T[>?6^O%%[_\\W_^/Y]]=LO"
+    "=%)Q.9U96CCY@H6G#Z090%.6==]Z9^\\##BQY=X?;);4Y/I\\??WMG3Z?+ZS=:2Q5^OW?'V]+*BX-S@]_N)#L#=9L#HD)^?7U]?OV7+EH<??KBMK4V"
+    "2I.3DY+BX.)_/I__@D,OEBHN+JZJJRLK*&N)(:GA-G%C0TM*\\:]>.YN:KDF3*R\\O+R<GS^7Q'CE3*LK^[NVOBQ(E_\\1=?&NCEUIC8N17SVSNOGC"
+    "MQU\">?*5^094^/,UDD6=-D1?4IJE=6/7[%Z9;;6]P-56V=#9[I]\\R:/V>A-=2MEU5-Z[IZZ=Q'FWW.'J%IL7'6O.R,TBF%RY<\\,\"$O.SX^SE S"
+    "];MK\"\"%\\/I^F:1:+)?CV4\"(H.NCC&GK_1%Q<7%R<L3?2_?C'/Q9\"Q,3$E)>7=_?<_/71'J>SK:WMIS_]J=XU+<MR>&_V/$2EI:6OO_YZ<'(2-"
+    "^9YK%^__H]__&-\"0H+5:K58++MW[W:Y7-_[WO=N_TT51=%4-7A^P^;-_WGFS!F[W9Z1D:EIVGOOO=?I<!1,FOS-IY_6<X/?[_?[_2-Z0FUK:TM*2I"
+    "DZM2QXI<UFNYW4(LOR=[[SG7/5-?_^FU]^Y=GO.MQ^A]M_8N^>ELOU)4'S(GOE!EV8F@7@#C#@O_[EY>62).W9L^<WO_F-W6[7-\"TY.7G^_/F*HAP"
+    "X<,#A<&B:UM[>GI^?OWCQXFG3IHUFT3J;S5945+QTZ:-6JW7__GTG3AROK[\\@R_*U:RWSYBW(S,S,R,C(R!CLIR)*)I=U=74JJEIWKKJS\\V+F1)L"
+    "],]XZ+D:8):]/\\?B4GDY?QU57^R67W!%3-FG6_?,6%=\\3NJ4SRJ?<>'AO;DZFW9Z8E)B8EY,U>5)^S+!.MQ,F3/#Y?%>O7M7/1GU_=#LPQ4'3-+/"
+    "9G)65->R?S7SVV6>%$,>.'7,ZG=W=-V>*.'N<0HA5JU8%+EZ-B8D9XCT*P\\AJM::FIO;[U%>_^M6DI*2WWWY;O_S'Y_,-[U;<?5T_PD'S(F?/KFAK"
+    ":S]QXGA=79VF\"5GV%Y>4E)67!W*#U^OU^WPCVNN@*&IGI^-*GQMO^_U>M]NEJL,<L!@W;MS#BQZ*3_CBG77_9]K2)Q5+G'URF4>5>LV+[)4;Z'4 ["
+    "BH#GLE24U/+RLH41:FOK]=O#'7HT\"$AA-_O/W[\\>$E)R;QY\\SH[.PL*\"LK+RX=RH[J1D)N;]]13WQ1\"6\"R6$R>.]_1TQ\\3$SYHU^]%'ET^>"
+    "?$_(EZ?8,^?,N\"\\IT?[G?7MKSI^]V-5MOM!A&:>9K2:?3_'Y5-DI\"6=LHI);7#KU_H7W32DL2TD*\\8O;0H@9Y5-GE-]R/Z72DM#%#$+/ 5:KU>"
+    "/QZ+>]ZO7S5_I_32;3^/'CX^+B)DR8,.SH,'/F3\"'$Y<N7JZNK=WSX86!]6UN;IFEE965V>X@?!XF4B1,G/O+((XJB[-Z]V^?S!;IG;I\\^B23X>H"
+    "JBHJ+N[FZWVW7X\\&$AQ/3I]\\Z:75%04!#(#5ZOU^?SC>@)=<:,>P>8G!CSP ,/#'03U<'I[<O)R9E;,:N]H[UZ[ZZ4*17N[M[S(H-S@]Z_PC1)X*"
+    "XRV)?@U-34AQZZ/B50OUVC?GXJ*BKZTI>^-(Q?91PYCS^^\\O''5P[CA2GVS/FS,F>6W5]Y=/^G^SXZ?/3@E:9+@6=SL_-GWSOKP?L>KIBQP&H=I9^"
+    "([%=^?GY^?K[;[?[XXX^[NKIZG9;,9K/5:K7;[??==]_PQBEZR<C(R,K*:FV]%KRRJ*@H(H,40Y>7E_?44T^Y7\"[]-\\.&<L'P4/C]_C-GS\\J*HJ"
+    "GZ_U1%U?Q^?UI:NGY 4M/2%$6NK:U59.7&8(6_\\<J5X?V,R!#]\\(<_\"/L^%46IJZO3NZ^F%!5^NN=-MZRZ'6V)/L<]\\[YZL?Y\"H'\\K<.,*15"
+    "%:6EKH=0#N*D,]$RQ=NG3ITJ4C6DH$Q5IC[YO[X'US'XQT(2'$Q\\>/3F*;-V_>O'DA9H-&I\\3$Q+#,;P@FR_);?_A#W_6!&R]^]NDG?_[LT_\"^:"
+    "40HBO+^^^\\'%N/CXR\\=V!D3&R<EIVSXP_H(%@8@JD3UET@@&GSPP0>1+F&4_.8WOXET\"0#N \"-RPT$  #!6$1T  ( !1 <  &\" ]/0WGOS5&P"
+    "QP @\" T+[[_'^GUP$  !A@$4)LV;(ETF4  ( [@T4(\\<PSST2Z#   < ?8O?-#BQ!BZM2I(3<%  \"HF#6#6T(! ' W.G/FC*'M QT-1 <  .Y2_"
+    "_JO_WKBQ(F0FY67EW__^]\\/+!(=  \"X2\\V:-2L[.SOD9KVV(3H  '\"7DB1)DJ3@-7/FS!%\"'#ITJ-=FP8O1&QTF39KTR\"./)\"4E5555[=JU"
+    "*]+E   PUFS8L.'SSS\\/+$Z=.C4S,U,(L6G3IN\"9$/???_^##SX86(S2Z&\"SV;[^]:^O6[>NJZOKV]_^=G%Q<75U=:2+ @!@;#*;S4E)2:^\\\\"
+    "LJT:=.$$)F9F7_S-W_3U=6E*$K?C:/T;I)%147'CQ_OZNJ2).EWO_M=34U-I\"L\" &#,RLO+>_?==TM*2O3%DI*2=]]]-R\\OK]^-H[378=*D24*("
+    "-6O6F$RFGIZ>M]YZ2Y;E2!<% ,#89#:;4U-37WWUU?OOOU\\(\\?GGG[_\\\\LMFL[G?C2,3'7H-0*2FIF9E975T=#0U-0569F=GKUV[5M.T)YYX8N"
+    "[<N?OV[8M$I0  C'VMK:VOOOKJ1Q]]5%Q<+(38N7.GHBBMK:W];AR! 8M%BQ9][6M?\"RS.F#%CS9HU965EW_K6MQ8O7JRO[.GIN7+EBJ9I0HB:FAI"
+    "]U@8  !@)75U=?_K3GP)9H;6U]4]_^E-75U>_&X]JKT-\"0L*R9<O*RLJ\\7J^^QF0RK5BQXHTWWFAI:;'9;\"^__')5555K:VMU=?6CCSZJ;S-ITJ"
+    "0K5ZZ,9IT  -P-BHN+ V=DW?CQX\\6-2S2#-PM>#&=TD\"1I_/CQ+2TM@37)R<D>C\\?C\\>B+BQ<O=KE<[[[[[O+ERP/5N%PN_25.I[.ZNKJHJ*BU"
+    "M;6AH:&FIN9O__9O72Z7S^?K=8$I  \"X?3_\\X0_[7;]HT:)!7A7.Z*!IVKWWWGOV[-E+ERX)(9*3DQ<N7+AMV[; !N^__[ZF:8$)G$*(A(2$X/D-"
+    "'H\\G*RM+?[QKUZZ//OK(9#(Q01( @+ ;]H]?AGG 8M>N7?I\\A>[N[EZY00BASUT(9C*95%4-+ 8_UA=[K0$  )$5_KD.NW;M>O311ZU6Z^;-FT-N"
+    "+,MR\\+4?]#$  !#EPG^%17IZNB1)[>WM^?GY(3?N[N[.S<T-+-ILMH:&AK\"7!   PB7,T2$]/7W^_/E;MV[]]--/\"PL+0Z:'NKHZ(80^^R$S,[."
+    "PL+\"VMC:\\)0$ @# *\\Q46LV?/WKIUJ[[X\\<<?+UJTJ+6UU>UV#_023=,V;MSXY)-/-C<WY^;F;MJTJ:>G)XPE 0\" \\)*>_L:3E4>.1KH,8;5"
+    ":_7Y_WWF4   @>E3,FA$MOV'A\\_DB70(   @M2G\\Y$P  1*?P]#J\\^NJK8=D/   837_W=W]G]\"5A&[!8N7)EN'85*9LW;Z8548)61 ]:$57&1"
+    "D-H1?08RAV8^F+  @  &$!T    !A =  \"  40'  !@@'EZ>5ECT]7;W,N7O_SE/_WI3V$I*((Z.CK.GS\\?Z2IN%ZV('K0B>HR-5HBQTA!:$3V>?"
+    "/+)CS[ZR-!+<K*SZ'4    &$!T  ( !1 <  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  \"  40'  !@ -$!   80'0   "
+    " &$!T  ( !1 <  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  \"  99>RQD9&>GIZ4ZGLZ&A05]CL]DR,C(\"&UR]>M7M=H"
+    "]>@0  ()K<$AV^\\I6O3)TZM;Z^/BLKR^OU_O:WOY5E>?;LV4N6+)%E6=]FPX8--34UD2@5  !$WLWHD)V=/7?NW%=??=7E<@DA7GCAA1DS9E165N;"
+    "FYF[=NO7 @0.1*Q(  $2+FW,=7\"[7^O7K]=P@A&AM;4U)21%\"9&=G7[MVS6:SF<WFR-0(  \"BQLU>A\\[.SL[.3OUQ6EK:E\"E3]NS98S*9TM+2"
+    "EB]?/F[<N(2$A,K*RLV;-_>[H[[KUZY=.T)%CY#2TM)(EQ &M\")ZT(KH,39:(<9*0VA%I*Q9LR8L^^D]35((8;?;O_WM;^_9LZ>IJ2DY.?GTZ=,??"
+    "/\"!P^&PV^UKUJR9-V_>P8,'^[YJY<J582DHLG;NW!GI$L* 5D0/6A$]QD8KQ%AI\"*V(B+X%#]0=,+C>%V?FY>5]][O?W;MW[\\<??RR$<#@<&S9L"
+    "<#@<0HC.SLY3ITX5%!0,IUX  # FW!(=\"@L+GWWVV2U;MGS^^>?ZFK2TM(J*BL &%HM%5=51+1   $23F]$A-37UZ:>?WKAQX]FS9\\UFL]EL-IE,"
+    "5JMUQ8H5^GT=['9[:6GIT:-'(U<M  \"(L)MS'>;/GQ\\;&_O,,\\\\$UAPX<.\"]]][;NG7K\\\\\\_?_GRY;R\\O-V[=W-3!P  [F8WH\\.V;=NV"
+    ";=O6=XL#!PYP4P<  *#C-RP  ( !1 <  &  T0$  !A =     ;T<S?)D:9I*?H#2>H8_7<'  \"W8[1['?3<H(>&0(8   !WB@@,6.BY@2X'  #N1"
+    ",QU    !HQJ=.@[0L&8!0  =Y;1[G4('J=@S ( @#M.Y <LZ'@  . .,GK1H=^(0,<#  !WEE'M=2 H  !PIXO\\@ 4  +B#1$5T8+H#  !WBLA'!T"
+    "8Q  \"X@T0^.NCH>   X(X0%=&!C@<  .X441$=  # G6*4H@/C$0  C VCU^O J 0  &- % U8T#,! $#TBY;H0)\\$  !WA&B)#@  X(X07=&!,0"
+    "L  *+<:$2'(08\"QBP  (A^H]3K0\"P  &!LB*X!\"P  $.6(#@  P(\"HBP[,E 0 ()I%5W1@2@0  %$NNJ(#  \"(<D0'  !@0#1&!Z8[   0M:("
+    "N.C#= 0\" :!9UT0$  $2S*(T.C%D  !\"=HC$Z,&8! $#4BL;H    HA;1 0  &!\"]T8'I#@  1*$1CP[#2P!,=P  (#J-1J_#L', '0\\  $2;Z"
+    "!VPH.,! ( H%+W1 0  1*%HCPZ,60  $%6B.CHP9@$ 0+2)ZNB@H^,! (#H$>W1@8X'  \"B2K1'!P  $%7NC.C F 4  %'\"TFLY(R,C/3W=Z70V-"
+    "#0$5J:FIF9E975T=#0U-1G:>UA.^9+4070  \"!*W!(=OO*5KTR=.K6^OCXK*\\OK]?[VM[^597G&C!F//OIH34U-04%!5575KEV[#+U!N\"8K:%H*"
+    "\\QX  (BXF]$A.SM[[MRYK[[ZJLOE$D*\\\\,(+,V;,.'+DR(H5*]YXXXV6EA:;S?;RRR]7556UMK:.<I5T/   $\"5NSG5PN5SKUZ_7<X,0HK6U-2"
+    "4EI;BXV.5RM;2T\"\"&<3F=U=75145%D*F7& P  4>!FKT-G9V=G9Z?^.\"TM;<J4*7OV[,G.S@Z>W^#Q>+*RLOK=T>;-FWNM6;MVK1\"'EBQ9$I9\""
+    "'WE$[-AQ2--2'GED3EAVV%=I:>D([7DTT8KH02NBQ]AHA1@K#:$5D;)FS9JP[*?W-$DAA-UN__:WO[UGSYZFIJ;<W%Q550-/!3_N9>7*E?VM3MFY<V"
+    "<8RA1\"\"\"%)0M/\"N<.^1G3GHX961 ]:$3W&1BO$6&D(K8B(O@7W_=H_%+VC0UY>WC/////IIY]^_OGG0@A9ELUF<^!9D\\DDR_(PWB:,F\"\\) "
+    "$ $W7)?A\\+\"PF>??7;+EBUZ;A!\"='=WY^;F!C:PV6S!%VV./CTT,.D! !#EQO\"IZF:O0VIJZM-//_WVVV_7U-3H/0V:IM75U0DA2DI*SIT[EYF"
+    "965A8^)__^9\\1*U8(<>-J\"_TCN?WNAUL_VD-\"C(%/FE9$#UH1/<9&*\\18:0BMN\"[B\\6++EN&\\ZF9TF#]_?FQL[#///!-8<^# @??>>V_CQH"
+    "U//OED<W-S;F[NIDV;>GIZ;K_6VQ3H>QCZX,4@'T]@#TN6++GC!J[ZHA71@U9$C['1\"C%6&G*7M*+O>:??,U%DA^\"'-=4A*#ILV[9MV[9M?;<X?_"
+    "[\\3W[RDV&7-7*\"NQ]ZK1QH^U&I\"P  (6Y,S@L^*XV-,U$_5UC<07I]!F$<R   X':$=W@]JMS9T:&7,?;9  #N:&/UK'1G_'(F  \"($D0'  !@"
+    " -$!   80'0    &$!T  ( !1 <  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !HQ@=!CHQZ\\! ,\"=:V1['<;JCX8! '#78L \""
+    "   80'0    &$!T  ( !1 <  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  \"  40'  !@ -$!   8,%+1@5_<!@!@3!K!7"
+    "@=^<1L @+&' 0L  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  \"  40'  !@ -$!   80'0    &$!T  ( !1 <  &  T0"
+    "$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  \"  40'  !@@*7?M<7%Q=75U?ICF\\V6D9$1>.KJU:MNMWLT2@,  -&GG^BP:-&B>?"
+    "/FO?KJJ_KB[-FSERQ9(LNROKAAPX::FIK1*Q   $236Z)#0D+\"LF7+RLK*O%YO8&5N;N[6K5L/'#@PZK4! (\"H<TMT6+QXL<OE>O?==Y<O7QY8F9"
+    "V=_<477]AL-H_'HRC*0#O:O'GSK2N>7;)D29B+'6&EI:61+B$,:$7TH!718VRT0HR5AM\"*2%FS9DU8]G-+='C__?<U32LI*0FL,9E,:6EIRY<O'S="
+    "N7$)\"0F5E99^(<-W*E2N#%S4M9>?.G6$I<33=B37W12NB!ZV('F.C%6*L-(161$3?@@<ZIP_NENB@:5JOIY.2DDZ?/OW!!Q\\X' Z[W;YFS9IY\\^"
+    "8=/'AP&.\\$  #&@! 79SH<C@T;-C@<#B%$9V?GJ5.G\"@H*1J,N   0E4)$A[2TM(J*BL\"BQ6)1576$2P(  -$K1'2P6JTK5JS0[^M@M]M+2TN/'"
+    "CTZ*H4! (!HU/\\MH0*:FIJV;MWZ_///7[Y\\.2\\O;_?NW=S4 0\" NUD_T>'<N7.!^T$)(0X<.,!-'0  @([?L     :,2'30M)21V\"T  (BXD>"
+    "IUD*2.$=HS  \"(( 8L  \"  40'  !@ -$!   80'0    &$!T  ( !1 <  &  T0$  !A =     80'0  @ %$!P  8 #1 0  &$!T    !A =  "
+    "\"  40'  !@ -$!   80'0    &$!T  ( !1 <  &  T0$  !A =     :$/SIH6DK8]PD  *+$B/0Z2%+'2.P6  !$' ,6  #  *(#   P@.@    "
+    ",(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@"
+    ",  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   PH/_H4%Q<'+R8FII:6EJ:G9T]*B4! (#HU4]T6+1HT=>^]"
+    "K7 XHP9,]:L65-65O:M;WUK\\>+%HU@;  \"(.I;@A82$A&7+EI65E7F]7GV-R61:L6+%&V^\\T=+28K/97G[YY:JJJM;6UDB4\"@  (N^6Z+!X\\6"
+    "*7R_7NN^\\N7[Y<7U-<7.QRN5I:6H003J>SNKJZJ*BHW^BP>?/F&P^?U1^O7;MV)\"L/O]+2TDB7$ :T(GK0BN@Q-EHAQDI#:$6DK%FS)BS[N24ZO/"
+    "_^^YJFE924!-8D)\"0T-34%%CT>3U965K\\[6KERI?Y TU(\"C^\\X.W?NC'0)84 KH@>MB!YCHQ5BK#2$5D1$WX*#OO8;<,M<!TW3>C]M,JFJ&E@,"
+    "?@P  .Y\"(2[.E&79;#;?W/K6) $  .XV(:)#=W=W;FYN8-%FLS4T-(QP20  ('J%B YU=75\"\"'WV0V9F9F%A86UM[6C4!0  HI)E\\*<U3=NX<>"
+    ".33S[9W-R<FYN[:=.FGIZ>T:D,  !$H7ZBP[ESYUY]]=7 XOGSYW_RDY^,8DD  \"!Z\\1L6  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #"
+    "\" Z     P@.@    .(#@  P \"B P  ,\"#,T4'34L*[0P  $%7\"W^L@21UAWR<  (@2#%@    #B X  ,  H@,  #\" Z     P@.@    .(#@ "
+    " P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #"
+    "\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P(!P1@=-2PGCW@  0!0*<Z^#)'6$=X<  \"\""
+    "J,& !   ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P !+R\"UL-EM&1D9@\\>K5JVZW>R1+ @  T2MT=)@]>_:2)4MD6=87-VS84%"
+    "-3,\\)5 0\" *!4Z.N3FYF[=NO7 @0.C4 T  (ARH><Z9&=G7[MVS6:SF<WF42@(  !$LQ\"]#B:3*2TM;?GRY>/&C4M(2*BLK-R\\>7._6V[>O%F("
+    "9X.?7;MV;3@K'7FEI:61+B$,:$7T4 =35   $Y-)1$%4H!718VRT0HR5AM\"*2%FS9DU8]A,B.B0E)9T^??J##SYP.!QVNWW-FC7SYLT[>/!@WRU7K"
+    "ERI:2DK5ZX,2UF1LG/GSDB7$ :T(GK0BN@Q-EHAQDI#:$5$]\"UXH.Z P848L' X'!LV;' X'$*(SL[.4Z=.%104#.-M  # V! B.J2EI5545 06+1"
+    ":+JJHC7!(  (A>(:*#U6I=L6*%?E\\'N]U>6EIZ].C142D,  !$HQ!S'9J:FK9NW?K\\\\\\]?OGPY+R]O]^[=W-0! (\"[6>C[.APX<(\";.@   !"
+    "V_80$   P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#"
+    "@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H   "
+    " #\" Z     X@.  #  *(#   P@.@    ,(#H    #PA8=-\"TE7+L\"  !1BUX'  !@ -$!   80'0    &$!T  ( !1 <  &  T0$  !@0SN@@21"
+    "UAW!L  (A\"]#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  ,M0-DI-3<W*RNKHZ&AJ:AKI"
+    "@@  0#0+'1UFS)CQZ*./UM34%!045%55[=JU:Q3* @  T2E$=#\"93\"M6K'CCC3=:6EIL-MO++[]<5575VMHZ.L4! (!H$R(Z%!<7NURNEI86(833"
+    "Z:RNKBXJ*AHH.FS>O#EX<>W:M>&J<G24EI9&NH0PH!71@U9$C['1\"C%6&D(K(F7-FC5AV4^(Z)\"0D! \\O\\'C\\61E90VT\\<J5*\\-24P3MW+D"
+    "STB6$ :V('K0B>HR-5HBQTA!:$1%]\"^[UG7^(0EQA83*95%4-+ 8_!@  =Z$0T4&69;/9?'/K6Y,$  \"XVX2(#MW=W;FYN8%%F\\W6T- PPB4! ("
+    "#H%2(ZU-75\"2%*2DJ$$)F9F86%A;6UM:-1%P  B$HAIDEJFK9QX\\8GGWRRN;DY-S=WTZ9-/3T]HU,9  \"(0J%O\"77^_/F?_.0GHU *  \"(?OR"
+    "&!0  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z "
+    "    X@.  #  *(#   P@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P"
+    "@.@    ,(#H    #B X  ,  H@,  #\" Z     P@.@    .(#@  P \"B P  ,(#H    #\" Z     X@.  #  *(#   P@.@    ,(#H    #B X"
+    "  ,  H@,  #\" Z     P@.@    /\"%ATDJ2-<NP(  %&+7@<  &  T0$  !A =     980FYAL]DR,C(\"BU>O7G6[W2-9$@  B%ZAH\\/LV;.7+"
+    "%DBR[*^N&'#AIJ:FA&N\"@  1*G0T2$W-W?KUJT'#AP8A6H  $\"4\"QT=LK.SO_CB\"YO-YO%X%$49:+/-FS?W6K-V[=K;K6YTE9:61KJ$,* 5T8-"
+    "61(^QT0KQ_[=W_S%-7?\\?Q\\\\MM6K++ 6M\\H5-?LB/X(]T'QQJE.DFBE%,,+*%$+<URY)](!IE?YC-)?MOF+@E<W'!;7_5/]AW'X>;;FR)BIC,_"
+    "6 ,/KHMH#+ 'Y,A^*/MT#H5N)\\_JI4!*O<6/5Q\\/OZBQ^OM^]\"6\\^HYY[9CI2/T0I;BXN(1.<]]HH/)9(J)B<G+RXN,C+1:K?7U]8,C0M\":-6"
+    "M&I\"\"Y#APX(+N$$4 O1@]Z,7J,C5Z(L=(1>B'%X(+O-J;?VWVBPZ1)DYJ:FK[^^FN?SV>WVXN+B^?-F_?33S_IN\"<  # &#!$=5J]>G9F9*82X?"
+    "OWZUJU;*RHJ@NU^O[^QL3$A(8'H  # (VN(Z%!;6WO\\^'$A1&]O;TQ,3&)B8GU]_:VCS>:^OKZ'6B   !A-AOA(J L7+K2TM+2TM)PZ=<IBL>3GYP"
+    "<_U\\%NMV=D9!P[=NRA%PD  $:+^^QUZ.CHJ*JJ*BDI.7?N7'Q\\?'5U-1_J  # H^S^%V?6UM;RH0X  \"\"([[     :$!T  ( &1 <  * !T0$ "
+    " &A =    !H0'0  @ 9$!P  H '1 0  :$!T    &A =  \" !D0'  \"@ =$!  !H0'0    :$!T  ( &1 <  * !T0$  &A =    !H0'0  @ 9$"
+    "!P  H '1 0  :$!T    &A =  \" !D0'  \"@ ='ACN+B8MDEC !Z,7K0B]%C;/1\"C)6.T NC(SH    -B X  $ #H@,  -\" Z    #10UA45UO"
+    "_W6)AGV;IUZXA4 P  'J8WWGA#T_%S_^4R2[EC  !@4\"Q8    #8@.  !  Z(#  #0@.@    T(#H    -B X  $ #H@,  -\" Z    #0@.@    "
+    "U&X-,DHZ.CITV;YO5Z.SHZPC^;7*FIJ<W-S;*KT,_I=$Z>//GJU:MGSIR178M^L;&Q#H>CJZOKXL6+LFL)U^.//^[S^;J[NV47HH?-9G,ZG:&;Y\\^"
+    "?OW;MFL1Z=+/9;-.G3[]^_7IK:ZOL6O08\\$ ((;J[NPWZZI@\\>;+3Z33Z>!'\\2]O9V7GITB79M>@T8+#3.HY'S)D]Z\\^.\\[KOWN5R%145F<WF"
+    "Q8L76ZW6MK8VW:>2[MEGGUVV;-EWWWTGNQ\"=5J]>O6S9,HO%,G?N7)?+]<LOO_3U]<DN2K/ERY?GY.18+)9GGGG&8K&</GU:=D7Z.9W.DI*2LV?/7"
+    "KAP078M>BQ8L.\"YYYZ;,V>.R^5RN5QGSIRY?/FR[*(T2TM+>_GEE\\>-&S=[]FR7RW7TZ%'9%6F6FII:5%3DNNVIIYZ*B(@X>?*D[+HT6[1HT=JU:"
+    "\\UF\\\\*%\"Z=-FW;BQ G9%>FQ<N7*5:M6F<WFIY]^VFJUGCIU2G9%F@T8[+2.X_\\7.RVL60>3R92?GU]>7M[5U66SV39OWGSTZ%$C9F&KU;IRY<"
+    "I9LV9=OWY==BTZQ<;&9F5E;=VZ-1 (\"\"$V;MSH<KGJZ^MEUZ7-U*E3L[.S@[UX[+''7G_]]9]__OGJU:NRZ](C(B*BL+#PRI4KL@O1+RXNKJJJJK"
+    ":V5G8A^IE,IH*\"@D\\^^23X]WWCQHVS9LWZ[;??9->E36-C8V-C8_#GE)24M6O7'CQX4&Y).BB*LF+%BAT[=G1V=DZ<./'--]^LK:TUW-Q#?'S\\@"
+    "@4+WGWW7;_?;S:;7WOMM9,G3YX[=TYV7<,U>+#3-XZ'M=<A-34U$ AT=74)(:Y>O=K<W)R2DA+.\"659MFQ9(!#8LV>/[$+T\"P0\"NW;M\"N8&(<3"
+    "%BQ<=#H?<DG3HZNK:L6-'L!>]O;TFD\\EL'IEO:'OX<G-SCQ\\_WMG9*;L0_6)C8R]<N&\"SV2(B(F37HE-Z>KK7ZPV]+WS__?<-EQOZLU@L!04%GW"
+    "_^>>B5;BR*HMR\\>5,(<>/&#555C?CJ=CJ=S<W-?K]?\"-'3TW/Z].F9,V?*+DJ#P8.=OG$\\K$?.:K7VSXQ___WWM&G3PCFA+%]^^:6JJFEI:;(+T"
+    "<_O]P>?S4*(F)B8]/3TFIH:N27IH*IJ5U>7R62:.W?N_/GS:VIJ0ITREL3$Q*2DI \\^^,#M=LNN12>3R103$Y.7EQ<9&6FU6NOKZ[_XX@O916EFM5"
+    "J]7N^:-6N>?/+)OKZ^FIJ:;[_]5G91^BU>O+BCH\\.@^[%45=VW;]\\++[S0U-24DI)25U?WQQ]_R\"Y*LYZ>GO[ORJQ6JZJJ$NO1:O!@IV\\<#VO6"
+    "P60R]5]--^+*>I\"Q'OM[L]OMK[SR2DU-C>%F D-L-IO9;/[KK[]24E*L5JOL<C2;.''BFC5K/OWT4]F%A&72I$E-34V[=NUZ^^VWMVW;EI:6-F_>/"
+    "-E%:>9T.F?.G-G>WO[66V]]]-%'2Y8L,>C,J!#\";#8O6K2HNKI:=B'Z)20DW+QYL[N[.Q (.)U.B\\4BNR+-6EI:)DV:M'+ERL3$Q(4+%\\;%Q2F*"
+    "(KLH#08/=OK&\\;\"B0T]/3_^9S $5X.&+CX]?OW[]]]]_?_CP8=FUZ-?=W?W##S]X/)X;-VXL7+A0=CF:K5BQHJ.C(R8F)BTMS6JUQL7%Q<;&RBY*"
+    ",Y_/5U%1X?/YA!!^O[^QL3$A(4%V49I=NG3ITJ5+=75U0HB.CH[&QL8Y<^;(+DJGV;-G7[Y\\V4#+Z@-D9&1,GS[]PP\\_K*VM]7@\\0HCL[&S916D"
+    "6\" 0^_OACA\\.1DY,S8<*$HT>/!I=@C$O?.![6@D5W=W=<7%SHILUF^_777\\,Y(<(Q8\\:,HJ*B/7OVA'94&<Z4*5-FS)CQXX\\_!F_Z_7Z[W2ZW"
+    ")!VN7+EBM]L7+%@@A' X'&EI:=>N73/<)%!,3$QB8F)HIZW9;#;B&X,!VU2-V(60]/3TIJ8FV57H9[5:SY\\_'WH(+EZ\\&!T=+;<D'29,F#!^_/B*"
+    "BHK@S1=??-'0#XK0.XZ'->L0O(0CN&HR=>K4&3-FM+2TA'-\"Z!8=';UNW;K=NW>?.'$B(B(B(B+\"9#+>YWV93*95JU9-F3)%\"!$9&9F:FFK$E^7"
+    "!@P<]M[6WM]?4U!CQBE^+Q9*?GQ_\\. &[W9Z1D7'LV#'916EVXL0)F\\V6GIXNA+#9;&EI:<9]>Y.4E'3V[%G95>C7WMZ>DI(2?'5/G#@Q(2'!B)<"
+    "UCA\\__M577PV^I7GBB2<2$A*,^U8M2-\\X'M:L@ZJJNW?O+BPL[.SLC(N+^^RSSPQ]*9JAS9\\_?_SX\\2^]]%*HI;:V=M^^?1)+TJ&SL_.KK[Y:O"
+    "W[]Z=.G$Q(2#A\\^;,3H,#9T='145565E)2<.W<N/CZ^NKKZ]]]_EUV49KV]O145%<\\___R2)4NF3IUZY,@1@WXJE*(HD9&1?_[YI^Q\"] L]H]K;"
+    "V^/BXNKKZPUW];@0PN_W?_/--Z6EI>WM[='1T145%0;]G+00?>.XLJZHL/Z_X;Z9L%@L-V_>'$N;#2&1HB@VFRT0\"!AZ>GEL4!1EW+AQ8^#5/6[<N"
+    "-[>7IY1T@6?43T]/89^+(+7C=^X<4-V(2-I^./XW'^Y1N:RVC'V&X1<JJHR?35*J*HZ-E[=1M_+-F:,C6=47U_?&.C% )IZ9+SE<   (!'1 0  :$!"
+    "T    &A =  \" !D0'  \"@ =$!  !H0'0    :$!T  ( &9B'$.^^\\([L,  !@ /_Y_PJS$\"(O+T]V)0  P !N10>_WR^[$@  8 SL=0   !H0'"
+    "0  @ 9$!P  H,'(?.DV  \"XFR-'CL@N(5S9V=FAGXD.   \\</V'7L.QV^W]KZA@P0(  &A =    !H0'0  @ :WHH/:6KX\\:H!-U:JJ^[RJ6KTI"
+    ":GEYJ_XS   PE@PUU$9%#6.L5%O+E_<;E-4[)QIZI![R@.$WWE?_60=WI=?KNZW2[2G(W=D:1GH    A2G+) 9_/Y_-Y&\\JR[HRY!TJ2E7O\\+U6M"
+    "+LW<4M>OY5!IYI:,RELC=>FAP?]ER .&WWA?=UVP6+JA+*NN^=0P3P,  $9::_ERAZ.@R>W.NMVBJM55GJRR#4M%<*3V5 V8+1CR@.$W#J>J8>UU4-"
+    "7J38-6,>ZT145%;:H>T.@HK0JV5&^Z\\Z_!WT+_FP  /.+^,9[VVS0@A!\"IFQN\\WOT;4N\\<W=;<)#)2DX000B2E9HBFYK9_GF[( X;?. QWC0Z'"
+    "=FRI<^?E*(JJMN[,+1\"57I_/UU#6%%S%4-7JT@*/N]+K\\_F\\E6[AV5;>^H_&AM0FCQ#BGT%&55OW[ZUSYRT=5FD  #P\"E)SMOD&VYRA\"B.2<G"
+    "&3E7LL94O2/#IX\"AR.4=[:E-OBVYP@A1-N=X3ZI>+.[;N_^-J$H.=MO=TPLS7,'3W H-/,ADHHWWVI,RLW/\\E0%%U#:2 X  !C;$-LDO0UE62(TA"
+    "1%T*U4X' 6>VTVA79FAQK;FIL%WH\"C)H>S0MG^O*-N0,_H\"%   LMQKP6)4&F+!0DDNV5_I]A3D]KM<I/_%%P=*DA6UM3PW<V]^@]?G\\WF]E6XA"
+    "1'\"A9\"A)Q9O=GJIJM77_7I&?FS3D,0  /)KNL6 QA/Z;$OIO5KCW <-O'(:A]SHH.=LKW75;BG>VJFK_%8<[EY:>:JZ[?1^'2F]/12S-<]=MV7%("
+    "\"\"':=F[SA,ZFY.2Y/54[20X  (1%47)\"8VUH5^)]#QA^XW!JN.O77RU]K]+M*,@L3?5MSRG>7UGJ<$0)(4166</^'$51EVXHR\\HL<'B$$%EEE6"
+    "59!<VGA)*<\\UY#66ZF(TJ(K+(RM]A[YVQY[H*\"+>Y*[RC<[@$ @($$!^@HCQ#\"7>F]M7^P>E/4MM2& R7)=SM@^(WWI:PK*OR@_,.1ZL_=J*WEN"
+    "9G-F[WOL=$! /\"H.7+DR)CYYLSU)?]^2-]A$;RT@MP  (#1W77!8J2HK>6YF5OJM,R$  \" 4>N!1P<EN>2 K^1!WPL  '@X^-)M  \"@ =$!  !H"
+    "\\, 7+   @-UNEUW\"B\"$Z  #P8&5G9X<N;AP#6+     :*.N*\"F77    #.-_\\/I;P3C9O=8     245.1*Y\"8(("
+  }
+  ResourceRecord {
+    Path		    /simulink/resources/mwimg_e7d17252-b99d-440c-8f94-b230e6612864.png
+    Data		    "B5!.1PT*&@H    -24A$4@   KX   )U\" (   \"PRF15    \"7!(67,  !)T   2= '>9A]X   @ $E$051XG.S=>W13UYTW_'TD"
+    "6;X(6[[AN[$!WS V 6PP)FD:2#%C((EI&@;:S$K2U8&29JU<VJ9K9I[.\\[PK3R?O=#HAO0P$YDTS/\"U-\"N&!, 0'0R WP(\"-N1IC&V.#L;$MVY"
+    ")EW<_E_>-@(6S=K?O^?KJ:94E'1_M(/\\[YGKVWCICGO[^1     +A'1@CYTYX/@]T,    \" -_]X--DF\"W 0   ,()H@,   !X -$!    /(#H "
+    "    !Y =      /(#H   \" !Q =    P ,RYP]W]O3=NCOHQ7KG%\\S*2DOVJDD    0NEQ$AZ_.7;IKE*;,3.-XGN4$CN-9CN=XGN,$EN=97N!X\\"
+    "4Z!$P2.XUF>YWAA?/#NAF6CSZY9$9AM    @(!Q$1UXLVF@>T W.L+S/,\\+'\"_PO, +]__@!$$0\",?S#^X4\"\"\\(1K7*;$@/S 8   ! (+F(#"
+    "N6%N0M*\\I4)\"8X6$ 0Q3(CQ0<P0_.C(:)0,LR@    BD(OH$!,CS\\[*2DU-L?LH;PT,/,?S/,?=O]4?(Q\\9'O%#:P$  /R.81B7RPB\"$(\"6N"
+    "(EAF*:FIHJ*\"KN/-C<W5U96^K#!WO<-\\#Q_Y5);P^MU T?_S%DL',?S/,]Q'\">.6]A3OX6Q\\>AO.QT_.OG!AQ_=4O_@SBWU4];\\T&+69=QYH?"
+    "HM=EZ[\\[>/3EH#  !$-L&I8+=NLJ:FILK*RN;FYJD/B;FAJ:G)AR_G973@>5YO9@_^Y7!F4:_^UD'CR @O\\!P_T>W \\XZ>N/S=#O%][WB7O%9H/"
+    "4C7;V&8-5<G'A.$(V6O%3XX7'?^]E%F#3EB_<R.E+9/\"A:U.R<>VDS(YHDE=]9.>7WG+R0Z_=H+DX,+  ! R*JHJ+\";'JRYP5&'A'=<1 >[V8KG^"
+    "7&#^3^^Z#)]<S0QB9=9;HVTG+<9O. %@2?$12@K>'7WN\\M/[_VTDQ!2OV7-KN7O=IQZM6#BT=J=PI'-N]:(Q_3.3_>>7O[NSQ_D@-I7'RSI$1<O1 "
+    "@A9/F[[VY&>   @+ R-3WX*3<0=Z+#I/3 <OR5_O'_>>#B)Q_7%VA[H@Q\";\"P9^>(8:S;S]W$<SWO2GU-_<!?9_#\\FIX':G[^[?-?__FTG(05%9"
+    ">1T:X?;Z_/ZA>Y;N_/(YM.O_1N&*   ((S8I@?_Y0;B.CKP@FW_ <_SW7<&_OG=C\\]]\\FG.Q:,SHQGI$!]EX(6[7>.W;T]$!X'GW(T.944%X@&];"
+    "NK8PH/$4/OS=Y?O6C-U_H.'7+_0A-J=D[HB  !@.NS-1YLLV&V,!-;TX+_<0%Q&!U[@Q0Q@L/#7[NG^OV]NO[F_=7A$G=C=DCM\\4QDM909X9I2/UO"
+    "6/-IV?^)X%Q_.<R^A0OZ7PM=/V#N3V%+QZ2IP<86\\\"I5],Z8H   #O.9]U&)IS#\\$1=^8Z\"'T:X^^_ZOWW+_J.WU#+9;*D[%G)YK%TP:R(81A>"
+    "(#Q1Q'&:;[X4OV0A\"()X>0>[*SS]6J&8+M=<?;?#WCQ&API>/24(PI'-IZ?.:_2'@E=WOTLPY0$  ,*(=9S\"R7<NIL^=N0XD*8J?)1F56/2\"1,H"
+    ";]7%G/LD=O9T3'34C@9'(\"\",C<4K\"M5_1W>VU3G80B/TO65B_82%8YRH6EBXG5R=_98(0TME^E2PO+7SXSMJ=0H>W_0$>O1 A!:_^#\\R7! \" "
+    "<&$[O\\'1=RY\\PO5<!Y[GH^3RVHHY?U\\>-2]..W?T6F'WN3*%K\" S*CY9X*/E?6F/W?K69F9^V4!]/<>R$WT/;C=!/$1/F958_V^OG9XZIY%,8]"
+    ":DIR]$:L7YDI]Z_E(   \"!-'5>I/_2@ZO?L!!X,0E$RZ/*\"O/2$Q7&LM5W1YISQR_%ITMD4OY>]C+FL2V9\\8FC!4L'CWYF&AV5*95.!BSLJMUY9"
+    "#.SAB%'K\",8]5N8-;LV'Q%J\"2&D\\[>/_EO1J8F'.G_[OW>1S4<\\&.IP^X4</>$U0C9[\\W(    !X.C[%-;TX-LIDZZBP_V+3',<Q_.\\D)24Q"
+    "\"D3HGZX,:GKIDS0WS$]'E7Q][%),P5!2,G.EC^W@<BB.(X7KRCI23-J=PH=I8\\6/IA@N_F(8#V<%Q25[5K#[\"(VCWDR2<+]%[+[A)^_NWS7:Z>]"
+    "?#D   A+X?6-#R?AP)H>?#@1E7G^^QO_M.=#1P]_<^IT3G9V6MI,\\?<I.([C><&@&^.O_)/>+&?SML2G9)'[\">.!_OX!GK.L6O4=7[42    0L'?"
+    "_6\"3BUX'\\>L2XO0%7KC__ZCHN('L-Z4R64)\"@G4!0;C_7_$[%OB2#0  0$1R$1TXCKO;UZ?3ZWF;[UW>_Z_)-*;5BC^Z+4RD\"O'+$R,C(XF)RL"
+    "!L      22B^@P=\\Z<CH[._OY^CU::F*C,R$B?1JL    @1+F(#KFY.;FY.8%I\"@   (0^+W]T&P   .B$Z      >0'0     #R Z    @ <0'0"
+    "   , #B X   #@ 40'    \\ \"B P   '@ T0$    \\@.@     'D!T      \\@.@   ( '$!T   #  X@.    X %$!P   /  H@,   !X -$!"
+    "    /(#H     !YP$1WJMS\"VMM1;[Q3_)/5;F.7;.GS8H$FO^- +>[M\"'[:P?HN=QECOM'UG NRA]VVB\"3YLCQ=O8X#?C8YMR^U^-\"Z;[?,:!@"
+    "\"(;*Y[':K?:1<F[*PEA)#:G=8_?:]VY_W7.K*9D,U''GKA$%!;MYGL.OCP :K^X\"ZRN:Z6^/F=<:QCVW)F#3EB_9B.E+2)1\\) M^?A@W\"0W@T "
+    " /!83T_/]@GGSY\\GA.CU^MV[=W=W=T]=& ,6'IJ:'1XDAR#I.+SO3/4[/WO0@MK77R\\,7G,  \"\"\\]/3T-#0T_/G/?W[]]==_\\I.?_,=__,?5"
+    "JU<U&LT__N,_7KER9>KRWD0')QV\\'=N63W2:^Z4/V&;]D_O\"G3STP(-N?:^;-SD[V\":'2>_,U'?CX?&.AV[9[6]W2V%).3G3UFGG$=OVU&]AEF^"
+    "KM[9H2[UM^ZPO_/ 6.&J3[7L]L7C]%H99LXN<>:.(>3!\\X^#=L'T3Q->P/NC?H0.7]2FV^<%B&,D   KLV[?OBR^^.'#@0'%QL5PNW[U[]QMOO#$\\"
+    "/,SSO-WE?=GKT+%M>=&^Y^X/;QPI?Z/(Q^/<'=N6%[U1/M$OW_[.E376(Y\"3AQYZ_IHK]X=?CCSG=3,>S@X=;5?L]SG8?3=JZS:3*VT3!_.#N\\B#"
+    "-76VG?&V[Z+V9^]4[UKC^C!WYHVWR&[Q#:K>M89A7K\"YY<EGU7&X;6+#VM\\A]S_GVIV\"<&3S_?&M*<,4SC^@76ON-^7(YC-OO.\"OH[6;]7GFC:"
+    "+[K;'9.@\" \"+9UZ];MV[?/G#GSQ(D33SSQ!\"'DJZ^^6K%BQ>#@H-WE74<'\\332C<F*];]Y@[RS>Z*KO/9G[U1/GA0P/?6_>8.\\TVX]*!6^OMO"
+    "Z\"DX>FJ2\\1&S?=/KT;8__'8?WV3_B.W@W\"DJJS^P[+/9 '-RU^9UWJN^OJ?[@KNJ2 B];5/CZ:?$PY^(\\>?,OQ085OO[+S9-N60.-6R^W<V+#W"
+    "'RNBP^H>N*=JOW9.]7V.U#<LVO-I/FU:W8]W 9WZG/SD=/WEQ+;^19Z'@ @LBD4\"J52*9%(4E-3?_.;W[SXXHLFDTFE4GG?ZV S3=+IE+?Z@[ML8P"
+    "93],89+[?!\\?HG#ORBPI)R\\:CEY\"%;A>N>J]ZUQ@>3_FOK-M\\__CM.#@[>C<)US]T_-M8?W+6Y[O62<G%-]0=W53^W;CHS% I?/WW_M+W(T18^"
+    "G$V\\3RK$MN??YN#LD*L/Z.''/$DQDVQ^,%?TP63;!VUPJSX?>E\\*2\\J];0L 0'@9&QO[IW_ZIYT[=[:VMCI?TK?3)\"?ON4-L>GWAZZ?O=Y9/,S"
+    "],9 >'R8$0XN#=*%SW7/6N@_6DH^U*=4D!J:W;?*:MDW2T79EF<IAHV4ZAW=\\GRO5;&,:FYW^SZV>$BA\"O3P\" 8++N&RLK*U^>D)^?/W5)F<]>L"
+    "Z\"DFNQKZR\"U?IK</W7]'6U72'E=(2'$R4-3%+Y^6EBW;7G16]M^5NOUH$5MW>8U;QVN)_O.;/ZEW<./XW>C<-USU?O:Z@_O(\\_M+B2DL&[SFH/;"
+    "2JZ<*?^EC]XXZZS)Z:^OL\\W.F7E'VQ6;/OV.MBN$E+A8C[//+E#<KL^'WKOZ@[M(^1%\\7P4 **!4*O_E7_[%G25]U^M0^/HO-Y^QF536L6V+3T]]"
+    "IZ[_A3>(^)5$)P_9JM]BV]7P<\">YIVKK-I]Y8\\T;#OL<G+P;A27E9]Y8\\P:YW\\M04%)]99^SS@N7.K8MM]FPCFUO3>/+H@4EU6?>^,W$Y;X<#D"
+    "98IWIL>V%2O[_=F0IN?D!^Y7Y]/I@S6K]ES:[J +<3 \"#D^7+ HG:G<&2S=:):T;X27_3 /[S^^Z,-XOJ?:S]MG?3F^*$'\"DHFEBC:]US[-#NK:^"
+    "LV$^+L$.WXW:BMVTR(=7RB<-USY,QTD@,I+\"FWF1Y8]$;Y$>][X@M?/VUM]<&Z]G>J[2VR^_Z,3(9Y@>RV';\"X_U4/.\\-!;GU ?N9F?5:_<Z3DK"
+    "8EY' ^Z5P  X#[F^>]O_-.>#X/=#(\"04+^%>:LD\"+$& \"!<_-T/-CF;Z\\ PS-0[!4'P6WL<OF@ 7M=-CII'0J:%5K9-#;6V^9R3ST44\\>\\  "
+    "$# .(L.0=G;AO@N/L2;9RN,FCI]5&TL $!P^>X;%@#AKW:G@$F1  #.X>>O    P .(#@   . !1 <   #P *(#    > #1 0   #P@(X3LWKT[V,T"
+    "   \" \\\" CA+SPP@O!;@8   \"$@>,-G\\D((1J-)M@M 0  @/\" N0X   #@@1\"*#@</'E0JE<%N1>0+S?<Y-%L57'A/ \" TA5!T    @-\"'"
+    "W[ @A! +:[K5=_%:Q]<W[UP<5O=9[T]69A;,6E16]/CLK(4RJ3R(+109#(:3)T\\:C4:>YWF>M]XOD4@D$DEL;.R*%2MB8F*\"V$((HKU[]^[=N]?1"
+    "HQLV;-BP84,@VP, D2KLHX.%Y:YU]=T9-<[.2%+$1/WW^9OB_4L+,Y<59[I\\NGILL*?O>E=O2]_0S7A%XKPYU?$SDF32*%8P&,U:K6YD1'.WX>O_D"
+    "Y5V9D[.([,RYR4IT_V\\0?;U]O;>OGV;YWF+Q2*52F4RV:3?U.9YWF0R-34U2222W-S<W-Q<KU\\KCKTE&[\\JZ'HF/R\"1,TF+]/)B5I+@]<K#T9M"
+    "OOFGW?H[C3\"83(20Z.EHJE=I=YM>__K4?6S9%1D;&\\N6/3KW_S)G3[CS]@P\\^\\/JE7WKI):^?\"P#AQ=WH</'BQ>O7KR<E)1%\"1D='2TI*%BU"
+    ":Y,^&N45G--^ZI_[JZNU^C5$>)4U/5+3U#*VL++IPX\\[ Z+C+IZO'!J]WG;O>U3BN'\\G)*)R;6YZ9-CM^1I)$PIAYK<$\\,J*]VS?8=;NWLZOOPH"
+    "AF0&?0SINSU&5ZN'%WI.W.L/AW57&6B>7NC>C2$^-R4N-E4F]&B'I[>V_=NC4T-,0PC%0JE4JE$HG$&AT$01\"C \\=Q0T-#/,^S+$L(\\3H]\"+K;"
+    "^AM-QJ[KD^YGY#$)53*2ED7D08L.*I7J\\N7+4JG4VN\\BOB<\\S^?EY<V9,\\<?+RH(PMJU:V?/GFU[IU:KO7SY\\J%#AP@AZ]:M6[!@P8SX>$$0Q"
+    ",^#%X2>GIZ&HT?]T1XG[8R)B<W.SKYTZ9+9;+9]2*\\WN/.[Y#S/+UNV+\",CP\\E+$$*N7[_^\\<<?O_+**_'Q\\8(@# P,-#<W3[_] ! NG$4'K5"
+    ";;W=T],#\"@4\"ANW;HU.CI:5%1$\"+EY\\V9K:ZO1:-3I=.GIZ?GY^?'Q\\8%J\\'UJK5ZC,ZK&#)W]:K,@'1LW& Q&(2$FBK K%Q?>Z1L4.(O+E7"
+    "3WMK9V-JJU@Z6%58\\N7I>6DB./BA$(SPEF,Q<=R\\D42GE2ZHS4=.6ERTVWN]MYCH^+27 9'=INJSZ_<B<S+>G6G<'\\-.70F.Y,6]^<=.7C9;/2$"
+    "N.BHSSNZ;E]^_;@X*!$(I')9&)_@VV7 R%$O$<BD; L*PC\"T-\"03\";SON.!U9J&!PRCQAF%9400!-;,FPT6S8AYH\"]^P3#A7;^Q?G+OWKWV]O;"
+    ">WMZ,C(R4E)38V%B&82P6R\\C(R,# @-@!X(_TP/-\\?G[^@@4+K/=HM=KSY\\]W=76)7VR^=>M645%165F98L8,@>=Y0>!YGN<>&E0* )[G698S& "
+    "QGSC1F966*05\\T>_;LC S7G7 \\SZ>GI]M]#\\70( A\"2TO+[;M]I8NKFIHO/+ER1596%L=Q =Y2  @NAX<QK59[^_;MUM;6\\?%QA4(AE\\L?>>"
+    "21)4N6$$(,!D-?7U]75Y=6JQT<'&08)B\\O+Y#IP61AK]SL:^T>T!HMZ:E)WUVY^*,CIP2.)3QO,1E5>M9H- E<K/.56\"RF&[<NJ#6JDH*ESSRY.5"
+    "H>RS ,R[$<9V%D+\"=8>('E!58J8Y)3$I=4+[2PYOX[/6U=3?,+ED5%13M9L\\\"S62DSGEVUY/>[#PL\"-ZXSW+H[J!H=DS),54EV>F*<3\":5R^S"
+    "W;T]E,!@XCA-S0U14%\"%D:FX0!$&\\4R:3\"8+ <1S+L@:#(3;6Q9LP54M+2_1X?TR_(2DZ,6[^,L*SG%'':4?8VS=U=P8TM^^Q^@M<5\"\\A1!(5"
+    "'9._0.+TK?\"A@8&!UM;6_O[^[.SL@H*\"6;-FQ<?'\"X28C*;;=V[+9%%]?7>O7+D2%165F9DID_ER)([CN$FG[->N73MQXL35JU=34U/%FW*Y/#8"
+    "V=LF2)?=S \\^+_4 ^;(9S6NVX3J=G6=9BX5B67;.F=OGRY9X6P-0M%5ESP_7KU\\\\V-8^;^2?7U?UIYQ_B%.>65\"P.\\)8\"0- YW,-V=76UMK8"
+    "JE<IUZ]:-C8U%1T<G)\"3H=#I\"2$5%Q9PY<W0Z74Q,S*E3IUI:6GB>MSTG\\RN3A3U[]=:I2YT)\\3,>7522FY-I9J0LRPHL*_ <9S9J#&:SR22PK"
+    "//UM'<WW^[KR,F<^UC%.C$W$$+NW+FMUJB*Y^>S@I'CC9Q@X@4S3RQ2F5!0FJD=U][NZVCO;IY?N-S)FGF6Y2QF\"\\MQ9J/ \\SS+IL3'5BPH;FII"
+    "[>B^.R=G9MG<[$=FI[FYO2=/GC293&)T(!.Y8=)$!S$]B/?+9#*>YU4JU<F3)]>L6>/FJUC]\\8]_9'CC$MGHDW-B6?6@P+.\\<9P;'S6/J;4:L_&K"
+    "%B*Y3B0R@343J3SOM3\\&+#J</7NVM[=WSIPYCS_^>')R,L,PFC&MP6B,3U#FY,U.2DZ5MERX=+'EZ-&CFS9M\\FUTF'HT/77J5%]?7VEI:596EB ("
+    "_?W]_?W]ITZ=JJBLM.8&7N#=&2/PE>W;MY\\Z=2HK*YME.99E__\"'_Q@9&7WNN>]YM!*[T4&\\A^,XM5K]YSU_2<\\O>.IOGV-9=M./7_T_V[>-C("
+    "Q4+EZ$Z ! %8=[V+Z^OM'1T:>??EJA4,3%Q:G5ZHL7+UZY<D7LO)TU:Y92J32;S>7EY9]]]EE?7U\\ HD/?D.9&=]_MOD$3*Y06YJ5GI,U0)JHMQ,)"
+    "SQN$[3=W-/4GQ,9J1+S[YZ-X]?5FVBR_$-UWY,C9&D9];G)(RDR<6(A\"!<*=/?]-P[-C2ZH7?6;,D-H%PQ,3R)HXW\\\\0\\0RE+3H^YJ]4V7?G2>"
+    "700.-9B,AE,+&<V$IX3.#9:QLS.RXZ-C>[N[FWK[A]2C?\"6HK(Y65%N]#T8# ;Q\"Q36N# R,F(T&B<M%AT=G9R<+.[EQ9$+@\\'@<N53O?766S&C"
+    "QU5??::_,V@9ZA%XEC?JN/%1T^BPF<CG/;.\"SUW'1>>.M9WO/; ]@$=&0@C)S,PL*2E)3DX6\"#&8+3O>>Z_EXL5W?K==((1A9#,SLW-'1_OO]OK\\"
+    "=2<=4 5!V+!A@\\ED&AT=;6IJ$@C9L&&#4JFTSL\"X/UK!<8$YH&JUVM___@\\7+[:DIZ?/GU_&,$QIZ?QKUZX<.O2)7J_SZ#+SXH\"7[3W6_@:U6O"
+    "W3G_YT5=V&^8N76%A69S1K39:J9WYP\\8NC3>^])PYE @ E'$:'V-C8F)@8M5H=%Q?7TM+RU5=?7;Y\\6:/1\"(*@4\"CFS9M765DY=^Y<C483$Q/C"
+    "1<>XI^X.#%]H[;K9.Q@?'Y^5G9&6F2&/4_0/#K6VG)/*HH3QH>Q495'AW,(YY@N7KFKO#5^Y8,I5DJ5+ESI:X=6VIO+213-GSB12BX4?)T3@!>[>4-"
+    "^%YDO#PRKM^/ CRV9GSE+(8LV<8&1Y$R-EXY.B)#&:JVU-SILJ<\"QK-NI-9LYD%'A>X%C\"6:*BH[.R,AB)5!85I1X>_KJY;6!P.\"LC+2<]*3G>V"
+    ";O'LFQ,3(Q$(B$3G0TFDTGL_G%$G/I@L7@S*2$Q,3&6BU%+I$.]:OW1%D($@6,%SL(:+;Q$)HV+D<0GD9A47AZO-P;RI)H8C<:4E)19LV8Q#&,P671"
+    "&DU:G'Q_7Z4T60@C#D&A%?'QB2F?[#9\\W:U)N((2DI:7=OY-A&$%(3$S,S,Q\\,%3!\\1S/<5P@>AUNW[Y]Z-!_?_WUUYF963DYLV)B8@6!9&5EZ7"
+    "3CMVYU??;94;D\\^IEGGHZ+BW-G;5-#$ID8I_CSGK^LJMM06+J D46U7V\\]4?_?2Y_Y@5D:DU!<,686FIN_]M<6 D#HL1\\=&AL;V]K:8F)BHJ.CA"
+    "X:&OOKJJ[-GST9%1:U<N9(0<O;LV8L7+W(<EYB8*,[GOWKUJEPNKZZN]E]#>^X.M-[H&M.;\"N;D9\\[*-?#2(=78G8[VKI936=DY\\^;D+*E8/'_^"
+    "?+U>S[(L(=='!WO/GS\\_9\\X<<31ZJOZ!.U5+JF,5429.S3!20@1!X!@I2P3F3D__X0-CJM&A!4MS<N8J9J1P+&]D>9,TFI HKG_@KO.F\"IS%8C+"
+    "I31;6;!1XSGJ3$)*<FA(3%]M_5]'9UC%XJ7/F'=7\"XEF/%&0G)B@<K4T\\<Q6C@S@V(<Z(G+28[1\"&^+?WI[S1,Y,+\"WEN\\F%/%A,M4^;=&51W"
+    "]C7>O7Y-0U+'3I^=-;<@*RO+WS-=CA\\_WM?7EYF9.2,^7JT9V[%SY\\BH^ESCF8&!@=^_\\V^$D#5/U^7/GB.3RXU&WR<:GN>M!U'QGJBH*$$0DI*"
+    "2%BU<* B\",C%1*I,Q#^<&CO?[Y,&>GIZ&AF-__>O>K*RLO+S9@L#?O7M7J4P<&1E-2TMG6:ZSL_V##SY0*A.JJJI24E+<WU+R\\+S(LTW-Z?D%\\Q"
+    "<M(;*H<:/%R$1)9B0WG_@L95ZE5C-J'!N)5<SPZY8\"0$BQ'QTN7+B@4JFJJZN52N7Y\\^>O7KT:$Q.S>O7J]>O7$T)24U./'CW:WMX^;]Z\\[.SLZ"
+    ".CH]O9VCN.<1(=__==_;6QL'!X>)H0D)R=75U?_XA>_\\*RE@A E87B+^<[=>RHA)G9&PG!?MV[H[K>7+UNQ8D5L;\"S+LBJ5BF79Y<N7+URX\\/KU"
+    "ZW?O]IX]>W;MVK5VU\\>R@C2*(5*3B5,SC$0@@B!P$BDGGI]9S/S7#5=[>^Y5K\\I=\\IV9+&\\P<R96X#@BL*R+(]/$@(7%VNM@,9GTIHFY%U)Y>D"
+    "YV0F)2ZZ7+%Z^T:E0#,5*AZI%BQ]O]8%<N9@*)1#+U*@*V84+\\NJ;S1CK!Q^8GEC.)1?,F/\\#(F!ESKGQQO;-[@.<9^8)O#XZJ#3=N2*52Y]%A^I"
+    "_^W;MWM5HMQW%$(.-ZPX4++</#PT.#@V:CH>/Z59E4(EAJH^4R0HC%8G%SV]UOE7@N;OM!B.(3$A8M6F0[+U),#1.#%<XF#_K@7P0A1X\\>_>,?_RL"
+    "E):6B8JE.IVMK:V4827[^[&^^^:J\\?$%65@XAY,*%IG_^Y_^Y;=L[W_K6MURNT-K@2?,BM6;^Z0W?,UHXK=$\\9C1+$E*+'EWUS?_]DT%R-9K5)0E"
+    "ZQ>Q\\OVXI (04^]$A*2EI_OSY*U:LT.OUG9V=1J/QV]_^]OKUZZ.CHPDASSSSC%:K;6AHN'7K5G)R<G%Q,<=QXN1_1W[QBU_LV+'C\\\\\\_)X2L7"
+    "+GRY9=?]K2AE>5%4B*<.G?I:LL%8].%_+)%^I$[243[Q'>?3TQ,/'WZ]+%CQ\\3.C^7+EU=45,R<.7-T=*2^_E/'T8'7&<9TII%83L(0\"2%$(!PS$"
+    "1U$47(ISY@MO,[\"&XRLQ<0+K$!8UL6I),^Q%K/)8&(YBY'PG'CS070@A.<YH\\EB,1LYL]%D-)B,)B=KLQZHK/T*CJ*#=4DR<9$HY^UTQ\"1-)XIT"
+    "XJ ?Y-*U3_/R\\L4020C9O__C[NYNL6LG,3'1[E.F_^F_\\,(+__F?_VDP&'1ZO2(^X=?O_L',<@?V?MA_^]9;__+_QL=%2QAF:%3#6<SN#].XWZJI"
+    "N8&W7DS#86[@''U;P=-7=T(0A/CX^-+2LK$QS:5++??N]>?ES;986(/!</9LX_SY95E9.<7%\\UI;K[H9IVQ#DNV\\R*<W?,_$LF,&TYB1'1X;5^N,"
+    "1B:J:-7W.H]^5%Y66/9$7<-G]7[=4@ (*?:C@^UUCB422514E%0JM1ZZQ&G\\XO< Q2O/F,WF2=\\8G&KKUJW9V=F$D*>??MJ+ALKE4?.*\\B421L("
+    "P'\"]T=USKN].9DQ+7UW=7+I=?N' A+2WMJ6>>W7OPLZ;FEJRLK+BX.*U6FYGI\\+OLK$70&;1ZTXB)DS&$(83P L](N=C8.(8ALBA)2:5RSH*X]#R"
+    "9F=,;+\":]V3*NM^AT%M;BNM>!-9GT1@MG,@D\";[TI/FK2ZX;[>^^VM[+Z\\?QT9=6B>?.+\\EVL<\"(Z6&=!.NEUF#BB^7&4W6@TJM5J\\6^+Q7+"
+    "RY,E//OF$$/+[W__>T5.F^>D30AB&Z>_O[^SLS\"\\LY@2>$\"$Z6AX?/T/,#8(@# X,]/1T>[39;K;*&@+<SPTLRW*NIDE._SWA>4&M'KUPH8D0,C"
+    ":F,9E,+,NR+&NQ6 P&_;5K5V_=ZM+K]2:3V<UR8%E6_(=O.R^R=-$2@X4=TU\"@SU   \"  241!5)O&C!:UT7+QZ^-]/;>*5GWO_)_?_?ZS=8L7/C"
+    ")XKY]U^H6FZ6\\I (04^]&AO[__\\N7+X^/C-34UQ<7%5Z]>O7'CQO'CQU>M6D4(^?SSS\\4K2Z:FIHH3'3H[.PL*\"ER^V#1W' GQ,XH+\\J/E<D+"
+    "(%]^<5]UI'QL;&QX>GCESIL%@*\"HJRLR=PQS^DN.,>KU>G$LX8X;#(=C4Y&R-6CL\\.I\"8&D7N]SKPC(Q3)LU(2)'F%L?,+HM-SI1(8BP&BU%GMH"
+    "R;N=%1HV&,I\"9G.V^GP'$6B]E@LG 6L\\#SXDV=T<+S[-C@O9&[MTWJH:1HR?RE\\[/24_-G9:4D.;LXHT0B$8]-XBP':WJ8M)CXD!@:Q/].7<8GY"
+    "L^??_/FS3__^4]14?+H:'EB8N+?_,W?.'F?K:;YZ1N-QN[N;EF4/\"$YE43%$,(\\^MCC<H87<T/?H*KEXL5+S4T6B]FC[A9W6B78<)@;^(=R \\MQ"
+    "K-->!_=?W8G*RDK;ESAW[IQ*-2)^.7/5JE76RU\\R##-KUBQW5FCM=;#.BYP[KYR7R#JNMW[QV>%%ZS:9I3'QL^?'6TCGT8^^_VQ=V;R2:'F4RY!$$"
+    "!H (HO]Z%!967GNW+F;-V\\.# QD9&04%!2TM[<W-S>+.^66EA:.XW)S<Q,2$C0:S=C8V)PY<Y8M6Q: YB;$*Q;,+Q3_'E7='>B_(Y?+32;SS)DS!4"
+    "$85@TF*^.R4E(((1:+F64M:K76T:K*2RKOJ3INW^E-RXF)DHNC+7Q<(I\\_;T;67%G!HAA9+,L*1KW9K#=;QLW<V+A9U:]GQZ+*2UQ<@5L0>(N%U9L"
+    "LXE?=!($W&4VC(\\-:U<#HG2[CR&!62OR3CSY:N7A^M-S9*(](O$X#R[+B[$B&8>R.#8F=0-8K$?$\\/YUK&X@_F3'ISNCHZ/+R\\OGSYR<D)%R[=N"
+    "WRY<LU-36%A87IZ>D)\"7Z_-'5%185>K[]V]:I$*LLK*$K/S$Z9F980%S.L'KO=TW/I\\N7SY\\YV=K1;+);_^J__6K]^?5Y>GJ]>6HQB-O'A?FY0J"
+    "]5=-V_RO) [:Y9\"H7@H-[ L-W$&[S]+EE0N65)IO<FR[)$CGXD=#[6UM2M7KO!TA6+]6.=%EBY:PDED&H-9)\\B((NGB%T=32RMU&G4,JUM05KAXX"
+    "2/1\\JC[TSIP-4D FM@_NCSQQ!-:K?;JU:L:C28M+:VXN)@0<N_>O;-GSQ)\"9#)93DY.:FJJ5\"H5KW6X8,&\")YYX(I#M7C\"_L*>K^)K4K%0FLB"
+    "R;EY?7W=T]<O/F(\\79\\?'Q$P/_I*>GV]$:JBM7[-G?V=E^)S,O-B,GD6$$@0CI<UAE9DQBIL#Q>B-G,;*LWL+I3=RXB1L:T _=UL6;LJLK7>R1>9"
+    "ZWL*S>Q(K1@>=YO59SN^W:X/66I!G1Q7-RERXN?W390C>W-#X^?GQ\\G&59<9\"\"81AQ-H8X0F3;D2[NP<4#F$0BF<ZW'KJ[NR]=NI23DV.]9WQ\\"
+    "7*U6%Q<79V5E965ER>7REI:6Y<N7.YK?X'/5U=42B>2SSSYK.%I?VMN;-[<P.3E9+H^RF$TWVMJN7;[4>^?VR,BH3C>^9\\^>^/CXU:M7V[9_.JSGX"
+    "M8N'9/)Q'/\\R/#(A0LM@B#$*112J93C.(9AQ-S 3HQ8^*0!=FDTFDF7]Q#KA&59BV7RY1G<Q'%<:VOKB&9,:^;7;?B>P631&,QJ@YE)2)U;_9WSA_"
+    "989-=B6%U^O&S-FC6$GXA*+(M+0@%0Q>&)J4:C&1X>5B@4%HLE,S,S+BY.I5*I5\"J>YQ4*A7CU&XO%(I?+52J5=>0[D.;.G:M6CQX]6E]9N30Z.CH"
+    "O+V_FS)GB#U);+.;>WMM&H_'II^L</7WA_*K&\\U]?;C]UYJNV[SQ3$!4M)8P@G<%'QW(Z$V_F.!/'&RR\\P<+JS9QVW-+5HC*II(_,*UXXO\\IYPP"
+    "2>-UM8@XEE.58\\21U3W6-;OGF\\:M'?//GHK)Q,N1N=#58K5JPX??KTX.\"@V6R.BHH2.QZL(Q?$YN>OA(E+4/,\\GY:6MGRYL^M6.2)^E./CXRDI"
+    "*1LV_*WU_K:VZQ]__+%&HQ%'M9U?6,)/JJJJHJ.CMVW;UM79?N/Z-?%PQ3\",7\"XWF4Q&HU&G&Y?+Y7%Q<1]]]!''<9LV;?+)MT;%T,#;]#<,W!LP"
+    "FHQJM5J\\:N3HZ(C%8F882>K,F=:#]]3+*_G6__I?_\\]77SUT-06=3I>1D24.6 B\"-]T ',=]_/''2Q]_<N7:.H.9'=89-4;+B&9<HS=9I/+B5=_"
+    "K//K1@K)\"V]Q@L5@0'0!HXS ZY.;F=G=W'SQX\\,DGGQP>'F88)C$Q,28FQFPVBS\\XI-?K8V)B6EI:,C(RW!Q)]:V\\O/S!P8%CQXX.#-QC&$E.3"
+    "DY65H[9;+YPH8EE+5KM6%Y>WK>^]6U'3Y='12^M7#:BN7?CRD4S>[V\\.D.9&B.1,:P@L!QOYG@3RQLMG,[ C@P:>EJ&-3W&!7,7+UNR7.[JTLN\\("
+    "(S=NW/C\\P-FW3@1A.@8>4YF6FE)P;J:QV?E9,;&QGBTF>+5-0@A9K-9$ 293&9[>2AB$QW$<0VQ?R(F)B8FQK,7$OWRE[\\DA$1%1967EVO''_SZZ"
+    "+A.-SP\\_.M?_UKLFF99UK<7>W93:6GIMFW;;),3F9CGL7OW[K_\\Y2]Q<7%RN5PFDQT_?EROU[_VVFO3?U&.XP2>MYW?<.# _[U^_;I2J4Q+2Q<$X"
+    "9-//M&HU?FSY_S@^>?%W&\"Q6\"P6BU\\/J,/#PPD)2?/FE=G>J5 HII-:6);]R4]^<J.]X[_>^_U3/WQ%;;\"H#98KITX,]G87V\\R+G)0;1#[:+ "
+    " ( P[W_N7EY0S#G#AQXKWWWE,JE8(@)\"8F+ENVC..XQL9&M5HM\",+(R$AN;NZJ5:OFSY\\?R$:+% I%86%1;>U:N5Q^YLSI*U<N=W??8EEV:&BPJ"
+    "JHZ/3T]+2TM+<W93T44SRD;&]-P/-]UHUVCN9V>IU\"FQ\\IG1!$I8S)S1C,WKC&/WM./W-&SHU%ELQ<_5K6R:*[K+5U87C+QYR/96>E*97Q\"?'Q."
+    "5L:<V;E17AUN9\\V:93:;[]V[)QZ-IO[HMG6*@R (4JDT(R/#ZY_-_.$/?T@(N73IDDZGTVH?S!31C>L((1LV;+!^>34J*LK-:Q3ZD%PN3TY.MOO0="
+    "[_[W82$A(\\^^DC\\^H_9;/;N4MQ3W7^';>9%5E14#@^/7+ERN:NK2Q (RUJ*BHO+RLNMN<%D,EG,9K_V.G <K]&H[TZY\\+;%8C(8]#SOY8#%C!DS"
+    "GERY(C;NW,>[?C>_=B,GBU'.*3/RS*1YD9-R WH= *CB\\$B6G)Q<5E;&<5QW=[=X8:CSY\\\\30BP6R^7+EXN+BZNJJC0:37Y^?GEYN3L7JO.'[.R"
+    "<39M^0 B1R617KEP>']=&1<4N7ERQ=NVZ.7/FNGQZDC)]R<)'$^*57Y\\^U7&S[?:85GIK5#9#D,HE9C-G-O.LCB&ZZ'@NNZATWF/+'RTI*$M*</&+"
+    "VX20A>7S%I8_=#VETF+7C7%\"S %RN=QH-(J7O9KT\\U?B?R42R<R9,V-B8F;-FN5U=%BT:!$AI+>WM[V]_>AGGUGO'QX>%@2AK*Q,J73QXR#!DI>7"
+    "MWKU:H[CCA\\_;C:;K=TSTR=.(K']/D5A8:%6JS48],W-S820!0L>65Q1F9^?;\\T-)I/);#;[]8\"Z<.$C#B8G1CW^^...+J+JG+A]65E92RL7CXR"
+    ".M)\\ZEE12:=!.GA=IFQO$_A5,DP2@BK.3X.3DY!4K[D\\)%\"_7*!Z?\"@L+O_WM;WOQJXS^\\\\PSZY]Y9KT73TQ2IB];G+ZH[+&FBV>^//UY\\\\"
+    "6S=_OO6!_-SLRM>&3Q$X\\^6;FP6BX/T$]$VI6;FYN;FVLP&$Z>/#DV-C;IL\"252N5RN5*I?/311[T;IY@D+2TM(R-#I1JRO;.PL# H@Q3NR\\G)V"
+    ";1IDUZO%W\\SS)TO#+O#8K%<;VMC.4[@Q?_Q'\"]8+):4E%3Q#4E.2>$XMK.SDV.YB<$*2]_=N][]C(B;?O[SG_E\\G1S'=75UB=U7)84%7Y[8:6!Y"
+    "@WHXWJR>6_7=V]VWK/U;U@M7<!PW.#B(7@< JKA[)*BMK:VMK?5K4X(H6A[]Z-(G'EWZ1+ ;XD)L;&Q@$EM55555E8O9H*$I/C[>)_,;;+$L^^<__6"
+    "GJ_=8++W[UY1=??_6E;U\\T*#B..W3HD/5F;&SLG<:&J.@8)C%ISY]V![%A !!20OHD$B 4?/KII\\%N0H\"\\]]Y[P6X\" (0!OUQP$    \"(5H@"
+    ",   !X -$!    /, \\__V-?]B. 4X   !P[967?XQ>!P   /\" C!!R\\.#!8#<#    PH.,$/+\"\"R\\$NQD    0!HXW?\"8CA,R;-\\_EH@  "
+    "  \"5BQ?BDE     TNG[]ND?+6SL:$!T    H]>___N]7KEQQN5AY>?E/?_I3ZTU$!P   $HM7KPX,S/3Y6*3ED%T    H!3#, S#V-ZS9,D20LCY\\"
+    "^<G+69[,_RBP[)ERZJKJTTFTY=??GGMVK5@-P<  \"!<[=FSYYMOOK'>G#=O7GIZ.B%DW[Y]MC,A'GOLL2>>>,)Z,\\RBP^S9LZNKJ]][[SV+Q?+C'"
+    "_]X9&2DO[\\_V(T\"   (;U*I-\"$AX:VWWIH_?SXA)#T]_>___N_'QL8XCINZ<)A=37+>O'GGSY\\W& PLRS8W-R]8L\"#8+0(   A[.3DY^_?O+R"
+    "XN%F\\6%Q?OW[\\_)R?'[L)AUNN@5JMGSIPI_IV:FAH3$Q/<]@   $0 J52:G)S\\]MMO/_;88X20;[[YYLTWWY1*I787#JWH4%14U-[>;KV9G)R<D"
+    "9$Q.CIJ'95H:6GY\\8]__+=_^[>\"(\"0E)0T/#P>II0   )%#I5*]_?;;GW_^>5%1$2&DH:&!XSB52F5WX1\"*#BM7KJRJJGK[[;?%FPL7+ER[=FU"
+    "'1T=^?GY+2\\NQ8\\<((0:#X7>_^UUQ<?'P\\'!>7IY2J0QJDP$  \"+!V-C87__Z5^M-E4IE>W.2D(@.<7%Q:]:L*2LK,YE,XCT2B:2NKF[[]NV#@"
+    "X,*A>+--]]L:6E1J50%!04+%R[\\^../\"2'//OOL)Y]\\$M2& P  A+&BHB+KD5<DS@H0OZ)INYCMS4!$!X9A9LZ<.3@X:+TG,3'1:#0:C4;QYJI5"
+    "J_1Z_?[]^]>M6V=MI5ZO%Y^BT^G:V]L+\"PM5*M7-FS>_]:UOO?CBBW%Q<5>O7KU[]VX V@\\  !\"1?O[SG]N]?^7*E4Z>%8CH( C\"(X\\\\TM;6"
+    "=N?.'4)(8F+B\\N7+CQPY8EW@T*%#@B!8)W820N+BXFR_=6DT&C,R,L15??#!!S*9C.=YGN<#T'@  (\"(Y/6/7P9HP.+8L6.K5JTBA&BUVDFY@1 B"
+    "\",*DY242B6TRF)026);U6TL!  # F<#-=3AV[-C:M6OE<OF! P=<+LRRK.UW0B02\">(\"  ! * C<):%24U,9AAD9&<G-S76YL%:KS<[.MMY4*!0"
+    "]/3W^;!T   \"X)4#1(34U==FR98</'_[RRR\\+\"@I<IH>NKBY\"B#C[(3T]O:\"@H+.S,Q -!0   *<\"] V+BHJ*PX</BS=/GCRY<N5*E4IE,!@"
+    "</440A+U[]V[<N'%@8\" [.WO?OGWCX^,!:\"H    XQSS__8U-%RX&NQD.R>5RB\\4R=1XE    !%[EXH4A<4DH)\\QF<[\";      ^$V2]G @  "
+    "0'#YM]?!^H,4    $(+^X1_^P=.G^'W 8OWZ]?Y^\"7\\[<.! N&\\%-B$48!-\"1 1L!38A%$3 )A!\"W+G2TE08L      /(#H   \" !Q =    "
+    "P .(#@   . !Z8+RLK[^>WY:^W>^\\YV__O6O?EIYP(R.CMZ\\>3/8K9@6;$(HP\":$B C8\"FQ\"*(B 32\"$;-RX\\?///_?H*5F9&>AU      \\"
+    "@.@   ( '$!T   #  X@.    X %G5Y-,2TM+34W5Z70]/3U3'U4H%&EI:=:;]^[=<_(CV@   ! 9'$:'IYYZ:MZ\\>=W=W1D9&2:3Z?WWWV=9UG:!"
+    "BHJ*FIH:ZYU[]NSIZ.CP;V,!   @V.Q'A\\S,S*5+E[[]]MMZO9X0\\NJKKRY<N+\"IJ<EVF>SL[,.'#S<V-@:BF0   ! :[,]UT.OUNW?O%G,#(42"
+    "E4B4E)4U:)C,S<VAH2*%02*52_[81    0H;]7@>-1J/1:,2_4U)22DI*3IPX8;N 1\"))24E9MV[=C!DSXN+BFIJ:'/WZUM3[=^S8,>UF!U1I:6FP"
+    "FS!=V(10@$T($1&P%=B$4!\".F[!UZU:?K,?%CVXKE<H?_>A')TZ<Z._OM[T_(2&AM;7UTT\\_5:O52J5RZ]:M55559\\^>G;J&\"/A-4D)(0T-#L)"
+    "LP7=B$4(!-\"!$1L!78A% 0=ILPM<&^_]'MG)R<5UYYY=2I4R=/GISTD%JMWK-GCUJM)H1H-)IKUZ[EY^=[\\?(    07AQ&AX*\"@A_^\\(<'#Q[\\"
+    "YIMOICZ:DI)265EIO2F3R7B>]TL# 0  ()38CP[)R<G//__\\WKU[V]K:I%*I5\"J52\"2$D-S<7*5220B1R^5U=77B=1V42F5I:>G%BQ<#V6X    "
+    "(\"OMS'98M6Q8='?W\"\"R]8[VEL;/SDDT]J:FHN7;K4U-34W]]_^/#AEU]^N;>W-R<GY_CQX[BH P    WL1X<C1XX<.7)DZOWOO_^^]>_&QD9<U "
+    "$  ( V^ T+    \\ \"B P   '@ T0$    \\@.@     'D!T      \\@.@   ( '$!T   #  X@.    X %$!P   /  H@,   !X -$!    /(#H"
+    "     !Y =      /(#H   \" !Q =    P .(#@   . !1 <   #P *(#    > #1 0   #R Z      >0'0     #R Z    @ <0'?PKY0,AV$V 8"
+    "$(!T\"SE P$%0+,(+@!$!S^*U*(!-Z$  \" B(3H   \" !Q = /P\"70Z40P%0+K(+ -'!7R*[;L =PR\\QP6X\"!!,*@%KB_C^\"\"P#1P2\\BOF"
+    "[ .01'RJ$ 0/5B<K\";X$>(#OZ\"W$ Y% #E(OO( 2XQS&BPF^!'B X /H8S3LJ)!1#91PYP@H8]@&PZ3TY+2TM-3=7I=#T]/;YJ4 2@H6[ .70Y4 "
+    "X%0\"U*1JN]CPY//?74O'GSNKN[,S(R3\";3^^^_S[*L#UL6IBBI&W $P9%R* !0O9C,O!3L1OB9EP,6F9F92Y<N_<,?_K!W[][?_>YW,3$Q\"Q<N]"
+    "&W+PA=R ^4PR$TY% #E:!BK\\C(ZZ/7ZW;MWZ_5Z\\:9*I4I*2O)=JP#\"$@:Y*8<\"H!P]?4Y>#EAH-!J-1B/^G9*24E)2<N+$\";M+'CAP8-(].W"
+    ";L\\.Y%@Z6TM-3-)9LW'26$U-34/+CGX9O!XOXFA*RPV(1F0BH^7$T<%$!8;()S$; )Q)];X;P ?\"@\"/HB(W(2 %8#7MF[=ZI/U3&N:)\"%$J53^"
+    "Z$<_.G'B1']_O]T%UJ]?/\\V7\" 4-#0TNE['.<K!=-&636\\\\-@!!IQG2$^\":(!3\"ID9,*(,0WP1T1L G$;ULQ]=^[__8 $?!!1-@FN+,'\"+J"
+    "IC9EZ>N^.:7TY,R<GYY577CEUZM3)DR>GLYZ(@5D.E,,@-\\WHZ:P&1^@Y!'C?ZU!04/#][W]___[]UZY=\\V&# ,(1!KDIAZ]648ZVX.AE=$A.3G["
+    "^^><_^NBCCHX.J51*\"!$$@>=YG[8MG-!6-S 5#AN40P%0CJH\"\\#(Z+%NV+#HZ^H477K#>T]C8^,DGG_BH56$&)QR40W $ *IX&1V.'#ERY,@1WS"
+    "8EK\"$W4(Z&B\\\" (\\B.E*.P / ;%@ ^@%D.U$*G(^7H+ !$A^FB,&^\"+10 T';8@$DH+ !$AVFA,V^\"%0H  \"B$Z#!=^\"H_Y5  -$.?$^6H"
+    "+0!$A^G\"(#?E4 #40I\\3Y<1?'J\"S ! =O$=MW@01\"@#H/&R %;4%@.C@)9QP $$!  \"5$!V\\AT%NFJ'+@7(H ,I17@\"(#M[#(#?ET.5 +70"
+    "Z4DXL@(H/5P>[(4&#Z. -RO,FH   G8Z4HSPX(CIXB?*Z 10 Y=#I\"#1#=/ 8SC@IAP*@' J <B@ @NC@'9QQ4@X%0\"W,<J <\"D\"$Z. 9Y$W*H"
+    "0  LQPHAP(@B Y>0-ZD' J <ICE0#D4 $%T ' ?NAPHAP*@' K \"M'! Z@;0)<#Y5  U,(L!UN(#NY\"W5 .P1& <ICE8(7HX 'D!LIAQT$S9$? +"
+    " <K1 < U\\3#!G8<U$*G(^40'\"=!=' +Z@9PV* <\"H!R* !;B ZN-6\\Z2E W%$-P!* 9]@!3(3JX!;F!<ICE0#,<.0\"'@$D0'0\"<P2P'RF&6 "
+    "^40'.U\"=' !=0,X;% .!4 Y%,!4B [.B+FAXL/5P6X(! >\"(P#-L =P!-'!!>1-RF&6 \\UPY  < NQ\"= \"P#[,<*(=9#I1#<'0\"T<$AU W@L"
+    "$$Y% #E4 \".(#K8AQ,.RB$X @ X@NC@$ :Y*8<\"H!FR(^50 ,[)7\"Y15%34WMX^]7Z%0I&6EF:]>>_>/8/!X,NF!1L&N2F' J 6.ATIAP)PR45T"
+    "6+ER9555U=MOOSWUH8J*BIJ:&I9EQ9M[]NSIZ.CP?0.# 7F3<B@ P&&#<B@ YQQ&A[BXN#5KUI25E9E,)KL+9&=G'SY\\N+&QT6]M\"P[D32 H    "
+    "QQQ&AU6K5NGU^OW[]Z];M\\[N IF9F>?.G5,H%$:CD>,X1^LY<.# I'MV[-CA75L#HYD0U8O)JS^LL=Y36EHZG;75U-2X7L[/IK,)(2)@FR#^VIFO/"
+    "C7; L\"G$\"*<;X7_\"L\"'(N\"#\"-E-<+\\ W-F$$#D$6&W=NM4GZW$8'0X=.B0(0G%QL=U')1))2DK*NG7K9LR8$1<7U]34-#4BB-:O7^^3A@9,"
+    "RB9QD+O!]LZ&A@9'R[M<F]?/]:T0:<9T!&834C:1X9<87[W2I + IQ B'&V%M=/13P7@0Q'P083@)GA: \"XW(70. :*IC7%T[';.8700!&?#O0D)\""
+    ":VMK9]^^JE:K58JE5NW;JVJJCI[]JP7+0@I&.2F' H ,%9%.=6+R<Q+P6Y$R//RRYEJM7K/GCUJM9H0HM%HKEV[EI^?[\\MV!0]V')1# 0#0#%^M<H"
+    ">7T2$E):6RLM)Z4R:3\\3SOHR8%#<XX*8<\"H!P*@'(H /=Y%AUR<W.52B4A1\"Z7U]75B==U4\"J5I:6E%R]>]$L# PMGG)1# 5 +7ZVB' K (ZXO"
+    "\"66KIJ;FTJ5+34U-_?W]AP\\??OGEEWM[>W-R<HX?/Q[N%W5 WJ0<\"@ PR$TY%(#[7$2'&S=NV%X/ZOWWW[?^W=C8&&$7=4#>I!QV')3#(#?E4 #"
+    "NPV]8$((S3NKA][4IAST Y5  GD)TN ]=#I1# 5 +@]R40P%X =$!>9-V* # KZ12#@7@*40'0I WJ8<=!^4P5D4Y%(\"G$!V :ICE0#GT.5$.!> ="
+    "VJ,#Z@;0YT0Y% #E4 !>H#HZ8'8,Y1 < 6B&/8#7J(X.!+F!>ICE0#,<.0\"' ._0'AV 6ICE0#ET.E(.P7$ZZ(T.J!O 88-R* #*H0\"\\1FETP D"
+    "'Y1 < 6B&/< T41H=\"'(#]3#+@68X<@ . =-!;W0 :F&6 ^6:-QTE.')0#,%Q^FB,#J@;P&&#<B@ RJ$ IHFZZ(!9#@  U,*IHT]0%QT(<@/=L..@"
+    "' H < B8/AJC U +?4Z4$PN@XL/5P6X(! >\"HZ_0%1U0-X#<0#D4 .50 #Y!473 &2<  ,#T410=\"'(#W=#G1#D4 .50 #Y$5W0 RB$[4@N=CI1#"
+    " ?@6+=$!>9-R* # 88-RN(\"L#]$2'0AV'-3#C@. 9KB K ]1$1UPQDDY7'F:<M@#4 X%X'-41 >\"+@?JH0\"HA4%NRJ$ _\"'RHP/R)N50 (\"Q*"
+    "LJA 'PN\\J,#0=ZD'G8<E,-8%>50 #X7X=$!9YR4PRP'RF$/0#D4@)]$>'0@Z'*@'@J <B@ :F&6@_]$<G1 WJ0<\"H!R* # 8*6?^\" Z%!4537\\"
+    "E?H*\\23GL.\"B'/0#E,%CI)].-#BM7KGSVV6=]TA3?P@D'Y3#+@7+8 U .!>!7,J^?&1<7MV;-FK*R,I/)Y,,&^1!..\"B' J <\"H!:F.7@;]Y'A"
+    "U6K5NGU^OW[]Z];M\\[)8@<.')ATSXX=.[Q^43<U;SI*\"*FIJ?')VDI+2[UOB>^:,1W3V800X=$F^+8 IL.V &C[%(+(>0$$<BO\\M <(EP_\"\";"
+    "]N0C,AJA>35W_HWSV .YL0(H< JZU;M_ID/=Y'AT.'#@F\"4%Q<['RQ]>O7>_T27DO91(9?8AI\\M\\*&!B]7EK+)^^?Z5H@T8SK<WX24343U8C+S4"
+    "O!'*R85 %6?0A\"YW ,$;\"O\\MP<(BP_\".?]M0LHF<;#2[V^1RTT(G4. :&ICII[>N\\/[N0Z\"@)$D\"$68Y4 Y#')3#@40 !'XY4S4#6\",DW("
+    "H ,JA /PMTJ(#9L<  % +IXZ!$6G1@2 WT T[#LJA  \"'@ \"(P.@ U$*?$^50 )1#< R8Z4:'&S=NO/WVVSYIRO2A;@\"'#<JA \"B' @B,R.EUP"
+    " D'  \"U<.H82)$3'0AR ]VPXZ <\"@!P\" B8B(H.0\"WT.5$.!4 Y!,< BY#H@+H!'#8HAP*@''XF-Y B(3K@A , @%JX@&S@14)T(,@-=$.?$^5"
+    "0 (!#0(!%2'0 :J'/B7(H ,HA. 9%V$<'U W@L$$Y% #E,,LA\\,([.N\"$ P\" <ICE$'CA'1T(\\B;=T.=$.10 Y5  P1+VT0%YDW+H<Z(6.ATIA"
+    "P((HC\".#LB;E$,!  X;E$.O<[\"$<70@V'%0#SL. )JAUSE8PC4ZX(R3<K@(#.6P!Z <\"B\"XPC4Z$'0Y4 \\%0\"T,<E,.!1!T81D=D#<IAP( C"
+    "%51#@407&$9'0CJAGHH ,IAK(IR*(#@\"K_H@$%NRJ$ *(<^)\\JAH1TS?P  ( !)1$%4 $)!^$4'@B$NZJ$ *(<\"H!P*(.C\"+#H@;P+0#'L RJ$"
+    " 0D2810>\"06ZZ8<<!...D' H@%(13=, @-^7PC2S*(3A2#@40.L(I.A!T.5 /N8%R* #*H0!\"1-A$!W0Y  !0\"UT.(25LH@-!EP/=FC<=#783()"
+    "APY !T.82.<(H.Z'*@%F8Y4 X%0#D$QU 3'M$!=0,5'ZX.=A,@F) ;*(=>YY 2!M%!S VH&P  \"F&B6P@*@^A \"%&]F(RZH1;ZG\"B' @#T.86:\\"
+    "(@.0\"T,<E,.!4 Y!,?0)'/R6')R<D9&QNCH:']__]1'%0I%6EJ:]>:]>_<,!H//VX>N*L!A@W(H ,JI7DQF7@IV(^!A#J/#PH4+UZY=V]'1D9^?W]"
+    "+2<NS8L4D+5%14U-34L\"PKWMRS9T]'1X=O&V>=Y8\"Z 0\"@#4X=0Y;]Z\"\"12.KJZK9OWSXX.*A0*-Y\\\\\\V6EA:52F6[3'9V]N'#AQL;&_W:"
+    "/LR.I!GZ*BF' @#T.84F^W,=BHJ*]'K]X. @(42GT[6WMQ<6%DY:)C,S<VAH2*%02*52OS81D9-.&.2F' J <@B.H<Q^KT-<7)SM_ :CT9B1D6&[@$"
+    "0B24E)6;=NW8P9,^+BXIJ:F@X<.&!W55/OW[%CASLMLUX]L*:FQIWE_:>TM-3KYS:'0/O)]#8A6)H)4;V8O/K#^^]>.&X\">;@ PG03; 5R$YK%BWG"
+    "XX9]/@+?\"'WL &FIITAX@!+GS*83((<!JZ]:M/EF/PP$+GN>M-VW_%B4D)+2VMG[ZZ:=JM5JI5&[=NK6JJNKLV;-35[5^_7KO6I:RR?J=S ;OUN!#"
+    "#0U>MB%ED_?/]:T0:8;[4C:129]^V&T\"F5( X;@)DP1L$_SZ;R<\"MB*R:\\EFED-(;Z;+3R%T#@&BJ8UQ=-KOG/T!\"Y9E;8<A)B4)0HA:K=ZS9X"
+    "]:K2:$:#2::]>NY>?G>_'RCJ\"KBG(H ,JA  !C5:',?G30:K79V=G6FPJ%HJ>GQW:!E)24RLI*ZTV93#:U9V*:,$&26ACDIAP*@'((CJ'/?G3HZNH"
+    "BA!07%Q-\"TM/3\"PH*.CL[\"2&YN;E*I9(0(I?+Z^KJQ.LZ*)7*TM+2BQ<O^JI-UKK!!$EJ(3A2#KF!<M@#A#C[<QT$0=B[=^_&C1L'!@:RL[/W[="
+    "LW/CY.\"*FIJ;ETZ5)34U-_?__APX=??OGEWM[>G)R<X\\>/^_:B#KCR-.7PZ0/0#'N $.?PDE W;][\\U:]^->G.]]]_W_IW8V.C/R[J@*XJRJ$ *"
+    "(<\"H!P*(\"R$XF]8H*^2<B@ :F&6 Q 40#@(K>@@[C@$(2G8#8'@P D'8)\";9M@#A(O0B@YD8L>!@2YJX<A!.?S;IQRZ',)\"\"$4'?+&\"<OBI&"
+    "\\KAC)-R*( P$D+1@2!O4@\\%0#D4 .50 .$B5*(#9CD T QGG)1# 8274(D.9\")OHK^:3MAQ ,XX*8<\"\"\",A$1W0Y4 Y?\"6/<@B.E$,!A)V0"
+    "B X$70[40VZ@' J <OAJ57@)?G1 W@2@&?8 E,-7J\\)1\\*,#(63X)0:C%=3\"D0/0Y4 Y%$#8\"7)TL#UL('52\"+,<*(?@2#D40)@*?J\\#NAPH"
+    "A]Q .10 Y3#+(1P%,SJ@RP$ @%J8Y1\"^@MSK@!,.FJ&ODG(H , A($P%?\\ \"HQ5TPBP'RJ$ *->\\Z6BPFP#>\"UITP&@%X+!!.10 Y3#+(7P%L"
+    "]<!$R0! \"B$60[A+CC1 5T.E,,@-^50 %#QX>I@-P&\\%[1>!_154@N#W)1# 5 .P3$\"!\"$Z6.L&HQ74PF&#<B@ RF&60[@+3J^#=<>!T0H  'I"
+    "@ED-D\"'1T0%<5Y5  E$,! /J<(D 0>AW$NL%H!84PR$TY% ! 9 AH=)ATPH$^*PIAC)-R* \":H<\\I8@2ZUP%=#I1#7J0<\"H!:Z'.*)(&+#NARH"
+    "!Q..\"B' @#DAH@1T%X'=#E0\"R<<E$,! $22 $6'2==R0)<#A3#(33D4 ,W0YQ1A M?K@&LY4 Z?.^50 )1#GU,D\"41T0-ZD' J <B@ RJ$ (H]L"
+    ".D].3D[.R,@8'1WM[^]WOB1F.5 .)QR40P%0#@408;R/#@L7+ER[=FU'1T=^?GY+2\\NQ8\\?L+H99#@ TPQDGY5  $<G+Z\"\"12.KJZK9OWSXX.*"
+    "A0*-Y\\\\\\V6EA:52F5WX>&7&.0&:F'' 3CCI!P*(/)X&1V*BHKT>OW@X\" A1*?3M;>W%Q86.HH.8FXX>/\"/!PX00LB.'3N\\;&R0E):6>OW<9D"
+    ")J:FI\\V!CO3&<3IJ-YTU%\"2,6'J\\FTWX1@;<(TV19 F&Z\"+4\\W02R 4/@G8\"N0'X2?]@#A4DM.\"B!<-L$)=S8A1 X!5ENW;O7)>KR,#G%Q<"
+    ";;S&XQ&8T9&AMTEAU]BF)?$/]=[]UJAH*&AP;LGIFSR_KF^%91FI&PBPR\\QOGKA$'DG/3*I ,)Q$R;Q:!-\\6P ^%+ /PG][@+\"HI91-1/5B,O.2"
+    "_?[FL-@$YUQN0N@< D13&W- /*?WD)??L)!()#S/6V_:_@T 0#!613W\\OG8$\\S(ZL\"PKE4H?K.7A) % <.0 #')3#P40J;R,#EJM-CL[VWI3H5#"
+    "T]/3XJ$D0\"7#A8<HA.%(.!1#9O(P.75U=A)#BXF)\"2'IZ>D%!06=GIR_;!>$/N8%R* #*X=+C$<S+:9*\"(.S=NW?CQHT# P/9V=G[]NT;'Q_W;<"
+    "L ($SAC)-RF.40\\;R_)-3-FS=_]:M?^; I$#%PY !T.5 .!1#9 OJCVT #S'*@'((CY5  -$!T -]#;J <\"H!RF.40\\1 =  # -S#+@1*(#N!+Z"
+    "*ND' H T.=$ T0'\\!G,<J <\"H!R\"([T0'0 7\\)A@W(8Y*8<\"H 2B X X#,8Y*869CE0!=$!? -]E91# 0 Z'>F!Z  ^@$%NRJ$  *B\"Z \"^"
+    "@3%.RJ$ :(8^)]H@.H!O8(R3<B@ :J'/B4*(#C!=..&@' H D!MH@^@ TX(3#LJA   HA.@ TX5!;LJA &B&/B<Z(3K =&&0FW(H &JASXE:B [@/9"
+    "QP4 X% ,@-=$)T@&G!CH-:..,$H!:B W@)9YR 60XTPQZ 9H@.X#V<<5(.LQPHAST M1 =P!LXX: <\"H!R* #*(3J EW#\"03D4 .4P7$4S1 < \\"
+    " S..\"F'W]<&1 ?P&(X<@\"X'RJ$ *(?H )[!5_(HA^!(.10 $$0'\\ )R ^50 )3#+ = =   =S5O.AKL)D P898#B! =P /HJP1T.5 .!0 $T0'<"
+    "AUD.E$-PI!P* *P0'< #R V4PR WY5  ($)T  #7Q#/.U:N7!+LA$!R8Y0\"V9$X>2TY.SLC(&!T=[>_OG_JH0J%(2TNSWKQW[Y[!8/!] R$TH*\\2"
+    "AE]B2$U-L%L!08-.1[!R&!T6+ERX=NW:CHZ._/S\\EI:68\\>.35J@HJ*BIJ:&95GQYIX]>SHZ.OS84@@>S'*@'((C -BR'QTD$DE=7=WV[=L'!P<5"
+    "\"L6;;[[9TM*B4JELE\\G.SCY\\^'!C8V- V@E!AMQ .=6+R<Q+P6X$! FR(TQB/SH4%17I]?K!P4%\"B$ZG:V]O+RPLG!0=,C,SSYT[IU HC$8CQW"
+    "&.7N# @0.3[MFQ8\\>TFQU0I:6E7C^WF9\":$.CCG<XFD-#8BFEN0K#8OG5AN@F$D&9\"5J]>4E,3QIM@*Y!;X:=_.P'=A$U'\"2$5'Z[V[7!5!-22"
+    ".YL0\"CM/6UNW;O7)>NQ'A[BX.-OY#4:C,2,CPW8!B422DI*R;MVZ&3-FQ,7%-34U38T(HO7KU_NDH<'5T-#@W1-3-GG_7-_R?A,^$*;S=!\\*A39X"
+    ":E(!A.4F/%P X;@)4P5L*_RW!PCD)@R_Q/CCQ2*@EEQN0N@< D13&^/HV.V<PP$+GN>M-VW_%B4D)+2VMG[ZZ:=JM5JI5&[=NK6JJNKLV;->M !\"&"
+    "68Y4 X%  !3/8@.3SWU5$5%!2'$9#+5U]=+I5+K0Q*)Q#H=4J16J_?LV2/^K=%HKEV[EI^?C^@0D7#8H!QF.= ,LQS K@?1H;&Q\\?KUZX00CN,D$D"
+    "EV=K;U(85\"<?GR9=NGI:2DS)X]NZFIZ?Y:9+*I/1, $ 'P57YJH<\\)''EP2:BAH:'.SL[.SLY;MVYU=7410HJ+BPDAZ>GI!04%G9V=XF*YN;E*I5"
+    "(NE]?5U8G7=5 JE:6EI1<O7@Q&^\\&/<,)!.10 (#> 7?;G.@B\"L'?OWHT;-PX,#&1G9^_;MV]\\?%Q\\J*:FYM*E2TU-38</'W[YY9=[>WMS<G*."
+    "'S^.BSI$&)QP4 X%  \"..+PDU,V;-W_UJU]-O?_]]]\\7_VAL;,1%'2(;!KDIAP*@&?J<P G\\A@4XA$%NRJ$ J(4^)W .T0'LP D'Y5  @-P 3B "
+    "Z@'W8<5 .!0  CB ZP&0XXZ0<\"H!R* !P\"=$![, 9)^50 -3\"+ =P!Z(#/ 0G')1# 8#JQ>1@-P%\"':(#3(83#LJA \"B';]: 2X@.\\ #..\""
+    "F' J <\"@#<A.@ #\\$9)^50 )1# 8 [$!W@/IQP4 X%0#D4 +@/T0$>P D'Y5  E,,$27 3H@, X(R3=F(!8((DN G1 0C!D0/0Y4 ]% \"X#]$!<"
+    "!$8VB$X H!'$!V $.0&ZF&0FV;(CN I1 < JF&0FW+H= 0O(#K0#B<<@,,&Y5  X\"E$!ZKAA(-R\"(X -/-Z#X#H0#OD!LIAE@/-D!W!.X@. )3\""
+    "+ ?*H=.1<M,)CH@.],()!^\"P03D4 .6\\+@!$!TKAA(-R\"(X -)OF'@#1@5[(#93#+ >:(3O\"= X!B X E,(L!VJATY%RTP^.B XTP@D'Y5  @-"
+    "Q N6EV.B(Z4 <G')1# 0# -#L=$1UHA$%NRJ$ :(8^)\\KYI  0'6B$06[*H0\"HA3XGROFJ ! =Z((3#LJA  \"Y@7(^Z71$=* (3CB H   Z.:33"
+    "D<?1(>BHJ+IKP0\" X/<-$.7 ^50 )3S80%,-SJL7+GRV6>?]4E3(  PR$TY=#E0\"YV.E/-M 7@?'>+BXK[WO>\\]_OCC/FD'^!M..\"B' @!T.E+"
+    ".AP7@?718M6J57J_?OW^_KYH\"_H83#LJA \"B'3D?*^;  9%X_\\]\"A0X(@%!<7.U_LP($#D^[9L6.'UR\\:%*6EI5X_MYF0FIH:'S;&RV9L.DI\""
+    "HR5>F\\ZG$$2V!1#$3?!5 83IIS!)(+?\"3WL 3S<A!/< $5!+[FQ\"J!T\"MF[=ZI,5>A\\=!,&M_L_UZ]=[_1*AHZ&AP;LGIFSR_KD^E+*)#+_$!"
+    "+\\=TQ,*[Z2G)A5 L#;!AP40CI_\"5 ';\"O_M =Q?K760.]0^N0BH)9>;$ J' -L\"F-J8J:?W[O @.CSUU%,5%16$$)/)]/;;;WOQ8A 4&.2F' H"
+    " 5\"\\F,R\\%NQ$0/#XO  ^B0V-CX_7KUPDA',?YL@G@?Q4?K@[[> _3@\",'Y3#+@7(^+P /HL/0T/_?WOT&177=?QP_\"RO$7>L*:U;X@17_ 2$F"
+    "0XM!'6.3)@@9 S,PH1W#V$HZSO0'DXRQ#YPVG>FSRDS:F:9C1M/..(,/2/Q9K3$ESF@(F53;;NA:8SN@8C!J-2B+85?C&A2XOP<;5P14[F5WS[WWO%"
+    "^/X+I_OM?]<L_GG'MW-Q@,!N/[]$@T9IR*BS8 (X>R. (H+D$-P*=)VA_7U2N.!E <#:\"X1#3 5*/#J5.GN.[!M)AP*(X& %26N\", JPXVQX1#<7"
+    "P*D,K(CDC0$$!T .R)JQP4QR=/*RZAP9'H8%M,.,\"PH3@:0'&):P\"B@STQX5 <P1%06:*/ $0'VR(W*(ZK'%1&=D1\"AP\"B V W7.6@.!8=%9>$"
+    "X$ATL\"$F'&#84!P-H+A$+SH2'>R&\"8?B\"(Z RI*SZ$ATL\"%.<BN.!E 9V1%)F#H2'6R(D]S*XBH'Q;'HJ+BD!4>B@ZTPX0##AN)H ,4E9]&1Z&"
+    " ?3#@ 0%G)7'0D.M@*)[E5QIJ3XF@ )&WJ2'2P%4YR*XXU)V6QZ*BX) ='HH--,.%0' T <H/BDKGJ3'2P R8<$#0 H+9DKCH3'6R\"JQQ4QI*#XF@"
+    " Q26_ 8@.-L%5#HICR4%9+#HJ3DH#$!TLCPF'XF@ D!L4E_Q59Z*#'7#@4!RGJP\"5)7_5F>A@;<PX%<<G3RN.(X#B9#4 T<'R6')0' V@+*YR@)#4"
+    " $0'\"V/\"H3@: )RK4IG$(P#1P=J8<\"B.D4-QG*M2G*PA@.A@5<PX%<=5#HKC\"* XN0U =+ PEAP41P,HC@90G,0&(#I8$A,.Q=$ BCOZXD'9)4"
+    " FZ4< HH-5,>%0'%<Y*(XC@.+D-@#1 ; 8KG)0G/09)^0R0P,0':S'#'T#N9AQ*J[DG0K9)4 FZ8N.S@?>(C\\_O[N[>_QVM]OM\\_EBOUZZ=.G&C1"
+    "OQ+ T3X4-@%$=P!%1FDD7'!T2'9YYY9MFR94U-3>/_J:2DI+R\\?&AH*/IK2TO+Z=.GXU\\@QB$W**Z_/M/QDNPB( G9$688 NX9'5PNUYHU:Y8L63"
+    "(X.#CA#7)R<EI;6_U^?\\)J W 7DTPX(,N=1<?R<MFU0 +S!,=[7NNP>O7J2\"2R=^_>>]T@.SL[& RZW>[4U-3$U(:QS-,WD,4,$PY(1 ,H3OI5#E"
+    "'W7'5X[[WW-$TK*\"B8\\%]34E*\\7F]E9>6,&3-<+E<@$-BW;]^$MQR_??OV[8;+E:*HJ,CP?8\\*41ZG^4'TG=PE[U08F'!,91=,PJ*[,+H!IKX+"
+    "<6PG8RSZ*HR1S+V([TL6>S0;O!\"*[$+<AX\"*BB>F\\G@-#0UQ*>:>T4'3[C?!G3ES9E=7U_OOOQ\\*A3P>3T-#P[)ERS[YY)/QMZRIJ8E#F;(=.G"
+    "3(V!V]+QJ_[_B'ZJ_/=+QD<+$Z7F5(9,5=&-, 4]F%Z)J3]/\\$Z07$1=+V(IY'@+L;P 8OA J[$-\\AX,I+CBD^UOAB[C7MO[\\[T:&JJJJDI$0(,"
+    "3@X..%UD:.%0J&6EI;HS^%PN+.S,R\\O;\\+H@#CB)+>R>&>-XF@ Q9GM;/6=Z.#W^T^<.\"&$&!X>?N#=O%[O_/GS X' -X_B=(Z,C\"2H1 CS]0V"
+    "2CV%#<32 XDSUUJH[T2$8# :#P0?>8>[<N5>O7DU+2ZNNKCY__GQ?7Y_'XRDJ*MJ]>W<BZU0:$PX 4)8)WUKUX(^$&J.\\O/SX\\>.!0*\"UM;6QL?"
+    "'\"A0NYN;EM;6U\\J$-\"F2IO(LE8<U(<#0\"S31T?$!U.G3HUYKJ''3MV1'_P^_U\\J$/2F\"IO(IE8<U(<#: X<P9'OL/\"[,S9-T@FA@W%T0\"*"
+    ",\\EG.8Q&=# U)AP H#@3KCH3'<S.A'D32<.:D^)H ,69M@&(#F9GPKR)9&+-25DL.BK.S U =# OT^9-) <- ',.&T@:TZXZ$QU,C0.'XDQ[X \"0"
+    "!*9==28ZF!0S3L69\\$-@D$P< 11G\\@8@.I@72PZ*HP&49>:3W$@:,S< T<&,3)XWD6@T #A7I3+S'P&(#B9EYKR))&#D4!SGJA1G\\B& Z& ZYL^"
+    ";2\"BN<E <1P#%6:(!B YF9/*\\B42C 11' RC._(N.1 =SL43>1.+0 (JC 11GE45'HH/I,.%0G/DG'$@HC@\"*LT0#$!U,A F'XJPRX4\"\"< 10"
+    "G(4:@.A@+I;(FT@<&D!Q-(#BK++H2'0P\"POE30!QQQ% <=9:=\"0ZF(A5\\B82@9$#+#DHSD(-0'0P$:OD3<0='SRL.(*CXBS7 $0'4[!<WR#NR V"
+    "*HP$49ZU59Z*#?,PX 4!9UKK*(8KH8 K6RIN(+]:<%$<#P')31Z*#*5@K;R*.6'-2' V@.(L&1Z*#9!;M&\\01PX;B: #%67'5F>@@$Q,. %\"6%:]"
+    "RB\"(Z2&;%O(EX8<U)<30 +#IU)#I(9L6\\B;A@S4EQ-(#B+!T<B0[26+IO$!<,&XJC 11GW55GHH,<3#@ 0%G6O<HABN@@C77S)J:.-2?%T0\"P]-"
+    "21Z\"\"-=?,FIH@U)\\71 +\"Z*44'G\\]75%0T;]Z\\>%6C\"\"8<8,U)<>0&E=E@\"' :OF=55=4CCSQR]NS9K*RLP<'!'3MV# T-Q;$R>^/ H3C"
+    "6G \"567T(,!@=LK.S2TM+FYJ:(I&($&+CQHW%Q<6!0\"\"NM=F3#?(FIH(&4!P-H#A[-(#!Z!\")1';NW!G-#4*(_O[^C(R,\"6^Y;]^^,5NV;]]N"
+    "[$EE*2HJ,GS?HT*4EY>/V5+R3H6X>V.B36473,*BNS\"Z :*[(*4!XL6BK\\(8R=R+,4> HR\\>%/%H !N\\$(KL@DF&@)B&AH:X/([!Z! .A\\/A<"
+    "/1GK]=;6%C8WMX^X2UK:FH,EF8FAPX=,G9'[XMWW3>:-PT_VE1(>=+XLN(NC&F Z,AAQ1V)L73Q,4G;B[%'@!?%E9<<<7EN&[P0*NR\">8: J/%//7"
+    "YZ/QE3?8>%Q^/9L&%#>WM[;V_O%!]*$58_Q84IX@))0&7V& )TK#I45565E)0((08'!YN:FH00N;FYZ]>O__CCCX\\<.9*H FW$'J>X8%ATR8$+))7"
+    "%$4!Q=FH '='![_>?.'%\"\"#$\\/\"R$6+1H45U=W=Z]>SL[.Q-5G>W8(V_\",!I 67R6 X2-&D!'= @&@\\%@,/IS9F;FNG7K=NW:=?KTZ=345\""
+    "&$IFDC(R,)J=$6[)0W80 -@/[Z3,=+LHN )#8[ AB\\3'+Y\\N7IZ>GKUZ^/;?'[_?OW[X]35?;$@4-Q-(#B.%>E.-LL.0C#T>' @0,'#AR(;RDV9O"
+    "5O.L$411N@HN()(2Q_23D,L-F,$WK9KP'X#HLDL5/>A $T@.)H ,79K &(#@EGO[P)8/(X BC.E@U =$@&WLJO,EL>.*\"+S6:<T,M^#4!T2 :N<E\""
+    "<_0X< %1&=$@XEAP41VY0' V@.%L. 42'Q+KRDH,E!Y4Q;\"B.!E\"<78< H@,  -\"!Z    '0@.@   !V(#@  0 >B P  T('H    =\" Z    '"
+    "8@.  ! !Z(#  #0@>@   !T(#H    =B X  $ 'H@,  -\"!Z    '0@.@   !V(#@  0 >B P  T('H    =\" Z    '8@.  ! !Z(#  #0@>@  "
+    " !T(#H    =B X  $ 'YWW^S>?SS9X]^_KUZ^?.G1O_KVZWV^?SQ7Z]=.G2C1LWXE\\@   PDWM&AZJJJD<>>>3LV;-965F#@X,[=NP8&AH:?8.2DI"
+    "+R\\O+8QI:6EM.G3R>V6   (-O$T2$[.[NTM+2IJ2D2B0@A-F[<6%Q<' @$1M\\F)R>GM;75[_<GHTP  & .$T>'2\"2R<^?.:&X00O3W]V=D9(RY3"
+    "79V=D='A]OM_OKKKX>'A^_U!/OV[1NS9?OV[5,H6(*BHB+9)4P5NV &[())V& OV 4SL.(N-#0TQ.5Q)HX.X7 X' Y'?_9ZO86%A>WM[:-OD)*2XO5"
+    "Z*RLK9\\R8X7*Y H' ^(@055-3$Y=\"Y3ITZ)#L$J:*73 #=L$D;+ 7[((96&X7QA=\\K['[_NYWF:00PN/Q;-BPH;V]O;>W=_3VF3-G=G5UO?_^^Z"
+    "%0R./Q-#0T+%NV[)-//C%0 0  L) [T:&JJJJDI$0(,3@XV-34)(3(S<U=OW[]QQ]_?.3(D3%W\"X5\"+2TMT9_#X7!G9V=>7A[1 0  V[L3'?Q^_X"
+    "D3)X00T0L7%BU:5%=7MW?OWL[.SO%W\\WJ]\\^?/CUTXZ70Z1T9&DE(P  \"0Z4YT\" :#P6 P^G-F9N:Z=>MV[=IU^O3IU-14(82F:=%P,'?NW*M7"
+    "KZ:EI5575Y\\_?[ZOK\\_C\\105%>W>O5O*#@  @&2:^%J'Y<N7IZ>GKU^_/K;%[_?OW[]?\"%%>7G[\\^/% (-#:VMK8V'CAPH7<W-RVMC8^U $  "
+    "!5,'!T.'#APX,\"!\"?]IQXX=T1_\\?C\\?Z@  @&KX#@L  * #T0$  .A ='BP>'W\\ED3L@AFP\"R9A@[U@%\\S !KM@&-$!  #H0'0    Z$!T "
+    " ( .1 <  *\"#8UW=VL\"_/DW0HT>_\"P,  )C3+W[Q\"UVW7_K=X@=\\<^84Z2T(  \"8'\"<L  \" #D0'  \"@ ]$!  #H0'0    Z$!T  ( .1"
+    " <  * #T0$  .A =    #H0'0  @ X)_#3)S,S,K*RL@8&!WM[>Q#U+$N3GYW=W=\\NNPB\"?SS=[]NSKUZ^?.W=.=BW&96=G9V1D]/7U]??WRZYE2"
+    "N;.G1L*A:Y=NR:[$-W<;K?/YXO]>NG2I1LW;DBLQQBWVSUOWKS!P<&>GA[9M>@VYB400ER[=LVB?Q&S9\\_V^7R6'AVBA];+ER]?N7)%=BU&C!G7]("
+    "[7J8\\_MN2+WDMQ+ZNXN+BNKL[I=#[UU%,NE^O,F3-Q?XKD>.:99U:O7GWDR!'9A1A1556U>O7JM+2TI4N7%A<7'S]^?&1D1'91NI67EY>5E:6EI7W"
+    "_^]]/2TL[>_:L[(H,\\OE\\C8V-Y\\^?#P:#LFO1;<6*%3_XP0\\>?_SQXN+BXN+B<^?.??GEE[*+TJ>@H. G/_G)M&G3'GOLL>+BXF/'CLFN2)_\\"
+    "_/RZNKKBVYYXXHG4U-13IT[)KDNW)Y]\\\\H477G ZG2M7KLS*RCIY\\J3LBG1;LV;-\\\\\\_[W0ZO_>][[E<KL\\__UQV1?J,&=?TCM?_DYV5D%6"
+    "'E)24ZNKJ;=NV]?7UN=WNS9LW'SMVS'+IV.5RK5FS9LF2)8.#@[)K,2([.[NTM+2IJ2D2B0@A-F[<6%Q<' @$9->ESYPY<U:M6A7=BV]]ZUL___G/_"
+    "_G/?UZ_?EUV7;JEIJ:N7;OVJZ^^DEV(03DY.:VMK7Z_7W8A!J6DI-36UK[]]MO1H_S&C1N7+%GRG__\\1W9=.G1V=G9V=D9_7KQX\\0LOO/#!!Q_(+"
+    "<D A\\/QW'//;=VZ]?+ER].G3__E+W_I]_NMM?:0FYN[8L6*W_[VM^%PV.ET_NQG/SMUZM2%\"Q=DUS4IX\\<U8^-U0JYUR,_/CT0B?7U]0HCKUZ]W"
+    "=W<O7KPX$4^44*M7KXY$(GOW[I5=B$&12&3GSIU)] U/   )CTE$0531W\"\"$Z._OS\\C(D%N2 7U]?5NW;HWNQ?#P<$I*BM.9V.]L2Y\"*BHH3)T"
+    "Y<OGQ9=B$&96=G!X-!M]N=FIHJNQ8C\"@L+!P8&8K/#W__^]];*#:.EI:75UM;^^<]_COUU6XO#X;AUZY80XN;-FYJF6>XOVN?S=7=WA\\-A(<30T-"
+    "#9LV<???11V45-UOAQS=AXG9#7S.5RC4Z17W_]=5965B*>**'>>^\\]3=,*\"@ID%V)0.!R.-K<0PNOU%A86MK>WRRW) $W3^OKZ4E)2EBY=NGSY\\"
+    "O;V]MA.6<C\\^?,7+%CPYIMOUM?7RZ[%B)24%*_76UE9.6/&#)?+%0@$]NW;)[LH?5PNU\\# 0$U-S7>^\\YV1D9'V]O:__O6OLHLRZ*FGGNKM[;7H"
+    "!5B:INW?O_]'/_I15U?7XL6+.SHZ_OO?_\\HN2I^AH:'1TS\"7RZ5IFL1Z=!D_KAD;KQ.RZI\"2DC+ZG+H5SZ\\+(2S4#??G\\7@V;-C0WMYNK57!T"
+    "=QNM]/IO'KUZN+%BUTNE^QR])D^?7I-3<VN7;MD%V+<S)DSN[JZ=N[<^>M?__KUUU\\O*\"A8MFR9[*+T\\?E\\CS[ZZ,6+%W_UJU_]X0]_>/KIIZV"
+    "X%\"J$<#J=3S[Y9%M;F^Q\"C,O+R[MUZ]:U:]<BD8C/YTM+2Y-=D3Z???;9S)DSUZQ9,W_^_)4K5^;DY#@<#ME%3=;X<<W8>)V0Z# T-#1Z57-,94B"
+    "FW-S<EU]^^6]_^]M''WTDNQ;CKEV[]O>__[VYN?GFS9LK5ZZ478X^SSWW7&]OK]?K+2@H<+E<.3DYV=G9LHO2)Q0*M;2TA$(A(40X'.[L[,S+RY-=E"
+    "#Y7KERY<N5*1T>'$**WM[>SL_/QQQ^77901CSWVV)=??FF5,^OC%145S9LW[ZVWWO+[_<W-S4*(5:M6R2Y*GT@D\\L<__C$C(Z.LK.RAAQXZ=NQ8]/"
+    "R+11D;KQ-RPN+:M6LY.3FQ7]UN][___>]$/!'N;]&B175U=7OW[HU=764Y#S_\\\\*)%B_[QCW]$?PV'PQZ/1VY)>GWUU5<>CV?%BA5\"B(R,C(*\""
+    "@ALW;EAK!<CK]<Z?/S]VC:W3Z;3<9&#,!:J6JS^FL+\"PJZM+=A7&N5RN2Y<NQ?[_^_O[,S,SY9:DUT,//92>GM[2TA+]]<<__K&E7Q%CXW5\"5AVB"
+    ";^V(GDV9,V?.HD6+/OOLLT0\\$>XC,S-SW;IUNW?O/GGR9&IJ:FIJ:DJ*]3X!+\"4EY?GGGW_XX8>%$#-FS,C/S[?<7^D''WS0?-O%BQ?;V]LM]U[?"
+    "M+2TZNKJZ(<*>#R>HJ*B3S_]5'91^IP\\>=+M=A<6%@HAW&YW04&!1><S\"Q8L.'_^O.PJC+MX\\>+BQ8NC?]'3IT_/R\\NSW#L;T]/3?_K3GT;G,-"
+    "_^]K?S\\O*L.S<31L?KA*PZ:)JV>_?NM6O77KY\\.2<GYT]_^I-UWY-F7<N7+T]/3U^_?GULB]_OW[]_O\\22#+A\\^?)?_O*7EU]^^>S9LWEY>1]]"
+    "])'EHH,-]/;VMK:V-C8V7KAP(3<WMZVM[?3IT[*+TF=X>+BEI>6'/_SATT\\_/6?.G,.'#UOQ4Z$<#L>,&3.^^.(+V848%^NEBQ<OYN3D! (!R[UC/"
+    "!P.'SAP8-.F31<O7LS,S&QI:;'BQZ/%&!NO'>OJU@;^E:@)1%I:VJU;MVQSO2%D<3@<;K<[$HE8=YW9!AP.Q[1ITZS^%SUMVK3AX6$:2:YH+PT-#5G"
+    "WA8B^4?SFS9NR\"XF;R8_72[];G-@WU-KIOQ42:9K&PI5TFJ;9X\"_:TE>TV88->FED9,3JNS\"&KMVQWLEO   @$=$!  #H0'0    Z$!T  ( .1 "
+    "<  * #T0$  .A =    #H0'0  @ Y.(<1O?O,;V64    +^+]W6IQ\"B,K*2MF5    \"_@F.H3#8=F5    :^!:!P  H /1 0  Z$!T    .B3V2["
+    "<! ,#APX=EES!5JU:MBOU,=   (.%&#[V6X_%X1K^C@A,6  ! !Z(#  #0@>@   !T^\"8Z:#W;RF>-\\6J;IAE^7$UK>W56^;8>XX\\  (\"=3#34"
+    "SIHUB;%2Z]E6/FI0UNX\\T,0C]80WF/S&!QJ]ZE\"_9V @=-N>^N;:BNT]4T@/   @QK&P\\5 H% J%!HYN*;TSYAYJ7.BXS[TTK6U3R6L=H[9\\N*"
+    "GDM:(]WXS4FSX<?Y<);S#YC0]TSQ,6S[ZRI;2C^_-)/@P  (BWGFWE&1FU7?7UI;>W:%I;:W/IEE>>%=&1NKEUS&K!A#>8_,;)5#6I:QTTK>W5<6<Q"
+    "[FR;-6O6JVUC-F9L:HUN:7OUSK]&_Q=&_PH @.+N&D]'730@A!#YFX\\.#!Q\\)?_.K<]T=XFB_ 5\"\"\"$6Y!>)KNXS=S_<A#>8_,9)N&=T^'#K:"
+    "QWUE64.AZ;U;*^H%7L&0J'0T2U=T;,8FM:VJ;:Y?L] *!0:V%,OFE_?UG/7QJ/Y7<U\"B+N#C*;U''RWH[[RV4F5!@\"  AQE;X3&>:/,(8186%:VT"
+    "'&_TQE2C(X.S;49&;&\\\\WK^T= ;94((<>;.<+^@87-]Q[L'SPB'H^R-VSLFGJVLCS[ A[&5#[&@8?,W&Q=45)<VMT9/H)PA.0  8&T37\"8Y<'1+"
+    "J8@M841]DRHR,FJ;;V^*7949VWBFNVO\\$S@<\"V/9X<S!=\\665\\K,%Z   )#E?B<L3&F\"$Q:.A8T']]0WUU:,>KO(Z#=?'&I<Z-!ZME64O%M]="
+    "\" 4\"@T,[*D70D1/E$QD0</F^N;6-JWGX+NBNF+!A+<! $!-]SEA,8'1%R6,OECA_C>8_,9)F/A:!T?9&WOJ.UYKV-ZC:://.-QY:^GGW1VWG^/#3"
+    ";>7(IZMK.]X;>N'0@AQ9OOKS;%'<Y15UC>W;B<Y   P)0Y'66RLC5V5^, ;3'[C9&JXY]=?/?N[/?49M26;\\D-OE#4<W+,I(V.6$$*4;CEZL,SAT)"
+    "Y]94MI26U&LQ\"B=,N>+:6UW9\\+Q\\*RWQW=4E&2,4N(TBU;ZL6[=QZMLKZV]K7Z/0,FO-P#   +B0[0LYJ%$/5[!KZY?K#MU5FOYQ\\]U+CP7C>8"
+    "_,8'<JRK6_OFMK?BM3_WHO5LJRCIWCSP.RYT  \"HYO#AP[;YYLR7&_\\W2=]A$7UK!;D!  \"KN^<)BWC1>K95E+S6H6<E!   F%;\"HX-C8>.A4&"
+    ".BGP4  \"0'7[H-  !T(#H    =$G[\" @  >#P>V27$#=$! (#$6K5J5>S-C3; \"0L  *\"#8UW=6MDU    R_A_D[/8W%;D?9<     245.1*Y\""
+    "8(("
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "ammclib_amclib_observer_F32_s32k11x"
+    created		    "29-Jul-2015 12:19:38"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    10
+  }
+  chart {
+    id			    2
+    machine		    1
+    name		    "3 Phase Symmetric System/Chart"
+    windowPosition	    [-7 -7 1550 848]
+    viewLimits		    [-174.806 1225.844 -194.606 637.186]
+    zoomFactor		    1.333
+    screen		    [1 1 1280 1024 1.333333333333333]
+    treeNode		    [0 3 0 0]
+    viewObj		    2
+    subviewS {
+      zoomFactor	      0.991
+    }
+    ssIdHighWaterMark	    21
+    decomposition	    CLUSTER_CHART
+    chartFileNumber	    4
+    executeAtInitialization 1
+    userSpecifiedStateTransitionExecutionOrder 1
+    disableImplicitCasting  1
+    supportVariableSizing   0
+    firstData		    4
+    firstTransition	    7
+  }
+  state {
+    id			    3
+    labelString		    "A\ndu:\n cntr=cntr+25;\n value=cntr;\nex:\n cntr = -Input_Amplitude;"
+    position		    [20.8101 95.0798 238.8296 99.1212]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 0]
+    subviewer		    2
+    ssIdNumber		    1
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  data {
+    id			    4
+    ssIdNumber		    7
+    name		    "cntr"
+    scope		    LOCAL_DATA
+    machine		    1
+    props {
+      initialValue	      "0"
+      type {
+	primitive		SF_INT16_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "int16"
+    linkNode		    [2 0 5]
+  }
+  data {
+    id			    5
+    ssIdNumber		    12
+    name		    "value"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_INT16_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "int16"
+    linkNode		    [2 4 6]
+  }
+  data {
+    id			    6
+    ssIdNumber		    21
+    name		    "Input_Amplitude"
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_INT16_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "int16"
+    linkNode		    [2 5 0]
+  }
+  transition {
+    id			    7
+    labelString		    "{cntr=0;}"
+    labelPosition	    [135.544 20.493 43.831 14.836]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 129.9178 28.351 0 0]
+    }
+    dst {
+      id		      3
+      intersection	      [1 0 -1 0.4568 129.9178 95.0798 0 0]
+    }
+    midPoint		    [129.9178 57.7154]
+    chart		    2
+    dataLimits		    [127.518 132.318 28.351 95.08]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    5
+    linkNode		    [2 0 8]
+  }
+  transition {
+    id			    8
+    labelString		    "[cntr >= Input_Amplitude]"
+    labelPosition	    [149.449 209.415 135.953 16]
+    fontSize		    12
+    src {
+      id		      3
+      intersection	      [3 0 1 0.4519 151.704 194.201 0 -59.4595]
+    }
+    dst {
+      id		      3
+      intersection	      [3 0 1 0.6402 106.7438 194.201 0 48.6879]
+    }
+    midPoint		    [140.3152 220.303]
+    chart		    2
+    dataLimits		    [104.344 151.704 194.201 222.342]
+    stampAngle		    NaN
+    subviewer		    2
+    slide {
+      mode		      MIRROR_SLIDE
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    3
+    linkNode		    [2 7 0]
+  }
+  instance {
+    id			    9
+    machine		    1
+    name		    "3 Phase Symmetric System/Chart"
+    chart		    2
+  }
+  target {
+    id			    10
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 11]
+  }
+  target {
+    id			    11
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 10 0]
+  }
+}

@@ -1,0 +1,55 @@
+
+%implements GFLIB_IntegratorTR_SF_F16 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign f16C1 = CAST("Number",Parameter[0].Value[0])
+   %assign u16NShift = CAST("Number",Parameter[1].Value[0])
+
+   %assign x = LibBlockInputSignal(0, "", "", 0)
+   %assign x1= LibBlockInputSignal(1, "", "", 0)
+   %assign x2 = LibBlockInputSignal(2, "", "", 0)
+   %assign y = LibBlockOutputSignal(0, "", "", 0)
+   %assign y1= LibBlockOutputSignal(1, "", "", 0)
+   %assign y2 = LibBlockOutputSignal(2, "", "", 0)
+   
+   {  
+	 static GFLIB_INTEGRATOR_TR_T_F16 param = { 0, 0, %<f16C1>, %<u16NShift> };
+     param.f32State = %<x1>;
+     param.f16InK1 = %<x2>;	 
+     %<y> = GFLIB_IntegratorTR_F16 (%<x>,&param);
+     %<y1> = param.f32State;
+     %<y2> = param.f16InK1;	 
+   }
+
+%endfunction

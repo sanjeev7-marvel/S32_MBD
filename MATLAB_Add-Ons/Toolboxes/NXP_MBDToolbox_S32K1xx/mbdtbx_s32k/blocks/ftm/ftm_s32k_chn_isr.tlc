@@ -1,0 +1,105 @@
+%implements ftm_s32k_chn_isr "C"
+
+%% Copyright (c) 2014 Freescale Semiconductor, Inc.
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+    %<LibAddToCommonIncludes("ftm_chn_irq.h")>
+
+    %endif
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign module = CAST("Number", Parameter[0].Value[0]) - 1
+    %assign isrChannel = CAST("Number", Parameter[1].Value[0]) - 1
+    %assign isrLevel = CAST("Number", Parameter[2].Value[0]) - 1
+
+    %<LibAddToCommonIncludes("ftm%<module>_ch%<isrChannel>_isr.h")>
+
+    %assign target_family = FEVAL("mbd_s32k_get_target_family")
+
+    %% enabling the ISR channel interrupt
+    /* FTM%<module>: enable channel %<isrChannel> interrupt */
+    FTM_DRV_EnableChnInt(FTM%<module>, %<isrChannel>);
+
+    %if FEVAL("strcmp", "%<target_family>", "s32k14")
+        %if isrChannel % 2 == 0
+            %assign chNr = isrChannel
+        %else
+            %assign chNr = isrChannel - 1
+        %endif
+
+        %assign irqName = "FTM%<module>_Ch%<chNr>_Ch%<chNr + 1>_IRQn"
+        %assign irqHandler = "FTM%<module>_Ch%<chNr>_%<chNr + 1>_IRQHandler"
+    %else
+        %assign irqName = "FTM%<module>_Ch0_7_IRQn"
+        %assign irqHandler = "FTM%<module>_Ch_IRQHandler"
+    %endif
+
+    /* FTM%<module>: ISR level */
+    INT_SYS_SetPriority(%<irqName>, %<isrLevel>);
+    /* FTM%<module>: enable ISR */
+    INT_SYS_EnableIRQ(%<irqName>);
+    /* FTM%<module>:installing ISR Handler */
+    INT_SYS_InstallHandler(%<irqName>, %<irqHandler>, (isr_t *)0);            
+    /* Adding interrupt handler in the vector from ftm_chn_irq.c file */
+    FTM_CHR_DRV_InstallCallback(%<module>, %<isrChannel>, FTM%<module>_Ch%<isrChannel>_isr);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%  Interrupt handler body file
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %openfile isr_c = "ftm%<module>_ch%<isrChannel>_isr.c"
+        #include "ftm%<module>_ch%<isrChannel>_isr.h"
+        #include "ftm_hw_access.h"
+        #include "ftm_common.h"
+
+        void FTM%<module>_Ch%<isrChannel>_isr(void)
+        {
+            %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                %with SFcnSystemOutputCall[fcnCallIdx]
+                %% skip unconnected function call outputs
+                %if ISEQUAL(BlockToCall, "unconnected")
+                    %continue
+                %endif
+
+                %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                %endwith
+            %endforeach
+        }
+    %closefile isr_c
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%  Interrupt handler declaration file
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %openfile isr_h = "ftm%<module>_ch%<isrChannel>_isr.h"
+        #include "%<CompiledModel.Name + ".h">"
+        #include "%<CompiledModel.Name + "_private.h">"
+
+        #ifndef FTM%<module>_CH%<isrChannel>_ISR_H
+        #define FTM%<module>_CH%<isrChannel>_ISR_H
+
+        void FTM%<module>_Ch%<isrChannel>_isr(void);
+
+        #endif
+    %closefile isr_h
+
+    %endif
+%endfunction

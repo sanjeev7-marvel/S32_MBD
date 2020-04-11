@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PWM Config Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <h1>PWM Config Block</h1>
+    <p>The main functionality of the block is to generate PWM output signals using the FTM module. The Block can generate signals in Edge-Aligned, Center Aligned and Combine mode.
+    </p>
+
+    <h2>Block Image</h2>
+    <img vspace="0" src="ftm_pwm_config_block_files/ftm_pwm_config_block.jpg" width="350px" height="auto"/>
+    <h2>Inputs:</h2>
+    <ul>
+    The inputs will be available according to the selected channel pairs, for each pairs, as follows:
+        <li>Ch(n), Ch(n+1) - for Edge-Aligned [Independent], Center-Aligned [Independent], Combine mode</li>
+        <li>Ch(n) - for Edge-Aligned  [Complementary], Center-Aligned [Complementary]</li>
+        <li>SW control - Value(s) forced on the respective channel(s) by SW control (uint16): </li>
+            <ul>
+                <li>Values - upper half (bits 8-15) - bit n 1/0 -> channel n forced to 1/0 </li>
+                <li>Enable - lower half (bits 0-7) - bit n 1 -> channel n affected by software control</li>
+                <p>e.g: 257 - 0x0101: values 1, enable 1 -> software control activated for channel 0 and output signal forced to HIGH.</p>
+                <p><b>Note:</b>This input is only available if SW control is enabled (from the SW control tab).</p>
+            </ul>
+        <li>OUTMASK - forces the output channel n to inactive state (denoted by 'Safe state' option used in this block, in the Output signals tab: </li>
+        <p><b>Note:</b>To mask output channel n, use value 1 on the nth bit. This input is only available if SW control is enabled (from the SW control tab).</p>
+    </ul>
+    <h2>Outputs:</h2>
+    <ul>
+    The outputs will be available according to the selected channel pairs, for each pairs, as follows:
+        <li>Ch(n), Ch(n+1) - for Edge-Aligned [Independent], Center-Aligned [Independent], Combine mode - if "Duty Cycle Simulation Output" is On</li>
+        <li>Ch(n) - for Edge-Aligned  [Complementary], Center-Aligned [Complementary] - if "Duty Cycle Simulation Output" is On</li>
+    </ul>
+
+    <h2>Parameters and Dialog Box</h2>
+    <p>The block dialog consists of the following tabs:</p>
+    <ul class="shifted">
+        <li><a href="#General_tab">General</a></li>
+        <li><a href="#Output_signals_tab">Output Signals</a></li>
+        <li><a href="#Reload_settings_tab">Reload Settings - Only in Advanced mode</a></li>
+        <li><a href="#External_trigger_tab">External Trigger - Only in Advanced mode</a></li>
+        <li><a href="#Faults_tab">Faults - Only in Advanced mode</a></li>
+    </ul>
+    <h4><a name="General_tab"></a>General</h4>
+    <img vspace="10" src="ftm_pwm_config_block_files/ftm_pwm_config_param_1.jpg" width="450px" height="auto"/>
+    <h3>FTM Module</h3>
+    <p>Select which FTM module to use.</p>
+    <ul>Range: 0 &ndash; FTMn</ul>
+
+    <h3>Mode</h3>
+    <p>Configures the mode in which the PWM signals will be generated.</p>
+    <ul>
+        <li>Edge-Aligned PWM</li>
+        <li>Center-Aligned PWM</li>
+        <li>Combine mode PWM</li>
+    </ul>
+
+    <h3>FTM Software Output Control</h3>
+    <p>This checkbox enables or disables the software control.</p>
+    <p><b>Note:</b>Only with this option enabled, the 2 additional inputs are available (SW control and OUTMASK). </p>
+
+    <h3>Channel Pair</h3>
+    <p>Enables or Disabled the output channel pair</p>
+    <p>If the mode is Edge-Aligned or Center-Aligned the channels can be configured as follows:</p>
+    <ul>
+        <li>Independent</li>
+        <li>Complementary - the channel (n+1) output is the the duplicated or inverted as for the channel (n) output.</li>
+    </ul>
+
+    <h3>PWM Frequency</h3>
+    <p>The PWM Frequency value can be expressed in Hz or Ticks. If the user choses to express in Ticks, it must set the PWM Prescaler too. If the user choses to express in Hz the prescaler and Ticks value will be computed automatically.</p>
+
+    <h3>Deadtime</h3>
+    <p>Deadtime is available only if one output is Complemetary or the PWM uses the combine mode.</p>
+    <p>The deadtime value can be expressed in Nanoseconds or Ticks. If the user choses to express in Ticks, it must set the Prescaler (1/4/16) too. If the user choses to express in Nanoseconds the prescaler and Ticks value will be computed automatically.</p>
+
+
+    <h3>Duty Cycle Settings </h3>
+    <p>Initial Duty Cycle - sets the Duty Cycle for the channels imediately after config. The functionality is described below:</p>
+    <ul>
+        <li>Edge-Aligned mode / Center-Aligned mode</li>
+        <ul>
+            <li>Independent - Ch(n) - sets the duty cycle for the channel (n).</li>
+            <li>Complementary - Ch(2n) - sets the duty cycle for the channel (n) and (n+1) (the outputs are inverted).</li>
+        </ul>
+        <li>Combine mode</li>
+        <ul>
+            <li>Ch(2n) - sets the value of the pins set point.</li>
+            <li>Ch(2n+1) - sets the value of the pins clear point.</li>
+        </ul>
+    </ul>
+    <p>The same principle is applied for the inputs and outputs.<\p>
+
+    <h3>Duty Cycle Simulation Output</h3>
+    <p>Only available if DutyCycle simulation output is used</p>
+
+    <h3>Start pin generation immediately after initialization</h3>
+    <p>If this checkbox is set, the PWM generation output starts immediately after the peripheral is configured. </p>
+
+    <h3>Show advanced options</h3>
+    <p>Shows or hides the Advanced options tab.</p>
+
+    <h4><a name="Output_signals_tab"></a>Output Signals</h4>
+    <p>Output Signals tab configures the PWM output pins and state:</p>
+    <img vspace="10" src="ftm_pwm_config_block_files/ftm_pwm_config_param_2.jpg"" width="450px" height="auto"/>
+    <h3>Ch[n] output pin</h3>
+    <p>Selects the output pin for the channel (n).</p>
+
+    <h3>Ch[n] polarity</h3>
+    <p>Defines the polarity of the channel output.</p>
+    <ul>
+        <li>Active High - The channel polarity is active high.</li>
+        <li>Active Low - The channel polarity is active low.</li>
+        <p>If the pair is set in Complementary mode, for the channel [n+1] the options are:</p>
+        <li>Main duplicated - The channel polarity for the Channel [n+1] is the same as for Channel[n].</li>
+        <li>Main inverted - The channel polarity for the Channel [n+1] is inverted as for Channel[n].</li>
+    </ul>
+
+    <h3>Ch[n] safe state</h3>
+    <p>Selects the output pin level when a fault appears.</p>
+    <ul>
+        <li>Low -  output Low when fault.</li>
+        <li>High - output High state when fault.</li>
+    </ul>
+
+    <h4><a name="External_trigger_tab"></a>External Trigger</h4>
+    <p>The External Triggers tab is available only if Show advanced checkbox is checked and contains the following parameters:</p>
+    <img vspace="15" src="ftm_pwm_config_block_files/ftm_pwm_config_param_3.jpg"
+    width="450px" height="auto"/>
+
+    <h3>Initialization </br>Channel (n) Trigger</h3>
+    <p>Enables generation of Output Trigger signal based on the counter value matching of register value or initialization of FTM counter.</p>
+
+    <h3>PWM Syncronization</h3>
+    <p>Selects the software trigger as the PWM synchronization trigger or HW trigger.</p>
+
+    <h3>Hardware trigger n</h3>
+    <p>Enables hardware trigger (n) to the PWM synchronization. Hardware trigger (n) happens when a rising edge is detected at the trigger 1 input signal.</p>
+
+    <h3>Auto Clear Trigger</h3>
+    <p>Determines if the FTM counter is reinitialized when the selected trigger for the synchronization is detected.</p>
+
+    <h3>Minimum Loading Point Enable</h3>
+    <p>Selects the maximum loading point to PWM synchronization (Synchronization Points). If is set, the selected loading point is when the FTM counter reaches its maximum value (MOD register).</p>
+
+    <h3>Maximum Loading Point Enable</h3>
+    <p>Selects the minimum loading point to PWM synchronization (Synchronization Points). If CNTMIN is set, the selected loading point is when the FTM counter reaches its minimum value (CNTIN register).</p>
+
+    <h3>Inverting Control Syncronization</h3>
+    <p>This Checkbox enables or disables the Reload Interrupt.</p>
+
+    <h3>Synchronization Points</h3>
+    <p>Selects the synchronization method.</p>
+    <ul>
+        <li>Wait loading points</li>
+        <li>Update now</li>
+    </ul>
+
+    <h4><a name="Reload_settings_tab"></a>Reload Settings</h4>
+    <p>The Reload settings tab contains the following parameters:</p>
+    <img vspace="15" src="ftm_pwm_config_block_files/ftm_pwm_config_param_4.jpg" width="450px" height="auto"/>
+
+    <h3>Enables Reload Interrupt</h3>
+    <p>This Checkbox enables or disables the Reload Interrupt.</p>
+
+    <h3>Reload Interrupt Priority</h3>
+    <p>This dropdown sets the priority of the Reload Interrupt priroty.</p>
+
+    <h3>Half-Cycle reload</h3>
+    <p>The Half Cycle Register contains the match value for FTM half cycle reload feature.</p>
+
+    <h3>Frequency of the Reload Opportunities</h3>
+    <p></p>
+
+    <h3>Channel n match is included as a reload opportunity</h3>
+    <p>The reload opportunity is enabled and it happens at the channel (n) match.</p>
+
+    <h4><a name="Faults_tab"></a>Faults Trigger</h4>
+    <p>The Faults Triggers tab is available only if Show advanced checkbox is checked and contains the following parameters:</p>
+    <img vspace="15" src="ftm_pwm_config_block_files/ftm_pwm_config_param_5.jpg"
+    width="450px" height="auto"/>
+
+    <h3>Enables Fault Protection</h3>
+    <p>This Checkbox enables or disables the Fault Protection.</p>
+
+    <h3>Enables Fault Interrupt</h3>
+    <p>This Checkbox enables or disables the Fault Protection Interrupt.</p>
+
+    <h3>Automatic Clearing</h3>
+    <p> Description</p>
+    <ul>
+        <li>Fault control disabled</li>
+        <li>Manual Fault control for even channels</li>
+        <li>Manual Fault control for all channels</li>
+        <li>Automatic Fault control for all channels</li>
+    </ul>
+
+    <h3>PWM Output-pins State on Fault</h3>
+    <p>This dropdown sets the PWM pin states on fault.</p>
+    <ul>
+        <li>Safe Value</li>
+        <li>Tri-state Value</li>
+    </ul>
+
+    <h3>Fault Filter Value</h3>
+    <p>This editbox sets the filter value for the inputs of channels.</p>
+
+    <h3>Fault Interrupt Priority</h3>
+    <p>This dropdown sets the priority of the Fault Interrupt priroty.</p>
+
+    <h3>Channel n</h3>
+    <p>This Checkbox enables or disables the Fault Protection Interrupt on the Channel n.</p>
+
+    <h3>Filter</h3>
+    <p>This Checkbox enables or disables the filter fr this channel.</p>
+
+    <h3>Polarity</h3>
+    <p>This dropdown sets in which state the filter is active.</p>
+    <ul>
+        <li>Active Low</li>
+        <li>Active High</li>
+    </ul>
+
+    <h3>Fault n input pin</h3>
+    <p>This dropdown selects the pin assigned to the Fault interrupt.</p>
+
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Block Miscellaneous Details</h2>
+    <p>Duty Cycle output signal needed for simulation purpose only.</p>
+
+    </div>
+</body>
+</html>

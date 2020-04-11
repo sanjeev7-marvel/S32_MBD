@@ -1,0 +1,210 @@
+%implements timer_s32k_lpit "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("lpit_driver.h")>
+    %<LibAddToCommonIncludes("lpit_hw_access.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("device_registers.h")>
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpit_sdk_params", blockPath)
+    %with sdk_params
+    %assign mcu = FEVAL("mbd_s32k_get_target_family")
+
+    %% S32K11x does not have separate channel interrupts; one interrupt for all 4 channels of LPIT0
+    %if (mcu == "s32k11")
+        %openfile buffer
+            void LPIT0_Ch0_4_IRQHandler (void)
+            {
+                /* Get interrupt flag for all 4 channels */
+                uint32_t ch = LPIT_DRV_GetInterruptFlagTimerChannels(0, 15U);
+
+                if(ch & 1 ){
+                    /* Execute STEP function for LPIT0 channel 0 */
+                    LPIT0_IRQHandler();
+                    LPIT_DRV_ClearInterruptFlagTimerChannels(0, 1);
+                }
+
+                %% For every lpit channel, call it's IRQ when triggered
+                %assign lpit_idxs = FEVAL("mbd_s32k_lpit_get_inst_used")
+                %foreach lpit_inst = FEVAL("length", lpit_idxs)
+                    if(ch & (1 << %<lpit_idxs[lpit_inst]>)){
+                        lpit%<lpit_idxs[lpit_inst]>_irq_call();
+                        LPIT_DRV_ClearInterruptFlagTimerChannels(0,(1 << %<lpit_idxs[lpit_inst]>));
+                    }
+                %endforeach
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+    %endif
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpit_sdk_params", blockPath)
+    %with sdk_params
+    {
+    %if !EXISTS("PIT_GLOBAL_INIT")
+        %assign ::PIT_GLOBAL_INIT = 1
+
+        /* Un-gate pit clock*/
+        PCC_SetPeripheralClockControl(PCC, LPIT0_CLK, true, %<clock>, 0, 0);
+
+        static const lpit_user_config_t lpitInit =
+        {
+            .enableRunInDebug = false,
+            .enableRunInDoze = true
+        };
+
+        /* Initialize PIT, enable module clock, disable run in debug. */
+        LPIT_DRV_Init(0, &lpitInit);
+    %endif
+
+    static const lpit_user_channel_config_t lpit%<channel>InitStruct =
+    {
+        .timerMode = LPIT_PERIODIC_COUNTER,
+        .periodUnits = LPIT_PERIOD_UNITS_MICROSECONDS,
+        .period = %<period>,
+        .triggerSource = LPIT_TRIGGER_SOURCE_INTERNAL,
+        .triggerSelect = 1U,
+        .enableReloadOnTrigger = false,
+        .enableStopOnInterrupt = false,
+        .enableStartOnTrigger = false,
+        .chainChannel = false,
+        .isInterruptEnabled = true
+    };
+
+    /* Initialize PIT timer channel. */
+    LPIT_DRV_InitChannel(0, %<channel>, &lpit%<channel>InitStruct);
+    %assign mcu = FEVAL("mbd_s32k_get_target_family")
+
+    %% S32K14x has separate IRQ handlers for each LPIT channel
+    %% thus we install separate handlers and generate code for
+    %% triggered subsystem inside those
+    %if (mcu == "s32k14")
+        /* Set priority for LPIT ISR */
+        INT_SYS_SetPriority(LPIT0_Ch%<channel>_IRQn, %<priority>);
+        INT_SYS_InstallHandler(LPIT0_Ch%<channel>_IRQn, LPIT0_Ch%<channel>_IRQHandler, (isr_t *)0);
+
+        %openfile buffer
+            void LPIT0_Ch%<channel>_IRQHandler (void)
+            {
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+                LPIT_DRV_ClearInterruptFlagTimerChannels(0,(1 << %<channel>));
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+    %else
+        %% For S32K11x we emulate (via software multiplexing) the separate channel's IRQs
+        %openfile buffer
+            extern void lpit%<channel>_irq_call();
+            %% Declare LPIT0_IRQHandler prototype only once
+            %if !EXISTS("PIT_IRQ_PROTO_INIT")
+                %assign ::PIT_IRQ_PROTO_INIT = 1
+                extern void LPIT0_IRQHandler (void);
+            %endif
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Defines", buffer)>
+
+        %% make c file for every channel IRQ
+        %assign headerName = "lpit%<channel>"
+        %assign headerfName = LibCreateSourceFile("Source", "Custom", "%<headerName>")
+        %openfile headerBuf
+            #include "%<CompiledModel.Name + ".h">"
+            #include "%<CompiledModel.Name + "_private.h">"
+
+            void lpit%<channel>_irq_call(){
+                /* Trigger subsystem for selected LPIT channel */
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                    %% skip unconnected function call outputs
+
+                    %if ISEQUAL(BlockToCall, "unconnected")
+                        %continue
+                    %endif
+
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+            }
+        %closefile headerBuf
+        %<LibSetSourceFileSection(headerfName, "Includes", headerBuf)>
+    %endif
+
+    %if (startImmediately)
+        /* Start the timer. */
+        LPIT_DRV_StartTimerChannels(0, (1 << %<channel>));
+    %else
+        /* Stop the timer. */
+        LPIT_DRV_StopTimerChannels(0, (1 << %<channel>));
+    %endif
+    }
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpit_sdk_params", blockPath)
+    %with sdk_params
+    %assign mcu = FEVAL("mbd_s32k_get_target_family")
+    %if (mcu == "s32k11")
+    {
+        static bool initialize_lpit_irq_handler = true;
+        if(initialize_lpit_irq_handler){
+            /* Set priority for LPIT ISR */
+            /* Keep in mind that system Step is ran on the same interrupt (LPIT0_IRQn) */
+            INT_SYS_SetPriority(LPIT0_IRQn, %<priority>);
+            INT_SYS_InstallHandler(LPIT0_IRQn, LPIT0_Ch0_4_IRQHandler, (isr_t *)0);
+            initialize_lpit_irq_handler = false;
+        }
+    }
+    %endif
+    %endwith
+
+    %endif
+%endfunction

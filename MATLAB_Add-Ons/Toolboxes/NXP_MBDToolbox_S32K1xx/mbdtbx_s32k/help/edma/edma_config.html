@@ -1,0 +1,114 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>eDMA Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>eDMA Configuration Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to configure the eDMA module.</p>
+            <p>In this block you can configure individual channels, set their priority, request source and what type of arbitration the DMA should use.</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="edma_files/edma_config.jpg" width="400px" height="auto">
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+             <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#1">General</a></li>
+                <!--If need be for another subclass, another ul instances must be placed-->
+                <li><a href="#2">Advanced</a></li>
+                <li><a href="#3">Channelx</a></li>
+                <li><a href="#4">Enabled channels</a></li>
+            </ul>
+
+           
+            <!--Table of contents-->
+           
+            <!--Window tab-->
+            <h4><a name="1"></a>General</h4>
+           
+            <img vspace="10" src="edma_files/edma_config_general.jpg" width="450px" height="auto">
+            </br>
+
+            <h3>Channel</h3>
+            <p>Select a DMA channel from the list.</p>
+            
+            <h3>Show advanced global settings</h3>
+            <p>Enable the Advanced tab where you can select arbitration and not halt on error property.</p>
+            
+            <h3>Show channel settings</h3>
+            <p>Enable the ChannelX tab where you can enable the channel, select what priority it has and what request source.</p>
+            
+            <h3>Show enabled channels</h3>
+            <p>Shows a list of all enabled channels so you can quickly see what channels are configured within this block.</p>
+            
+            
+            <h4><a name="2"></a>Advanced</h4>
+            <img vspace="10" src="edma_files/edma_config_advanced.jpg" width="450px" height="auto">
+            
+            <!--Tab-->
+            <h3>Arbitration</h3>
+            <p>Choose from the following arbitration types:</p>
+            <ul>
+                <li> <b>Fixed priority</b> - the highest priority channel requesting service is selected to execute </li>
+                <li> <b>Round robin</b> - channel priorities are ignored and channels are cycled through (from high to low channel numbers) </li>
+            </ul>
+            
+            <h3>Not halt on error</h3>
+            <p>Any error causes the HALT bit to set. Here you can choose from the following:</p>
+            <ul>
+                <li> <b>True</b> - Normal operation </li>
+                <li> <b>False</b> - Halt on error; all service requests are ignored until the HALT bit is cleared </li>
+            </ul>
+            
+            
+            <h4><a name="3"></a>ChannelX</h4>
+            <img vspace="10" src="edma_files/edma_config_channel.jpg" width="450px" height="auto">
+            
+            <h3>Priority</h3>
+            <p>Choose a priority for the channel from the list.</p>
+            <p><b>Note:</b> If the arbitration selected is round robin, this priority will be ignored.</p>
+            
+            <h3>DMA request source</h3>
+            <p>Choose the request source for this DMA channel; if you want a software trigger of DMA, select EDMA_REQ_DISABLED (the default setting for this field).</p>
+            
+            <h3>Enable</h3>
+            <p>Check it to enable the usage of current channel of eDMA.</p>
+            
+            
+            <h4><a name="4"></a>Enabled channels</h4>
+            <img vspace="10" src="edma_files/edma_config_enabled_channels.jpg" width="450px" height="auto">
+            
+            <h3>Enabled channels</h3>
+            <p>This is a list of all enabled channels. After checking/unchecking the 'enable' attribute from ChannelX tab, this list will be refreshed.</p>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

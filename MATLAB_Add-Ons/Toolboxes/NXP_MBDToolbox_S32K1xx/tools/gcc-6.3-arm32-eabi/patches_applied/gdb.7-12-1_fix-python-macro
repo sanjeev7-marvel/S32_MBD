@@ -1,0 +1,21 @@
+--- gdb-7.12.1/gdb/python/python-internal.h-orig	2017-10-12 10:22:25.031192444 -0500
++++ gdb-7.12.1/gdb/python/python-internal.h	2017-10-12 10:23:11.833140731 -0500
+@@ -88,6 +88,18 @@
+ /* Request clean size types from Python.  */
+ #define PY_SSIZE_T_CLEAN
+ 
++/* When compiling with MinGW, pyconfig.h (included by other Python
++ headers) renames hypot to _hypot. That conflicts with C++'s
++ std::hypot. See <https://bugs.python.org/issue11566>.
++
++ In C++, it's not a good idea to define standard C functions as
++ macros. Fortunately, pyconfig.h has double-inclusion guards, so
++ include it ourselves, and #undef any conflicting symbol it may have
++ defined. Note libstdc++'s <c...> headers also #undef C-inherited
++ function-like macros, including "hypot". */
++#include <pyconfig.h>
++#undef hypot
++
+ /* Include the Python header files using angle brackets rather than
+    double quotes.  On case-insensitive filesystems, this prevents us
+    from including our python/python.h header file.  */

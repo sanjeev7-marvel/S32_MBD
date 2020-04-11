@@ -1,0 +1,46 @@
+%implements lpspi_s32k_master_transfer "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lpspi_master_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lpspi_transfer_sdk_params", blockPath)
+    %with info
+    {
+        /* Update the peripheral CS to select the slave you want to send data to */
+        LPSPI_DRV_SetPcs(%<user_config.instance>, %<user_config.pcs>, %<user_config.polarity>);
+        /* Send data */
+        %if ISEQUAL (user_config.xfermode, "Blocking")
+            LPSPI_DRV_MasterTransferBlocking(%<user_config.instance>, %<LibBlockInputSignalAddr(0, "", "", 0)>,
+            %<LibBlockOutputSignalAddr(0, "", "", 0)>, %<LibBlockInputSignalWidth(0)>U, %<user_config.timeout>);
+        %else
+            LPSPI_DRV_MasterTransfer(%<user_config.instance>, %<LibBlockInputSignalAddr(0, "", "", 0)>,
+            %<LibBlockOutputSignalAddr(0, "", "", 0)>, %<LibBlockInputSignalWidth(0)>U);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

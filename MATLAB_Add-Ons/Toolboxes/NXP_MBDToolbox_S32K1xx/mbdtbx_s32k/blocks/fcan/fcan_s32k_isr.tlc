@@ -1,0 +1,188 @@
+%implements fcan_s32k_isr "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flexcan_driver.h")>
+    %<LibAddToCommonIncludes("flexcan_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    
+    %assign instance = CAST("Number", Parameter[0].Value[0])
+    %assign event = CAST("Number", Parameter[0].Value[1])
+
+    %assign name = "fcan%<instance>_s32k_rx_isr"
+    %assign fname = LibCreateSourceFile("Source", "Custom", "%<name>")
+
+    %% ISR Header
+    %openfile isr_h = "%<name>.h"
+    #ifndef %<name>_h
+    #define %<name>_h
+
+    extern flexcan_msgbuff_t canCom%<instance>_recvBuffFifo;
+
+    extern void %<name>(uint8_t instance, flexcan_event_type_t eventType, uint32_t buffIdx, flexcan_state_t *flexcanState);
+
+    #endif
+    %closefile isr_h
+    %<LibAddToCommonIncludes("%<name>.h")>
+
+    %if !EXISTS("FCAN%<instance>_ISR_BUF_INITIALIZE")
+        %% INITIALIZE ONCE
+        %assign ::FCAN%<instance>_ISR_BUF_INITIALIZE = 1
+
+        FLEXCAN_DRV_InstallEventCallback(%<instance>, %<name>, (void *)0);
+
+        %% HEADER
+        %openfile tmpFcnBuf
+        #include "flexcan_driver.h"
+        #include "%<name>.h"
+
+        #include "%<CompiledModel.Name + ".h">"
+        #include "%<CompiledModel.Name + "_private.h">"
+
+        void %<name>(uint8_t instance, flexcan_event_type_t eventType, uint32_t buffIdx, flexcan_state_t *flexcanState)
+        {
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(fname , "UserTop", tmpFcnBuf)>
+
+        %%FOOTER
+        %openfile tmpFcnBuf
+        }
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(fname , "UserBottom", tmpFcnBuf)>
+    %endif
+
+    %% ISR ROUTINE
+    %openfile tmpFcnBuf
+    %switch (event)
+    %case (1)  %% Rx Complete
+        %assign mbIndex = LibBlockOutputSignal(1, "", "", 0)
+        %assign id = LibBlockOutputSignal(2, "", "", 0)
+        %assign data = LibBlockOutputSignalAddr(3, "", "", 0)
+        %assign length = LibBlockOutputSignal(4, "", "", 0)
+        %assign timestamp = LibBlockOutputSignal(5, "", "", 0)
+
+        if (eventType == FLEXCAN_EVENT_RX_COMPLETE) {
+            uint8_t i;
+            flexcan_msgbuff_t* mb_message = flexcanState->mbs[buffIdx].mb_message;
+
+            %<mbIndex> = buffIdx;
+            %<id> = mb_message->msgId;
+            %<length> = mb_message->dataLen;
+
+            for(i = 0; i < mb_message->dataLen; i++) {
+                (%<data>)[i] = mb_message->data[i];
+            }
+
+            %<timestamp> = (mb_message->cs & CAN_CS_TIME_STAMP_MASK) >> CAN_CS_TIME_STAMP_SHIFT;
+
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (2)  %% Rx FIFO Complete
+        %assign id = LibBlockOutputSignal(1, "", "", 0)
+        %assign data = LibBlockOutputSignalAddr(2, "", "", 0)
+        %assign length = LibBlockOutputSignal(3, "", "", 0)
+        %assign timestamp = LibBlockOutputSignal(4, "", "", 0)
+
+        if (eventType == FLEXCAN_EVENT_RXFIFO_COMPLETE) {
+            uint8_t i;
+
+            %<id> = canCom%<instance>_recvBuffFifo.msgId;
+            %<length> = canCom%<instance>_recvBuffFifo.dataLen;
+
+            for(i = 0; i < canCom%<instance>_recvBuffFifo.dataLen; i++) {
+                (%<data>)[i] = canCom%<instance>_recvBuffFifo.data[i];
+            }
+
+            %<timestamp> = (canCom%<instance>_recvBuffFifo.cs & CAN_CS_TIME_STAMP_MASK) >> CAN_CS_TIME_STAMP_SHIFT;  %% TimeStamp
+
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (3)  %% Tx Complete
+        %assign mbIndex = LibBlockOutputSignal(1, "", "", 0)
+
+        if (eventType == FLEXCAN_EVENT_TX_COMPLETE) {
+            %<mbIndex> = buffIdx;
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (4)  %% Wake Up Timeout
+        if (eventType == FLEXCAN_EVENT_WAKEUP_TIMEOUT) {
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (5)  %% Wake Up Match
+        if (eventType == FLEXCAN_EVENT_WAKEUP_MATCH) {
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (6) %% Rx FIFO Warning
+        if(eventType == FLEXCAN_EVENT_RXFIFO_WARNING){
+            %<mbIndex> = buffIdx;
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+    %case (7) %% RxFIFO Overflow
+        if(eventType == FLEXCAN_EVENT_RXFIFO_OVERFLOW){
+            %<mbIndex> = buffIdx;
+            %<FcnCallTriggeredSubsystems(block)>
+
+            return;
+        }
+    %break
+
+    %endswitch
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Functions", tmpFcnBuf)>
+
+    %endif
+%endfunction
+
+
+%function FcnCallTriggeredSubsystems(block) Output
+
+   %foreach fcnCallIdx = NumSFcnSysOutputCalls
+        %% call the downstream system
+        %with SFcnSystemOutputCall[fcnCallIdx]
+
+        %% skip unconnected function call outputs
+        %if !ISEQUAL(BlockToCall, "unconnected")
+            %% Call subsytem code
+            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+        %endif
+        %endwith
+    %endforeach
+%endfunction

@@ -1,0 +1,63 @@
+
+%implements GFLIB_Lut2D_SF_F32 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign u32ShamOffset1   = CAST("Number",Parameter[0].Value[0])
+   %assign u32ShamOffset2   = CAST("Number",Parameter[1].Value[0])
+   %if ( FEVAL("mbd_s32k_version_is_newer_than", "2016"))
+      %assign VectCoefBuf = SLibGetValueFromParamRec(Parameter[2], TLC_FALSE)
+   %else
+      %assign VectCoefBuf = GetValueFromParamRec(Parameter[2])
+   %endif
+   %assign VectCoefSize = LibBlockParameterSize(Parameter[2])
+   %assign s32MidIdx        = CAST("Number",Parameter[3].Value[0])
+
+   %assign x = LibBlockInputSignal(0, "", "", 0)
+   %assign y = LibBlockInputSignal(1, "", "", 0)
+   %assign t = LibBlockOutputSignal(0, "", "", 0)
+
+   {
+     static const tFrac32 pf32Table[] = {
+        %foreach idx =  VectCoefSize[1]
+            %if idx > 0
+            , \
+            %endif
+            %<VectCoefBuf[idx]> \
+        %endforeach
+    };
+	 static const GFLIB_LUT2D_T_F32 param = { %<u32ShamOffset1>, %<u32ShamOffset2>, &pf32Table[0] + %<s32MidIdx> };
+     %<t> = GFLIB_Lut2D_F32 (%<x>,%<y>,&param);
+   }
+
+%endfunction

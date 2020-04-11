@@ -1,0 +1,118 @@
+%implements edma_s32k_config "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %if !EXISTS("EDMA_DRIVER_INCLUDED")
+        %assign ::EDMA_DRIVER_INCLUDED = 1
+        %assign ::EDMA_COUNT = 0
+
+        %<LibAddToCommonIncludes("device_registers.h")>
+        %<LibAddToCommonIncludes("edma_driver.h")>
+        %<LibAddToCommonIncludes("pcc_hw_access.h")>
+        %<LibAddToCommonIncludes("clock_S32K1xx.h")>
+
+        %assign sdk_params = FEVAL("mbd_s32k_edma_config_sdk_params", blockPath)
+        %with sdk_params
+            %% get sdk parameters
+            %assign chns_len = user_config.channels_len
+            %assign chns = user_config.channels
+            %assign chns_pr = user_config.channels_priority
+            %assign chns_req_src = user_config.channels_request_source
+            %assign chns_en = user_config.channels_enable
+
+            %% declare global variables
+            %openfile declarationsBuf
+                edma_state_t edmaState;
+
+                %assign ch_idx = 0
+                %foreach i = chns_len
+                    %if %<chns_en[i]> == 1
+                        edma_chn_state_t dmaControllerChn%<ch_idx>_State;
+                        %assign ch_idx = ch_idx + 1
+                    %endif
+                %endforeach
+                edma_chn_state_t * const edmaChnStateArray[%<ch_idx>] = {
+                %foreach idx = ch_idx
+                    &dmaControllerChn%<idx>_State,
+                %endforeach
+                };
+            %closefile declarationsBuf
+            %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", declarationsBuf)>
+        %endwith
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_edma_config_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %% get sdk parameters
+        %assign chns_len = user_config.channels_len
+        %assign chns = user_config.channels
+        %assign chns_pr = user_config.channels_priority
+        %assign chns_req_src = user_config.channels_request_source
+        %assign chns_en = user_config.channels_enable
+
+        %% enable clock
+        /* Enable DMAMUX clock */
+        PCC_SetPeripheralClockControl(PCC, %<periph_clock>, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        %% edma user config
+        const edma_user_config_t dmaController_InitConfig = {
+          .chnArbitration = %<user_config.arbitration>,
+          .haltOnError = %<user_config.halt_on_error>
+        };
+
+        %% edma channels config
+        %assign ch_idx = 0
+
+        %% get all enabled channels from the UI and generate edma_channel_config_t for them
+        %foreach i = chns_len
+            %if %<chns_en[i]> == 1
+                edma_channel_config_t dmaControllerChn%<ch_idx>_Config = {
+                    .channelPriority = %<chns_pr[i]>,
+                    .virtChnConfig = %<chns[i]>,
+                    .source = %<chns_req_src[i]>,
+                    .callback = NULL,
+                    .callbackParam = NULL
+                };
+                %assign ch_idx = ch_idx + 1
+            %endif
+        %endforeach
+
+        %% declare array with all channel configs
+        /* eDMA channel%<ch_idx> config */
+        const edma_channel_config_t * const edmaChnConfigArray[%<ch_idx>] = {
+        %foreach idx = ch_idx
+            &dmaControllerChn%<idx>_Config,
+        %endforeach
+        };
+
+        /* Initialize eDMA module & channels */
+        EDMA_DRV_Init(&edmaState, &dmaController_InitConfig, edmaChnStateArray, edmaChnConfigArray, %<ch_idx>);
+    }
+    %endwith
+
+    %endif
+%endfunction

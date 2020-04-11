@@ -1,0 +1,110 @@
+%implements rtc_s32k_alarm_set "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("rtc_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %% For future if there will be many instances
+    %assign instance = 0
+
+    %% This runs only one time.
+    %if !EXISTS("RTC_ALARM_STRUCTURE_DECLARED")
+        %assign ::RTC_ALARM_STRUCTURE_DECLARED = 1
+        %% Alarm ISR Structure intitalization code
+        %openfile buffer
+            //rtcTimer%<instance> Alarm Interrupt Configuration
+            rtc_alarm_config_t alarmConfig%<instance> =
+            {
+                .alarmTime           =
+                    {
+                        .year       =  1970U,
+                        .month      =  1U,
+                        .day        =  1U,
+                        .hour       =  0U,
+                        .minutes    =  0U,
+                        .seconds    =  0U,
+                    },
+                .repetitionInterval  =  0UL,
+                .numberOfRepeats     =  0UL,
+                .repeatForever       =  false,
+                .alarmIntEnable      =  true,
+                .alarmCallback       =  rtcTimer%<instance>_AlarmISR,
+                .callbackParams      =  NULL,
+            };
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", buffer)>
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %% For future if there will be many instances
+    %assign instance = 0
+    %% Out functions
+    %assign sdk_params = FEVAL("mbd_s32k_rtc_alarm_set_sdk_params", blockPath)
+    %with sdk_params
+        %if user_config.inputs_enable == "true"
+             %% The case 
+            %assign year       = LibBlockInputSignal(0,"","",0)
+            %assign month      = LibBlockInputSignal(1,"","",0)
+            %assign day        = LibBlockInputSignal(2,"","",0)
+            %assign hour       = LibBlockInputSignal(3,"","",0)
+            %assign minutes    = LibBlockInputSignal(4,"","",0)
+            %assign seconds    = LibBlockInputSignal(5,"","",0)
+
+            alarmConfig%<instance>.alarmTime.year       = %<year>;
+            alarmConfig%<instance>.alarmTime.month      = %<month>;
+            alarmConfig%<instance>.alarmTime.day        = %<day>;
+            alarmConfig%<instance>.alarmTime.hour       = %<hour>;
+            alarmConfig%<instance>.alarmTime.minutes    = %<minutes>;
+            alarmConfig%<instance>.alarmTime.seconds    = %<seconds>;
+        %else
+            alarmConfig%<instance>.alarmTime.year       = %<user_config.date_year>U;
+            alarmConfig%<instance>.alarmTime.month      = %<user_config.date_month>U;
+            alarmConfig%<instance>.alarmTime.day        = %<user_config.date_day>U;
+            alarmConfig%<instance>.alarmTime.hour       = %<user_config.time_hour>U;
+            alarmConfig%<instance>.alarmTime.minutes    = %<user_config.time_min>U;
+            alarmConfig%<instance>.alarmTime.seconds    = %<user_config.time_sec>U;
+        %endif
+        alarmConfig%<instance>.repetitionInterval   = %<user_config.rep_interval>UL;
+        alarmConfig%<instance>.numberOfRepeats      = %<user_config.rep_number>UL;
+        alarmConfig%<instance>.repeatForever        = %<user_config.rep_forever>;
+
+        RTC_DRV_ConfigureAlarm(RTCTIMER%<instance>, &alarmConfig%<instance>);
+    %endwith
+
+    %endif
+%endfunction

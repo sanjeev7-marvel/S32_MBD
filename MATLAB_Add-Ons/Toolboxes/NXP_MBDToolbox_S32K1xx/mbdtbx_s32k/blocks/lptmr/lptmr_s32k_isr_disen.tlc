@@ -1,0 +1,42 @@
+%implements lptmr_s32k_isr_disen "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("lptmr_driver.h")>
+    %<LibAddToCommonIncludes("trgmux_driver.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output 
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign instance = 0
+    %assign isr_state = FEVAL("mbd_s32k_lptmr_isr_disen_params", blockPath)
+    //must be disabled before enable/disable instance of LPTMR%<instance>
+    LPTMR_DRV_StopCounter(INST_LPTMR%<instance>);
+    //real set intrrupt
+    LPTMR_DRV_SetInterrupt(INST_LPTMR%<instance>, %<isr_state>);
+    //restart counter for instance%<instance>
+    LPTMR_DRV_StartCounter(INST_LPTMR%<instance>);
+	
+    %endif 
+%endfunction

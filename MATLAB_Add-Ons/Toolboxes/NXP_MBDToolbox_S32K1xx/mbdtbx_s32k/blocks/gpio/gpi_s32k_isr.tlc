@@ -1,0 +1,123 @@
+%implements gpi_s32k_isr "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("gpio_irq.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+    
+    %assign pinInfo = FEVAL("mbd_s32k_get_pin_info_gpio", blockPath)
+    %assign out = FEVAL("mbd_s32k_gpi_isr_parameters", blockPath)
+    %assign mcu_family = FEVAL("mbd_s32k_get_target_family")
+
+    %with pinInfo.user_config
+    {        
+        %% Initialize only once (if other output/input blocks are used)
+        %if !EXISTS("GPI_%<port>%<pin>_INITIALIZATION")
+            %assign ::GPI_%<port>%<pin>_INITIALIZATION = 1
+
+            %if mcu_family == "s32k14"
+                /* Enable clock for %<port> */
+                PCC_SetClockMode(PCC, PCC_%<port>_CLOCK, true);
+            %else
+                /* Enable clock for %<port> */
+                PCC_SetClockMode(PCC, %<port>_CLK, true);
+            %endif
+
+            /* Configure the output port init structure. */
+            const pin_settings_config_t gpio%<port>Pin%<pin> =
+            {
+                .base = %<port>,
+                .pinPortIdx = %<pin>,
+                .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                .passiveFilter = false,
+                .mux = PORT_MUX_AS_GPIO,
+                .pinLock = false,
+                .intConfig = PORT_DMA_INT_DISABLED,
+                .clearIntFlag = true,
+                .gpioBase = %<pt>,
+                .direction = GPIO_INPUT_DIRECTION,
+            };
+
+            /* Initialize GPI%<port>%<pin>. */
+            PINS_DRV_Init(1, &gpio%<port>Pin%<pin>);
+        %endif
+
+        /* Set GPI%<port>%<pin> interrupt configuration. */
+        PINS_DRV_SetPinIntSel(%<port>, %<pin>, %<out.sdk_irqc>);
+
+        %if mcu_family == "s32k14"
+            /* Set priority for GPIO%<port> ISR. */
+            INT_SYS_SetPriority (%<port>_IRQn, %<out.prio>);
+            /* Enable GPI%<port> interrupt.*/
+            INT_SYS_EnableIRQ(%<port>_IRQn);
+        %else
+            /* Set priority for GPIO%<port> ISR. */
+            INT_SYS_SetPriority (PORT_IRQn, %<out.prio>);
+            /* Enable GPI%<port> interrupt.*/
+            INT_SYS_EnableIRQ(PORT_IRQn);
+        %endif
+
+        %openfile buffer
+            void GPI%<port>%<pin>_callback (void)
+            {
+
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+
+                     %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+
+                /* Clear interrupt flag */
+                PINS_DRV_ClearPinIntFlagCmd(%<port>, %<pin>);
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+
+        /* Register GPI%<port>%<pin> callback function.*/
+        %if (port == "PORTA")
+            GPI_DRV_InstallCallback(0, %<pin>, &GPI%<port>%<pin>_callback);
+        %elseif (port == "PORTB")
+            GPI_DRV_InstallCallback(1, %<pin>, &GPI%<port>%<pin>_callback);
+        %elseif (port == "PORTC")
+            GPI_DRV_InstallCallback(2, %<pin>, &GPI%<port>%<pin>_callback);
+        %elseif (port == "PORTD")
+            GPI_DRV_InstallCallback(3, %<pin>, &GPI%<port>%<pin>_callback);
+        %elseif (port == "PORTE")
+            GPI_DRV_InstallCallback(4, %<pin>, &GPI%<port>%<pin>_callback);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

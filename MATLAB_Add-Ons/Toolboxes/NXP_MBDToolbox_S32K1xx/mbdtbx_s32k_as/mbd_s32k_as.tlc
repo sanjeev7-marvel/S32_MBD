@@ -1,0 +1,71 @@
+%% SYSTLC: Model Based Design Autosar Toolbox S32K Code Generation Target \
+%%    TMF: mbd_s32k_as.tmf MAKE: mbd_s32k_as_make_rtw COPY_MDLREF_INCLUDES=0 EXTMODE: no_ext_comm
+%%
+%%
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+%%
+%%
+
+%selectfile NULL_FILE
+
+%% Standard (required) Real-Time Workshop settings
+
+%assign CodeFormat         = "Embedded-C"
+%assign AutoBuildProcedure = 0
+%assign TargetType         = "RT"
+%assign Language           = "C"
+%assign GenRTModel         = TLC_TRUE
+%assign ERTCustomFileTest  = TLC_TRUE
+%assign GenerateASAP2 = 0
+%assign isERT = FEVAL("detectTarget")
+
+
+%% Tie-in custom target option to Real-Time Workshop options
+
+%% Generate ISO_C math code whenever possible
+%if (isERT == 1)
+%if GenFloatMathFcnCalls == "ISO_C"
+	%include "mathlib.tlc"
+    %<LibRegisterISOCMathFcnPrototypes()>
+%endif
+%endif
+
+%% Generate the model code with RTW-EC but generate a target
+%% specific main.c
+
+%assign ERTCustomFileTemplate = "mbdtargettemplateas.tlc"
+%include "mbdtargetmainlibs32kas.tlc"
+
+%% Displaying the toolbox version number
+%matlab disp("### Using Model-Based Design Autosar Toolbox for S32K1xx Series %<FEVAL("mbd_s32k_find_mbdt_ver")>")
+
+%assign MATLABROOT = FEVAL("matlabroot")
+%assign modelname = FEVAL("bdroot")
+%assign hooksfound = FEVAL("find_hook_routines")
+
+%% Add user defined cache here
+
+%assign dofixup = FEVAL("fixup_alignment","clear")
+
+%include "codegenentry.tlc"
+
+%assign dofixup = FEVAL("fixup_alignment","dofixup","%<modelname>.h")
+
+%% Custom RTW dialog options
+
+/%
+    BEGIN_RTW_OPTIONS
+
+    % Specify the RTW build directory name (failure to do so results
+    % in the code generating into the current MATLAB directory)
+  
+    rtwgensettings.BuildDirSuffix = '_mbd_rtw';
+    rtwgensettings.Version = '1';
+    rtwgensettings.ActivateCallback = 'mbd_s32k_as_stf_activate_cbk(hDlg,hSrc)';
+
+    % Inherit AUTOSAR options
+    rtwgensettings.DerivedFrom = 'autosar.tlc';
+
+    END_RTW_OPTIONS
+%/

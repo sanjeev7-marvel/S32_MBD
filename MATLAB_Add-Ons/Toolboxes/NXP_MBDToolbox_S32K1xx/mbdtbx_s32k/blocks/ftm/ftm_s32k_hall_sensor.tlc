@@ -1,0 +1,138 @@
+%implements ftm_s32k_hall_sensor "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("ftm_chn_irq.h")>
+    %<LibAddToCommonIncludes("ftm_ic_driver.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+
+    %endif
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_ftm_hall_sensor_sdk_params", blockPath)
+
+    %if !EXISTS("FTM%<sdk_params.module>_INPUT_INIT")
+        %assign ::FTM%<sdk_params.module>_INPUT_INIT = 1
+        %include "ftm_s32k_common_input.tlc"
+    %endif
+
+    %with sdk_params.ftm1ch1.pin_info.user_config
+        /* Enable clock for %<port> */
+        PCC_SetClockMode (PCC, %<clock>, true);
+        /* Pin is configured for FTM function */
+        PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+    %endwith
+    %with sdk_params.ftm2ch0.pin_info.user_config
+        /* Enable clock for %<port> */
+        PCC_SetClockMode (PCC, %<clock>, true);
+        /* Pin is configured for FTM function */
+        PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+    %endwith
+    %with sdk_params.ftm2ch1.pin_info.user_config
+        /* Enable clock for %<port> */
+        PCC_SetClockMode (PCC, %<clock>, true);
+        /* Pin is configured for FTM function */
+        PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+    %endwith
+
+    %with sdk_params
+        %<LibAddToCommonIncludes("ftm%<module>_ch%<channel>_hall_sensor_isr.h")>
+
+        /* FTM%<module>: channel %<channel> counter reset */
+        FTM_RMW_CnSCV_REG(FTM%<module>, %<channel>, FTM_CnSC_ICRST_MASK , FTM_CnSC_ICRST(%<counter_reset>));
+
+        /* FTM%<module>: channel %<channel> ISR enable */
+        FTM_DRV_EnableChnInt(FTM%<module>, %<channel>);
+
+        /* Select as the input of FTM2: XOR of FTM2_CH0, FTM2_CH1 and FTM1_CH1 */
+        SIM->FTMOPT1 |= SIM_FTMOPT1_FTM2CH1SEL(1);
+
+        %if FEVAL("strcmp", "%<target_family>", "s32k14")
+            %if channel_num % 2 == 0
+                %assign ch_nr = channel_num
+            %else
+                %assign ch_nr = channel_num - 1
+            %endif
+
+            %assign irq_name = "FTM%<module>_Ch%<ch_nr>_Ch%<ch_nr + 1>_IRQn"
+            %assign irq_handler = "FTM%<module>_Ch%<ch_nr>_%<ch_nr + 1>_IRQHandler"
+        %else
+            %assign irq_name = "FTM%<module>_Ch0_7_IRQn"
+            %assign irq_handler = "FTM%<module>_Ch_IRQHandler"
+        %endif
+
+        /* FTM%<module>: ISR level */
+        INT_SYS_SetPriority(%<irq_name>, %<isrlevel>);
+        /* FTM%<module>: enable ISR */
+        INT_SYS_EnableIRQ(%<irq_name>);
+        /* FTM%<module>:installing ISR Handler */
+        INT_SYS_InstallHandler(%<irq_name>, %<irq_handler>, (isr_t *)0);
+        /* Adding interrupt handler in the vector from ftm_chn_irq.c file */
+        FTM_CHR_DRV_InstallCallback(%<module>, %<channel>, FTM%<module>_Ch%<channel>_Hall_Sensor_isr);
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler body file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %openfile isr_c = "ftm%<module>_ch%<channel>_hall_sensor_isr.c"
+            #include "ftm%<module>_ch%<channel>_hall_sensor_isr.h"
+            #include "ftm_ic_driver.h"
+            #include "ftm_hw_access.h"
+            #include "ftm_common.h"
+
+            void FTM%<module>_Ch%<channel>_Hall_Sensor_isr(void)
+            {
+                %<LibBlockOutputSignal(1,"","",0)> = FTM_DRV_GetChnCountVal(FTM%<module>, %<channel>);
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+            }
+        %closefile isr_c
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler declaration file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %openfile isr_h = "ftm%<module>_ch%<channel>_hall_sensor_isr.h"
+            #include "%<CompiledModel.Name + ".h">"
+            #include "%<CompiledModel.Name + "_private.h">"
+            
+            #ifndef FTM%<module>_CH%<channel>_ISR_H
+            #define FTM%<module>_CH%<channel>_ISR_H
+
+            void FTM%<module>_Ch%<channel>_Hall_Sensor_isr(void);
+
+            #endif
+        %closefile isr_h
+    %endwith
+
+    %endif
+%endfunction

@@ -1,0 +1,147 @@
+%% Copyright (c) 2016 NXP
+
+%implements AMCLIB_BemfObsrvDQ_SF_FLT "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+    %assign ::cntInit = %<::cntInit> + 1
+
+    %assign fltIGain = CAST("Real32", Parameter[0].Value[0])
+    %assign fltUGain = CAST("Real32", Parameter[1].Value[0])
+    %assign fltWIGain = CAST("Real32", Parameter[2].Value[0])
+    %assign fltEGain = CAST("Real32", Parameter[3].Value[0])
+    %assign fltCC1sc_D = CAST("Real32", Parameter[4].Value[0])
+    %assign fltCC1sc_Q = CAST("Real32", Parameter[5].Value[0])
+    %assign fltCC2sc_D = CAST("Real32", Parameter[6].Value[0])
+    %assign fltCC2sc_Q = CAST("Real32", Parameter[7].Value[0])
+    %assign fltUpperLimit_D = CAST("Real32", Parameter[8].Value[0])
+    %assign fltUpperLimit_Q = CAST("Real32", Parameter[9].Value[0])
+    %assign fltLowerLimit_D = CAST("Real32", Parameter[10].Value[0])
+    %assign fltLowerLimit_Q = CAST("Real32", Parameter[11].Value[0])
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+    AMCLIB_BEMF_OBSRV_DQ_T_FLT BemfObsrv_%<::cntInit>;
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+    AMCLIB_BemfObsrvDQInit_FLT(&BemfObsrv_%<::cntInit>);
+
+    BemfObsrv_%<::cntInit>.pParamD.fltCC1sc = %<fltCC1sc_D>;
+    BemfObsrv_%<::cntInit>.pParamD.fltCC2sc = %<fltCC2sc_D>;
+    BemfObsrv_%<::cntInit>.pParamD.fltUpperLimit = %<fltUpperLimit_D>;
+    BemfObsrv_%<::cntInit>.pParamD.fltLowerLimit = %<fltLowerLimit_D>;
+    BemfObsrv_%<::cntInit>.pParamQ.fltCC1sc = %<fltCC1sc_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.fltCC2sc = %<fltCC2sc_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.fltUpperLimit = %<fltUpperLimit_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.fltLowerLimit = %<fltLowerLimit_Q>;
+    BemfObsrv_%<::cntInit>.fltIGain = %<fltIGain>;
+    BemfObsrv_%<::cntInit>.fltUGain = %<fltUGain>;
+    BemfObsrv_%<::cntInit>.fltWIGain = %<fltWIGain>;
+    BemfObsrv_%<::cntInit>.fltEGain = %<fltEGain>;
+
+%openfile tmpParamExternBuf
+    extern AMCLIB_BEMF_OBSRV_DQ_T_FLT BemfObsrv_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cnt = %<::cnt> + 1
+
+    %assign fltIAB_A = LibBlockInputSignal(0, "", "", 0)
+    %assign fltIAB_B = LibBlockInputSignal(1, "", "", 0)
+    %assign fltUAB_A = LibBlockInputSignal(2, "", "", 0)
+    %assign fltUAB_B = LibBlockInputSignal(3, "", "", 0)
+    %assign fltVelocity = LibBlockInputSignal(4, "", "", 0)
+    %assign fltPhase = LibBlockInputSignal(5, "", "", 0)
+    %assign fltAcc_D = LibBlockInputSignal(6, "", "", 0)
+    %assign fltInerrK1_D = LibBlockInputSignal(7, "", "", 0)
+    %assign fltAcc_Q = LibBlockInputSignal(8, "", "", 0)
+    %assign fltInerrK1_Q = LibBlockInputSignal(9, "", "", 0)
+    %assign fltIObsrvIn_1_D = LibBlockInputSignal(10, "", "", 0)
+    %assign fltIObsrvIn_1_Q = LibBlockInputSignal(11, "", "", 0)
+    %assign fltIObsrv_D = LibBlockInputSignal(12, "", "", 0)
+    %assign fltIObsrv_Q = LibBlockInputSignal(13, "", "", 0)
+    %assign fltpOutPhaseErr = LibBlockOutputSignal(0, "", "", 0)
+    %assign fltpOutEObsrv_D = LibBlockOutputSignal(1, "", "", 0)
+    %assign fltpOutEObsrv_Q = LibBlockOutputSignal(2, "", "", 0)
+    %assign fltpOutAcc_D = LibBlockOutputSignal(3, "", "", 0)
+    %assign fltpOutInErrK1_D = LibBlockOutputSignal(4, "", "", 0)
+    %assign fltpOutAcc_Q = LibBlockOutputSignal(5, "", "", 0)
+    %assign fltpOutInErrK1_Q = LibBlockOutputSignal(6, "", "", 0)
+    %assign fltpOutIObsrvIn_1_D = LibBlockOutputSignal(7, "", "", 0)
+    %assign fltpOutIObsrvIn_1_Q = LibBlockOutputSignal(8, "", "", 0)
+    %assign fltpOutIObsrv_D = LibBlockOutputSignal(9, "", "", 0)
+    %assign fltpOutIObsrv_Q = LibBlockOutputSignal(10, "", "", 0)   
+
+    {
+        SWLIBS_2Syst_FLT mcIab;
+        SWLIBS_2Syst_FLT mcUab;
+        tFloat fltVelocity = %<fltVelocity>;
+        tFloat fltPhase = %<fltPhase>;
+
+        mcIab.fltArg1 = %<fltIAB_A>;
+        mcIab.fltArg2 = %<fltIAB_B>;
+        mcUab.fltArg1 = %<fltUAB_A>;
+        mcUab.fltArg2 = %<fltUAB_B>;
+
+        BemfObsrv_%<::cnt>.pParamD.fltAcc = %<fltAcc_D>;
+        BemfObsrv_%<::cnt>.pParamD.fltInErrK1 = %<fltInerrK1_D>;
+        BemfObsrv_%<::cnt>.pParamQ.fltAcc = %<fltAcc_Q>;
+        BemfObsrv_%<::cnt>.pParamQ.fltInErrK1 = %<fltInerrK1_Q>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1.fltArg1 = %<fltIObsrvIn_1_D>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1.fltArg2 = %<fltIObsrvIn_1_Q>;
+        BemfObsrv_%<::cnt>.pIObsrv.fltArg1 = %<fltIObsrv_D>;
+        BemfObsrv_%<::cnt>.pIObsrv.fltArg2 = %<fltIObsrv_Q>;
+        
+        %<fltpOutPhaseErr> = AMCLIB_BemfObsrvDQ_FLT(&mcIab, &mcUab, fltVelocity, fltPhase, &BemfObsrv_%<::cnt>);
+
+        %<fltpOutEObsrv_D> = BemfObsrv_%<::cnt>.pEObsrv.fltArg1;
+        %<fltpOutEObsrv_Q> = BemfObsrv_%<::cnt>.pEObsrv.fltArg2;
+        %<fltpOutAcc_D> = BemfObsrv_%<::cnt>.pParamD.fltAcc;
+        %<fltpOutInErrK1_D> = BemfObsrv_%<::cnt>.pParamD.fltInErrK1;
+        %<fltpOutAcc_Q> = BemfObsrv_%<::cnt>.pParamQ.fltAcc;
+        %<fltpOutInErrK1_Q> = BemfObsrv_%<::cnt>.pParamQ.fltInErrK1;
+        %<fltpOutIObsrvIn_1_D> = BemfObsrv_%<::cnt>.pIObsrvIn_1.fltArg1;
+        %<fltpOutIObsrvIn_1_Q> = BemfObsrv_%<::cnt>.pIObsrvIn_1.fltArg2;
+        %<fltpOutIObsrv_D> = BemfObsrv_%<::cnt>.pIObsrv.fltArg1;
+        %<fltpOutIObsrv_Q> = BemfObsrv_%<::cnt>.pIObsrv.fltArg2;
+    }
+
+%endfunction

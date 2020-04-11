@@ -1,0 +1,109 @@
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+%assign input_struct = FEVAL("mbd_s32k_ftm_input_info")
+%foreach i = input_struct.instances_number
+    %if input_struct.ftm%<i>_input_number > 0
+
+        %assign file_name = "ftm%<i>_input_params_config"
+        %<LibAddToCommonIncludes("%<file_name>.h")>
+
+        %openfile setting_c = "%<file_name>.c"
+
+        %assign input_ch_number = input_struct.ftm%<i>_input_number
+        #include "%<file_name>.h"
+
+        ftm_input_ch_param_t ftm%<i>input_ch_param[%<input_ch_number>] =
+        {
+            %foreach j=input_ch_number
+                %assign input_structure = input_struct.ftm%<i>_input[j]
+                %if FEVAL("strcmp", "%<input_structure.mode>", "FTM_MODE_INPUT_CAPTURE")
+                {
+                     %<input_structure.channel>U, /* Channel id */
+                     FTM_EDGE_DETECT, /* Input capture operation mode */
+                     %<input_structure.edgeMode>, /* Edge alignment mode */
+                     FTM_NO_MEASUREMENT, /* Signal measurement operation type */
+                     %<input_structure.filter_value>, /* Filter value */
+                     %<input_structure.filter_en>, /* Filter state (enabled/disabled) */
+                     false, /* Continuous measurement state */
+                     NULL, /* Vector of callbacks  parameters for channels events */
+                     NULL /* Vector of callbacks for channels events */
+                },
+                %elseif FEVAL("strcmp", "%<input_structure.mode>", "FTM_MODE_DUAL_CAPTURE")
+                {
+                     %<input_structure.channel>U, /* Channel id */
+                     FTM_SIGNAL_MEASUREMENT, /* Input capture operation mode */
+                     FTM_NO_PIN_CONTROL,  /* Edge alignment mode */
+                     %<input_structure.edgeMode>, /* Signal measurement operation type */
+                     %<input_structure.filter_value>, /* Filter value */
+                     %<input_structure.filter_en>, /* Filter state (enabled/disabled) */
+                     %<input_structure.c_mode>, /* Continuous measurement state */
+                     NULL, /* Vector of callbacks  parameters for channels events */
+                     NULL /* Vector of callbacks for channels events */
+                },
+                %endif
+            %assign prescaler=input_struct.ftm%<i>_input[j].prescaler
+            %assign module=input_struct.ftm%<i>_input[j].module
+            %assign periph_clock=input_struct.ftm%<i>_input[j].periph_clock
+            %assign clock_source=input_struct.ftm%<i>_input[j].clock_source
+            %endforeach
+        };
+
+        /* Input capture configuration for FTM%<i> */
+         ftm_input_param_t flexTimer_ic%<i>_InputCaptureConfig =
+        {
+             %<input_ch_number>, /* Number of channels */
+             65535U, /* Max count value */
+             ftm%<i>input_ch_param /* Channels configuration */
+        };
+
+        /* Global configuration of flexTimer_ic1 */
+        ftm_user_config_t  flexTimer_ic%<i>_InitConfig =
+        {
+            {
+                true,   /* Software trigger state */
+                false,  /* Hardware trigger 1 state */
+                false,  /* Hardware trigger 2 state */
+                false,  /* Hardware trigger 3 state */
+                false, /* Max loading point state */
+                false, /* Min loading point state */
+                FTM_SYSTEM_CLOCK, /* Update mode for INVCTRL register */
+                FTM_SYSTEM_CLOCK, /* Update mode for SWOCTRL register */
+                FTM_SYSTEM_CLOCK, /* Update mode for OUTMASK register */
+                FTM_SYSTEM_CLOCK, /* Update mode for CNTIN register */
+                false, /* Automatic clear of the trigger*/
+                FTM_UPDATE_NOW, /* Synchronization point */
+            },
+             FTM_MODE_INPUT_CAPTURE, /* Mode of operation for FTM */
+             %<prescaler>, /* FTM clock prescaler */
+             FTM_CLOCK_SOURCE_SYSTEMCLK,   /* FTM clock source */
+             FTM_BDM_MODE_00, /* FTM debug mode */
+             false, /* Interrupt state */
+             false /* Initialization trigger */
+        };
+
+        %closefile setting_c
+
+        %openfile setting_h = "%<file_name>.h"
+                #include "%<CompiledModel.Name + ".h">"
+                #include "%<CompiledModel.Name + "_private.h">"
+
+                extern ftm_input_ch_param_t ftm%<i>input_ch_param[%<input_ch_number>];
+                extern ftm_input_param_t flexTimer_ic%<i>_InputCaptureConfig;
+                extern ftm_user_config_t  flexTimer_ic%<i>_InitConfig;
+
+        %closefile setting_h
+
+    %% PWM init clocks
+     /* Set FTM_%<module> clock source */
+    PCC_SetPeripheralClockControl (PCC, %<periph_clock>, true, %<clock_source>, 0, 0);
+    /* Enable clock for FTM_%<module> */
+    PCC_SetClockMode (PCC,  %<periph_clock>, true);
+
+    /* Initialize FTM instances, PWM and Input capture */
+    static ftm_state_t ftm%<i>StateStruct;
+    FTM_DRV_Init(%<i>, &flexTimer_ic%<i>_InitConfig, &ftm%<i>StateStruct);
+    /* Setup input capture for FMT%<i>*/
+    FTM_DRV_InitInputCapture(%<i>, &flexTimer_ic%<i>_InputCaptureConfig);
+
+    %endif
+%endforeach

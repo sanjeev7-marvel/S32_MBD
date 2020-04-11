@@ -1,0 +1,75 @@
+
+%implements GDFLIB_FilterMA_SF_FLT "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GDFLIB_INCLUDED")
+      %assign ::GDFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gdflib.h\"" + "\n")>
+   %endif 
+   
+   %assign ::cntMA = 0
+   %assign ::cntInitMA = 0
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   %assign ::cntInitMA = %<::cntInitMA> + 1
+	 
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "FIRparams")
+%openfile tmpParamBuf 
+   %if !EXISTS("GDFLIB_INCLUDED_TO_FIRPARAM")
+      %assign ::GDFLIB_INCLUDED_TO_FIRPARAM = 1
+      #include "gdflib.h"
+   %endif 
+    GDFLIB_FILTER_MA_T_FLT trMyFilterMA_%<::cntInitMA> = GDFLIB_FILTER_MA_DEFAULT_FLT ;
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+    %assign fltLambda   = CAST("Real32",Parameter[0].Value[0])
+	
+	trMyFilterMA_%<::cntInitMA>.fltLambda = %<fltLambda>;  
+	 
+    GDFLIB_FilterMAInit_FLT(&trMyFilterMA_%<::cntInitMA>);
+   
+%openfile tmpParamExternBuf 
+    extern GDFLIB_FILTER_MA_T_FLT trMyFilterMA_%<::cntInitMA>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>   
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cntMA = %<::cntMA> + 1
+   
+    %assign fltIn = LibBlockInputSignal(0, "", "", 0)
+    %assign fltInAcc = LibBlockInputSignal(1, "", "", 0)
+    %assign fltOut = LibBlockOutputSignal(0, "", "", 0)
+    %assign fltOutAcc = LibBlockOutputSignal(1, "", "", 0)
+
+	trMyFilterMA_%<::cntMA>.fltAcc = %<fltInAcc>;    
+   
+    %<fltOut> = GDFLIB_FilterMA_FLT(%<fltIn>, &trMyFilterMA_%<::cntMA>);
+
+	%<fltOutAcc> = trMyFilterMA_%<::cntMA>.fltAcc;
+
+%endfunction

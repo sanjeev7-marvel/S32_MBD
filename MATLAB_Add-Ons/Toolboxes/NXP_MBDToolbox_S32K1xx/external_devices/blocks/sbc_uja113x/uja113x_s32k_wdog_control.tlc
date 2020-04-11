@@ -1,0 +1,77 @@
+%implements uja113x_s32k_wdog_control "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja113x.h")>
+    %<LibAddToCommonIncludes("sbc_uja113x_map.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_uja113x_wdog_sdk_param", blockPath)
+    %with params
+    {
+        /* Variable for storing current Mode. */
+        /*Get SBC current mode*/
+        uja113x_mc_mc_t currentMode = MC_SLEEP;
+        uint8_t txData[2U];
+        uint8_t rxData[2U];
+        uja113x_wtdc_cfg_t wtdcCfg;
+
+        %if EXISTS(reset)
+            txData[0U] = WTDC_ADDRESS;
+            UJA113X_SbcTransfer(0, true, txData, rxData, 2U);
+            wtdcCfg.wtdModeCtrl = (uja113x_wtdc_wmc_t)(rxData[1] & UJA113X_WDC_WMC_MASK);
+            wtdcCfg.nomWtdPeriod = (uja113x_wtdc_nwp_t)(rxData[1] & UJA113X_WDC_NWP_MASK);
+            UJA113X_SetWatchdog(0, &wtdcCfg);
+        %endif
+        %if EXISTS(mode) ||  EXISTS(per)
+            txData[0U] = MC_ADDRESS;
+            UJA113X_SbcTransfer(0, true, txData, rxData, 2U);
+            currentMode = rxData[1U];
+            /* Set device to Standby mode*/
+            UJA113X_SetMode(0, MC_STANDBY);
+            %if EXISTS(mode) &&  EXISTS(per)
+                wtdcCfg.wtdModeCtrl = %<mode>;
+                wtdCfg.nomWtdPeriod = %<per>;
+                UJA113X_SetWatchdog(0, &wtdcCfg);
+            %else
+                txData[0U] = WTDC_ADDRESS;
+                UJA113X_SbcTransfer(0, true, txData, rxData, 2U);
+                %if EXISTS(mode)
+                    wtdcCfg.wtdModeCtrl = %<mode>;
+                    wtdcCfg.nomWtdPeriod = (uja113x_wtdc_nwp_t)(rxData[1] & UJA113X_WDC_NWP_MASK);
+                    UJA113X_SetWatchdog(0, &wtdcCfg);
+                %endif
+                %if EXISTS(per)
+                    wtog.wtdModeCtrl =  (uja113x_wtdc_wmc_t)(rxData[1] & UJA113X_WDC_WMC_MASK);
+                    wtog.nomWtdPeriod = %<per>;
+                    UJA113X_SetWatchdog(0, &wtdcCfg);
+                %endif
+                 UJA113X_SetMode(0, currentMode);
+            %endif
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

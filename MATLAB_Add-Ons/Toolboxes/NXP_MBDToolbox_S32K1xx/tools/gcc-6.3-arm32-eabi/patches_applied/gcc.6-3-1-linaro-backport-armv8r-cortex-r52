@@ -1,0 +1,200 @@
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm-arches.def gcc-6.3.1-linaro/gcc/config/arm/arm-arches.def
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm-arches.def	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm-arches.def	2017-07-20 13:46:24.913404660 +0300
+@@ -75,5 +75,7 @@
+ 	  ARM_FSET_MAKE (FL_CO_PROC | FL_FOR_ARCH8M_MAIN, FL2_CMSE))
+ ARM_ARCH("armv8-m.main+dsp", cortexm33, 8M_MAIN,
+ 	  ARM_FSET_MAKE (FL_CO_PROC | FL_ARCH7EM | FL_FOR_ARCH8M_MAIN, FL2_CMSE))
++ARM_ARCH("armv8-r", cortexr52, 8R,
++	  ARM_FSET_MAKE_CPU1 (FL_CO_PROC | FL_CRC32 | FL_FOR_ARCH8R))
+ ARM_ARCH("iwmmxt",  iwmmxt,     5TE,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_STRONG | FL_FOR_ARCH5TE | FL_XSCALE | FL_IWMMXT))
+ ARM_ARCH("iwmmxt2", iwmmxt2,    5TE,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_STRONG | FL_FOR_ARCH5TE | FL_XSCALE | FL_IWMMXT | FL_IWMMXT2))
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm-cores.def gcc-6.3.1-linaro/gcc/config/arm/arm-cores.def
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm-cores.def	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm-cores.def	2017-07-20 15:13:39.925263754 +0300
+@@ -169,6 +169,7 @@
+ ARM_CORE("cortex-m23",	cortexm23, cortexm23,	8M_BASE, ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_FOR_ARCH8M_BASE), v6m)
+ ARM_CORE("cortex-a32",	cortexa32, cortexa53,	8A,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_CRC32 | FL_FOR_ARCH8A), cortex_a35)
+ ARM_CORE("cortex-m33",	cortexm33, cortexm33,	8M_MAIN, ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_ARCH7EM | FL_FOR_ARCH8M_MAIN), v7m)
++ARM_CORE("cortex-r52",	cortexr52, cortexr52,	8R, 	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_FOR_ARCH8R), cortex)
+ ARM_CORE("cortex-a35",	cortexa35, cortexa53,	8A,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_CRC32 | FL_FOR_ARCH8A), cortex_a35)
+ ARM_CORE("cortex-a53",	cortexa53, cortexa53,	8A,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_CRC32 | FL_FOR_ARCH8A), cortex_a53)
+ ARM_CORE("cortex-a57",	cortexa57, cortexa57,	8A,	ARM_FSET_MAKE_CPU1 (FL_LDSCHED | FL_CRC32 | FL_FOR_ARCH8A), cortex_a57)
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm-flags.h gcc-6.3.1-linaro/gcc/config/arm/arm-flags.h
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm-flags.h	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm-flags.h	2017-07-20 13:36:18.985404660 +0300
+@@ -105,6 +105,7 @@
+ #define FL2_FOR_ARCH8_2A	(FL2_FOR_ARCH8_1A | FL2_ARCH8_2)
+ #define FL_FOR_ARCH8M_BASE	(FL_FOR_ARCH6M | FL_ARCH8 | FL_THUMB_DIV)
+ #define FL_FOR_ARCH8M_MAIN	(FL_FOR_ARCH7M | FL_ARCH8)
++#define FL_FOR_ARCH8R		(FL_FOR_ARCH8A)
+ 
+ /* There are too many feature bits to fit in a single word so the set of cpu and
+    fpu capabilities is a structure.  A feature set is created and manipulated
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm.h gcc-6.3.1-linaro/gcc/config/arm/arm.h
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm.h	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm.h	2017-07-20 12:54:34.793164586 +0300
+@@ -423,7 +423,8 @@
+   BASE_ARCH_7EM = 7,
+   BASE_ARCH_8A = 8,
+   BASE_ARCH_8M_BASE = 8,
+-  BASE_ARCH_8M_MAIN = 8
++  BASE_ARCH_8M_MAIN = 8,
++  BASE_ARCH_8R = 8
+ };
+ 
+ /* The major revision number of the ARM Architecture implemented by the target.  */
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm-tables.opt gcc-6.3.1-linaro/gcc/config/arm/arm-tables.opt
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm-tables.opt	2017-06-08 21:11:35.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm-tables.opt	2017-07-20 15:14:54.392011754 +0300
+@@ -316,6 +316,9 @@
+ Enum(processor_type) String(cortex-m33) Value(cortexm33)
+ 
+ EnumValue
++Enum(processor_type) String(cortex-r52) Value(cortexr52)
++
++EnumValue
+ Enum(processor_type) String(cortex-a35) Value(cortexa35)
+ 
+ EnumValue
+@@ -458,10 +461,13 @@
+ Enum(arm_arch) String(armv8-m.main+dsp) Value(33)
+ 
+ EnumValue
+-Enum(arm_arch) String(iwmmxt) Value(34)
++Enum(arm_arch) String(armv8-r) Value(34)
++
++EnumValue
++Enum(arm_arch) String(iwmmxt) Value(35)
+ 
+ EnumValue
+-Enum(arm_arch) String(iwmmxt2) Value(35)
++Enum(arm_arch) String(iwmmxt2) Value(36)
+ 
+ Enum
+ Name(arm_fpu) Type(int)
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/arm-tune.md gcc-6.3.1-linaro/gcc/config/arm/arm-tune.md
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/arm-tune.md	2017-06-08 21:11:35.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/arm-tune.md	2017-07-20 15:14:53.452481754 +0300
+@@ -33,9 +33,9 @@
+ 	cortexr8,cortexm7,cortexm4,
+ 	cortexm3,marvell_pj4,cortexa15cortexa7,
+ 	cortexa17cortexa7,cortexm23,cortexa32,
+-	cortexm33,cortexa35,cortexa53,
+-	cortexa57,cortexa72,cortexa73,
+-	exynosm1,qdf24xx,xgene1,
+-	cortexa57cortexa53,cortexa72cortexa53,cortexa73cortexa35,
+-	cortexa73cortexa53"
++	cortexm33,cortexr52,cortexa35,
++	cortexa53,cortexa57,cortexa72,
++	cortexa73,exynosm1,qdf24xx,
++	xgene1,cortexa57cortexa53,cortexa72cortexa53,
++	cortexa73cortexa35,cortexa73cortexa53"
+ 	(const (symbol_ref "((enum attr_tune) arm_tune)")))
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/bpabi.h gcc-6.3.1-linaro/gcc/config/arm/bpabi.h
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/bpabi.h	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/bpabi.h	2017-07-20 13:06:26.150790239 +0300
+@@ -98,6 +98,7 @@
+    |march=armv8-m.base|mcpu=cortex-m23			\
+    |march=armv8-m.main					\
+    |march=armv8-m.main+dsp|mcpu=cortex-m33		\
++   |march=armv8-r					\
+    :%{!r:--be8}}}"
+ #else
+ #define BE8_LINK_SPEC \
+@@ -137,6 +138,7 @@
+    |march=armv8-m.base|mcpu=cortex-m23			\
+    |march=armv8-m.main					\
+    |march=armv8-m.main+dsp|mcpu=cortex-m33		\
++   |march=armv8-r					\
+    :%{!r:--be8}}}"
+ #endif
+ 
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/config/arm/driver-arm.c gcc-6.3.1-linaro/gcc/config/arm/driver-arm.c
+--- gcc-6.3.1-linaro-orig/gcc/config/arm/driver-arm.c	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/config/arm/driver-arm.c	2017-07-20 13:12:58.326790239 +0300
+@@ -54,6 +54,7 @@
+     {"0xd09", "armv8-a+crc", "cortex-a73"},
+     {"0xc14", "armv7-r", "cortex-r4"},
+     {"0xc15", "armv7-r", "cortex-r5"},
++    {"0xd13", "armv8-r+crc", "cortex-r52"},
+     {"0xc20", "armv6-m", "cortex-m0"},
+     {"0xc21", "armv6-m", "cortex-m1"},
+     {"0xc23", "armv7-m", "cortex-m3"},
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/doc/invoke.texi gcc-6.3.1-linaro/gcc/doc/invoke.texi
+--- gcc-6.3.1-linaro-orig/gcc/doc/invoke.texi	2017-06-08 21:11:24.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/doc/invoke.texi	2017-07-20 13:07:22.930790239 +0300
+@@ -13999,7 +13999,7 @@
+ @samp{armv7}, @samp{armv7-a}, @samp{armv7-m}, @samp{armv7-r}, @samp{armv7e-m},
+ @samp{armv7ve}, @samp{armv8-a}, @samp{armv8-a+crc}, @samp{armv8.1-a},
+ @samp{armv8.1-a+crc}, @samp{armv8-m.base}, @samp{armv8-m.main},
+-@samp{armv8-m.main+dsp}, @samp{iwmmxt}, @samp{iwmmxt2}.
++@samp{armv8-m.main+dsp}, @samp{armv8-r}, @samp{iwmmxt}, @samp{iwmmxt2}.
+ 
+ Architecture revisions older than @samp{armv4t} are deprecated.
+ 
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/gcc/testsuite/lib/target-supports.exp gcc-6.3.1-linaro/gcc/testsuite/lib/target-supports.exp
+--- gcc-6.3.1-linaro-orig/gcc/testsuite/lib/target-supports.exp	2017-06-08 21:11:29.000000000 +0300
++++ gcc-6.3.1-linaro/gcc/testsuite/lib/target-supports.exp	2017-07-20 12:57:13.785628587 +0300
+@@ -3375,7 +3375,8 @@
+ 	v8_1a "-march=armv8.1a" __ARM_ARCH_8A__
+ 	v8_2a "-march=armv8.2a" __ARM_ARCH_8A__
+ 	v8m_base "-march=armv8-m.base -mthumb -mfloat-abi=soft" __ARM_ARCH_8M_BASE__
+-	v8m_main "-march=armv8-m.main -mthumb" __ARM_ARCH_8M_MAIN__ } {
++	v8m_main "-march=armv8-m.main -mthumb" __ARM_ARCH_8M_MAIN__
++	v8r "-march=armv8-r" __ARM_ARCH_8R__ } {
+     eval [string map [list FUNC $armfunc FLAG $armflag DEF $armdef ] {
+ 	proc check_effective_target_arm_arch_FUNC_ok { } {
+ 	    if { [ string match "*-marm*" "FLAG" ] &&
+diff -ruN '--exclude=.git' gcc-6.3.1-linaro-orig/libgcc/config/arm/lib1funcs.S gcc-6.3.1-linaro/libgcc/config/arm/lib1funcs.S
+--- gcc-6.3.1-linaro-orig/libgcc/config/arm/lib1funcs.S	2017-06-08 21:11:29.000000000 +0300
++++ gcc-6.3.1-linaro/libgcc/config/arm/lib1funcs.S	2017-07-20 12:58:15.134938586 +0300
+@@ -109,7 +109,7 @@
+ #endif
+ 
+ #if defined(__ARM_ARCH_8A__) || defined(__ARM_ARCH_8M_BASE__) \
+-	|| defined(__ARM_ARCH_8M_MAIN__)
++	|| defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8R__)
+ # define __ARM_ARCH__ 8
+ #endif
+ 
+--- gcc-6.3.1-linaro/gcc/config/arm/t-rmprofile-orig	2017-07-24 10:10:22.963872633 -0500
++++ gcc-6.3.1-linaro/gcc/config/arm/t-rmprofile	2017-07-24 10:37:23.803776796 -0500
+@@ -43,8 +43,8 @@
+ MULTILIB_OPTIONS       += mthumb
+ MULTILIB_DIRNAMES      += thumb
+ 
+-MULTILIB_OPTIONS       += march=armv6s-m/march=armv7-m/march=armv7e-m/march=armv7/march=armv8-m.base/march=armv8-m.main
+-MULTILIB_DIRNAMES      += v6-m v7-m v7e-m v7-ar v8-m.base v8-m.main
++MULTILIB_OPTIONS       += march=armv6s-m/march=armv7-m/march=armv7e-m/march=armv7/march=armv8-m.base/march=armv8-m.main/march=armv8-r
++MULTILIB_DIRNAMES      += v6-m v7-m v7e-m v7-ar v8-m.base v8-m.main v8-r
+ 
+ MULTILIB_OPTIONS       += mfpu=vfpv3-d16/mfpu=fpv4-sp-d16/mfpu=fpv5-sp-d16/mfpu=fpv5-d16
+ MULTILIB_DIRNAMES      += fpv3 fpv4-sp fpv5-sp fpv5
+@@ -89,6 +89,18 @@
+ MULTILIB_REQUIRED      += mthumb/march=armv7/mfpu=vfpv3-d16/mfloat-abi=softfp
+ MULTILIB_REQUIRED      += mthumb/march=armv7/mfpu=vfpv3-d16/mfloat-abi=hard
+ 
++# ARMv8-R
++MULTILIB_REQUIRED      += march=armv8-r
++MULTILIB_REQUIRED      += march=armv8-r/mfpu=vfpv5-d16/mfloat-abi=softfp
++MULTILIB_REQUIRED      += march=armv8-r/mfpu=vfpv5-d16/mfloat-abi=hard
++MULTILIB_REQUIRED      += march=armv8-r/mfpu=fpv5-sp-d16/mfloat-abi=softfp
++MULTILIB_REQUIRED      += march=armv8-r/mfpu=fpv5-sp-d16/mfloat-abi=hard
++MULTILIB_REQUIRED      += mthumb/march=armv8-r
++MULTILIB_REQUIRED      += mthumb/march=armv8-r/mfpu=vfpv5-d16/mfloat-abi=softfp
++MULTILIB_REQUIRED      += mthumb/march=armv8-r/mfpu=vfpv5-d16/mfloat-abi=hard
++MULTILIB_REQUIRED      += mthumb/march=armv8-r/mfpu=fpv5-sp-d16/mfloat-abi=softfp
++MULTILIB_REQUIRED      += mthumb/march=armv8-r/mfpu=fpv5-sp-d16/mfloat-abi=hard
++
+ 
+ # Matches
+ 
+@@ -109,6 +121,7 @@
+ MULTILIB_MATCHES       += march?armv7=mcpu?cortex-r5
+ MULTILIB_MATCHES       += march?armv7=mcpu?cortex-r7
+ MULTILIB_MATCHES       += march?armv7=mcpu?cortex-r8
++MULTILIB_MATCHES       += march?armv8-r=mcpu?cortex-r52
+ MULTILIB_MATCHES       += march?armv7=mcpu?marvell-pj4
+ MULTILIB_MATCHES       += march?armv7=mcpu?generic-armv7-a
+ MULTILIB_MATCHES       += march?armv7=mcpu?cortex-a8

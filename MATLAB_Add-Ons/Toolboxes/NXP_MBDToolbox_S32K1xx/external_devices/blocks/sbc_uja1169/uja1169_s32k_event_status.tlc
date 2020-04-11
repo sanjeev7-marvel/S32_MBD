@@ -1,0 +1,93 @@
+%implements uja1169_s32k_event_status "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja1169_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_uja1169_event_status_sdk_param", blockPath)
+    %with params
+    {
+        uint8_t readData = 0U;
+
+        SBC_DataTransfer(%<reg>, NULL, &readData);
+
+        %switch struct
+            %%Overtemperature
+            %case "otw"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sys_evnt_stat_otw_t)(readData & SBC_UJA_SYS_EVNT_STAT_OTW_MASK);
+            %break
+            %%CAN wake-up: 1 - CAN wake-up event detected while the transceiver is in CAN Offline Mode, 0 - No CAN wake-up event detected
+            %case "cw"
+            %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_trans_evnt_stat_cw_t)(readData & SBC_UJA_TRANS_EVNT_STAT_CW_MASK);
+            %break
+            %% CAN partial networking frame error: 0 - no error detected; 1- error detected
+            %case "pnfde"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_trans_evnt_stat_pnfde_t)(readData & SBC_UJA_TRANS_EVNT_STAT_PNFDE_MASK);
+            %break
+            %%CAN failure
+            %case "cf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_trans_evnt_stat_cf_t)(readData & SBC_UJA_TRANS_EVNT_STAT_CF_MASK);
+            %break
+            %% CAN bus-silence
+            %case "cbs"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_trans_evnt_stat_cbs_t)(readData & SBC_UJA_TRANS_EVNT_STAT_CBS_MASK);
+            %break
+            %%  V2/VEXT overvoltage : 0->no V2/VEXT overvoltage event captured/1->  V2/VEXT overvoltage event captured
+            %case "v2o"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sup_evnt_stat_v2o_t)(readData & SBC_UJA_SUP_EVNT_STAT_V2O_MASK);
+            %break
+            %% V2/VEXT undervoltage
+            %case "v2u"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sup_evnt_stat_v2u_t)(readData & SBC_UJA_SUP_EVNT_STAT_V2U_MASK);
+            %break
+            %% V1 undervoltage
+            %case "v1u"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sup_evnt_stat_v1u_t)(readData & SBC_UJA_SUP_EVNT_STAT_V1U_MASK);
+            %break
+            %% SPI failure detection
+            %case "spif"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sys_evnt_stat_spif_t)(readData & SBC_UJA_SYS_EVNT_SPIFE_MASK);
+            %break
+            %% Watchdog failure
+            %case "wdf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_sys_evnt_stat_wdf_t)(readData & SBC_UJA_SYS_EVNT_STAT_WDF_MASK);
+            %break
+            %% Wake pin rising edge
+            %case "wpr"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_wake_evnt_stat_wpr_t)(readData & SBC_UJA_WAKE_EVNT_STAT_WPR_MASK);
+            %break
+            %% Wake pin falling edge
+            %case "wpf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_wake_evnt_stat_wpf_t)(readData & SBC_UJA_WAKE_EVNT_STAT_WPF_MASK);
+            %break
+            %% Limp-home
+            %case "lhc"
+                %<LibBlockOutputSignal(0, "", "", 0)> = (sbc_fail_safe_lhc_t)(readData & SBC_UJA_FAIL_SAFE_LHC_MASK);
+        %endswitch
+    }
+    %endwith
+
+    %endif
+%endfunction

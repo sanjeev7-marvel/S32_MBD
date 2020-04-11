@@ -1,0 +1,28 @@
+%% Create clock configuration header.
+%%
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%openfile tmpFcnBuf = "s32k_clock_init.h"
+
+%assign mcu_xtal_freq = FEVAL("mbd_s32k_get_config_param", "mcu_xtal_freq")
+%if (mcu_xtal_freq == "External 8")
+    %assign xtal = 8
+%elseif (mcu_xtal_freq == "External 40")
+    %assign xtal = 40
+%endif
+
+%assign core_clock  = FEVAL("mbd_s32k_get_config_param", "mcu_system_clock_freq")
+#ifndef _S32K_CLOCK_INIT_H
+#define _S32K_CLOCK_INIT_H
+
+#include <stdint.h>
+
+#define XTAL_FREQ        %<xtal>000000UL
+#define CORE_CLK_FREQ    %<core_clock>000000UL
+
+void Clock_Setup(void);
+void UpdateSystickConfig(uint32_t ticks);
+
+#endif
+%closefile tmpFcnBuf

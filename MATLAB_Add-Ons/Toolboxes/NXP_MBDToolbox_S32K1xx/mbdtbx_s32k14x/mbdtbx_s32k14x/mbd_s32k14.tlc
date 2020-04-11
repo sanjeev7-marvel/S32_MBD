@@ -1,0 +1,34 @@
+%% SYSTLC: Model Based Design Toolbox S32K14x Code Generation Target \
+%%    TMF: mbd_s32k.tmf MAKE: mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0 EXTMODE: no_ext_comm
+%%
+%%
+%% Copyright (c) 2015 Freescale Semiconductor, Inc.
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+%%
+%% This file needs to be kept for backwards compatibility.
+%% Here we set the callback we need to convert models from one toolbox version
+%% to another.
+%%
+%%
+
+%selectfile NULL_FILE
+
+%% Custom RTW dialog options
+
+/%
+  BEGIN_RTW_OPTIONS
+
+  % Inherit ERT options
+  rtwgensettings.DerivedFrom = 'ert.tlc';
+
+  % Specify the RTW build directory name (failure to do so results
+  % in the code generating into the current MATLAB directory)
+
+  rtwgensettings.BuildDirSuffix = '_mbd_rtw';
+  rtwgensettings.Version = '1';
+  rtwgensettings.ActivateCallback = 'mbd_s32k_set_stf(hDlg,hSrc)';
+
+  END_RTW_OPTIONS
+%/
+

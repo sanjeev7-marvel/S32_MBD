@@ -1,0 +1,60 @@
+%implements uja1169_s32k_wdog_control "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja1169_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_uja1169_wdog_sdk_param", blockPath)
+    %with params
+    {
+        %if EXISTS(mode) &&  EXISTS(per)
+            sbc_wtdog_ctr_t watchdogCtr = {
+                .modeControl = %<mode>,
+                .nominalPeriod = %<per>
+            };
+            SBC_SetWatchdog(&watchdogCtr);
+        %else
+            %if EXISTS(mode)
+                sbc_wtdog_ctr_t  wtdog;
+                SBC_GetWatchdog(&wtdog);
+                wtdog.modeControl = %<mode>;
+                SBC_SetWatchdog(&wtdog);
+            %endif
+            %if EXISTS(per)
+                sbc_wtdog_ctr_t  wtdog;
+                SBC_GetWatchdog(&wtdog);
+                wtog.nominalPeriod = %<per>;
+                SBC_SetWatchdog(&wtdog);
+            %endif
+        %endif
+
+        %if EXISTS (reset)
+            SBC_FeedWatchdog();
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

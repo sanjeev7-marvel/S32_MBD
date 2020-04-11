@@ -1,0 +1,336 @@
+diff -ruN newlib-2.5.0-orig/libgloss/arm/_kill.c newlib-2.5.0/libgloss/arm/_kill.c
+--- newlib-2.5.0-orig/libgloss/arm/_kill.c	2017-07-11 16:49:19.042298151 -0500
++++ newlib-2.5.0/libgloss/arm/_kill.c	2017-07-11 16:53:36.268990341 -0500
+@@ -19,6 +19,8 @@
+       return do_AngelSWI (AngelSWI_Reason_ReportException,
+ 			  (void *) ADP_Stopped_ApplicationExit);
+     }
++#elif defined (__ARM_ARCH_6M__)
++  asm ("bkpt %a0" :: "i" (SWI_Exit));
+ #else
+   asm ("swi %a0" :: "i" (SWI_Exit));
+ #endif
+diff -ruN newlib-2.5.0-orig/libgloss/arm/linux-syscalls0.S newlib-2.5.0/libgloss/arm/linux-syscalls0.S
+--- newlib-2.5.0-orig/libgloss/arm/linux-syscalls0.S	2017-07-11 16:49:19.041298024 -0500
++++ newlib-2.5.0/libgloss/arm/linux-syscalls0.S	2017-07-11 18:15:19.663186529 -0500
+@@ -19,6 +19,7 @@
+ #define GLOBAL(name) .global name; FUNC(name)
+ #define SIZE(name) .size name, .-name
+ 
++#if !defined(__ARM_ARCH_6M__)
+ # define SYSCALL4(name) \
+ 	GLOBAL(_ ## name); \
+ 	swi #SYS_ ## name; \
+@@ -34,6 +35,23 @@
+ 	pop { r4 - r5 }; \
+ 	b _set_errno; \
+ 	SIZE(_ ## name)
++#else
++# define SYSCALL4(name) \
++	GLOBAL(_ ## name); \
++	bkpt #SYS_ ## name; \
++	b _set_errno; \
++	SIZE(_ ## name)
++
++# define SYSCALL6(name) \
++	GLOBAL(_ ## name); \
++	push { r4 - r5 }; \
++	ldr r4, [sp, #8]; \
++	ldr r5, [sp, #12]; \
++	bkpt #SYS_ ## name; \
++	pop { r4 - r5 }; \
++	b _set_errno; \
++	SIZE(_ ## name)
++#endif
+ 
+ #define SYSCALL0(name) SYSCALL3(name)
+ #define SYSCALL3(name) SYSCALL4(name)
+diff -ruN newlib-2.5.0-orig/libgloss/arm/redboot-syscalls.c newlib-2.5.0/libgloss/arm/redboot-syscalls.c
+--- newlib-2.5.0-orig/libgloss/arm/redboot-syscalls.c	2017-07-11 16:49:19.043298279 -0500
++++ newlib-2.5.0/libgloss/arm/redboot-syscalls.c	2017-07-11 16:55:32.558770174 -0500
+@@ -25,8 +25,10 @@
+ static int __attribute__ ((naked)) __syscall(int func_no, ...)
+ {
+     asm ("mov	r12, lr\n");
+-#ifdef __thumb__
++#if defined (__thumb__)  && !defined(__ARM_ARCH_6M__)
+     asm ("swi 0x18\n");
++#elif defined(__ARM_ARCH_6M__)
++    asm ("bkpt 0x18\n");
+ #else
+     asm ("swi 0x180001\n");
+ #endif
+diff -ruN newlib-2.5.0-orig/libgloss/arm/syscalls.c newlib-2.5.0/libgloss/arm/syscalls.c
+--- newlib-2.5.0-orig/libgloss/arm/syscalls.c	2017-07-11 16:49:19.042298151 -0500
++++ newlib-2.5.0/libgloss/arm/syscalls.c	2017-07-11 17:10:38.381895636 -0500
+@@ -167,6 +167,7 @@
+   int fh;
+   const char * name;
+ 
++#if !defined(__ARM_ARCH_6M__)
+   name = ":tt";
+   asm ("mov r0,%2; mov r1, #0; swi %a1; mov %0, r0"
+        : "=r"(fh)
+@@ -187,6 +188,28 @@
+        : "i" (SWI_Open),"r"(name)
+        : "r0","r1");
+   monitor_stderr = fh;
++#else
++  name = ":tt";
++  asm ("mov r0,%2; mov r1, #0; bkpt %a1; mov %0, r0"
++       : "=r"(fh)
++       : "i" (SWI_Open),"r"(name)
++       : "r0","r1");
++  monitor_stdin = fh;
++
++  name = ":tt";
++  asm ("mov r0,%2; mov r1, #4; bkpt %a1; mov %0, r0"
++       : "=r"(fh)
++       : "i" (SWI_Open),"r"(name)
++       : "r0","r1");
++  monitor_stdout = fh;
++
++  name = ":tt";
++  asm ("mov r0,%2; mov r1, #8; bkpt %a1; mov %0, r0"
++       : "=r"(fh)
++       : "i" (SWI_Open),"r"(name)
++       : "r0","r1");
++  monitor_stderr = fh;
++#endif
+ #endif
+ 
+   /* If we failed to open stderr, redirect to stdout. */
+@@ -211,7 +234,11 @@
+   return do_AngelSWI (AngelSWI_Reason_Errno, NULL);
+ #else
+   register r0 asm("r0");
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a1" : "=r"(r0) : "i" (SWI_GetErrno));
++#else
++  asm ("bkpt %a1" : "=r"(r0) : "i" (SWI_GetErrno));
++#endif
+   return r0;
+ #endif
+ }
+@@ -257,9 +284,15 @@
+   r0 = fh;
+   r1 = (int)ptr;
+   r2 = len;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a4"
+        : "=r" (r0)
+        : "0"(r0), "r"(r1), "r"(r2), "i"(SWI_Read));
++#else
++  asm ("bkpt %a4"
++       : "=r" (r0)
++       : "0"(r0), "r"(r1), "r"(r2), "i"(SWI_Read));
++#endif
+   return checkerror (r0);
+ #endif
+ }
+@@ -353,10 +386,17 @@
+ #else
+   if (dir == SEEK_END)
+     {
++#if !defined(__ARM_ARCH_6M__)
+       asm ("mov r0, %2; swi %a1; mov %0, r0"
+ 	   : "=r" (res)
+ 	   : "i" (SWI_Flen), "r" (pfd->handle)
+ 	   : "r0");
++#else
++      asm ("mov r0, %2; bkpt %a1; mov %0, r0"
++	   : "=r" (res)
++	   : "i" (SWI_Flen), "r" (pfd->handle)
++	   : "r0");
++#endif
+       checkerror (res);
+       if (res == -1)
+         return -1;
+@@ -364,10 +404,17 @@
+     }
+ 
+   /* This code only does absolute seeks.  */
++#if !defined(__ARM_ARCH_6M__)
+   asm ("mov r0, %2; mov r1, %3; swi %a1; mov %0, r0"
+        : "=r" (res)
+        : "i" (SWI_Seek), "r" (pfd->handle), "r" (ptr)
+        : "r0", "r1");
++#else
++  asm ("mov r0, %2; mov r1, %3; bkpt %a1; mov %0, r0"
++       : "=r" (res)
++       : "i" (SWI_Seek), "r" (pfd->handle), "r" (ptr)
++       : "r0", "r1");
++#endif
+   checkerror (res);
+ #endif
+   /* At this point ptr is the current file position. */
+@@ -410,9 +457,15 @@
+   r0 = fh;
+   r1 = (int)ptr;
+   r2 = len;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a4"
+        : "=r" (r0)
+        : "0"(r0), "r"(r1), "r"(r2), "i"(SWI_Write));
++#else
++  asm ("bkpt %a4"
++       : "=r" (r0)
++       : "0"(r0), "r"(r1), "r"(r2), "i"(SWI_Write));
++#endif
+   return checkerror (r0);
+ #endif
+ }
+@@ -508,12 +561,16 @@
+   block[1] = aflags;
+   
+   fh = do_AngelSWI (AngelSWI_Reason_Open, block);
+-  
+-#else
++#elif !defined(__ARM_ARCH_6M__)
+   asm ("mov r0,%2; mov r1, %3; swi %a1; mov %0, r0"
+        : "=r"(fh)
+        : "i" (SWI_Open),"r"(path),"r"(aflags)
+        : "r0","r1");
++#else
++  asm ("mov r0,%2; mov r1, %3; bkpt %a1; mov %0, r0"
++       : "=r"(fh)
++       : "i" (SWI_Open),"r"(path),"r"(aflags)
++       : "r0","r1");
+ #endif
+   
+   /* Return a user file descriptor or an error. */
+@@ -542,9 +599,15 @@
+ #else
+   register r0 asm("r0");
+   r0 = fh;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a2" 
+        : "=r"(r0) 
+        : "0"(r0), "i" (SWI_Close));
++#else
++  asm ("bkpt %a2" 
++       : "=r"(r0) 
++       : "0"(r0), "i" (SWI_Close));
++#endif
+   return checkerror (r0);
+ #endif
+ }
+@@ -645,10 +708,17 @@
+ #ifdef ARM_RDI_MONITOR
+   res = checkerror (do_AngelSWI (AngelSWI_Reason_FLen, &pfd->handle));
+ #else
++#if !defined(__ARM_ARCH_6M__)
+   asm ("mov r0, %2; swi %a1; mov %0, r0"
+        : "=r" (res)
+        : "i" (SWI_Flen), "r" (pfd->handle)
+        : "r0");
++#else
++  asm ("mov r0, %2; bkpt %a1; mov %0, r0"
++       : "=r" (res)
++       : "i" (SWI_Flen), "r" (pfd->handle)
++       : "r0");
++#endif
+   checkerror (res);
+ #endif
+   if (res == -1)
+@@ -700,9 +770,15 @@
+ #else
+   register r0 asm("r0");
+   r0 = (int)path;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a2" 
+        : "=r"(r0)
+        : "0"(r0), "i" (SWI_Remove));
++#else
++  asm ("bkpt %a2" 
++       : "=r"(r0)
++       : "0"(r0), "i" (SWI_Remove));
++#endif
+   res = r0;
+ #endif
+   if (res == -1) 
+@@ -722,7 +798,11 @@
+ #else
+       {
+         int value;
++#if !defined(__ARM_ARCH_6M__)
+         asm ("swi %a1; mov %0, r0" : "=r" (value): "i" (SWI_Time) : "r0");
++#else
++        asm ("bkpt %a1; mov %0, r0" : "=r" (value): "i" (SWI_Time) : "r0");
++#endif
+         tp->tv_sec = value;
+       }
+ #endif
+@@ -747,8 +827,10 @@
+ 
+ #ifdef ARM_RDI_MONITOR
+   timeval = do_AngelSWI (AngelSWI_Reason_Clock,NULL);
+-#else
++#elif !defined(__ARM_ARCH_6M__)
+   asm ("swi %a1; mov %0, r0" : "=r" (timeval): "i" (SWI_Clock) : "r0");
++#else
++  asm ("bkpt %a1; mov %0, r0" : "=r" (timeval): "i" (SWI_Clock) : "r0");
+ #endif
+   return timeval;
+ }
+@@ -789,9 +871,15 @@
+ #else
+   register r0 asm("r0");
+   r0 = pfd->handle;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a2"
+        : "=r" (r0)
+        : "0"(r0), "i" (SWI_IsTTY));
++#else
++  asm ("bkpt %a2"
++       : "=r" (r0)
++       : "0"(r0), "i" (SWI_IsTTY));
++#endif
+   tty = r0;
+ #endif
+ 
+@@ -830,9 +918,15 @@
+ #else
+   register r0 asm("r0");
+   r0 = (int)s;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a2" 
+        : "=r" (r0)
+        : "0"(r0), "i" (SWI_CLI));
++#else
++  asm ("bkpt %a2" 
++       : "=r" (r0)
++       : "0"(r0), "i" (SWI_CLI));
++#endif
+   return checkerror (r0);
+ #endif
+ }
+@@ -852,9 +946,15 @@
+   register r1 asm("r1");
+   r0 = (int)oldpath;
+   r1 = (int)newpath;
++#if !defined(__ARM_ARCH_6M__)
+   asm ("swi %a3" 
+        : "=r" (r0)
+        : "0" (r0), "r" (r1), "i" (SWI_Rename));
++#else
++  asm ("bkpt %a3" 
++       : "=r" (r0)
++       : "0" (r0), "r" (r1), "i" (SWI_Rename));
++#endif
+   return checkerror (r0);
+ #endif
+ }
+diff -ruN newlib-2.5.0-orig/newlib/libc/sys/arm/trap.S newlib-2.5.0/newlib/libc/sys/arm/trap.S
+--- newlib-2.5.0-orig/newlib/libc/sys/arm/trap.S	2017-07-11 16:49:18.810268662 -0500
++++ newlib-2.5.0/newlib/libc/sys/arm/trap.S	2017-07-11 16:52:05.943510437 -0500
+@@ -91,5 +91,9 @@
+ 
+         @ We now know how much extra stack the function requires.
+         @ Terminate the program for the moment:
++#ifdef __ARM_ARCH_6M__
++        bkpt    SWI_Exit
++#else
+         swi     SWI_Exit
+ #endif
++#endif

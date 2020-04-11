@@ -1,0 +1,59 @@
+%implements pdb_s32k_isr_control "C"
+
+%% Copyright (c) 2016 - 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("pdb_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdkParams = FEVAL("mbd_s32k_pdb_isr_disen_make_params", blockPath)
+    %with sdkParams
+    {
+      /* Table of base addresses for PDB instances. */
+      static PDB_Type * const s_pdbBase[PDB_INSTANCE_COUNT] = PDB_BASE_PTRS;
+
+      uint32_t sc = 0;
+      PDB_Type * base = s_pdbBase[%<pdbModule>];
+      sc = base->SC;
+
+      %if FEVAL("strcmp", "%<regScPdbeie>", "on")
+        /* Enable PDB sequence error interrupt */
+        sc |= (uint32_t)PDB_SC_PDBEIE_MASK;
+      %else
+        /* Disable PDB sequence error interrupt */
+        sc &= ~(uint32_t)(PDB_SC_PDBEIE_MASK);
+      %endif
+      %if FEVAL("strcmp", "%<regScPdbie>", "on")
+        /* Enable PDB interrupt */
+        sc |= (uint32_t)PDB_SC_PDBIE_MASK;
+      %else
+        /* Disable PDB interrupt */
+        sc &= ~((uint32_t)PDB_SC_PDBIE_MASK);
+      %endif
+
+      base->SC = sc;
+    }
+    %endwith
+
+    %endif
+%endfunction

@@ -1,0 +1,168 @@
+%% Copyright (c) 2017 NXP
+
+%implements AMCLIB_FWSpeedLoop_SF_FLT "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+    %<LibAddToCommonIncludes("<stdbool.h>")>
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+%assign ::cntInit = %<::cntInit> + 1
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("STDBOOL_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::STDBOOL_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include <stdbool.h>
+    %endif
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+bool FWSpeedLoop_%<::cntInit>_initialized = false;
+AMCLIB_FW_SPEED_LOOP_T_FLT FWSpeedLoop_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+%openfile tmpParamExternBuf
+    extern bool FWSpeedLoop_%<::cntInit>_initialized;
+    extern  AMCLIB_FW_SPEED_LOOP_T_FLT FWSpeedLoop_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+%assign ::cnt = %<::cnt> + 1
+
+%assign fltLambdaW = CAST("Real32", Parameter[0].Value[0])
+%assign fltLambdaFW = CAST("Real32", Parameter[1].Value[0])
+%assign fltPropGainQ = CAST("Real32", Parameter[2].Value[0])
+%assign fltIntegGainQ = CAST("Real32", Parameter[3].Value[0])
+%assign fltPropGainFW = CAST("Real32", Parameter[4].Value[0])
+%assign fltIntegGainFW = CAST("Real32", Parameter[5].Value[0])
+%assign fltRampUp = CAST("Real32", Parameter[6].Value[0])
+%assign fltRampDown = CAST("Real32", Parameter[7].Value[0])
+%assign fltUmaxDivImax = CAST("Real32", Parameter[8].Value[0])
+
+%assign fltVelocityReq = LibBlockInputSignal(0, "", "", 0)
+%assign fltVelocityFbck = LibBlockInputSignal(1, "", "", 0)
+%assign fltIQReqK_1 = LibBlockInputSignal(2, "", "", 0)
+%assign fltIQFbck = LibBlockInputSignal(3, "", "", 0)
+%assign fltUQReq = LibBlockInputSignal(4, "", "", 0)
+%assign fltUQLim = LibBlockInputSignal(5, "", "", 0)
+%assign fltAccW = LibBlockInputSignal(6, "", "", 0)
+%assign fltAccFW = LibBlockInputSignal(7, "", "", 0)
+%assign fltUpperLimitQ = LibBlockInputSignal(8, "", "", 0)
+%assign fltLowerLimitQ = LibBlockInputSignal(9, "", "", 0)
+%assign fltInK_1Q = LibBlockInputSignal(10, "", "", 0)
+%assign fltIntegPartK_1Q = LibBlockInputSignal(11, "", "", 0)
+%assign fltUpperLimitFW = LibBlockInputSignal(12, "", "", 0)
+%assign fltLowerLimitFW = LibBlockInputSignal(13, "", "", 0)
+%assign fltInK_1FW = LibBlockInputSignal(14, "", "", 0)
+%assign fltIntegPartK_1FW = LibBlockInputSignal(15, "", "", 0)
+%assign fltRampState = LibBlockInputSignal(16, "", "", 0)
+
+%assign pOutRampState = LibBlockOutputSignal(0, "", "", 0)
+%assign pOutIntegPartK_1Q = LibBlockOutputSignal(1, "", "", 0)
+%assign pOutInK_1Q = LibBlockOutputSignal(2, "", "", 0)
+%assign pOutLimitFlagQ = LibBlockOutputSignal(3, "", "", 0)
+%assign pOutIntegPartK_1FW = LibBlockOutputSignal(4, "", "", 0)
+%assign pOutInK_1FW = LibBlockOutputSignal(5, "", "", 0)
+%assign pOutLimitFlagFW = LibBlockOutputSignal(6, "", "", 0)
+%assign pOutAccW = LibBlockOutputSignal(7, "", "", 0)
+%assign pOutAccFW = LibBlockOutputSignal(8, "", "", 0)
+%assign pOutIDReq = LibBlockOutputSignal(9, "", "", 0)
+%assign pOutIQReq = LibBlockOutputSignal(10, "", "", 0)
+
+{
+    SWLIBS_2Syst_FLT IDQReq;
+    tFloat fltIQFbckLocal;
+    tFloat fltUQReqLocal;
+    tFloat fltUQLimLocal;
+
+    fltIQFbckLocal = %<fltIQFbck>;
+    fltUQReqLocal = %<fltUQReq>;
+    fltUQLimLocal = %<fltUQLim>;
+
+    if (!FWSpeedLoop_%<::cnt>_initialized) {
+
+    FWSpeedLoop_%<::cnt>.pFilterW.fltLambda = %<fltLambdaW>;
+    FWSpeedLoop_%<::cnt>.pFilterFW.fltLambda = %<fltLambdaFW>;
+
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltPropGain = %<fltPropGainQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltIntegGain = %<fltIntegGainQ>;
+
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltPropGain = %<fltPropGainFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltIntegGain = %<fltIntegGainFW>;
+
+    FWSpeedLoop_%<::cnt>.pRamp.fltRampUp = %<fltRampUp>;
+    FWSpeedLoop_%<::cnt>.pRamp.fltRampDown = %<fltRampDown>;
+
+    FWSpeedLoop_%<::cnt>.fltUmaxDivImax = %<fltUmaxDivImax>;
+
+    FWSpeedLoop_%<::cnt>.pIQFbck = &fltIQFbckLocal;
+    FWSpeedLoop_%<::cnt>.pUQReq = &fltUQReqLocal;
+    FWSpeedLoop_%<::cnt>.pUQLim = &fltUQLimLocal;
+
+    AMCLIB_FWSpeedLoopInit_FLT (&FWSpeedLoop_%<::cnt>);
+    FWSpeedLoop_%<::cnt>_initialized = true;
+}
+    FWSpeedLoop_%<::cnt>.pFilterW.fltAcc = %<fltAccW>;
+    FWSpeedLoop_%<::cnt>.pFilterFW.fltAcc = %<fltAccFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltIntegPartK_1 = %<fltIntegPartK_1Q>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltIntegPartK_1 = %<fltIntegPartK_1FW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltInK_1 = %<fltInK_1Q>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltInK_1 = %<fltInK_1FW>;
+    FWSpeedLoop_%<::cnt>.pRamp.fltState = %<fltRampState>;
+
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltLowerLimit = %<fltLowerLimitQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.fltUpperLimit = %<fltUpperLimitQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltLowerLimit = %<fltLowerLimitFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.fltUpperLimit = %<fltUpperLimitFW>;
+
+    IDQReq.fltArg2 = %<fltIQReqK_1>;
+
+    AMCLIB_FWSpeedLoop_FLT (%<fltVelocityReq>, %<fltVelocityFbck>, &IDQReq, &FWSpeedLoop_%<::cnt>);
+
+    %<pOutRampState> = FWSpeedLoop_%<::cnt>.pRamp.fltState;
+    %<pOutIntegPartK_1Q> = FWSpeedLoop_%<::cnt>.pPIpAWQ.fltIntegPartK_1;
+    %<pOutInK_1Q> = FWSpeedLoop_%<::cnt>.pPIpAWQ.fltInK_1;
+    %<pOutLimitFlagQ> = FWSpeedLoop_%<::cnt>.pPIpAWQ.u16LimitFlag;
+    %<pOutIntegPartK_1FW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.fltIntegPartK_1;
+    %<pOutInK_1FW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.fltInK_1;
+    %<pOutLimitFlagFW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.u16LimitFlag;
+    %<pOutAccW> = FWSpeedLoop_%<::cnt>.pFilterW.fltAcc;
+    %<pOutAccFW> = FWSpeedLoop_%<::cnt>.pFilterFW.fltAcc;
+    %<pOutIDReq> = IDQReq.fltArg1;
+    %<pOutIQReq> = IDQReq.fltArg2;
+}
+
+%endfunction

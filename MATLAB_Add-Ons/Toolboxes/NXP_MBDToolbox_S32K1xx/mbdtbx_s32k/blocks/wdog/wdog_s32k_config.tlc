@@ -1,0 +1,55 @@
+%implements wdog_s32k_config "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("wdog_driver.h")>
+
+    %endif
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign instance = 0
+    %assign sdk_params = FEVAL("mbd_s32k_wdog_config_sdk_params", blockPath)
+    %with sdk_params
+    {
+        const wdog_user_config_t wdog%<instance>_user_cfg =
+        {
+            .clkSource        = %<user_config.clkSource>,
+            .opMode           = {
+                .wait         = false,
+                .stop         = false,
+                .debug        = false
+            },
+            .updateEnable     = %<user_config.updateEnable>,
+            .intEnable        = %<user_config.intEnable>,
+            .winEnable        = %<user_config.winEnable>,
+            .windowValue      = %<user_config.windowValue>,
+            .timeoutValue     = %<user_config.timeoutValue>,
+            .prescalerEnable  = %<user_config.prescalerEnable>
+        };
+
+        /* Configure WDOG%<instance> */
+        WDOG_DRV_Init(%<instance>, &wdog%<instance>_user_cfg);
+    }
+    %endwith
+
+    %endif
+%endfunction

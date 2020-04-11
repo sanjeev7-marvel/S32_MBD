@@ -1,0 +1,123 @@
+%implements ftm_s32k_dual_edge_capture "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("ftm_ic_driver.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_ftm_dual_edge_sdk_params", blockPath) 
+    %with sdk_params
+        %if !EXISTS("FTM%<module>_INPUT_INIT")
+            %assign ::FTM%<module>_INPUT_INIT = 1
+               %include "ftm_s32k_common_input.tlc"
+        %endif
+
+        %with sdk_params.pin_info.user_config
+            /* Enable clock for %<port> */
+            PCC_SetClockMode(PCC, %<clock>, true);
+            /* Pin is configured for FTM function */
+            PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+        %endwith
+
+        /* FTM%<module>: channel %<channel + 1> ISR enable */
+        FTM_DRV_EnableChnInt(FTM%<module>, %<channel + 1>);
+
+        %if FEVAL("strcmp", "%<target_family>", "s32k14")
+            /* FTM%<module>: ISR level */
+            INT_SYS_SetPriority(FTM%<module>_Ch%<channel>_Ch%<channel+1>_IRQn, %<isrlevel>);
+            /* FTM%<module>: enable ISR */
+            INT_SYS_EnableIRQ(FTM%<module>_Ch%<channel>_Ch%<channel+1>_IRQn);
+            /* FTM%<module>:installing ISR Handler */
+            INT_SYS_InstallHandler(FTM%<module>_Ch%<channel>_Ch%<channel+1>_IRQn, FTM%<module>_ch%<channel+1>_Dual_Edge_Capture_isr, (isr_t *)0);  /* FTM%<module> interrupt handler */
+        %else
+            %<LibAddToCommonIncludes("ftm_chn_irq.h")>
+    
+            %% Probably this should be executed once
+            /* FTM%<module>: ISR level */
+            INT_SYS_SetPriority(FTM%<module>_Ch0_7_IRQn, %<isrlevel>);
+            /* FTM%<module>: enable ISR */
+            INT_SYS_EnableIRQ(FTM%<module>_Ch0_7_IRQn);
+            /* FTM%<module>:installing ISR Handler */
+            INT_SYS_InstallHandler(FTM%<module>_Ch0_7_IRQn, FTM%<module>_Ch_IRQHandler, (isr_t *)0);            
+
+            /* Adding interrupt handler in the vector from ftm_chn_irq.c file */
+            FTM_CHR_DRV_InstallCallback(%<module>, %<channel + 1>, FTM%<module>_ch%<channel+1>_Dual_Edge_Capture_isr);
+        %endif
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler body file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %openfile isr_c = "ftm%<module>_ch%<channel+1>_input_isr.c"
+            #include "ftm%<module>_ch%<channel+1>_input_isr.h"
+            #include "ftm_common.h"
+
+            void FTM%<module>_ch%<channel+1>_Dual_Edge_Capture_isr(void)
+            {
+                %if FEVAL("strcmp", "%<target_family>", "s32k14")
+                /* FTM%<module>: check channel %<channel+1> ISR flag */
+                if (FTM_DRV_IsChnIntEnabled(FTM%<module>, %<channel+1>) && FTM_DRV_HasChnEventOccurred (FTM%<module>, %<channel+1>))
+                {
+                %endif
+
+                    uint16_t _C0V;
+                    /* FTM%<module>: read data */
+                    _C0V = FTM_DRV_GetChnCountVal(FTM%<module>, %<channel>);
+                    %<LibBlockOutputSignal(1,"","",0)> = (uint16_t)FTM_DRV_GetChnCountVal(FTM%<module>,%<channel+1>) - _C0V;
+                    %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                        %% call the downstream system
+                        %with SFcnSystemOutputCall[fcnCallIdx]
+                            %% skip unconnected function call outputs
+                            %if ISEQUAL(BlockToCall, "unconnected")
+                                %continue
+                            %endif
+                            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                        %endwith
+                    %endforeach
+                %if FEVAL("strcmp", "%<target_family>", "s32k14")
+                    /* FTM%<module>: clear channel %<channel+1> ISR flag */
+                    FTM_DRV_ClearChnEventFlag(FTM%<module>, %<channel+1>);
+                }
+                %endif
+            }
+        %closefile isr_c
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler declaration file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %<LibAddToCommonIncludes("ftm%<module>_ch%<channel+1>_input_isr.h")>
+        %openfile isr_h = "ftm%<module>_ch%<channel+1>_input_isr.h"
+            #include "%<CompiledModel.Name + ".h">"
+            #include "%<CompiledModel.Name + "_private.h">"
+
+            void FTM%<module>_ch%<channel+1>_Dual_Edge_Capture_isr(void);
+        %closefile isr_h
+    %endwith
+
+    %endif
+%endfunction

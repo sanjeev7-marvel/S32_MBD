@@ -1,0 +1,164 @@
+%implements flexio_spi_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_spi_config_sdk_params", blockPath)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("flexio.h")>
+    %<LibAddToCommonIncludes("flexio_spi_driver.h")>
+    %<LibAddToCommonIncludes("flexio_common.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("clock_S32K1xx.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_spi_config_sdk_params", blockPath)
+    %with sdk_params
+
+    %% declare global variables
+    %openfile declarationsBuf
+        flexio_device_state_t flexIODeviceState;
+        %if (user_config.Role == "Master")
+            flexio_spi_master_state_t flexioSPIMasterState%<user_config.InstanceNumber>;
+            void flexio_spi_master_transfer_callback(void *driverState, spi_event_t event, void *userData) __attribute__((weak));
+        %else
+            flexio_spi_slave_state_t flexioSPISlaveState%<user_config.InstanceNumber>;
+            void flexio_spi_slave_transfer_callback(void *driverState, spi_event_t event, void *userData) __attribute__((weak));
+        %endif
+    %closefile declarationsBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", declarationsBuf)>
+
+    {
+        /* Enable clock for flexIO and GPIO (FXIO_Dn pins) */
+        PCC_SetPeripheralClockControl(PCC, FLEXIO0_CLK, true, CLK_SRC_FIRC, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.MOSIInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.MISOInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.SCKInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.SSInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        /* Configure flexIO SPI as %<user_config.Role> */
+        %%check if config is for master or slave
+        %if (user_config.Role == "Master")
+            flexio_spi_master_user_config_t flexioSPIMasterConfig = {
+                .driverType = %<user_config.DriverType>,
+                .clockPolarity = %<user_config.CPOL>,
+                .clockPhase = %<user_config.CPHA>,
+                .baudRate = %<user_config.BaudRate>,
+                .bitOrder = %<user_config.BitOrder>,
+                .transferSize = %<user_config.TransferSize>,
+                .mosiPin = %<user_config.MOSIInfo.user_config.fxio_pin>,
+                .misoPin = %<user_config.MISOInfo.user_config.fxio_pin>,
+                .sckPin = %<user_config.SCKInfo.user_config.fxio_pin>,
+                .ssPin = %<user_config.SSInfo.user_config.fxio_pin>,
+                .callback = flexio_spi_master_transfer_callback,
+                .callbackParam = NULL,
+                .txDMAChannel = 255,
+                .rxDMAChannel = 255,
+            };
+        %endif
+
+        %if (user_config.Role == "Slave")
+            flexio_spi_slave_user_config_t flexioSPISlaveConfig = {
+                .driverType = %<user_config.DriverType>,
+                .clockPolarity = %<user_config.CPOL>,
+                .clockPhase = %<user_config.CPHA>,
+                .bitOrder = %<user_config.BitOrder>,
+                .transferSize = %<user_config.TransferSize>,
+                .mosiPin = %<user_config.MOSIInfo.user_config.fxio_pin>,
+                .misoPin = %<user_config.MISOInfo.user_config.fxio_pin>,
+                .sckPin = %<user_config.SCKInfo.user_config.fxio_pin>,
+                .ssPin = %<user_config.SSInfo.user_config.fxio_pin>,
+                .callback = flexio_spi_slave_transfer_callback,
+                .callbackParam = NULL,
+                .txDMAChannel = 255,
+                .rxDMAChannel = 255,
+            };
+        %endif
+
+        /* Setup flexio SPI pins */
+        pin_settings_config_t fxio_pin_mux[4]={
+        {
+            .base          = %<user_config.MOSIInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.MOSIInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.MOSIInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            .base          = %<user_config.MISOInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.MISOInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.MISOInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            .base          = %<user_config.SCKInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.SCKInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.SCKInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            .base          = %<user_config.SSInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.SSInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.SSInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        }};
+        PINS_DRV_Init(4, fxio_pin_mux);
+
+        /* Init the FLEXIO device */
+        FLEXIO_DRV_InitDevice(0, &flexIODeviceState);
+
+        /* Initialize FlexIO SPI driver as %<user_config.Role> */
+        %if (user_config.Role == "Master")
+            FLEXIO_SPI_DRV_MasterInit(0, &flexioSPIMasterConfig, &flexioSPIMasterState%<user_config.InstanceNumber>);
+        %endif
+
+        %if (user_config.Role == "Slave")
+            FLEXIO_SPI_DRV_SlaveInit(0, &flexioSPISlaveConfig, &flexioSPISlaveState%<user_config.InstanceNumber>);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

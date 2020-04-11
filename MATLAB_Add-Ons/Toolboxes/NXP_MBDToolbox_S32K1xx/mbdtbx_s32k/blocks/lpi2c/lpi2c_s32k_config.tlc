@@ -1,0 +1,138 @@
+%implements lpi2c_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+    %<LibAddToCommonIncludes("lpi2c_driver.h")>
+    %<LibAddToCommonIncludes("lpi2c_irq.h")>
+    %<LibAddToCommonIncludes("lpi2c_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_block_info", blockPath)
+    %assign addr = info.addr
+    %assign instance = info.instance
+    %assign opmode = FEVAL("mbd_s32k_lpi2c_get_opmode", blockPath)
+    %assign clock = FEVAL("mbd_s32k_lpi2c_get_clock", blockPath)
+
+    %assign pin = FEVAL("mbd_s32k_lpi2c_get_pin_info", blockPath)
+    %assign sda = pin.user_config.sda_info.user_config
+    %assign scl = pin.user_config.scl_info.user_config
+
+    %openfile headerBuf
+    %if (info.mode == "Master")
+        lpi2c_master_state_t lpi2cMasterState%<instance>;
+        void lpi2c_MasterCallback(i2c_master_event_t masterEvent, void *userData) __attribute__((weak));
+    %else
+        lpi2c_slave_state_t lpi2cSlaveState%<instance>;
+        void lpi2c_SlaveCallback(i2c_slave_event_t slaveEvent, void *userData) __attribute__((weak));
+    %endif
+    %closefile headerBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", headerBuf)>
+
+    %openfile fcnBuf
+        void LPI2C_DRV_SetSlaveAddr(uint16_t addr, bool is10BitAddr)
+        {
+            LPI2C_Type *baseAddr = LPI2C0;
+            LPI2C_Set_SlaveAddr0(baseAddr, addr);
+            if (is10BitAddr)
+            {
+                LPI2C_Set_SlaveAddrConfig(baseAddr, LPI2C_SLAVE_ADDR_MATCH_0_10BIT);
+            }
+            else
+            {
+                LPI2C_Set_SlaveAddrConfig(baseAddr, LPI2C_SLAVE_ADDR_MATCH_0_7BIT);
+            }
+        }
+    %closefile fcnBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", fcnBuf)>
+
+    %if (info.is10bitaddr == "on")
+        %assign is10bit = "true"
+    %else
+        %assign is10bit = "false"
+    %endif
+
+    {
+        /* Enable clock for LPI2C and GPIO (SDA, SCL pins) */
+        PCC_SetPeripheralClockControl(PCC, LPI2C%<instance>_CLK, true, %<clock>, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetClockMode(PCC, %<sda.port>_CLK, true);
+        PCC_SetClockMode(PCC, %<scl.port>_CLK, true);
+
+        /* Setup i2c instance%<instance> pins */
+        pin_settings_config_t i2c%<instance>_pins[2]={
+        {
+            .base          = %<sda.port>,
+            .pinPortIdx    = %<sda.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_UP_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<sda.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            .base          = %<scl.port>,
+            .pinPortIdx    = %<scl.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_UP_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<scl.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        }};
+        PINS_DRV_Init(2, i2c%<instance>_pins);
+
+        %if (info.mode == "Master")
+            static lpi2c_master_user_config_t lpi2c_MasterConfig%<instance> = {
+                .slaveAddress = 1U, /* default value, will be changed upon transfer */
+                .is10bitAddr = %<is10bit>,
+                .operatingMode = %<opmode>, /* on S32K144 only Standard mode supported (up to 100kbps)*/
+                .baudRate = %<info.bdr>U,
+                .transferType = LPI2C_USING_INTERRUPTS,
+                .masterCallback = (i2c_master_callback_t)lpi2c_MasterCallback,
+                .callbackParam = NULL
+            };
+            /* Initialize LPI2C instance with the config above */
+            LPI2C_DRV_MasterInit(%<instance>, &lpi2c_MasterConfig%<instance>, &lpi2cMasterState%<instance>);
+        %else
+            static lpi2c_slave_user_config_t lpi2c_SlaveConfig%<instance> = {
+                .slaveAddress = 1U, /* default value, will be changed upon transfer */
+                .is10bitAddr = %<is10bit>,
+                .slaveListening = false,
+                .operatingMode = %<opmode>, /* on S32K144 only Standard mode supported (up to 100kbps)*/
+                .transferType = LPI2C_USING_INTERRUPTS,
+                .slaveCallback = (i2c_slave_callback_t)lpi2c_SlaveCallback,
+                .callbackParam = NULL
+            };
+            /* Initialize LPI2C instance with the config above */
+            LPI2C_DRV_SlaveInit(%<instance>, &lpi2c_SlaveConfig%<instance>, &lpi2cSlaveState%<instance>);
+        %endif
+    }
+
+    %endif
+%endfunction

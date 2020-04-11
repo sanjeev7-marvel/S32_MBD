@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>CSEc Encrypt Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>CSEc Encrypt Block</h1>
+            <!--Page-description-->
+            <p>This block allows to encrypt a plain text.</p>
+            <p><b>Note:</b>This is only available for S32K14x parts (no support for S32K11x).</p>
+
+            <p>The CSEc supports AES-128 encryption and decryption in ECB (Electronic Codebook) and CBC (Cipher Block Chaining) modes of operation. The key is selected from one of the memory slots which must be enabled for the encryption.
+
+            For a key that is not stored in a non-volatile memory slot, a plain text key can be loaded into the RAM_KEY slot. However, as this method implies a potential security risk, this might only be useful for development or debug purposes.
+
+            Data must be presented in 128-bit blocks. Any required padding must be done by the application.
+            </p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="csec_encrypt_files/csec_encrypt_block.jpg" width="200px" height="auto" />
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>Plain text (uint8_t*) - the length must be a multiple of 16.</li>
+            </ul>
+            Available only for Cipher Block Chaining (CBC) mode:
+            <ul>
+                <li>IV (uint8_t[16]) - initialization vector.</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>Status (status_t)</li>
+                <li>Cipher text (uint8_t*)</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+
+            <img vspace="10" src="csec_encrypt_files/csec_encrypt_mask.jpg" width="450px" height="auto" />
+
+            <h3>Mode</h3>
+            <p>The AES encryption mode: Electronic Codebook (ECB) or Cipher Block Chaining (CBC).</p>
+
+            <h3>Key ID</h3>
+            <p>The key used for encryption: RAM key or one of the User Keys 1 to 17.</p>
+
+            <h3>Timeout</h3>
+            <p>Timeout in milliseconds as a 32 bits unsigned integer. In case the operation times out the returned status is STATUS_TIMEOUT.</p>
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

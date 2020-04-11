@@ -1,0 +1,104 @@
+%implements rtc_s32k_config "C"
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("rtc_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %% For future if there will be many instances
+    %assign instance = 0
+
+    %% Declaring extern structures for used RTC in .h file
+    %<GenerateHeaderInstances(block, system, instance)>
+
+    %assign sdk_params = FEVAL("mbd_s32k_rtc_config_sdk_params", blockPath)
+    %% Declaring extern structures for used power modes in .c file
+    %<GenerateCodeInstances(block, system, instance, sdk_params)>
+
+    %% Enabling clock and instances
+    PCC_SetPeripheralClockControl(PCC, RTC0_CLK, true, CLK_SRC_OFF, 0, 0);
+
+    RTC_DRV_Init(RTCTIMER%<instance>, &rtcTimer%<instance>_Config);
+
+    %if sdk_params.user_config.is_seconds_isr == "true"
+    // Configure RTC Time Seconds Interrupt
+    RTC_DRV_ConfigureSecondsInt(RTCTIMER%<instance>, &rtcTimer%<instance>_SecIntConfig);
+    %endif
+
+    // Set the time and date
+    RTC_DRV_SetTimeDate(RTCTIMER%<instance>, &rtcTimer%<instance>_StartTime);
+    %if sdk_params.user_config.state_start_counter == "true"
+        // Start the RTC counter
+        RTC_DRV_StartCounter(RTCTIMER%<instance>);
+    %endif
+
+    %endif
+%endfunction
+
+
+%function GenerateHeaderInstances(block, system, instance) void
+
+    %openfile tmpFcnBuf
+    // Configuration instance number %<instance>
+    #define RTCTIMER%<instance> %<instance>U
+    void rtcTimer%<instance>_AlarmISR(void* params);
+    void rtcTimer%<instance>_SecondsISR(void* params);
+    %closefile tmpFcnBuf
+    %assign headerFile = LibGetModelDotHFile()
+    %<LibSetSourceFileSection(headerFile, "Definitions", tmpFcnBuf)>
+%endfunction
+
+
+%function GenerateCodeInstances(block, system, instance, sdk_params) void
+
+    %with sdk_params
+        %openfile tmpFcnBuf
+        //rtcTimer%<instance> configuration structure
+        const rtc_init_config_t rtcTimer%<instance>_Config =
+        {
+            .compensationInterval       =   %<user_config.comp_interval>U,
+            .compensation               =   %<user_config.comp_value>,
+            .clockSelect                =   %<user_config.clock_input>,
+            .clockOutConfig             =   %<user_config.clock_output>,
+            .updateEnable               =   %<user_config.update_enable>,
+            .nonSupervisorAccessEnable  =   %<user_config.state_access>
+        };
+        // rtcTimer%<instance> Initial Time and Date
+        const rtc_timedate_t rtcTimer%<instance>_StartTime =
+        {
+            .year       =   %<user_config.date_year>U,
+            .month      =   %<user_config.date_month>U,
+            .day        =   %<user_config.date_day>U,
+
+            .hour       =   %<user_config.time_hour>U,
+            .minutes    =   %<user_config.time_min>U,
+            .seconds    =   %<user_config.time_sec>U
+        };
+        %closefile tmpFcnBuf
+        %assign srcFile = LibGetModelDotCFile()
+        %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+    %endwith
+%endfunction

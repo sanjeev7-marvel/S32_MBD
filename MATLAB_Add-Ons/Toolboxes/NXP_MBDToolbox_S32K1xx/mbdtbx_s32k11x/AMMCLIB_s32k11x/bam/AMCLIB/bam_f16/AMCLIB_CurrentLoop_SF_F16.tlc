@@ -1,0 +1,134 @@
+%% Copyright (c) 2019 NXP
+
+%implements AMCLIB_CurrentLoop_SF_F16 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+    %<LibAddToCommonIncludes("<stdbool.h>")>
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+      %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+%assign ::cntInit = %<::cntInit> + 1
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("STDBOOL_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::STDBOOL_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include <stdbool.h>
+    %endif
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+    bool CurrentLoop_%<::cntInit>_initialized = false;
+    AMCLIB_CURRENT_LOOP_T_F16 CurrentLoop_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+%openfile tmpParamExternBuf
+    extern bool CurrentLoop_%<::cntInit>_initialized;
+    extern  AMCLIB_CURRENT_LOOP_T_F16 CurrentLoop_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cnt = %<::cnt> + 1
+
+    %assign f16CC1scD = CAST("Number", Parameter[0].Value[0])
+    %assign f16CC2scD = CAST("Number", Parameter[1].Value[0])
+    %assign u16NShiftD = CAST("Number", Parameter[2].Value[0])
+    %assign f16CC1scQ = CAST("Number", Parameter[3].Value[0])
+    %assign f16CC2scQ = CAST("Number", Parameter[4].Value[0])
+    %assign u16NShiftQ = CAST("Number", Parameter[5].Value[0])
+
+    %assign f16UDcBus = LibBlockInputSignal(0, "", "", 0)
+    %assign f16IDReq = LibBlockInputSignal(1, "", "", 0)
+    %assign f16IQReq = LibBlockInputSignal(2, "", "", 0)
+    %assign f16IDFbck = LibBlockInputSignal(3, "", "", 0)
+    %assign f16IQFbck = LibBlockInputSignal(4, "", "", 0)
+    %assign f32AccD = LibBlockInputSignal(5, "", "", 0)
+    %assign f16InErrK1D = LibBlockInputSignal(6, "", "", 0)
+    %assign f32AccQ = LibBlockInputSignal(7, "", "", 0)
+    %assign f16InErrK1Q = LibBlockInputSignal(8, "", "", 0)
+
+    %assign pOutAccD = LibBlockOutputSignal(0, "", "", 0)
+    %assign pOutInErrK1D = LibBlockOutputSignal(1, "", "", 0)
+    %assign pOutAccQ = LibBlockOutputSignal(2, "", "", 0)
+    %assign pOutInErrK1Q = LibBlockOutputSignal(3, "", "", 0)
+    %assign pOutUDReq = LibBlockOutputSignal(4, "", "", 0)
+    %assign pOutUQReq = LibBlockOutputSignal(5, "", "", 0)
+
+    {
+        SWLIBS_2Syst_F16 UDQReq;
+        SWLIBS_2Syst_F16 IDQReqLocal;
+        SWLIBS_2Syst_F16 IDQFbckLocal;
+
+        IDQReqLocal.f16Arg1 = %<f16IDReq>;
+        IDQReqLocal.f16Arg2 = %<f16IQReq>;
+        IDQFbckLocal.f16Arg1 = %<f16IDFbck>;
+        IDQFbckLocal.f16Arg2 = %<f16IQFbck>;
+
+        if (!CurrentLoop_%<::cnt>_initialized) {
+
+            CurrentLoop_%<::cnt>.pPIrAWD.f16CC1sc = %<f16CC1scD>;
+            CurrentLoop_%<::cnt>.pPIrAWD.f16CC2sc = %<f16CC2scD>;
+            CurrentLoop_%<::cnt>.pPIrAWD.u16NShift = %<u16NShiftD>;
+
+            CurrentLoop_%<::cnt>.pPIrAWQ.f16CC1sc = %<f16CC1scQ>;
+            CurrentLoop_%<::cnt>.pPIrAWQ.f16CC2sc = %<f16CC2scQ>;
+            CurrentLoop_%<::cnt>.pPIrAWQ.u16NShift = %<u16NShiftQ>;
+
+            CurrentLoop_%<::cnt>.pIDQReq = &IDQReqLocal;
+            CurrentLoop_%<::cnt>.pIDQFbck = &IDQFbckLocal;
+
+            AMCLIB_CurrentLoopInit_F16(&CurrentLoop_%<::cnt>);
+
+            CurrentLoop_%<::cnt>_initialized = true;
+        }
+
+        CurrentLoop_%<::cnt>.pPIrAWD.f32Acc = %<f32AccD>;
+        CurrentLoop_%<::cnt>.pPIrAWD.f16InErrK1 = %<f16InErrK1D>;
+        CurrentLoop_%<::cnt>.pPIrAWQ.f32Acc = %<f32AccQ>;
+        CurrentLoop_%<::cnt>.pPIrAWQ.f16InErrK1 = %<f16InErrK1Q>;
+
+        AMCLIB_CurrentLoop_F16(%<f16UDcBus>, &UDQReq, &CurrentLoop_%<::cnt>);
+
+        %<pOutAccD> = CurrentLoop_%<::cnt>.pPIrAWD.f32Acc;
+        %<pOutInErrK1D> = CurrentLoop_%<::cnt>.pPIrAWD.f16InErrK1;
+        %<pOutAccQ> = CurrentLoop_%<::cnt>.pPIrAWQ.f32Acc;
+        %<pOutInErrK1Q> = CurrentLoop_%<::cnt>.pPIrAWQ.f16InErrK1;
+        %<pOutUDReq> = UDQReq.f16Arg1;
+        %<pOutUQReq> = UDQReq.f16Arg2;
+    }
+
+
+%endfunction

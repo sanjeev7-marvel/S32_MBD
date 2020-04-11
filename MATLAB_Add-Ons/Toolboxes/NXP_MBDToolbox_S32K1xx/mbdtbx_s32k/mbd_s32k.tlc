@@ -1,0 +1,79 @@
+%% SYSTLC: Model Based Design Toolbox S32K1xx Code Generation Target \
+%%    TMF: mbd_s32k.tmf MAKE: mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0 EXTMODE: no_ext_comm
+%%
+%%
+%% Copyright (c) 2015 Freescale Semiconductor, Inc.
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+%%
+%%
+
+%selectfile NULL_FILE
+
+%% Standard (required) Real-Time Workshop settings
+
+%assign CodeFormat         = "Embedded-C"
+%assign AutoBuildProcedure = 0
+%assign TargetType         = "RT"
+%assign Language           = "C"
+%assign GenRTModel         = TLC_TRUE
+%assign ERTCustomFileTest  = TLC_TRUE
+%assign GenerateASAP2 = 0
+%assign isERT = FEVAL("detectTarget")
+
+
+%% Tie-in custom target option to Real-Time Workshop options
+
+%% Generate ISO_C math code whenever possible
+%if (isERT == 1)
+%if GenFloatMathFcnCalls == "ISO_C"
+  %include "mathlib.tlc"
+  %<LibRegisterISOCMathFcnPrototypes()>
+%endif
+%endif
+
+
+%% Generate the model code with RTW-EC but generate a target
+%% specific main.c
+
+%assign filesep  = FEVAL("filesep")
+%assign root_dir = FEVAL("mbd_find_s32k_root")
+%addincludepath root_dir + filesep + "mbdtbx_s32k"
+
+%assign ERTCustomFileTemplate = "mbdtargettemplate.tlc"
+%include "mbdtargetmainlibs32k.tlc"
+
+%% Displaying the toolbox version number
+%matlab disp("### Using Model-Based Design Toolbox for S32K1xx Series %<FEVAL("mbd_s32k_find_mbdt_ver")>")
+
+%assign MATLABROOT = FEVAL("matlabroot")
+%assign modelname = FEVAL("bdroot")
+%assign hooksfound = FEVAL("find_hook_routines")
+
+%% Add user defined cache here
+
+%assign dofixup = FEVAL("fixup_alignment","clear")
+
+%include "codegenentry.tlc"
+
+%assign dofixup = FEVAL("fixup_alignment","dofixup","%<modelname>.h")
+
+
+%% Custom RTW dialog options
+
+/%
+  BEGIN_RTW_OPTIONS
+
+  % Inherit ERT options
+  rtwgensettings.DerivedFrom = 'ert.tlc';
+
+  % Specify the RTW build directory name (failure to do so results
+  % in the code generating into the current MATLAB directory)
+
+  rtwgensettings.BuildDirSuffix = '_mbd_rtw';
+  rtwgensettings.Version = '1';
+  rtwgensettings.ActivateCallback = 'mbd_s32k_convert_mdl_to_latest_version(hDlg,hSrc)';
+
+  END_RTW_OPTIONS
+%/
+

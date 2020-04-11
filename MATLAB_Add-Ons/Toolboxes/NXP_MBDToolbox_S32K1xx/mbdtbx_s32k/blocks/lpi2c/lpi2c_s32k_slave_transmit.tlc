@@ -1,0 +1,35 @@
+%implements lpi2c_s32k_slave_transmit "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpi2c_transmit_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %assign size = LibBlockInputSignalWidth(0)
+        %assign data = LibBlockInputSignalAddr(0, "", "", 0)
+        bool is10bitAddr = %<user_config.is10bit>;
+        %assign instance = user_config.Instance
+        %assign slaveAddress = LibBlockInputSignal(1, "", "", 0)
+
+        LPI2C_DRV_SetSlaveAddr(%<slaveAddress>, is10bitAddr);
+
+        %if ISEQUAL (user_config.xfermode, "Blocking")
+            LPI2C_DRV_SlaveSendDataBlocking(%<instance>, %<data>, %<size>, %<user_config.Timeout>);
+        %else
+            LPI2C_DRV_SlaveSendData(%<instance>, %<data>, %<size>);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

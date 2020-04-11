@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LPUART Configuration Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+		<!--Page-title-->
+	<h1>LPUART Configuration Block</h1>
+
+	<p>Low Power Universal Asynchronous Receiver/Transmitter Configuration Block</p>
+	<p>The main functionality of the block is to configure LPUART module.</p>
+
+	<h2>Block Image</h2>
+	<img vspace="0" src="lpuart_config_files/lpuart_config_block.jpg" width="250px" height="auto">
+
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<h3>Parameters and Dialog Box</h3>
+	<p>The block dialog consists of the following tabs:</p>
+	<ul class="shifted">
+		<li><a href="#General_tab">General Settings</a></li>
+		<li><a href="#BreakandIdleConfiguration_tab">Break and Idle Configuration</a></li>
+		<li><a href="#Pins_tab">Pins</a></li>
+	</ul>
+
+	<h4><a name="General_tab"></a>General</h4>
+	<p>The General Settings tab contains the following parameters:</p>
+	<img vspace="15" src="lpuart_config_files/lpuart_config_general.jpg" width="400px" height="auto">
+
+	<h3>LPUART Module</h3>
+	<p>Select which LPUART module to use.</p>
+
+	<h3>Baud rate</h3>
+
+	<p>Available speed selections for the serial baud rate in kbps.</p>
+
+	<h3>Show advanced options</h3>
+    <p>Shows or hides the Advanced options.</p>
+
+	<!--Advanced tab-->
+    <h4><a name="2"></a>Advanced</h4>
+    <img vspace="10" src="lpuart_config_files/lpuart_config_advanced.jpg" width="400px" height="auto">
+
+	<h3>Data bits</h3>
+	<p>Select the number of data bits to use:</p>
+	<ul>
+		<li>8 - data bits</li>
+		<li>9 - data bits</li>
+		<li>10 - data bits</li>
+	</ul>
+	<h3>Parity mode</h3>
+	<ul>
+        <li>None</li>
+        <li>Even</li>
+		<li>Odd</li>
+	</ul>
+	<p>Odd parity means the total number of 1s in the data character, including the parity bit, is odd. Even
+				parity means the total number of 1s in the data character, including the parity bit, is even.
+	</p>
+
+	<h3>Stop bit number select</h3>
+		<p>
+		SBNS determines whether data characters are one or two stop bits.
+		</p>
+
+	<h3>Both edge sampling</h3>
+		<p> Enables sampling of the received data on both edges of the baud rate clock, effectively doubling the number of times the receiver samples the input data for a given oversampling ratio.</p>
+		<ul>
+			<li>rising edge - Receiver samples input data using the rising edge of the baud rate clock</li>
+			<li>rising and falling edges - Receiver samples input data using the rising and falling edge of the baud rate clock</li>
+		</ul>
+
+	<h3>Receive data inversion</h3>
+	<p>Setting this bit reverses the polarity of the received data input.</p>
+
+	<h3>Transmit data inversion</h3>
+	<p>Setting this bit reverses the polarity of the transmitted data output.</p>
+
+	<h4><a name = "BreakandIdleConfiguration_tab"></a>Break and Idle Configuration</h4>
+	<img vspace="10" src="lpuart_config_files/lpuart_config_break_idle.jpg" width="400px" height="auto">
+	<p>The Break and Idle Configuration tab is part of advanced options. It contains the following parameters :</p>
+
+	<h3>Transmit break character length</h3>
+	<p>Selects a longer transmitted break character length. Detection of a framing error is not affected by the state of this selection.</p> 
+		<ul>
+			<li>10 - 13 bit times</li>
+			<li>13 - 16 bit times</li>
+		</ul>
+
+	<h3>Receive break character detection length</h3>
+	<p>Selects a longer break character detection length. While 13-16 bit times option is set, receive data is not stored in the receive data buffer.</p>
+		<ul>
+			<li>10 - 13 bit times</li>
+			<li>13 - 16 bit times</li>
+		</ul>
+
+	<h4><a name = "Pins_tab"></a>Pins</h4>
+	<img vspace="10" src="lpuart_config_files/lpuart_config_pins.jpg" width="400px" height="auto">
+	<p>The list of available pins depends on the selected LPUART Module.</p>
+
+	<!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <ul>
+		<li>None</li>
+    </ul>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+	<p><b>*Note: </b>Read Hardware Manual documentation to get more information.</p>
+
+	</div>
+</body>
+</html>

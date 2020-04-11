@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="./js/coder_app.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./rtwreport_utils.js"></script>
+<script type="text/javascript" src="./rtwannotate.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/coder_app.css"/>
+</head>
+<body onload="srcFileOnload();">
+<pre id="code">
+<table class="code" id="codeTbl">
+<tr name="1" id="1">
+<td><a id="l1" class='ln'>1</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="2" id="2">
+<td><a id="l2" class='ln'>2</a></td><td><span class="ct"> * Academic License - for use in teaching, academic research, and meeting</span></td></tr>
+<tr name="3" id="3">
+<td><a id="l3" class='ln'>3</a></td><td><span class="ct"> * course requirements at degree granting institutions only.  Not for</span></td></tr>
+<tr name="4" id="4">
+<td><a id="l4" class='ln'>4</a></td><td><span class="ct"> * government, commercial, or other organizational use.</span></td></tr>
+<tr name="5" id="5">
+<td><a id="l5" class='ln'>5</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="6" id="6">
+<td><a id="l6" class='ln'>6</a></td><td><span class="ct"> * File: fcan0_s32k_rx_isr.c</span></td></tr>
+<tr name="7" id="7">
+<td><a id="l7" class='ln'>7</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="8" id="8">
+<td><a id="l8" class='ln'>8</a></td><td><span class="ct"> * Code generated for Simulink model 'flexcan_echo_s32k14x'.</span></td></tr>
+<tr name="9" id="9">
+<td><a id="l9" class='ln'>9</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="10" id="10">
+<td><a id="l10" class='ln'>10</a></td><td><span class="ct"> * Model version                   : 1.444</span></td></tr>
+<tr name="11" id="11">
+<td><a id="l11" class='ln'>11</a></td><td><span class="ct"> * Simulink Coder version          : 9.0 (R2018b) 24-May-2018</span></td></tr>
+<tr name="12" id="12">
+<td><a id="l12" class='ln'>12</a></td><td><span class="ct"> * MBDT for S32K1xx Series Version : 4.1.0 (R2017b-R2019a) 22-Jul-2019</span></td></tr>
+<tr name="13" id="13">
+<td><a id="l13" class='ln'>13</a></td><td><span class="ct"> * C/C++ source code generated on  : Sat Apr  4 21:03:17 2020</span></td></tr>
+<tr name="14" id="14">
+<td><a id="l14" class='ln'>14</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="15" id="15">
+<td><a id="l15" class='ln'>15</a></td><td><span class="ct"> * Target selection: mbd_s32k.tlc</span></td></tr>
+<tr name="16" id="16">
+<td><a id="l16" class='ln'>16</a></td><td><span class="ct"> * Embedded hardware selection: ARM Compatible-&gt;ARM Cortex</span></td></tr>
+<tr name="17" id="17">
+<td><a id="l17" class='ln'>17</a></td><td><span class="ct"> * Code generation objectives: Unspecified</span></td></tr>
+<tr name="18" id="18">
+<td><a id="l18" class='ln'>18</a></td><td><span class="ct"> * Validation result: Not run</span></td></tr>
+<tr name="19" id="19">
+<td><a id="l19" class='ln'>19</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="20" id="20">
+<td><a id="l20" class='ln'>20</a></td><td></td></tr>
+<tr name="21" id="21">
+<td><a id="l21" class='ln'>21</a></td><td><span class="pp">#include "flexcan_driver.h"</span></td></tr>
+<tr name="22" id="22">
+<td><a id="l22" class='ln'>22</a></td><td><span class="pp">#include "fcan0_s32k_rx_isr.h"</span></td></tr>
+<tr name="23" id="23">
+<td><a id="l23" class='ln'>23</a></td><td><span class="pp">#include "flexcan_echo_s32k14x.h"</span></td></tr>
+<tr name="24" id="24">
+<td><a id="l24" class='ln'>24</a></td><td><span class="pp">#include "flexcan_echo_s32k14x_private.h"</span></td></tr>
+<tr name="25" id="25">
+<td><a id="l25" class='ln'>25</a></td><td></td></tr>
+<tr name="26" id="26">
+<td><a id="l26" class='ln'>26</a></td><td><span class="kw">void</span> <a id="26c6" class="tk">fcan0_s32k_rx_isr</a>(<a id="26c24" class="tk">uint8_t</a> <a id="26c32" class="tk">instance</a>, <a id="26c42" class="tk">flexcan_event_type_t</a> <a id="26c63" class="tk">eventType</a>,</td></tr>
+<tr name="27" id="27">
+<td><a id="l27" class='ln'>27</a></td><td>  <a id="27c3" class="tk">uint32_t</a> <a id="27c12" class="tk">buffIdx</a>, <a id="27c21" class="tk">flexcan_state_t</a> <a id="27c37" class="tk">*</a><a id="27c38" class="tk">flexcanState</a>)</td></tr>
+<tr name="28" id="28">
+<td><a id="l28" class='ln'>28</a></td><td><span class="br">{</span></td></tr>
+<tr name="29" id="29">
+<td><a id="l29" class='ln'>29</a></td><td>  <span class="kw">if</span> (<a id="29c7" class="tk">eventType</a> <a id="29c17" class="tk">==</a> <a id="29c20" class="tk">FLEXCAN_EVENT_RX_COMPLETE</a>) <span class="br">{</span></td></tr>
+<tr name="30" id="30">
+<td><a id="l30" class='ln'>30</a></td><td>    <a id="30c5" class="tk">uint8_t</a> <a id="30c13" class="tk">i</a>;</td></tr>
+<tr name="31" id="31">
+<td><a id="l31" class='ln'>31</a></td><td>    <a id="31c5" class="tk">flexcan_msgbuff_t</a><a id="31c22" class="tk">*</a> <a id="31c24" class="tk">mb_message</a> = <a id="31c37" class="tk">flexcanState</a>-&gt;<a id="31c51" class="tk">mbs</a>[<a id="31c55" class="tk">buffIdx</a>].<a id="31c64" class="tk">mb_message</a>;</td></tr>
+<tr name="32" id="32">
+<td><a id="l32" class='ln'>32</a></td><td>    <a id="32c5" class="tk">flexcan_echo_s32k14x_Y</a>.<a id="32c28" class="tk">RxMBIndex</a> = <a id="32c40" class="tk">buffIdx</a>;</td></tr>
+<tr name="33" id="33">
+<td><a id="l33" class='ln'>33</a></td><td>    <a id="33c5" class="tk">flexcan_echo_s32k14x_B</a>.<a id="33c28" class="tk">FCAN_Rx_Complete_Isr_o3</a> = <a id="33c54" class="tk">mb_message</a>-&gt;<a id="33c66" class="tk">msgId</a>;</td></tr>
+<tr name="34" id="34">
+<td><a id="l34" class='ln'>34</a></td><td>    <a id="34c5" class="tk">flexcan_echo_s32k14x_B</a>.<a id="34c28" class="tk">FCAN_Rx_Complete_Isr_o5</a> = <a id="34c54" class="tk">mb_message</a>-&gt;<a id="34c66" class="tk">dataLen</a>;</td></tr>
+<tr name="35" id="35">
+<td><a id="l35" class='ln'>35</a></td><td>    <span class="kw">for</span> (<a id="35c10" class="tk">i</a> = 0; <a id="35c17" class="tk">i</a> <a id="35c19" class="tk">&lt;</a> <a id="35c21" class="tk">mb_message</a>-&gt;<a id="35c33" class="tk">dataLen</a>; <a id="35c42" class="tk">i</a><a id="35c43" class="tk">++</a>) <span class="br">{</span></td></tr>
+<tr name="36" id="36">
+<td><a id="l36" class='ln'>36</a></td><td>      (<a id="36c8" class="tk">&amp;</a><a id="36c9" class="tk">flexcan_echo_s32k14x_B</a>.<a id="36c32" class="tk">FCAN_Rx_Complete_Isr_o4</a>[0])[<a id="36c60" class="tk">i</a>] = <a id="36c65" class="tk">mb_message</a>-&gt;</td></tr>
+<tr name="37" id="37">
+<td><a id="l37" class='ln'>37</a></td><td>        <a id="37c9" class="tk">data</a>[<a id="37c14" class="tk">i</a>];</td></tr>
+<tr name="38" id="38">
+<td><a id="l38" class='ln'>38</a></td><td>    <span class="br">}</span></td></tr>
+<tr name="39" id="39">
+<td><a id="l39" class='ln'>39</a></td><td></td></tr>
+<tr name="40" id="40">
+<td><a id="l40" class='ln'>40</a></td><td>    <a id="40c5" class="tk">flexcan_echo_s32k14x_Y</a>.<a id="40c28" class="tk">RxTimestamp</a> = (<a id="40c43" class="tk">mb_message</a>-&gt;<a id="40c55" class="tk">cs</a> <a id="40c58" class="tk">&amp;</a></td></tr>
+<tr name="41" id="41">
+<td><a id="l41" class='ln'>41</a></td><td>      <a id="41c7" class="tk">CAN_CS_TIME_STAMP_MASK</a>) <a id="41c31" class="tk">&gt;&gt;</a> <a id="41c34" class="tk">CAN_CS_TIME_STAMP_SHIFT</a>;</td></tr>
+<tr name="42" id="42">
+<td><a id="l42" class='ln'>42</a></td><td>    <a id="42c5" class="tk">flexcan_echo__RX_Complete_Event</a>();</td></tr>
+<tr name="43" id="43">
+<td><a id="l43" class='ln'>43</a></td><td>    <span class="kw">return</span>;</td></tr>
+<tr name="44" id="44">
+<td><a id="l44" class='ln'>44</a></td><td>  <span class="br">}</span></td></tr>
+<tr name="45" id="45">
+<td><a id="l45" class='ln'>45</a></td><td></td></tr>
+<tr name="46" id="46">
+<td><a id="l46" class='ln'>46</a></td><td>  <span class="kw">if</span> (<a id="46c7" class="tk">eventType</a> <a id="46c17" class="tk">==</a> <a id="46c20" class="tk">FLEXCAN_EVENT_RXFIFO_COMPLETE</a>) <span class="br">{</span></td></tr>
+<tr name="47" id="47">
+<td><a id="l47" class='ln'>47</a></td><td>    <a id="47c5" class="tk">uint8_t</a> <a id="47c13" class="tk">i</a>;</td></tr>
+<tr name="48" id="48">
+<td><a id="l48" class='ln'>48</a></td><td>    <a id="48c5" class="tk">flexcan_echo_s32k14x_B</a>.<a id="48c28" class="tk">FCAN_Rx_FIFO_Complete_Isr_o2</a> =</td></tr>
+<tr name="49" id="49">
+<td><a id="l49" class='ln'>49</a></td><td>      <a id="49c7" class="tk">canCom0_recvBuffFifo</a>.<a id="49c28" class="tk">msgId</a>;</td></tr>
+<tr name="50" id="50">
+<td><a id="l50" class='ln'>50</a></td><td>    <a id="50c5" class="tk">flexcan_echo_s32k14x_B</a>.<a id="50c28" class="tk">FCAN_Rx_FIFO_Complete_Isr_o4</a> =</td></tr>
+<tr name="51" id="51">
+<td><a id="l51" class='ln'>51</a></td><td>      <a id="51c7" class="tk">canCom0_recvBuffFifo</a>.<a id="51c28" class="tk">dataLen</a>;</td></tr>
+<tr name="52" id="52">
+<td><a id="l52" class='ln'>52</a></td><td>    <span class="kw">for</span> (<a id="52c10" class="tk">i</a> = 0; <a id="52c17" class="tk">i</a> <a id="52c19" class="tk">&lt;</a> <a id="52c21" class="tk">canCom0_recvBuffFifo</a>.<a id="52c42" class="tk">dataLen</a>; <a id="52c51" class="tk">i</a><a id="52c52" class="tk">++</a>) <span class="br">{</span></td></tr>
+<tr name="53" id="53">
+<td><a id="l53" class='ln'>53</a></td><td>      (<a id="53c8" class="tk">&amp;</a><a id="53c9" class="tk">flexcan_echo_s32k14x_B</a>.<a id="53c32" class="tk">FCAN_Rx_FIFO_Complete_Isr_o3</a>[0])[<a id="53c65" class="tk">i</a>] =</td></tr>
+<tr name="54" id="54">
+<td><a id="l54" class='ln'>54</a></td><td>        <a id="54c9" class="tk">canCom0_recvBuffFifo</a>.<a id="54c30" class="tk">data</a>[<a id="54c35" class="tk">i</a>];</td></tr>
+<tr name="55" id="55">
+<td><a id="l55" class='ln'>55</a></td><td>    <span class="br">}</span></td></tr>
+<tr name="56" id="56">
+<td><a id="l56" class='ln'>56</a></td><td></td></tr>
+<tr name="57" id="57">
+<td><a id="l57" class='ln'>57</a></td><td>    <a id="57c5" class="tk">flexcan_echo_s32k14x_Y</a>.<a id="57c28" class="tk">RxFIFOTimestamp</a> = (<a id="57c47" class="tk">canCom0_recvBuffFifo</a>.<a id="57c68" class="tk">cs</a> <a id="57c71" class="tk">&amp;</a></td></tr>
+<tr name="58" id="58">
+<td><a id="l58" class='ln'>58</a></td><td>      <a id="58c7" class="tk">CAN_CS_TIME_STAMP_MASK</a>) <a id="58c31" class="tk">&gt;&gt;</a> <a id="58c34" class="tk">CAN_CS_TIME_STAMP_SHIFT</a>;</td></tr>
+<tr name="59" id="59">
+<td><a id="l59" class='ln'>59</a></td><td>    <a id="59c5" class="tk">flexcan__RX_FIFO_Complete_Event</a>();</td></tr>
+<tr name="60" id="60">
+<td><a id="l60" class='ln'>60</a></td><td>    <span class="kw">return</span>;</td></tr>
+<tr name="61" id="61">
+<td><a id="l61" class='ln'>61</a></td><td>  <span class="br">}</span></td></tr>
+<tr name="62" id="62">
+<td><a id="l62" class='ln'>62</a></td><td><span class="br">}</span></td></tr>
+<tr name="63" id="63">
+<td><a id="l63" class='ln'>63</a></td><td></td></tr>
+<tr name="64" id="64">
+<td><a id="l64" class='ln'>64</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="65" id="65">
+<td><a id="l65" class='ln'>65</a></td><td><span class="ct"> * File trailer for generated code.</span></td></tr>
+<tr name="66" id="66">
+<td><a id="l66" class='ln'>66</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="67" id="67">
+<td><a id="l67" class='ln'>67</a></td><td><span class="ct"> * [EOF]</span></td></tr>
+<tr name="68" id="68">
+<td><a id="l68" class='ln'>68</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="69" id="69">
+<td><a id="l69" class='ln'>69</a></td><td></td></tr>
+</table>
+</pre>
+</body>
+</html>

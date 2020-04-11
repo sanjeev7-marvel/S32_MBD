@@ -1,0 +1,43 @@
+%implements ftm_s32k_init_disen "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+   %<LibAddToCommonIncludes("ftm_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_ftm_init_trigger_sdk_params", blockPath)
+    %with sdk_params
+        /* FTM PWM Initialization Trigger Enable Disable*/
+        %if load_pdb_0
+            PDB_DRV_LoadValuesCmd(0);
+        %endif
+        %if load_pdb_1
+            PDB_DRV_LoadValuesCmd(1);
+        %endif
+        
+        FTM_DRV_SetInitTriggerCmd(FTM%<module>, %<action>);
+    %endwith
+
+    %endif
+%endfunction

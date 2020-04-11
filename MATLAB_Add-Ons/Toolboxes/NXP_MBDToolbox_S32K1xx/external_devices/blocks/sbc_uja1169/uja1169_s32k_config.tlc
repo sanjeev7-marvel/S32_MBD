@@ -1,0 +1,136 @@
+%implements uja1169_s32k_config "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja1169_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_uja1169_config_sdk_params", blockPath)
+    %with sdk_params
+    {
+
+        %openfile tmpFcnBuf
+            void sbc_init0(void);
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(LibGetModelDotHFile(), "Functions", tmpFcnBuf)>
+
+        %openfile tmpFcnBuf
+            /* Configure sbc init structure. */
+            const sbc_int_config_t sbcConfig = {
+                .regulatorCtr = {
+                    .regulator = {
+                        .pdc = %<user_config.regulatorCtr.regulator.pdc>,
+                        .v2c =  %<user_config.regulatorCtr.regulator.v2c>,
+                        .v1rtc = %<user_config.regulatorCtr.regulator.v1rtc>
+                    },
+                    .supplyEvnt = {
+                        .v2oe = %<user_config.regulatorCtr.supplyEvnt.v2oe>,
+                        .v2ue = %<user_config.regulatorCtr.supplyEvnt.v2ue>,
+                        .v1ue = %<user_config.regulatorCtr.supplyEvnt.v1ue>
+                    }
+                },
+                .watchdog = {
+                    .modeControl =  %<user_config.watchdog.modeControl>,
+                    .nominalPeriod = %<user_config.watchdog.nominalPeriod>
+                },
+                .mode = %<user_config.mode>,
+                .lhc = %<user_config.lhc>,
+                .sysEvnt = {
+                    .owte = %<user_config.sysEvnt.owte>,
+                    .spife = %<user_config.sysEvnt.spife>
+                },
+                .lockMask =(sbc_lock_t) %<user_config.lockMask>,
+                .can = {
+                    .canConf = {
+                        .cfdc = %<user_config.can.canConf.cfdc>,
+                        .pncok = %<user_config.can.canConf.pncok>,
+                        .cpnc = %<user_config.can.canConf.cpnc>,
+                        .cmc = %<user_config.can.canConf.cmc>
+                    },
+                    .canTransEvnt  = {
+                        .cbse = %<user_config.can.canTransEvnt.cbse>,
+                        .cfe = %<user_config.can.canTransEvnt.cfe>,
+                        .cwe = %<user_config.can.canTransEvnt.cwe>
+                    },
+                    .datRate = %<user_config.can.datRate>,
+                    .identif = {
+                        (sbc_identifier_t)%<user_config.can.identif1>,
+                        (sbc_identifier_t)%<user_config.can.identif2>,
+                        (sbc_identifier_t)%<user_config.can.identif3>,
+                        (sbc_identifier_t)%<user_config.can.identif4>
+                    },
+                    .mask ={
+                        (sbc_identif_mask_t)%<user_config.can.mask1>,
+                        (sbc_identif_mask_t)%<user_config.can.mask2>,
+                        (sbc_identif_mask_t)%<user_config.can.mask3>,
+                        (sbc_identif_mask_t)%<user_config.can.mask4>
+                    },
+                    .frame = {
+                        .ide = %<user_config.can.frame.ide>,
+                        .pndm = %<user_config.can.frame.pndm>,
+                        .dlc = (sbc_frame_ctr_dlc_t)%<user_config.can.frame.dlc>
+                    },
+                    .dataMask = {
+                        (sbc_data_mask_t)%<user_config.can.dataMask0>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask1>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask2>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask3>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask4>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask5>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask6>,
+                        (sbc_data_mask_t)%<user_config.can.dataMask7>
+                    }
+                },
+                .wakePin = {
+                    .wpre = %<user_config.wakePin.wpre>,
+                    .wpfe = %<user_config.wakePin.wpfe>
+                }
+            };
+
+            void sbc_init0()
+            {
+                sbc_factories_conf_t factoriesConf;
+
+                SBC_Init(&sbcConfig, %<user_config.lpspiInstance>);
+
+                SBC_GetFactoriesSettings(&factoriesConf);
+
+                if (factoriesConf.control.fnmc == SBC_UJA_SBC_FNMC_EN ||
+                    factoriesConf.control.sdmc == SBC_UJA_SBC_SDMC_EN ||
+                    factoriesConf.control.slpc == SBC_UJA_SBC_SLPC_IG)
+                {
+                    /* Set correct settings. */
+                    factoriesConf.control.fnmc = SBC_UJA_SBC_FNMC_DIS;
+                    factoriesConf.control.sdmc = SBC_UJA_SBC_SDMC_DIS;
+                    factoriesConf.control.slpc = SBC_UJA_SBC_SLPC_AC;
+                    SBC_ChangeFactoriesSettings(&factoriesConf);
+                }
+            }
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", tmpFcnBuf)>
+    }
+    %endwith
+
+    %endif
+%endfunction

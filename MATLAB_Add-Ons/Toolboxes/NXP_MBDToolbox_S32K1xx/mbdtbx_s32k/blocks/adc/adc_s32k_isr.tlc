@@ -1,0 +1,71 @@
+%implements adc_s32k_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("adc_driver.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("mbd_adc_irq.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_adc_isr_params", blockPath)
+    %with sdk_params
+
+        ADC_InstallCallback(%<instance>, %<adc_r>, ADC%<instance>_SC1reg%<adc_r>_callback);
+
+        %if !EXISTS("ADC%<instance>_NVIC_ISR_INITIALIZATION")
+            %assign ::ADC%<instance>_NVIC_ISR_INITIALIZATION = 1
+            /* Set ADC%<instance> interrupt priority */
+            INT_SYS_SetPriority(ADC%<instance>_IRQn, %<prio>);
+            /* Enable ADC%<instance> interrupt */
+            INT_SYS_EnableIRQ(ADC%<instance>_IRQn);
+        %endif
+
+        %openfile buffer
+        void ADC%<instance>_SC1reg%<adc_r>_callback(void)
+        {
+            adc_chan_config_t config;
+            uint16_t result;
+            %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                %with SFcnSystemOutputCall[fcnCallIdx]
+                    %% skip unconnected function call outputs
+                    %if ISEQUAL (BlockToCall, "unconnected")
+                        %continue
+                    %endif
+
+                    ADC_DRV_GetChanResult(%<instance>, %<adc_r>, &result);
+                    %<LibBlockOutputSignal(1,"","",0)> = result;
+                    ADC_DRV_GetChanConfig(%<instance>, %<adc_r>, &config);
+                    %<LibBlockOutputSignal(2,"","",0)> = config.channel;
+
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                %endwith
+            %endforeach
+        }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+    %endwith
+
+    %endif
+%endfunction

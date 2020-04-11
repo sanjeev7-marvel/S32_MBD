@@ -1,0 +1,180 @@
+%implements lpspi_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("lpspi_master_driver.h")>
+    %<LibAddToCommonIncludes("lpspi_slave_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign blockInfo = FEVAL("mbd_s32k_lpspi_config_sdk_params", blockPath)
+
+    %with blockInfo
+    %% pinInfo = pinInfo.sin_info, pinInfo.sout_info, pinInfo.sck_info, pinInfo.pcs_info
+    %% each of them has .port, .pin, .mux, .pt (e.g.: PORTA, 2, PORT_MUX_ALT3, PTD)
+    %assign pinInfo = user_config.PinInfo.user_config
+
+    %openfile definitionsBuf
+        %if (user_config.Role == "Master")
+            lpspi_state_t lpspiMasterState%<user_config.InstanceNumber>;
+            void lpspi_master_transfer_callback%<user_config.InstanceNumber>(void *driverState, spi_event_t event, void *userData) __attribute__((weak));
+        %else
+            lpspi_state_t lpspiSlaveState%<user_config.InstanceNumber>;
+            void lpspi_slave_transfer_callback%<user_config.InstanceNumber>(void *driverState, spi_event_t event, void *userData) __attribute__((weak));
+        %endif
+    %closefile definitionsBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", definitionsBuf)>
+
+    {
+        /* Enable LPSPI clock */
+        PCC_SetPeripheralClockControl(PCC, LPSPI%<user_config.InstanceNumber>_CLK, true, CLK_SRC_FIRC, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        /* Enable clock for %<pinInfo.sin_info.user_config.port> */
+        PCC_SetPeripheralClockControl(PCC, %<pinInfo.sin_info.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        /* Enable clock for %<pinInfo.sout_info.user_config.port> */
+        PCC_SetPeripheralClockControl(PCC, %<pinInfo.sout_info.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        /* Enable clock for %<pinInfo.sck_info.user_config.port> */
+        PCC_SetPeripheralClockControl(PCC, %<pinInfo.sck_info.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        %foreach pcs_idx = 4
+            %if(pinInfo.pcs_info[pcs_idx].user_config.port != "None")
+                /* PCS%<pcs_idx>! Enable clock for %<pinInfo.pcs_info[pcs_idx].user_config.port> */
+                PCC_SetPeripheralClockControl(PCC, %<pinInfo.pcs_info[pcs_idx].user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+            %endif
+        %endforeach
+
+        /* Setup SPI pins */
+        pin_settings_config_t spi_pin_mux[%<pinInfo.pin_count>]={
+        {
+            /* SIN pin */
+            .base          = %<pinInfo.sin_info.user_config.port>,
+            .pinPortIdx    = %<pinInfo.sin_info.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<pinInfo.sin_info.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            /* SOUT pin */
+            .base          = %<pinInfo.sout_info.user_config.port>,
+            .pinPortIdx    = %<pinInfo.sout_info.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<pinInfo.sout_info.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+        {
+            /* SCK pin */
+            .base          = %<pinInfo.sck_info.user_config.port>,
+            .pinPortIdx    = %<pinInfo.sck_info.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<pinInfo.sck_info.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+        },
+
+        %foreach pcs_idx = 4
+            %if(pinInfo.pcs_info[pcs_idx].user_config.port != "None")
+            {
+                /* PCS%<pcs_idx> pin */
+                .base          = %<pinInfo.pcs_info[pcs_idx].user_config.port>,
+                .pinPortIdx    = %<pinInfo.pcs_info[pcs_idx].user_config.pin>,
+                .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+                .passiveFilter = false,
+                .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+                .mux           = %<pinInfo.pcs_info[pcs_idx].user_config.mux>,
+                .pinLock       = false,
+                .intConfig     = PORT_DMA_INT_DISABLED,
+                .clearIntFlag  = false,
+            },
+            %endif
+        %endforeach
+
+        };
+        PINS_DRV_Init(%<pinInfo.pin_count>, spi_pin_mux);
+    }
+
+    %if (user_config.Role == "Master")
+    {
+        /* Configure the SPI init structure. */
+        lpspi_master_config_t spiConfig%<user_config.InstanceNumber> =
+        {
+            .bitsPerSec = %<user_config.BaudRate>,
+            .whichPcs = %<user_config.WhichPCS>,
+            .pcsPolarity = %<user_config.PCSPol>,
+            .isPcsContinuous = %<user_config.ContinuousTransfer>,
+            .bitcount = %<user_config.TransferSize>,
+            .clkPhase = %<user_config.CPHA>,
+            .clkPolarity = %<user_config.CPOL>,
+            .lsbFirst = %<user_config.BitOrder>,
+            .transferType = LPSPI_USING_INTERRUPTS,
+            .callback = (spi_callback_t)lpspi_master_transfer_callback%<user_config.InstanceNumber>,
+        };
+
+        /* Module source clock */
+        uint32_t frequency;
+        CLOCK_SYS_GetFreq(LPSPI%<user_config.InstanceNumber>_CLK, &frequency);
+        spiConfig%<user_config.InstanceNumber>.lpspiSrcClk = frequency;
+
+        /* Initializes a LPSPI instance for interrupt driven master mode operation */
+        LPSPI_DRV_MasterInit(%<user_config.InstanceNumber>, &lpspiMasterState%<user_config.InstanceNumber>, &spiConfig%<user_config.InstanceNumber>);
+    }
+    %else
+    {
+        /* Configure the SPI init structure. */
+        lpspi_slave_config_t spiConfig%<user_config.InstanceNumber> =
+        {
+            .pcsPolarity = %<user_config.PCSPol>,
+            .bitcount = %<user_config.TransferSize>,
+            .clkPhase = %<user_config.CPHA>,
+            .whichPcs = %<user_config.WhichPCS>,
+            .clkPolarity = %<user_config.CPOL>,
+            .lsbFirst = %<user_config.BitOrder>,
+            .transferType = LPSPI_USING_INTERRUPTS,
+            .callback = (spi_callback_t)lpspi_slave_transfer_callback%<user_config.InstanceNumber>,
+        };
+
+        /* Initializes a LPSPI instance for a slave mode operation */
+        LPSPI_DRV_SlaveInit(%<user_config.InstanceNumber>, &lpspiSlaveState%<user_config.InstanceNumber>,
+        &spiConfig%<user_config.InstanceNumber>);
+    }
+    %endif
+    %endwith
+
+    %endif
+%endfunction

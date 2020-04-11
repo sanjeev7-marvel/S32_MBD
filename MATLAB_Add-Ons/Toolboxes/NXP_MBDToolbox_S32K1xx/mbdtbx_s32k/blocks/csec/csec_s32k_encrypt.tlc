@@ -1,0 +1,79 @@
+%implements csec_s32k_encrypt "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("csec_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %if !EXISTS("CSEc_INITIALIZE")
+        %% INITIALIZE ONCE
+        %assign ::CSEc_INITIALIZE = 1
+
+        %openfile declarationsBuf
+        csec_state_t csec1_State;
+        %closefile declarationsBuf
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", declarationsBuf)>
+
+        %openfile externBuf
+        extern csec_state_t csec1_State;
+        %closefile externBuf
+        %<LibCacheExtern(externBuf)>
+
+        CSEC_DRV_Init(&csec1_State);
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign plainText = LibBlockInputSignalAddr(0, "", "", 0)
+    %assign status = LibBlockOutputSignal(0, "", "", 0)
+    %assign cipherText = LibBlockOutputSignalAddr(1, "", "", 0)
+
+    %assign length = LibBlockInputSignalWidth(0)
+
+    %assign sdk_params = FEVAL("mbd_s32k_csec_encrypt_sdk_params", blockPath)
+    %with sdk_params
+        %switch mode
+            %case "ECB"
+                %<status> = CSEC_DRV_EncryptECB(%<keyId>, %<plainText>, %<length>, %<cipherText>, %<timeout>);
+            %break
+            %case "CBC"
+                %assign iv = LibBlockInputSignalAddr(1, "", "", 0)
+
+                %<status> = CSEC_DRV_EncryptCBC(%<keyId>, %<plainText>, %<length>, %<iv>, %<cipherText>, %<timeout>);
+            %break
+        %endswitch
+    %endwith
+
+    %endif
+%endfunction

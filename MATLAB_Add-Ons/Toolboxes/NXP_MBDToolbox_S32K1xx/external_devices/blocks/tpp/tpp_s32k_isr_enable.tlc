@@ -1,0 +1,24 @@
+%implements tpp_s32k_isr_enable "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Output function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs (block, system) Output
+    %assign blockPath = LibGetBlockPath(block)
+	%if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+	%<LibAddToCommonIncludes("tpp_ic_init.h")>
+
+	%assign int_params = FEVAL("tpp_s32k_int_params", blockPath)
+	%if (int_params.tppIntEn == 1)
+		tpp_interrupt_enable(%<int_params.tppIntPrio>);
+	%else
+		tpp_interrupt_disable();
+	%endif
+
+    %endif
+%endfunction

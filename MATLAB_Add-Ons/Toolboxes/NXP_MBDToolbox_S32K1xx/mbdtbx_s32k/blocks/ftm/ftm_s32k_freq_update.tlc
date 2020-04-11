@@ -1,0 +1,40 @@
+%implements ftm_s32k_freq_update "C"
+
+%% Copyright (c) 2014 Freescale Semiconductor, Inc.
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign vector = FEVAL ("mbd_s32k_ftm_pwm_config_get_used_modules")
+    %% Vector[0] = size of the vector containing the pwm used modules
+    %foreach i = vector[0] + 1
+        %if i > 0
+            %<LibAddToCommonIncludes("ftm%<vector[i]>_pwm_params.h")>
+        %endif
+    %endforeach
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_ftm_pwm_frequency_update_sdk_params", blockPath)
+    FTM_DRV_UpdatePwmPeriod(FTM_PWM%<params.ftm_module>, %<params.units>, %<LibBlockInputSignal(0, "", "", 0)>, true);
+
+    %endif
+%endfunction

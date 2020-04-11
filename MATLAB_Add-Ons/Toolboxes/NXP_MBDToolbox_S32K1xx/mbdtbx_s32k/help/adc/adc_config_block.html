@@ -1,0 +1,184 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ADC Configuration Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>ADC Configuration Block</h1>
+	<!--Page-description-->
+	<p>This block is used to configure the parameters of the ADC.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="adc_config_block_files/adc_config_block.jpg" width="200px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	 <!--Block-Dialog-Box-->
+       <h2>Parameters and Dialog Box</h2>
+        <p>The block dialog consists of the following tabs: </p>
+		<ul>
+                <li><a href="#1">General</a></li>
+                <li><a href="#2">Advanced</a></li>
+            </ul>
+    <!--Table of contents-->
+
+	<!--Window tab-->
+        <h4><a name="1"></a>General</h4>
+		<p>The General tab contains the following parameters:</p>
+
+		<img vspace="10" src="adc_config_block_files/adc_config_opt.jpg" width="400px" height="auto">
+
+		<h3>ADC converter number</h3>
+		<p>Selects the ADC converter number.</p>
+
+		<h3>Conversion Mode Selection</h3>
+		<p>Selects the ADC resolution mode.</p>
+		<ul>
+			<li>8-bit conversion</li>
+			<li>10-bit conversion</li>
+			<li>12-bit conversion</li>
+		</ul>
+
+		<h3>Show advanced options</h3>
+		<p>Shows or hides the Advanced options.</p>
+		<!--Advanced options-->
+		<img vspace="10" src="adc_config_block_files/adc_config_general_advanced.jpg" width="400px" height="auto">
+
+		<!--Tab-->
+		<h3>Sample Time Select (2 - 256)</h3>
+		<p>Selects a sample time of 2 to 256 ADCK clock cycles. The value written to this register is the desired
+				sample time minus 1. A sample time of 1 is not supported. Allows higher impedance inputs to be
+				accurately sampled or to maximize conversion speed for lower impedance inputs. Longer sample times
+				can also be used to lower overall power consumption when continuous conversions are enabled if high
+				conversion rates are not required.</p>
+
+		<h3>Input Clock Select</h3>
+		<p>Selects the input clock source to generate the internal clock, ADCK.</p>
+		<li>alternate clock 1</li>
+		<p> </p>
+
+		<h3>Clock Divide Select</h3>
+		<p>Selects the divide ratio used by the ADC to generate the internal clock ADCK.</p>
+			<ul>
+				<li>input clock</li>
+				<li>input clock / 2</li>
+				<li>input clock / 4</li>
+				<li>input clock / 8</li>
+			</ul>
+
+		<!--Advanced tab-->
+        <h4><a name="2"></a>Advanced</h4>
+		<p>This tab is part of Advanced options and it contains the following parameters:</p>
+
+		<img vspace="10" src="adc_config_block_files/adc_config_advanced.jpg" width="400px" height="auto">
+		<h3>Pre-trigger Source Select</h3>
+		<p>Selects pre-trigger source for ADC.</p>
+			<ul>
+				<li>PDB pre-trigger</li>
+				<li>TRGMUX pre-trigger</li>
+				<li>Software pre-trigger</li>
+			</ul>
+			<h3>Software Pre-trigger Source</h3>
+			<p>It is visible when software pre-trigger source is selected and it selects pre-trigger source for ADC.</p>
+             <ul>
+				<li>Software pre-trigger 0</li>
+				<li>Software pre-trigger 1</li>
+				<li>Software pre-trigger 2</li>
+				<li>Software pre-trigger 3</li>
+			</ul>
+		<h3>Conversion Trigger Select</h3>
+		<p>Selects the type of trigger used for initiating a conversion. Two types of trigger are selectable:</p>
+			<ul>
+				<li>software</li>
+				<li>hardware</li>
+			</ul>
+		<p>When software trigger is selected, a conversion is initiated following a write to SC1A.</p>
+        <p>When hardware trigger is selected, a conversion is initiated following the assertion of the ADHWT input after a pulse of the ADHWTSn input.</p>
+
+        <h3>Voltage Reference Selection</h3>
+		<p>Selects the voltage reference source used for conversions.</p>
+			<ul>
+				<li>Vrefh and Vrefl</li>
+				<li>Valth and Valtl</li>
+			</ul>
+        
+        <h3>Supply Monitoring Enable</h3>
+        <p>Enable it for measuring internal supply (e.g.: VDD,VDD_LV, etc).</p>
+        <p><b>Note:</b>Only ADC0 (measured internally via internal input channel 0).</p>
+        
+		<h3>Compare Function Enable</h3>
+		<p>Enables the compare function.</p>
+
+		<h3>Compare Function Greater Than Enable</h3>
+		<p>Configures the compare function to check the conversion result relative to the CV1 and CV2 based upon
+				the value of ACREN. ACFE must be set for ACFGT to have any effect.</p>
+			<ul>
+				<li>Unchecked - Configures less than threshold, outside range not inclusive and inside range not inclusive; functionality
+				based on the values placed in CV1 and CV2.</li>
+				<li>Checked - Configures greater than or equal to threshold, outside and inside ranges inclusive; functionality based
+				on the values placed in CV1 and CV2.</li>
+			</ul>
+
+		<h3>Compare Function Range Enable</h3>
+		<p>Configures the compare function to check if the conversion result of the input being monitored is either
+				between or outside the range formed by CV1 and CV2 determined by the value of ACFGT. ACFE must be
+				set for ACFGT to have any effect. </p>
+			<ul>
+				<li>Unchecked - Range function disabled. Only CV1 is compared.</li>
+				<li>Checked - Range function enabled. Both CV1 and CV2 are compared.</li>
+			</ul>
+
+			<h3>Compare Value Register 1 (0 - 65535)</h3>
+			<p> Contains a compare value used to compare the conversion result when the compare function is enabled. </p>
+			<h3>Compare Value Register 2 (0 - 65535)</h3>
+			<p> Contains a compare value used to compare the conversion result when the compare function is enabled. </p>
+		<h3>Continuous Conversion Enable</h3>
+			<ul>
+				<li>Unchecked - One conversion or one set of conversions if the hardware average function is enabled, that is,
+				AVGE=1, after initiating a conversion.</li>
+				<li>Checked - Continuous conversions or sets of conversions if the hardware average function is enabled, that is,
+				AVGE=1, after initiating a conversion.</li>
+			</ul>
+
+		<h3>Hardware Average Enable</h3>
+		<p>Enables the hardware average function of the ADC. </p>
+
+		<h3>Hardware Average Select</h3>
+		<p>Determines how many ADC conversions will be averaged to create the ADC average result.</p>
+		<ul>
+			<li>4 samples</li>
+			<li>8 samples</li>
+			<li>16 samples<br>
+			<li>32 samples</td>
+		</ul>
+
+	<!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <ul>
+		<li>None</li>
+    </ul>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+	<p>* Read Hardware Manual documentation to get more information.</p>
+
+	</div>
+
+	</body>
+	</html>

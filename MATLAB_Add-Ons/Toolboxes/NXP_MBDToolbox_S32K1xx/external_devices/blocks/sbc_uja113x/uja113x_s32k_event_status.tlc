@@ -1,0 +1,96 @@
+%implements uja113x_s32k_event_status "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("sbc_uja113x.h")>
+    %<LibAddToCommonIncludes("sbc_uja113x_map.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_uja113x_event_status_sdk_param", blockPath)
+    %with params
+    {
+        uint8_t txData[2U];
+        uint8_t rxData[2U];
+
+        txData[0U] = %<reg>;
+        UJA113X_SbcTransfer(0, true, txData, rxData, 2U);
+
+        %switch struct
+            %%Overtemperature
+            %case "otw"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_MSS_OTWS_MASK;
+            %break
+            %%CAN wake-up: 1 - CAN wake-up event detected while the transceiver is in CAN Offline Mode, 0 - No CAN wake-up event detected
+            %case "cw"
+            %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_TIS_CWI_MASK;
+            %break
+            %% CAN partial networking frame error: 0 - no error detected; 1- error detected
+            %case "pnfde"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_TS_CPNS_MASK;
+            %break
+            %%CAN failure
+            %case "cf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_TS_CFS_MASK;
+            %break
+            %% CAN bus-silence
+            %case "cbs"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_TS_CBSS_MASK;
+            %break
+            %%  V2/VEXT overvoltage : 0->no V2/VEXT overvoltage event captured/1->  V2/VEXT overvoltage event captured
+            %case "v2o"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_SUPIS_VEXTOI_MASK;
+            %break
+            %% V2/VEXT undervoltage
+            %case "v2u"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_SUPIS_VEXTUI_MASK;
+            %break
+            %% V1 undervoltage
+            %case "v1u"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_SUPIS_V1UI_MASK;
+            %break
+            %% SPI failure detection
+            %case "spif"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_SYSIS_SPIFI_MASK;
+            %break
+            %% Watchdog failure
+            %case "wdf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_SYSIS_WDI_MASK;
+            %break
+            %% Wake pin rising edge
+            %case "b0wis"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_GIS_B0WIS_MASK;
+            %break
+            %% Wake pin falling edge
+            %case "wpf"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_GIS_B1WIS_MASK;
+            %break
+            %% Limp-home
+            %case "lhc"
+                %<LibBlockOutputSignal(0, "", "", 0)> = rxData[1] & UJA113X_FSC_LHC_MASK;
+        %endswitch
+    }
+    %endwith
+
+    %endif
+%endfunction

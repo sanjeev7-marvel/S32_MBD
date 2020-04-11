@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Dual Edge Capture Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <h1>Dual Edge Capture Block</h1>
+    <p>Dual Edge Capture block for signal pulse or period measurement on the even channel input.</p>
+    <h2>Block Image</h2>
+    <img vspace="0" src="dual_edge_capture_input_files/ftm_dual_edge_capture_block.jpg" width="350px" height="auto"/>
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <h2>Outputs:</h2>
+    <ul>
+    <li>Function-call</li>
+        <li>Time in System Clock Ticks (uint16)</li>
+    </ul>
+
+    <h2>Parameters and Dialog Box</h2>
+    <p>The block dialog consists of the following tabs:</p>
+
+    <ul class="shifted">
+        <li><a href="#General_tab">General</a></li>
+        <li><a href="#Input_signal_tab">Input Signals</a></li>
+    </ul>
+
+    <h4><a name="General_tab"></a>General</h4>
+    <img vspace="10" src="dual_edge_capture_input_files/ftm_dual_edge_capture_general.jpg" width="450px" height="auto"/>
+    <h3>FTM Module</h3>
+    <p>Select which FTM module to use.</p>
+    <ul><li>Range varies depending on the selected MCU in the main config block.</li></ul>
+
+    <h3>Channel Pair</h3>
+    <p>Enables the Dual Edge Capture mode in the channels (n) and (n+1).</p>
+    <ul>
+        <li>0 &ndash; 1</li>
+        <li>2 &ndash; 3</li>
+        <li>4 &ndash; 5</li>
+        <li>6 &ndash; 7</li>
+    </ul>
+
+    <h3>Capture Mode</h3>
+    <p></p>
+    <ul>
+        <li>One-Shot</li>
+        <li>Continuous</li>
+        <li>Capture selection</li>
+    </ul>
+
+    <h3>Measurement</h3>
+    <p>Select edges to use</p>
+    <ul>
+        <li>Positive Pulse (Rising to Falling)</li>
+        <li>Negative Pulse (Falling to Rising)</li>
+        <li>Period (Rising to Rising)</li>
+        <li>Period (Falling to Falling)</li>
+    </ul>
+
+    <h3>Prescale factor for Time Stamp</h3>
+    <p>The selected prescale factor for the time stamp</p>
+    <ul>
+        <td>1 &ndash; 2 &ndash; 4 &ndash; 8 &ndash; 16 &ndash; 32 &ndash; 64 &ndash; 128</td>
+    </ul>
+
+    <h3>Filter Enable</h3>
+    <p>When enabled will show value field</p>
+    <ul>
+        <li>Enable/Disable</li>
+    </ul>
+
+    <h3>ISR Priority</h3>
+    <p>Interrupt priority level</p>
+    <ul>
+        <li>0 &ndash; 3  - S32K11x</li>
+        <li>0 &ndash; 15 - S32K14x</li>
+    </ul>
+
+    <h4><a name="Input_signal_tab"></a>Input Signals</h4>
+    <p>The Input signal tab contains the following parameters:</p>
+    <img vspace="15" src="dual_edge_capture_input_files/ftm_dual_edge_capture_pins.jpg"
+    width="450px" height="auto"/>
+
+
+    <h3>Input pin</h3>
+    <p>Defines which input pin the signal to be measured is on.</p>
+    <ul>
+        <li>Pin list varies depending on the selected MCU in the main config block.</li>
+    </ul>
+
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Block Miscellaneous Details:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+%implements ftm_s32k_pwm_config "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("<string.h>")>
+    %<LibAddToCommonIncludes("ftm_pwm_driver.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+
+    %assign vector = FEVAL ("mbd_s32k_ftm_pwm_config_get_used_modules")
+    %foreach i = vector[0] + 1
+        %if i > 0
+            %<LibAddToCommonIncludes("ftm%<vector[i]>_pwm_params.h")>
+        %endif
+    %endforeach
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign pwmParams = FEVAL("mbd_s32k_ftm_pwm_config_sdk_params", blockPath)
+    %assign ftmModule = %<pwmParams.ftmModule>
+
+    %if !EXISTS("FTM_%<ftmModule>_CONFIG_STRUCT_DEFINED")
+    %assign ::FTM_%<ftmModule>_CONFIG_STRUCT_DEFINED = 1
+
+        %% Generate the ftm%<ftmModule>_pwm_params.h file
+        %openfile h_param_file = "ftm%<ftmModule>_pwm_params.h"
+        #ifndef FTM%<ftmModule>_PWM_PARAMS_H
+        #define FTM%<ftmModule>_PWM_PARAMS_H
+
+        /* MODULE flexTimer_pwm%<ftmModule>.*/
+
+        /* Include inherited beans */
+        #include "ftm_pwm_driver.h"
+
+        /* Device instance number */
+        #define FTM_PWM%<ftmModule> %<ftmModule>U
+
+        /*fault configuration structure for FTM%<ftmModule>*/
+        extern  ftm_pwm_fault_param_t flexTimer_pwm%<ftmModule>_FaultConfig;
+
+        %if (FEVAL("strcmp","%<pwmParams.pwmMode>","independent") == 1)
+        /* Independent channels configuration structure for flexTimer_pwm%<ftmModule> */
+        extern ftm_independent_ch_param_t flexTimer_pwm%<ftmModule>_IndependentChannelsConfig[%<pwmParams.structNumber>];
+        %endif
+
+        %if (FEVAL("strcmp","%<pwmParams.pwmMode>","combine") == 1)
+        /* Combine channels configuration structure for PWM */
+        extern ftm_combined_ch_param_t flexTimer%<ftmModule>_CombinedChannelsConfig[%<pwmParams.pairsNumber>];
+        %endif
+
+        /* PWM configuration for flexTimer_pwm%<ftmModule> */
+        extern ftm_pwm_param_t flexTimer_pwm%<ftmModule>_PwmConfig;
+
+        /* Global configuration of flexTimer_pwm%<ftmModule> */
+        extern ftm_user_config_t  flexTimer_pwm%<ftmModule>_InitConfig;
+
+        /* Global state structure of flexTimer_pwm%<ftmModule> */
+        extern ftm_state_t ftmStateStruct%<ftmModule>;
+
+        #endif
+        %closefile h_param_file
+
+        %% Generate the  ftm%<ftmModule>_pwm_params.c file
+        %openfile c_param_file = "ftm%<ftmModule>_pwm_params.c"
+        #include "ftm%<ftmModule>_pwm_params.h"
+
+        /* Fault configuration structure for FTM%<ftmModule> */
+        ftm_pwm_fault_param_t flexTimer_pwm%<ftmModule>_FaultConfig =
+        {
+            %<pwmParams.fault_struct.pwmFaultPinState>, /* Output pin state on fault */
+            %<pwmParams.fault_struct.pwmFaultInterrupt>, /* PWM fault interrupt state */
+            %<pwmParams.fault_struct.filterValue>U, /* Fault filter value */
+            %<pwmParams.fault_struct.pwmFaultClearing>,  /* Fault mode */
+            {
+                %foreach i = 4
+                {
+                    %<pwmParams.fault_struct.structs_ids[i].faultDisen>, /* Fault channel state (Enabled/Disabled) */
+                    %<pwmParams.fault_struct.structs_ids[i].faultFilter>, /* Fault channel filter state (Enabled/Disabled) */
+                    %<pwmParams.fault_struct.structs_ids[i].faultPolarity>, /* Channel output state on fault */
+                },
+                %endforeach
+           }
+        };
+
+        %if (FEVAL("strcmp" ,"%<pwmParams.pwmMode>", "independent") == 1)
+        /* Independent channels configuration structure for flexTimer_pwm%<ftmModule> */
+        ftm_independent_ch_param_t flexTimer_pwm%<ftmModule>_IndependentChannelsConfig[%<pwmParams.structNumber>] =
+        {
+            %foreach i = %<pwmParams.structNumber>
+            {
+                %<pwmParams.structs_ids[i].chN>U, /* hwChannelId */
+                %<pwmParams.structs_ids[i].chNPolarity>, /* Edge mode */
+                %<pwmParams.structs_ids[i].chNDutyCycle>U, /* Duty cycle percent 0-0x8000 */
+                %<pwmParams.structs_ids[i].chNTrg>, /* External Trigger */
+                %<pwmParams.structs_ids[i].chNMode>, /* The selection of the channel (n) mode */
+                %<pwmParams.structs_ids[i].chNP1Disen>, /* Enabled/disabled the channel (n+1) output */      %%enabled by default becuse of independent
+                %<pwmParams.structs_ids[i].chNP1Polarity>, /* Select channel (n+1) output relative to channel (n) */
+                %<pwmParams.structs_ids[i].deadtime>, /* Dead time enabled/disabled */
+            },
+            %endforeach
+        };
+        %endif
+
+        %if (FEVAL("strcmp","%<pwmParams.pwmMode>","combine") == 1)
+        /* Combine channels configuration structure for PWM */
+        ftm_combined_ch_param_t flexTimer%<ftmModule>_CombinedChannelsConfig[%<pwmParams.pairsNumber>] =
+        {
+            %foreach i = %<pwmParams.pairsNumber>
+            {
+                %<pwmParams.structs_ids[i].chN>U, /* Hardware channel for channel (n) */
+                %<pwmParams.structs_ids[i].chNDutyCycle>U, /* First edge time */
+                %<pwmParams.structs_ids[i].chNP1DutyCycle>U, /* Second edge time */
+                %<pwmParams.structs_ids[i].deadtime>, /* Dead time enabled/disabled */
+                false, /* The modified combine mode enabled/disabled */ /* this will work only in the combine mode */
+                %<pwmParams.structs_ids[i].chNPolarity>, /* Channel polarity */
+                %<pwmParams.structs_ids[i].chNP1Disen>, /* Output enabled/disabled for channel (n+1) */
+                %<pwmParams.structs_ids[i].chNP1Polarity>, /* Polarity for channel (n+1) */
+                %<pwmParams.structs_ids[i].chNTrg>, /* External Trigger on the channel (n) */
+                %<pwmParams.structs_ids[i].chNP1Trg>, /* External Trigger on the channel (n+1) */
+                %<pwmParams.structs_ids[i].chNMode>, /* The selection of the channel (n) mode */
+                %<pwmParams.structs_ids[i].chNP1Mode>, /* The selection of the channel (n+1) mode */
+            },
+            %endforeach
+        };
+        %endif
+
+        /* PWM configuration for flexTimer_pwm%<ftmModule> */
+        ftm_pwm_param_t flexTimer_pwm%<ftmModule>_PwmConfig =
+        {
+        %if (FEVAL("strcmp","%<pwmParams.pwmMode>","independent") == 1)
+            %<pwmParams.structNumber>U, /* Number of independent PWM channels */
+            0U, /* Number of combined PWM channels */
+        %else
+            0U, /* Number of independent PWM channels */
+            %<pwmParams.pairsNumber>U, /* Number of combined PWM channels */
+        %endif
+            %<pwmParams.pwmEdge>, /* PWM mode */
+            %<pwmParams.deadtimeValue>U, /* Dead time value */
+            %<pwmParams.deadtimePrescaler>, /* Dead time prescaler */
+            %<pwmParams.pwmFrequency>U, /* PWM frequency */
+        %if (FEVAL("strcmp","%<pwmParams.pwmMode>","independent") == 1)
+            flexTimer_pwm%<ftmModule>_IndependentChannelsConfig, /* Independent PWM channels configuration structure */
+            NULL, /* Combined PWM channels configuration structure */
+        %else
+            NULL, /* Independent PWM channels configuration structure */
+            flexTimer%<ftmModule>_CombinedChannelsConfig, /* Combined PWM channels configuration structure */
+        %endif
+            &flexTimer_pwm%<ftmModule>_FaultConfig /* PWM fault configuration structure */
+        };
+
+        /* Global configuration of flexTimer_pwm%<ftmModule> */
+        ftm_user_config_t  flexTimer_pwm%<ftmModule>_InitConfig =
+        {
+            {
+                %<pwmParams.sync_struct.pwmSyncSw>,   /* Software trigger state */
+                %<pwmParams.sync_struct.pwmSyncTrg0>,  /* Hardware trigger 1 state */
+                %<pwmParams.sync_struct.pwmSyncTrg1>,  /* Hardware trigger 2 state */
+                %<pwmParams.sync_struct.pwmSyncTrg2>,  /* Hardware trigger 3 state */
+                %<pwmParams.sync_struct.pwmSyncMinLoad>, /* Max loading point state */
+                %<pwmParams.sync_struct.pwmSyncMaxLoad>, /* Min loading point state */
+                %<pwmParams.sync_struct.pwmSyncInvert>, /* Update mode for INVCTRL register */
+                %<pwmParams.sync_struct.pwmSyncOutControl>, /* Update mode for SWOCTRL register */
+                %<pwmParams.sync_struct.pwmSyncOutMask>, /* Update mode for OUTMASK register */
+                %<pwmParams.sync_struct.pwmSyncCounterInitial>, /* Update mode for CNTIN register */
+                %<pwmParams.sync_struct.pwmSyncAutoClear>, /* Automatic clear of the trigger*/
+                %<pwmParams.sync_struct.pwmSyncPoints>, /* Synchronization point */
+            },
+             %<pwmParams.pwmEdge>, /* Mode of operation for FTM */
+             %<pwmParams.pwmPrescaler>, /* FTM clock prescaler */
+             FTM_CLOCK_SOURCE_SYSTEMCLK,   /* FTM clock source */
+             FTM_BDM_MODE_00, /* FTM debug mode */
+             false, /* Interrupt state */
+             %<pwmParams.initTrigger> /* Initialization trigger */
+        };
+
+        ftm_state_t ftmStateStruct%<ftmModule>;
+        %closefile c_param_file
+    %endif
+
+    %% Enabling clocks for the selected PWM
+
+    %foreach i = %<pwmParams.pinsNumber>
+        %% Pins output declarations
+        %% at least one channel must be selected
+        %assign pinFcn = FEVAL("mbd_s32k_get_pin_info", "%<pwmParams.pins_struct[i].pinFtmSignal>", "%<pwmParams.pins_struct[i].pinFtmCh>")
+        /* Enable clock for %<pinFcn.user_config.port> */
+        PCC_SetClockMode (PCC, %<pinFcn.user_config.clock>, true);
+        /* Pin is configured for FTM function */
+        PINS_SetMuxModeSel (%<pinFcn.user_config.port>, %<pinFcn.user_config.pin>, %<pinFcn.user_config.mux>);
+
+        %if FEVAL("strcmp", "%<pwmParams.pins_struct[i].pinFtmChNP1>", "None") != 1
+            %assign pinFcn = FEVAL("mbd_s32k_get_pin_info", "%<pwmParams.pins_struct[i].pinFtmSignalNP1>", "%<pwmParams.pins_struct[i].pinFtmChNP1>")
+            /* Enable clock for %<pinFcn.user_config.port> */
+            PCC_SetClockMode (PCC, %<pinFcn.user_config.clock>, true);
+            /* Pin is configured for FTM function */
+            PINS_SetMuxModeSel (%<pinFcn.user_config.port>, %<pinFcn.user_config.pin>, %<pinFcn.user_config.mux>);
+        %endif
+    %endforeach
+
+    %% Fault handler enable and fault pins initialization
+    %if (FEVAL("strcmp", "%<pwmParams.fault_struct.pwmFaultInterrupt>", "true") == 1)
+        /* Enabling the FTM%<ftmModule> Faults pins */
+        %foreach i = %<pwmParams.fault_struct.pinNumber>
+            %% Fault pins
+            %assign pinFcn = FEVAL("mbd_s32k_get_pin_info", "%<pwmParams.fault_struct.structs_pins[i].alt>", "%<pwmParams.fault_struct.structs_pins[i].pin>")
+            /* Enable clock for %<pinFcn.user_config.port> */
+            PCC_SetClockMode (PCC, %<pinFcn.user_config.clock>, true);
+            /* Pin is configured for FTM function as Fault Pin */
+            PINS_SetMuxModeSel(%<pinFcn.user_config.port>, %<pinFcn.user_config.pin>, %<pinFcn.user_config.mux>);
+        %endforeach
+        /* FTM%<ftmModule>: fault ISR level */
+        INT_SYS_SetPriority(FTM%<ftmModule>_Fault_IRQn, %<pwmParams.fault_struct.pwmFaultPriority>);
+        /* FTM%<ftmModule>: fault enable ISR */
+        INT_SYS_EnableIRQ(FTM%<ftmModule>_Fault_IRQn);
+    %endif
+
+    %% PWM init clocks and
+    /* Set FTM_%<ftmModule> clock source */
+    PCC_SetPeripheralClockControl (PCC, %<pwmParams.periph_clock>, true,  %<pwmParams.clock_source>, 0, 0);
+    /* Enable clock for FTM_%<ftmModule> */
+    PCC_SetClockMode (PCC, %<pwmParams.periph_clock>, true);
+
+    /* PWM%<ftmModule> initialization */
+    FTM_DRV_Init (FTM_PWM%<ftmModule>, &flexTimer_pwm%<ftmModule>_InitConfig, &ftmStateStruct%<ftmModule>);
+
+    %% Here I need to see if the checkbox for auto init PWM is done or not
+    %if (FEVAL("strcmp", "%<pwmParams.startAfterInit>", "true") == 1)
+        FTM_DRV_InitPwm (FTM_PWM%<ftmModule>, &flexTimer_pwm%<ftmModule>_PwmConfig);
+    %endif
+
+    %if FEVAL("strcmp", "%<pwmParams.pwmMode>", "independent") == 1
+        %% Need to init other triggers if the  user sets the edge or center align
+        %% the SDK doesn't allow us to set the triggers on the (n+1) channels
+        %% Trigger the second channel if the mode is Edge or Center-aligned
+        %% because the SDK does not provide that
+
+        %%TODO check if this is still valid, but will be checked when adding support for S32K1 family
+        %foreach i = %<pwmParams.pairsNumber>
+              FTM_DRV_SetChnTriggerCmd(FTM%<ftmModule>, %<pwmParams.structs_ids[i].chN + 1>, %<pwmParams.structs_ids[i].chNP1Trg>);
+                %if FEVAL("strcmp", "%<pwmParams.structs_ids[i].chType>", "Independent") == 1 && FEVAL("strcmp", "%<pwmParams.structs_ids[i].chNP1Disen>", "true") == 1
+                    FTM_DRV_UpdatePwmChannel(FTM_PWM%<ftmModule>, %<i + 1>U, FTM_PWM_UPDATE_IN_DUTY_CYCLE, %<pwmParams.structs_ids[i].chNP1DutyCycle>,  0, true);
+                %endif
+        %endforeach
+    %endif
+
+    %% Half cycle reload
+    %if FEVAL("strcmp", "%<pwmParams.reload_struct.reloadISREnable>", "true") == 1
+
+        /* FTM%<ftmModule>: Half Cycle reload settings */
+        %foreach idx = %<pwmParams.reload_struct.chanNumber>
+            FTM_DRV_SetPwmLoadChnSelCmd(FTM%<ftmModule>, %<pwmParams.reload_struct.chanVectors[idx]>, true);
+        %endforeach
+
+        FTM_DRV_SetHalfCycleCmd(FTM%<ftmModule>, %<pwmParams.reload_struct.reloadHalfCycle>);
+
+        FTM_DRV_SetHalfCycleReloadPoint(FTM_PWM%<ftmModule>, %<pwmParams.reload_struct.reloadHCR>, %<pwmParams.reload_struct.reloadHalfCycle>);
+
+        FTM_DRV_SetLoadFreq(FTM%<ftmModule>, %<pwmParams.reload_struct.reloadFrequency>);
+
+        FTM_DRV_SetReIntEnabledCmd(FTM%<ftmModule>, true);
+    %endif
+
+     %%Reload Interrupt
+    %if FEVAL("strcmp", "%<pwmParams.reload_struct.reloadISREnable>", "true") == 1
+
+        /* FTM%<ftmModule>: overflow reload ISR level */
+        INT_SYS_SetPriority(FTM%<ftmModule>_Ovf_Reload_IRQn, %<pwmParams.reload_struct.reloadISRPriority>);
+
+        /* FTM%<ftmModule>: overflow reload enable ISR */
+        INT_SYS_EnableIRQ(FTM%<ftmModule>_Ovf_Reload_IRQn);
+
+        /* FTM%<ftmModule>: install handler for overflow reload ISR */
+        INT_SYS_InstallHandler(FTM%<ftmModule>_Ovf_Reload_IRQn, FTM%<ftmModule>_ovf_reload_isr, (isr_t *)0);  /* FTM%<ftmModule> Ovf reload interrupt handler */
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+        %assign blockPath = LibGetBlockPath(block)
+
+        %assign pwmParams = FEVAL("mbd_s32k_ftm_pwm_config_sdk_params", blockPath)
+
+        %assign ftmModule = %<pwmParams.ftmModule>
+        %assign inputIdx = 0
+
+        %if FEVAL("strcmp", "%<pwmParams.pwmMode>", "independent") == 1
+            %% output code for the independent channels
+            %foreach i = %<pwmParams.pairsNumber>
+            {
+                %% same approach for the independent or complementary mode
+                uint16_t dutyA = FTM_MAX_DUTY_CYCLE * %<LibBlockInputSignal(inputIdx, "", "", 0)>;
+                FTM_DRV_UpdatePwmChannel(FTM_PWM%<ftmModule>, %<pwmParams.structs_ids[inputIdx].chN>U, FTM_PWM_UPDATE_IN_DUTY_CYCLE, dutyA,  0, true);
+                %assign inputIdx = %<inputIdx> + 1
+
+                %% if the independent mode
+                %if FEVAL("strcmp", "%<pwmParams.structs_ids[inputIdx - 1].chType>", "Independent") == 1
+                    %if FEVAL("strcmp", "%<pwmParams.pins_struct[i].pinFtmChNP1>", "None") != 1
+                        %assign chanNr = %<pwmParams.structs_ids[inputIdx].chN>
+                        uint16_t dutyB = FTM_MAX_DUTY_CYCLE * %<LibBlockInputSignal(inputIdx, "", "", 0)>;
+                        FTM_DRV_UpdatePwmChannel(FTM_PWM%<ftmModule>, %<chanNr>U, FTM_PWM_UPDATE_IN_DUTY_CYCLE, dutyB,  0, true);
+                    %endif
+                    %assign inputIdx = %<inputIdx> + 1
+                %endif
+            }
+            %endforeach
+        %else
+            %% output code for the combined channels
+            %foreach i = %<pwmParams.pairsNumber>
+            {
+                uint16_t dutyA = FTM_MAX_DUTY_CYCLE * %<LibBlockInputSignal(inputIdx, "", "", 0)>;
+                %assign inputIdx = %<inputIdx> + 1
+                uint16_t dutyB = FTM_MAX_DUTY_CYCLE * %<LibBlockInputSignal(inputIdx, "", "", 0)>;
+                %assign inputIdx = %<inputIdx> + 1
+                FTM_DRV_UpdatePwmChannel(FTM_PWM%<ftmModule>, %<pwmParams.structs_ids[i].chN>U, FTM_PWM_UPDATE_IN_DUTY_CYCLE, dutyA, dutyB, true);
+            }
+            %endforeach
+        %endif
+
+        %% Software control
+        %if pwmParams.sw_control_enable == 1
+            /* SW control */
+            {
+                %assign swcontrol_input = LibBlockInputSignal(inputIdx, "", "", 0)
+                FTM_DRV_SetSoftwareOutputChannelControl(FTM_PWM%<ftmModule>, %<swcontrol_input> & 0xff, false);
+                FTM_DRV_SetOutmaskReg(FTM%<ftmModule>, %<LibBlockInputSignal(inputIdx+1, "", "", 0)>);
+                FTM_DRV_SetSoftOutChnValue(FTM_PWM%<ftmModule>, %<swcontrol_input> >> 8, true);
+            }
+        %endif
+
+    %endif
+
+    %%check if need to update the put values
+    %if CAST("Number", Parameter[0].Value[2]) != 0
+        /* Simulation Outputs */
+        %% the mex function array parameters contains the channel number in the second parameter
+        %assign chNumber = CAST("Number", Parameter[0].Value[1])
+        %foreach i = %<chNumber>
+            %<LibBlockOutputSignal(i, "", "", 0)> = (float) %<LibBlockInputSignal(i, "", "", 0)>;
+        %endforeach
+    %endif
+%endfunction

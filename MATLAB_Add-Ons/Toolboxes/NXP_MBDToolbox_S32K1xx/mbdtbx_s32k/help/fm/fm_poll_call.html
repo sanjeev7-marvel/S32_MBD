@@ -1,0 +1,51 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FreeMaster Poll Call Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>FreeMaster Poll Call Block</h1>
+	<!--Page-description-->
+
+	<p>
+        This block allows the user to call the FMSTR_Call function in other places than main loop. The FMSTR_Call is 
+        placed in the main application loop when this block is not used, to be called during the "idle" time.<br/>
+        The FMSTR_Call function handles the protocol decoding and execution in the poll-driven or short interrupt modes.
+        In the poll-driven mode, this function also handles the interface communication with the PC.<br/>
+        In the long interrupt mode, this function typically compiles as an empty function, and can still be
+        called.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="fm_poll_call_files/fm_poll_block.jpg" width="250px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<img vspace="10" src="fm_poll_call_files/fm_poll_general.jpg" width="450px" height="auto">
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<p>Please do the following:
+		<ul>
+			<li>Use <a href="fm_config.html">FreeMaster_Config</a> block to configure FreeMaster embedded-side software driver.</li>
+		</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	</div>
+</body>
+</html>

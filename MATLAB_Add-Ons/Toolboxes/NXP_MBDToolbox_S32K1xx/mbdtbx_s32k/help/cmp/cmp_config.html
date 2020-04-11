@@ -1,0 +1,323 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>CMP Configuration Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+	<!--Page-title-->
+    <h1>CMP Configuration Block</h1>
+	<!--Page-description-->
+    <p>This block is used to configure the CMP module.</p>
+	<!--Library block image-->
+    <h2>Block Image</h2>
+    <img vspace="0" src="cmp_config_files/cmp_config_block.jpg" width="400px" height="auto">
+	<!--Inputs-->
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+	<!--Outputs-->
+    <h2>Outputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+	<!--Block-Dialog-Box-->
+    <h2>Parameters and Dialog Box</h2>
+	<!--Table of contents-->
+    <p>The block dialog consists of the following tabs:</p>
+    <ul>
+        <li><a href="#Control0_tab">Control Register 0</a></li>
+        <li><a href="#Control1_tab">Control Register 1</a></li>
+        <li><a href="#Control2_tab">Control Register 2</a></li>
+    </ul>
+	<!--Window tab-->
+        <h4><a name="Control0_tab"></a>Control Register 0</h4>
+		<img vspace="10" src="cmp_config_files/cmp_config_opt.jpg" width="450px" height="auto">
+        <p>The Control Register 0 tab contains the following parameters:</p>
+            <h3>Comparator Mode</h3>
+			<p>Selects which functional mode to use.</p>
+			<ul>
+                <li>Continuous</li>
+                <li>Sampled Non-Filtered Int Clock</li>
+                <li>Sampled Non-Filtered Ext Clock</li>
+                <li>Sampled Filtered Int Clock</li>
+                <li>Sampled Filtered Ext Clock</li>
+                <li>Window</li>
+                <li>Windowed Resampled</li>
+                <li>Windowed Filtered</li>
+			</ul>
+			 <p> See  the <a href="#table_functional_modes">table</a> below.</p>
+            <h3>Filter Sample Period (0 - 255)</h3>
+            <p>Specifies the sampling period, in bus clock cycles, of the comparator output filter, when C1[SE] = 0.
+                Setting FPR to 0x0 disables the filter. Filter programming and latency details are provided in the CMP
+                functional description. This field has no effect when C0[SE ]= 1. In that case, the external SAMPLE signal
+                is used to determine the sampling period.</p>
+
+            <h3>Power Mode Select</h3>
+			<p>Selects which power mode to use.</p>
+			<ul>
+				<li>Low Speed</li>
+				<li>High Speed</li>
+			</ul>
+
+            <h3>Comparator INVERT</h3>
+            <p>Allows selection of the polarity of the analog comparator function. It is also driven to the COUT output, on
+                both the device pin and as SCR[COUT], when OPE=0.</p>
+
+            <h3>Comparator Output Select</h3>
+            <p>Selects the Comparator Output.</p>
+			<ul>
+            <li>Set CMPO to equal COUT (filtered)</li>
+            <li>Set CMPO to equal COUTA (unfiltered)</li>
+            </ul>
+
+            <h3>Comparator Output Pin Enable</h3>
+			<p>The OPE bit enables the path from the comparator output to a selected pin.</p>
+            <ul>
+               <li>PTA4</li>
+               <li>PTE3</li>
+			</ul>
+
+            <h3>Filter Sample Count (1 - 7)</h3>
+            <p>Represents the number of consecutive samples that must agree prior to the comparator ouput filter
+                accepting a new output state.</p>
+
+            <h3>Offset Control</h3>
+			<p>Comparator hard block offset control. See chip data sheet to get the actual offset value with each level.</p>
+            <ul>
+                <li>level 0</li>
+                <li>level 1</li>
+            </ul>
+
+            <h3>Hysteresis Control</h3>
+            <p>Defines the programmable hysteresis level. The hysteresis values associated with each level are device specific.
+                See the Data Sheet of the device for the exact values.</p>
+            <ul>
+                <li>00 - Level 0</li>
+                <li>01 - Level 1</li>
+                <li>10 - Level 2</li>
+                <li>11 - Level 3</li>
+            </ul>
+
+    <a name="table_functional_modes"><b>Comparator functional modes</b></a>
+    <table rules="all" cellpadding="2" cellspacing="2">
+    <tbody>
+        <tr>
+            <th>Mode #</th>
+            <th>C0[EN]</th>
+            <th>C0[WE]</th>
+            <th>C0[FILTER_CNT]</th>
+            <th>C0[FPR]</th>
+            <th>Operation</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>Disabled</td>
+        </tr>
+        <tr>
+            <td>2A</td>
+            <td>0</td>
+            <td>x</td>
+            <td>x</td>
+            <td>0x00</td>
+            <td>x</td>
+            <td rowspan="2">Continuous Mode</td>
+        </tr>
+        <tr>
+            <td>2B</td>
+            <td>0</td>
+            <td>x</td>
+            <td>x</td>
+            <td>x</td>
+            <td>0x00</td>
+        </tr>
+        <tr>
+            <td>3A</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0x01</td>
+            <td>x</td>
+            <td>Sampled Non-Filtered External Clock</td>
+        </tr>
+        <tr>
+            <td>3B</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0x01</td>
+            <td>> 0x00</td>
+            <td>Sampled Non-Filtered Internal Clock</td>
+        </tr>
+        <tr>
+            <td>4A</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>> 0x01</td>
+            <td>x</td>
+            <td>Sampled Filtered External Clock</td>
+        </tr>
+        <tr>
+            <td>4B</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>> 0x01</td>
+            <td>> 0x04</td>
+            <td>Sampled Filtered Internal Clock</td>
+        </tr>
+        <tr>
+            <td>5A</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0x00</td>
+            <td>x</td>
+            <td rowspan="2">Windowed</td>
+        </tr>
+        <tr>
+            <td>5B</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>x</td>
+            <td>0x00</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0x01</td>
+            <td>0x01-0xFF</td>
+            <td>Windowed Resampled</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>> 0x01</td>
+            <td>0x01-0xFF</td>
+            <td>Windowed Filtered</td>
+        </tr>
+        <tr>
+            <td colspan="7" style="text-align: center">All other combinations of C0[EN], C0[WE], C0[SE], C0[Filter_CNT], and C0[FPR] are illegal.</td>
+        </tr>
+    </tbody>
+    </table>
+    <p> </p>
+
+        <h4><a name="Control1_tab"></a>Control Register 1</h4>
+		<img vspace="10" src="cmp_config_files/cmp_config_cr1.jpg" width="450px" height="auto">
+        <p>The Control Register 1 tab contains the following parameters:</p>
+
+            <h3>Selection of the input to the positive port</h3>
+            <p>Determines which input is selected for the plus input of the comparator.</p>
+			<ul>
+                <li>IN0, from the 8-bit DAC output</li>
+                <li>IN1, from the analog 8-1 mux</li>
+			</ul>
+            <h3>Selection of the input to the negative port</h3>
+            <p>Determines which input is selected for the plus input of the comparator.</p>
+			<ul>
+                <li>IN0, from the 8-bit DAC output</li>
+                <li>IN1, from the analog 8-1 mux</li>
+			</ul>
+
+            <h3>Channel 0 input enable</h3>
+            <p>Channel 0 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 1 input enable</h3>
+            <p>Channel 1 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 2 input enable</h3>
+            <p>Channel 2 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 3 input enable</h3>
+            <p>Channel 3 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 4 input enable</h3>
+            <p>Channel 4 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 5 input enable</h3>
+            <p>Channel 5 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 6 input enable</h3>
+            <p>Channel 6 of the input enable for the round-robin checker.</p>
+
+            <h3>Channel 7 input enable</h3>
+            <p>Channel 7 of the input enable for the round-robin checker.</p>
+
+            <h3>DAC Enable</h3>
+            <p>This bit is used to enable the DAC. When the DAC is disabled, it is powered down to conserve power.</p>
+
+            <h3>Supply voltage Ref Source</h3>
+            <p>Selected resistor ladder network supply reference.*</p>
+            <ul>
+                <li>0 - Vin1</li>
+                <li>1 - Vin2</li>
+            </ul>
+
+            <h3>Plus Input MUX Control</h3>
+            <p>Determines which input is selected for the plus mux.*</p>
+
+            <h3>Minus Input MUX Control</h3>
+            <p>Determines which input is selected for the minus mux.*</p>
+
+            <h3>DAC Output Voltage (0 - 255)</h3>
+
+            <p>Selects an output voltage from one of 256 distinct levels.</p>
+            <p>DACO = (V in /256) * (VOSEL[7:0] + 1) , so the DACO range is from V in /256 to V in .</p>
+
+		<h4><a name="Control2_tab"></a>Control Register 2</h4>
+        <img vspace="10" src="cmp_config_files/cmp_config_cr2.jpg" width="450px" height="auto">
+        <p>The Control Register 2 tab contains the following parameters:</p>
+
+        <h3>Round-Robin Enable</h3>
+        <p>This bit enables the round-robin operation.</p>
+
+        <h3>Fixed MUX Port</h3>
+        <p>Selects the source for the Sample/Window input.</p>
+        <ul>
+            <li>The Plus port is fixed</li>
+            <li>The Minus port is fixed</li>
+		</ul>
+
+            <h3>Fixed Channel Selection</h3>
+
+            <p>This field indicates which channel in the mux port is fixed in a given round-robin mode. If FXDACI is set,
+                FXMXCH has no effect.</p>
+
+            <h3>Number of Sample Clocks</h3>
+            <p>For a given channel, this field specifies how many round-robin clock cycles later the sample takes place.</p>
+           <ul>
+                <li>as soon as the active channel is scanned</li>
+                <li>1 round-robin clock cycle after the next cycle</li>
+                <li>2 round-robin clock cycles after the next cycle</li>
+                <li>3 round-robin clock cycles after the next cycle</li>
+            </ul>
+
+    <h2>Block Dependency</h2>
+	<ul>
+        <li>None</li>
+	</ul>
+    <h2>Block Miscellaneous Details</h2>
+	<ul>
+        <li>None</li>
+	</ul>
+
+        <p>* Read Hardware Manual documentation to get more information.</p>
+       </div>
+</body>
+</html>

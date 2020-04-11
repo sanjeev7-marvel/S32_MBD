@@ -1,0 +1,47 @@
+%implements ftm_s32k_isr_disen "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    
+    %assign module  = CAST("Number", Parameter[0].Value[0]) - 1
+	%assign channel = CAST("Number", Parameter[1].Value[0]) - 2
+	%assign en      = CAST("Number", Parameter[2].Value[0]) - 1
+    
+    %if (channel == -1)
+      %if (en == 0)
+        FTM_DRV_SetTimerOverflowInt(FTM%<module>, 0);
+      %else
+        FTM_DRV_SetTimerOverflowInt(FTM%<module>, 1);
+      %endif
+	%else
+      %if (en == 0)
+		FTM_DRV_DisableChnInt(FTM%<module>, %<channel>);
+      %else
+		FTM_DRV_EnableChnInt(FTM%<module>, %<channel>);
+      %endif
+	%endif  
+    
+    %endif
+%endfunction

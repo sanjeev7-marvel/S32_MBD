@@ -1,0 +1,118 @@
+%% Copyright (c) 2016 NXP
+
+%implements AMCLIB_TrackObsrv_SF_FLT "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+    <LibAddToCommonIncludes("<stdbool.h>")>
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+    %assign ::cntInit = %<::cntInit> + 1
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("STDBOOL_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::STDBOOL_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include <stdbool.h>
+    %endif
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+    tBool TrackObsrv_%<::cntInit>_initialized = false;
+    AMCLIB_TRACK_OBSRV_T_FLT TrackObsrv_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+%openfile tmpParamExternBuf
+    extern tBool TrackObsrv_%<::cntInit>_initialized;
+    extern AMCLIB_TRACK_OBSRV_T_FLT TrackObsrv_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cnt = %<::cnt> + 1
+
+    %assign fltCC1 = CAST("Real32", Parameter[0].Value[0])
+    %assign fltCC2 = CAST("Real32", Parameter[1].Value[0])
+    %assign fltC1 = CAST("Real32", Parameter[2].Value[0])
+
+    %assign fltPhaseErr = LibBlockInputSignal(0, "", "", 0)
+    %assign fltAcc = LibBlockInputSignal(1, "", "", 0)
+    %assign fltInErrK1 = LibBlockInputSignal(2, "", "", 0)
+    %assign fltUpperLimit = LibBlockInputSignal(3, "", "", 0)
+    %assign fltLowerLimit = LibBlockInputSignal(4, "", "", 0)
+    %assign fltState = LibBlockInputSignal(5, "", "", 0)
+    %assign fltInK1 = LibBlockInputSignal(6, "", "", 0)
+    %assign fltPosEst = LibBlockOutputSignal(0, "", "", 0)
+    %assign fltVelocityEst = LibBlockOutputSignal(1, "", "", 0)
+    %assign fltpOutAcc = LibBlockOutputSignal(2, "", "", 0)
+    %assign fltpOutInErrK1 = LibBlockOutputSignal(3, "", "", 0)
+    %assign fltpOutState = LibBlockOutputSignal(4, "", "", 0)
+    %assign fltpOutInK1 = LibBlockOutputSignal(5, "", "", 0)
+
+    {
+        tFloat fltPosEst;
+        tFloat fltVelocityEst;
+
+        if (!TrackObsrv_%<::cnt>_initialized) {
+            TrackObsrv_%<::cnt>.pParamPI.fltCC1sc = %<fltCC1>;
+            TrackObsrv_%<::cnt>.pParamPI.fltCC2sc = %<fltCC2>;
+            TrackObsrv_%<::cnt>.pParamPI.fltUpperLimit = %<fltUpperLimit>;
+            TrackObsrv_%<::cnt>.pParamPI.fltLowerLimit = %<fltLowerLimit>;
+            TrackObsrv_%<::cnt>.pParamInteg.fltC1 = %<fltC1>;
+
+            AMCLIB_TrackObsrvInit_FLT(&TrackObsrv_%<::cnt>);
+            
+            TrackObsrv_%<::cnt>_initialized = true;
+        }
+
+        TrackObsrv_%<::cnt>.pParamPI.fltAcc = %<fltAcc>;
+        TrackObsrv_%<::cnt>.pParamPI.fltInErrK1 = %<fltInErrK1>;
+        TrackObsrv_%<::cnt>.pParamPI.fltUpperLimit = %<fltUpperLimit>;
+        TrackObsrv_%<::cnt>.pParamPI.fltLowerLimit = %<fltLowerLimit>;
+        TrackObsrv_%<::cnt>.pParamInteg.fltState = %<fltState>;
+        TrackObsrv_%<::cnt>.pParamInteg.fltInK1 = %<fltInK1>;
+
+        AMCLIB_TrackObsrv_FLT(%<fltPhaseErr>, &fltPosEst, &fltVelocityEst, &TrackObsrv_%<::cnt>);
+
+        %<fltPosEst> = fltPosEst;
+        %<fltVelocityEst> = fltVelocityEst;
+        %<fltpOutAcc> = TrackObsrv_%<::cnt>.pParamPI.fltAcc;
+        %<fltpOutInErrK1> = TrackObsrv_%<::cnt>.pParamPI.fltInErrK1;
+        %<fltpOutState> = TrackObsrv_%<::cnt>.pParamInteg.fltState;
+        %<fltpOutInK1> = TrackObsrv_%<::cnt>.pParamInteg.fltInK1;
+    }
+
+%endfunction

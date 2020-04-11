@@ -1,0 +1,146 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Programmable Delay Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>Programmable Delay Block</h1>
+	<!--Page-description-->
+	<p>This block is used to setup the programmable delay module (PDB). The PDB provides controllable delays from an external trigger, or a programmable interval tick, to the hardware trigger inputs of ADCs. The PDB can optionally provide pulse outputs (Pulse-Out's) that are used as the sample window in the CMP block. </p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="pdb_config_block_files/pdb_config_block.jpg" width="300px" height="auto" >
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<p>The block dialog consists of the following tabs:</p>
+	<ul>
+		<li><a href="#General_tab">PDB Configuration</a></li>
+		<li><a href="#Trigger_Generator_0_tab">Channel 0 Configuration</a></li>
+		<li><a href="#Trigger_Generator_1_tab">Channel 1 Configuration</a></li>
+	</ul>
+	<!--Table of contents-->
+	<!--Window tab-->
+		<h4><a name="General_tab"></a>PDB Configuration</h4>
+		<img vspace="10" src="pdb_config_block_files/pdb_config_pdb_conf.jpg" width="450px" height="auto">
+			<p>The PDB Configuration tab contains the following parameters:</p>
+
+			<h3>PDB Module</h3>
+			<p>Selects which PDB module to use.</p>
+
+			<h3>Operation Mode</h3>
+			<ul>
+				<li>One-Shot </li>
+				<li>Continuous</li>
+			</ul>
+
+			<p>In One-Shot mode the counter is enabled and restarted at count zero upon receiving a positive edge on the selected trigger input source or software trigger.</p>
+			<p>In Continuous mode the counter is enabled and restarted at count zero. The counter is rolled over to zero again when the count reaches the value specified in the modulus register, and the counting is restarted. This enables a continuous stream of pretriggers/trigger outputs as a result of a single trigger input event. </p>
+
+			<h3>Trigger Input Source (TRGSEL)</h3>
+			<p>Selects the trigger input source for the PDB. PDB trigger source selection is implemented through the TRGMUX module. For each PDB unit, there is only one trigger input from TRGMUX, but it supports different trigger sources</p>
+			<ul>
+				<li>External (TRGMUX_PDB_TRIG)</li>
+				<li>Software</li>
+			</ul>
+
+			<h3>Input signal for External trigger (TRGMUX_PDB_TRIG Only)</h3>
+			<p>Available external trigger input pins.</p>
+			<h3>PDB Modulus (MOD)</h3>
+			<p>Specifies the period of the counter. When the counter reaches this value, it will be reset back to zero. If the
+				PDB is in Continuous mode, the count begins anew.</p>
+            <h3>Enable PDB in Init function</h3>
+            <p>Enable this checkbox if you want the PDB to be enabled in the initialization function called once, at the beginning. If you want to enable it at a certain moment, use PDB Enable block.</p>
+			<h3>Show Advanced Options</h3>
+			<img vspace="10" src="pdb_config_block_files/pdb_config_show_adv.jpg" width="450px" height="auto">
+			<h3>Prescaler Value (PRESCALER)</h3>
+				<p>Counting uses the peripheral clock divided by x times multiplication factor selected by MULT.</p>
+
+			<h3>Multiplication Factor for Prescaler Value (MULT)</h3>
+			<p>Selects the multiplication factor of the prescaler divider for the counter clock.</p>
+
+			<h3>Pulse-Outx Enable</h3>
+			<p>Enables Pulse out.</p>
+
+			<h3>Pulse-Outx Delay 1 (0-65535)</h3>
+			<p>Specifies the delay 1 value for the PDB Pulse-Out. Pulse-Out goes high when the PDB counter is equal to
+				the DLY1.</p>
+
+			<h3>Pulse-Outx Delay 2 (0-65535)</h3>
+			<p>Specifies the delay 2 value for the PDB Pulse-Out. Pulse-Out goes low when the PDB counter is equal to
+				the DLY2.</p>
+
+		<h4><a name="Trigger_Generator_0_tab"></a>Channel 0 Configuration</h4>
+		<img vspace="10" src="pdb_config_block_files/pdb_config_chan0_conf.jpg" width="450px" height="auto">
+			<p>The Channel 0 Configuration tab contains the following parameters:</p>
+		<h3>Pre-Trigger x Enabled</h3>
+			<p>Enables the PDB ADC pre-trigger.</p>
+
+			<h3>Pre-Trigger x Back-To-Back Enabled</h3>
+			<p>Back-to-back operation enables the ADC conversions complete to trigger
+				the next PDB channel pre-trigger and trigger output, so that the ADC conversions can be triggered on next
+				set of configuration and results registers. Application code must only enable the back-to-back operation of
+				the PDB pre-triggers at the leading of the back-to-back connection chain.</p>
+
+			<h3>Pre-Trigger x Output Select (TOS)</h3>
+			<p>Selects the PDB ADC pre-trigger mode:</p>
+			<ul>
+				<li>Pre-triggers bypassed mode</li>
+				<li>Pre-triggers delay mode</li>
+			</ul>
+
+			<h3>Delay x (DLY)</h3>
+			<p>Specifies the delay value for the channel's corresponding pre-trigger. The pre-trigger asserts when the
+				counter is equal to DLY.</p>
+		<!--Tab-->
+		<h4><a name="Trigger_Generator_1_tab"></a>Channel 1 Configuration</h4>
+		<img vspace="10" src="pdb_config_block_files/pdb_config_chan1_conf.jpg" width="450px" height="auto">
+			<p>The Channel 1 Configuration tab contains the following parameters:</p>
+
+			<h3>Pre-Trigger x Enabled</h3>
+
+			<p>Enables the PDB ADC pre-trigger.</p>
+
+			<h3>Pre-Trigger x Back-To-Back Enabled</h3>
+			<p>Back-to-back operation enables the ADC conversions complete to trigger
+				the next PDB channel pre-trigger and trigger output, so that the ADC conversions can be triggered on next
+				set of configuration and results registers. Application code must only enable the back-to-back operation of
+				the PDB pre-triggers at the leading of the back-to-back connection chain.</p>
+
+			<h3>Pre-Trigger x Output Select (TOS)</h3>
+			<p>Selects the PDB ADC pre-trigger mode.</p>
+			<ul>
+				<li>Pre-triggers bypassed mode</li>
+				<li>Pre-triggers delay mode</li>
+			</ul>
+
+			<h3>Delay x (DLY)</h3>
+			<p>Specifies the delay value for the channel's corresponding pre-trigger. The pre-trigger asserts when the
+				counter is equal to DLY.</p>
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	</div>
+</body>
+</html>

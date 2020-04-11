@@ -1,0 +1,53 @@
+
+%implements GFLIB_Hyst_SF_F16 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign f16HystOn    = CAST("Number",Parameter[0].Value[0])
+   %assign f16HystOff   = CAST("Number",Parameter[1].Value[0])
+   %assign f16OutValOn  = CAST("Number",Parameter[2].Value[0])
+   %assign f16OutValOff = CAST("Number",Parameter[3].Value[0])
+
+   %assign x = LibBlockInputSignal(0, "", "", 0)
+   %assign x1 = LibBlockInputSignal(1, "", "", 0)
+   %assign y = LibBlockOutputSignal(0, "", "", 0)
+   %assign y1 = LibBlockOutputSignal(1, "", "", 0)
+   
+   {  
+	 static GFLIB_HYST_T_F16 param = { %<f16HystOn>, %<f16HystOff>, %<f16OutValOn>, %<f16OutValOff>, 0 };
+     param.f16OutState = %<x1>;	 
+     %<y> = GFLIB_Hyst_F16 (%<x>,&param);
+     %<y1> = param.f16OutState;
+   }
+
+%endfunction

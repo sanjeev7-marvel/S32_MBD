@@ -1,0 +1,63 @@
+
+%implements GFLIB_Lut2D_SF_FLT "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign fltShamOffset1   = CAST("Number",Parameter[0].Value[0])
+   %assign fltShamOffset2   = CAST("Number",Parameter[1].Value[0])
+   %if ( FEVAL("mbd_s32k_version_is_newer_than", "2016"))
+      %assign VectCoefBuf = SLibGetValueFromParamRec(Parameter[2], TLC_FALSE)
+   %else
+      %assign VectCoefBuf = GetValueFromParamRec(Parameter[2])
+   %endif
+   %assign VectCoefSize = LibBlockParameterSize(Parameter[2])
+   %assign fltMidIdx        = CAST("Number",Parameter[3].Value[0])
+
+   %assign x = LibBlockInputSignal(0, "", "", 0)
+   %assign y = LibBlockInputSignal(1, "", "", 0)
+   %assign t = LibBlockOutputSignal(0, "", "", 0)
+
+   {
+     static const tFloat pfltTable[] = {
+        %foreach idx =  VectCoefSize[1]
+            %if idx > 0
+            , \
+            %endif
+            %<VectCoefBuf[idx]> \
+        %endforeach
+    };
+	 static const GFLIB_LUT2D_T_FLT param = { %<fltShamOffset1>, %<fltShamOffset2>, &pfltTable[0] + %<fltMidIdx> };
+     %<t> = GFLIB_Lut2D_FLT(%<x>,%<y>,&param);
+   }
+
+%endfunction

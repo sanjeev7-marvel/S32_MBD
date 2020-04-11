@@ -1,0 +1,49 @@
+
+%implements GFLIB_SinCos_SF_F32 "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif 
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+  %assign x = LibBlockInputSignal(0, "", "", 0)
+  %assign sinOut = LibBlockOutputSignal(0, "", "", 0)
+  %assign cosOut = LibBlockOutputSignal(1, "", "", 0)
+  
+  {
+	  static SWLIBS_2Syst_F32 Out;
+	  SWLIBS_2Syst_F32 *const pOut = &Out;
+		
+	  GFLIB_SinCos_F32 (%<x>, pOut, GFLIB_SINCOS_DEFAULT_F32);
+	  %<sinOut> = pOut->f32Arg1;
+	  %<cosOut> = pOut->f32Arg2;
+  }
+%endfunction

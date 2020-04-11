@@ -1,0 +1,201 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Target Configuration Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>Target Configuration Block</h1>
+	<!--Page-description-->
+	<p>The main functionality of the block is to configure the MCU target, build toolchain, connection and diagnostics.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="main_config_files/main_config_block.jpg" width="400px" height="auto">
+	<!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+	<!--Block-Dialog-Box-->
+     <h2>Parameters and Dialog Box</h2>
+	<p>The block dialog consists of the following configuration tabs:</p>
+	<ul class="shifted">
+		<li><a href="#MCU_tab">Target MCU</a></li>
+		<li><a href="#Compiler_tab">Build Toolchain</a></li>
+		<li><a href="#PilBam_tab">Target Connection</a></li>
+		<li><a href="#Diagnostic_tab">Diagnostics</a></li>
+	</ul>
+	<h4><a name="MCU_tab"></a>Target MCU</h4>
+	<img vspace="10" src="main_config_files/main_config_mcu.jpg" width="400px" height="auto">
+	<p>The MCU tab contains the following parameters:</p>
+
+	<h3>Target MCU</h3>
+    <ul>
+        <li>Family
+            <ul>
+                <li>S32K116</li>
+                <li>S32K118</li
+                <li>S32K142</li>
+                <li>S32K144</li>
+                <li>S32K146</li>
+                <li>S32K148</li>
+            </ul>
+        </li>
+
+        <li> Package - varies depending on the selected family
+            <ul>
+                <li>64LQFP</li>
+                <li>100LQFP</li>
+                <li>144LQFP</li>
+                <li>176LQFP</li>
+            </ul>
+        </li>
+
+        <li> SRAM - varies depending on the selected family
+            <ul>
+                <li>64KB</li>
+                <li>128KB</li>
+                <li>192KB</li>
+                <li>256KB</li>
+            </ul>
+        </li>
+    </ul>
+
+	<h3>System Clock Frequency MHz</h3>
+	<ul>
+        <li>Clock Frequency Value</li>
+            <ul>
+                <li>40 MHz - Only for S32K11x</li>
+                <li>80 MHz - Only for S32K14x</li>
+                <li>112 MHz - Only for S32K14x</li>
+            </ul>
+            
+        <li>External Crystal clock</li>
+        <ul>
+            <li>External 8 MHz - Default Exteranl Quartz on S32K14x EVB</li>
+            <li>External 40 MHz - Default Exteranl Quartz on S32K11x EVB</li>
+        </ul>
+    </ul>
+
+	<h3>Step tick</h3>
+    <p> Here you can either select a timer to call functions on a defined step interval (set in MATLAB Solver - FixedStepDiscrete), either suppress that timer and call all your subsystems with another time/block of your choice. </p>
+    <ul>
+        <li>Timer</li>
+            <ul>
+                <li> LPIT Channel 0</li>
+                <li> Suppress</li>
+            </ul>
+        <li>Priority level of System Tick interrupt (0 - 15)</li>
+    </ul>
+
+    <h3>Propagate configuration</h3>
+    <p>Press this button to propagate the settings to all referenced models.</p>
+    
+	<h4><a name="Compiler_tab"></a>Build Toolchain</h4>
+	<img vspace="10" src="main_config_files/main_config_build.jpg" width="400px" height="auto">
+	<p>Here you can set the following parameters:</p>
+
+	<h3>Generate S32 Design Studio ProjectInfo.xml file</h3>
+	<p>This enables the generation of a S32 Design Studio project file, when building
+	a model. This option is only available when GCC is selected compiler.</p>
+
+		<h3>Compiler Selection</h3>
+		<ul>
+			<li>IAR</li>
+			<li>GCC</li>
+			<li>GreenHills Multi</li>
+		</ul>
+
+		<h3>Target Memory Model</h3>
+		<ul>
+			<li>FLASH</li>
+			<li>SRAM</li>
+		</ul>
+
+		<h3>GCC/GHS/IAR Compile Options</h3>
+		<p>Compile Options for compiler.</p>
+
+		<h3>GCC/GHS/IAR Assemble Options</h3>
+		<p>Default Assemble Options for compiler.</p>
+
+		<h3>GCC/GHS/IAR Link Options</h3>
+		<p>Default Link Options for compiler.</p>
+
+		<h3>GCC/GHS/IAR Library Options</h3>
+		<p>Default Library Options for the compiler.</p>
+
+		<h3>GCC/GHS/IAR Default Target Memory Definitions</h3>
+		<ul>
+		 <li>On</li>
+		 <li>Off</li>
+		</ul>
+
+		<h3>GCC/GHS/IAR  User Defined Target Memory Definitions</h3>
+		<p>List of available .icf files in [compiler]_specific_files folder</p>
+
+	<h4><a name="PilBam_tab"></a>PIL and Download Config</h4>
+	<img vspace="10" src="main_config_files/main_config_target.jpg" width="400px" height="auto">
+	<p>Here you can set the following parameters:</p>
+
+	<h3>Processor-in-the-Loop (PIL) Mode Download</h3>
+	<p>Enable if PIL simulation mode should be supported.</p>
+
+	<h3>Download Code after Build</h3>
+	<p>Enable if application code should be downloaded onto the target after build.</p>
+
+	<h3>Delay before start application </h3>
+	<p>Delay in milliseconds before application starts.</p>
+
+    <h3>Download Interface</h3>
+	<p>Selects Download method for application Serial (uses bootloader) or OpenSDA (no bootloader)</p>
+    
+    <h3>BAM Restart Request</h3>
+	<p>If checked, Prompt Dialog should be shown before target reset.</p>
+    
+	<h3>COM Port</h3>
+	<p>COM port for PIL and BootLoader communication (Click on Refresh to update your current possible connections).</p>
+
+	<h3>Baud Rate</h3>
+	<p>Available Baud rate selection for PIL and Bootloader communication.</p>
+
+	<h3>OpenSDA Drive Name</h3>
+    <p>Select the drive on which the EVB has mounted on. Click on Refresh button to show up current possible connections or select Custom and enter the drive letter which you want to use.
+
+	<h3>LPUART</h3>
+	<p>Select which LPUART module to use.</p>    
+
+    <h3>RX pin</h3>
+    <p>The list of available RX pins depends on the selected LPUART module.</p>
+
+    <h3>TX pin</h3>
+    <p>The list of available TX pins depends on the selected LPUART module.</p>
+    
+	<h4><a name="Diagnostic_tab"></a>Diagnostics</h4>
+    <img vspace="10" src="main_config_files/main_config_diag.jpg" width="400px" height="auto">
+	<p>Here you can set the following parameters:</p>
+
+	<h3>Enable/Disable Consistency Checks</h3>
+	<p>Several checkboxes available to Enable/Disable consistency checks for specific modules/peripherics.</p>
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+		<li>Required System Target File is set automatically by adding Target Configuration Block into the model.
+	     If no Target Configuration Block in the model then System Target File should be set manually.</li>
+	</ul>
+	</div>
+</body>
+</html>

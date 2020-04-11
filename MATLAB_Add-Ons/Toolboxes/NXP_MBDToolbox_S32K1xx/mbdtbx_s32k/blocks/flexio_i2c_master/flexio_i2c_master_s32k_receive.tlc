@@ -1,0 +1,47 @@
+%implements flexio_i2c_master_s32k_receive "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("flexio.h")>
+    %<LibAddToCommonIncludes("flexio_i2c_driver.h")>
+    %<LibAddToCommonIncludes("flexio_common.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_i2c_master_receive_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %assign slaveAddr = LibBlockInputSignal(0,"","", 0)
+        %assign rxSize = LibBlockInputSignal(1,"","", 0)
+
+        %% Set slave address and then get data from that slave
+        FLEXIO_I2C_DRV_MasterSetSlaveAddr(&i2cMasterState%<user_config.InstanceNumber>, %<slaveAddr>);
+        FLEXIO_I2C_DRV_MasterReceiveDataBlocking(&i2cMasterState%<user_config.InstanceNumber>,
+        %<LibBlockOutputSignalAddr(0,"","", 0)>, %<rxSize>, true, %<user_config.Timeout>);
+    }
+    %endwith
+
+    %endif
+%endfunction

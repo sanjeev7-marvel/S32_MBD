@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>FTM Fault Interrupt Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <h1>FTM Fault Interrupt Block</h1>
+
+    <p>The main functionality of the block is to generate a function call on a fault channel.</p>
+
+    <h2>Block Image</h2>
+    <img vspace="0" src="ftm_fault_isr_files/ftm_fault_isr_block.jpg" width="300px" height="auto"/>
+
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <h2>Outputs:</h2>
+    <ul>
+        <li>Function-call</li>
+    </ul>
+
+    <h2>Parameters and Dialog Box</h2>
+    <img vspace="15" src="ftm_fault_isr_files/ftm_fault_isr_param_1.jpg" width="450px" height="auto"/>
+
+    <h3>Module</h3>
+    <p>Select which FTM module to use.</p>
+    <ul>
+        <li>Range: 0 &ndash; FTMn</li>
+    </ul>
+    <h3>Channel</h3>
+    <p>Select which FTM Channel channel to trigger the function.</p>
+    <ul>
+        <li>Range: 0 &ndash; 4 (For FTM0, FTM1, FTM2, FTM3)</li>
+        <li>Range: 0 &ndash; 2 (For FTM4, FTM5, FTM6, FTM7)</li>
+    </ul>
+
+    <h2>Block Dependency</h2>
+    <p>Before using this block a <a href="ftm_pwm_config_block.html">FTM PWM Config Block</a> needs to be added and configured on the same FTMn module.</p>
+    <p>In order to enable the Fault interrupts, the follwing steps must be done in the FTM PWM Config Block:</p>
+    <ol type="1">
+        <li>The "Show advanced options" must be checked, in order to access the Faults tabs.</li>
+        <li>The "Enable Fault Protection" and the "Enable Fault Interrupt" settings must be checked int he Faults tab.</li>
+        <li>The "Fault Interrupt Priority" must be set at the desired value.</li>
+        <li>For each enabled channel the checkboxes must be checked, Polarity set to Actove High on Low ans the Fault pin must be selected.</li>
+        <li>For each enabled channel a Fault Isr block must be added.</li>
+    </ol>
+
+
+    <h2>Block Miscellaneous Details:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+</body>
+</html>

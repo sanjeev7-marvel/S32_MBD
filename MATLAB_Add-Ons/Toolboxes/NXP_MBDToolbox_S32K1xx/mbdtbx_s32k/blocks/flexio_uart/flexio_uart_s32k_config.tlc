@@ -1,0 +1,122 @@
+%implements flexio_uart_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_uart_config_sdk_params", blockPath)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("flexio.h")>
+    %<LibAddToCommonIncludes("flexio_uart_driver.h")>
+    %<LibAddToCommonIncludes("flexio_common.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("clock_S32K1xx.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_uart_config_sdk_params", blockPath)
+    %with sdk_params
+
+    %% declare global variables
+    %openfile declarationsBuf
+        flexio_uart_state_t flexioUartTxState%<user_config.InstanceNumber>;
+        flexio_uart_state_t flexioUartRxState%<user_config.InstanceNumber>;
+        flexio_device_state_t flexIODeviceState;
+
+        void flexio_uart_tx_callback(void *driverState, uart_event_t event, void* userData) __attribute__((weak));
+        void flexio_uart_rx_callback(void *driverState, uart_event_t event, void* userData) __attribute__((weak));
+    %closefile declarationsBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", declarationsBuf)>
+
+    {
+        /* Enable clock for flexIO and GPIO (FXIO_Dn pins) */
+        PCC_SetPeripheralClockControl(PCC, FLEXIO0_CLK, true, CLK_SRC_FIRC, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.TxInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+        PCC_SetPeripheralClockControl(PCC, %<user_config.RxInfo.user_config.port>_CLK, true, CLK_SRC_OFF, DIVIDE_BY_ONE, MULTIPLY_BY_ONE);
+
+        /* Configure flexIO */
+        /* config for Tx */
+        const flexio_uart_user_config_t flexioUartTxConfig%<user_config.InstanceNumber> = {
+            .driverType    = %<user_config.DriverType>,
+            .direction     = FLEXIO_UART_DIRECTION_TX,
+            .baudRate      = %<user_config.BaudRate>,
+            .bitCount      = %<user_config.BitCount>,
+            .dataPin       = %<user_config.TxInfo.user_config.fxio_pin>,
+            .callback      = (uart_callback_t)flexio_uart_tx_callback,
+            .callbackParam = NULL,
+            .dmaChannel  = 255
+        };
+        /* config for Rx */
+        const flexio_uart_user_config_t flexioUartRxConfig%<user_config.InstanceNumber> = {
+            .driverType    = %<user_config.DriverType>,
+            .direction     = FLEXIO_UART_DIRECTION_RX,
+            .baudRate      = %<user_config.BaudRate>,
+            .bitCount      = %<user_config.BitCount>,
+            .dataPin       = %<user_config.RxInfo.user_config.fxio_pin>,
+            .callback      = (uart_callback_t)flexio_uart_rx_callback,
+            .callbackParam = NULL,
+            .dmaChannel  = 255
+        };
+
+        /* Setup flexio instance%<user_config.InstanceNumber> pins */
+        pin_settings_config_t fxio_pin_mux%<user_config.InstanceNumber>[2]={
+        {
+            .base          = %<user_config.TxInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.TxInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.TxInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+            .gpioBase      = NULL,
+        },
+        {
+            .base          = %<user_config.RxInfo.user_config.port>,
+            .pinPortIdx    = %<user_config.RxInfo.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<user_config.RxInfo.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+            .gpioBase      = NULL,
+        }};
+        PINS_DRV_Init(2, fxio_pin_mux%<user_config.InstanceNumber>);
+
+        /* Init the FLEXIO device */
+        FLEXIO_DRV_InitDevice(0, &flexIODeviceState);
+
+        /* Initialize FlexIO UART driver for Tx */
+        FLEXIO_UART_DRV_Init(0, &flexioUartTxConfig%<user_config.InstanceNumber>, &flexioUartTxState%<user_config.InstanceNumber>);
+
+        /* Initialize FlexIO UART driver for Rx */
+        FLEXIO_UART_DRV_Init(0, &flexioUartRxConfig%<user_config.InstanceNumber>, &flexioUartRxState%<user_config.InstanceNumber>);
+    }
+    %endwith
+
+    %endif
+%endfunction

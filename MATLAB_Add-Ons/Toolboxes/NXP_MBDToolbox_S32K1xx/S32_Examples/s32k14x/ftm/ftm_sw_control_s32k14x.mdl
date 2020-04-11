@@ -1,0 +1,2747 @@
+Model {
+  Name			  "ftm_sw_control_s32k14x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.134"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 3
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Motor Control Blocks/FTM Blocks/FTM_PWM_Config"
+      Path		      "ftm_sw_control_s32k14x/FTM_PWM_Config"
+      SID		      "54"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "ftm_sw_control_s32k14x/MBD_S32K14x_Config_Information"
+      SID		      "57"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "ftm_sw_control_s32k14x/Model Info1"
+      SID		      "53"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This example shows how to use FTM SW control and OUTMASK to generate PWM signals for S32K144.\n\nIn "
+  "this example we use the following tranzitions for SW Control to overwrite the HW control for PWM:\nCH0 : HIGH -> LOW"
+  " ---> CH2 : HIGH -> LOW\n\nAt every time period (controlled by the fixed discrete step), the input signal for the SW"
+  " control changes, in the following manner:\nCH0: H, H, H, H, H, L, L, L, L, L, L, L, L, L, L [mimics a 33% duty cycl"
+  "e of a PWM, the update frequency being given by the fixed discrete step]\nAfter CH0 goes through all of these tranzi"
+  "tions, CH2 follows the same pattern. After that is over, this cycle is repeated.\n\nChannel 1 is masked (it's inacti"
+  "ve, put into its safe value, set in the FTM Config block).\n\nFor verification, see reference output signal in photo"
+  ".\n\nNote: If complementary mode is used, please read the manual on how the SW control will respond (or the help for"
+  " PWM Config block).\n"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [-6.0, 0.0, 1752.0, 939.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1877.0, 848.0]
+	ZoomFactor		[0.8]
+	Offset			[-150.89263212925277, -316.03657445617318]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAACgvwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAQQAAAoIAAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAbIAAADLwAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Thu Jul 12 12:54:03 2018"
+  Creator		  "nxf46081"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:58:25 2019"
+  RTWModifiedTimeStamp	  485683104
+  ModelVersionFormat	  "1.%<AutoIncrement:134>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  on
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "ftm_sw_control_s32k14x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "ftm_sw_control_s32k14x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.0001"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  off
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Dataset"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  on
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "auto"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Simplified"
+	  MergeDetectMultiDrivingBlocksExec "error"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "error"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  on
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "error"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "error"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "warning"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel on
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  on
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport on
+	  LaunchReport		  on
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  on
+	  GenerateTraceReport	  on
+	  GenerateTraceReportSl	  on
+	  GenerateTraceReportSf	  on
+	  GenerateTraceReportEml  on
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments on
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement on
+	      OperatorAnnotations     on
+	      SimulinkDataObjDesc     on
+	      SFDataObjDesc	      on
+	      MATLABFcnDesc	      on
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      on
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments on
+	      MATLABSourceComments    on
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C99 (ISO)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k14.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C99 (ISO)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  2048
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant on
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "mbd_ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "mbd_ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "mbd_ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "mbd_ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  on
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases on
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dwe"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  off
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar off
+	  CovSaveSingleToWorkspaceVar off
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  on
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition    [ 145, 177, 1135, 847 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "left"
+    VerticalAlignment	    "top"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      Ground
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      EnsureOutportIsVirtual  off
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+      MustResolveToSignalObject	off
+      OutputWhenUnConnected   off
+      OutputWhenUnconnectedValue "0"
+      VectorParamsAs1DForOutWhenUnconnected off
+    }
+    Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      GeneratePreprocessorConditionals off
+      AllowZeroVariantControls off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
+      ContentPreviewEnabled   off
+      IsWebBlock	      off
+      IsObserver	      off
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  System {
+    Name		    "ftm_sw_control_s32k14x"
+    Location		    [-6, 0, 1746, 939]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "80"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "89"
+    Block {
+      BlockType		      Constant
+      Name		      "Constant1"
+      SID		      "75"
+      Position		      [750, 1020, 780, 1050]
+      ZOrder		      2083
+      Value		      "2"
+      OutDataTypeStr	      "uint8"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "DT01"
+      SID		      "2"
+      Position		      [750, 620, 780, 650]
+      ZOrder		      2024
+      Value		      "0.5"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "DT1"
+      SID		      "76"
+      Position		      [750, 700, 780, 730]
+      ZOrder		      2055
+      Value		      "0.25"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "DT2"
+      SID		      "77"
+      Position		      [750, 780, 780, 810]
+      ZOrder		      2060
+      Value		      "0.5"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "DT3"
+      SID		      "78"
+      Position		      [750, 860, 780, 890]
+      ZOrder		      2061
+      Value		      "0.25"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FTM_PWM_Config"
+      SID		      "54"
+      Ports		      [6]
+      Position		      [975, 590, 1295, 1080]
+      ZOrder		      2045
+      Priority		      "1"
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      12
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Motor Control Blocks/FTM Blocks/FTM_PWM_Config"
+      SourceType	      "FTM_s32k_pwm_config_block"
+      ftmModule		      "3"
+      ftmMode		      "Edge-Aligned PWM"
+      ftmSourceClock	      "80 MHz"
+      swcontrol_enable	      on
+      chan0En		      on
+      chan0Type		      "Independent"
+      chan2En		      on
+      chan2Type		      "Independent"
+      chan4En		      off
+      chan4Type		      "Independent"
+      chan6En		      off
+      chan6Type		      "Independent"
+      ftmPwmUnits	      "Hz"
+      outFrequency	      "10000"
+      ftmPeriod		      "8000"
+      ftmPrescaler	      "Divide by 1"
+      deadtimeUnits	      "Nanoseconds"
+      deadtimeNs	      "0"
+      deadtimeTicks	      "0"
+      deadtimePrescaler	      "Divide by 1"
+      dutyCycleCh0	      "0.5"
+      dutyCycleCh1	      "0.5"
+      dutyCycleCh2	      "0.25"
+      dutyCycleCh3	      "0.25"
+      dutyCycleCh4	      "0.25"
+      dutyCycleCh5	      "0.25"
+      dutyCycleCh6	      "0.25"
+      dutyCycleCh7	      "0.25"
+      dutyCycleSim	      off
+      startAfterInit	      on
+      showAdvOpt	      on
+      pinFtmCh0		      "PTB8: [FTM3_CH0 | FTM Channel]"
+      pinFtmCh1		      "PTB9: [FTM3_CH1 | FTM Channel]"
+      pinPolCh0		      "Active High"
+      pinPolCh1		      "Active Low"
+      outputComplem0	      "Main duplicated"
+      outputLevel0	      "High"
+      outputLevel1	      "High"
+      pinFtmCh2		      "PTB10: [FTM3_CH2 | FTM Channel]"
+      pinFtmCh3		      "PTB11: [FTM3_CH3 | FTM Channel]"
+      pinPolCh2		      "Active Low"
+      pinPolCh3		      "Active High"
+      outputComplem2	      "Main duplicated"
+      outputLevel2	      "Low"
+      outputLevel3	      "Low"
+      pinFtmCh4		      "PTC10: [FTM3_CH4 | FTM Channel]"
+      pinFtmCh5		      "None"
+      pinPolCh4		      "Active Low"
+      pinPolCh5		      "Active Low"
+      outputComplem4	      "Main duplicated"
+      outputLevel4	      "Low"
+      outputLevel5	      "Low"
+      pinFtmCh6		      "PTC12: [FTM3_CH6 | FTM Channel]"
+      pinFtmCh7		      "None"
+      pinPolCh6		      "Active Low"
+      pinPolCh7		      "Active Low"
+      outputComplem6	      "Main duplicated"
+      outputLevel6	      "Low"
+      outputLevel7	      "Low"
+      initTrigger	      off
+      chTrigger0	      on
+      chTrigger1	      on
+      chTrigger2	      off
+      chTrigger3	      off
+      chTrigger4	      off
+      chTrigger5	      off
+      chTrigger6	      off
+      chTrigger7	      off
+      mcuTargetUpdate	      "on"
+      pwmSyncTrg	      "Software trigger"
+      pwmSyncHwRouting	      "TRGMUX_FTM7"
+      pwmSyncTrg0	      off
+      pwmSyncTrg1	      off
+      pwmSyncTrg2	      off
+      pwmSyncAutoClear	      on
+      pwmSyncMinLoad	      on
+      pwmSyncMaxLoad	      on
+      pwmSyncInvert	      "System Clock"
+      pwmSyncOutControl	      "System Clock"
+      pwmSyncOutMask	      "System Clock"
+      pwmSyncCounterInitial   "System Clock"
+      pwmSyncPoints	      "Wait Loading Points"
+      reloadEnable	      off
+      reloadPriority	      "15"
+      reloadHalfCycle	      off
+      reloadHCR		      "0"
+      reloadFrequency	      "0"
+      chnMatch0		      off
+      chnMatch1		      off
+      chnMatch2		      off
+      chnMatch3		      off
+      chnMatch4		      off
+      chnMatch5		      off
+      chnMatch6		      off
+      chnMatch7		      off
+      pwmFaultProtection      off
+      pwmFaultInterrupt	      off
+      pwmFaultClearing	      "Fault control disabled"
+      pwmFaultPinState	      "Safe Value"
+      pwmFaultFilterValue     "0"
+      pwmFaultPriority	      "15"
+      fault_disen_0	      off
+      fault_filter_0	      off
+      fault_polarity_0	      "Active High"
+      fault_disen_1	      off
+      fault_filter_1	      off
+      fault_polarity_1	      "Active high"
+      fault_disen_2	      off
+      fault_filter_2	      off
+      fault_polarity_2	      "Active high"
+      fault_disen_3	      off
+      fault_filter_3	      off
+      fault_polarity_3	      "Active high"
+      fault_pin_0	      "None"
+      fault_pin_1	      "None"
+      fault_pin_2	      "None"
+      fault_pin_3	      "None"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "57"
+      Ports		      []
+      Position		      [1195, 35, 1583, 307]
+      ZOrder		      2048
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K144-64KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : IAR\nTarget Type : FLASH\nDownload Code after build : off\nStep Tick Interrupt Priority : 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K144"
+      mcu_target_package      "64-LQFP"
+      mcu_target_sram_size    "48KB"
+      mcu_system_clock_freq   "80"
+      mcu_xtal_freq	      "External 8"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "15"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g"
+      gcc_target_link_opts    "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K144_48_flash.ld"
+      ghs_target_compile_opts "-cpu=cortexm4f -thumb -DARM_MATH_CM4 -fpu=vfpv4_d16 -fsingle -Ogeneral -Wundef -Wimplic"
+      "it-int -Wshadow -Wtrigraphs --no_commons --gnu_asm -gnu99 -gdwarf-2 -G"
+      ghs_target_assemble_opts "-cpu=cortexm4f -fpu=vfpv4_d16"
+      ghs_target_link_opts    "-cpu=cortexm4f -thumb -fpu=vfpv4_d16"
+      ghs_target_default_lcf  on
+      ghs_target_user_lcf     "S32K144_48_flash.ld"
+      iar_target_compile_opts "--cpu=Cortex-M4F --thumb --fpu=VFPv4_sp -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--cpu Cortex-M4F --thumb --fpu VFPv4_sp"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  on
+      iar_target_user_lcf     "S32K144_48_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info1"
+      SID		      "53"
+      Ports		      []
+      Position		      [215, -69, 918, 405]
+      ZOrder		      2044
+      ForegroundColor	      "magenta"
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: ftm_sw_control_s32k14x\\n\\nDescription: This example shows how to use FTM "
+      "SW control and OUTMASK to generate PWM signals for S32K144.\\n\\nIn this example we use the following tranzition"
+      "s for SW Control to overwrite the HW control for PWM:\\nCH0 : HIGH -> LOW ---> CH2 : HIGH -> LOW\\n\\nAt every t"
+      "ime period (controlled by the fixed discrete step), the input signal for the SW control changes, in the followin"
+      "g manner:\\nCH0: H, H, H, H, H, L, L, L, L, L, L, L, L, L, L [mimics a 33% duty cycle of a PWM, the update frequ"
+      "ency being given by the fixed discrete step]\\nAfter CH0 goes through all of these tranzitions, CH2 follows the "
+      "same pattern. After that is over, this cycle is repeated.\\n\\nChannel 1 is masked (it's inactive, put into its "
+      "safe value, set in the FTM Config block).\\n\\nFor verification, see reference output signal in photo.\\n\\nNote"
+      ": If complementary mode is used, please read the manual on how the SW control will respond (or the help for PWM "
+      "Config block).\\n"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "SW control signal generator"
+      SID		      "88"
+      Ports		      [0, 1]
+      Position		      [710, 924, 815, 986]
+      ZOrder		      2084
+      LibraryVersion	      "1.251"
+      ErrorFcn		      "Stateflow.Translate.translate"
+      PermitHierarchicalResolution "ExplicitOnly"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      SFBlockType	      "Chart"
+      Variant		      off
+      System {
+	Name			"SW control signal generator"
+	Location		[-6, 0, 1746, 939]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"54"
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  SID			  "88::52"
+	  Ports			  [1, 1]
+	  Position		  [270, 230, 320, 270]
+	  ZOrder		  32
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  " Ground "
+	  SID			  "88::54"
+	  Position		  [20, 121, 40, 139]
+	  ZOrder		  34
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  " SFunction "
+	  SID			  "88::51"
+	  Tag			  "Stateflow S-Function ftm_sw_control_s32k14x 2"
+	  Ports			  [1, 2]
+	  Position		  [180, 100, 230, 160]
+	  ZOrder		  31
+	  FunctionName		  "sf_sfun"
+	  PortCounts		  "[1 2]"
+	  SFunctionDeploymentMode off
+	  EnableBusSupport	  on
+	  SFcnIsStateOwnerBlock	  off
+	  Port {
+	    PortNumber		    2
+	    Name		    "swctrl"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  SID			  "88::53"
+	  Position		  [460, 241, 480, 259]
+	  ZOrder		  33
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "swctrl"
+	  SID			  "88::30"
+	  Position		  [460, 101, 480, 119]
+	  ZOrder		  10
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  Name			  "swctrl"
+	  ZOrder		  1
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "swctrl"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  " Ground "
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  DstBlock		  " Demux "
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      ZOrder		      16
+      SrcBlock		      "DT01"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      42
+      SrcBlock		      "DT1"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      51
+      SrcBlock		      "DT3"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      4
+    }
+    Line {
+      ZOrder		      50
+      SrcBlock		      "DT2"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      79
+      SrcBlock		      "Constant1"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      6
+    }
+    Line {
+      ZOrder		      80
+      SrcBlock		      "SW control signal generator"
+      SrcPort		      1
+      DstBlock		      "FTM_PWM_Config"
+      DstPort		      5
+    }
+    Annotation {
+      SID		      "71"
+      Name		      "Output PWM signals and overwriting with SW control and masking CH1"
+      Position		      [188, 463, 1858, 1226]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      327
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "51"
+      Name		      "  "
+      Position		      [190, -86, 1858, 448]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      326
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "89"
+      Name		      "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+      "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }"
+      "\n</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n"
+      "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-inden"
+      "t:0px;\"><span style=\" font-size:10px;\">Output signal reference</span></p>\n<p style=\" margin-top:0px; margin"
+      "-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"C:\\Users\\nxf"
+      "30742\\AppData\\Local\\Temp\\1\\mwslx_ftm_sw_control_s32k14x_378bec9a_8125_4be6_9c75_ce319b7daec3/simulink/resou"
+      "rces/mwimg_033920ab-deaf-4e57-8cf7-9c81fc26fbc3.JPG\" /><img src=\"C:\\Users\\nxf30742\\AppData\\Local\\Temp\\1\\"
+      "mwslx_ftm_sw_control_s32k14x_95292a24_6f00_4b7e_a159_700ba3795f65/simulink/resources/mwimg_4b810959-603d-422a-82"
+      "1d-546031b830fa.JPG\" /><img src=\"[$unpackedFolder]/simulink/resources/mwimg_bc180e55-a6d0-4758-8256-684ab39faf"
+      "21.JPG\" /></p></body></html>"
+      Position		      [163, -300, 1885, -98]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      Interpreter	      "rich"
+      ZOrder		      -1
+    }
+  }
+}
+MatResources {
+  NumRecords		  3
+  ResourceRecord {
+    Path		    /simulink/resources/mwimg_bc180e55-a6d0-4758-8256-684ab39faf21.JPG
+    Data		    "_]C_X  02D9)1@ ! 0$ :@!J  #_X1$217AI9@  34T *@    @ ! $[  (    8   (2H=I  0    !   (8IR=  $    P   0VNH"
+    "<  <   @,    /@     <Z@    @                                                                                      "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                              $-O;G-T86YT:6X@4F%Z=F%N($-H:79U   %D ,  @   !0  !\"PD 0  @   !0  !#$DI$  @    ,Y-@  "
+    "DI(  @    ,Y-@  ZAP !P  \" P   BD     !SJ    \"                                                                   "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                                                                                  "
+    "                                                  ,C Q.3HP-SHP.2 Q-CHQ-#HP,0 R,#$Y.C W.C Y(#$V.C$T.C Q    0P!O &X "
+    "<P!T &$ ;@!T &D ;@ @ %( 80!Z '8 80!N \"  0P!H &D =@!U    _^$+*FAT=' Z+R]N<RYA9&]B92YC;VTO>&%P+S$N,\"\\ /#]X<&%C:V5"
+    "T(&)E9VEN/2?ON[\\G(&ED/2=7-4TP37!#96AI2'IR95-Z3E1C>FMC.60G/SX-\"CQX.GAM<&UE=&$@>&UL;G,Z>#TB861O8F4Z;G,Z;65T82\\B/C"
+    "QR9&8Z4D1&('AM;&YS.G)D9CTB:'1T<#HO+W=W=RYW,RYO<F<O,3DY.2\\P,B\\R,BUR9&8M<WEN=&%X+6YS(R(^/')D9CI$97-C<FEP=&EO;B!R9&"
+    "8Z86)O=70](G5U:60Z9F%F-6)D9#4M8F$S9\"TQ,61A+6%D,S$M9#,S9#<U,3@R9C%B(B!X;6QN<SID8STB:'1T<#HO+W!U<FPN;W)G+V1C+V5L96U"
+    "E;G1S+S$N,2\\B+SX\\<F1F.D1E<V-R:7!T:6]N(')D9CIA8F]U=#TB=75I9#IF868U8F1D-2UB83-D+3$Q9&$M860S,2UD,S-D-S4Q.#)F,6(B('A"
+    "M;&YS.GAM<#TB:'1T<#HO+VYS+F%D;V)E+F-O;2]X87 O,2XP+R(^/'AM<#I#<F5A=&5$871E/C(P,3DM,#<M,#E4,38Z,30Z,#$N.38Q/\"]X;7 Z"
+    "0W)E871E1&%T93X\\+W)D9CI$97-C<FEP=&EO;CX\\<F1F.D1E<V-R:7!T:6]N(')D9CIA8F]U=#TB=75I9#IF868U8F1D-2UB83-D+3$Q9&$M860S"
+    ",2UD,S-D-S4Q.#)F,6(B('AM;&YS.F1C/2)H='1P.B\\O<'5R;\"YO<F<O9&,O96QE;65N=',O,2XQ+R(^/&1C.F-R96%T;W(^/')D9CI397$@>&UL"
+    ";G,Z<F1F/2)H='1P.B\\O=W=W+G<S+F]R9R\\Q.3DY+S R+S(R+7)D9BUS>6YT87@M;G,C(CX\\<F1F.FQI/D-O;G-T86YT:6X@4F%Z=F%N($-H:79"
+    "U/\"]R9&8Z;&D^/\"]R9&8Z4V5Q/@T*\"0D)/\"]D8SIC<F5A=&]R/CPO<F1F.D1E<V-R:7!T:6]N/CPO<F1F.E)$1CX\\+W@Z>&UP;65T83X-\"B "
+    "@(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @\"B @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @\"B @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @\"B @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @( H@(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @\"B @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " *(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @\"B @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @\"B @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" *(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\""
+    " @(\" @(\" @(\" @(\" @(\" @( H@(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @(\" @/#]X<&%C:V5T(&5N9#TG=R<_/O_; $, !P4%!@"
+    "4$!P8%!@@'!P@*$0L*\"0D*%0\\0#!$8%1H9&!48%QL>)R$;'24=%Q@B+B(E*\"DK+\"L:(\"\\S+RHR)RHK*O_; $,!!P@(\"@D*% L+%\"H<&!PJ"
+    "*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*BHJ*O_  !$( .T&@P,!(@ \"$0$#$0'_Q  ?   !!0$! 0$! 0   "
+    "        0(#! 4&!P@)\"@O_Q \"U$  \" 0,# @0#!04$!    7T! @, !!$%$B$Q008346$'(G$4,H&1H0@C0K'!%5+1\\\"0S8G*\"\"0H6%Q@9"
+    "&B4F)R@I*C0U-C<X.3I#1$5&1TA)2E-455976%E:8V1E9F=H:6IS='5V=WAY>H.$A8:'B(F*DI.4E9:7F)F:HJ.DI::GJ*FJLK.TM;:WN+FZPL/$Q<"
+    ";'R,G*TM/4U=;7V-G:X>+CY.7FY^CIZO'R\\_3U]O?X^?K_Q  ? 0 # 0$! 0$! 0$!         0(#! 4&!P@)\"@O_Q \"U$0 \" 0($! ,$!P4$"
+    "!  ! G<  0(#$00%(3$&$D%1!V%Q$R(R@0@40I&AL<$)(S-2\\!5B<M$*%B0TX27Q%Q@9&B8G*\"DJ-38W.#DZ0T1%1D=(24I35%565UA96F-D969G"
+    ":&EJ<W1U=G=X>7J\"@X2%AH>(B8J2DY25EI>8F9JBHZ2EIJ>HJ:JRL[2UMK>XN;K\"P\\3%QL?(R<K2T]35UM?8V=KBX^3EYN?HZ>KR\\_3U]O?X^?"
+    "K_V@ , P$  A$#$0 _ ,/SSZG\\Z///J?SK/\\ZCSJX['@\\IH>>?4_G1YY]3^=9_G4>=18.4T///J?SH\\\\^I_.L_SJ/.HL'*:'GGU/YT>>?4_G6"
+    "?YU:NG>'M9U6U^TV-DTD).%=G5 Q]MQ&?PI.RW#E(O//J?SH\\\\^I_.H?L5]YUS%]EE$EJI:=2O,8'4FJOG46#E-#SSZG\\Z///J?SK/\\ZIC%<\""
+    "R%X8G%NS^6)<?*6QG&?6BP<I:\\\\^I_.CSSZG\\ZS_ #J/.IV#E-#SSZG\\Z///J?SK/\\ZCSJ+!RFAYY]3^='GGU/YUG^=1YU%@Y30\\\\^I_.F1"
+    "3863G_EO-_P\"C&JEYU-2;A_\\ KM+_ .C&HMH5R^Z:7GGU/YT>>?4_G5GPOH5QXEU9;:+*0)AIYL<(O^)[#_ T>*-\"N/#6K-;2Y>!\\M!-CAU_Q'"
+    "<?XBEUL3R.US(UJ;/A[4AG_ )=)?_0#7(7]SNL;L9ZPN/\\ QTUT.KS9T+4!ZVLO_H)KDKS_ (]+G_KD_P#(UT4MCT<&K19V?GT>?6;O/J?SHWGU/Y"
+    "UJ=II>?1Y]9N\\^I_.C>?4_G0!I>?1Y]9N\\^I_.C>?4_G0!I>?1Y]9N\\^I_.C>?4_G0!I>?1Y]9N\\^I_.C>?4_G0!I>?5NSC26VNKF=F\\JV0$A"
+    ".K$\\ >W-86\\^I_.KMMJ+6GVJ%X_.AN%*.A;'?@@]B* -\"_B2VCMIH68QW$>]0QY4@X(I#;LFGI>2S)''(Q5 0Q+$?0']:S+[47O6A 00PV\\?EQ"
+    "QABV!W)/<FI['6/[/@D2.&25I$*L))_W1)[E-O/YT /28,P!8(\">6.<#\\N:0S@,0K;@#@, 1G\\\\&LZ-\\,OF[F4'Y@K8)_'!Q0TF6)4,JYX!;<"
+    "0/K@9_*@#?,<']AF\\1I3(LPC(. O(S4\\5G!YUE;SO*)KQ-X92-J _=R.^?PK'&IQ+H[6'V61MSB0R?: /F QTV=/;/XU+#KS1?99)+59KBT0I%(9"
+    "\"!CMN&.<?44 / =KS[-D!_,\\OD\\9SBK[Z3)'YF^\\M0(I!&YW-\\K'H/N^]<[!=/%>)<2$R,L@D;G&XYR:T)]>>=;D?9@OGW2W'^MSMQCCISTH "
+    "NR:?-\"MP]Q-%$EO((W8[FR3Z!03W%9_V@=CQ4J>(/+U:?4!;2[Y7W>6MSA\"-H&&&SYO7M64TKR2,[84LQ.$& ,GH/:@#1\\^CSZS=Y]3^=&\\^I_"
+    ".@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I"
+    "_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^"
+    "I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\"
+    "^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^CSZS=Y]3^=&\\^I_.@#2\\^LO6I^+(^EP?_"
+    "13T[>?4_G6?JK$BUR3_KC_ .BWH 47C#HQHJC10!TOGCUH\\\\>M5-U&ZN8\\BQ;\\\\>M'GCUJINHW4!8M^>/6CSQZU4W4;J L6_/'K76RWVEZGI>"
+    "F67B-;[2;FV@VV]R(2T3QD\\.5.#VZCK7#[JZ\"R\\97=M8PVMU8Z=J*6XQ U];^8T0] <CCV.:B2;V%8[:RNM2T^^\\1PZL;2_GCTTSK<- I\\U-H"
+    "\"@\\#*XZ@]ZRM!\"1:3:75S8Z+\"M[<M^]U'+F=<X*Q1JIV =,USD'C/5(M;NM3F\\BZDNHC#-%/'F-DX^7:,<#%26OC:^MK&.U^QZ=,L$C/;/-;;"
+    "VMB3G\"9/ SZY_2HY&%CJ?L6G:3?^+=NGV]S'IZQ/!'<+N\"DG.,]<9/3/(&*K7^MM<?#%)OL5A%YVH-%MBM@JH-N<J.S=L]<5S5SXOOKJ75Y'AME."
+    "K*BS[5;Y=O3;\\W'XYJO;>(KFW\\/SZ,T%M/;2OYBF:/+Q-C&Y#G@_G3Y'U\"Q5\\\\>M'GCUJINHW5J.Q;\\\\>M'GCUJINHW4!8M^>/6CSQZU4W4"
+    ";J L6_/'K2+./GY_Y:R?^AFJNZ@-R_\\ UT?_ -\"-'0=M#5M-<U\"PC9+#4+JU1CEE@F9 3ZX!HN]<U\"_C6._U\"ZND4[E6>9G /J 36CX*TS0-;"
+    "U(Z?KLUY!/+_P >[P2HJN?[IW(>?3UZ?5?&NEZ!H>I#3]#FO)YXC_I#SRHRJ?[HVJ.?7TZ?2;KFL*QS6I3!M(O1GK;R#_QTUS=S!/\\ 9Y@;IR-C9!"
+    "5.>/\\ =K;OS_Q++O\\ ZX/_ .@FKVK16X^'T<J01+.R1[I0@#'+WH//7D*@_P\" KZ\"MZ>QVX963,+%Y_P _\\G_?\"?\\ Q-&+S_G_ )/^^$_^)"
+    "H\\RCS*T.H,7G_/_ \"?]\\)_\\31B\\_P\"?^3_OA/\\ XFCS*/,H ,7G_/\\ R?\\ ?\"?_ !-&+S_G_D_[X3_XFCS*/,H ,7G_ #_R?]\\)_P#$"
+    "T8O/^?\\ D_[X3_XFCS*/,H ,7G_/_)_WPG_Q-&+S_G_D_P\"^$_\\ B:/,H\\R@ Q>?\\_\\ )_WPG_Q-23K>+<2*+^4@.1RD?K_NU'YE2W4F+R8?"
+    "]-&_G0!%B\\_Y_P\"3_OA/_B:,7G_/_)_WPG_Q-'F4>90 8O/^?^3_ +X3_P\")HQ>?\\_\\ )_WPG_Q-'F4>90 8O/\\ G_D_[X3_ .)HQ>?\\_P#"
+    ")_P!\\)_\\ $T>91YE !B\\_Y_Y/^^$_^)HQ>?\\ /_)_WPG_ ,31YE'F4 &+S_G_ )/^^$_^)HQ>?\\_\\G_?\"?_$T>91YE !B\\_Y_Y/\\ OA/_"
+    " (FC%Y_S_P G_?\"?_$T>91YE !B\\_P\"?^3_OA/\\ XFC%Y_S_ ,G_ 'PG_P 31YE'F4 &+S_G_D_[X3_XFC%Y_P _\\G_?\"?\\ Q-'F4>90 8O"
+    "/^?\\ D_[X3_XFC%Y_S_R?]\\)_\\31YE'F4 &+S_G_D_P\"^$_\\ B:,7G_/_ \"?]\\)_\\31YE'F4 &+S_ )_Y/^^$_P#B:,7G_/\\ R?\\ ?\""
+    "?_ !-'F4>90 8O/^?^3_OA/_B:,7G_ #_R?]\\)_P#$UH:?8?:X9W>1!LA9T F0'(_O G('N<5#9L(]3BCD6&8%U4C<'7DCN#@T 5<7G_/_ \"?]\\"
+    ")_\\31B\\_P\"?^3_OA/\\ XFK>J$1ZM=(@\"JLA 51@ 5?L=.M)[6R>8SF2ZE:/Y& \"XSSR#Z4 8N+S_G_D_P\"^$_\\ B:,7G_/_ \"?]\\)_\\"
+    "36P]E8\".WF,LT,+W#0N7(.,=^!QT]ZI:A\";690L3)&PRCF42\"0>H( % %3%Y_P _\\G_?\"?\\ Q-&+S_G_ )/^^$_^)H\\RCS* #%Y_S_R?]\\"
+    ")_\\31B\\_Y_Y/\\ OA/_ (FCS*/,H ,7G_/_ \"?]\\)_\\31B\\_P\"?^3_OA/\\ XFCS*/,H ,7G_/\\ R?\\ ?\"?_ !-&+S_G_D_[X3_XFCS*"
+    "/,H ,7G_ #_R?]\\)_P#$T8O/^?\\ D_[X3_XFCS*/,H ,7G_/_)_WPG_Q-&+S_G_D_P\"^$_\\ B:/,H\\R@ Q>?\\_\\ )_WPG_Q-&+S_ )_Y/^^"
+    "$_P#B:/,H\\R@ Q>?\\_P#)_P!\\)_\\ $T8O/^?^3_OA/_B:/,H\\R@ Q>?\\ /_)_WPG_ ,31B\\_Y_P\"3_OA/_B:/,I48NX4$ DX&X@#\\S0 F"
+    "+S_G_D_[X3_XFC%Y_P _\\G_?\"?\\ Q-:-W8?9]/MIUEC+2*Q?,Z8X/&WGG\\,U-83(EMY^H0VZ62J5&8AOE;_9/4GZ<\"@#(Q>?\\_\\ )_WPG_Q"
+    "-&+S_ )_Y/^^$_P#B:DM?W]U#&Y(#N%..V36U-IVGPBX/^E$03K#_ *Q?F)QS]WCK0!@XO/\\ G_D_[X3_ .)HQ>?\\_P#)_P!\\)_\\ $UM'3;9;J"
+    "[MT=YKB*0+'#YJQEUQG.2#D^P]*QF=E8JP*D'!![4 )B\\_Y_P\"3_OA/_B:,7G_/_)_WPG_Q-'F4>90 8O/^?^3_ +X3_P\")HQ>?\\_\\ )_WPG_"
+    "Q-'F4>90 8O/\\ G_D_[X3_ .)HQ>?\\_P#)_P!\\)_\\ $T>91YE !B\\_Y_Y/^^$_^)HQ>?\\ /_)_WPG_ ,31YE'F4 &+S_G_ )/^^$_^)HQ>?\\"
+    "_\\G_?\"?_$T>91YE !B\\_Y_Y/\\ OA/_ (FC%Y_S_P G_?\"?_$T>91YE !B\\_P\"?^3_OA/\\ XFC%Y_S_ ,G_ 'PG_P 31YE'F4 &+S_G_D_["
+    "X3_XFC%Y_P _\\G_?\"?\\ Q-'F4>90 8O/^?\\ D_[X3_XFC%Y_S_R?]\\)_\\31YE7])LA?W2I+(JQG.<2J&X&> >?TH H8O/^?^3_OA/_B:,7G_"
+    " #_R?]\\)_P#$U8B<VUR [VV=OWF(E5?^^<\\U;U<(L%G)$J,'C.Z>-0JR,#_='3'T% &9B\\_Y_P\"3_OA/_B:,7G_/_)_WPG_Q-:EA:6TVFM<W!F"
+    "+>>L06-@.N.>0?6IKO3K.&.Y:.2=/LTZ1NSD$$'J< =LT 8N+S_G_D_P\"^$_\\ B:,7G_/_ \"?]\\)_\\35_4[9+4J]JK-;L2$G,H</\\ @ ,'V-"
+    "4/,H ,7G_/_)_WPG_Q-&+S_G_D_P\"^$_\\ B:/,H\\R@ Q>?\\_\\ )_WPG_Q-&+S_ )_Y/^^$_P#B:/,H\\R@ Q>?\\_P#)_P!\\)_\\ $T8O/^?"
+    "^3_OA/_B:/,H\\R@ Q>?\\ /_)_WPG_ ,31B\\_Y_P\"3_OA/_B:/,H\\R@ Q>?\\_\\G_?\"?_$T8O/^?^3_ +X3_P\")H\\RCS* #%Y_S_P G_?\""
+    "?_$T8O/\\ G_D_[X3_ .)H\\RCS* #%Y_S_ ,G_ 'PG_P 31B\\_Y_Y/^^$_^)H\\RCS* #%Y_P _\\G_?\"?\\ Q-&+S_G_ )/^^$_^)H\\RCS* #"
+    "%Y_S_R?]\\)_\\31B\\_Y_Y/\\ OA/_ (FCS#ZUI-IV-)%QYL7F^=L/^D1[,8SUSU]LT 9N+S_G_D_[X3_XFC%Y_P _\\G_?\"?\\ Q-;^A6\"GR;F"
+    "ZMVG69BD:[-RJ.[-V]A6+=;HKR6-U*$.?E*XP,\\<4 18O/^?^3_OA/_B:,7G_ #_R?]\\)_P#$UOSZ980&Y#&Y/V>!96(=?FSV'RU$^G6:7KPF5\\"
+    "M DD,;2*A=C_#N(Q^E &+B\\_Y_Y/\\ OA/_ (FC%Y_S_P G_?\"?_$U)<!X+AXWC:)E;&QCDC\\<#-1^90 8O/^?^3_OA/_B:,7G_ #_R?]\\)_P#"
+    "$T>91YE !B\\_Y_P\"3_OA/_B:,7G_/_)_WPG_Q-'F4>90 8O/^?^3_ +X3_P\")HQ>?\\_\\ )_WPG_Q-'F4>90 8O/\\ G_D_[X3_ .)HQ>?\\_P"
+    "#)_P!\\)_\\ $T>91YE !B\\_Y_Y/^^$_^)HQ>?\\ /_)_WPG_ ,31YE'F4 &+S_G_ )/^^$_^)HQ>?\\_\\G_?\"?_$T>91YE !B\\_Y_Y/\\ OA/"
+    "_ (FC%Y_S_P G_?\"?_$T>91YE !B\\_P\"?^3_OA/\\ XFC%Y_S_ ,G_ 'PG_P 31YE'F4 &+S_G_D_[X3_XFC%Y_P _\\G_?\"?\\ Q-6M/M_MEW"
+    "'&SJJ,X5LR*K8/H\">3],U(\\<=EJZK.\\;0K-@C>KG:&[@>W;% %'%Y_S_R?]\\)_\\31B\\_Y_Y/\\ OA/_ (FM+5 [QFZMW@:R>4K'Y400KZ _*"
+    "#TING6\\%Q:7D]R92+= P6-@,_F#0!GXO/\\ G_D_[X3_ .)HQ>?\\_P#)_P!\\)_\\ $UN76F6<:W2Q-.)(+<3Y9E(.>V,54OK6*&U6:RWSPX7=/Y"
+    "H(!/4%<9'XF@#.Q>?\\_P#)_P!\\)_\\ $T8O/^?^3_OA/_B:/,H\\R@ Q>?\\ /_)_WPG_ ,31B\\_Y_P\"3_OA/_B:/,H\\R@ Q>?\\_\\G_?\"?"
+    "_$T8O/^?^3_ +X3_P\")H\\RCS* #%Y_S_P G_?\"?_$T8O/\\ G_D_[X3_ .)H\\RCS* #%Y_S_ ,G_ 'PG_P 31B\\_Y_Y/^^$_^)H\\RCS* #%Y"
+    "_P _\\G_?\"?\\ Q-&+S_G_ )/^^$_^)H\\RCS* #%Y_S_R?]\\)_\\31B\\_Y_Y/\\ OA/_ (FCS*/,H ,7G_/_ \"?]\\)_\\31B\\_P\"?^3_OA"
+    "/\\ XFCS*/,H ,7G_/\\ R?\\ ?\"?_ !-&+S_G_D_[X3_XFCS*/,H ,7G_ #_R?]\\)_P#$T8O/^?\\ D_[X3_XFM&WT_P W3+BX:2/?'LV#ST P3"
+    "SNYX_'%36200Z-<7<SH)!,(E81K-M^@)P?K[4 9&+S_ )_Y/^^$_P#B:,7G_/\\ R?\\ ?\"?_ !-6]3BDM+]HY)%DRH962,(\"\"..!TK3ATNR=;9"
+    "9&N-\\UN9V*NN!CMC% &#B\\_P\"?^3_OA/\\ XFC%Y_S_ ,G_ 'PG_P 36P+*PWV;O-)##<PLX$CC.X'@;L8'Y5G7D;VMR8Y(6AX!\"NX?CUR  : "
+    "(,7G_ #_R?]\\)_P#$T8O/^?\\ D_[X3_XFCS*/,H ,7G_/_)_WPG_Q-&+S_G_D_P\"^$_\\ B:/,H\\R@ Q>?\\_\\ )_WPG_Q-&+S_ )_Y/^^$_P"
+    "#B:/,H\\R@ Q>?\\_P#)_P!\\)_\\ $T8O/^?^3_OA/_B:/,H\\R@ Q>?\\ /_)_WPG_ ,31B\\_Y_P\"3_OA/_B:/,H\\R@ Q>?\\_\\G_?\"?_$T"
+    "8O/^?^3_ +X3_P\")H\\RCS* #%Y_S_P G_?\"?_$T8O/\\ G_D_[X3_ .)H\\RCS* #%Y_S_ ,G_ 'PG_P 31B\\_Y_Y/^^$_^)H\\RCS* #%Y_P "
+    "_\\G_?\"?\\ Q-&+S_G_ )/^^$_^)H\\RI(%:>3:K(OJ7D5/U)% $>+S_ )_Y/^^$_P#B:,7G_/\\ R?\\ ?\"?_ !-7]4M1IU^Z1NC(K#:&D1FZ9Y"
+    "4<_F*EOIC!I<$4R1&YN/WI*PHICC[#@#DT 9>+S_G_ )/^^$_^)HQ>?\\_\\G_?\"?_$U?TBVBOKIX[AG\")$S_(0#Q]:OQ:;8S?9E0W*M<0-,N74A"
+    "<=CQS0!@XO/^?^3_ +X3_P\")HQ>?\\_\\ )_WPG_Q-:+VL+:4EQ:;[APFZ8B4#RCGNF,D>^:SO,H ,7G_/_)_WPG_Q-07*73M 'O)&_>$CY4X.UO\\"
+    " 9J?S*BE?,L'^^?\\ T!J &>1-_P _4G_?*?\\ Q-%?0&A:3H,FG2F;1=.D87ETH+VD9(47$@4=.@  'L** /&,T9J/;>?\\^1_[_)_C1MO/^?(_]_"
+    "D_QK'E9Y_L9]B3-&:A7[6Q8\"R.5.#^^7KC/K[T[;>?\\^1_[_)_C1RL/8S[$F:,U'MO/^?(_P#?Y/\\ &C;>?\\^1_P\"_R?XT<K#V,^Q)FC-1[;S"
+    "_ )\\C_P!_D_QHVWG_ #Y'_O\\ )_C1RL/8S[$F:,U'MO/^?(_]_D_QHVWG_/D?^_R?XT<K#V,^Q)FC-1[;S_GR/_?Y/\\:-MY_SY'_O\\G^-'*P]C"
+    "/L29HS4>V\\_Y\\C_ -_D_P :-MY_SY'_ +_)_C1RL/8S[$F:,U'MO/\\ GR/_ '^3_&C;>?\\ /D?^_P G^-'*P]C/L29HS4>V\\_Y\\C_W^3_&C;"
+    ">?\\^1_[_)_C1RL/8S[$F:,_,_\\ UT?_ -\"-1[;S_GR/_?Y/\\:-MYEC]B/+%O]<G<Y]:.5C]C.VQ*KE6#*2K*<@@X(-#2,[%G)9F.22<DFHMMY_"
+    "SY'_O\\G^-&V\\_Y\\C_ -_D_P :.5B]C/L,OC_Q+;K_ *XO_P\"@FI-1O$?PK]F$JEE1<INY&&N#T_X&/^^AZU7OA=C3KG=:%5\\ILGSE.!@^]4+K"
+    "SA;RYM9AF)FY*<#!Y^]5Q36YTT82BG<EHJK]M'_/M<_]\\#_&C[:/^?:Y_P\"^!_C5FY:HJK]M'_/M<_\\ ? _QH^VC_GVN?^^!_C0!:HJK]M'_ #["
+    "7/_? _P :/MH_Y]KG_O@?XT 6J*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- %JI;O_C]G_ZZ-_.J'VT"
+    "?\\^US_P!\\#_&GSZBLMQ)(+:Z =BP!1>Y_WJ )Z*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- %JBJO"
+    "VT?\\^US_P!\\#_&C[:/^?:Y_[X'^- %JBJOVT?\\ /M<_]\\#_ !H^VC_GVN?^^!_C0!:HJK]M'_/M<_\\ ? _QH^VC_GVN?^^!_C0!:HJK]M'_ #"
+    "[7/_? _P :/MH_Y]KG_O@?XT 6J*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- %JBJOVT?\\^US_P!\\"
+    "#_&C[:/^?:Y_[X'^- %JBJOVT?\\ /M<_]\\#_ !H^VC_GVN?^^!_C0!:HJK]M'_/M<_\\ ? _QH^VC_GVN?^^!_C0!H0RS0P3-\"^Q7'E/P\"2#GC"
+    "GZ4V\"=[:420E0XZ%D#8_ @U4&HJ+=X_LUUEF5L[%[ _[7O3/MH_Y]KG_O@?XT 7KBYENIC+<,&<]2$5<_7 &:ECU&ZA6!8YMJP,6C&T?*3U/3FLS["
+    ":/^?:Y_P\"^!_C1]M'_ #[7/_? _P : -'[?<>6L9D#(KF0*T:L-QZG!'O3;BZFNF0W$F[8NU %\"A1[   50^VC_GVN?^^!_C1]M'_/M<_]\\#_&@"
+    "\"U157[:/^?:Y_[X'^-'VT?\\^US_ -\\#_&@\"U157[:/^?:Y_[X'^-'VT?\\^US_WP/\\: +5%5?MH_Y]KG_O@?XT?;1_S[7/\\ WP/\\: +5%5?"
+    "MH_Y]KG_O@?XT?;1_S[7/_? _QH M455^VC_GVN?^^!_C1]M'_/M<_P#? _QH M455^VC_GVN?^^!_C1]M'_/M<_]\\#_&@\"U157[:/^?:Y_[X'^-"
+    "'VT?\\^US_ -\\#_&@\"U157[:/^?:Y_[X'^-'VT?\\^US_WP/\\: +5%5?MH_Y]KG_O@?XT?;1_S[7/\\ WP/\\: -\"XEF*0PRR;DB7,:@#@-@U("
+    "=3NFCCC9XV2)=J!X(VVC\\5K.FU%9'!%M=#\"JO*+V4#^][4S[:/^?:Y_[X'^- %N.1HI%D0X=2\"#CO5A]1NY!('G)\\R02O\\ *O+#H>E9GVT?\\"
+    "^US_P!\\#_&C[:/^?:Y_[X'^- &H-4NQ</.)5\\YVW&0PH6SC'!QQ^%52222Q+$G)).2357[:/^?:Y_[X'^-'VT?\\^US_ -\\#_&@\"U157[:/^?:"
+    "Y_[X'^-'VT?\\^US_WP/\\: +5%5?MH_Y]KG_O@?XT?;1_S[7/\\ WP/\\: +5%5?MH_Y]KG_O@?XT?;1_S[7/_? _QH M455^VC_GVN?^^!_C1]M'"
+    "_/M<_P#? _QH M455^VC_GVN?^^!_C1]M'_/M<_]\\#_&@\"U157[:/^?:Y_[X'^-'VT?\\^US_ -\\#_&@\"U157[:/^?:Y_[X'^-'VT?\\^US_WP"
+    "/\\: +5%5?MH_Y]KG_O@?XT?;1_S[7/\\ WP/\\: +536LLUO(T]L^QXUSG /!X[_6L_P\"VC_GVN?\\ O@?XT^/451)0;:Z^==H^1?[P/][VH MV]"
+    "Q+:R;X'VMC&< Y'N#P:6XNY[K9]HDW\",810H55'L  *H?;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- &A'>SQ6_D1R;8_,$FW:/O#H>E/;4;I_-#S;A-"
+    "()) 44AF'3M^E9GVT?\\^US_ -\\#_&C[:/\\ GVN?^^!_C0!H3WD]S&D<T@,:$E45%103WPH J&JOVT?\\^US_ -\\#_&C[:/\\ GVN?^^!_C0!:H"
+    "JK]M'_/M<_]\\#_&C[:/^?:Y_P\"^!_C0!:HJK]M'_/M<_P#? _QH^VC_ )]KG_O@?XT 6J*J_;1_S[7/_? _QH^VC_GVN?\\ O@?XT 6J*J_;1_S["
+    "7/\\ WP/\\:/MH_P\"?:Y_[X'^- %JBJOVT?\\^US_WP/\\:/MH_Y]KG_ +X'^- %JBJOVT?\\^US_ -\\#_&C[:/\\ GVN?^^!_C0!:HJK]M'_/M<"
+    "_]\\#_&C[:/^?:Y_P\"^!_C0!:HJK]M'_/M<_P#? _QH^VC_ )]KG_O@?XT 6JF>686<<#2?N6)E5 !UY7.>O:L_[:/^?:Y_[X'^-/DU%72(\"VNOD"
+    "7:?D7^\\3_>]Z +EK=365P)[5_+E (#;0>/QJ(L68LQRS$DG'4U5^VC_ )]KG_O@?XT?;1_S[7/_ 'P/\\: -.34KN4S&2<GSD$;_ \"KRHZ#I2G4K"
+    "HS\"5I$9PJJ&:%&V@=,9'%9?VT?\\ /M<_]\\#_ !H^VC_GVN?^^!_C0!<DE>:5Y9G9Y'.69NI--JK]M'_/M<_]\\#_&C[:/^?:Y_P\"^!_C0!:HJK"
+    "]M'_/M<_P#? _QH^VC_ )]KG_O@?XT 6J*J_;1_S[7/_? _QH^VC_GVN?\\ O@?XT 6J*J_;1_S[7/\\ WP/\\:/MH_P\"?:Y_[X'^- %JBJOVT?\\"
+    "^US_WP/\\:/MH_Y]KG_ +X'^- %JBJOVT?\\^US_ -\\#_&C[:/\\ GVN?^^!_C0!:HJK]M'_/M<_]\\#_&C[:/^?:Y_P\"^!_C0!:HJK]M'_/M<_P"
+    "#? _QH^VC_ )]KG_O@?XT 6J*J_;1_S[7/_? _QH^VC_GVN?\\ O@?XT 7K9I$N%>%@LD>74D=,#/\\ 2F^<YG,S$,Y8N2R@@G.>G2JT.HK&Y)MKHY"
+    "5EX1>ZD?WO>F?;1_S[7/\\ WP/\\: -\">\\GN(TCED'EH<JB(J*#ZX4 9I([J:&&6**3:DPVR# .X?C5#[:/^?:Y_[X'^-'VT?\\^US_WP/\\: --"
+    "]2NY&E+3DF:,1/\\B\\J.W2FRWUQ-!Y+2*L1;<4CC5 3[[0,_C6=]M'_ #[7/_? _P :/MH_Y]KG_O@?XT 6J*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@"
+    "?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- %JBJOVT?\\^US_P!\\#_&C[:/^?:Y_[X'^- %JBJOVT?\\ /M<_]\\#_ !H^VC_GVN?^^!_C0!"
+    ":HJK]M'_/M<_\\ ? _QH^VC_GVN?^^!_C0!:HJK]M'_ #[7/_? _P :/MH_Y]KG_O@?XT 6J*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P"
+    " ^US_WP/\\ &C[:/^?:Y_[X'^- %JBJOVT?\\^US_P!\\#_&C[:/^?:Y_[X'^- &@)9H[%D63$,S89<#DK@_UI;>]N+576\"3:KXW*5# XZ<$$51.H"
+    "J;=(_LUUE69L[%[@?[7M3/MH_P\"?:Y_[X'^- %V:>2XF::>1I)&/+-4XU.\\4H5G(\\N,Q)\\B\\*>HZ5E_;1_S[7/\\ WP/\\:/MH_P\"?:Y_[X'"
+    "^- &B+^XVQ*75EA0I&'B1@H)SW'M3)[B6ZF,MQ(9'( R>, =@!P*H_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_"
+    "[X'^- %JBJOVT?\\^US_P!\\#_&C[:/^?:Y_[X'^- %JBJOVT?\\ /M<_]\\#_ !H^VC_GVN?^^!_C0!:HJK]M'_/M<_\\ ? _QH^VC_GVN?^^!_C0"
+    "!:HJK]M'_ #[7/_? _P :/MH_Y]KG_O@?XT 6J*J_;1_S[7/_ 'P/\\:/MH_Y]KG_O@?XT 6J*J_;1_P ^US_WP/\\ &C[:/^?:Y_[X'^- %JBJOVT"
+    "?\\^US_P!\\#_&C[:/^?:Y_[X'^- %JG1*9)D1\" S, \"?6J?VT?\\^US_P!\\#_&GP:BL5Q'(;:Z(1@Q 1>Q_WJ +<]Q+<W#3SOOD<Y+8 SV[47%"
+    "S-=SF:YDWR$ 9P!P.@P*H_;1_S[7/_? _QH^VC_GVN?\\ O@?XT 7[>ZFM'9K>38S*4)P#P>O6I$U*[C:(I.088S&GRK\\JGJ.E9GVT?\\^US_WP/\\"
+    ":/MH_Y]KG_ +X'^- &C]NN!:M;I(J1,H5@D:J6 [$@9/YU!57[:/\\ GVN?^^!_C1]M'_/M<_\\ ? _QH M5&_\\ KH?]\\_\\ H+5#]M'_ #[7/_?"
+    " _P :;]JWSPA;>?.X_>51GY3[T >K:;XGM8+5U;4X4)N)GP9P/O2L<]>^<T5YCO?_ )]Y?S3_ .*HH Z7-&:Z\"RB@_P\");9FVA9+RWD>61D!<ME@"
+    ",-U&-HZ4210E;BR%M\"L<6GK.K[!YA?:&)W=>^,=* .;B/SS_]=/\\ V5:DS4,1^:;_ *Z?^RK721S7]M9Z2FDJQ28,9%496:3<05?U&,<'L: ,-HY"
+    "$5&=&57&5)& PZ<>M-S72&*\"Y^P6ES;(7>WGPZ.1Y15G(V@'!Y'?-1G2K==*F\\Z\"..>&WCE)621GRQ'WN F\"#T'- '/YHS73?V=ITVHW%NMF(U"
+    "MKV*'(E8EU8D$')]NV*CLM.T_43\"_V?[.!<2QE%D8^8$3<,]3GUQ^ H Y](WD#&-&?8NYMHSM'J?:FYK?,=I'%>&SV@OISF18Q)L#;P/E+@$C_Z]&"
+    "DR7$6GZ?\\ 8MP\\Z^*7!1<[QA<*WM@MQ0!@9HS3[O:M]<+'@(LKA<=,!CBHLT .S1FFYHS0 [-&:;FC- $:&692Z31QKN90#&6/!(_O#TJU_9FI?8"
+    "_M61Y'G_9]_P!G/^LQG;C?G/X5%HS6_P!K@%[]H\\CSWW?9<>9]]L;<]\\XKTK_BJ_\\ A8'_ \"V_LWS?;R?)Q_Z%^N?:@#S!S+\"H=YHY%W*I\"Q"
+    "E3R0/[Q]:<[N9DBC95+*6+,N< 8'3(]:?K36_VN<67VCR//3;]JQYGWUSNQWSFJ[G_ $V/_KD_\\TH G,%R(PYG0(Q*AOLS8)&,C._J,C\\Q3-LH./"
+    "M<.?3R#_\\ %UJ3ZI:R:-% FG6B2B:9B%:?]V&2,!AF0@DE3P<CY1QSS=U6?[%H>F0Z?KLDT<ELRRV\\0EC1@99,M@X##.Y#G!^4'&#P <M>R&31KL"
+    "MU$4JG'J,C^E4[\\_Z/+_UYG^1JQ<'_ (DM[])_YM52^;]U+_UZ'^1H S**=Y,7]UO^_C_XT>3%_=;_ +^/_C0 VBG>3%_=;_OX_P#C1Y,7]UO^_C_"
+    "XT -HJY8Z7'>F8F6.W2\"/S'DEDEP!N5?X<GJP[5.FAVTH<6^I6LSI&\\GEJUP\"P52QQE0.@/>@#,HJU8Z:E]=\"%66+Y'<O)))M4*I8GC)Z ]!4_"
+    "P#9%A_T%[/\\[G_XB@#.HJU?::EC=&%F67Y$</'))M8,H8'G!Z$=15E]#MH@@N-2M87>-)/+9K@E0RAAG\"D=\".] &915^XT>\"*Q:ZANX+I$D6-A"
+    "$\\P*E@Q'W@/[II+328KJVFN)+B*VBB=$+322G)8,0!M!_NF@\"C16K;Z#:W5S%;P:K9M+*X1%W7(R2< <I5*TL%O;Z\"UB&'GD6-2TKX!)P,\\^] "
+    "%>BM'^R+#_H+V?YW/\\ \\145]I<=D82)8[A)X_,22*27!&YE_BP>JGM0!3HK131;?[+!-<7]M;^>A=$D><M@,5S\\JD=5/>FW&CP16+74-W!=(DBQ"
+    "L(GF!4L&(^\\!_=- %\"BKUII,5U;37$EQ%;11.B%II)3DL&( V@_W34]OH-K=7,5O!JMFTLKA$7=<C))P!RE &515BTL%O;Z\"UB&'GD6-2TKX!)P"
+    ",\\^]6?[(L/^@O9_G<_P#Q% &=15R^TN.R,)$L=PD\\?F))%)+@C<R_Q8/53VJ5-%M_LL$UQ?VUOYZ%T21YRV Q7/RJ1U4]Z ,ZBM%]%M_LL\\UO?V"
+    "UQY\"!W2-YPV\"P7/S*!U8=ZBL=+CO3,3+';I!'YCR2R2X W*O\\ #D]6':@\"G16C_9%A_P!!>S_.Y_\\ B*K7=@ME?3VLHR\\$C1L5E?!(.#CGVH"
+    " KT5JW&@VMK<RV\\^JV:RQ.4==UR<$'!'\"5!=Z3%:VT-Q'<17,4KN@:&248*A20=P']X4 4:*OV^CP2V*W4UW!:H\\C1J)7F)8J%)^Z#_>%2)H=M*"
+    "'%OJ5K,Z1O)Y:M< L%4L<94#H#WH S**M6.FI?70A5EB^1W+R22;5\"J6)XR>@/05/\\ V18?]!>S_.Y_^(H SJ*L7=@ME?3VLHR\\$C1L5E?!(.#C"
+    "GVJ[<:#:VMS+;SZK9K+$Y1UW7)P0<$<)0!E45>N])BM;:&XCN(KF*5W0-#)*,%0I(.X#^\\*6WT>\"6Q6ZFNX+5'D:-1*\\Q+%0I/W0?[PH H45IIH"
+    "=M*'%OJ5K,Z1O)Y:M< L%4L<94#H#WJ+2M&.L:G%8VVU99<[3)*X484GL3Z4 4:*U;C0;6UN9;>?5;-98G*.NZY.\"#@CA*C_LBP_Z\"]G^=S_\\10"
+    "!G45H_V18?]!>S_.Y_^(H_LBP_Z\"]G^=S_ /$4 9U%:/\\ 9%A_T%[/\\[G_ .(H_LBP_P\"@O9_G<_\\ Q% &=16C_9%A_P!!>S_.Y_\\ B*/[(L"
+    "/^@O9_G<__ !% &=16C_9%A_T%[/\\ .Y_^(H_LBP_Z\"]G^=S_\\10!G45H_V18?]!>S_.Y_^(IR:';2AQ;ZE:S.D;R>6K7 +!5+'&5 Z ]Z ,RBG"
+    ">3%_=;_ +^/_C1Y,7]UO^_C_P\"- #:*=Y,7]UO^_C_XT>3%_=;_ +^/_C0 VBG>3%_=;_OX_P#C1Y,7]UO^_C_XT -HIWDQ?W6_[^/_ (T>3%_=;_"
+    "OX_P#C0 VBG>3%_=;_ +^/_C1Y,7]UO^_C_P\"- #:*=Y,7]UO^_C_XT>3%_=;_ +^/_C0 VBG>3%_=;_OX_P#C1Y,7]UO^_C_XT -HIWDQ?W6_[^/"
+    "_ (T>3%_=;_OX_P#C0 VBG>3%_=;_ +^/_C1Y,7]UO^_C_P\"- #:*=Y,7]UO^_C_XT>3%_=;_ +^/_C0 VBG>3%_=;_OX_P#C1Y,7]UO^_C_XT -H"
+    "IWDQ?W6_[^/_ (U?31;?[+!-<7]M;^>A=$D><M@,5S\\JD=5/>@#.HJ_<:/!%8M=0W<%TB2+&PB>8%2P8C[P']TTEII,5U;37$EQ%;11.B%II)3DL&"
+    "( V@_W30!1HK5M]!M;JYBMX-5LVEE<(B[KD9). .4JE:6\"WM]!:Q##SR+&I:5\\ DX&>?>@\"O16C_9%A_P!!>S_.Y_\\ B*BOM+CLC\"1+'<)/'Y"
+    "B2122X(W,O\\6#U4]J *=%:*:+;_98)KB_MK?ST+HDCSEL!BN?E4CJI[TVXT>\"*Q:ZANX+I$D6-A$\\P*E@Q'W@/[IH H45>M-)BNK::XDN(K:*)T"
+    "0M-)*<E@Q &T'^Z:GM]!M;JYBMX-5LVEE<(B[KD9). .4H RJ*L6E@M[?06L0P\\\\BQJ6E? ).!GGWJS_9%A_P!!>S_.Y_\\ B* ,ZBKE]I<=D82)"
+    "8[A)X_,22*27!&YE_BP>JGM4J:+;_98)KB_MK?ST+HDCSEL!BN?E4CJI[T 9U%:+Z+;_ &6>:WO[:X\\A [I&\\X;!8+GYE ZL.]16.EQWIF)ECMT@"
+    "C\\QY)9)< ;E7^')ZL.U %.BM'^R+#_H+V?YW/_Q%5KNP6ROI[649>\"1HV*RO@D'!QS[4 5Z*U;C0;6UN9;>?5;-98G*.NZY.\"#@CA*@N])BM;:&"
+    "XCN(KF*5W0-#)*,%0I(.X#^\\* *-%7[?1X);%;J:[@M4>1HU$KS$L5\"D_=!_O\"I$T.VE#BWU*UF=(WD\\M6N 6\"J6.,J!T![T 9E%6K'34OKH0"
+    "JRQ?([EY))-JA5+$\\9/0'H*G_LBP_P\"@O9_G<_\\ Q% &=15B[L%LKZ>UE&7@D:-BLKX)!P<<^U7;C0;6UN9;>?5;-98G*.NZY.\"#@CA* ,JBKU"
+    "WI,5K;0W$=Q%<Q2NZ!H9)1@J%)!W ?WA2V^CP2V*W4UW!:H\\C1J)7F)8J%)^Z#_>% %\"BM--#MI0XM]2M9G2-Y/+5K@%@JECC*@= >]5K'34OKH0"
+    "JRQ?([EY))-JA5+$\\9/0'H* *M%:/]D6'_ $%[/\\[G_P\"(J\"^TU+&Z,+,LOR(X>.23:P90P/.#T(ZB@\"K16F^AVT007&I6L+O&DGELUP2H90P"
+    "SA2.A'>H[C1X(K%KJ&[@ND218V$3S J6#$?> _NF@\"A16CI^A\"_LKN[\\Z*W@M-GFO-)+_ !$@8\"Y/44?V18?]!>S_ #N?_B* ,ZBM'^R+#_H+V"
+    "?YW/_Q%']D6'_07L_SN?_B* ,ZBM'^R+#_H+V?YW/\\ \\11_9%A_T%[/\\[G_ .(H SJ*T?[(L/\\ H+V?YW/_ ,11_9%A_P!!>S_.Y_\\ B* ,ZB"
+    "M'^R+#_H+V?YW/_P 11_9%A_T%[/\\ .Y_^(H SJ*T?[(L/^@O9_G<__$4?V18?]!>S_.Y_^(H SJ*O7>DQ6MM#<1W$5S%*[H&ADE&\"H4D'<!_>%4"
+    "_)B_NM_P!_'_QH ;13O)B_NM_W\\?\\ QH\\F+^ZW_?Q_\\: &T4[R8O[K?]_'_P :/)B_NM_W\\?\\ QH ;13O)B_NM_P!_'_QH\\F+^ZW_?Q_\\ "
+    "&@!M%.\\F+^ZW_?Q_\\:/)B_NM_P!_'_QH ;13O)B_NM_W\\?\\ QH\\F+^ZW_?Q_\\: &T4[R8O[K?]_'_P :/)B_NM_W\\?\\ QH ;13O)B_NM_P"
+    "!_'_QH\\F+^ZW_?Q_\\ &@!M%.\\F+^ZW_?Q_\\:/)B_NM_P!_'_QH ;13O)B_NM_W\\?\\ QH\\F+^ZW_?Q_\\: &T4[R8O[K?]_'_P :/)B_NM_W"
+    "\\?\\ QH ;13O)B_NM_P!_'_QH\\F+^ZW_?Q_\\ &@!M%:MQH-K:W,MO/JMFLL3E'7=<G!!P1PE5+[34L;HPLRR_(CAXY)-K!E# \\X/0CJ* *M%:*"
+    ":+;_98)KB_MK?ST+HDCSEL!BN?E4CJI[TVXT>\"*Q:ZANX+I$D6-A$\\P*E@Q'W@/[IH H45>M-)BNK::XDN(K:*)T0M-)*<E@Q &T'^Z:GM]!M;JY"
+    "BMX-5LVEE<(B[KD9). .4H RJ*L6E@M[?06L0P\\\\BQJ6E? ).!GGWJS_9%A_P!!>S_.Y_\\ B* ,ZBKE]I<=D82)8[A)X_,22*27!&YE_BP>JGM4"
+    "J:+;_98)KB_MK?ST+HDCSEL!BN?E4CJI[T 9U%:+Z+;_ &6>:WO[:X\\A [I&\\X;!8+GYE ZL.]16.EQWIF)ECMT@C\\QY)9)< ;E7^')ZL.U %.B"
+    "M'^R+#_H+V?YW/_Q%5KNP6ROI[649>\"1HV*RO@D'!QS[4 5Z*U;C0;6UN9;>?5;-98G*.NZY.\"#@CA*@N])BM;:&XCN(KF*5W0-#)*,%0I(.X#^\\"
+    "* *-%7[?1X);%;J:[@M4>1HU$KS$L5\"D_=!_O\"G/HMO\\ 99YK>_MKCR$#ND;SAL%@N?F4#JP[T 9U%6K'34OKH0JRQ?([EY))-JA5+$\\9/0'H*"
+    "G_LBP_Z\"]G^=S_\\10!G458N[!;*^GM91EX)&C8K*^\"0<''/M5VXT&UM;F6WGU6S66)RCKNN3@@X(X2@#*HJ]=Z3%:VT-Q'<17,4KN@:&248*A20"
+    "=P']X4MOH\\$MBMU-=P6J/(T:B5YB6*A2?N@_WA0!0HK330[:4.+?4K69TC>3RU:X!8*I8XRH'0'O5:QTU+ZZ$*LL7R.Y>223:H52Q/&3T!Z\"@\"K"
+    "16C_9%A_T%[/\\[G_XBH+[34L;HPLRR_(CAXY)-K!E# \\X/0CJ* *M%:;Z';1!!<:E:PN\\:2>6S7!*AE##.%(Z$=ZCN-'@BL6NH;N\"Z1)%C81/,"
+    "\"I8,1]X#^Z: *%%7K328KJVFN)+B*VBB=$+322G)8,0!M!_NFI[?0;6ZN8K>#5;-I97\"(NZY&23@#E* ,JBK%I8+>WT%K$,//(L:EI7P\"3@9Y]Z"
+    "L_V18?\\ 07L_SN?_ (B@#.HJU?::EC=&%F67Y$</'))M8,H8'G!Z$=15L>'HUTRUOKF\\MK:*[W^4)))RQVM@_=!Q0!E4L?\\ Q]0?[Q_]!:M#^R+"
+    "#_H+V?YW/_P 144UA;6LUN\\%];W#&0@I$9L@;&Y^=0/ZT /HHHH Z6/5;V&T-M%<%(L$ !02 >H#$9&?8BAM5O7LQ:FX/DA0F-HR5!R%W8SCVSBJ<"
+    "46W[/_HMLFV!SS+G9G/)YY8^G;(XXX(HMOV?_1;9-D#_ /+7/EYSR>>6/IVR.!C@ ;$?FF_ZZ?\\ LJU9BO+F\")HX+F:)'^\\L<C*&^H!YJG&?FE_"
+    "ZZ?\\ LJU)F@\"9;B9-FR:1?+4JF'(V@]0/3J:>;Z[:$0F[N#$J[1'YK;0/3&<8X%5LT9H L\"\\N1(SBYF#NX=F$ARS#H2<\\D4U;B90H6:0!7WJ "
+    "YX;^]]?>H<T9H L27MU,S--=3R,Z[&9Y6)*^AR>GM217=Q;JZV]Q+\"'&&$<A7</?'6H,T9H <, 8'2C--S1F@!V:,TW-&: '9HS3<T9H AVSQY6-8"
+    "W7<6!+E3R2?0^M6?[3U;[%]DWCR//\\ M&WSC_K,8W9VYS^-,S1F@\"';/)A9$C1=P8D.6/!!]!Z4^97\\Q9(MI95*X8XR#CO^%/S1F@\"-);N.176"
+    "&$E2\" S[AQZ@K@CV/%2W5]J%XT;3QV_[M/+18PL:JN2V JH!U8G\\:3-&: *MVICT>Z#$$F*1CCU.3_6J-ZWRR_P#7L?Y&K^H'_B677_7%_P#T$UF"
+    "WK8\\W'_/N?Y&@\"\"BBB@ HHHH OZ=_QX:M_P!>B_\\ H^*C1?\\ C_D_Z]+G_P!$/1IW_'AJW_7HO_H^*C1?^/\\ D_Z]+G_T0] !HO\\ Q_R?]>"
+    "ES_P\"B'JA5_1?^/^3_ *]+G_T0]4* +^M?\\?\\ '_UZ6W_HA*-:_P\"/^/\\ Z]+;_P!$)1K7_'_'_P!>EM_Z(2C6O^/^/_KTMO\\ T0E !#_R+="
+    "Y_U]V__H$U$/\\ R+=Y_P!?=O\\ ^@340_\\ (MWG_7W;_P#H$U$/_(MWG_7W;_\\ H$U !H'_ \",FF_\\ 7W%_Z&*- _Y&33?^ON+_ -#%&@?\\C"
+    ")IO_7W%_P\"ABC0/^1DTW_K[B_\\ 0Q0!0J_J/_'AI/\\ UZ-_Z/EJA5_4?^/#2?\\ KT;_ -'RT &H_P#'AI/_ %Z-_P\"CY:(?^1;O/^ONW_\\ 0"
+    ")J-1_X\\-)_Z]&_]'RT0_P#(MWG_ %]V_P#Z!-0 0_\\ (MWG_7W;_P#H$U&@?\\C)IO\\ U]Q?^ABB'_D6[S_K[M__ $\":C0/^1DTW_K[B_P#0Q0"
+    " :!_R,FF_]?<7_ *&*H5?T#_D9--_Z^XO_ $,50H OZC_QX:3_ ->C?^CY:-1_X\\-)_P\"O1O\\ T?+1J/\\ QX:3_P!>C?\\ H^6C4?\\ CPTG_K"
+    "T;_P!'RT &G?\\ 'AJW_7HO_H^*C3O^/#5O^O1?_1\\5&G?\\>&K?]>B_^CXJ-._X\\-6_Z]%_]'Q4 4*OZ_\\ \\C)J7_7W+_Z&:H5?U_\\ Y&34O"
+    "^ON7_T,T &O_P#(R:E_U]R_^AFB;_D6[/\\ Z^[C_P! AHU__D9-2_Z^Y?\\ T,T3?\\BW9_\\ 7W<?^@0T $W_ \"+=G_U]W'_H$-&B_P#'_)_UZ7"
+    "/_ *(>B;_D6[/_ *^[C_T\"&C1?^/\\ D_Z]+G_T0] !HO\\ Q_R?]>ES_P\"B'JA5_1?^/^3_ *]+G_T0]4* +^O_ /(R:E_U]R_^AFC7_P#D9-2_"
+    "Z^Y?_0S1K_\\ R,FI?]?<O_H9HU__ )&34O\\ K[E_]#- !-_R+=G_ -?=Q_Z!#1-_R+=G_P!?=Q_Z!#1-_P BW9_]?=Q_Z!#1-_R+=G_U]W'_ *!#"
+    "0 :+_P ?\\G_7I<_^B'K0\\#_\\CG8_]M/_ $6U9^B_\\?\\ )_UZ7/\\ Z(>M#P/_ ,CG8_\\ ;3_T6U &?K__ \",FI?\\ 7W+_ .AFJ%7]?_Y&3"
+    "4O^ON7_ -#-4* \"BBB@ HHHH **** \"BBB@ J_HO_'_ \"?]>ES_ .B'JA5_1?\\ C_D_Z]+G_P!$/0!0HHHH **** \"BBB@ HHHH **** \"BB"
+    "B@ HHHH **** \"BBB@ HHHH **** \"K^H_\\>&D_]>C?^CY:H5?U'_CPTG_KT;_T?+0 0_\\ (MWG_7W;_P#H$U$/_(MWG_7W;_\\ H$U$/_(MWG"
+    "_7W;_^@340_P#(MWG_ %]V_P#Z!-0 :!_R,FF_]?<7_H8HT#_D9--_Z^XO_0Q1H'_(R:;_ -?<7_H8HT#_ )&33?\\ K[B_]#% %\"K^H_\\ 'AI/_"
+    "7HW_H^6J%7]1_X\\-)_Z]&_]'RT &H_\\>&D_]>C?^CY:(?\\ D6[S_K[M_P#T\":C4?^/#2?\\ KT;_ -'RT0_\\BW>?]?=O_P\"@34 $/_(MWG_7"
+    "W;_^@34:!_R,FF_]?<7_ *&*(?\\ D6[S_K[M_P#T\":C0/^1DTW_K[B_]#% !H'_(R:;_ -?<7_H8JA5_0/\\ D9--_P\"ON+_T,50H OZC_P >&D"
+    "_]>C?^CY:-1_X\\-)_Z]&_]'RT:C_QX:3_UZ-_Z/EHU'_CPTG_KT;_T?+0 :=_QX:M_UZ+_ .CXJ-._X\\-6_P\"O1?\\ T?%1IW_'AJW_ %Z+_P\""
+    "CXJ-._P\"/#5O^O1?_ $?%0!0J_K__ \",FI?\\ 7W+_ .AFJ%7]?_Y&34O^ON7_ -#- !K_ /R,FI?]?<O_ *&:)O\\ D6[/_K[N/_0(:-?_ .1DU"
+    "+_K[E_]#-$W_(MV?_7W<?\\ H$- !-_R+=G_ -?=Q_Z!#1HO_'_)_P!>ES_Z(>B;_D6[/_K[N/\\ T\"&C1?\\ C_D_Z]+G_P!$/0 :+_Q_R?\\ 7I"
+    "<_^B'JA5_1?^/^3_KTN?\\ T0]4* +^O_\\ (R:E_P!?<O\\ Z&:-?_Y&34O^ON7_ -#-&O\\ _(R:E_U]R_\\ H9HU_P#Y&34O^ON7_P!#- !-_P "
+    "BW9_]?=Q_Z!#1-_R+=G_U]W'_ *!#1-_R+=G_ -?=Q_Z!#1-_R+=G_P!?=Q_Z!#0 :+_Q_P G_7I<_P#HAZ-%_P\"/^3_KTN?_ $0]&B_\\?\\G_ %"
+    "Z7/_HAZ-%_X_Y/^O2Y_P#1#T 4*OZU_P ?\\?\\ UZ6W_HA*H5?UK_C_ (_^O2V_]$)0 :U_Q_Q_]>EM_P\"B$HA_Y%N\\_P\"ONW_] FHUK_C_ (_"
+    "^O2V_]$)1#_R+=Y_U]V__ *!-0!H:1_R)GB+_ +=O_1AK K?TC_D3/$7_ &[?^C#6!0 4444 %%%% !1110 4444 %%%% %^;_D6[/_K[N/\\ T\"&"
+    "J%7YO^1;L_P#K[N/_ $\"&J% !1110 4444 %%%% !1110 4444 %%%% !1110 4444 %%%% !1110 4444 7]?_Y&34O^ON7_ -#-&M?\\?\\?_ %"
+    "Z6W_HA*-?_ .1DU+_K[E_]#-&M?\\?\\?_7I;?\\ HA* #4?^/#2?^O1O_1\\M$/\\ R+=Y_P!?=O\\ ^@34:C_QX:3_ ->C?^CY:(?^1;O/^ONW_P"
+    "#0)J \"'_D6[S_K[M__ $\":C0/^1DTW_K[B_P#0Q1#_ ,BW>?\\ 7W;_ /H$U&@?\\C)IO_7W%_Z&* #0/^1DTW_K[B_]#%4*OZ!_R,FF_P#7W%_Z"
+    "&*H4 7]1_P\"/#2?^O1O_ $?+1J/_ !X:3_UZ-_Z/EHU'_CPTG_KT;_T?+1J/_'AI/_7HW_H^6@ T[_CPU;_KT7_T?%1IW_'AJW_7HO\\ Z/BHT[_C"
+    "PU;_ *]%_P#1\\5&G?\\>&K?\\ 7HO_ */BH H5?U__ )&34O\\ K[E_]#-4*OZ__P C)J7_ %]R_P#H9H -?_Y&34O^ON7_ -#-$W_(MV?_ %]W'_"
+    "H$-&O_ /(R:E_U]R_^AFB;_D6[/_K[N/\\ T\"&@ F_Y%NS_ .ONX_\\ 0(:-._X\\-6_Z]%_]'Q43?\\BW9_\\ 7W<?^@0T:=_QX:M_UZ+_ .CXJ "
+    "#1?^/^3_KTN?\\ T0]4*OZ+_P ?\\G_7I<_^B'JA0!?U_P#Y&34O^ON7_P!#-&O_ /(R:E_U]R_^AFC7_P#D9-2_Z^Y?_0S1K_\\ R,FI?]?<O_H9H"
+    " )O^1;L_P#K[N/_ $\"&B;_D6[/_ *^[C_T\"&B;_ )%NS_Z^[C_T\"&B;_D6[/_K[N/\\ T\"&@ T7_ (_Y/^O2Y_\\ 1#T:+_Q_R?\\ 7I<_^B'H"
+    "T7_C_D_Z]+G_ -$/1HO_ !_R?]>ES_Z(>@\"A5_6O^/\\ C_Z]+;_T0E4*OZU_Q_Q_]>EM_P\"B$H -:_X_X_\\ KTMO_1\"40_\\ (MWG_7W;_P#H"
+    "$U&M?\\?\\?_7I;?\\ HA*(?^1;O/\\ K[M__0)J \"'_ )%N\\_Z^[?\\ ] FHT#_D9--_Z^XO_0Q1#_R+=Y_U]V__ *!-1H'_ \",FF_\\ 7W%_Z"
+    "&* #0/^1DTW_K[B_P#0Q5\"K^@?\\C)IO_7W%_P\"ABJ% %_6O^/\\ C_Z]+;_T0E:&K_\\ (F>'?^WG_P!&\"L_6O^/^/_KTMO\\ T0E:&K_\\B9X"
+    "=_P\"WG_T8* ,\"D7_CY@_WC_Z\"U+2+_P ?,'^\\?_06H MT444 :'VNW_Y[Q?\\ ?8H^UV__ #WB_P\"^Q6EYC_WC^='F/_>/YT 94=U;AI,SQ\\"
+    "OD?./[HI_VNW_Y[Q?]]BKL+MYDYW')D]?]A:E\\Q_[Q_.@#-^UV_P#SWB_[[%'VNW_Y[Q?]]BM+S'_O'\\Z/,?\\ O'\\Z ,W[7;_\\]XO^^Q1]KM_"
+    "^>\\7_ 'V*TO,?^\\?SH\\Q_[Q_.@#-^UV__ #WB_P\"^Q1]KM_\\ GO%_WV*TO,?^\\?SH\\Q_[Q_.@#-^UV_\\ SWB_[[%'VNW_ .>\\7_?8K2\\"
+    "Q_P\"\\?SH\\Q_[Q_.@#-^UV_P#SWB_[[%'VNW_Y[Q?]]BM+S'_O'\\Z/,?\\ O'\\Z ,W[7;_\\]XO^^Q1]KM_^>\\7_ 'V*TO,?^\\?SH\\Q_[Q_"
+    ".@#-^UV__ #WB_P\"^Q1]KM_\\ GO%_WV*O\"XF?/E12R*\"1N#*!D=>I%'GW.<?9IL^GF1__ !5 %'[7;_\\ />+_ +[%'VNW_P\">\\7_?8J\\;B"
+    "9<>;%+&I(&XLI&3TZ$TKW#JRJH>1VR0JD=!U/) [T 4/M=O_P ]XO\\ OL4?:[?_ )[Q?]]BKWG77_/M-_W\\3_XJCSKG_GVF_P\"_B?\\ Q5 &3?7"
+    "4#:=<A9HR3$P #CG@U2O5;,I*MCR\"3QVP:V]0F,NC79#-CR) 0>QP016]J)_XIQ_^P&?_ $!JRJ5.2QK3I\\]SCOM>A?\\ /O<?^#&/_P\"-T?:]\""
+    "_Y][C_P8Q__ !NLS:O]Q/\\ OD4;5_N)_P!\\BM3(T_M>A?\\ /O<?^#&/_P\"-T?:]\"_Y][C_P8Q__ !NLS:O]Q/\\ OD4;5_N)_P!\\B@#5.IZ7"
+    "%9W45G$Z/<1B,O+?(X4!U?H$']W'6J^G:A;V5YYLK1RH8Y(V19U4D.A0X/./O9Z52VK_ '$_[Y%&U?[B?]\\B@#7AU32+4R/;02B5H9(E,E_&RC>A7"
+    ". @S][UK+\\V+_GM#_W\\7_&F;5_N)_WR*-J_W$_[Y% &O-JFD71C>Y@E,JPQQ,8[^-5.Q N<%#C[OK574=0M[V\\\\V)HXD$<<:HTZL0$0(,GC/W<"
+    "]*I;5_N)_WR*-J_W$_P\"^10!HV>HV,5C/:WB^<DLD<@,5TD94J''=6S]_]*=/J6G?V;):649B\\R9)6>:\\23[H<  !5_OG\\JS-J_W$_P\"^11M7"
+    "^XG_ 'R* +=A?Q6.I6UWYD+^1,DNSSE&[:0<9[=*O6FJ:+97T%U%;3%X)%D4-J,>\"0<C/[OVK&VK_<3_ +Y%&U?[B?\\ ?(H ?YL7_/:'_OXO^-:0"
+    "U/2Y;.UBO(G=[>,QAXKY$# NS]\"A_O8ZUE;5_N)_WR*-J_W$_P\"^10!?U#4;2Z%LEMMABMX?*427*NQ^=FSD ?WO3M3K/4;&*QGM;Q?.262.0&*Z"
+    "2,J5#CNK9^_^E9VU?[B?]\\BC:O\\ <3_OD4 :<^I:=_9LEI91F+S)DE9YKQ)/NAP  %7^^?RJO87\\5CJ5M=^9\"_D3)+L\\Y1NVD'&>W2JFU?[B?"
+    "]\\BC:O]Q/\\ OD4 ;-IJFBV5]!=16TQ>\"19%#:C'@D'(S^[]JR?-B_Y[0_\\ ?Q?\\:9M7^XG_ 'R*-J_W$_[Y% &J-3TN6SM8KR)W>WC,8>*^1 "
+    "P+L_0H?[V.M0ZAJ-I=\"V2VVPQ6\\/E*)+E78_.S9R /[WIVJAM7^XG_ 'R*-J_W$_[Y% %_3]1M+47*7.V:*XA\\IA'<JC#YU;.2#_=].]3'4]+BL"
+    "[J*SB='N(Q&7EOD<* ZOT\"#^[CK65M7^XG_ 'R*-J_W$_[Y% #_ #8O^>T/_?Q?\\:UKO5-%O;Z>ZEMI@\\\\C2,%U&/ ).3C]W[UC;5_N)_WR*-J"
+    "_W$_[Y% %N_OXK[4KF[\\R%//F>79YRG;N).,]^M6(-2T[^S8[2]C,OES/*KPWB1_>\" @@JW]P?G69M7^XG_?(HVK_ '$_[Y% &C>:C8RV,%K9KY*"
+    "1222$RW22%BP0=E7'W/UJ/3M0M[*\\\\V5HY4,<D;(LZJ2'0H<'G'WL]*I;5_N)_P!\\BC:O]Q/^^10!KPZII%J9'MH)1*T,D2F2_C91O0KG 09^]Z"
+    "UE^;%_SVA_[^+_ (TS:O\\ <3_OD4;5_N)_WR* -F[U31;V^GNI;:8//(TC!=1CP\"3DX_=^]4;^_BOM2N;OS(4\\^9Y=GG*=NXDXSWZU4VK_ '$_["
+    "Y%&U?[B?]\\B@#3@U+3O[-CM+V,R^7,\\JO#>)']X(\"\"\"K?W!^=-O-1L9;&\"ULU\\E(I))\"9;I)\"Q8(.RKC[GZUG;5_N)_WR*-J_W$_P\"^1"
+    "0!=T[4+>RO/-E:.5#')&R+.JDAT*'!YQ][/2M+2M>TC1]3BOK:UE:6+.T2:A&5.5([1CUK VK_<3_OD4;5_N)_WR* +=_?Q7VI7-WYD*>?,\\NSSE."
+    "W<2<9[]:K^;%_SVA_[^+_C3-J_W$_[Y%&U?[B?]\\B@!_FQ?\\]H?^_B_P\"-'FQ?\\]H?^_B_XTS:O]Q/^^11M7^XG_?(H ?YL7_/:'_OXO\\ C1Y"
+    "L7_/:'_OXO^-,VK_<3_OD4;5_N)_WR* '^;%_SVA_[^+_ (T>;%_SVA_[^+_C3-J_W$_[Y%&U?[B?]\\B@!_FQ?\\]H?^_B_P\"-'FQ?\\]H?^_B_X"
+    "TS:O]Q/^^11M7^XG_?(H ?YL7_/:'_OXO\\ C5K3M0M[*\\\\V5HY4,<D;(LZJ2'0H<'G'WL]*I;5_N)_WR*-J_P!Q/^^10!I_:]\"_Y][C_P &,?\\"
+    " \\;H^UZ%_S[W'_@QC_P#C=9FU?[B?]\\BC:O\\ <3_OD4 :?VO0O^?>X_\\ !C'_ /&Z/M>A?\\^]Q_X,8_\\ XW69M7^XG_?(HVK_ '$_[Y% &G]"
+    "KT+_GWN/_  8Q_P#QNC[7H7_/O<?^#&/_ .-UF;5_N)_WR*-J_P!Q/^^10!I_:]\"_Y][C_P &,?\\ \\;H^UZ%_S[W'_@QC_P#C=9FU?[B?]\\BC:"
+    "O\\ <3_OD4 :?VO0O^?>X_\\ !C'_ /&Z/M>A?\\^]Q_X,8_\\ XW69M7^XG_?(HVK_ '$_[Y% &G]KT+_GWN/_  8Q_P#QNC[7H7_/O<?^#&/_ .-"
+    "UF;5_N)_WR*-J_P!Q/^^10!I_:]\"_Y][C_P &,?\\ \\;H^UZ%_S[W'_@QC_P#C=9FU?[B?]\\BC:O\\ <3_OD4 :?VO0O^?>X_\\ !C'_ /&Z/M>"
+    "A?\\^]Q_X,8_\\ XW69M7^XG_?(HVK_ '$_[Y% &G]KT+_GWN/_  8Q_P#QNC[7H7_/O<?^#&/_ .-UF;5_N)_WR*-J_P!Q/^^10!I_:]\"_Y][C_P"
+    " &,?\\ \\;H^UZ%_S[W'_@QC_P#C=9FU?[B?]\\BC:O\\ <3_OD4 :?VO0O^?>X_\\ !C'_ /&Z/M>A?\\^]Q_X,8_\\ XW69M7^XG_?(HVK_ '$_["
+    "Y% &G]KT+_GWN/_  8Q_P#QNH]0U&TNA;);;88K>'RE$ERKL?G9LY '][T[50VK_<3_ +Y%&U?[B?\\ ?(H T;/4;&*QGM;Q?.262.0&*Z2,J5#CNK"
+    "9^_P#I3I]2T[^S9+2RC,7F3)*SS7B2?=#@  *O]\\_E69M7^XG_ 'R*-J_W$_[Y% %NPOXK'4K:[\\R%_(F279YRC=M(.,]NE7K35-%LKZ\"ZBMIB\\"
+    "$BR*&U&/!(.1G]W[5C;5_N)_P!\\BC:O]Q/^^10 _P V+_GM#_W\\7_&M(:GI<MG:Q7D3N]O&8P\\5\\B!@79^A0_WL=:RMJ_W$_P\"^11M7^XG_ '"
+    "R* +^H:C:70MDMML,5O#Y2B2Y5V/SLV<@#^]Z=J=9ZC8Q6,]K>+YR2R1R Q721E2H<=U;/W_TK.VK_ '$_[Y%&U?[B?]\\B@#3GU+3O[-DM+*,Q>9,"
+    "DK/->))]T.   J_WS^55[\"_BL=2MKOS(7\\B9)=GG*-VT@XSVZ54VK_<3_ +Y%&U?[B?\\ ?(H V;35-%LKZ\"ZBMIB\\$BR*&U&/!(.1G]W[5D^;"
+    "%_SVA_[^+_C3-J_W$_[Y%&U?[B?]\\B@#5&IZ7+9VL5Y$[O;QF,/%?(@8%V?H4/\\ >QUJ'4-1M+H6R6VV&*WA\\I1)<J['YV;.0!_>].U4-J_W$_["
+    "Y%&U?[B?]\\B@\"_I^HVEJ+E+G;-%<0^4PCN51A\\ZMG)!_N^G>ICJ>EQ6=U%9Q.CW$8C+RWR.% =7Z!!_=QUK*VK_<3_OD4;5_N)_WR* '^;%_SVA"
+    "_[^+_C6M=ZIHM[?3W4MM,'GD:1@NHQX!)R<?N_>L;:O]Q/^^11M7^XG_?(H MW]_%?:E<W?F0IY\\SR[/.4[=Q)QGOUJQ!J6G?V;':7L9E\\N9Y5>&"
+    "\\2/[P0$$%6_N#\\ZS-J_P!Q/^^11M7^XG_?(H T;S4;&6Q@M;-?)2*220F6Z20L6\"#LJX^Y^M1Z=J%O97GFRM'*ACDC9%G520Z%#@\\X^]GI5+:O"
+    "]Q/^^11M7^XG_?(H UX=4TBU,CVT$HE:&2)3)?QLHWH5S@(,_>]:R_-B_P\">T/\\ W\\7_ !IFU?[B?]\\BC:O]Q/\\ OD4 ;-WJFBWM]/=2VTP>>"
+    "1I&\"ZC'@$G)Q^[]ZHW]_%?:E<W?F0IY\\SR[/.4[=Q)QGOUJIM7^XG_?(HVK_<3_ +Y% &G!J6G?V;':7L9E\\N9Y5>&\\2/[P0$$%6_N#\\Z;>:C"
+    "8RV,%K9KY*1222$RW22%BP0=E7'W/UK.VK_<3_ +Y%&U?[B?\\ ?(H NZ=J%O97GFRM'*ACDC9%G520Z%#@\\X^]GI5J'5-(M3(]M!*)6ADB4R7\\;"
+    "*-Z%<X\"#/WO6LC:O]Q/^^11M7^XG_?(H ?YL7_/:'_OXO\\ C6I-JFD71C>Y@E,JPQQ,8[^-5.Q N<%#C[OK61M7^XG_ 'R*-J_W$_[Y% %W4=0M["
+    "V\\\\V)HXD$<<:HTZL0$0(,GC/W<]*DL]1L8K&>UO%\\Y)9(Y 8KI(RI4..ZMG[_Z5G;5_N)_WR*-J_P!Q/^^10!MKKFG6^BW]A90E/MOE[I)KU'V["
+    "&W# \"+[UC^;%_P ]H?\\ OXO^-,VK_<3_ +Y%&U?[B?\\ ?(H ?YL7_/:'_OXO^-'FQ?\\ /:'_ +^+_C3-J_W$_P\"^11M7^XG_ 'R* '^;%_SVA"
+    "_[^+_C1YL7_ #VA_P\"_B_XTS:O]Q/\\ OD4;5_N)_P!\\B@!_FQ?\\]H?^_B_XT>;%_P ]H?\\ OXO^-,VK_<3_ +Y%&U?[B?\\ ?(H ?YL7_/:'_"
+    "OXO^-'FQ?\\ /:'_ +^+_C3-J_W$_P\"^11M7^XG_ 'R* '^;%_SVA_[^+_C1YL7_ #VA_P\"_B_XTS:O]Q/\\ OD4;5_N)_P!\\B@#3@U+3O[-CM+"
+    "V,R^7,\\JO#>)']X(\"\"\"K?W!^='VO0O^?>X_P#!C'_\\;K,VK_<3_OD4;5_N)_WR* -/[7H7_/O<?^#&/_XW1]KT+_GWN/\\ P8Q__&ZS-J_W$_"
+    "[Y%&U?[B?]\\B@#3^UZ%_S[W'_@QC_^-T?:]\"_Y][C_ ,&,?_QNLS:O]Q/^^11M7^XG_?(H T_M>A?\\^]Q_X,8__C='VO0O^?>X_P#!C'_\\;K,V"
+    "K_<3_OD4;5_N)_WR* -/[7H7_/O<?^#&/_XW1]KT+_GWN/\\ P8Q__&ZS-J_W$_[Y%&U?[B?]\\B@#3^UZ%_S[W'_@QC_^-T?:]\"_Y][C_ ,&,?_Q"
+    "NLS:O]Q/^^11M7^XG_?(H T_M>A?\\^]Q_X,8__C='VO0O^?>X_P#!C'_\\;K,VK_<3_OD4;5_N)_WR* -/[7H7_/O<?^#&/_XW1]KT+_GWN/\\ P8"
+    "Q__&ZS-J_W$_[Y%&U?[B?]\\B@#3^UZ%_S[W'_@QC_^-T?:]\"_Y][C_ ,&,?_QNLS:O]Q/^^11M7^XG_?(H T_M>A?\\^]Q_X,8__C='VO0O^?>X_"
+    "P#!C'_\\;K,VK_<3_OD4;5_N)_WR* -/[7H7_/O<?^#&/_XW1]KT+_GWN/\\ P8Q__&ZS-J_W$_[Y%&U?[B?]\\B@#3^UZ%_S[W'_@QC_^-T?:]\"_"
+    "Y][C_ ,&,?_QNLS:O]Q/^^11M7^XG_?(H MW]_%?:E<W?F0IY\\SR[/.4[=Q)QGOUJY-JFD71C>Y@E,JPQQ,8[^-5.Q N<%#C[OK61M7^XG_?(HVK_"
+    " '$_[Y% %_4-1M+H6R6VV&*WA\\I1)<J['YV;.0!_>].U.L]1L8K&>UO%\\Y)9(Y 8KI(RI4..ZMG[_P\"E9VU?[B?]\\BC:O]Q/^^10!ISZEIW]FR"
+    "6EE&8O,F25GFO$D^Z'   5?[Y_*J]A?Q6.I6UWYD+^1,DNSSE&[:0<9[=*J;5_N)_WR*-J_P!Q/^^10!LVFJ:+97T%U%;3%X)%D4-J,>\"0<C/[OVK"
+    ")\\V+_ )[0_P#?Q?\\ &F;5_N)_WR*-J_W$_P\"^10!JC4]+EL[6*\\B=WMXS&'BOD0,\"[/T*'^]CK4.H:C:70MDMML,5O#Y2B2Y5V/SLV<@#^]Z="
+    "JH;5_N)_WR*-J_W$_P\"^10!?T_4;2U%RESMFBN(?*81W*HP^=6SD@_W?3O4QU/2XK.ZBLXG1[B,1EY;Y'\"@.K] @_NXZUE;5_N)_WR*-J_W$_P\""
+    "^10 _S8O^>T/_ '\\7_&M:[U31;V^GNI;:8//(TC!=1CP\"3DX_=^]8VU?[B?\\ ?(HVK_<3_OD4 6[^_BOM2N;OS(4\\^9Y=GG*=NXDXSWZU8@U+3"
+    "O[-CM+V,R^7,\\JO#>)']X(\"\"\"K?W!^=9FU?[B?]\\BC:O]Q/^^10!HWFHV,MC!:V:^2D4DDA,MTDA8L$'95Q]S]:;I^HVEJ+E+G;-%<0^4PCN5"
+    "1A\\ZMG)!_N^G>J&U?[B?\\ ?(HVK_<3_OD4 :\\.J:1:F1[:\"42M#)$IDOXV4;T*YP$&?O>M9?FQ?\\]H?^_B_P\"-,VK_ '$_[Y%&U?[B?]\\B@"
+    "#9N]4T6]OI[J6VF#SR-(P748\\ DY./W?O5&_OXK[4KF[\\R%//F>79YRG;N).,]^M5-J_P!Q/^^11M7^XG_?(H TX-2T[^S8[2]C,OES/*KPWB1_>"
+    "\" @@JW]P?G3;S4;&6Q@M;-?)2*220F6Z20L6\"#LJX^Y^M9VU?[B?]\\BC:O]Q/\\ OD4 7=.U\"WLKSS96CE0QR1LBSJI(=\"AP><?>STJU#JFD6"
+    "ID>V@E$K0R1*9+^-E&]\"N<!!G[WK61M7^XG_?(HVK_<3_OD4 /\\V+_GM#_W\\7_&M2;5-(NC&]S!*95ACB8QW\\:J=B!<X*''W?6LC:O]Q/\\ OD"
+    "4;5_N)_P!\\B@\"[J.H6][>>;$T<2\"..-4:=6(\"($&3QG[N>E26>HV,5C/:WB^<DLD<@,5TD94J''=6S]_\\ 2L[:O]Q/^^11M7^XG_?(H TY]2T"
+    "[^S9+2RC,7F3)*SS7B2?=#@  *O\\ ?/Y57L+^*QU*VN_,A?R)DEV><HW;2#C/;I53:O\\ <3_OD4;5_N)_WR* -FTU31;*^@NHK:8O!(LBAM1CP2#"
+    "D9_=^U9/FQ?\\ /:'_ +^+_C3-J_W$_P\"^11M7^XG_ 'R* ->;5-(NC&]S!*95ACB8QW\\:J=B!<X*''W?6C4]:M+W3+\"QMD6\"*R\\S:9+I9&;>"
+    "P/8+TQ61M7^XG_?(HVK_<3_OD4 /\\V+_GM#_W\\7_&E1T:Z@\"2(QW'A7!_A;TJ/:O]Q/\\ OD4Z( 7<.%4?,>@Q_\"U %ZBBB@#M[72K26.TAE>;"
+    "[3>1/*C*1L3&< C&3G:>XQ52:UMET2\"\\@DE>224QN&4!1A<\\=<]>OZ5)!K?D009M%>YMHVCAF\\P@*&SU7'.,GN*I&\\_XE,=D$X28R[]W7*@8Q"
+    "^% %:(_--_UT_\\ 95K: L+&UL?M5I]I-TADD?S&4HNXJ H!QGC/.:PXC\\TW_73_ -E6M.WUF>WABC\\FWF,!)A>9\"QCSSQ@COSSF@#1?3;6[MK&"
+    ".&7R9G@E=%,/,FUF/S$'@X'O5==$+Z4UXDDORQK(VZW98R\"<85SU(SZ8]ZJKK-TLT$I\\MW@C=%+*?FWY))YZ_,?2GR:]<R0NC0VV^2%87EV-O95Q"
+    "C^+ Z=A0!>;P_\";I[>&^+O#<)!+F' &XX!'//Z4R'0%NWB^Q79E1I7CD)A(*E!DD#)W#'3I51-=NDNI[@)#OFG2=@5. 5.0!STYIEMK-U:JBQ>7A9"
+    "FE.5SN++M*GGIB@#2.DBPCNS(K.KV#2Q^?#L=\"& Y4YP?\\:I:=%:S6-_YL+-/% TJ/OPJX('3OU]?PJN=3<>=Y5O;PB:$PLL:MC:3G/+$YXJ*WNY"
+    "+:.=8PI\\^(Q-N&< D'CWXH CS1FF9HS0 _-&:9FC- #\\T9IF:,T 2Z/!]LN(K?SH(1)-(-]P^V,?.QY/OC'XUVWVW3/^$J_X1K^PHOL/VW./,??Y"
+    "F,;^OW<=NF.:\\ZCG^S':Z/N61F'[HL#EB1V([UT__\"QM1\\OS/*3[=YN[[7]D^;R\\?ZK&SIGOG/\\ .@#'UB#[)<2V_G03\".:,;[=]\\9^=3P?"
+    ";./PJNQQ?1X_YY/\\ S2H))_M)VHC[FD5C^Z*@88$]@.U/F;RYTE(8J$93M4G&2IZ#Z4 ;]Q%IBZ'!+%<7)D,\\X5FLT4N0D1\"L?-.%&>#S]YN/6?"
+    "4M,N-'TBQDO-'5#<PMNN)6DW)(7? P'\"J=FP@%?7.<$#F$NX1(IDCF9,C<%C921W .TX/O@_2K-[JEK<\"V2UMKB&.WA\\I1(#(QS([DDA%'5R.G:"
+    "@\"E<G_B2WWTG_FU=%J!_P\"*?<?]04C_ ,<:N;N01HMWN!&Z.5L'WW'^M;]^W_$C?_L#G_T!JY,2_A.O#*_,<I_PC>M_] ^\\_P# %_\\ &C_A&];"
+    "_ .@?>?\\ @\"_^-5**ZSD+?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5"
+    "** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ ,"
+    " 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y"
+    "_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_"
+    "P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \""
+    "-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_"
+    "X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5*"
+    "* +?_\"-ZW_T#[S_ , 7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , "
+    "7_P :/^$;UO\\ Z!]Y_P\" +_XU4HH M_\\ \"-ZW_P! ^\\_\\ 7_QH_X1O6_^@?>?^ +_ .-5** +?_\"-ZW_T#[S_ , 7_P :BETG4;\":WEO;6"
+    "XAC+E0TMLT8)V-QDGV/%0TB_P#'S!_O'_T%J +=%%% &M$8F^S_ +^9]\\;MQ\"!YC#/3T48Z^QI8C$WV?]_,^^)V_P!2!YC#/3T48Z^QIWGR_P#/5"
+    "_N[/O'[OI]/:CSY?^>K_=V?>/W?3Z>U $<9^:7_ *Z?^RK3\\U%&?FE_W_\\ V5:?F@!V:,TW-&: '9HS3<T9H =FC--S1F@!V:,TW-&: '9HS3<T9"
+    "H =FC--S1F@!V:,TW-&: '9HS3<T9H =FC--S1F@\"'43_Q*[K_KB_\\ Z\":U[]O^),__ &\"3_P\"@M6-J!_XEEU_UQ?\\ D:U;\\_\\ $I<?]0H"
+    "_^@M7#BW\\/J=V$5^;T.2HHHKN.$**** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH *"
+    "*** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ H"
+    "HHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"B"
+    "BB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH ***"
+    "* \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH *1?^/F#_>/_H+4M(O_ !\\P?[Q_]!:@\""
+    "W1110!M?8[?^[)_W^?_ .*H^QV_]V3_ +_/_P#%5JP:///;QR\"6%7E5GBA9B'D\"]2!C'8]2,XHDT>>.W>1I8?,2(3/ &.]4/0GC'<<9SS0!C16D!"
+    ">;*R<28'[Y_[J^]2?8[?^[)_P!_G_\\ BJ6(_/-_UT_]E6M:'3;?R+9KV]^SO=9,2^7N  .-S'(VC/UH R/L=O\\ W9/^_P __P 51]CM_P\"[)_W^"
+    "?_XJMJ;1)?L<$UH/-+1.\\A$BX^5B#M'4C SQFJS:7>K:\"Y,/[LJ&^^NX*3@$KG(!]<4 9WV.W_NR?]_G_P#BJ/L=O_=D_P\"_S_\\ Q5:LFA:C&X"
+    "1[<;C((\\\"120QZ X/&?>FOHVH))$AMRS2L44(RM\\PZ@X/!'O0!F?8[?^[)_P!_G_\\ BJ/L=O\\ W9/^_P __P 56NFE/&+K[8\"IBM3/&4=65^"
+    "0.HR\".3TIMAI\\%V(5EO5BEGD\\N*)4WMGU89&T<]>: ,K[';_W9/^_S_P#Q5'V.W_NR?]_G_P#BJF<&.1D)!*L5./:DS0!%]CM_[LG_ '^?_P\"*"
+    "H^QV_P#=D_[_ #__ !52YHS0!%]CM_[LG_?Y_P#XJC[';_W9/^_S_P#Q52YHS0!5=+\")MLL@1O1KEP?_ $*FYTW_ )[K_P\"!3?\\ Q57-,6:<K!;"
+    "I)))),X\"Q)N9OG/0=^!^E=A_8VA?VI_8?]K3_ &_[3C[1Y)V8Q_JOO8W9_BQUX]J .%1+\"5ML4@=O1;ER?_0J?);VD2[I=R+ZM.X'_H53ZFLT!:\""
+    "X22.2.9 5E3:R_..H[9!_6HB^V_B/I$Y'YK0!!G3?^>Z_^!3?_%49TW_GNO\\ X%-_\\570S:=<0Z7'=&>W+&657\"WT+#:JQD;<-RWS-D#)^[QR,P"
+    "ND$5C!+->3^=<0M*D:6ZLHP[H 6,@/)3^Z<9[T 8.H6MN-*NG0/_J'(/G.1]T^]:^H65O_ &)))M;=_9!?/F-UVM[UD7)_XDM[[+.![<M6WJ#9T*0?"
+    "]0<C_P <:O/QKDN2SZGN933A/VO,KZ'![#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XUZ!X8FP_\\][C_ +_&C8?^>]Q_W^-+B"
+    "7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I"
+    "_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_"
+    "C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ "
+    "'VG^- \";#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP"
+    "_\\ />X_[_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_["
+    "_ !HV'_GO<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A"
+    "_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_"
+    "P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN"
+    ")?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ 'VG^- \";#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_"
+    "P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_\\ />X_[_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^"
+    ">+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]"
+    "]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#"
+    "_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_S"
+    "WN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'"
+    "_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ 'VG^- \";#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?"
+    "]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_\\ />X_[_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_"
+    "?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?"
+    "XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )X"
+    "M_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_"
+    "?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ 'VG^- \";"
+    "#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_\\ />X_["
+    "_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO"
+    "<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W"
+    "^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P"
+    "\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I"
+    "_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ 'VG^- \";#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7"
+    "_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_\\ />X_[_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0"
+    " FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_"
+    "\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\"
+    ":-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:"
+    "-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2X"
+    "E_YXM_WVG^-&)?\\ GBW_ 'VG^- \";#_SWN/^_P :-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM"
+    "_WVG^-&)?^>+?]]I_C0 FP_\\ />X_[_&C8?\\ GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\""
+    ">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO<?\\ ?XTN)?\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WV"
+    "G^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 F"
+    "P_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ "
+    "#WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/\\ SWN/^_QHV'_GO<?]_C2XE_YXM_WVG^-&)?\\ GBW_ 'VG^- \";#_SWN/^_P :"
+    "-A_Y[W'_ '^-+B7_ )XM_P!]I_C1B7_GBW_?:?XT )L/_/>X_P\"_QHV'_GO<?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_\\ />X_[_&C8?\\ GO<"
+    "?]_C2XE_YXM_WVG^-&)?^>+?]]I_C0 FP_P#/>X_[_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_P\">+?\\ ?:?XT )L/_/>X_[_ !HV'_GO<?\\ ?XTN)?"
+    "\\ GBW_ 'VG^-&)?^>+?]]I_C0 FP_\\][C_ +_&C8?^>]Q_W^-+B7_GBW_?:?XT8E_YXM_WVG^- \";#_P ][C_O\\:-A_P\">]Q_W^-+B7_GBW_?"
+    ":?XT8E_YXM_WVG^- \";#_ ,][C_O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_ )XM_P!]I_C0 FP_\\][C_O\\ &C8?^>]Q_P!_C2XE_P\">+?\\ ?:?"
+    "XT8E_YXM_WVG^- \";#_SWN/\\ O\\:-A_Y[W'_?XTN)?^>+?]]I_C1B7_GBW_?:?XT )L/_ #WN/^_QHV'_ )[W'_?XTN)?^>+?]]I_C1B7_GBW_?"
+    ":?XT )L/\\ SWN/^_QIT*D7<.9)7^8\\.Y8?=-)B7_GBW_?:?XTZ(/\\ :X-T94;CR64_PMZ&@\"]1110!W-IJ5C&MC=2SLLMG \\9@\\LDR$EB,$<"
+    "#[W?'2JY:RMM&\\BSOX1-*@:Y)BDWN1R(U.W &>ISS]*R$29O+W+&NY\"[?O1\\F.@]R?3WH1)F\\O<(UW1L[_ +T'9C.![D^GO0 V(_--_P!=/_95"
+    "K82^T^:VM%U&*X+VH*!8=NV5<E@\"21MY)Y&:Q8S\\TO\\ UT_]E6GYH VHM9MTN;&4PNJV\\,J,JX.\"Q; &3R!N'6I?[:T^/3YH+>VDC:6W2/:L,"
+    "8 8$$DOG<V<'K^58&:,T =!%KULFI7=P8IML]Y%.H &0JL2<\\]:9IVNPV,:*T+MFXE=^%/R.FWOW]NE86:,T ;<VLPLLZ*971K1H(QY$<04E@?NJ<"
+    " <5%IU[96=K(6>YCO'.U9HHE?RTQSMRPPQ]>PZ5DYHS0!(2H8B/=L!.W<,'';/6DS3,T9H ?FC-,S1F@!^:,TS-&: #3[J2UD66\"62*2.9R&B?:P^"
+    "<]#VX/ZUV'_\"1^'?[4_MW^S)_[0^TY^S><=N,?Z[[N,_[.>O/O7%/;P2MNDA1F]2H--^QVO\\ S[Q?]\\\"@\"?4+J2ZD:6:626225\"6E?<Q^<=3"
+    "WP!^E1R-B\\C/_ $S<?JM(EO!$VZ.%%;U\"@4^1$E7;(BN/1AF@\"=9GECBMGE\"0K(6!8<(6VAF. 3T5?7IP*U-=UJ6^M=/M'O(+M+:'!:&W$:JV]"
+    "^%RBD#9Y8P !P/3-<_]CM?^?>+_ +X%'V.V_P\"?>+_O@4 17!SHMX>Q68CWY:MB_?\\ XDSC_J$D?^.M65J&!I5T , 0O@?\\!-7[Y_\\ B52#_J%"
+    "D?^.M7'BHWY?4^@R7_E[Z&383&UT2\\N(XH&E%Q\"@::!), K*2!N!Q]T?E4?\\ ;5U_SRL?_ \"#_P\"(HA_Y%N\\_Z^[?_P! FJA78?/F[Y<47C'"
+    "4E2&+9\";PQQM&K(NU)\"ORD8X('&.U4?[:NO\\ GE8_^ $'_P 16A+_ ,CGJ_\\ V_?^BY*P* .EM[GS/#LU\\]O9FXC$H5OL<0'#VP'R[<'AVY(["
+    "FLG^VKK_ )Y6/_@!!_\\ $5H6G_(F7/\\ VV_]&6E8% %_^VKK_GE8_P#@!!_\\11_;5U_SRL?_   @_P#B*H44 7_[:NO^>5C_ . $'_Q%']M77_/"
+    "*Q_\\  \"#_ .(JA10!?_MJZ_YY6/\\ X 0?_$4?VU=?\\\\K'_P  (/\\ XBJ%% %_^VKK_GE8_P#@!!_\\11_;5U_SRL?_   @_P#B*H44 7_[:N"
+    "O^>5C_ . $'_Q%']M77_/*Q_\\  \"#_ .(JA10!IW\\QNM$L[B2*!93<3(6A@2/(\"Q$ [0,_>/YUF5?F_P\"1;L_^ONX_] AJA0 4444 %%%% !1"
+    "110 4444 %%%% !1110 4444 %%%% !1110 4444 %%%% &G83&UT2\\N(XH&E%Q\"@::!), K*2!N!Q]T?E4?]M77_ #RL?_ \"#_XBB'_D6[S_ *"
+    "^[?_T\":J% &[Y<4OC'35>&+9,;,R1K&JHVY(RWR@8Y)/&.]4?[:NO^>5C_ . $'_Q%:$7_ \".>D?\\ ;C_Z+CK H U9;EKWP_<2316P>.ZA56BMH"
+    "XR 5ER,JHS]T?E3IKQ['3=-6WAM?WENSNTEI%(S'SI!G+*3T 'X57A_Y%N\\_P\"ONW_] FHU'_CPTG_KT;_T?+0!<TC4YKK6[&WG@L6BEN(T=?L,("
+    "R\"P!'\"55TE_*@U&<1Q.\\5J&3S8ED\"DRQC.&!'0D?C3= _Y&33?^ON+_ -#%&G?\\>&K?]>B_^CXJ #^VKK_GE8_^ $'_ ,13M6?S8-.G,<2/+:"
+    "EG\\J)8PQ$L@SA0!T 'X5G5?U'_ (\\-)_Z]&_\\ 1\\M %S5]3FM=;OK>\"\"Q6**XD1%^PPG #$ <I4,MRU[X?N))HK8/'=0JK16T<9 *RY&549^"
+    "Z/RJ'7_P#D9-2_Z^Y?_0S1#_R+=Y_U]V__ *!-0!8FO'L=-TU;>&U_>6[.[26D4C,?.D&<LI/0 ?A4FD:G-=:W8V\\\\%BT4MQ&CK]AA&06 (X2J>H"
+    "_\\>&D_]>C?^CY:- _Y&33?^ON+_P!#% #M)?RH-1G$<3O%:AD\\V)9 I,L8SA@1T)'XTW^VKK_GE8_^ $'_ ,11IW_'AJW_ %Z+_P\"CXJH4 :.K/"
+    "YL&G3F.)'EM2S^5$L88B609PH Z #\\*M:OJ<UKK=];P06*Q17$B(OV&$X 8@#E*IZC_ ,>&D_\\ 7HW_ */EHU__ )&34O\\ K[E_]#- %B&\\>^T"
+    "W4EN(;7]W;JZ-':11LI\\Z,9RJ@]\"1^--BN6LO#]O)#%;%Y+J96:6VCD) 6+ RRG'WC^=0Z=_QX:M_UZ+_ .CXJ)O^1;L_^ONX_P#0(: #^VKK_GE"
+    "8_P#@!!_\\15[RXHO&.I*D,6R$WACC:-61=J2%?E(QP0.,=JPJWY?^1SU?_M^_]%R4 9_]M77_ #RL?_ \"#_XBI+^8W6B6=Q)% LIN)D+0P)'D!8B"
+    " =H&?O'\\ZS*OS?\\BW9_\\ 7W<?^@0T 6M0U\"2RGA@MX;,(+6!OFLHF))B0DDE23DDFC3]0DO9YH+B&S*&UG;Y;*)2\"(G(((4$8(!JKK7_'_'_U"
+    "Z6W_ *(2C1?^/^3_ *]+G_T0] $EA,;71+RXCB@:47$*!IH$DP\"LI(&X''W1^51_VU=?\\\\K'_P  (/\\ XBB'_D6[S_K[M_\\ T\":J% &[Y<47"
+    "C'4E2&+9\";PQQM&K(NU)\"ORD8X('&.U4?[:NO^>5C_X 0?\\ Q%:$O_(YZO\\ ]OW_ *+DK H T[^8W6B6=Q)% LIN)D+0P)'D!8B =H&?O'\\ZF"
+    "U#4)+*>&\"WALP@M8&^:RB8DF)\"225).22:JS?\\ (MV?_7W<?^@0T:U_Q_Q_]>EM_P\"B$H M:?J$E[/-!<0V90VL[?+91*01$Y!!\"@C! -0V$Q"
+    "M=$O+B.*!I1<0H&F@23 *RD@;@<?='Y5'HO_'_ \"?]>ES_ .B'HA_Y%N\\_Z^[?_P! FH /[:NO^>5C_P\" $'_Q%;'B\"\\-C_9?V6VL4\\_3HII"
+    "/]!A.YVSD\\KQTZ5S%;_BO_ )@O_8)@_P#9J ,_^VKK_GE8_P#@!!_\\11_;5U_SRL?_   @_P#B*H44 7_[:NO^>5C_ . $'_Q%']M77_/*Q_\\  "
+    "\"#_ .(JA10!?_MJZ_YY6/\\ X 0?_$4?VU=?\\\\K'_P  (/\\ XBJ%% %_^VKK_GE8_P#@!!_\\11_;5U_SRL?_   @_P#B*H44 7_[:NO^>5C_ "
+    ". $'_Q%']M77_/*Q_\\  \"#_ .(JA10!?_MJZ_YY6/\\ X 0?_$4:T%_M(,J(F^W@<K&@1<M\"A)P.!DDGBJ%7]:_X_P\"/_KTMO_1\"4 4**** \""
+    "BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ K7FO'L=-TU;>&U_>6[.[26D4C,?.D&<LI/0 ?A615_4?\\ CPTG_KT;_P!"
+    "'RT 7-(U.:ZUNQMYX+%HI;B-'7[#\",@L 1PE5=)?RH-1G$<3O%:AD\\V)9 I,L8SA@1T)'XTW0/^1DTW_K[B_]#%&G?\\>&K?\\ 7HO_ */BH /[:"
+    "NO^>5C_ . $'_Q%.U9_-@TZ<QQ(\\MJ6?RHEC#$2R#.% '0 ?A6=5_4?^/#2?^O1O_1\\M %S5]3FM=;OK>\"\"Q6**XD1%^PPG #$ <I4,MRU[X?N"
+    "))HK8/'=0JK16T<9 *RY&549^Z/RJ'7_^1DU+_K[E_P#0S1#_ ,BW>?\\ 7W;_ /H$U %B:\\>QTW35MX;7]Y;L[M):12,Q\\Z09RRD] !^%2:1J<U"
+    "UK=C;SP6+12W$:.OV&$9!8 CA*IZC_ ,>&D_\\ 7HW_ */EHT#_ )&33?\\ K[B_]#% #M)?RH-1G$<3O%:AD\\V)9 I,L8SA@1T)'XTW^VKK_GE8_"
+    "P#@!!_\\11IW_'AJW_7HO_H^*J% &CJS^;!ITYCB1Y;4L_E1+&&(ED&<* .@ _\"K6KZG-:ZW?6\\$%BL45Q(B+]AA. &( Y2J>H_\\>&D_]>C?^CY"
+    ":-?\\ ^1DU+_K[E_\\ 0S0!8AO'OM-U);B&U_=VZNC1VD4;*?.C&<JH/0D?C38KEK+P_;R0Q6Q>2ZF5FEMHY\"0%BP,LIQ]X_G4.G?\\ 'AJW_7HO_"
+    "H^*B;_D6[/_ *^[C_T\"&@ _MJZ_YY6/_@!!_P#$5>\\N*+QCJ2I#%LA-X8XVC5D7:DA7Y2,<$#C':L*M^7_D<]7_ .W[_P!%R4 9_P#;5U_SRL?_ "
+    "  @_P#B*DOYC=:)9W$D4\"RFXF0M# D>0%B(!V@9^\\?SK,J_-_R+=G_U]W'_ *!#0!:U#4)+*>&\"WALP@M8&^:RB8DF)\"225).22:-/U\"2]GF@"
+    "N(;,H;6=OELHE((B<@@A01@@&JNM?\\?\\?_ %Z6W_HA*-%_X_Y/^O2Y_P#1#T 26$QM=$O+B.*!I1<0H&F@23 *RD@;@<?='Y5'_;5U_P \\K'_P "
+    "@_^(HA_Y%N\\_P\"ONW_] FJA0!N^7%%XQU)4ABV0F\\,<;1JR+M20K\\I&.\"!QCM5'^VKK_GE8_P#@!!_\\16A+_P CGJ__ &_?^BY*P* -._F-U"
+    "HEG<210+*;B9\"T,\"1Y 6(@':!G[Q_.IM0U\"2RGA@MX;,(+6!OFLHF))B0DDE23DDFJLW_(MV?\\ U]W'_H$-&M?\\?\\?_ %Z6W_HA* +6GZA)>"
+    "SS07$-F4-K.WRV42D$1.000H(P0#4-A,;71+RXCB@:47$*!IH$DP\"LI(&X''W1^51Z+_P ?\\G_7I<_^B'HA_P\"1;O/^ONW_ /0)J #^VKK_ )Y6"
+    "/_@!!_\\ $5>\\N*7QCIJO#%LF-F9(UC54;<D9;Y0,<DGC'>L*M^+_ )'/2/\\ MQ_]%QT 9_\\ ;5U_SRL?_ \"#_P\"(J:6Y:]\\/W$DT5L'CNH5"
+    "5HK:.,@%9<C*J,_='Y5E5?A_Y%N\\_Z^[?_P! FH L37CV.FZ:MO#:_O+=G=I+2*1F/G2#.64GH /PJ32-3FNM;L;>>\"Q:*6XC1U^PPC(+ $<)5/4"
+    "?^/#2?^O1O_1\\M&@?\\C)IO_7W%_Z&* +FKZG-:ZW?6\\$%BL45Q(B+]AA. &( Y2J?]M77_/*Q_P# \"#_XBC7_ /D9-2_Z^Y?_ $,U0H O_P!M7"
+    "7_/*Q_\\ (/_ (BC^VKK_GE8_P#@!!_\\15\"B@\"__ &U=?\\\\K'_P @_\\ B*/[:NO^>5C_ . $'_Q%4** +_\\ ;5U_SRL?_ \"#_P\"(H_MJZ"
+    "_YY6/\\ X 0?_$50HH O_P!M77_/*Q_\\ (/_ (BC^VKK_GE8_P#@!!_\\15\"B@\"__ &U=?\\\\K'_P @_\\ B*M:?J$E[/-!<0V90VL[?+91*01"
+    "$Y!!\"@C! -8U7]%_X_P\"3_KTN?_1#T 4**** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH **** \"BBB@ HHHH V]7U.:UUN^MX"
+    "(+%8HKB1$7[#\"< ,0!RE0O<M>Z29)HK8/'>1*K16T<9 ,4V1E5&?NC\\JAU_\\ Y&34O^ON7_T,T6__ \"!)O^OV'_T5<4 14444 :Z>4GE[;>,>7"
+    "&47KQG.6Z\\GFA/*3R]MO&/+C*+UXSG+=>3S1]EF_P\"?E/\\ OP?_ (NC[+-_S\\I_WX/_ ,70!'&?FE_ZZ?\\ LJT_-,BMIB\\W^D(,28_U)Y^5?"
+    "]JI/LLW_/RG_?@__%T )FC-+]EF_P\"?E/\\ OP?_ (NC[+-_S\\I_WX/_ ,70 F:,TOV6;_GY3_OP?_BZ/LLW_/RG_?@__%T )FC-+]EF_P\"?E/\\"
+    " OP?_ (NC[+-_S\\I_WX/_ ,70 F:,TOV6;_GY3_OP?_BZ/LLW_/RG_?@__%T )FC-+]EF_P\"?E/\\ OP?_ (NC[+-_S\\I_WX/_ ,70 F:,TOV6;"
+    "_GY3_OP?_BZ/LLW_/RG_?@__%T )FC-+]EF_P\"?E/\\ OP?_ (NC[+-_S\\I_WX/_ ,70 F:,TOV6;_GY3_OP?_BZ/LLW_/RG_?@__%T )FC-+]EF"
+    "_P\"?E/\\ OP?_ (NC[+-_S\\I_WX/_ ,70!6U _P#$LNO^N+_^@FK=\\W_$MD_[!I_]!:JNH6TJZ9=$W\"$\"%R0(2,_*?]JNGU#PA(OAM[W^T5P="
+    "#-WY?D=MC';G=[=?TKCQ-2G3Y>=VN>UE5>-+VG-U1RTEA>6/ANZ^VVD]OONX-OG1E-V$ESC/7J*R*AWW'_3O^3?XT;[C_IW_ \";_ !KL/%.ON-,OX"
+    "_%&K74EE<I;D7K\"9HF\"8,<F#G&.<BN6J'?<?]._Y-_C1ON/^G?\\F_QH Z>SC<^\"+N0(Q13*I;' )DM<#/O@_D:YZH=]Q_T[_DW^-&^X_P\"G?\\"
+    "F_QH FHJ'?<?\\ 3O\\ DW^-&^X_Z=_R;_&@\":BH=]Q_T[_DW^-&^X_Z=_R;_&@\":BH=]Q_T[_DW^-&^X_Z=_P F_P : )J*AWW'_3O^3?XT;[C_"
+    " *=_R;_&@\":BH=]Q_P!._P\"3?XT;[C_IW_)O\\: -V.PO+[PW:_8K2>XV7<^[R8R^W*18SCIT-5_[!UC_ *!5]_X#/_A65ON/^G?\\F_QHWW'_ $"
+    "[_ )-_C0!J_P!@ZQ_T\"K[_ ,!G_P */[!UC_H%7W_@,_\\ A65ON/\\ IW_)O\\:-]Q_T[_DW^- &K_8.L?\\ 0*OO_ 9_\\*/[!UC_ *!5]_X#/_"
+    "A65ON/^G?\\F_QHWW'_ $[_ )-_C0!J_P!@ZQ_T\"K[_ ,!G_P */[!UC_H%7W_@,_\\ A65ON/\\ IW_)O\\:-]Q_T[_DW^- &K_8.L?\\ 0*OO_ "
+    "9_\\*/[!UC_ *!5]_X#/_A65ON/^G?\\F_QHWW'_ $[_ )-_C0!J_P!@ZQ_T\"K[_ ,!G_P */[!UC_H%7W_@,_\\ A65ON/\\ IW_)O\\:-]Q_T[_"
+    "DW^- &K_8.L?\\ 0*OO_ 9_\\*/[!UC_ *!5]_X#/_A65ON/^G?\\F_QHWW'_ $[_ )-_C0!J_P!@ZQ_T\"K[_ ,!G_P */[!UC_H%7W_@,_\\ A65"
+    "ON/\\ IW_)O\\:-]Q_T[_DW^- &K_8.L?\\ 0*OO_ 9_\\*/[!UC_ *!5]_X#/_A65ON/^G?\\F_QHWW'_ $[_ )-_C0!J_P!@ZQ_T\"K[_ ,!G_P "
+    "*/[!UC_H%7W_@,_\\ A65ON/\\ IW_)O\\:-]Q_T[_DW^- &K_8.L?\\ 0*OO_ 9_\\*/[!UC_ *!5]_X#/_A65ON/^G?\\F_QHWW'_ $[_ )-_C0!"
+    "J_P!@ZQ_T\"K[_ ,!G_P */[!UC_H%7W_@,_\\ A65ON/\\ IW_)O\\:-]Q_T[_DW^- &[)87ECX;NOMMI/;[[N#;YT93=A)<XSUZBLBH=]Q_T[_DW"
+    "^-&^X_Z=_R;_&@#K[?3+^3Q1I-U'97+VX%DQF6)BF!''DYQCC!KEJAWW'_3O^3?XT;[C_IW_)O\\: -NPM+F]\\/WL=G;RW#BZ@8K$A8@;9><#ZTW6"
+    "+>:UM]+AN8I(95M#N212K#]]*>AK&WW'_3O^3?XT;[C_IW_ \";_ !H U= _Y&33?^ON+_T,5:M],O[+3-5DO+*YMT-JJAI8F4$^=%QDCVK WW'_ $"
+    "[_ )-_C1ON/^G?\\F_QH FK9N-,O[W3-*DL[*YN$%JREHHF8 ^=+QD#WK WW'_3O^3?XT;[C_IW_)O\\: -77_\\ D9-2_P\"ON7_T,U-86ES>^'[V"
+    ".SMY;AQ=0,5B0L0-LO.!]:Q-]Q_T[_DW^-&^X_Z=_P F_P : -G6+>:UM]+AN8I(95M#N212K#]]*>AJ/0/^1DTW_K[B_P#0Q65ON/\\ IW_)O\\:-"
+    "]Q_T[_DW^- &_;Z9?V6F:K)>65S;H;55#2Q,H)\\Z+C)'M6-4.^X_Z=_R;_&C?<?]._Y-_C0!OW&F7][IFE26=E<W\"\"U92T43, ?.EXR![U5U_P#"
+    "Y&34O^ON7_P!#-96^X_Z=_P F_P :-]Q_T[_DW^- &SH]O-=6^J0VT4DTK6@VI&I9C^^B/04Z_M+FR\\/V4=Y;RV[FZG8+*A4D;8N<'Z5B;[C_ *=_"
+    "R;_&C?<?]._Y-_C0!-74W&F7\\?BC5KJ2RN4MR+UA,T3!,&.3!SC'.17(;[C_ *=_R;_&C?<?]._Y-_C0!-6O'87E]X;M?L5I/<;+N?=Y,9?;E(L9Q"
+    "TZ&L+?<?]._Y-_C1ON/^G?\\F_QH U]>C>+4UCE1D=+6W5E88*D0ID$4:#&\\NIM'$C.[VMPJJHR6)A?  K(WW'_3O^3?XT;[C_IW_)O\\: -V2PO+"
+    "'PW=?;;2>WWW<&WSHRF[\"2YQGKU%9%0[[C_IW_)O\\:-]Q_T[_DW^- '7W&F7\\?BC5KJ2RN4MR+UA,T3!,&.3!SC'.17+5#ON/^G?\\F_QHWW'_3"
+    "O^3?XT ;L=A>7WANU^Q6D]QLNY]WDQE]N4BQG'3H:AUZ-XM36.5&1TM;=65A@J1\"F0161ON/\\ IW_)O\\:-]Q_T[_DW^- &OH,;RZFT<2,[O:W\""
+    "JJC)8F%\\ \"II+\"\\L?#=U]MM)[??=P;?.C*;L)+G&>O45A;[C_IW_ \";_ !HWW'_3O^3?XT 35O\\ BO\\ Y@O_ &\"8/_9JYK?<?]._Y-_C1O"
+    "N/^G?\\F_QH FHJ'?<?]._Y-_C1ON/^G?\\ )O\\ &@\":BH=]Q_T[_DW^-&^X_P\"G?\\F_QH FHJ'?<?\\ 3O\\ DW^-&^X_Z=_R;_&@\":BH=]Q"
+    "_T[_DW^-&^X_Z=_R;_&@\":BH=]Q_T[_DW^-&^X_Z=_P F_P : )JV]3TC4KJXAFMM/NIHFM+?:\\<#,I_<H.H%<]ON/^G?\\F_QHWW'_3O^3?XT :"
+    "O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z=_P F_P :-]Q_T[_DW^- &K_8.L?] J^_\\!G_ ,*/[!UC_H%7W_@,_P#A65ON/^G?\\F_Q"
+    "HWW'_3O^3?XT :O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z=_P F_P :-]Q_T[_DW^- &K_8.L?] J^_\\!G_ ,*/[!UC_H%7W_@,_P#"
+    "A65ON/^G?\\F_QHWW'_3O^3?XT :O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z=_P F_P :-]Q_T[_DW^- &K_8.L?] J^_\\!G_ ,*/["
+    "!UC_H%7W_@,_P#A65ON/^G?\\F_QHWW'_3O^3?XT :O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z=_P F_P :-]Q_T[_DW^- &K_8.L?]"
+    " J^_\\!G_ ,*/[!UC_H%7W_@,_P#A65ON/^G?\\F_QHWW'_3O^3?XT :O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z=_P F_P :-]Q_T["
+    "_DW^- &K_8.L?] J^_\\!G_ ,*/[!UC_H%7W_@,_P#A65ON/^G?\\F_QHWW'_3O^3?XT :O]@ZQ_T\"K[_P !G_PH_L'6/^@5??\\ @,_^%96^X_Z="
+    "_P F_P :-]Q_T[_DW^- &K_8.L?] J^_\\!G_ ,*DUBWFM;?2X;F*2&5;0[DD4JP_?2GH:QM]Q_T[_DW^-&^X_P\"G?\\F_QH U= _Y&33?^ON+_P!"
+    "#%6K?3+^RTS59+RRN;=#:JH:6)E!/G1<9(]JP-]Q_T[_DW^-&^X_Z=_R;_&@\":MFXTR_O=,TJ2SLKFX06K*6BB9@#YTO&0/>L#?<?]._Y-_C1ON/^"
+    "G?\\ )O\\ &@#5U_\\ Y&34O^ON7_T,U-86ES>^'[V.SMY;AQ=0,5B0L0-LO.!]:Q-]Q_T[_DW^-&^X_P\"G?\\F_QH V=8MYK6WTN&YBDAE6T.Y)%"
+    "*L/WTIZ&H] _P\"1DTW_ *^XO_0Q65ON/^G?\\F_QHWW'_3O^3?XT ;]OIE_9:9JLEY97-NAM54-+$R@GSHN,D>U8U0[[C_IW_)O\\:-]Q_P!._P\""
+    "3?XT ;]QIE_>Z9I4EG97-P@M64M%$S 'SI>,@>]5=?_Y&34O^ON7_ -#-96^X_P\"G?\\F_QHWW'_3O^3?XT ;.CV\\UU;ZI#;1232M:#:D:EF/[Z("
+    "]!3K^TN;+P_91WEO+;N;J=@LJ%21MBYP?I6)ON/^G?\\F_QHWW'_3O^3?XT 35U-QIE_'XHU:ZDLKE+<B]83-$P3!CDP<XQSD5R&^X_Z=_R;_&C?<?"
+    "]._Y-_C0!-6O'87E]X;M?L5I/<;+N?=Y,9?;E(L9QTZ&L+?<?]._Y-_C1ON/^G?\\ )O\\ &@#7UZ-XM36.5&1TM;=65A@J1\"F011H,;RZFT<2,[O"
+    ":W\"JJC)8F%\\ \"LC?<?]._Y-_C1ON/^G?\\ )O\\ &@#=DL+RQ\\-W7VVTGM]]W!M\\Z,INPDN<9Z]1614.^X_Z=_R;_&C?<?\\ 3O\\ DW^- '7"
+    "W&F7\\?BC5KJ2RN4MR+UA,T3!,&.3!SC'.17+5#ON/^G?\\F_QHWW'_ $[_ )-_C0!NQV%Y?>&[7[%:3W&R[GW>3&7VY2+&<=.AJ'7HWBU-8Y49'2U"
+    "MU96&\"I$*9!%9&^X_Z=_R;_&C?<?]._Y-_C0!KZ#&\\NIM'$C.[VMPJJHR6)A?  J:2PO+'PW=?;;2>WWW<&WSHRF[\"2YQGKU%86^X_P\"G?\\F_"
+    "QHWW'_3O^3?XT 35U-OIE_)XHTFZCLKE[<\"R8S+$Q3 CCR<XQQ@UR&^X_P\"G?\\F_QHWW'_3O^3?XT 35JV%I<WOA^]CL[>6X<74#%8D+$#;+S@?"
+    "6L3?<?]._Y-_C1ON/^G?\\F_QH V=8MYK6WTN&YBDAE6T.Y)%*L/WTIZ&H] _Y&33?^ON+_P!#%96^X_Z=_P F_P :-]Q_T[_DW^- &KK_ /R,FI?]"
+    "?<O_ *&:H5#ON/\\ IW_)O\\:-]Q_T[_DW^- $U%0[[C_IW_)O\\:-]Q_T[_DW^- $U%0[[C_IW_)O\\:-]Q_P!._P\"3?XT 345#ON/^G?\\ )O\\"
+    " &C?<?]._Y-_C0!-14.^X_P\"G?\\F_QHWW'_3O^3?XT 35HZ#&\\NIM'$C.[VMPJJHR6)A?  K(WW'_ $[_ )-_C1ON/^G?\\F_QH U?[!UC_H%7W"
+    "_@,_P#A1_8.L?\\ 0*OO_ 9_\\*RM]Q_T[_DW^-&^X_Z=_P F_P : -7^P=8_Z!5]_P\" S_X4?V#K'_0*OO\\ P&?_  K*WW'_ $[_ )-_C1ON/^G"
+    "?\\F_QH U?[!UC_H%7W_@,_P#A1_8.L?\\ 0*OO_ 9_\\*RM]Q_T[_DW^-&^X_Z=_P F_P : -7^P=8_Z!5]_P\" S_X4?V#K'_0*OO\\ P&?_  K*"
+    "WW'_ $[_ )-_C1ON/^G?\\F_QH U?[!UC_H%7W_@,_P#A1_8.L?\\ 0*OO_ 9_\\*RM]Q_T[_DW^-&^X_Z=_P F_P : -7^P=8_Z!5]_P\" S_X4?V"
+    "#K'_0*OO\\ P&?_  K*WW'_ $[_ )-_C1ON/^G?\\F_QH U?[!UC_H%7W_@,_P#A1_8.L?\\ 0*OO_ 9_\\*RM]Q_T[_DW^-&^X_Z=_P F_P : -7^"
+    "P=8_Z!5]_P\" S_X4?V#K'_0*OO\\ P&?_  K*WW'_ $[_ )-_C1ON/^G?\\F_QH U?[!UC_H%7W_@,_P#A1_8.L?\\ 0*OO_ 9_\\*RM]Q_T[_DW^"
+    "-&^X_Z=_P F_P : -7^P=8_Z!5]_P\" S_X4?V#K'_0*OO\\ P&?_  K*WW'_ $[_ )-_C1ON/^G?\\F_QH U?[!UC_H%7W_@,_P#A1_8.L?\\ 0*O"
+    "O_ 9_\\*RM]Q_T[_DW^-&^X_Z=_P F_P : -7^P=8_Z!5]_P\" S_X4?V#K'_0*OO\\ P&?_  K*WW'_ $[_ )-_C1ON/^G?\\F_QH U=?_Y&34O^O"
+    "N7_ -#-%O\\ \\@2;_K]A_P#15Q65ON/^G?\\ )O\\ &G1-*;N'S/*QN/W V?NMZF@\"]1110!TJ6MQ);M/';RM\"GWI%0E5^IH:TN5MA<-;RB ])2"
+    "AVG\\>E=!8\"1H]+N4;_0K>VE6X8-A4.6R&^N5^M11Q7,>BW<UV[$R6B*EPT@:%ERN$4<?-U]>_% '-1'YYO^NG_LJUH6VE7MW\")8(058E4W.JER."
+    "H4$Y;\\*S8C\\TW_73_P!E6MW;%?VNFNE_!:_94*2>;($:,[BVY1U;@]N<B@\"A<6DEM#!)(5_?J64#.0 2.?Q%5\\UT<&IQ![&#[:K6[VTXF\\Q@-"
+    "V2Y&_/0G@@'UI[7-K'HDL+7\\<R_9HS$K3H!OR\"<1 94C)Y)R: .9S1FNL&K13:K=>?>Q-#'J$+0;G7:J[CN*^WJ:AL-5MYOL[ZE<QR.MU,(V9A\\"
+    "@*?*>APN>AQ@4 8%O:O<I.R%0((C*VX]0\"!Q[\\U+:Z9>7L7F6\\09=VP$NJ[FQG R1D^PK5N[^*070DEB\\S^SVC\\PW23-(V\\8!90 3C]*K:'Y"
+    "$<D%S/<6I6.7+1W$I0P]#O4$X8\\=,'ITH R#D$@C!'4&DS1*ZM/(R.TBER0[#!89ZTW- #LT9IN:,T .S1FFYHS0!'!&EPNZ7>6:1E'[YD PQ Z$#"
+    "MUKIO\\ A7][L\\OY/MOF[?LGVT[O+Q_K<[^F>,8S7.Z1=BSNH9S#!,(YI\"4N4W1G+L.1[9S^%=Q]DTO_ (2K_A)O[>B^P?;<;MC[_-QG9T^[COTQ"
+    "Q0!P<\\:6Z[HMX99%4_OF<'+ 'J2._6EDP]U'&Y;849B%8KD@J!R.>YI^L78O+J:<16\\(DFC.RV3;&,.HX'OC/XU Y_TV/_KD_P#-* ++64\"VD5R"
+    "2VR61XE N9,Y0(3W_ -L?K4PT?_1%N2%6-T+KOU$*S*\"02$,FX\\J1TYQQ5E]=U6\\LH[ 7E],[R.#_ *0[&8.$4(5SR/E/'/WSQZV?$)MXK/2K=="
+    "*N-/N$MB6$\\Q+;?-D&&4J.206R,??(QC& #F;IBVB7F23MCF4$^@W ?RKTK4C_ ,4,W_8K'_T4]>97!_XDM[_NS_S:O2-1;_BBB/\\ J6/_ &F]>)"
+    "FS_A^IZ&\"5^?T/%O/A_P\">J?\\ ?0H\\^'_GJG_?0K<F2SETF6ZLTNH7BGCC(EN!(&#*Y[(N/N?K6=YC_P!YOSKVSSRIY\\/_ #U3_OH4>?#_ ,]"
+    "4_P\"^A7436FFC5;[3XH[Y7MQ<;96NE()C5B\"5\\L==OKWK\"\\Q_[S?G0!4\\^'_GJG_?0H\\^'_GJG_?0K<A2SBTF*ZO$NIGEGDC BN!&%\"JA["
+    "HV?O_I4.J1):WVRV:41-#%*HD?<PWQJV,@#/WO2@#)\\^'_GJG_?0H\\^'_GJG_?0K6TN)+J^V7+2F)8996$;[6.R-FQD@X^[Z5-,EG+I,MU9I=0O%"
+    "/'&1+<\"0,&5SV1<?<_6@##\\^'_GJG_?0H\\^'_GJG_?0JWYC_P!YOSK=AM--.JV.GRQWS/<\"WW2K=* #(JDD+Y9Z;O7M0!R_GP_\\]4_[Z%'GP_"
+    "\\ /5/^^A5OS'_O-^=7[)+;^S;F[O5N)?+FCB5(9A']X.222K?W!^= &+Y\\/_/5/^^A1Y\\/_/5/^^A6QJ4<,26<MGYZ)<0&0I+*'*D2.G4 ?W<]*"
+    "CTR'[;JUG:RR.$GG2-BIY + ''YT 9?GP_\\]4_[Z%'GP_\\ /5/^^A6\\JV%U8WKVT5Y#+;PB53)=*ZG]XBXP$'][U[5F>8_]YOSH J>?#_SU3_OH"
+    "4>?#_P ]4_[Z%;S+86MC9/<Q7DTMQ\"96,=TJ*/WCKC!0_P!WU[U5U.'[%JUY:Q2.4@G>-2QY(#$#/Y4 9?GP_P#/5/\\ OH4>?#_SU3_OH5M626W]"
+    "FW-W>K<2^7-'$J0S\"/[P<DDE6_N#\\Z+U+;^S;:[LEN(O,FDB9)IA)]T(000J_P!\\_E0!B^?#_P ]4_[Z%'GP_P#/5/\\ OH5J:9#]MU:SM99'\""
+    "3SI&Q4\\@%@#C\\ZM*MA=6-Z]M%>0RV\\(E4R72NI_>(N,!!_>]>U &#Y\\/_/5/^^A1Y\\/_/5/^^A5OS'_ +S?G6FRV%K8V3W,5Y-+<0F5C'=*BC"
+    "]XZXP4/]WU[T 8/GP_\\]4_[Z%'GP_\\]4_[Z%:FIP_8M6O+6*1RD$[QJ6/) 8@9_*I--CAE2\\EO//=+> 2!(I0A8F1$ZD'^]GI0!C^?#_SU3_OH4"
+    ">?#_P ]4_[Z%;5ZEM_9MM=V2W$7F321,DTPD^Z$(((5?[Y_*J'F/_>;\\Z *GGP_\\]4_[Z%'GP_\\]4_[Z%=1-:::-5OM/BCOE>W%QME:Z4@F-6()"
+    "7RQUV^O>L+S'_O-^= %3SX?^>J?]]\"CSX?\\ GJG_ 'T*W(4LXM)BNKQ+J9Y9Y(P(K@1A0JH>Z-G[_P\"E0ZI$EK?;+9I1$T,4JB1]S#?&K8R ,_>"
+    "]* ,GSX?^>J?]]\"CSX?\\ GJG_ 'T*UM+B2ZOMERTIB6&65A&^UCLC9L9(./N^E33)9RZ3+=6:74+Q3QQD2W D#!E<]D7'W/UH P_/A_YZI_WT*//"
+    "A_P\">J?\\ ?0JWYC_WF_.M_P\"RZ5_PDG]D^3?_ /'W]F\\W[8O]_;NQY?XXS0!ROGP_\\]4_[Z%'GP_\\]4_[Z%6_,?\\ O-^=:,*6<6DQ75XEU,"
+    "\\L\\D8$5P(PH54/=&S]_P#2@##\\^'_GJG_?0H\\^'_GJG_?0K6U2)+6^V6S2B)H8I5$C[F&^-6QD 9^]Z4:7$EU?;+EI3$L,LK\"-]K'9&S8R0<?"
+    "=]* ,GSX?^>J?]]\"CSX?^>J?]]\"MR9+.729;JS2ZA>*>.,B6X$@8,KGLBX^Y^M9WF/_>;\\Z *GGP_\\]4_[Z%'GP_\\]4_[Z%=1#:::=5L=/ECO"
+    "F>X%ONE6Z4 &15)(7RSTW>O:L+S'_O-^= %3SX?^>J?]]\"CSX?\\ GJG_ 'T*VK)+;^S;F[O5N)?+FCB5(9A']X.222K?W!^=-U*.&)+.6S\\]$N("
+    "#(4EE#E2)'3J /[N>E &/Y\\/_ #U3_OH4>?#_ ,]4_P\"^A6IID/VW5K.UED<)/.D;%3R 6 ./SJTJV%U8WKVT5Y#+;PB53)=*ZG]XBXP$'][U[4 "
+    "8/GP_\\]4_[Z%'GP_\\]4_[Z%6_,?\\ O-^=:;+86MC9/<Q7DTMQ\"96,=TJ*/WCKC!0_W?7O0!@^?#_SU3_OH4>?#_SU3_OH5J:G#]BU:\\M8I'*0"
+    "3O&I8\\D!B!G\\JFLDMO[-N;N]6XE\\N:.)4AF$?W@Y))*M_<'YT 8OGP_\\]4_[Z%'GP_\\ /5/^^A6QJ4<,26<MGYZ)<0&0I+*'*D2.G4 ?W<]*C"
+    "TR'[;JUG:RR.$GG2-BIY + ''YT 9?GP_\\ /5/^^A1Y\\/\\ SU3_ +Z%;RK875C>O;17D,MO\")5,ETKJ?WB+C 0?WO7M69YC_P!YOSH J>?#_P "
+    "]4_[Z%'GP_P#/5/\\ OH5O,MA:V-D]S%>32W$)E8QW2HH_>.N,%#_=]>]5=3A^Q:M>6L4CE()WC4L>2 Q S^5 &7Y\\/_/5/^^A1Y\\/_/5/^^A6QI"
+    "L<,J7DMYY[I;P\"0)%*$+$R(G4@_P![/2G7J6W]FVUW9+<1>9-)$R33\"3[H0@@A5_OG\\J ,7SX?^>J?]]\"CSX?^>J?]]\"K?F/\\ WF_.MV:TTT"
+    ":K?:?%'?*]N+C;*UTI!,:L02OECKM]>] '+^?#_P ]4_[Z%'GP_P#/5/\\ OH5;\\Q_[S?G6C\"EG%I,5U>)=3/+/)&!%<\",*%5#W1L_?_2@##\\^"
+    "'_GJG_?0H\\^'_ )ZI_P!]\"M;5(DM;[9;-*(FABE42/N8;XU;&0!G[WI1I<275]LN6E,2PRRL(WVL=D;-C)!Q]WTH R?/A_P\">J?\\ ?0H\\^'_G"
+    "JG_?0K<F2SETF6ZLTNH7BGCC(EN!(&#*Y[(N/N?K6=YC_P!YOSH J>?#_P ]4_[Z%'GP_P#/5/\\ OH5U$UIIHU6^T^*.^5[<7&V5KI2\"8U8@E?+'"
+    "7;Z]ZPO,?^\\WYT 5//A_YZI_WT*//A_YZI_WT*W(4LXM)BNKQ+J9Y9Y(P(K@1A0JH>Z-G[_Z5#JD26M]LMFE$30Q2J)'W,-\\:MC( S][TH R?/A_"
+    "YZI_WT*//A_YZI_WT*UM+B2ZOMERTIB6&65A&^UCLC9L9(./N^E33)9RZ3+=6:74+Q3QQD2W D#!E<]D7'W/UH P_/A_YZI_WT*//A_YZI_WT*M^8_"
+    "\\ >;\\ZW8;333JMCI\\L=\\SW M]TJW2@ R*I)\"^6>F[U[4 <OY\\/_/5/^^A1Y\\/_ #U3_OH5;\\Q_[S?G5^R2V_LVYN[U;B7RYHXE2&81_>#D"
+    "DDJW]P?G0!B^?#_SU3_OH4>?#_SU3_OH5L:E'#$EG+9^>B7$!D*2RARI$CIU ']W/2H],A^VZM9VLLCA)YTC8J>0\"P!Q^= &7Y\\/_/5/^^A1Y\\/"
+    "_ #U3_OH5O*MA=6-Z]M%>0RV\\(E4R72NI_>(N,!!_>]>U9GF/_>;\\Z *GGP_\\]4_[Z%'GP_\\ /5/^^A6\\RV%K8V3W,5Y-+<0F5C'=*BC]XZXP"
+    "4/\\ =]>]5=3A^Q:M>6L4CE()WC4L>2 Q S^5 &7Y\\/\\ SU3_ +Z%'GP_\\]4_[Z%;5DEM_9MS=WJW$OES1Q*D,PC^\\')))5O[@_.FZE'#$EG+9"
+    "^>B7$!D*2RARI$CIU ']W/2@#'\\^'_GJG_?0H\\^'_GJG_?0K4TR'[;JUG:RR.$GG2-BIY + ''YU:5;\"ZL;U[:*\\AEMX1*IDNE=3^\\1<8\"#^"
+    "]Z]J ,'SX?^>J?]]\"CSX?\\ GJG_ 'T*M^8_]YOSK39;\"UL;)[F*\\FEN(3*QCNE11^\\=<8*'^[Z]Z ,'SX?^>J?]]\"CSX?\\ GJG_ 'T*U-3A"
+    "^Q:M>6L4CE()WC4L>2 Q S^52:;'#*EY+>>>Z6\\ D\"12A\"Q,B)U(/][/2@#'\\^'_ )ZI_P!]\"CSX?^>J?]]\"MJ]2V_LVVN[);B+S)I(F2:82"
+    "?=\"$$$*O]\\_E5#S'_O-^= %3SX?^>J?]]\"CSX?\\ GJG_ 'T*ZB:TTT:K?:?%'?*]N+C;*UTI!,:L02OECKM]>]87F/\\ WF_.@\"IY\\/\\ SU"
+    "3_ +Z%'GP_\\]4_[Z%;D*6<6DQ75XEU,\\L\\D8$5P(PH54/=&S]_]*AU2)+6^V6S2B)H8I5$C[F&^-6QD 9^]Z4 9/GP_P#/5/\\ OH4>?#_SU3_O"
+    "H5K:7$EU?;+EI3$L,LK\"-]K'9&S8R0<?=]*FF2SETF6ZLTNH7BGCC(EN!(&#*Y[(N/N?K0!A^?#_ ,]4_P\"^A1Y\\/_/5/^^A5OS'_O-^=;LUIIH"
+    "U6^T^*.^5[<7&V5KI2\"8U8@E?+'7;Z]Z .7\\^'_GJG_?0H\\^'_GJG_?0JWYC_ -YOSK1A2SBTF*ZO$NIGEGDC BN!&%\"JA[HV?O\\ Z4 8?GP_"
+    "\\]4_[Z%'GP_\\]4_[Z%:VJ1):WVRV:41-#%*HD?<PWQJV,@#/WO2C2XDNK[9<M*8EAEE81OM8[(V;&2#C[OI0!D^?#_SU3_OH4>?#_P ]4_[Z%;DR"
+    "6<NDRW5FEU\"\\4\\<9$MP) P97/9%Q]S]:SO,?^\\WYT 5//A_YZI_WT*//A_YZI_WT*ZB&TTTZK8Z?+'?,]P+?=*MTH ,BJ20OEGIN]>U87F/_ '"
+    "F_.@\"IY\\/_ #U3_OH4>?#_ ,]4_P\"^A6U9);?V;<W=ZMQ+Y<T<2I#,(_O!R225;^X/SINI1PQ)9RV?GHEQ 9\"DLH<J1(Z=0!_=STH Q_/A_P\""
+    ">J?\\ ?0H\\^'_GJG_?0K4TR'[;JUG:RR.$GG2-BIY + ''YU:5;\"ZL;U[:*\\AEMX1*IDNE=3^\\1<8\"#^]Z]J ,'SX?^>J?]]\"CSX?^>J?]]\""
+    "K?F/\\ WF_.M-EL+6QLGN8KR:6XA,K&.Z5%'[QUQ@H?[OKWH P?/A_YZI_WT*//A_YZI_WT*U-3A^Q:M>6L4CE()WC4L>2 Q S^53626W]FW-W>K<2"
+    "^7-'$J0S\"/[P<DDE6_N#\\Z ,7SX?^>J?]]\"CSX?\\ GJG_ 'T*V-2CAB2SEL_/1+B R%)90Y4B1TZ@#^[GI4>F0_;=6L[661PD\\Z1L5/(!8 X_"
+    ".@#+\\^'_ )ZI_P!]\"CSX?^>J?]]\"MY5L+JQO7MHKR&6WA$JF2Z5U/[Q%Q@(/[WKVK,\\Q_P\"\\WYT 5//A_P\">J?\\ ?0H\\^'_GJG_?0K>9;"
+    "\"UL;)[F*\\FEN(3*QCNE11^\\=<8*'^[Z]ZJZG#]BU:\\M8I'*03O&I8\\D!B!G\\J ,OSX?^>J?]]\"CSX?^>J?]]\"MC38X94O);SSW2W@$@2*4"
+    "(6)D1.I!_O9Z4Z]2V_LVVN[);B+S)I(F2:82?=\"$$$*O]\\_E0!B^?#_SU3_OH4>?#_P ]4_[Z%6_,?^\\WYUNS6FFC5;[3XH[Y7MQ<;96NE()C5B"
+    "\"5\\L==OKWH Y?SX?\\ GJG_ 'T*//A_YZI_WT*M^8_]YOSK1A2SBTF*ZO$NIGEGDC BN!&%\"JA[HV?O_I0!A^?#_P ]4_[Z%'GP_P#/5/\\ OH5"
+    "K:I$EK?;+9I1$T,4JB1]S#?&K8R ,_>]*-+B2ZOMERTIB6&65A&^UCLC9L9(./N^E &3Y\\/\\ SU3_ +Z%'GP_\\]4_[Z%;DR6<NDRW5FEU\"\\4\\"
+    "<9$MP) P97/9%Q]S]:SO,?\\ O-^= %3SX?\\ GJG_ 'T*//A_YZI_WT*ZB:TTT:K?:?%'?*]N+C;*UTI!,:L02OECKM]>]87F/_>;\\Z *GGP_\\]"
+    "4_[Z%'GP_\\]4_[Z%;D*6<6DQ75XEU,\\L\\D8$5P(PH54/=&S]_]*AU2)+6^V6S2B)H8I5$C[F&^-6QD 9^]Z4 9/GP_\\]4_[Z%'GP_\\]4_[Z%:"
+    "VEQ)=7VRY:4Q+#+*PC?:QV1LV,D''W?2IIDLY=)ENK-+J%XIXXR);@2!@RN>R+C[GZT 8?GP_\\]4_[Z%'GP_\\]4_[Z%6_,?\\ O-^=;L-IIIU6QT"
+    "^6.^9[@6^Z5;I0 9%4DA?+/3=Z]J .7\\^'_GJG_?0H\\^'_ )ZI_P!]\"K?F/_>;\\ZOV26W]FW-W>K<2^7-'$J0S\"/[P<DDE6_N#\\Z ,7SX?^>"
+    "J?]]\"CSX?^>J?]]\"MC4HX8DLY;/ST2X@,A264.5(D=.H _NYZ5'ID/VW5K.UED<)/.D;%3R 6 ./SH R_/A_YZI_WT*//A_P\">J?\\ ?0K>5;\""
+    "ZL;U[:*\\AEMX1*IDNE=3^\\1<8\"#^]Z]JS/,?^\\WYT 5//A_YZI_WT*//A_P\">J?\\ ?0K>9;\"UL;)[F*\\FEN(3*QCNE11^\\=<8*'^[Z]ZJ"
+    "ZG#]BU:\\M8I'*03O&I8\\D!B!G\\J ,OSX?^>J?]]\"CSX?^>J?]]\"MJR2V_LVYN[U;B7RYHXE2&81_>#DDDJW]P?G3=2CAB2SEL_/1+B R%)90Y"
+    "4B1TZ@#^[GI0!C^?#_SU3_OH4>?#_SU3_OH5J:9#]MU:SM99'\"3SI&Q4\\@%@#C\\ZM*MA=6-Z]M%>0RV\\(E4R72NI_>(N,!!_>]>U &#Y\\/_ #"
+    "U3_OH4>?#_ ,]4_P\"^A5OS'_O-^=:;+86MC9/<Q7DTMQ\"96,=TJ*/WCKC!0_W?7O0!@^?#_P ]4_[Z%'GP_P#/5/\\ OH5J:G#]BU:\\M8I'*03O"
+    "&I8\\D!B!G\\JDTV.&5+R6\\\\]TMX!($BE\"%B9$3J0?[V>E &/Y\\/\\ SU3_ +Z%'GP_\\]4_[Z%;5ZEM_9MM=V2W$7F321,DTPD^Z$(((5?[Y_"
+    "*J'F/_ 'F_.@\"IY\\/_ #U3_OH4>?#_ ,]4_P\"^A7436FFC5;[3XH[Y7MQ<;96NE()C5B\"5\\L==OKWK\"\\Q_[S?G0!4\\^'_GJG_?0H\\^'_G"
+    "JG_?0K<A2SBTF*ZO$NIGEGDC BN!&%\"JA[HV?O_I4.J1):WVRV:41-#%*HD?<PWQJV,@#/WO2@#)\\^'_GJG_?0H\\^'_GJG_?0K6TN)+J^V7+2F)"
+    "8996$;[6.R-FQD@X^[Z5-,EG+I,MU9I=0O%/'&1+<\"0,&5SV1<?<_6@##\\^'_GJG_?0H\\^'_GJG_?0JWYC_P!YOSK=FM--&JWVGQ1WRO;BXVRM="
+    "*03&K$$KY8Z[?7O0!R_GP_\\]4_[Z%'GP_\\ /5/^^A5OS'_O-^=:,*6<6DQ75XEU,\\L\\D8$5P(PH54/=&S]_]* ,/SX?^>J?]]\"CSX?^>J?]]\""
+    "M;5(DM;[9;-*(FABE42/N8;XU;&0!G[WI1I<275]LN6E,2PRRL(WVL=D;-C)!Q]WTH R?/A_YZI_WT*//A_P\">J?\\ ?0K<F2SETF6ZLTNH7BGCC("
+    "EN!(&#*Y[(N/N?K6=YC_WF_.@\"IY\\/_/5/^^A1Y\\/_ #U3_OH5U$-IIIU6QT^6.^9[@6^Z5;I0 9%4DA?+/3=Z]JPO,?\\ O-^= %3SX?\\ GJG"
+    "_ 'T*//A_YZI_WT*VK)+;^S;F[O5N)?+FCB5(9A']X.222K?W!^=-U*.&)+.6S\\]$N(#(4EE#E2)'3J /[N>E &/Y\\/\\ SU3_ +Z%'GP_\\]4_["
+    "Z%:FF0_;=6L[661PD\\Z1L5/(!8 X_.K2K875C>O;17D,MO\")5,ETKJ?WB+C 0?WO7M0!@^?#_SU3_OH4>?#_P ]4_[Z%6_,?^\\WYUILMA:V-D]S"
+    "%>32W$)E8QW2HH_>.N,%#_=]>] &#Y\\/_/5/^^A3X)4>\\A\".K'<> <_PFM'4X?L6K7EK%(Y2\"=XU+'D@,0,_E21P\"2Q-RSN7BN8XU&>,-'*3^"
+    "/R#]: \"BBB@#661)?*P\"WF E/E/('4_H?RH61)#$5!)E!*':>0,Y/X8/Y5*DC+Y>Z\\N&VPLC_*!N/.%Z\\*./K0DC#R]]Y<-MA*/\\H&X\\X7KP"
+    "HX^M $41^:7_KI_[*M29J&,_-+_ -=/_95I^: 'YHS3,T9H ?FC-,S1F@!^:,TS-&: 'YHS3,T9H ?FC-,S1F@!^:,TS-&: (VMSN)CFDC!.=HP1G\\"
+    "12?9WSG[3)G_=3_\"I<T9H C6W.X&2:20 YVG &?P%/EC\\P@AV1EZ,N/Z_2ES1F@\"+[.YZW4OY)_A2\"V8=+F0?14_PJ;-&: *]ZHCTBZ5>GDOR3"
+    "U.#7H6HM_Q1I_[%HC_R&]>>:@?^)9=?]<7_ /037?:BW_%(,/\\ J6S_ .BWKP<X=O9>IZF7J_/Z'G$/_(MWG_7W;_\\ H$U4*OP_\\BW>?]?=O_Z!"
+    "-5\"O>/+-^7_D<]7_ .W[_P!%R5@5OR_\\CGJ__;]_Z+DK H OS?\\ (MV?_7W<?^@0T:U_Q_Q_]>EM_P\"B$HF_Y%NS_P\"ONX_] AHUK_C_ (_^O"
+    "2V_]$)0 :+_ ,?\\G_7I<_\\ HAZ(?^1;O/\\ K[M__0)J-%_X_P\"3_KTN?_1#T0_\\BW>?]?=O_P\"@34 4*WXO^1STC_MQ_P#1<=8%;\\7_ \"."
+    ">D?\\ ;C_Z+CH P*OP_P#(MWG_ %]V_P#Z!-5\"K\\/_ \"+=Y_U]V_\\ Z!-0 :C_ ,>&D_\\ 7HW_ */EHT#_ )&33?\\ K[B_]#%&H_\\ 'AI/_"
+    "7HW_H^6C0/^1DTW_K[B_P#0Q0 :=_QX:M_UZ+_Z/BJA5_3O^/#5O^O1?_1\\54* +^H_\\>&D_P#7HW_H^6C7_P#D9-2_Z^Y?_0S1J/\\ QX:3_P!>"
+    "C?\\ H^6C7_\\ D9-2_P\"ON7_T,T $/_(MWG_7W;_^@343?\\BW9_\\ 7W<?^@0T0_\\ (MWG_7W;_P#H$U$W_(MV?_7W<?\\ H$- !H'_ \",FF_"
+    "\\ 7W%_Z&*-._X\\-6_Z]%_]'Q4:!_R,FF_]?<7_ *&*-._X\\-6_Z]%_]'Q4 4*OZC_QX:3_ ->C?^CY:H5?U'_CPTG_ *]&_P#1\\M !K_\\ R,F"
+    "I?]?<O_H9HT[_ (\\-6_Z]%_\\ 1\\5&O_\\ (R:E_P!?<O\\ Z&:-._X\\-6_Z]%_]'Q4 $W_(MV?_ %]W'_H$-4*OS?\\ (MV?_7W<?^@0U0H WY"
+    "?^1SU?_M^_]%R5@5OR_P#(YZO_ -OW_HN2L\"@\"_-_R+=G_ -?=Q_Z!#1K7_'_'_P!>EM_Z(2B;_D6[/_K[N/\\ T\"&C6O\\ C_C_ .O2V_\\ 1\""
+    "4 &B_\\?\\G_ %Z7/_HAZ(?^1;O/^ONW_P#0)J-%_P\"/^3_KTN?_ $0]$/\\ R+=Y_P!?=O\\ ^@34 4*W_P#FI'_<6_\\ :U8%;_\\ S4C_ +BW_"
+    "M:@# J_-_R+=G_U]W'_ *!#5\"K\\W_(MV?\\ U]W'_H$- !K7_'_'_P!>EM_Z(2C1?^/^3_KTN?\\ T0]&M?\\ '_'_ ->EM_Z(2C1?^/\\ D_Z]+"
+    "G_T0] !#_R+=Y_U]V__ *!-5\"K\\/_(MWG_7W;_^@350H WXO^1STC_MQ_\\ 1<=8%;\\7_(YZ1_VX_P#HN.L\"@\"_#_P BW>?]?=O_ .@34:C_ "
+    ",>&D_\\ 7HW_ */EHA_Y%N\\_Z^[?_P! FHU'_CPTG_KT;_T?+0 :!_R,FF_]?<7_ *&*-._X\\-6_Z]%_]'Q4:!_R,FF_]?<7_H8HT[_CPU;_ *]%"
+    "_P#1\\5 %\"K^H_P#'AI/_ %Z-_P\"CY:H5?U'_ (\\-)_Z]&_\\ 1\\M !K__ \",FI?\\ 7W+_ .AFB'_D6[S_ *^[?_T\":C7_ /D9-2_Z^Y?_ "
+    "$,T0_\\ (MWG_7W;_P#H$U !J/\\ QX:3_P!>C?\\ H^6C0/\\ D9--_P\"ON+_T,4:C_P >&D_]>C?^CY:- _Y&33?^ON+_ -#% !IW_'AJW_7HO_"
+    "H^*J%7]._X\\-6_Z]%_]'Q50H OZC_QX:3_ ->C?^CY:-?_ .1DU+_K[E_]#-&H_P#'AI/_ %Z-_P\"CY:-?_P\"1DU+_ *^Y?_0S0 :=_P >&K?]>"
+    "B_^CXJ)O^1;L_\\ K[N/_0(:-._X\\-6_Z]%_]'Q43?\\ (MV?_7W<?^@0T 4*WY?^1SU?_M^_]%R5@5OR_P#(YZO_ -OW_HN2@# J_-_R+=G_ -?="
+    "Q_Z!#5\"K\\W_(MV?_ %]W'_H$- !K7_'_ !_]>EM_Z(2C1?\\ C_D_Z]+G_P!$/1K7_'_'_P!>EM_Z(2C1?^/^3_KTN?\\ T0] !#_R+=Y_U]V__H"
+    "$U4*OP_P#(MWG_ %]V_P#Z!-5\"@#?E_P\"1SU?_ +?O_1<E8%;\\O_(YZO\\ ]OW_ *+DK H OS?\\BW9_]?=Q_P\"@0T:U_P ?\\?\\ UZ6W_HA*"
+    ")O\\ D6[/_K[N/_0(:-:_X_X_^O2V_P#1\"4 &B_\\ '_)_UZ7/_HAZ(?\\ D6[S_K[M_P#T\":C1?^/^3_KTN?\\ T0]$/_(MWG_7W;_^@34 4*WX"
+    "O^1STC_MQ_\\ 1<=8%;\\7_(YZ1_VX_P#HN.@# J_#_P BW>?]?=O_ .@350J_#_R+=Y_U]V__ *!-0 :C_P >&D_]>C?^CY:- _Y&33?^ON+_ -#%"
+    "&H_\\>&D_]>C?^CY:- _Y&33?^ON+_P!#% !IW_'AJW_7HO\\ Z/BJA5_3O^/#5O\\ KT7_ -'Q50H OZC_ ,>&D_\\ 7HW_ */EHU__ )&34O\\ K"
+    "[E_]#-&H_\\ 'AI/_7HW_H^6C7_^1DU+_K[E_P#0S0 0_P#(MWG_ %]V_P#Z!-1J/_'AI/\\ UZ-_Z/EHA_Y%N\\_Z^[?_ - FHU'_ (\\-)_Z]&_\\"
+    " 1\\M !H'_ \",FF_\\ 7W%_Z&*-._X\\-6_Z]%_]'Q4:!_R,FF_]?<7_ *&*-._X\\-6_Z]%_]'Q4 4*OZC_QX:3_ ->C?^CY:H5?U'_CPTG_ *]&"
+    "_P#1\\M !K_\\ R,FI?]?<O_H9HT[_ (\\-6_Z]%_\\ 1\\5&O_\\ (R:E_P!?<O\\ Z&:-._X\\-6_Z]%_]'Q4 $W_(MV?_ %]W'_H$-4*OS?\\ ("
+    "MV?_7W<?^@0U0H WY?^1SU?_M^_]%R5@5OR_P#(YZO_ -OW_HN2L\"@\"_-_R+=G_ -?=Q_Z!#1K7_'_'_P!>EM_Z(2B;_D6[/_K[N/\\ T\"&C6O\\"
+    " C_C_ .O2V_\\ 1\"4 &B_\\?\\G_ %Z7/_HAZ(?^1;O/^ONW_P#0)J-%_P\"/^3_KTN?_ $0]$/\\ R+=Y_P!?=O\\ ^@34 4*WY?\\ D<]7_P\"W"
+    "[_T7)6!6_+_R.>K_ /;]_P\"BY* ,\"K\\W_(MV?_7W<?\\ H$-4*OS?\\BW9_P#7W<?^@0T &M?\\?\\?_ %Z6W_HA*-%_X_Y/^O2Y_P#1#T:U_P "
+    "?\\?\\ UZ6W_HA*-%_X_P\"3_KTN?_1#T $/_(MWG_7W;_\\ H$U4*OP_\\BW>?]?=O_Z!-5\"@#?B_Y'/2/^W'_P!%QU@5OQ?\\CGI'_;C_ .BXZP"
+    "* +\\/_ \"+=Y_U]V_\\ Z!-1J/\\ QX:3_P!>C?\\ H^6B'_D6[S_K[M__ $\":C4?^/#2?^O1O_1\\M !H'_(R:;_U]Q?\\ H8HT[_CPU;_KT7_T"
+    "?%1H'_(R:;_U]Q?^ABC3O^/#5O\\ KT7_ -'Q4 4*OZC_ ,>&D_\\ 7HW_ */EJA5_4?\\ CPTG_KT;_P!'RT &O_\\ (R:E_P!?<O\\ Z&:(?^1;O"
+    "/\\ K[M__0)J-?\\ ^1DU+_K[E_\\ 0S1#_P BW>?]?=O_ .@34 &H_P#'AI/_ %Z-_P\"CY:- _P\"1DTW_ *^XO_0Q1J/_ !X:3_UZ-_Z/EHT#_D"
+    "9--_Z^XO\\ T,4 &G?\\>&K?]>B_^CXJH5?T[_CPU;_KT7_T?%5\"@\"_J/_'AI/\\ UZ-_Z/EHU_\\ Y&34O^ON7_T,T:C_ ,>&D_\\ 7HW_ */EH"
+    "U__ )&34O\\ K[E_]#- !IW_ !X:M_UZ+_Z/BHF_Y%NS_P\"ONX_] AHT[_CPU;_KT7_T?%1-_P BW9_]?=Q_Z!#0!0K?E_Y'/5_^W[_T7)6!6_+_ "
+    ",CGJ_\\ V_?^BY* ,\"K\\W_(MV?\\ U]W'_H$-4*OS?\\BW9_\\ 7W<?^@0T &M?\\?\\ '_UZ6W_HA*-%_P\"/^3_KTN?_ $0]&M?\\?\\?_ %Z6"
+    "W_HA*-%_X_Y/^O2Y_P#1#T $/_(MWG_7W;_^@350J_#_ ,BW>?\\ 7W;_ /H$U4* -^7_ )'/5_\\ M^_]%R5@5OR_\\CGJ_P#V_?\\ HN2L\"@\"_"
+    "-_R+=G_U]W'_ *!#1K7_ !_Q_P#7I;?^B$HF_P\"1;L_^ONX_] AHUK_C_C_Z]+;_ -$)0 :+_P ?\\G_7I<_^B'HA_P\"1;O/^ONW_ /0)J-%_X_Y"
+    "/^O2Y_P#1#T0_\\BW>?]?=O_Z!-0!0K?B_Y'/2/^W'_P!%QU@5OQ?\\CGI'_;C_ .BXZ ,\"K\\/_ \"+=Y_U]V_\\ Z!-5\"K\\/_(MWG_7W;_\\ "
+    "H$U !J/_ !X:3_UZ-_Z/EHT#_D9--_Z^XO\\ T,4:C_QX:3_UZ-_Z/EHT#_D9--_Z^XO_ $,4 &G?\\>&K?]>B_P#H^*J%7]._X\\-6_P\"O1?\\ T"
+    "?%5\"@\"_J/\\ QX:3_P!>C?\\ H^6C7_\\ D9-2_P\"ON7_T,T:C_P >&D_]>C?^CY:-?_Y&34O^ON7_ -#- !#_ ,BW>?\\ 7W;_ /H$U&H_\\>&"
+    "D_P#7HW_H^6B'_D6[S_K[M_\\ T\":C4?\\ CPTG_KT;_P!'RT &@?\\ (R:;_P!?<7_H8HT[_CPU;_KT7_T?%1H'_(R:;_U]Q?\\ H8HT[_CPU;_K"
+    "T7_T?%0!0J_J/_'AI/\\ UZ-_Z/EJA5_4?^/#2?\\ KT;_ -'RT &O_P#(R:E_U]R_^AFC3O\\ CPU;_KT7_P!'Q4:__P C)J7_ %]R_P#H9HT[_CP"
+    "U;_KT7_T?%0 3?\\BW9_\\ 7W<?^@0U0J_-_P BW9_]?=Q_Z!#5\"@#?E_Y'/5_^W[_T7)6!6_+_ ,CGJ_\\ V_?^BY*P* +\\W_(MV?\\ U]W'_H$"
+    "-&M?\\?\\?_ %Z6W_HA*)O^1;L_^ONX_P#0(:-:_P\"/^/\\ Z]+;_P!$)0 :+_Q_R?\\ 7I<_^B'HA_Y%N\\_Z^[?_ - FHT7_ (_Y/^O2Y_\\ 1#"
+    "T0_P#(MWG_ %]V_P#Z!-0!0K?E_P\"1SU?_ +?O_1<E8%;\\O_(YZO\\ ]OW_ *+DH P*OS?\\BW9_]?=Q_P\"@0U0J_-_R+=G_ -?=Q_Z!#0 :U_Q"
+    "_Q_\\ 7I;?^B$HT7_C_D_Z]+G_ -$/1K7_ !_Q_P#7I;?^B$HT7_C_ )/^O2Y_]$/0 0_\\BW>?]?=O_P\"@350J_#_R+=Y_U]V__H$U4* -^+_D<]"
+    "(_[<?_ $7'6!6_%_R.>D?]N/\\ Z+CK H OP_\\ (MWG_7W;_P#H$U&H_P#'AI/_ %Z-_P\"CY:(?^1;O/^ONW_\\ 0)J-1_X\\-)_Z]&_]'RT &@?"
+    "\\C)IO_7W%_P\"ABC3O^/#5O^O1?_1\\5&@?\\C)IO_7W%_Z&*-._X\\-6_P\"O1?\\ T?%0!0J_J/\\ QX:3_P!>C?\\ H^6J%7]1_P\"/#2?^O1O"
+    "_ $?+0 :__P C)J7_ %]R_P#H9HM_^0)-_P!?L/\\ Z*N*-?\\ ^1DU+_K[E_\\ 0S1;_P#($F_Z_8?_ $5<4 14444 :FVX_P\"?5_\\ OM/_ (JC"
+    ";<?\\^K_]]I_\\55S-&: *$8GW2@6SGY^?G3CY1_M4_;<?\\^K_ /?:?_%58B/SS_\\ 73_V5:DS0!3VW'_/J_\\ WVG_ ,51MN/^?5_^^T_^*J\\T"
+    "<B*C.C*KC*DC 8=./6FYH I[;C_GU?\\ [[3_ .*HVW'_ #ZO_P!]I_\\ %5<S1F@\"GMN/^?5_^^T_^*HVW'_/J_\\ WVG_ ,55Y(WD#&-&?8NYMH"
+    "SM'J?:FYH I[;C_GU?_OM/_BJ-MQ_SZO\\ ]]I_\\55S-&: *>VX_P\"?5_\\ OM/_ (JC;<?\\^K_]]I_\\55S-&: *>VX_Y]7_ .^T_P#BJ-MQ_P"
+    " ^K_\\ ?:?_ !57,T9H I[;C_GU?_OM/_BJ-MQ_SZO_ -]I_P#%5,AEF4NDT<:[F4 QECP2/[P]*M?V9J7V/[5D>1Y_V??]G/\\ K,9VXWYS^% &?M"
+    "N/^?5_^^T_^*HVW'_/J_\\ WVG_ ,54SF6%0[S1R+N52%C*GD@?WCZTYW<S)%&RJ64L69<X P.F1ZT 5]MQ_P ^K_\\ ?:?_ !5&VX_Y]7_[[3_XJK"
+    "1@N1&',Z!&)4-]F;!(QD9W]1D?F*9ME!Q]KASZ>0?_ (N@\"AJ G_LVZW6S@>2^273C@_[5=_J%OJ(\\(-(=.E\\K_A'\"PD\\R/!3RW^;&[./;&?:"
+    "N'O9#)HMX6ZB*53CU (_I7K>IM_Q;D_\\ 8G_^TGKPLXDE[*ZOJ=F&J2AS<IX9::Q/91R1PPN4D*LRRVL<@)&<'#9Q]X_G4W_\"0W/_ #Z0_P#@LM_"
+    "_ (FL^BO=.,M)K-PFHO?!)C<2%R[- C!MX(;*GCD$\\8[U-_PD-S_SZ0_^\"RW_ /B:SZ* +5WK$]['''-\"X2,LRK%:QQ@$XR<+C/W1^53#Q%=;$5"
+    "K=7V(J!I-/@=L*  ,D9.  .:SZ* - ^(KK8ZK;JF]&0M'I\\\"-A@01D#(R\"1Q4-IK$]E')'#\"Y20JS++:QR D9P<-G'WC^=5:* -#_A(;G_ )]("
+    "?_!9;_\\ Q-0OK-P^HI?%)A<1E\"C+ BA=@ 7\"CC@ <8[55HH T/\\ A(;G_GTA_P#!9;__ !-1W&MW%U;&WD@*Q%PY6&SBCR0\" 3MQG[Q_.J=% "
+    "%Z+7[F*WC@$&](@53S;&&0J\"2<98$]23^-21^);R*19(K:-'0AE9=-MP5(Z$'%9M% %BTU66Q>1K>&7]XFQUDMTD5AD'&&R.H!_\"K'_  D-S_SZ0"
+    "_\\ @LM__B:SZ* +%WJLM\\\\;7$,O[M-B+';I&JC).,+@=23^-6I/$MY+(TDMM&[N2S,VFVY+$]23BLVB@\"Y<:W<75L;>2 K$7#E8;.*/) (!.W&"
+    "?O'\\Z+?6[BUMA;QP%H@Y<+-9Q28) !(W9Q]T?E5.B@#2C\\2WD4BR16T:.A#*RZ;;@J1T(.*JVFJRV+R-;PR_O$V.LENDBL,@XPV1U /X57HH T/\\"
+    " A(;G_GTA_P#!9;__ !-5[O59;YXVN(9?W:;$6.W2-5&2<87 ZDG\\:KT4 :4GB6\\ED:26VC=W)9F;3;<EB>I)Q4<NOW,MO) 8-B2@*_E6,,98 @X"
+    "RH!Z@'\\*HT4 7+?6[BUMA;QP%H@Y<+-9Q28) !(W9Q]T?E4G_  D-S_SZ0_\\ @LM__B:SZ* +2:S<)J+WP28W$A<NS0(P;>\"&RIXY!/&.]3?\\)"
+    "#<_\\^D/_@LM_P#XFL^B@\"U=ZQ/>QQQS0N$C+,JQ6L<8!.,G\"XS]T?E4P\\176Q%:W5]B*@:33X';\"@ #)&3@ #FL^B@#0/B*ZV.JVZIO1D+1Z?"
+    " C88$$9 R,@D<5#::Q/91R1PPN4D*LRRVL<@)&<'#9Q]X_G56B@#0_X2&Y_P\"?2'_P66__ ,35?^U9_P\"TOM^VX^T^=YWF>4OW\\[LXSCK5>B@#0"
+    "_X2&Y_Y](?_  66_P#\\34-WK$]['''-\"X2,LRK%:QQ@$XR<+C/W1^55:* - >(KK8BM;J^Q%0-)I\\#MA0 !DC)P !S0?$5UL=5MU3>C(6CT^!&P"
+    "P((R!D9!(XK/HH M6FL3V4<D<,+E)\"K,LMK'(\"1G!PV<?>/YU-_PD-S_ ,^D/_@LM_\\ XFL^B@\"T^LW#ZBE\\4F%Q&4*,L\"*%V !<*.. !QCM"
+    "4W_\"0W/_ #Z0_P#@LM__ (FL^B@\"Y<:W<75L;>2 K$7#E8;.*/) (!.W&?O'\\Z=%K]S%;QP\"#>D0*IYMC#(5!).,L\">I)_&J-% &E'XEO(I%D"
+    "BMHT=\"&5ETVW!4CH0<55M-5EL7D:WAE_>)L=9+=)%89!QALCJ ?PJO10!H?\\)#<_P#/I#_X++?_ .)JO=ZK+?/&UQ#+^[38BQVZ1JHR3C\"X'4D_"
+    "C5>B@#2D\\2WDLC22VT;NY+,S:;;DL3U).*AN-;N+JV-O) 5B+ARL-G%'D@$ G;C/WC^=4Z* +T6OW,5O' (-Z1 JGFV,,A4$DXRP)ZDG\\:DC\\2W"
+    "D4BR16T:.A#*RZ;;@J1T(.*S:* +%IJLMB\\C6\\,O[Q-CK);I(K#(.,-D=0#^%6/\\ A(;G_GTA_P#!9;__ !-9]% %B[U66^>-KB&7]VFQ%CMTC5"
+    "1DG&%P.I)_&K4GB6\\ED:26VC=W)9F;3;<EB>I)Q6;10!>EU^YEMY(#!L24!7\\JQAC+ $'&5 /4 _A3;?6[BUMA;QP%H@Y<+-9Q28) !(W9Q]T?E5"
+    ".B@#0_X2&Y_P\"?2'_P66__ ,34*:S<)J+WP28W$A<NS0(P;>\"&RIXY!/&.]5:* -#_ (2&Y_Y](?\\ P66__P 34-WK$]['''-\"X2,LRK%:QQ@$"
+    "XR<+C/W1^55:* - >(KK8BM;J^Q%0-)I\\#MA0 !DC)P !S0?$5UL=5MU3>C(6CT^!&PP((R!D9!(XK/HH M6FL3V4<D<,+E)\"K,LMK'(\"1G!PV<"
+    "?>/YU-_PD-S_SZ0_^\"RW_ /B:SZ* +2:S<)J+WP28W$A<NS0(P;>\"&RIXY!/&.]3?\\)#<_P#/I#_X++?_ .)K/HH M7>L3WL<<<T+A(RS*L5K'&"
+    " 3C)PN,_='Y5,/$5UL16MU?8BH&DT^!VPH  R1DX  YK/HH T#XBNMCJMNJ;T9\"T>GP(V&!!&0,C()'%0VFL3V4<D<,+E)\"K,LMK'(\"1G!PV<?>"
+    "/YU5HH T/\\ A(;G_GTA_P#!9;__ !-0OK-P^HI?%)A<1E\"C+ BA=@ 7\"CC@ <8[55HH T/^$AN?^?2'_P %EO\\ _$U'<:W<75L;>2 K$7#E8;."
+    "*/) (!.W&?O'\\ZIT4 7HM?N8K>. 0;TB!5/-L89\"H))QE@3U)/XU)'XEO(I%DBMHT=\"&5ETVW!4CH0<5FT4 6+359;%Y&MX9?WB;'62W216&0<8"
+    ";(Z@'\\*L?\\)#<_\\^D/_@LM_P#XFL^B@\"Q=ZK+?/&UQ#+^[38BQVZ1JHR3C\"X'4D_C5J3Q+>2R-)+;1N[DLS-IMN2Q/4DXK-HH N7&MW%U;&WD"
+    "@*Q%PY6&SBCR0\" 3MQG[Q_.G1:_<Q6\\< @WI$\"J>;8PR%023C+ GJ2?QJC10!I1^);R*19(K:-'0AE9=-MP5(Z$'%5;359;%Y&MX9?WB;'62W21"
+    "6&0<8;(Z@'\\*KT4 :'_\"0W/_/I#_X++?\\ ^)JO=ZK+?/&UQ#+^[38BQVZ1JHR3C\"X'4D_C5>B@#2D\\2WDLC22VT;NY+,S:;;DL3U).*CEU^YE"
+    "MY(#!L24!7\\JQAC+ $'&5 /4 _A5&B@\"Y;ZW<6ML+>. M$'+A9K.*3!( )&[./NC\\JD_X2&Y_Y](?_!9;_P#Q-9]% %I-9N$U%[X),;B0N79H$8"
+    "-O!#94\\<@GC'>IO^$AN?\\ GTA_\\%EO_P#$UGT4 6KO6)[V...:%PD99E6*UCC )QDX7&?NC\\JF'B*ZV(K6ZOL14#2:? [84  9(R<  <UGT4 :"
+    "!\\176QU6W5-Z,A:/3X$;# @C(&1D$CBH;36)[*.2.&%RDA5F66UCD!(S@X;./O'\\ZJT4 :'_  D-S_SZ0_\\ @LM__B:A36;A-1>^\"3&XD+EV:!"
+    "&#;P0V5/'()XQWJK10!H?\\)#<_\\^D/_@LM_P#XFH;O6)[V...:%PD99E6*UCC )QDX7&?NC\\JJT4 : \\176Q%:W5]B*@:33X';\"@ #)&3@ #F"
+    "@^(KK8ZK;JF]&0M'I\\\"-A@01D#(R\"1Q6?10!:M-8GLHY(X87*2%699;6.0$C.#ALX^\\?SJ;_A(;G_ )](?_!9;_\\ Q-9]% %I]9N'U%+XI,+B"
+    ",H498$4+L \"X4<< #C':IO\\ A(;G_GTA_P#!9;__ !-9]% %RXUNXNK8V\\D!6(N'*PV<4>2 0\"=N,_>/YTZ+7[F*WC@$&](@53S;&&0J\"2<98"
+    "$]23^-4:* -*/Q+>12+)%;1HZ$,K+IMN\"I'0@XJK::K+8O(UO#+^\\38ZR6Z2*PR#C#9'4 _A5>B@#0_X2&Y_P\"?2'_P66__ ,35>[U66^>-KB&7"
+    "]VFQ%CMTC51DG&%P.I)_&J]% &E)XEO)9&DEMHW=R69FTVW)8GJ2<5#<:W<75L;>2 K$7#E8;.*/) (!.W&?O'\\ZIT4 7HM?N8K>. 0;TB!5/-L89"
+    "\"H))QE@3U)/XU)'XEO(I%DBMHT=\"&5ETVW!4CH0<5FT4 6+359;%Y&MX9?WB;'62W216&0<8;(Z@'\\*L?\\ \"0W/_/I#_P\"\"RW_^)K/HH L7"
+    ">JRWSQM<0R_NTV(L=ND:J,DXPN!U)/XU:D\\2WDLC22VT;NY+,S:;;DL3U).*S:* +TNOW,MO) 8-B2@*_E6,,98 @XRH!Z@'\\*;;ZW<6ML+>. M$"
+    "'+A9K.*3!( )&[./NC\\JIT4 :'_\"0W/_ #Z0_P#@LM__ (FH4UFX347O@DQN)\"Y=F@1@V\\$-E3QR\">,=ZJT4 :'_  D-S_SZ0_\\ @LM__B:A"
+    "N]8GO8XXYH7\"1EF58K6., G&3A<9^Z/RJK10!H#Q%=;$5K=7V(J!I-/@=L*  ,D9.  .:#XBNMCJMNJ;T9\"T>GP(V&!!&0,C()'%9]% %JTUB>RC"
+    "DCAA<I(59EEM8Y 2,X.&SC[Q_.IO^$AN?^?2'_P66_\\ \\36?10!:36;A-1>^\"3&XD+EV:!&#;P0V5/'()XQWJ;_A(;G_ )](?_!9;_\\ Q-9]% "
+    "%J[UB>]CCCFA<)&695BM8XP\"<9.%QG[H_*IAXBNMB*UNK[$5 TFGP.V%  &2,G  '-9]% &@?$5UL=5MU3>C(6CT^!&PP((R!D9!(XJ&TUB>RCDCA"
+    "A<I(59EEM8Y 2,X.&SC[Q_.JM% &A_P )#<_\\^D/_ (++?_XFH7UFX?44OBDPN(RA1E@10NP +A1QP .,=JJT4 :'_\"0W/_/I#_X++?\\ ^)J.XU"
+    "NXNK8V\\D!6(N'*PV<4>2 0\"=N,_>/YU3HH O1:_<Q6\\< @WI$\"J>;8PR%023C+ GJ2?QJ2/Q+>12+)%;1HZ$,K+IMN\"I'0@XK-HH L6FJRV+R"
+    "-;PR_O$V.LENDBL,@XPV1U /X58_X2&Y_Y](?_!9;_P#Q-9]% %B[U66^>-KB&7]VFQ%CMTC51DG&%P.I)_&K4GB6\\ED:26VC=W)9F;3;<EB>I)Q6"
+    ";10!<N-;N+JV-O) 5B+ARL-G%'D@$ G;C/WC^=.BU^YBMXX!!O2(%4\\VQAD*@DG&6!/4D_C5&B@#2C\\2WD4BR16T:.A#*RZ;;@J1T(.*JVFJRV+R"
+    "-;PR_O$V.LENDBL,@XPV1U /X57HH T/^$AN?^?2'_P66_\\ \\35>[U66^>-KB&7]VFQ%CMTC51DG&%P.I)_&J]% &E)XEO)9&DEMHW=R69FTVW)8"
+    "GJ2<5'+K]S+;R0&#8DH\"OY5C#&6 (.,J >H!_\"J-% %RWUNXM;86\\<!:(.7\"S6<4F\"0 2-V<?='Y5)_PD-S_ ,^D/_@LM_\\ XFL^B@\"TFLW"
+    "\":B]\\$F-Q(7+LT\",&W@ALJ>.03QCO4W_\"0W/_ #Z0_P#@LM__ (FL^B@\"U=ZQ/>QQQS0N$C+,JQ6L<8!.,G\"XS]T?E4P\\176Q%:W5]B*@:3"
+    "3X';\"@ #)&3@ #FL^B@#0/B*ZV.JVZIO1D+1Z? C88$$9 R,@D<5#::Q/91R1PPN4D*LRRVL<@)&<'#9Q]X_G56B@#0_X2&Y_Y](?_  66_P#\\34"
+    "*:S<)J+WP28W$A<NS0(P;>\"&RIXY!/&.]5:* -#_A(;G_GTA_\\%EO_ /$U#=ZQ/>QQQS0N$C+,JQ6L<8!.,G\"XS]T?E56B@#0'B*ZV(K6ZOL14#"
+    "2:? [84  9(R<  <T'Q%=;'5;=4WHR%H]/@1L,\"\",@9&02.*SZ* +5IK$]E')'#\"Y20JS++:QR D9P<-G'WC^=3?\\)#<_\\ /I#_ .\"RW_\\ "
+    "B:SZ* +3ZS</J*7Q287$90HRP(H78 %PHXX '&.U3?\\ \"0W/_/I#_P\"\"RW_^)K/HH N7&MW%U;&WD@*Q%PY6&SBCR0\" 3MQG[Q_.G1:_<Q6\\"
+    "< @WI$\"J>;8PR%023C+ GJ2?QJC10!I1^);R*19(K:-'0AE9=-MP5(Z$'%5;359;%Y&MX9?WB;'62W216&0<8;(Z@'\\*KT4 :'_\"0W/_ #Z0_P#"
+    "@LM__ (FJ]WJLM\\\\;7$,O[M-B+';I&JC).,+@=23^-5Z* -*3Q+>2R-)+;1N[DLS-IMN2Q/4DXJ*36;B]:&V>-8HC+YA\"6D40)\".!DH 3]X_G5"
+    "*EC_P\"/J#_>/_H+4 7J*** /0+**#_B6V9MH62\\MY'ED9 7+98##=1C:.E(-*>V\\,7)DL9&N3'',9C$2$4L/E4X[+DG'K[5BQZK>PVAMHK@I%@@"
+    " *I(!Z@,1D9]B*A2YFB@EAC<K'* '&!R <B@\"*(_--_UT_\\ 95KI(YK^VL])3258I,&,BJ,K-)N(*OZC&.#V-<Q$?FF_ZZ?^RK5F*\\NH(FC@N9H"
+    "D?[RQR,H;Z@'F@#I#%!<_8+2YMD+O;SX='(\\HJSD;0#@\\COFHSI5NNE3>=!''/#;QRDK)(SY8C[W 3!!Z#FN=6XF39LFD7RU*IAR-H/4#TZFGF]N"
+    "VA$)N[@Q*NT1^:VT#TQG&.!0!TO\\ 9VG3:C<6ZV8C6VO8H<B5B75B00<GV[8J.RT[3]1,+_9_LX%Q+&461CY@1-PSU.?7'X\"N=%W<B1G%Q,'=P[,"
+    ")#EF'0DYY(IJW$RA0LT@\"OO4!SPW][Z^] '0F.TCBO#9[07TYS(L8DV!MX'REP\"1_]>G^%8%CN([D&!Y9',:JTJAHUQRVTG))Z# ]:YV2\\NIF9I"
+    "KJ>1G78S/*Q)7T.3T]J9'+)%('B=HW7HRG!'XT *P*,R,064D$A@PR/<<&C-1C@8%+F@!^:,TS-&: 'YHS3,T9H DT9K?[7 +W[1Y'GON^RX\\S[[8"
+    "VY[YQ7I7_ !5?_\"P/^6W]F^;[>3Y./_0OUS[5XW<:B;&9H?+WC)8'=CJ<_P!:E_X2^]^Q?9,R>1Y_VC;YG_+3&-V<9S^- &KK36_VN<67VCR//3;]"
+    "JQYGWUSNQWSFJ[G_ $V/_KD_\\TK-M]1-],L/E[!D,3NST.?Z5:OYS:JMP!NV@IMSC.<'^E '03ZI:R:-% FG6B2B:9B%:?\\ =ADC 89D())4\\'("
+    "^4<<\\W=5G^Q:'ID.GZ[)-');,LMO$)8T8&63+8. PSN0YP?E!Q@\\<*GB!HY%=;925((#$,./4$8(]CQ4MUXIGO7C,\\$?[M/+01JD:JNXM@*B@=6"
+    ")_&@\">X/\\ Q);WZ3_S:O7-2;_BWI_[%''_ )\">O(KCC0[DGJT,CG\\03_6O5]2;_B@3_P!BG_[2>OGL[>M+U.O#J_,>'>3%_=;_ +^/_C1Y,7]U"
+    "O^_C_P\"-/HKZ$Y!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7"
+    "]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_"
+    "C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_"
+    "\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z"
+    "* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'"
+    "DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y"
+    ",7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\"
+    " OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_["
+    "^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ ("
+    "T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-"
+    "'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y"
+    ",7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO"
+    "^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_O"
+    "X_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C"
+    "3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ ."
+    "-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH "
+    "9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]U"
+    "O\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W"
+    "6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/"
+    "_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX"
+    "_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH"
+    " 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1Y,7"
+    "]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^/_C3Z* &>3%_="
+    ";_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C_ .-'DQ?W6_[^"
+    "/_C3Z* &>3%_=;_OX_\\ C1Y,7]UO^_C_ .-/HH 9Y,7]UO\\ OX_^-'DQ?W6_[^/_ (T^B@!GDQ?W6_[^/_C1Y,7]UO\\ OX_^-/HH 9Y,7]UO^_C"
+    "_ .-'DQ?W6_[^/_C3Z* &>3%_=;_OX_\\ C1'&B74!4$'<>KL?X6]33Z1?^/F#_>/_ *\"U %NBBB@#_]D"
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "ftm_sw_control_s32k14x"
+    created		    "30-May-2019 16:02:36"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    15
+  }
+  chart {
+    id			    2
+    machine		    1
+    name		    "SW control signal generator"
+    windowPosition	    [-6 0 1752 939]
+    viewLimits		    [0 1169.496 -2.886 631.249]
+    zoomFactor		    0.878
+    screen		    [1 1 1280 1024 1.333333333333333]
+    treeNode		    [0 3 0 0]
+    viewObj		    2
+    subviewS {
+      y1		      4.148
+      zoomFactor	      0.878
+    }
+    ssIdHighWaterMark	    15
+    decomposition	    CLUSTER_CHART
+    chartFileNumber	    2
+    saturateOnIntegerOverflow 1
+    userSpecifiedStateTransitionExecutionOrder 1
+    disableImplicitCasting  1
+    firstData		    7
+    firstTransition	    9
+  }
+  state {
+    id			    3
+    labelString		    "A\ndu:\nswctrl = 257;\ncntr=cntr+1;"
+    position		    [61.875 32.625 162.375 78.375]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 6]
+    subviewer		    2
+    ssIdNumber		    1
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    4
+    labelString		    "A1\ndu:\nswctrl = 1;\ncntr=cntr+1;"
+    position		    [78.5 193.5 159.375 78.375]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 6 5]
+    superState		    GROUPED
+    subviewer		    2
+    ssIdNumber		    3
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    5
+    labelString		    "A2\ndu:\nswctrl = 1028;\ncntr=cntr+1;"
+    position		    [364.6504 214.5201 162.375 78.375]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 4 0]
+    subviewer		    2
+    ssIdNumber		    12
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    6
+    labelString		    "A3\ndu:\nswctrl = 4;\ncntr=cntr+1;"
+    position		    [380.0827 32.625 159.375 78.375]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 3 4]
+    superState		    GROUPED
+    subviewer		    2
+    ssIdNumber		    14
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  data {
+    id			    7
+    ssIdNumber		    9
+    name		    "cntr"
+    scope		    LOCAL_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_UINT16_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "uint16"
+    linkNode		    [2 0 8]
+  }
+  data {
+    id			    8
+    ssIdNumber		    11
+    name		    "swctrl"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_UINT16_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "uint16"
+    linkNode		    [2 7 0]
+  }
+  transition {
+    id			    9
+    labelString		    "{cntr = 1;}"
+    labelPosition	    [124.021 5.016 53.641 16]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 123.6209 19.5 0 0]
+    }
+    dst {
+      id		      3
+      intersection	      [1 0 -1 0.3803 123.6209 32.625 0 0]
+    }
+    midPoint		    [123.6209 22.0871]
+    chart		    2
+    dataLimits		    [121.221 126.021 19.5 32.625]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+    linkNode		    [2 0 10]
+  }
+  transition {
+    id			    10
+    labelString		    "[cntr==10]\n{cntr=1;}"
+    labelPosition	    [282.468 83.77 55.984 30]
+    fontSize		    12
+    src {
+      id		      6
+      intersection	      [4 -1 0 0.5 380.0827 71.8125 0 -24.375]
+    }
+    dst {
+      id		      3
+      intersection	      [2 1 0 0.5 224.25 71.8125 0 24.375]
+    }
+    midPoint		    [306.1663 71.8125]
+    chart		    2
+    dataLimits		    [224.25 380.083 69.412 74.213]
+    stampAngle		    NaN
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      mode		      MIRROR_SLIDE
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    13
+    linkNode		    [2 9 11]
+  }
+  transition {
+    id			    11
+    labelString		    "[cntr == 5]\n{cntr = 1;}"
+    labelPosition	    [192.446 130.416 55.969 30]
+    fontSize		    12
+    src {
+      id		      3
+      intersection	      [3 0 1 0.2263 187.5 111 0 -35.9375]
+    }
+    dst {
+      id		      4
+      intersection	      [1 -0 -1 0.6839 187.5 193.5 0 35.9375]
+    }
+    midPoint		    [187.5 148.25]
+    chart		    2
+    dataLimits		    [185.1 189.9 111 193.5]
+    stampAngle		    NaN
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    7
+    linkNode		    [2 10 12]
+  }
+  transition {
+    id			    12
+    labelString		    "[cntr == 5]\n{cntr = 1;}"
+    labelPosition	    [436.564 149.921 55.969 30]
+    fontSize		    12
+    src {
+      id		      5
+      intersection	      [1 0 -1 0.3658 424.0494 214.5201 0 -35.9375]
+    }
+    dst {
+      id		      6
+      intersection	      [3 0 1 0.7241 424.0494 111 0 35.9375]
+    }
+    midPoint		    [424.0494 166.76]
+    chart		    2
+    dataLimits		    [421.649 426.449 111 214.52]
+    stampAngle		    NaN
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    15
+    linkNode		    [2 11 13]
+  }
+  transition {
+    id			    13
+    labelString		    "[cntr==10]\n{cntr=1;}"
+    labelPosition	    [270.932 197.297 55.984 30]
+    fontSize		    12
+    src {
+      id		      4
+      intersection	      [2 1 0 0.5 237.875 232.6875 0 -24.375]
+    }
+    dst {
+      id		      5
+      intersection	      [4 -1 0 0.7682 364.6504 232.6875 0 24.375]
+    }
+    midPoint		    [297.2627 232.6875]
+    chart		    2
+    dataLimits		    [237.875 364.65 230.287 235.088]
+    stampAngle		    NaN
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    4
+    linkNode		    [2 12 0]
+  }
+  instance {
+    id			    14
+    machine		    1
+    name		    "SW control signal generator"
+    chart		    2
+  }
+  target {
+    id			    15
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 16]
+  }
+  target {
+    id			    16
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 15 0]
+  }
+}

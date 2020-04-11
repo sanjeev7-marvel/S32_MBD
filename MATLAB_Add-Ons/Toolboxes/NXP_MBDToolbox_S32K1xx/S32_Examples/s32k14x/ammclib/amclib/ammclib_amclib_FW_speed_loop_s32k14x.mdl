@@ -1,0 +1,3961 @@
+Model {
+  Name			  "ammclib_amclib_FW_speed_loop_s32k14x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.278"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 13
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/AMCLIB/bam_f16/AMCLIB_FWSpeedLoop_F16"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/AMCLIB_FWSpeedLoop_F16"
+      SID		      "748"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/AMCLIB/bam_f32/AMCLIB_FWSpeedLoop_F32"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/AMCLIB_FWSpeedLoop_F32"
+      SID		      "754"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/AMCLIB/bam_flt/AMCLIB_FWSpeedLoop_FLT"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/AMCLIB_FWSpeedLoop_FLT"
+      SID		      "761"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/Check Static Range ID_FW_F16 "
+      SID		      "585"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/Check Static Range ID_FW_F32 "
+      SID		      "711"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/FreeMaster_Config"
+      SID		      "564"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/GFLIB/bam_f16/GFLIB_Ramp_F16"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/GFLIB_Ramp_F16"
+      SID		      "704"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/MLIB_ConvertPU_F32F1"
+      SID		      "708"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF16"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/MLIB_ConvertPU_FLTF16"
+      SID		      "746"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF16"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/MLIB_ConvertPU_FLTF16   "
+      SID		      "656"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF32"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/MLIB_ConvertPU_FLTF32"
+      SID		      "709"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "ammclib_amclib_FW_speed_loop_s32k14x/Model Info"
+      SID		      "524"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This model tests the AMMCLIB AMCLIB Field Weakening Speed Loop blocks\n\nValidation:\n- Run the mode"
+  "l in Simulation and compare the Inputs vs Outputs results.\n- Open Freemaster (ammclib_amclib_FW_speed_loop_s32k14x."
+  "pmp) and compare the HW results against the Simulated ones"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [8.0, 8.0, 1550.0, 838.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1875.0, 833.0]
+	ZoomFactor		[0.99999999999999989]
+	Offset			[-291.51215876436765, -122.56163793103468]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAX+AAACygAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Wed Jul 29 12:18:26 2015"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:55:50 2019"
+  RTWModifiedTimeStamp	  485682950
+  ModelVersionFormat	  "1.%<AutoIncrement:278>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "ammclib_amclib_FW_speed_loop_s32k14x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "ammclib_amclib_FW_speed_loop_s32k14x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.001"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "1"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "none"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  off
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k14.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  2048
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant on
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  off
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases off
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition    [ 357, 82, 1466, 794 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      ShareAcrossModelInstances	off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      Lockdown		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      Scope
+      DefaultConfigurationName "Simulink.scopes.TimeScopeBlockCfg"
+      Floating		      off
+    }
+  }
+  System {
+    Name		    "ammclib_amclib_FW_speed_loop_s32k14x"
+    Location		    [8, 8, 1558, 846]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "765"
+    Block {
+      BlockType		      Reference
+      Name		      "AMCLIB_FWSpeedLoop_F16"
+      SID		      "748"
+      Ports		      [9, 3]
+      Position		      [230, 367, 555, 763]
+      ZOrder		      2230
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/AMCLIB/bam_f16/AMCLIB_FWSpeedLoop_F16"
+      SourceType	      "AMCLIB_FWSpeedLoop_F16"
+      ContentPreviewEnabled   off
+      u16NSamplesW	      "3"
+      u16NSamplesFW	      "3"
+      f16PropGainQ	      "0.001*(2^15-1)"
+      s16PropGainShiftQ	      "0"
+      f16IntegGainQ	      "0.0005*(2^15-1)"
+      s16IntegGainShiftQ      "0"
+      f16PropGainFW	      "0.02*(2^15-1)"
+      s16PropGainShiftFW      "0"
+      f16IntegGainFW	      "0.002*(2^15-1)"
+      s16IntegGainShiftFW     "0"
+      f32RampUp		      "0.001*(2^15-1)"
+      f32RampDown	      "0.001*(2^15-1)"
+      Port {
+	PortNumber		3
+	Name			"ID_Request"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "AMCLIB_FWSpeedLoop_F32"
+      SID		      "754"
+      Ports		      [9, 3]
+      Position		      [230, 807, 555, 1203]
+      ZOrder		      2236
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/AMCLIB/bam_f32/AMCLIB_FWSpeedLoop_F32"
+      SourceType	      "AMCLIB_FWSpeedLoop_F32"
+      ContentPreviewEnabled   off
+      u16NSamplesW	      "3"
+      u16NSamplesFW	      "3"
+      f32PropGainQ	      "0.001*(2^31-1)"
+      s16PropGainShiftQ	      "0"
+      f32IntegGainQ	      "0.0005*(2^31-1)"
+      s16IntegGainShiftQ      "0"
+      f32PropGainFW	      "0.02*(2^31-1)"
+      s16PropGainShiftFW      "0"
+      f32IntegGainFW	      "0.002*(2^31-1)"
+      s16IntegGainShiftFW     "0"
+      f32RampUp		      "0.001*(2^31-1)"
+      f32RampDown	      "0.001*(2^31-1)"
+      Port {
+	PortNumber		3
+	Name			"ID_Request"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "AMCLIB_FWSpeedLoop_FLT"
+      SID		      "761"
+      Ports		      [9, 3]
+      Position		      [230, 1277, 555, 1673]
+      ZOrder		      2243
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/AMCLIB/bam_flt/AMCLIB_FWSpeedLoop_FLT"
+      SourceType	      "AMCLIB_FWSpeedLoop_FLT"
+      ContentPreviewEnabled   off
+      fltLambdaW	      "0.5"
+      fltLambdaFW	      "0.5"
+      fltPropGainQ	      "0.001"
+      fltIntegGainQ	      "0.0005"
+      fltPropGainFW	      "0.02"
+      fltIntegGainFW	      "0.002"
+      fltRampUp		      "0.001"
+      fltRampDown	      "0.001"
+      fltUmaxDivImax	      "1"
+      Port {
+	PortNumber		3
+	Name			"ID_FW_FLT"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range ID_FW_F16 "
+      SID		      "585"
+      Description	      "0 <= u <= 0.707*(2^15-1)"
+      Ports		      [1]
+      Position		      [915, 517, 1020, 563]
+      ZOrder		      2061
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.707*(2^15-1)"
+      max_included	      on
+      min		      "0"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range ID_FW_F32 "
+      SID		      "711"
+      Description	      "0 <= u <= 0.707*(2^31-1)"
+      Ports		      [1]
+      Position		      [915, 957, 1020, 1003]
+      ZOrder		      2196
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.707*(2^31-1)"
+      max_included	      on
+      min		      "0"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range ID_FW_FLT"
+      SID		      "729"
+      Description	      "0 <= u <= 0.707"
+      Ports		      [1]
+      Position		      [915, 1427, 1020, 1473]
+      ZOrder		      2215
+      Commented		      "on"
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.707"
+      max_included	      on
+      min		      "0"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_ID_FW_F16_res"
+      SID		      "579"
+      Ports		      [1]
+      Position		      [915, 455, 1020, 495]
+      ZOrder		      2055
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_ID_FW_F32_res"
+      SID		      "712"
+      Ports		      [1]
+      Position		      [915, 895, 1020, 935]
+      ZOrder		      2194
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_ID_FW_FLT_res"
+      SID		      "730"
+      Ports		      [1]
+      Position		      [915, 1365, 1020, 1405]
+      ZOrder		      2213
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_F16"
+      SID		      "660"
+      Ports		      [1]
+      Position		      [645, 729, 675, 761]
+      ZOrder		      2147
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('Mi"
+      "nYLimReal','-1490.375','MaxYLimReal','13413.375','YLabelReal','','MinYLimMag','  0.00000','MaxYLimMag','13413.37"
+      "5','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0"
+      ".686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0."
+      "623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0."
+      "717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<Si"
+      "gnalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',2,'LineNames',{{'ID_Request','S"
+      "peedFbk'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-1490.375','MaxYLi"
+      "mReal','13413.375','YLabelReal','','MinYLimMag','  0.00000','MaxYLimMag','13413.375','LegendVisibility','On','XG"
+      "rid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.68627450980"
+      "3922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1607843137254"
+      "9;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.07450980392"
+      "15686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Naviga"
+      "tion',true,'OnceAtStop',false),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2"
+      "016b','Position',[425.8 281 560 420])"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_F32"
+      SID		      "713"
+      Ports		      [1]
+      Position		      [645, 1184, 675, 1216]
+      ZOrder		      2202
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-107374176.625','MaxYLimReal','966367639.625','YLabelReal',''"
+      ",'MinYLimMag','       0.00000','MaxYLimMag','966367639.625','LegendVisibility','On','XGrid',true,'YGrid',true,'P"
+      "lotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'"
+      "ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;"
+      "0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 "
+      "1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChan"
+      "nelNames',{{}},'NumLines',2,'LineNames',{{'ID_Request','SpeedFbk'}},'ShowContent',true,'Placement',1)},'DisplayP"
+      "ropertyDefaults',struct('MinYLimReal','-107374176.625','MaxYLimReal','966367639.625','YLabelReal','','MinYLimMag"
+      "','       0.00000','MaxYLimMag','966367639.625','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase'"
+      ",false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',"
+      "[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.7176470588"
+      "23529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745"
+      "098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false),extmgr"
+      ".Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2016b','Position',[425.8 281 560 420])"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_FLAG_F16"
+      SID		      "662"
+      Ports		      [1]
+      Position		      [680, 494, 710, 526]
+      ZOrder		      2149
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1','DataLoggingSaveFormat','Array','DataLogging"
+      "Decimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDis"
+      "plays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag',"
+      "'1.125','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCol"
+      "or',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215"
+      "686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215"
+      "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
+      ",'%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'AMCLIB_F"
+      "WSpeedLoop_F16/2'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.125','"
+      "MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVisibility','Off','XGrid"
+      "',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.68627450980392"
+      "2 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1"
+      " 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.07450980392156"
+      "86;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigatio"
+      "n',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "FW_FLAG_F16_declaration"
+      SID		      "588"
+      Position		      [245, 220, 347, 260]
+      ZOrder		      2064
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      Priority		      "3"
+      DataStoreName	      "FW_FLAG_F16"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		22
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  23
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    24
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  25
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "FW_FLAG_F16_write"
+      SID		      "659"
+      Ports		      [1]
+      Position		      [645, 545, 750, 585]
+      ZOrder		      2146
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      DataStoreName	      "FW_FLAG_F16"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_FLAG_F32"
+      SID		      "714"
+      Ports		      [1]
+      Position		      [680, 934, 710, 966]
+      ZOrder		      2204
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData3','DataLoggingSaveFormat','Array','DataLogging"
+      "Decimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDis"
+      "plays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag',"
+      "'1.125','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCol"
+      "or',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215"
+      "686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215"
+      "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
+      ",'%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'AMCLIB_F"
+      "WSpeedLoop_F32/2'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.125','"
+      "MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVisibility','Off','XGrid"
+      "',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.68627450980392"
+      "2 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1"
+      " 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.07450980392156"
+      "86;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigatio"
+      "n',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "FW_FLAG_F32_declaration"
+      SID		      "680"
+      Position		      [560, 220, 662, 260]
+      ZOrder		      2166
+      BackgroundColor	      "[0.000000, 0.666667, 1.000000]"
+      Priority		      "3"
+      DataStoreName	      "FW_FLAG_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		26
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  27
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    28
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  29
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "FW_FLAG_F32_write"
+      SID		      "715"
+      Ports		      [1]
+      Position		      [650, 985, 755, 1025]
+      ZOrder		      2201
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "FW_FLAG_F32"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_FLAG_FLT"
+      SID		      "732"
+      Ports		      [1]
+      Position		      [685, 1404, 715, 1436]
+      ZOrder		      2222
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData5','DataLoggingSaveFormat','Array','DataLogging"
+      "Decimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDis"
+      "plays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag',"
+      "'1.125','LegendVisibility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCol"
+      "or',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215"
+      "686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215"
+      "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
+      ",'%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'AMCLIB_F"
+      "WSpeedLoop_FLT/2'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.125','"
+      "MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVisibility','Off','XGrid"
+      "',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.68627450980392"
+      "2 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1"
+      " 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.07450980392156"
+      "86;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigatio"
+      "n',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "FW_FLAG_FLT_declaration"
+      SID		      "698"
+      Position		      [915, 220, 1017, 260]
+      ZOrder		      2183
+      BackgroundColor	      "magenta"
+      Priority		      "3"
+      DataStoreName	      "FW_FLAG_FLT"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		30
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  31
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    32
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  33
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "FW_FLAG_FLT_write"
+      SID		      "733"
+      Ports		      [1]
+      Position		      [650, 1455, 755, 1495]
+      ZOrder		      2219
+      BackgroundColor	      "magenta"
+      DataStoreName	      "FW_FLAG_FLT"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "FW_FLT"
+      SID		      "731"
+      Ports		      [1]
+      Position		      [645, 1624, 675, 1656]
+      ZOrder		      2220
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData4'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.24699','MaxYLimReal','0.30522','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','0.30522','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
+      "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
+      "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137"
+      "2549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 "
+      "0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines'"
+      ",2,'LineNames',{{'ID_FW_FLT','SpeedFbk'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('M"
+      "inYLimReal','-0.24699','MaxYLimReal','0.30522','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','0.30522','Le"
+      "gendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627"
+      "4509803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647"
+      "05882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.83137"
+      "2549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configurat"
+      "ion('Tools','Plot Navigation',true,'OnceAtStop',false),extmgr.Configuration('Tools','Measurements',true,'Version"
+      "','2016b')),'Version','2016b','Position',[425.8 281 560 420])"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FreeMaster_Config"
+      SID		      "564"
+      Ports		      []
+      Position		      [711, -82, 1021, -26]
+      ZOrder		      2040
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      SourceType	      "fm_s32k_config"
+      interface		      "LPUART1"
+      baudrate		      "115200"
+      rxd		      "PTC6: [LPUART1_RX | Receive]"
+      txd		      "PTC7: [LPUART1_TX | Transmit]"
+      mode		      "Short Interrupt"
+      isr_prio		      "1"
+      show_adv_opts	      on
+      use_scope		      on
+      max_scope_vars	      "8"
+      use_recorder	      on
+      max_rec_vars	      "8"
+      rec_buff_size	      "1024"
+      rec_timebase	      "0"
+      rec_timebase_unit	      "milliseconds"
+      comm_buffer_size_auto   on
+      comm_buffer_size	      "255"
+      comm_rqueue_size_default on
+      comm_rqueue_size	      "32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "GFLIB_Ramp_F16"
+      SID		      "704"
+      Ports		      [1, 1]
+      Position		      [-495, 865, -275, 935]
+      ZOrder		      2188
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/GFLIB/bam_f16/GFLIB_Ramp_F16"
+      SourceType	      "GFLIB_Ramp"
+      ContentPreviewEnabled   off
+      f16RampUp		      "2"
+      f16RampDown	      "2"
+      Port {
+	PortNumber		1
+	Name			"SpeedFbk"
+      }
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "ID_FW_F16_declaration"
+      SID		      "580"
+      Position		      [245, 155, 347, 195]
+      ZOrder		      2056
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      Priority		      "2"
+      DataStoreName	      "ID_FW_F16"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		34
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  35
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    36
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  37
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "ID_FW_F16_write"
+      SID		      "581"
+      Ports		      [1]
+      Position		      [915, 390, 1020, 430]
+      ZOrder		      2057
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      DataStoreName	      "ID_FW_F16"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "ID_FW_F32_declaration"
+      SID		      "679"
+      Position		      [560, 155, 662, 195]
+      ZOrder		      2165
+      BackgroundColor	      "[0.000000, 0.666667, 1.000000]"
+      Priority		      "2"
+      DataStoreName	      "ID_FW_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		38
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  39
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    40
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  41
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "ID_FW_F32_write"
+      SID		      "717"
+      Ports		      [1]
+      Position		      [915, 830, 1020, 870]
+      ZOrder		      2195
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "ID_FW_F32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "ID_FW_FLT_declaration"
+      SID		      "697"
+      Position		      [915, 155, 1017, 195]
+      ZOrder		      2182
+      BackgroundColor	      "magenta"
+      Priority		      "2"
+      DataStoreName	      "ID_FW_FLT"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		42
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  43
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    44
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  45
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "ID_FW_FLT_write"
+      SID		      "734"
+      Ports		      [1]
+      Position		      [915, 1300, 1020, 1340]
+      ZOrder		      2214
+      BackgroundColor	      "magenta"
+      DataStoreName	      "ID_FW_FLT"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "IQFbk_F16"
+      SID		      "705"
+      Position		      [65, 460, 130, 490]
+      ZOrder		      2189
+      Value		      "0.2*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "IQFbk_F32"
+      SID		      "718"
+      Position		      [65, 900, 130, 930]
+      ZOrder		      2207
+      Value		      "0.2*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "IQFbk_FLT"
+      SID		      "735"
+      Position		      [65, 1370, 130, 1400]
+      ZOrder		      2223
+      Value		      "0.2"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitFW_F16"
+      SID		      "655"
+      Position		      [65, 730, 130, 760]
+      ZOrder		      2142
+      Value		      "-0.5*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitFW_F32 "
+      SID		      "719"
+      Position		      [65, 1170, 130, 1200]
+      ZOrder		      2199
+      Value		      "-0.5*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitFW_FLT  "
+      SID		      "736"
+      Position		      [65, 1640, 130, 1670]
+      ZOrder		      2218
+      Value		      "-0.5"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitQ_F16"
+      SID		      "751"
+      Position		      [65, 640, 130, 670]
+      ZOrder		      2233
+      Value		      "-0.4*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitQ_F32"
+      SID		      "760"
+      Position		      [65, 1080, 130, 1110]
+      ZOrder		      2242
+      Value		      "-0.4*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "LowerLimitQ_FLT"
+      SID		      "765"
+      Position		      [65, 1550, 130, 1580]
+      ZOrder		      2247
+      Value		      "-0.4"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Ports		      []
+      Position		      [359, -85, 669, 87]
+      ZOrder		      1
+      ForegroundColor	      "red"
+      Priority		      "0"
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K142-16KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : GCC\nTarget Type : FLASH\nDownload Code after build : (OpenSDA: E)\nStep Tick Interrupt Priority "
+      ": 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K144"
+      mcu_target_package      "100-LQFP"
+      mcu_target_sram_size    "64KB"
+      mcu_system_clock_freq   "80"
+      mcu_xtal_freq	      "External 8"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "15"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g"
+      gcc_target_link_opts    "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K144_64_flash.ld"
+      ghs_target_compile_opts "-cpu=cortexm4f -thumb -DARM_MATH_CM4 -fpu=vfpv4_d16 -fsingle -Ogeneral -Wundef -Wimplic"
+      "it-int -Wshadow -Wtrigraphs --no_commons --gnu_asm -gnu99 -gdwarf-2 -G"
+      ghs_target_assemble_opts "-cpu=cortexm4f -fpu=vfpv4_d16"
+      ghs_target_link_opts    "-cpu=cortexm4f -thumb -fpu=vfpv4_d16"
+      ghs_target_default_lcf  off
+      ghs_target_user_lcf     "S32K144_64_flash.ld"
+      iar_target_compile_opts "--cpu=Cortex-M4F --thumb --fpu=VFPv4_sp -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--cpu Cortex-M4F --thumb --fpu VFPv4_sp"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  off
+      iar_target_user_lcf     "S32K144_64_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_ConvertPU_F32F1"
+      SID		      "708"
+      Ports		      [1, 1]
+      Position		      [-195, 836, 25, 904]
+      ZOrder		      2192
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/MLIB/bam_f32/MLIB_ConvertPU_F32F16"
+      SourceType	      "MLIB_ConvertPU_F32"
+      ContentPreviewEnabled   off
+      Port {
+	PortNumber		1
+	Name			"SpeedFbk"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_ConvertPU_FLTF16"
+      SID		      "746"
+      Ports		      [1, 1]
+      Position		      [-195, 1306, 25, 1374]
+      ZOrder		      2228
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF16"
+      SourceType	      "MLIB_ConvertPU_FLT"
+      ContentPreviewEnabled   off
+      Port {
+	PortNumber		1
+	Name			"SpeedFbk"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_ConvertPU_FLTF16   "
+      SID		      "656"
+      Ports		      [1, 1]
+      Position		      [600, 626, 820, 694]
+      ZOrder		      2143
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF16"
+      SourceType	      "MLIB_ConvertPU_FLT"
+      ContentPreviewEnabled   off
+      Port {
+	PortNumber		1
+	Name			"ID_FW_F16"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_ConvertPU_FLTF32"
+      SID		      "709"
+      Ports		      [1, 1]
+      Position		      [600, 1066, 820, 1134]
+      ZOrder		      2193
+      LibraryVersion	      "1.825"
+      SourceBlock	      "ammclib_bam_s32k14x/MLIB/bam_flt/MLIB_ConvertPU_FLTF32"
+      SourceType	      "MLIB_ConvertPU_FLT"
+      ContentPreviewEnabled   off
+      Port {
+	PortNumber		1
+	Name			"ID_FW_F32"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "524"
+      Ports		      []
+      Position		      [-210, -86, 298, 93]
+      ZOrder		      1976
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: ammclib_amclib_FW_speed_loop_s32k14x\\n\\nDescription: This model tests the"
+      " AMMCLIB AMCLIB Field Weakening Speed Loop blocks\\n\\nValidation:\\n- Run the model in Simulation and compare t"
+      "he Inputs vs Outputs results.\\n- Open Freemaster (ammclib_amclib_FW_speed_loop_s32k14x.pmp) and compare the HW "
+      "results against the Simulated ones"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      SID		      "661"
+      Ports		      [2, 1]
+      Position		      [600, 726, 605, 764]
+      ZOrder		      2148
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux1"
+      SID		      "721"
+      Ports		      [2, 1]
+      Position		      [600, 1181, 605, 1219]
+      ZOrder		      2203
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux2"
+      SID		      "739"
+      Ports		      [2, 1]
+      Position		      [600, 1621, 605, 1659]
+      ZOrder		      2221
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux3"
+      SID		      "699"
+      Ports		      [4, 1]
+      Position		      [1125, 353, 1130, 1677]
+      ZOrder		      2184
+      ShowName		      off
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Q_FLAG_F16"
+      SID		      "753"
+      Ports		      [1]
+      Position		      [680, 369, 710, 401]
+      ZOrder		      2235
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0"
+      ".00000','MaxYLimMag','1.125','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor'"
+      ",[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666666666"
+      "66667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725490"
+      "19608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650"
+      "980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'L"
+      "ineNames',{{'AMCLIB_FWSpeedLoop_F16/1'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('Mi"
+      "nYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVis"
+      "ibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627450980"
+      "3922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647058823"
+      "53 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.83137254901"
+      "9608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('T"
+      "ools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','20"
+      "16b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Q_FLAG_F16_declaration"
+      SID		      "749"
+      Position		      [245, 285, 347, 325]
+      ZOrder		      2231
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      Priority		      "3"
+      DataStoreName	      "Q_FLAG_F16"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		46
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  47
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    48
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  49
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "Q_FLAG_F16_write"
+      SID		      "752"
+      Ports		      [1]
+      Position		      [645, 415, 750, 455]
+      ZOrder		      2234
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      DataStoreName	      "Q_FLAG_F16"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Q_FLAG_F32"
+      SID		      "755"
+      Ports		      [1]
+      Position		      [675, 804, 705, 836]
+      ZOrder		      2238
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData2'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0"
+      ".00000','MaxYLimMag','1.125','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor'"
+      ",[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666666666"
+      "66667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725490"
+      "19608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650"
+      "980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'L"
+      "ineNames',{{'AMCLIB_FWSpeedLoop_F32/1'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('Mi"
+      "nYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVis"
+      "ibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627450980"
+      "3922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647058823"
+      "53 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.83137254901"
+      "9608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('T"
+      "ools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','20"
+      "16b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Q_FLAG_F32_declaration"
+      SID		      "757"
+      Position		      [560, 285, 662, 325]
+      ZOrder		      2239
+      BackgroundColor	      "[0.000000, 0.666667, 1.000000]"
+      Priority		      "3"
+      DataStoreName	      "Q_FLAG_F32"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		50
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  51
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    52
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  53
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "Q_FLAG_F32_write"
+      SID		      "756"
+      Ports		      [1]
+      Position		      [645, 855, 750, 895]
+      ZOrder		      2237
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "Q_FLAG_F32"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Q_FLAG_FLT"
+      SID		      "762"
+      Ports		      [1]
+      Position		      [680, 1274, 710, 1306]
+      ZOrder		      2245
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData3'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0"
+      ".00000','MaxYLimMag','1.125','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor'"
+      ",[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06666666666"
+      "66667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8313725490"
+      "19608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650"
+      "980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',1,'L"
+      "ineNames',{{'AMCLIB_FWSpeedLoop_FLT/1'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('Mi"
+      "nYLimReal','-0.125','MaxYLimReal','1.125','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.125','LegendVis"
+      "ibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.68627450980"
+      "3922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.4117647058823"
+      "53 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.83137254901"
+      "9608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('T"
+      "ools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','20"
+      "16b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Q_FLAG_FLT_declaration"
+      SID		      "758"
+      Position		      [915, 285, 1017, 325]
+      ZOrder		      2240
+      BackgroundColor	      "magenta"
+      Priority		      "3"
+      DataStoreName	      "Q_FLAG_FLT"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		54
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  55
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    56
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  57
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint16"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "Q_FLAG_FLT_write"
+      SID		      "763"
+      Ports		      [1]
+      Position		      [650, 1325, 755, 1365]
+      ZOrder		      2244
+      BackgroundColor	      "magenta"
+      DataStoreName	      "Q_FLAG_FLT"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "Read SpeedFbk Input Amplitude"
+      SID		      "651"
+      Ports		      [0, 1]
+      Position		      [-675, 880, -525, 920]
+      ZOrder		      2137
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "SpeedFbk_Input_Amplitude"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "ReqSpd_F16"
+      SID		      "643"
+      Position		      [65, 370, 130, 400]
+      ZOrder		      2113
+      Value		      "0.25*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "ReqSpd_F32"
+      SID		      "722"
+      Position		      [65, 810, 130, 840]
+      ZOrder		      2197
+      Value		      "0.25*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "ReqSpd_FLT"
+      SID		      "740"
+      Position		      [65, 1280, 130, 1310]
+      ZOrder		      2216
+      Value		      "0.25"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope"
+      SID		      "701"
+      Ports		      [1]
+      Position		      [1170, 931, 1230, 1099]
+      ZOrder		      2186
+      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
+      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
+      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData6'),extmgr.Configuration('Visuals','Time Domain"
+      "',true,'SerializedDisplays',{struct('MinYLimReal','-0.26574','MaxYLimReal','0.47397','YLabelReal','','MinYLimMag"
+      "','0.00000','MaxYLimMag','0.47397','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesC"
+      "olor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.066666"
+      "6666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.83137"
+      "2549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 "
+      "0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Color',[1 0 0],'LineStyle','-','Line"
+      "Width',1,'Marker','none','Visible','on'),struct('Color',[0.0745098039215686 0.623529411764706 1],'LineStyle','-'"
+      ",'LineWidth',1,'Marker','none','Visible','on'),struct('Color',[1 0 1],'LineStyle','-','LineWidth',1,'Marker','no"
+      "ne','Visible','on'),struct('Color',[1 0.843137254901961 0],'LineStyle','-','LineWidth',2,'Marker','none','Visibl"
+      "e','on')}},'UserDefinedChannelNames',{{}},'NumLines',4,'LineNames',{{'ID_FW_F16','ID_FW_F32','ID_FW_FLT','SpeedF"
+      "bk'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-0.26574','MaxYLimReal'"
+      ",'0.47397','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','0.47397','LegendVisibility','On','XGrid',true,'Y"
+      "Grid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.68627"
+      "4509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666"
+      "666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588"
+      "235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration('Tools','Plot Navigation',true),"
+      "extmgr.Configuration('Tools','Measurements',true,'Version','2016b')),'Version','2016b')"
+      NumInputPorts	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "SpeedFbk_Input_Amplitude_declaration"
+      SID		      "648"
+      Position		      [-195, 220, -48, 260]
+      ZOrder		      2135
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "SpeedFbk_Input_Amplitude"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "0.25*(2^15-1)"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		58
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  59
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    60
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  61
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-32768"
+      OutMax		      "32767"
+      OutDataTypeStr	      "int16"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "SpeedFbk_declaration"
+      SID		      "649"
+      Position		      [45, 220, 147, 260]
+      ZOrder		      2138
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "SpeedFbk"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		62
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  63
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    64
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  65
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-1"
+      OutMax		      "1"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "SpeedFbk_write"
+      SID		      "747"
+      Ports		      [1]
+      Position		      [-135, 1575, -30, 1615]
+      ZOrder		      2229
+      BlockMirror	      on
+      BackgroundColor	      "green"
+      DataStoreName	      "SpeedFbk"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQLim_F16"
+      SID		      "706"
+      Position		      [65, 550, 130, 580]
+      ZOrder		      2190
+      Value		      "0.9*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQLim_F32"
+      SID		      "723"
+      Position		      [65, 990, 130, 1020]
+      ZOrder		      2208
+      Value		      "0.9*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQLim_FLT"
+      SID		      "741"
+      Position		      [65, 1460, 130, 1490]
+      ZOrder		      2224
+      Value		      "0.9"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQReq_F16"
+      SID		      "707"
+      Position		      [65, 505, 130, 535]
+      ZOrder		      2191
+      Value		      "0.9*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQReq_F32"
+      SID		      "724"
+      Position		      [65, 945, 130, 975]
+      ZOrder		      2209
+      Value		      "0.9*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UQReq_FLT"
+      SID		      "742"
+      Position		      [65, 1415, 130, 1445]
+      ZOrder		      2225
+      Value		      "0.9"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitFW+F32 "
+      SID		      "725"
+      Position		      [65, 1125, 130, 1155]
+      ZOrder		      2198
+      Value		      "0.5*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitFW_F16"
+      SID		      "644"
+      Position		      [65, 685, 130, 715]
+      ZOrder		      2114
+      Value		      "0.5*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitFW_FLT   "
+      SID		      "743"
+      Position		      [65, 1595, 130, 1625]
+      ZOrder		      2217
+      Value		      "0.5"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitQ_F16"
+      SID		      "750"
+      Position		      [65, 595, 130, 625]
+      ZOrder		      2232
+      Value		      "0.4*(2^15-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitQ_F32"
+      SID		      "759"
+      Position		      [65, 1035, 130, 1065]
+      ZOrder		      2241
+      Value		      "0.4*(2^31-1)"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "UpperLimitQ_FLT"
+      SID		      "764"
+      Position		      [65, 1505, 130, 1535]
+      ZOrder		      2246
+      Value		      "0.4"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+    }
+    Line {
+      ZOrder		      798
+      SrcBlock		      "UpperLimitFW_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      8
+    }
+    Line {
+      ZOrder		      797
+      SrcBlock		      "LowerLimitFW_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      9
+    }
+    Line {
+      ZOrder		      786
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      2
+      Points		      [21, 0]
+      Branch {
+	ZOrder			805
+	Points			[0, -55]
+	DstBlock		"FW_FLAG_F16"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			799
+	DstBlock		"FW_FLAG_F16_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      630
+      SrcBlock		      "Read SpeedFbk Input Amplitude"
+      SrcPort		      1
+      DstBlock		      "GFLIB_Ramp_F16"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      785
+      SrcBlock		      "ReqSpd_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      1
+    }
+    Line {
+      Name		      "ID_Request"
+      ZOrder		      790
+      Labels		      [1, 1]
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      3
+      Points		      [18, 0]
+      Branch {
+	ZOrder			800
+	Points			[0, -35]
+	DstBlock		"MLIB_ConvertPU_FLTF16   "
+	DstPort			1
+      }
+      Branch {
+	ZOrder			474
+	Points			[0, 40]
+	DstBlock		"Mux"
+	DstPort			1
+      }
+    }
+    Line {
+      Name		      "ID_FW_F16"
+      ZOrder		      468
+      SrcBlock		      "MLIB_ConvertPU_FLTF16   "
+      SrcPort		      1
+      Points		      [34, 0; 0, -24]
+      Branch {
+	ZOrder			788
+	Points			[0, -96]
+	Branch {
+	  ZOrder		  809
+	  DstBlock		  "Check Static Range ID_FW_F16 "
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  469
+	  Points		  [0, -65]
+	  Branch {
+	    ZOrder		    810
+	    DstBlock		    "Display_ID_FW_F16_res"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    472
+	    Points		    [0, -65]
+	    DstBlock		    "ID_FW_F16_write"
+	    DstPort		    1
+	  }
+	}
+      }
+      Branch {
+	ZOrder			569
+	Labels			[1, 1]
+	Points			[251, 0]
+	DstBlock		"Mux3"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      477
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      DstBlock		      "FW_F16"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      570
+      SrcBlock		      "Mux3"
+      SrcPort		      1
+      DstBlock		      "Scope"
+      DstPort		      1
+    }
+    Line {
+      Name		      "SpeedFbk"
+      ZOrder		      631
+      SrcBlock		      "GFLIB_Ramp_F16"
+      SrcPort		      1
+      Points		      [23, 0]
+      Branch {
+	ZOrder			823
+	Points			[0, -30]
+	Branch {
+	  ZOrder		  667
+	  Labels		  [2, 1]
+	  Points		  [0, -440; 294, 0]
+	  Branch {
+	    ZOrder		    793
+	    Points		    [0, 353; 538, 0]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    792
+	    DstBlock		    "AMCLIB_FWSpeedLoop_F16"
+	    DstPort		    2
+	  }
+	}
+	Branch {
+	  ZOrder		  723
+	  DstBlock		  "MLIB_ConvertPU_F32F1"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	ZOrder			728
+	Points			[0, 440]
+	DstBlock		"MLIB_ConvertPU_FLTF16"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      794
+      SrcBlock		      "IQFbk_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      796
+      SrcBlock		      "UQLim_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      5
+    }
+    Line {
+      ZOrder		      795
+      SrcBlock		      "UQReq_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      4
+    }
+    Line {
+      ZOrder		      829
+      SrcBlock		      "UpperLimitFW+F32 "
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      8
+    }
+    Line {
+      ZOrder		      828
+      SrcBlock		      "LowerLimitFW_F32 "
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      9
+    }
+    Line {
+      ZOrder		      816
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F32"
+      SrcPort		      2
+      Points		      [21, 0]
+      Branch {
+	ZOrder			672
+	Points			[0, -55]
+	DstBlock		"FW_FLAG_F32"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			671
+	DstBlock		"FW_FLAG_F32_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      820
+      SrcBlock		      "ReqSpd_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      1
+    }
+    Line {
+      Name		      "ID_Request"
+      ZOrder		      814
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F32"
+      SrcPort		      3
+      Points		      [18, 0]
+      Branch {
+	ZOrder			815
+	Labels			[-1, 1]
+	Points			[0, -35]
+	DstBlock		"MLIB_ConvertPU_FLTF32"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			683
+	Points			[0, 55]
+	DstBlock		"Mux1"
+	DstPort			1
+      }
+    }
+    Line {
+      Name		      "ID_FW_F32"
+      ZOrder		      685
+      SrcBlock		      "MLIB_ConvertPU_FLTF32"
+      SrcPort		      1
+      Points		      [36, 0; 0, -24]
+      Branch {
+	ZOrder			812
+	Points			[0, -96]
+	Branch {
+	  ZOrder		  654
+	  Points		  [0, -65]
+	  Branch {
+	    ZOrder		    653
+	    DstBlock		    "Display_ID_FW_F32_res"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    652
+	    Points		    [0, -65]
+	    DstBlock		    "ID_FW_F32_write"
+	    DstPort		    1
+	  }
+	}
+	Branch {
+	  ZOrder		  651
+	  DstBlock		  "Check Static Range ID_FW_F32 "
+	  DstPort		  1
+	}
+      }
+      Branch {
+	ZOrder			686
+	Labels			[1, 1]
+	Points			[249, 0]
+	DstBlock		"Mux3"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      657
+      SrcBlock		      "Mux1"
+      SrcPort		      1
+      DstBlock		      "FW_F32"
+      DstPort		      1
+    }
+    Line {
+      Name		      "SpeedFbk"
+      ZOrder		      665
+      Labels		      [1, 1]
+      SrcBlock		      "MLIB_ConvertPU_F32F1"
+      SrcPort		      1
+      Points		      [17, 0]
+      Branch {
+	ZOrder			824
+	Labels			[2, 1]
+	Points			[0, 362; 481, 0; 0, -22]
+	DstBlock		"Mux1"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			822
+	DstBlock		"AMCLIB_FWSpeedLoop_F32"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      825
+      SrcBlock		      "IQFbk_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      827
+      SrcBlock		      "UQLim_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      5
+    }
+    Line {
+      ZOrder		      826
+      SrcBlock		      "UQReq_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      4
+    }
+    Line {
+      ZOrder		      848
+      SrcBlock		      "UpperLimitFW_FLT   "
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      8
+    }
+    Line {
+      ZOrder		      847
+      SrcBlock		      "LowerLimitFW_FLT  "
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      9
+    }
+    Line {
+      ZOrder		      832
+      SrcBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      SrcPort		      2
+      Points		      [21, 0]
+      Branch {
+	ZOrder			693
+	Points			[0, -55]
+	DstBlock		"FW_FLAG_FLT"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			692
+	DstBlock		"FW_FLAG_FLT_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      841
+      SrcBlock		      "ReqSpd_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      1
+    }
+    Line {
+      Name		      "ID_FW_FLT"
+      ZOrder		      838
+      SrcBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      SrcPort		      3
+      Points		      [18, 0]
+      Branch {
+	ZOrder			839
+	Labels			[-1, 1; 3, 1]
+	Points			[0, -65; 283, 0; 0, -90]
+	Branch {
+	  ZOrder		  702
+	  Points		  [0, -65]
+	  Branch {
+	    ZOrder		    731
+	    Points		    [0, -65]
+	    Branch {
+	      ZOrder		      730
+	      Labels		      [2, 1]
+	      Points		      [0, -64; 249, 0]
+	      DstBlock		      "Mux3"
+	      DstPort		      3
+	    }
+	    Branch {
+	      ZOrder		      700
+	      DstBlock		      "ID_FW_FLT_write"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    ZOrder		    701
+	    DstBlock		    "Display_ID_FW_FLT_res"
+	    DstPort		    1
+	  }
+	}
+	Branch {
+	  ZOrder		  699
+	  DstBlock		  "Check Static Range ID_FW_FLT"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	ZOrder			696
+	Points			[0, 25]
+	DstBlock		"Mux2"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      706
+      SrcBlock		      "Mux2"
+      SrcPort		      1
+      DstBlock		      "FW_FLT"
+      DstPort		      1
+    }
+    Line {
+      Name		      "SpeedFbk"
+      ZOrder		      722
+      SrcBlock		      "MLIB_ConvertPU_FLTF16"
+      SrcPort		      1
+      Points		      [17, 0]
+      Branch {
+	ZOrder			843
+	Labels			[1, 1]
+	Points			[0, 255]
+	Branch {
+	  ZOrder		  735
+	  DstBlock		  "SpeedFbk_write"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  734
+	  Labels		  [2, 1]
+	  Points		  [0, 96; 530, 0; 0, -32]
+	  Branch {
+	    ZOrder		    840
+	    Points		    [0, -9]
+	    DstBlock		    "Mux2"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    733
+	    Points		    [533, 0]
+	    DstBlock		    "Mux3"
+	    DstPort		    4
+	  }
+	}
+      }
+      Branch {
+	ZOrder			842
+	DstBlock		"AMCLIB_FWSpeedLoop_FLT"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      844
+      SrcBlock		      "IQFbk_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      846
+      SrcBlock		      "UQLim_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      5
+    }
+    Line {
+      ZOrder		      845
+      SrcBlock		      "UQReq_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      4
+    }
+    Line {
+      ZOrder		      803
+      SrcBlock		      "UpperLimitQ_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      6
+    }
+    Line {
+      ZOrder		      804
+      SrcBlock		      "LowerLimitQ_F16"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      7
+    }
+    Line {
+      ZOrder		      806
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	ZOrder			808
+	Points			[0, -50]
+	DstBlock		"Q_FLAG_F16"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			807
+	DstBlock		"Q_FLAG_F16_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      817
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F32"
+      SrcPort		      1
+      Points		      [14, 0]
+      Branch {
+	ZOrder			819
+	Points			[0, -55]
+	DstBlock		"Q_FLAG_F32"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			818
+	DstBlock		"Q_FLAG_F32_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      830
+      SrcBlock		      "UpperLimitQ_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      6
+    }
+    Line {
+      ZOrder		      831
+      SrcBlock		      "LowerLimitQ_F32"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_F32"
+      DstPort		      7
+    }
+    Line {
+      ZOrder		      835
+      SrcBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      SrcPort		      1
+      Points		      [21, 0]
+      Branch {
+	ZOrder			837
+	Points			[0, -55]
+	DstBlock		"Q_FLAG_FLT"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			836
+	DstBlock		"Q_FLAG_FLT_write"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      849
+      SrcBlock		      "UpperLimitQ_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      6
+    }
+    Line {
+      ZOrder		      850
+      SrcBlock		      "LowerLimitQ_FLT"
+      SrcPort		      1
+      DstBlock		      "AMCLIB_FWSpeedLoop_FLT"
+      DstPort		      7
+    }
+    Annotation {
+      SID		      "702"
+      Name		      "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+      "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }"
+      "\n</style></head><body style=\" font-family:'Arial'; font-size:10px; font-weight:400; font-style:normal;\">\n<p "
+      "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0"
+      "px; line-height:100%;\"><span style=\" font-size:10px;\">Expected results:</span></p>\n<p style=\" margin-top:0p"
+      "x; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;\""
+      "><span style=\" font-size:10px;\"> </span><img src=\"[$unpackedFolder]/simulink/resources/mwimg_c941b8de-2892-41"
+      "61-a110-34fc204dbe59.png\" /></p></body></html>"
+      Position		      [1270, 728, 1976, 1373]
+      InternalMargins	      [0, 0, 0, 0]
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      Interpreter	      "rich"
+      ZOrder		      -1
+    }
+    Annotation {
+      SID		      "592"
+      Name		      "S32K14x EVB Config and example description"
+      Position		      [-220, -111, 1053, 118]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1825
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "593"
+      Name		      "Data Initializations"
+      Position		      [-220, 132, 1055, 345]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1826
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "594"
+      Name		      "F16 Calculations"
+      Position		      [-220, 360, 1059, 788]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1827
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "726"
+      Name		      "F32 Calculations"
+      Position		      [-220, 800, 1059, 1248]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1828
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "744"
+      Name		      "FLT Calculations"
+      Position		      [-220, 1270, 1059, 1698]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1829
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+MatResources {
+  NumRecords		  1
+  ResourceRecord {
+    Path		    /simulink/resources/mwimg_c941b8de-2892-4161-a110-34fc204dbe59.png
+    Data		    "B5!.1PT*&@H    -24A$4@   KX   )U\" (   \"PRF15    \"7!(67,  !)T   2= '>9A]X   @ $E$051XG.S=>5P4]^$__O?>"
+    "P K+)?>Q(I<\"7J &O-88M:B)VB36'*VQ34W3)FE,&].T3=LT:?U]FC0FQL1(?S;:W*<F,1K!\"Q6\\4$00$% 1Y91K6?:<Z_O'P+K\"[L(\"RR[R>"
+    "K8/'[LSL^]YST\"8U[[?[WF/X-&'5Q,   \" _A$30C[XZ!-75P,   !&@)\\^\\I#0U74   \" D031 0   !R Z      .0'0     !R Z    @ "
+    ",0'0   , !B X   #@ +']U577ZJ[6-@V@W*38J+ @_P%5\"0   -Q7']'AZ.FB6H,H8&P0P[(TPS$,2S,LP[(,P]$L2[,<P_(+.8;C&(:E699AN<Z"
+    "FVE5WM=V_9/[P' ,    ,FSZB VLR-E8W:MM:699E68YA.9;E6*[K!<-Q'$<8EKVUD\",LQQG:FTWZX.$Y     !A.?42'E+C(28E*A8^/K0TXC@\\"
+    "3?'S@,P3;UMHF$6,4!0  P!VHC^C@X2$-#PL+# RPNI8U!P:685F68;K>U7M(6UM:G5!;    IQ,(!'UNPW'<,-2DGP0\"04%!06IJJM6U9\\^>34M"
+    "+&\\(*#[QM@&79XJ+R[/4K&O=_R% 4P[ LRS(,P_#]%C;L>T)PRQ/[!KQW    Y^'L<G7M>BHH*$A+2SM[]FSO57QN*\"@H&,+=#3 ZL\"RK,]&[/]"
+    "X3&G]#=W6WH;65Y5B&[6YV8%EK'ZIZ:Y9@\"=EK/O5[)U94#:;N    0$AJ:JK5]&#.#;8:) :FC^A@-5NQ+-NI-[USY(KQ^'Y?/U9,76TM/&/1><%"
+    "R'$M(KP]6??]Y?L:;SV>:%V3^]K>Q@SX     Z)T>G)0;2'^B0X_T0#-L<7WG7W>=_^;+?;&::Q(]Y^E)6H_DT\"83VX5A6-9*YHB-3R;YI976=U3U"
+    "UJS>_1B6\"RU[-_8](9CU5M6MM;/>JK)>U.TK    [ER6Z<%YN8'T'1U8SK+]@&79ZNN-?WGSR]/??!]Q?O]8F4!TDY7H6:[V2F=-37=TX%C&6G0@F"
+    "<^_F9&UQ,KUO.JM67'/)G?U9%2^.;'W0J[RS9(EENDA_]FX-61GURKR;%SWJJJW9L5]OJJRJT<D^=8*  !P'4$_N+J.=P)S>G!>;B!]1@>68_D,H*?"
+    "8BPW:__]XS8:O2EM:VWVK\"R-;+BMD(D$C*VAC9=KZMH(SW?=9,\"S+6.WIB/UM'G^AO[U!8-]KS^:OV[LMLWNCWV;R\"\\F;E=T+2>QO=[Z9D;7[5"
+    "@Y8MS>OJ[N#7_7J6U7=G]K9W0^2^?SMGP$  ->P/^K0/<<>@BW]&>O U:D-;Q^]\\>\\C=0<NM4O%8K_P*']31S!GDGL(!\"Q'6\"+W8M3'<_F;+#B"
+    ".XZ=WL%YB[&_S.([;NR[_V;BN5H1]N[/(NA69MV^V;W<628ZW' H1&Y],2LSC*C,FQMV^RORI_&?CS!$V[MG\\_I\\*  \" D<W<3V'GGHO!Z\\]8!"
+    "^(G8:.$;4)*QPE%K$'G=>*;R+::\")EDC(] *\"8\",?%2$*:B6%M[PSS8@2-6;[+HEKF-JS0W%0RM=7MOC[';,OO^#   P$AG.;[!UCT70Z+OL0XL"
+    "RTJDTLS4F%^F2\"9X:<:W78RK/ITL%\\>&2KS].58FK0N:?77..D%2<N.^?0Q-=[<]]+5G\\ZC)N(D9%LT)77HOK*HHL6B'N&V\\I;F)PFI1    =["
+    "K>XR*=EQ[Z'NO )P&95)(<%_WS]/ UCRR>/W]:VE1IY%21Q%_0%'Z78/:O0N<L]_G%,YT,8VQKX[KGH^Y95M5;LRS&+%:]]6I7/T7L;_^\\+M]RH.-"
+    ";^WHM)%5OK7F66-[9F;6D>]V^)Y9D==WTV?M33^ >\"P  N,/9NI_\"2>FAK\\=?=4TRS3 ,R[*<GY\\?H_\"1_'RUWY7+8DYWW3A7DOI+3[^Q',<%"
+    "A(=+'UQ%Q!*&8?D9)7N6%1N?G+5$D&5^OVYO=V=\"YC9N+Q%TK\\MXL_*W_,+*B;/BNL?<9KQ9F6<Q#43&FWLGOBH0+.DNR3PR\\K:BNLL\"  !PQ,"
+    "BZX\\/._13F]#\"$ U'[B X<U]7LT'W3)<.RG#1LLJ8E3F>2LA,>D_N.Y<=%LBSKZ>EIWI18NSES&\\=ML[$CJ^MB?YO'V;SRQ]E::6\\W    ?1EQ"
+    "MWO8KW!J:NK0'E$_H@,_QU/77)$<R[(2F5=C^ :16.SCXV/>@..Z_N7OL1AA9QT   #ZIX_HP#!,;5V=5J=C+>Z[[/K7:.S0:/B';G/=J8*_J:&UM="
+    "775S$\\!P    ##J8_H,#XFIK*RJKZ^WJ%\"?7T5(2'!@ZA5'S*W<;CC$@  P\"7ZB Z1D1&1D1'#4Q4   !P?P-\\Z#8   \",3H@.    X !$!P "
+    "  '  H@,    X -$!    '(#H      Y =      '(#H   \"  Q =    P &(#@   .  1 <   !P *(#    . #1 0   !R Z      .0'0     "
+    "!R Z    @ ,0'0   , !B X   #@@#ZBP[XG!):>V&=>R+\\D^YX09&RJ',(*]=CC;3L>:(%#6,-]3UBIC'FAY9D99K>=M^XJ#&%]!G :A_EL5&[*L"
+    "/JCZ;/:0_X[# !P9^N[U2']C0JNV[9,0@C)W&9^.?0RMW7M:^\\Z0M;MO6W';B!SQ3J2M?OV\"]2^W5EDW8I,XN0S8UOEI@S!$K+7_&/:FUC.7PF'N"
+    "SZW7X1==#8  ,!AUZY=>[?;F3-G\"\"$ZG6[GSIW5U=6]-T:'A8-Z9X=;R<%%*O=\\<2+]C=_?JD'F^O5QKJL.  \",+->N7<O.SO[PPP_7KU__F]_"
+    "\\YIUWWBDI*5&KU7_\\XQ^+BXM[;S^0Z&\"G@;=R4T9WH[E3VH MRN_9%FYGU2VWFO4'7+V>V<$R.?0X,[W/QNW]';>]L]K>WB]QB2GD1'F5E366]="
+    "GWA\"!CTSYSC9[89UD_\\XYO/P);=;(\\U]V;[WM\"(%B214X\\%R^XU7UCXVQ8G@1^'^:5SNTZZ//WDZ_SK<W0DP$ H\\ 77WQQY,B17;MV)20D2*"
+    "72G3MW/O?<<RTM+2S+6MU^*%L=*C=EQ'_Q8%?WQMZ4Y^*'N)^[<E-&_',IW>WR%6\\4+S%?@>RLNNWS2XJ[NE_V/CC@:MR>'2K+BZVW.5@]&YDKUI'"
+    "B\\NZ+^>XL<JNDJO(3 VV[R/S]&^E92_J^S)UX[A6RDS]!Z5E+!((U%N\\<^5E5[BGO/K\"*-TC7SSES&\\?M7=?5O]6KF\\+^#RAK25=5]JX[\\=P"
+    ":9UVM^_G[>>*Y^*[:6!P= , =[,DGGWSWW7?'CAU[Z- AE4I%\"#EZ].C\\^?.;FIJL;M]W=.\"_1O9CL.*^UY\\C;^SL;BK/_/T;Z3T'!0S.OM>?("
+    "V]4F\"]*<>MWFO=@9U4/*8E\\_0;3IF]Y_:_<\\X7U*[Z-LQ&;F'[BBSU\\\"\\3NK'5OO)'>5=*^W5GIB;$#K%'<^GS^,M?']^1U+_$5BEO_TKH>["
+    "\\R!IE^[V]9]8/W\\;!\\_H/3N,Y7Y^S?2K3>@]$_6DA[C:Y=DW5Z'_OQ^KMN;W[457\\]7T/(  '<VN5RN4\"B$0F%@8.#KK[_^V&./&8W&YN;F@;"
+    "<Z6 R3M#OD;=_N+,N8(8A_[L0 C\\%V^=T7?EY<8@I_U;*SRE+<L@?3LY8,P:#_S!7KNJ[_MI.#C;,1M^S!KFOCOMU9ZU:L3TSA2]JW.RO]P66#&:$"
+    "0MSZ_ZVM[O*TCO#V;##RI$,N6?XN+LTU]_8!N7^=(BNEAW:VQHK<&V]ZJ0[]^/V\\[+W&)*0.M\"P# R-+1T?&G/_UIV[9MI:6E]K<<VF&2/?]RN]G"
+    "P^KCU^5V-Y8/,#]W9P69R((38.!MQRQY,S]J]CU26%Z<GQI+,%>M.E%>1RO+B02:'[IIMXRJ<_45YWQ,\"@47+_[J^/^$NW/SW$P# E<Q_&]/2TG[="
+    "3:E4]MY2/&3[C$U,)U^45Y),)PWN[UU^97DQ25D11PBQLZJ7N/7YW+)-&?&O;/I]YH [+3)7K%ORRIY]Y(L3ZUZR>OFQ?3;BECV8_D7YOCU?D =WQA"
+    "$2MV+=DMV;$HM/I+PT1\"?./&IR\\.55E5OY9EY97FS1IE]97DQ(8A_EV/O9#9=^_W[>=N[V[<XB*7MQOPH C (*A>*?__QG?[8<NE:'N/4OK3MA,:"
+    "BL<M,30_K5MW?Y:YXC_\"V)=E99VO>$95/#[8WDCLI<L>[$<TN>L]GF8.=LQ\"6FG'ANR7.DJY4A-C&]^ M[C1=]JMR487%@E9M>&<3-HK&)Z2>>>["
+    "U[NB^;G1'FH1Z;UO1H][<Z4J&?/R\"GZO_OYZTQH_N>6)*5/LSU! !P>T/989&YC=N[SCQ0+?Z+Q*%H@;^]_*[>!K[\\!RORS8/>;*^Z)3:Q>XOX+Q"
+    "ZL&&1C=>:*=838NT3;/AN9*]818NZ?B%OV(#DQF.1 XA)3+(8'QC^7LG?@+?%QZ_/-M=Z]HN*-=&N;[.P:D2D0K\"$[+3LLNF[UL-(=U*\\?D)/U\\"
+    "_<S_8V]B:]TC^.XU;P\"  !=!(\\^O/J#CSYQ=34 W,*^)P2O)+H@U@  C!0_?>0A>V,=! )![X4<QSFM/C9W.@S[[2=;U2-N4T,SRZJZ6]V&G)V?\""
+    "^^./P,  ,/&7G1PR5];-_\\3[^;5LS2\"JCIXH^I@ 0!<:^CNL  8^3*W<1@4\"0!@'QY_!0    Y =      '(#H   \"  Q =    P &(#@   . "
+    " ,2%DY\\Z=KJX&    C QB0LB:-6M<70T    8 0YD_R FA*C5:E?7!    $8&C'4     ![A1=-B]>[=\"H7!U+>Y\\[GF>W;-6KH5S @#NR8VB P"
+    "   +@_/,.\"$$(HVGBU[OS%RF.7KY]O::\\S+_=7A,9&34V.GSLN;(I8)'5A#7EZO?[PX<,&@X%E699ES<N%0J%0*/3T])P_?[Z'AX<+:P@N]/GGGW"
+    "_^^>>VUJY:M6K5JE7#61\\ N%.-^.A T<S%*W77VPSC0OSD'I+OSESFE\\^(\"[TK(;3/C[=W-%VK*[MRH[#NYF5ON>^$F'3O,7YBD83F] :31J-M;"
+    "5779A_[7UC0B9B(R5&A$_P4P4X^(.MNW+A14U/#LBQ%42*12\"P6]WBF-LNR1J.QH*! *!1&1D9&1D8.>%]>]%5Q9PFGO=9SA5 J\\)NJDR;00I\\!"
+    "%SX2;=BPP>IRAF&,1B,A1\":3B40BJ]O\\ZU__<F+->@D)\"<G(F-5[^8D3^?WY^/OOOS_@7:]=NW; GP6 D:6_T>'\\^?-E965^?GZ$D+:VML3$Q*"
+    "E3ISJS8OVB-9BN-K0?+:FI5QND$E&PK[S\\VLV[T^+/7;K>V-;9Y\\?;.YK*KIPNNW*R4]<:$1(W/C(E-&B<]Q@_H5!@8C5Z4VNKIK:NZ4K-C:HK=>"
+    "=:U8U:O69\"S(P^T\\.EVM;RZRW\\ZYD)84:::6C5!OMZ101ZBT4#Z2&Z<>/&U:M7;]Z\\*1 (1\"*12\"02\"H7FZ,!Q'!\\=&(:Y>?,FR[(T31-\""
+    "!IP>.&V-[E*!X4I9C^4\"J8?/3#$)\"B-2ET6'YN;F\"Q<NB$0B<[L+?TY8EHV.CHZ)B7'&3CF.6[ITZ;AQXRP7:C2:\"Q<N?/OMMX209<N639HT:8"
+    "RW-\\=Q_,^#Y;AKUZYE[]_OC/K8J:>'AV=X>'A149')9+)<I=/I^_-<<I9E[[KKKI\"0$#N[((24E95]^>673SWUE+>W-\\=QC8V-9\\^>'7S] 6\""
+    "DL!<=-!I-=75U8V.C7\"Z_>O5J6UM;?'P\\(>3RY<NEI:4&@T&KU08'!RN52F]O[^&J<)=VC4ZM-31WZ*OJVTV<J*-3K]<;.!\\/\":'OGA9WO:Z)8"
+    "Z@^\"ZF^45I:=;)=TS0Q;N:L:<N\" B*D$@^.L QG,C$R3T8L5TC] L<$!BN*+A345%>P#.OEX=-G=\"BO:3Y8?#TTR._J]29ED.)FA_9$>5U,L&)N"
+    "<E20KY=,XG!+3TU-35-3DU H%(O%?'N#99,#(81?(A0*:9KF..[FS9MBL7C@#0^TQMC2J&\\SC(E+)AS'T2;6I*?4K:;&.N])+83M^\\0Z24-#0T5%"
+    "Q8T;-T)\"0@(\" CP]/04\" 451K:VMC8V-? . ,](#R[)*I7+2I$GF)1J-YLR9,U>N7.%O;+YZ]6I\\?'QR<K)\\S!B.95F.8UF696[K5!H&+,O2-"
+    "*/7ZT^<.!D6%LH'?=ZX<>-\"0OINA&-9-C@XV.HYY$,#QW&%A84UM743I\\TL.'MNP=WSP\\+\"&(89YB,% ->R>1G3:#0U-36EI:6=G9URN5PJE4Z"
+    ">/'GZ].F$$+U>7U=7=^7*%8U&T]34)! (HJ.CAS,]&\"FZ^')=:76CQD %!_K]^.YIG^[-XQB:L\"QE-#3K:(/!R#&>]@NA*..EJ^?:U<V)L3.6+U@"
+    "GDWH*! *:H1F&$HAIAJ-8CF8Y6B06^ ?X3D^?0M&F^NO7RJ\\4),7>)9'([)3,L718P)C[%TY_>^<>CF,ZM?JKM4W-;1TB@6!F8GBPKY=8+)**K;=O"
+    "]Z;7ZQF&X7.#1\"(AA/3.#1S'\\0O%8C''<0S#T#2MU^L]/?LX\";T5%A;*.NL]ZO5^,E^OI+L(2S,&+:-II6LN:Z\\WJFL::-TY1G*#$\"*4R#R4D"
+    "X1V3\\40:FQL+\"TMK:^O#P\\/CXV-C8J*\\O;VY@@Q&HPUUVO$8DE=76UQ<;%$(@D-#16+A[(GCF&8'E_9+UZ\\>.C0H9*2DL# 0/ZM5\"KU]/2</"
+    "GUZ5VY@6;X=: BK89]&TZG5ZFB:IBB&INDE2S(S,C(<_07H?:0\\<VXH*RL[57\"VT\\0N6+;B@VU;O.2GIZ=.&^8C!0\"7L_D7]LJ5*Z6EI0J%8MF"
+    "R91T='3*9S,?'1ZO5$D)24U-C8F*T6JV'AT=>7EYA82'+LI;?R9S*2-&G2J[F%57Y>(^9-34Q,B+4)!#1-,W1-,<RC,F@UIM,1B-'T_;+J:@^6U-7&"
+    "1$Z?G;J,CXW$$*N7Z]I5S<G)\"EISL\"P!H8SLIR))91(S,5.#-5T:FKJ*BNJSR;%9=@IF:5IAC)1-,.8#!S+LC0=X.V9.BFAH+\"TLKHV)F)L\\OC"
+    "PR>.\"^GF\\AP\\?-AJ-?'0@W;FAQT '/CWPR\\5B,<NRS<W-AP\\?7K)D23_W8O;?__Y7P!JFB]L6Q'C2[4T<2[.&3J:SS=31KE&;#$<+B;\",\","
+    "4<;2(B:?2S_QVVZ'#JU*D;-V[$Q,3,G3O7W]]?(!\"H.S1Z@\\';1Q$1/<[//U!4>*[H?.'^_?L?>NBAH8T.O:^F>7EY=75U$R=.# L+XSBNOKZ^OK"
+    "X^+R\\O-2W-G!M8CNU/'\\%0>??==_/R\\L+\"PFF:H6EZRY9W6EO;'GSP 8<*L1H=^\"4,P[2WMW_XT<?!RMA[?_(@3=,/_>JW_WMW4VMK:]JTJ8@"
+    ". *.*S;^P=75U;6UM]]UWGUPN]_+R:F]O/W_^?'%Q,=]X&Q45I5 H3\"932DK*#S_\\4%=7-PS1H>ZF^E)U74U=DY'F)L9%!X<$C5'XME.$8AE#R_6"
+    "\"ZK/7_+P]U*U'OOFTH4&7'-['#?$%Q;F>'G)E9$) P%B64(0C'&'R\\X]GY^3,2)]RSY+IGCZ$(4::-3*LB26F,0JQ?[!'K4934)QK/SIP#$T9C7H"
+    "CS9@,A&4XAI:)!>.BPST]9=75-\\JKZV\\VM[)4?'),F*0?;0]ZO9Z_@<(<%UI;6PT&0X_-9#*9O[\\__U>>[[G0Z_5]%M[;*Z^\\XM%VH/GH#[KK3"
+    "=3-:QQ+LP8MT]EF;&LQ$>F$Y?/9R&6,++*C_,R-7>\\.XY61$$)\"0T,3$Q/]_?TY0O0F:NM[[Q6>/__&YG<Y0@0\"\\=C0\\,BVMOK:&T.^WQX75("
+    "[C5JU:930:V]K:\"@H*.$)6K5JE4\"C,(S\"Z>BL89G@NJ!J-YNVWMYP_7Q@<')R4E\"P0\"\"9.3+IXL?C;;[_1Z;0.33//=WA9+C&W-[2WM__N=["
+    "];N&)5TK3I%$UK#2:-D9JY_)'S1_87O/<>WY4) *.$S>C@Z>GIX>'1WM[NY>556%AX].C1\"Q<NJ-5JCN/D<OF$\"1/2TM+&CQ^O5JL]/#P&T##NJ-"
+    "K&EG.E5R[?:/+V]@X+#PD*#9%ZR>N;;I86GA:))5SGS?! 17S<^+@8T[FB$DU#2_$Y8Z2\"S)@QPU:!)>4%*1.GCAT[EH@HBNTDA&,YIN%FW;FS12T"
+    "MS9K.ELEWC0N-DHL]30QGH%FC0$1[^TF$'NJ2\\@+[5>48FC89=$838S1P+,LQ-&$HB4P6%A8B$(K$$DE[2\\NQL^6-32UA(4$1P7[^WO;.'DW3'AX"
+    ">0J&0=#<V&(U&OOG'%G[H T4-9%\"\"KZ^O)^/1+A3=O-&NVU](\",<Q-,=0M(%BA6*1EX?0VX]X!+)2;YUA.+]4$X/!$! 0$!45)1 (]$9*:S!JM+"
+    "K.3JW.2!%\"! (BDWM[^P9455P:\\FKUR V$D*\"@H*Z% H& XWQ]?4-#0V]U53 LPS(,,QRM#C4U-=]^^]VQ8\\=\"0\\,B(J(\\/#PYCH2%A6FUG"
+    "5>O7OGAA_U2J6SY\\ON\\O+SZ4UKOD$2Z^RD^_.CCA2M6Q4V<)!!+*LI*#^W[;L;R1TPB#Y^$U X3=_;L,6<=(0\"X'^O1X>3)D^7EY1X>'C*9[.;-"
+    "FT>/'CUUZI1$(KG[[KL)(:=.G3I__CS#,+Z^OOQX_I*2$JE4FIZ>[KR*7JMM++UTI4-GC(U1AD9%ZEG1S>:.ZY455PKSPL(C)L1$3$^=EI24I-/I:)"
+    "HFI*RMZ<:9,V=B8F+XWNC>ZANOSYR>[BF7&)EV@4!$\",=QC$!$$TYP_5K]GET=S6TW)\\V(B!@O'Q/ T*R!9HTB&2$2IKZQUGY5.8:BC$:=D:)-!H"
+    "YES&\\)(?Z! 1Y>GO6U\\JKRRJ:BJK'7FZ<D1$V.#??UD=LJC?_FRD<'OF^\"'Q'98S/++@S^]<\"_\\LK&^L?%L4S/RY[80R961%]O:J^J.UE;=E%"
+    "- COR3T6-CPT+\"W/V2)<#!P[4U=6%AH:.\\?9N5W=LW;:MM:W]],D3C8V-;[_Q&B%DR7TKE.-BQ%*IP3#TB89E6?-%E%\\BD4@XCO/S\\YLZ90K'<"
+    "0I?7Y%8++@]-S\"LTP</7KMV+3L[Y[///@\\+\"XN.'L=Q;&UMK4+AV]K:%A043--,557%^^^_KU#XS)PY,R @H/]'2FX?%WFJX&RP,C9IZG0BEG0:"
+    "*(- (ASC?_;0#P$3TC3J-D-'JZ=\\C%./% #<BO7H<.[<N>;FYO3T=(5\"<>;,F9*2$@\\/C\\6+%Z]<N9(0$A@8N'___HJ*B@D3)H2'A\\MDLHJ*\""
+    "H9A[$2'__N__SMY\\F1+2PLAQ-_?/ST]_8477G\"LIAPG$0I8RG2]MJ&9\\_ <X]-25ZV]63LOXZ[Y\\^=[>GK2--W<W$S3=$9&QI0I4\\K*RFIK;Y"
+    "PZ=6KITJ56RZ-I3B01$)'1R+0+!$*.<!S'\"$4,__V,,K''LDMN7&M(7Q@Y_9ZQ-*LW,4::8QC\"T70?5Z;N#@O*W.I &8TZ8_?8\"Y$T.\"+<Q]>O"
+    "M.C\"^>)2=7.CAXB;.3G!]G'?^E/.9P*A4-A[%@'+,,'?KFF_DG:PGDK?%(%O_(2>*P1BP9B8XB-E5=6-+\"N03IK7U-:NOW1))!+9CPZ#_^G7UM9J"
+    "-!J&80A'.G7Z<^<*6UI:;C8UF0SZRK(2L4C(49DRJ9@00E%4/X^]_[7BOXM;_B!XWCX^4Z=.M1P7R:>&[LX*>X,'A^\"_\"$+V[]__W__N\" @(2$V"
+    "=H=5JR\\M+!0*A4CGN^/&C*2F3PL(B\"\"'GSA7\\Y2]_W;3IC3ESYO19H+G\"/<9%:DSL?:L>,%\",QF#J,)B$/H'QLQ8>__H#O;!$1FO].)U\\G-"
+    "*I1PH ;L5Z=/#S\\TM*2IH_?[Y.IZNJJC(8#//FS5NY<J5,)B.$+%^^7*/19&=G7[UZU=_?/R$A@6$8?O\"_+2^\\\\,+6K5L/'CQ(\"+G[[KM__>M"
+    "?.UK1M)1X$>'R3A>5%)XS%)Q3)D_5M5[W(QK5CQ_U]?7-S\\_/R<GA&S\\R,C)24U/'CAW;UM:Z;]_WMJ,#J]5W:(VMGHQ00(2$$(XP@N[HP)-(1:S"
+    " 1+%:BM4;:,K(<C1':+J/KY(L0U,FH]Y(,Y2!L S_]E9T((1E&8.1HDP&QF0P&O1&@]%.:>8+E;E=P59T,&])NB>)LE]/6XRB8\"(/)C;:08HN?A\\"
+    "=K>1#)\"'DJZ^^K*ZNYIMV?'U]K7YD\\#_]-6O6_.<__]'K]5J=3N[M\\Z\\WMYAH9M?GG]377'WEG_^?MY=,*!#<;%,SE*G_W33]KU7OW,\":)].P"
+    "F1L86W<K.+IW.SB.\\_;VGC@QN:-#7514V-!0'QT]CJ)HO5Y_ZM3)I*3DL+\"(A(0)I:4E_8Q3EB')<ESD?:L>,-)TA][88:!;.CK;M0:#0!*_\\(&"
+    "J_9^F),<EJU9D_[#/J4<* &[%>G2PG.=8*!1*)!*12&2^=/'#^/G[ /F99TPF4X\\[!GM[\\LDGP\\/#\"2'WW7?? \"HJE4HFQ\"N%0H%0(&!8KKK"
+    "R8MWUJH@ K[JZ6JE4>N[<N:\"@H'N7W__Y[A\\*SA:&A85Y>7EI-)K04)OWLM,4I]5K=,96(R,6$ $AA.58@8CQ]/02\"(A8(DQ,4\\1,\\@J.%IL8"
+    "G9XRZDQ4IX[2:BF:ZKO5@38:=0:*,1HYCC6_Y=<:==J6^ANU%:6TKE,9K)@Y=4)2O+*/ KNC@WD4I)U6A^XKFA-[V0T&0WM[._^:HJC#AP]_\\\\TW"
+    "A)\"WWW[;UD<&^=,GA @$@OKZ^JJJ*F5< L.QA' RF=3;>PR?&SB.:VILO':MVJ'#[F>MS\"&@_[F!IFFFKV&2@S\\G+,NUM[>=.U= \".GH4!N-1I"
+    "JF:9JF*$JOUUV\\6'+UZA6=3F<TFOKYZT#3-/\\?ON6XR(E3I^LIND-G[#!0[0;J_+$#==>NQB]\\X,R';SY\\_XII4R8W-=33=F]H&OR1 H!;L1X="
+    "ZNOK+URXT-G9N6C1HH2$A)*2DDN7+ATX<&#APH6$D(,'#_(S2P8&!G!/:1P  \"  241!5/(#':JJJF)C8_O<V2#_</AXCTF(5<JD4D+(D>-GFJ]7="
+    "'1TM+2TC!T[5J_7Q\\?'AT;&\"/;D,HQ!I]/Q8PG'C+'9!1OH'ZYNU[2T-?H&2DA7JP,K$#,*OS$^ :+(!(]QR9[^H4*A!Z6G#%H3U6EBVMH,^@X2Z"
+    "!]NOYX<PU\"426^D&,K$L2S_5FN@6);N:&IHK:TQMM_TDPF39B2%!0<JH\\(\"_.Q-SB@4\"OEK$S_*P9P>>FS&K^)# _]O[VV&1%)2TN7+ES_\\\\"
+    " .)1\"J327U]?7_THQ_9.<]F@_SI&PR&ZNIJL43JXQ]()!Z$\"&;-GBL5L'QNJ&MJ+CQ_ONAL 469'&INZ4^M. LV<P-[6VZ@&8:VV^K0_[W;D9:69"
+    "KF+TZ=/-S>W\\C=G+ERXT#S]I4 @B(J*ZD^!YE8'\\[C(\\1-26*&XLJSTR ][IBY[R\"3R\\!Z7Y$V1JOV?/GS_BN0)B3*II,^01! : .XLUJ-#6E"
+    "K:Z=.G+U^^W-C8&!(2$AL;6U%1<?;L6?Z/<F%A(<,PD9&1/CX^:K6ZHZ,C)B;FKKON&H;J^GC+)R7%\\:_;FFL;ZZ]+I5*CT31V[%B.XUJ:F_P57F$"
+    "! 800BC+1--7>KK%55$IB6D-S9<WU&T$1'A(IW]O\">OFRR@ECPL:+8Z=ZB#UIFC/H3\":=B>HT,1V=IN9Z'=TA24GL8P9NCF,IBM89*?Y6-XYCC09"
+    "C6VN+IKFQ[?H50VM36(#W@EFSTJ8ER:3V>GEX_#P--$WSHR,% H'5OB&^$<@\\$Q'+LH.9VX!_9$:/A3*9+\"4E)2DIR<?'Y^+%BQ<N7%BT:%%<7%Q"
+    "P<+\"/C].GIDY-3=7I=!=+2H0B<71L?'!H>,#8(!\\OCY;VCIIKUXHN7#AS^E15905%43MV[%BY<F5T=/10[9J/8A;QH2LWM+>W7[E\\F66YR*@HN5"
+    "Q^6VZ@::;[&[SS3)^>-GUZFODM3=-[]_[ -SQD9F;>??=\\1POD?W_,XR(G3IW.\",5JO4G+B8G<[_R1_8$3T[3J=@]:.RDY;MJ4R3*II&M8!V:3!!"
+    "A-K%]=5\"J51J,I*2E1J]5!04$)\"0F$D(:&AE.G3A%\"Q&)Q1$1$8&\"@2\"3BYSJ<-&F22J4:SGI/2HJ[=B7AHLBD4/C2-!T='5U=7=UZ^?+DA'!"
+    "O;^_NCG]R[5JUK1+2T^9_]%555<7UT&C/D A?@8#C\"!<<0RM\"/7Q#.8;5&1C*0-,ZBM$9F4XC<[-1=[-&ZVT,3T_KXR\\RR[(43>N,-!\\=6);5:"
+    "=0UY1>;R@K]QL@28B)G3$N9==>4?AZIM[=W9V<G3=-\\)X5 (.!'8_ ]1)8-Z?Q?</X\")A0*!W/70W5U=5%1441$A'E)9V=G>WM[0D)\"6%A86%B8"
+    "5\"HM+\"S,R,BP-;YAR*6GIPN%PA]^^\"%[_[Z)-VY$CX_S]_>72B64R7BIO/SBA:(;UVM:6]NTVLZ//OK(V]M[\\>+%EO4?#/-W<7.3CM%H9!FVM:"
+    "7UW+E\"CN.\\Y'*12,0PC$ @X',#W=UC,205L$JM5O>8WH/_/:%IFJ)Z3L_03PS#E):6MJH[-\"9VV:H']$9*K3>UZTT\"G\\#QZ?><^?8C2GS1@]8"
+    "JO<5+EBPA;'=4HFE,\"04PJMC\\8JI6JUM:6N1R.451H:&A7EY>S<W-S<W-+,O*Y7)^]AN*HJ12:7-SL[GG>SB-'S^^O;UM__Y]:6DS9#)9='3TV+%"
+    "C^0=24Y3IQHT:@\\%PWWTK;'U\\2M+,DV>.7:C(.W&T_)[EL1*9B @XT1A6YLEHC:R)88P,JZ=8/47K3(RFD[I2V&QL%DV>D# E::;]BG$L:Z)HO9&"
+    "F&9K_DMK1W$ 7'I\\[<^J/%LR*B@B5]J.QP6S^_/GY^?E-34TFDTDBD? -#^:>\"V+Q^\"NN>PIJEF6#@H(R,NS-6V4+_Z/L[.P,\" A8M>HGYN7EY"
+    "65??OFE6JWF>[7M3RSA)#-GSI3)9)LV;;I257&I[\")_N1((!%*IU&@T&@P&K;93*I5Z>7E]^NFG#,,\\]-!#0W+7*!\\:6(OVAL:&1H/1T-[>SL\\"
+    ":V=;62E$F@4 8.':L^>+=>WJEH?6WO[U\\].AMLREHM=J0D#\"^PX+C!M(,P##,EU]^.6/N@KN7KM\";Z!:M06V@6M6=:IV1$DD3%CY0M?_32<EQEK"
+    "F!HBA$!X#1QF9TB(R,K*ZNWKU[]X(%\"UI:6@0\"@:^OKX>'A\\EDXA\\XI-/I/#P\\\"@L+0T)\"^MF3.K2BHY5-38TY.?L;&QL$ F%$1$186(3)9"
+    "#IWKH\"F*8VF(SHZ>LZ<>;8^+I7(9J3=U:INN%1\\WD27I:2'* (]A&(!S7$TPYH8UDBS!HK1ZNG6)OVUPA;U-<.D\\=/NFIXA[6OJ99;C.AJN7SJX"
+    "RZ3M)!PG\\Y!&A 9-3(Q=MFAN5$2HIZ>'0X?)SZY!\"#&93!S'B<5BR^FAB$5TX/LU^/8)#P\\/#P_'=L1[Z:67\"\"$2B20E)473>>OIHYU:;4M+R"
+    "[_^]2^^:9JFZ:&=[+F?)DZ<N&G3)LOD1+K'>>S<N?/CCS_V\\O*22J5BL?C @0,ZG>[99Y\\=_$X9AN%8UG)\\PZY=7Y>5E2D4BJ\"@8([COOGF&W5"
+    "[NW)<S\".//LKG!HJB*(IRZ@6UI:7%Q\\=OPH1DRX5RN7PPJ86FZ=_\\YC>7*BIWO/?VO3]_JEU/M>NIXKQ#33>J$RS&1?;(#;PA.BP & %L_O5/24"
+    "D1\" 2'#AUZ[[WW% H%QW&^OKYWW747PS G3YYL;V_G.*ZUM34R,G+APH5)24G#66F>7\"Z/BXO/S%PJE4I/G,@O+KY077V5INF;-YMFSDP/#@X.\""
+    "@H*\"K+WJ(B$F.2.#C7#LE<N5:C5-<'1<D6PIW2,A(@$1A-C,#&=:E-;@Z[UNHYNDR2/FS9[YMWQX_L^TBDIB=TO)X>'!2L4WC[>WA%A(3'C(B4#NM"
+    "Q&14693*:&A@;^:M3[H=OF(0X<QXE$HI\"0D $_-O/G/_\\Y(:2HJ$BKU6HTMT:*:#NUA)!5JU:9;UZ52\"3]G*-P\"$FE4G]_?ZNK?OSC'_OX^'SZ"
+    "Z:?\\[3\\FDVE@4W'WUG6&+<9%IJ:FM;2T%A=?N'+E\"L<1FJ;B$Q*24U+,N<%H-%(FDU-;'1B&5:O;:WM-O$U11KU>Q[(#[+ 8,V;,@KOG>WJ=_C)"
+    "K<U+F:D;LH8A)-K\"\"'N,B>^0&M#H C\"HVKV3^_O[)R<D,PU175_,30YTY<X800E'4A0L7$A(29LZ<J5:KE4IE2DI*?R:J<X;P\\(B''GJ$$\"(6"
+    "BXN++W1V:B02SVG34I<N7183,[[/C_LI@J=/F>7CK3B6GU=YN;RF0R.ZVB8>PXFD0I.),9E86BL@6IDW$QX_<<+LC%F)L<E^/GT\\<9L0,B5EPI24V"
+    "^93FIC0=V7LX'. 5\"HU& S\\M%<]'G_%_RL4\"L>.'>OAX1$5%37@Z#!UZE1\"R(T;-RHJ*O;_\\(-Y>4M+\"\\=QR<G)\"D4?#P=QE>CHZ,6+%S,"
+    ",<^#  9/)9&Z>&3Q^$(GE_11Q<7$:C4:OUYT]>Y80,FG2Y&FI:4JETIP;C$:CR61RZ@5URI3)-@8G2N;.G6MK$E7[^.,+\"PN;D3:MM:VU(B_'+S%-"
+    "K^DY+M(R-_#M*Q@F\"3\"JV/L2[._O/W]^UY! ?KI&_OH4%Q<W;]Z\\ 3R5T7F6+U^Y?/G* 7S03Q%\\U[3@J<FS\"\\Z?R,T_>/;\\J=KZZ^:UX:&"
+    "1J9.GJ68M2)N2+I4.TR,BK8J,C(R,C-3K]8</'^[HZ.AQ61*)1%*I5*%0S)HU:V#]%#T$!06%A(0T-]^T7!@7%^>23HK^BXB(>.BAAW0Z'?_,L/[<,"
+    "-P?%$65E9?3#,.Q_/]8AN4HB@H(\".1/B']  ,/05555#,UT=U90=;6U WN,2#\\]__SOA[Q,AF&N7+G\"-U\\EQL7F'MJFIUE]>XNWJ7W\\S!_75%"
+    "\\UMV^9)ZY@&*:IJ0FM#@\"C2G^O!)F9F9F9F4ZMB@O)I+)9,U2S9JA<79$^>'IZ#D]BFSESYLR9?8P&=4_>WMY#,K[!$DW3'W[P0>_EYHD7C^8>.7"
+    "8T=VAWZA(,PWS[[;?FMYZ>GM=/9DMD'@)?OX\\^V.G\"B@& 6W'K+Y$ [N#[[[]W=16&R7OOO>?J*@# \".\"4\"0<!  #@3H7H      Y =      "
+    "'\"!Y]>/66=]'!\"0   'U[ZM>_0JL#    .$!,\"-F]>[>KJP$    C@Y@0LF;-&E=7 P   $:  ]D_B DA$R9,Z'-3    @+1I4S E%   P&A45E"
+    ";FT/;FA@9$!P  @%'JW__^=W%Q<9^;I:2D_.YWOS._170    8I:9-FQ8:&MKG9CVV070    8I00\"@4 @L%PR??IT0LB9,V=Z;&;Y%M$!  !@E/K"
+    "HHX^.'S]N?CMAPH3@X&!\"R!=??&$Y$F+V[-DJE<K\\%M$!  !@M!.)1#X^/J^\\\\DI24A(A)#@X^)>__&5'1P?#,+TWQFR2    HUU$1,177WV5D"
+    ")# OTU(2/CJJZ\\B(B*L;HQ6!P  @-%.)!+Y^_MOW+AQ]NS9A)#CQX]OV+!!)!)9W1C1 0  8+1K;F[>N''CP8,'X^/C\"2'9V=D,PS0W-UO=&-$! "
+    " !@M.OHZ/CLL\\_,;YN;FRW?]N#<Z+!QXT:GE@\\    #\\.*++Q)\"XN/CC4:CY?*Q8\\>2[ELTS?BF\"#.GMSJL7+G2V;MPMEV[=HWTH\\ AN ,<"
+    "@CO (;@#'(([2$Q,)(0\\__SS5M?>???==CZ+#@L  (!1I[R\\?/?NW7S;@Z-P<R8    X -$!    '(#H      X034I)KJMO<%+I]]QSCYV[.T:*"
+    "MK:VRY<ON[H6@X)#< <X!'> 0W '. 0WL7KUZH,'#SKZJ;#0$+0Z    @ ,0'0   , !B X   #@ $0'    < \"B P   #@ T0$    <@.@     #"
+    "D!T      <@.@   ( #$!T   #  7CH-@  .,6U:]=<7871)3HZ>GAVA.@   #.,FP7,QC.H(8.\"P   '  H@,    X -$!    '(#H      Y = "
+    "     'X X+  !P/24A*ANKJ@DY,NCRITV;UM#04%=71PA9O'@QOY\"F:8U&4U!0P+*LG<\\N6+! ++[M<EE86!@5%55?7U];6\\LO24E)\"0D)R<G)"
+    "X=_*9#*52I63DV.K9*ME-C4UF=^J5*HC1XZ8WP8$!$R;-JVSL_/$B1/].V(G0G0    74Q%RV/;:EX<B.CS]]-/????=UU]_30C)RLHJ+\"QL:VL3B"
+    "413IDPQ& S////,R9,G;7UV\\^;-5555K:VMYB4W;]Y<O7HUQW'//_\\\\O^355U]-2DJ:.W<NGTY4*M7++[^\\?_]^A\\HT1X=GGGGFT4<?G3%C!O"
+    "]V_OSY__[WOX\\?/QX='6TT&E>O7FT_ZS@;H@,  +B8DA!\"R Y\"<JVM/>*$/;[^^NO'CQ_G7S_]]-/;MV^?-V]><W.SK>W??//-PX=OBS?AX>%//"
+    "?44_UJA4\"0F)F9G9ZM4JH\\__I@0,GWZ='/Y_2^3$.+GY_>G/_TI,S-3J]7R2\\1B\\;___>]?__K7?+C)R<G)S,S\\_OOO'3C:H8:Q#@  X!9R\""
+    "=EA[?_53M[OVV^_??WZ]94K5SKTJ:-'CR8F)LKE<D+(W+ESL[.S<W-ST]/3^;5I:6D'#AP80&5^][O?M;:V;MBPP;QD_OSYUZ]?-S>*+%RXT+6Y@:#"
+    "5 0  H+2T-\"4EQ<X&J:FI4JF4?]W0T%!45*16J\\O*RC(R,G)R<A8M6G3BQ(G<W-R___WO0J%0*!0F)R?W.2BA=YF$D+_\\Y2\\LR\\Z?/]^\\F9^"
+    "?7TU-S<:-&W_\\XQ_3-/W66V]E964-ZF@'#=$!  !&.XJB)!*)G0WFS)F3E)3$OSY]^C1_F<_+RTM-3<W)R9DU:];&C1L;&AIJ:VMGS)@AE\\M+2DK"
+    "4:K7]G5HML_<@AOCX^,S,S+_\\Y2\\OOOCBA D3/OOLL_+R\\J-'CP[L2(<$H@,  (QVWM[>&HW&S@96QR7DY^<__OCC$R=.;&]OYT=''CMV+\",C0"
+    "R02]3G0P5:9O5575U^[=HT?0E%65K9___Y[[[W7M=$!8QT  &!4D\\OE\\^;-&\\#0A-S<W+2TM-FS9Q\\[=HQ?DI^?/WGRY+2TM+R\\O*&J7H_!FR"
+    "S+NO;V\"H+H    HY!8+)9()#*9+\"TM+2LKJZJJRCPE0__1-'WNW+F?_O2GYC: @P</IJ:F)B<GGSIU:JBJ>O#@07]__P4+%A!\" @(\"YLV;MWOW"
+    "[J$J?&#080$  */.SIT[\"2$,PZC5ZCU[]KS^^NL#*R<O+^^99Y[)S>VZJY2FZ:*B(JU6.X0- Q1%/?'$$V^]]=9O?O.;^/CXK*PLE\\\\*A>@   #"
+    "#06E[OLAYSM_[VK5KS:^CHZ,=^JQY,&-OFS=OWKQYL^621QYY9)!E$D(.'SYLG@^*$'+Z].GT]'1/3T^*HFB:[D_Y3H7H    P^$Q0OYJ=X/J8:F&+"
+    "0J%PNK]F>7EY7:FBAK. O5Z_0 ^Y0R(#@  ,!R.V T']M<.@\\# P'OOO;?W<HU&,[ K_9 7Z#X0'0  8#@<<74%[+M\\^?(++[S@S@6Z#]QA 0   "
+    " Y =      '(#H   \"  ^R-=?#W]P\\)\"6EK:ZNOK[>S661D9'M[N_TI/ $  .P0!BHEB2JKJ]CF:JK\\R+#6!NRR&1VF3)FR=.G2RLI*I5)96%A"
+    "H:YJMH*\"@=>O6??+))Z6EI4ZK)   W,DDB2J?%VP^S4'_S<N#CP[3IDUK:&C@GS2Q>/%B?B%-TQJ-IJ\"@P/X,3@L6+!\"+;[M<%A861D5%U=?7U]"
+    ";6\\DM24E)\"0D+,UTJ93*92J7)R<FR5;+7,IJ8F0LB$\"1.BHJ(J*RNO7+EB7AL7%Q<3$]/2TE)04.#0@3N#]>@@% I7K%CQ[KOO-C4UR>7R#1LV%"
+    "!86]KZ91\"02K5Z]NK.ST_GU! \" .Y8P4$D(,1[?05W*[;UV2)H<GG[ZZ>^^^^[KK[\\FA&1E9146%K:UM8E$HBE3IA@,AF>>>>;DR9.V/KMY\\^:"
+    "JJJK6UE;SDILW;ZY>O9KCN.>??YY?\\NJKKR8E)<V=.Y=/)RJ5ZN677]Z_?[]#938U-3W__/-+ERXM*\"CX\\Y___.FGG[[SSCN$D)=??OF>>^XY<^"
+    "9,8F)B9V?G(X\\\\8C0:!WU*!LYZ=(B/C]?I='S\\T6JU%145<7%QO:/#XL6+R\\K*PL/#G5Y-<%=VVAB'5LNX)-GLL&'8D?/@$-P!#L&=49=RC<=W"
+    "#,^^7G_]=?/#+9]^^NGMV[?/FS?/SG0+O9]R&1X>_M133_&O%0I%8F)B=G:V2J7B'W$Y??KT/A^>V;O,A(2$=>O6S9@QHZVM+2@HZ.3)DY]^^FEP</"
+    "###S_,+R2$[-^_?\\6*%9]]]EGO F6S'^OSP\"U=H@,=VM[,>G3P\\O*R'-]@,!A\"0D)Z;#-NW+B8F)@M6[8\\]MAC=G:P:]>N'DNV;MTZD)JZSL2"
+    ")$UU=A<%RTB%H@B95+'C-&27W5DW(F+N&9U?.4HU#< /5.(1A5>/J\"O3+VV^_O73ITI4K5_[G/__I_Z>.'CVZ9<L6N5RNU6KGSIV;G9U]_/CQV;-G"
+    "\\]$A+2WMO??><[0FE9652Y8LX2,\"15$BD4@BD;2WMZ]=NY9?2 BY>O6JK6_L8W[QOD.[NT27.UI#GLT.\"\\ONF=Y=-9Z>GBM7KOS?__[7YPY6KE"
+    "PYL)JYE>SL;%=78;\"&_! DB2J?AUXCA.B_>9EIKA[:PGM+3DHJN7C1V7NQ147(8X000OXVB GO7'L(0P*'X Y&TB'<_;*K:]!?I:6E5B>--DM-395"
+    "*I?SKAH:&HJ(BM5I=5E:6D9&1DY.S:-&B$R=.Y.;F_OWO?Q<*A4*A,#DYN<^'5/4NDV79RLI*L5B\\:M6JG_WL9V^]]59#0P,AA.\\$(80HE<H%\"Q"
+    ";T>&J&6>?VM5:7VS)K_4,#>XZ6]>A T[1()#*_%0J%/9ZW\\:,?_:B^OCX@(\" @(,#+RRL\\/+S/&S'@3F(>T]3Q?_.'9^1S@-<BXW&7!;A00E83L"
+    "I:02X,HQ+6',\"1P\".Y@1!W\"B(D.%$5))!([&\\R9,\\?\\P*K3IT\\7%1410O+R\\E)34W-R<F;-FK5QX\\:&AH;:VMH9,V;(Y?*2DA*U6FU_IU"
+    ";+)(3X^_O+9++&QL:Y<^>^__[[YO:&D)\"03S[Y9//FS;;N2W\"TNR?@=\\L=VM[,>G30:#26[2%RN?S\"A0N6&W1V=BH4BO3T=$*(GY]?0D*\"7J]"
+    "'=!@EAC\\W   XE;>WM_TI!GJ/2R\"$Y.?G/_[XXQ,G3FQO;^<;!HX=.Y:1D2$2B?H<Z&\"K3$)(4U/3^^^___[[[W_RR2>_^,4O^ >\"3YX\\^?WW"
+    "W]^Z=:M#O2I.8GU**/Z&D(2$!$)(<'!P;&QL5545(20R,E*A4!!\"<G)R=G2KK:T]=.A0?TX3W %&86Y0$<+W'U:[M!H X\"1RN7S>O'D'#AQP](.Y"
+    "N;EI:6FS9\\\\^=NP8OR0_/W_RY,EI:6EY>7D#J,GX\\>/7K%EC?EM?7\\\\/-)P]>_8''WSPQS_^T1UR [$5'3B.^_SSSQ]XX('''W_\\5[_ZU1=?"
+    "?,'?@;EHT:*XN+CAK2&XD=&9&_@O!?/=_N$] -!_8K%8(I'(9+*TM+2LK*RJJBI;TQ?90=/TN7/G?OK3GQX]>I1?<O#@P=34U.3DY%.G3@VL5B^]]-"
+    "+X\\>,)(8&!@7/GSMV_?W]45-2V;=O6KU]_\\.!!B40BD4AZ3 @Q_&SN_O+ER__XQS]Z+-R^?7OO+7?LV#&T=0+W- IS R%$20@A9\"UR \\\"@V;F"
+    "76Y(P;WCK0G;NW$D(81A&K5;OV;.'[Q08@+R\\O&>>>28WMVLZ\"IJFBXJ*M%JM_3FF;+ETZ=+?_O:W/7OVG#ES9OKTZ5NV;,G)R?GSG_\\\\9LR8_"
+    "_[WO^;-_O>__[WTTDL#J_\"0P$.WH5]&9VX @\"'D,?LQS^5_M;,!Z\\Q[M=:NO77W071TM$.?-0]F[&WSYLT][G=XY)%'!E/FAQ]^^/'''_O[^[>W"
+    "M_,W*+SZZJNOOOJJ(_5U.D0'Z-NHS0TJC'( &#I4^1$[-W)3Y4><&AWZI% HK-Z?65Y>;F>J*&<4R++LP/8X;! =H ^C.3=@E / $'+S/R\"!@8'WW"
+    "GMO[^4:C69@%_(A+]!](#J /:,V-Q\",<@ 892Y?OOS\"\"R^X<X'NP_H=%@!D=.<&  \"P!=$!K!OEN4&%40X  #8@.H 5R T8Y0  8 O&.D!/HSP"
+    "W$(QR ' %)5&JB,KJJFI2?630_SE.FS:MH:&!GRYZ\\>+%_$*:IC4:34%!@?UI&!8L6-!C%J;\"PL*HJ*CZ^OK:VEI^24I*2DA(B'E>*9E,IE*I<G)"
+    "R;)5LM<RFIJ;%BQ>?/GW:_-P*0LCDR9-[/[R:?UQ6GT?M)(@.<!OD!@ 8?BJB.DRL/,V!]S)Y>?#1X>FGG_[NN^^^_OIK0DA65E9A86%;6YM())HR9"
+    "8K!8'CFF6=.GCQIZ[.;-V^NJJIJ;6TU+[EY\\^;JU:LYCGO^^>?Y):^^^FI24M+<N7/Y=*)2J5Y^^>7]^_<[5&934U-65M:##SYX^O1I\\_*,C(P9,"
+    "V800B9,F$ (*2LK([<_+FOX(3K +<@-!*,< %Q!292$D!UD1R[)[;UV\\+FAM]=??]W\\Z*6GGWYZ^_;M\\^;-LW//9.]'586'AS_UU%/\\:X5\"D9"
+    "B8F)V=K5*I/O[X8T+(].G3^WRTDZW'7_6P=>O6K5NW$D+>>.,-0LASSSW7YT><#=$!NB W$(QR '\"I7)*[@^P8_OV^_?;;2Y<N7;ERI4,/ESIZ].B"
+    "6+5OD<KE6JYT[=VYV=O;QX\\=GSY[-1X>TM+3WWGO/:55V,40'( 2YH9N2$()1#@\"C3VEIJ=69'\\U24U.E4BG_FA]GH%:KR\\K*,C(R<G)R%BU:="
+    ".+$B=S<W+___>]\"H5 H%\"8G)Y\\X<<+^3GN7.23',@P0'8 00H2!2D)(Y_:UHSDW ,\"H15&41\"*QL\\&<.7/,3YTPCS/(R\\M+34W-R<F9-6O6"
+    "QHT;&QH::FMK9\\R8(9?+2TI*U&JU_9U:+7-$0'0 (DE4C?G%^\\3)SYYQ?RJ,<@ 8K;R]O34:C9T-K(Y+R,_/?_SQQR=.G-C>WLZ/CCQV[%A&1H9("
+    ").ISH(.M,D<$S.LPVJ&K@J?\"* > T4HNE\\^;-^_ @0..?C W-S<M+6WV[-G'CAWCE^3GYT^>/#DM+2TO+V^HJ^E&$!U&->0&,R4A!*,< $8-L5@L"
+    "D4AD,EE:6EI65E95595Y2H;^HVGZW+ES/_WI3X\\>/<HO.7CP8&IJ:G)R\\JE3IP9<-Y%().G68^X'-^&.=8+A@=P  */6SIT[\"2$,PZC5ZCU[]KS"
+    "^^NL#*R<O+^^99Y[)S>VZIY2FZ:*B(JU6:W^.*?L^_?13\\^M#APZM7;MVP$4Y\":+#*(7<8$F%40X SF=GOLAY9)ZS]VYY 8Z.CG;HL^;!C+UMWKQ"
+    "Y\\^;-EDL>>>21P91IIV[N,*,##]%A-$)NL*3\"* > 8?$8>>ROY*]V-JAV:7I7*!16[\\\\L+R^W,U74<!;H/A =1AWDAAZ4A!\",<@!POB/DB)UP"
+    "8'_M, @,#+SWWGM[+]=H- .[T@]Y@>X#T6%T$08J9;/6$$SAT$V%K@J X>*,^:2'T.7+EU]XX05W+M!](#J,(N;V!C+JIW P4Q)\"T.0  . (1(=1A"
+    ")\\RTGA\\A^Z;EQ$=  !@8#\"OPVAAGC+2F+<3N8&G0F\\% (#CT.HP*FB\")OD\\]!K!T$@+*MQ8 >!.E.$V5U77#F,]H!\\0'>Y\\DD15Q0+DAIZ"
+    "4A!\",<@!P#ZH9Y/!.FVM?WD+^]LX0[\"4J*FK:M&E2J;2EI>7PX<.#F;7)%I5*55)2PM] L6#!@AYS0186%K:UM=U]]]W[]^^W7\"X6BQ<L6-!CH3"
+    "M#=+C#X59, '!_=G+#4%FU:M4KK[R21Q\"1$0  ( !)1$%4FYNKT^F2DI(V;-CP\\,,/M[2T#.U>_O6O?[WPP@O\\0ZTV;]Y<5575VMIJ7GOSYDV*H"
+    "K*RLGK,^R23R7HO=&>(#G<X?FBD\\N3K9Y$;+*@PR@' ;=CIJAA\"?_G+7W[YRU^:'S;Q]==?/_'$$__\\YS^=NM/>S\\;T\\_-SZAZ'!Z+#G<P\\-"
+    "%*J;71U7=R(\"J,< -S5_#561C8,?JR#4\"CT\\/ PF4SF)2^^^*)<+B>$R&2RC1LW%A<7KUFS1JU6;]Z\\^>#!@X20J*BH/_SA#^GIZ>7EY6^]]=;"
+    ")DR=M+9PZ=>J&#1N42N577WW5S_K\\[&<_^_G/?ZY6J]]]]]T>_12__.4O?7U]7WOMM<$>LS,A.MRQ++LJO*.DKJZ.&U$20C#* < M5=<Z95 DR[*;"
+    "-V_^^../#Q\\^?/SX\\8*\"@N+B8GZ56\"R^__[[\"2'WW'//I$F3/OC@@P<>>*\"FIN;KK[_>NG7K^O7KT]/3L[*R[K___KJZNMX+6UM;/_C@@S_]"
+    "Z4\\__/##DT\\^&1P<;+G?U-14J;3KSV]#0T-141'_>LJ4*<N6+9LV;=K6K5OYW?'+GWWVV1_]Z$?]? J&\"^'FS#L3ACC8HD)7!<\"HM'GSYN7+EU"
+    "^]>O7^^^_?LV=/3DY.3$P,OXIAF)=>>HE_@O:N7;M6K5JU<.'\"VMK:[=NW&XW&(T>.9&=GKUZ]VNK\">^ZYY]RY<]]\\\\XW1:'SSS3?KZ^LM=SIG"
+    "SIS5W3(R,LR[>_'%%SL[.X\\>/;IW[]Z''WZ87_[TTT\\O7;KT)S_YR9\"/P!AR:'6X,_%#'##;=&]*0@B:' !&'Z%06%Q<S#<V! 0$_/6O?]VR9<N"
+    "2)4L((9V=G5JMEM^LN+AX]NS9*2DI24E)%R]>-']\\W[Y]5A=.F3+%\\H$4965EECOM/=:!WYW1:.1?%Q04S)X]FW^]=.G2L+ PN5RN5JN'ZJB=!*T"
+    ".=R#S$ =,_=2#\"DT. */2TJ5+CQT[9G[;TM+R^>>?CQ\\_GG_KZ>EI7C5NW#BCT5A34Y.7EY?4+2TM;<.&#5877KERQ</#P_SQL6/']ED9R]TE)B:"
+    ":8\\3]]]__R2>?;-JT:9 '.PP0'>XTZ*JP0TD(09,#@(LHPVW^W]F.'#GBZ>GYRBNO\\#<X^/GY/?SPP^;V *E4^L ##Q!\" @(\"5JQ8\\>677^;F"
+    "YLZ:-6OJU*F$$+E<_NVWWZY=N];JPD.'#BU<N# N+HX0,FW:-*M/V>Y!*I6N6+&\"W]W2I4N__?9;?KE6JWWMM=?\"PL+6K%GCE+,P=-!A<4=!;K!#"
+    "A28' )=Z; 7YZU.NV;56JWWTT4<W;MQX_OQYD\\DD$HFRL[,M'VMY[[WW/OSPP_'Q\\>^\\\\PY_W\\3Z]>NW;]]>65D9'Q]_X,\"![=NWVUKXP@LO"
+    "[-JUJ[2TU,O+J[\"PL,_*Z'2ZE2M7/OKHHQ,F3-BR9<O1HT?Y>ST((4:C\\<477_S/?_YS^/!A\\]A)-X3H<.= ;K!#A1LR 4:WTM+2Y<N72R02J51"
+    "J-!IIFK9<NV;-&D]/3XJBS,N_^^Z[[[__WM/3TV0R411E9^'77W^]>_=NF4RFU^LMRTQ*2NI=C;:VM@D3)A!\"+'>GU6K-\\T$=/WZ<W\\\"=(3K<."
+    "3 TT@XE(01=%0#NS>JD#D.+HBCS);^''A=^0@C+LN;ADWTN[/UQ^QS=WJT@.MPA,#02 -S<CMUDQVZ;:UWUC\"N:IC_]]%/7['O$0G2X$Z\"KPCX51"
+    "CD N 'W? \"FT6BT'/0 _8'H,.(A-]BGPB@' ->Y=NV:JZL 0P_1861#;NB3DA\"\"40X KF#K49\"+%BW*SLX>YLH,K3O@$ 8#\\SJ,;!@::9\\*7"
+    "14  $,-T6$$P]#(/BD)(6AR   84H@.(Q6Z*OJD0I,# ( 3(#J,2,@-_:$DA*#) 0!@J\"$ZC$@8XM G%9H<  \"< ]%AY,$0ASZI<$,F (#3(#J,,"
+    ".BJZ \\E(01=%0  SH'H,,*@JP(  %P+T6$D05=%?Z@PR@$ P)D0'48,=%7TDY(0@MX*  \"GL3<1M;^_?TA(2%M;6WU]O=4-0D-#_?S\\FIJ:FIN;"
+    "G5,]Z\"(,5,IFK2'HJNB+\"DT.  !.9C,Z3)DR9>G2I965E4JELK\"P,\"<GI\\<&BQ8M2DE)N7;MVM*E2\\^<.7/DR!'GUG04,[<W$'15V*7\"C14"
+    "  ,YG/3H(A<(5*U:\\^^Z[34U-<KE\\PX8-A86%EDT+P<'!<^;,V;AQHTZG\\_;V_L,?_G#FS!FM5CM<U1Y=^*&1QN,[=-^\\C.A@AY(0@JX*   GL"
+    "QX=XN/C=3I=4U,3(42KU5945,3%Q5E&AZ:FIK???ENGTQ%\"&(81\"H5BL?6B=NW:U6/)UJU;AZ;NPV7BQ(DNW+LF:%+%@M<((2G&B][3X@F)'T AK"
+    "CV$(='G(4QJ:WOMS!E\"2.#TZ8O\\_(:E4HX9#3\\%]X=#< <X!)=X\\LDGAZHHZ]=[+R\\OR_$-!H,A)\"3$<@..XYJ:FH1\"85I:VEUWW77HT\"&"
+    "U6FVUJ)4K5PY575W(50]7E22J?!YZC1#2\\7_S3PQNB,,=\\'Q8^X<01@@A9\"TA.\\Z<&9[Z#, =_U,8$7 ([@\"',/QZ5[CW=_M^LGZ'A5 H9%G6"
+    "_-;RM26Y7\"X6BSLZ.N+BXKR\\O 96 [ #LSCTDPJC(P$ AHOUZ$#3M$@DNK71[4G\"3*/1Y.?G[]BQPV0RS9HURUEU'*TPBT/_*0DA&.4  # LK$<"
+    "'C483'AYN?BN7RZ]=NV:YP=BQ8]/3T\\UOU6JU0J%P4A5')\\SBT'\\J-#D   PCZ]'ARI4KA)\"$A 1\"2'!P<&QL;%55%2$D,C*2CPA\"H7#ITJ5"
+    "CQXXEA(P9,R8^/KZTM'3X:CT*H*NBGU2X(1, 8'A9'R;)<=SGGW^^>O7JQL;&\\/#P+[[XHK.SDQ\"R:-&BHJ*B@H*\"QL;&[[[[[JFGGJJNKE8JE8"
+    "</'T9T&$+HJN@_)2$$714  ,/(YI10ER]?_L<__M%CX?;MV\\VO3YTZ=>K4*6?5:Q1#5T7_J=!5 0 P[/ ,\"[>#KHK^4Q)\"T.0  #\"\\$!W<\"["
+    "HJ^D^%)@<  %= =' CZ*IPB)(0@B8' (!AA^C@1M!5T7\\J-#D  +@(HH.[0%=%_ZEP0R8 @.L@.K@%=%4X1$D(05<% (\"+(#JX'G*#0U3HJ@  <\""
+    "E$!]?#$(?^4Z&K @# U1 =7 Q#'!RB)(2@JP( P*40'5P)714.4:&K @# #2 ZN!*Z*ARB)(2@R0$ P-40'5P&714  # 2(3JX!KHJ'#6IK0V]%0  "
+    "[@#1P3705>$0%2&OG3E#<&,% ( ;0'1P 715.$I)\",$H!P  ]X#H,-S05>$H%6ZL  !P)X@.PPU=%0Y1=<\\!]?STZ4=<6A,  .\")75V!T05=%8Y"
+    "2$D((64M(G9^?:VL\"   \\M#H,'W15.$J%K@H  />#Z#!\\T%7A$!4>5P$ X)80'88)NBH<I22$X*X*  #W@[$.PP%=%8Y2C9JN\"F6XJVO@B&!__"
+    "<BJ<&\\X!'> 0QCI$!V& [HJ'*(:'5T5RG\"B#\">'=[JZ'HXYYNH*#!X.P1W@$-Q\">?-G _L@HH/3H:O\"44I\"R!W=53$R0P, 0!=$!Z=#DP-84"
+    "LU : \" D0W1P;G0Y. HU9T[RB'87V\\U-ZS](SERVA45<MR<.7..'1O9[;0X!'> 0W 3F[;\\A)#S _@@HH-SH<G!(:H[=)0#WT/QO[_V_$.S]H]D"
+    "QRZ7U&B XEL]JVM=78G!P2&X QS\"2(?HX$1H<G\"4DA!R9XURL#6L8<2%!@  ,T0')T*3@T-4=U97A9VQD//7C)@>\"@\" WA =G 5-#@Y1W5E=%;"
+    ";&0J*Q 0#N (@.3H$YH!RE)(3<$5T5=GHHZK2+LK.S75$I (\"AA.C@%.BJ<(CJCNBJZ'-8PZ)%PU\\I (\"AA^@P]-!5X9#_U][]!D=UW?<?_VHE1"
+    "-AU+$L027C!OH#^8!DS2C&*/;;#E0TB-3\"%,>T0!E>BXYD6QA[B3DQ;,E/@ 69B/--D[$\"2#L.J#6U^ B+C>NRQ(&)=.XT*N K48! (1!HL2\\B1"
+    "9- :;,'^'ERTK%:[J[UW[^Z]=_?]&C_0_M'NN0B\\'YWO]YRC.K]402\\D@*Q\"=# 9I0J]%!%Q<JDB5EL#O9  ,A71P624*G11G5RJ8+(!0'8B.IB"
+    ")4H5>BH@X<,J!T  @FQ$=3$.I0B_5F5,.L3:3)C0 R!)$!]-0JM!%=6!W9*S)!MH: &05HH,Y*%7HI8B(<TH55\"@ ((3H8 )*%7JICBI54*$ @'!$"
+    "!Q-0JM!%=4ZI@@H% (Q%=$\"Z*2)B^U(%%0H B(7HD\"RZ''11;5^J(#0 0'Q$AZ30Y:\"+:N]2!<=D T BB Y)H<M!%T5$[%JJX)AL $@0T<$X2A6"
+    "ZJ'8M55\"A  !=B X&4:K01;5EJ8+0   &$!T,HE2ABR(B=BI5$!H P#\"B@Q&4*G11;5:JX)AL $@&T<$(IAP2I]JI5,%D P D+UYT*\"HJ*BTM[>"
+    "_O[^[NCOJ$XN+B*5.F# T-7;IT*37#LR.F''111,0&I0I\" P\"8)69TJ*ZN7K)DR;ESYQ1%:6]O/W3H4,03EBU;]L ##W1U=966EMZX<6/W[MW#P\\"
+    ",I'JTM,.60.-4>I0H.H0  $T6/#BZ7:_GRY3MW[NSM[?5X/!LW;FQO;^_KZPL]8>K4J34U-=NW;P\\$ B*R8<.&ZNKJX\\>/IVG4UF'*(7&J#4H5'$"
+    "(! *:+'ATJ*BH\"@4!O;Z^(# T-=71TE)>7AT>'0\"#0V-BHY081Z>OK*RPL3,-P+<>40^(4$;&N5$&% @!2)'IT<+O=X?T-UZ]?+RTM#7_\"X.#@X"
+    ".\"@]O7DR9-GSY[=VMH:]:6:FR/_/[UKUR[CX[5\"5565]L75XKD=3^T0D3]1IGS=76?IH/0)74+:S.WOWW'LF(A,F3^_SHQ8J>L2YI;U[WCA6,2=K"
+    "^Z=<^CHO2)29]&/+OT_!=-Q\"7; )=B!$R]AW;IU9KU4S(+%K5NW0C?#OXY04%#PW'//M;:VQFJE7+%B19)#M(.6EI8)L]6[O[M#1#[_8>UO'3CET-"
+    "+2DK;W4D2^*R(B:T5\\QR(_P@U+Y!*TR88=+T3>7ULO_J,?B7QDUF\",2>=/(46X!#O@$NS <9<P=L!C?[=/4/3H,#P\\G)N;&[KI<KFBMD!.FS:MO"
+    "K[^O??>^^\"##XR]O8-0JDB0.M+B(.GMCJ1\" 0#I$3TZ7+UZU>OUAFYZ/)Z3)T]&/*>LK&SUZM4'#APX=>I4\"@=H#W1')DX1$1&?R-9T10=\" P\""
+    "DDROJO1<N7!\"1RLI*$2DI*2DK*SM__KR(3)\\^O:\"@0$2*BHK6K%G3U-1TYLR9W-S<W-Q<EROZ2V6 J\\5S.:XB0>K(:LS&M.0&Q2MJC5P\\''T-"
+    "!;D! %(A^JQ#,!AL:FI:M6I53T^/U^O=MV_?M6O71*2NKN[$B1/'CQ]_Y)%')DZ<6%]?'_J6MK:V@P</IFG4Z?6EIT0H521 3>-JS%@S#<)D P\"D6"
+    ",PMH3H[.[=MVQ9QY^[=N[4OWG[[[;???CN%XX(#*2*2EM68L0ZA(#0 0!IPAL4X)LQ6NQ[YOM#E,!XU+1M'TM8  )8C.L0S8;9*ET,BU-27*DJ*OF "
+    "_:0\"P Z)#/-J\"3*7MU0_)#7$I(I+*4H5:(_^R^?V(.PD- & )HD-,H069^4,]5H_%UM14EBHXA ( [(;H$%-H#ZBONS^Q>BSVI::L5$%; P#8$]$"
+    "ANE%[0-V7;_5P[$L1D124*FAK  #;RMA]G)+$MM.)4%-0JM!V>1J;&UYZ;3ZY 0#L@.@0!=M.)T(UNU01:VO(M9LDYP$Y>3XK3G4' /NC8!&)!9F)4"
+    "$W-#;0U (\"#$!TB4:H8EVIJ;HBU-21K* # GH@.HU\"J2(0B(F:T1C+9  !.1'08A2F'<:EFM$82&@# N8@.=S#E,\"XUZ5(%H0$ G([H< =3#N-2"
+    "1,1HJ2+.,=FT-0\" @Q =;F/*85QJ$J4*CLD&@(Q!=+B-*8?X5*.E\"BH4 )!AB XB3#F,1S64&P@- )\"1B XB3#F,1Q$1G2T.'$(! )F*Z,\"4PS"
+    "A4G2T.'),- )F-Z,\"40SRJGE(%%0H R ;9'AV8<HA#U9,;J%  0);(ZNC 25=QJ GG!BH4 )!5LCHZ4*J(0Q&1\\5HCJ5  0!;*ZNB 6-3Q6B,)#0"
+    "\"0M;(W.M#E$(L:MU3!?M( D.6R-#K0Y1\"+&C<WL)\\T \"!+HP-=#E&IL7,#%0H @\"8;HP.EBE@4$1G3&DEH  \"$R\\;HP)1#5.J8UDA\" P!@"
+    "K*R+#DPY1*6.*57$:FN@%Q( LES610>F',921^<&)AL  '%D5W1@RF$L1:1>1$36BG1Y124T  #BRJ[HP)1#!'5DOD%$E!JY2&@  (PGBZ(#4PYC*2"
+    "(BXO=*HU?V< @% \" !610=F'*(H(KL\\8IX16T4=?1#3#8  &+)ENC E$,$5>1(C0@5\"@\" 3MD2'9AR\"*=ZY8@W2FZ@0@$ &%=61 =G33DHHJB"
+    "C\"P@^\\9GVXBR\\!  D)RNB@\\VG',*S@B+*9MD<_FB7=\"FB=(4=?VTL21 :  \"FR/SH8-LI!RTQC,T*(K)5MFI907LT_ FA))%X@%\"\\,K>L_"
+    "]T?1WF(\"@4 0*_,CPXVG')01&F0AO! $,H*(N(7?_@<@U_\\RNU%E'>21((!(FRFX5C$0TPV  \",R?SH8!]CIQFTQ!\"1%2+X1Q]_[1>_*FHB 2+"
+    "6(12$!@! ,C(\\.MBG6J&*>N3.SHVR5;;ZQ!<G,<3B%[_V7YP $:NM039);?/H) ( @$Z9'!TFS%;O_KLC(O+Y#VLMK%:$ER<2F69(1*P X?-NB14:"
+    "I/G.J9@  !B6R='!#ET.X9,-M5+K-_6S.R) U-?<OWE,:/!MDH9F[=W)#0  $[BL'D#&4D39(ENTW+!5MLZ0&>;FAA\"_^'W>+5MK:I7&M1$/;:V_G"
+    "1M>FC\\_)>\\- ,@^&3OK8&&70\\0\"\"M,G&T:]UYVVAE%OL763XF_N.G)[ ))?6)BB 0  LDW&SCI85:U01;TH%T.=#:F;;! 1M48N'H[L;/!O:I"
+    " '@@N:-Q^1!J%. 0 P6V;..E@UY1#J;#\"\\@\")!L=90U-:+'.U2151I$%'72E?J@@L (#MEYJQ#^J<<PCL;:J5VBVQ)46Y0O-$G&]9NDIP'M*TA_"
+    "2*U(CX198'4IV(, (!LEIFS#FF6TF44H]XHVBY/$5L\\*2(B?K^(*@VJJ%MDRQ;9DJ+Q  \"R4+Q9AZ*BHJJJJJE3I\\9_B8J*\"E.'E*PT5RL44>J"
+    "E7D1\\XDM=9X,VV1\"U0A&>&U21/2(BLE7\\:V6M-C:B P# 1#%G':JKJY<L67+NW#E%4=K;VP\\=.A3U:4\\^^>2WOO6M[=NWIVR$NJ6S6A$^W] H"
+    "C:DH4B1^XJ4J$EI2X1<1\\8G('ME3+_6S.F>U2(OI8P, 9*'HT<'E<BU?OGSGSIV]O;T>CV?CQHWM[>U]?7WASW&[W4\\__?2<.7-NW+B1EJ$F))U3"
+    "#JENBM1U3+8:F1M$1H[GWB-[)GTRB<H% , 4T:-#145%(!#H[>T5D:&AH8Z.CO+R\\HCHL&C1HD @<.# @:5+E\\9Y@^;FR$^Y7;MV)3?F>#Z;L:A+"
+    "1&E[=?)]^7)?G2FO6555-?;.N?US=QS;(2(OS7_I9.')\"JFH$-,*-R5%7Y047=_Q0N1QER+RTFOS/QDJK!M]97/[^W<<.R8B+\\V?GU]8&/[@)_+)"
+    "JY^\\^OV/OO\\WD_[FVIQK)PM/FC7(-(OZ4W 6+L$.N 0[X!(LL6[=.K->*GIT<+O=W=W=H9O7KU\\O+2V->,Z;;[X9# 8K*ROCO\\&*%2N2'*(N$Q"
+    "^_]ZY'Y*-3IVY\\8.;\\?$O+J%=31=TA.T1KBCSF-_&-M)F&?_EQE(=&)ALB\\X0JLD-$M/F&8U'21HNTE,XJ7=.YYL%C#[XJKYHXVC2+^\"DX$9=@"
+    "!UR\"'7 )Z3=VP&-_MT]0]#9)E\\MUZ]:MT,WPKT.\"P:\"QMTR=]%0K0G4*TQ=31%UU*2,++Z.>E*U&JU.,=:+HA(AH\"R[,&\"D ('M%CP[#P\\."
+    "YN;EWGC0Z2=A6&AHD4Y0;8BV@B!,:).'<(\"(G\"T^&%ERHHB8W6 ! 5HM>L+AZ]:K7ZPW=]'@\\)T_:O4:>ABF'5.0&7;V0HP>3:&[0^,2GB+)9-M"
+    "=+/5M, @ ,BS[K<.'\"!1'1^AA*2DK*RLK.GS\\O(M.G3R\\H*$CG^!*7ZBF'5.2&./M\"FIL;--JP*5L  )(1?=8A& PV-36M6K6JIZ?'Z_7NV[?O"
+    "VK5K(E)75W?BQ(GCQX^G=Y#6,STWQ#F$PG]TW,$8R0TBXA?_6EFK[?3@%S]S#P   V)N\"=79V;EMV[:(.W?OWAUQS]FS9^VP'U1*JQ5S^^?>64^1]"
+    ",>MX0J%1C6:&S24+0  2<J0XZ]25ZU01=7V;S E-QBN4(P,)JG<H*%L 0!(1B9$A]1-.9A8ITCP$(JX@S$A-\\A(V8+5%@  8S(A.J1HRB&4&UZ:_U"
+    "(RN2&!8[(3&8PYN4'C$]]6V1HZN L @,1E0G1(A?#YAF0V;TZR0B$BBL@64W.#)E2V8.(! *\"+XZ-#*JH5IM0IDJ]0B(@J<E%DL_:-YN4&$?&+GXD"
+    "' ( !CH\\.IE<KDL\\-IE0H1$21VY_J/I$9IN8&#1,/   #G!T=3)]R2#(WQ \\-B4\\VR,A\\0X.(B#2*V>=YBP@3#P  0YP='<R=<D@F-\\0*#:*"
+    "S0C$RDMO-#5M3,]\\0PD)- (!>SHX.)C*<&^*$!KT5BI&1W&F*W)*:^880%FH\" /2*N9ND_9E;K5!$$9&ULE97;HC:\"\"D);PT9Y053L)@BOM#^D"
+    "MJ?    \\3EXUL'$:H4JZA[9(R)=\"?^2;^R8[/&&D>[<H-&N>H$L2.-[ @\"<RJFS#B9..>@M521Y\"$7TUQ1I2,TBS$1HT4%;:L'!%@\" ^)PZZV"
+    "#6E(.NW&#B HK18TC5Y@T)8JD% \"!Q3HT.IM\"5&TQ<0!%.2?'F#0EBCP< 0((<&1U,J58DGAM*BKZ(T]:@=P'%Z#&D?/.&!#'Q  !(D\".C0_+5B"
+    "@1S@U:A^)?-[YM;H1@90YHV;T@0$P\\ @$0X,CHD*?2[=?REF*EH:Q@9P*@3K;98.M\\0PL0# \" 161<=5%$ORL4&:9#82S%-.;DJ]@ L;HJ,@XD'"
+    " ,\"XG!<=DFQTT#8^\\HEOALP8.^5@ULE5L:@V*U)$8.(! # NAT6'\";/5N__NB(A\\_L-: XT.H:V?&J5Q[)1#K-\"P>$-=\\I,-BBV+%&,Q\\0 "
+    " B,]AT2&9!LDXK9$IK5\"(O8L4$4(3#^Q+#0\"(RF'1P;!8N2'5%0JQ?9%B+/:E!@#$X:2-J UW.43-#:G83SK:6UMS+$4R0OM2;Y$M',8- (C@I%D"
+    "'8]6*L;DASC'99E4H9$QS@]^<5TT'3N(& ,3AF%D'PU,.$:=IFWY,=E3J2&@0I^4&#2=Q P!B<4QT,#SE$#I-.ST5\"B7L#,RM(CZ[KJ085^+GCP, "
+    "LHICHH,!H5+%6F^M>/T74QP:Q/F3#6,MD 4^\\5D]\"@\" C3BCU\\% M>)V;O!V;:VIW7/8GXK]I,,I89T-3EE)$5]XLZ3%0P$ V(DS9AWT5BMNYX"
+    "8:OS36;A[S:&V].:LNP]XNTR8;9*19<H_LJ9=ZO_C'/90< ) E'##KH'?*017UB'>/EALB'C)QMP:-DG&3#>%\\XF-[* ! ! ?,.NB:<E\"]RA'O9F"
+    "F<$7&_Z6T-DJ&3#1%\"VT/1\\0  T#A@UB%Q:HT<.=P5,=E@>EN#9/ID0[A0QP,;/   -':/#@E6*U)]\"$4X=?2!%%L<N_PR$9RE\"0\"(8.OHD,@"
+    "YF6DXA.+.>V7-9$,XSM($ (2S=:]#_\"Z']&SQ=/N]PC9ZDLSM;(A*FWA@9TD @,;6T2&.6/M)F[[P4A%YMK-SS<A-1V\\0:1C-D@\" $/M&AUA=#F"
+    "F;;%!\",PV=G9*MH4$3WBS)!@\\ D.5LVNL0M<LA5EN#;Y,ZXP'%]*TA0[V0OY@U:T:FMT/&1[,D \"#$IM$AHLLAYC'9F_;( \\'&9M/.:E)&AP:M"
+    "%_)?9\\TRY]6=C&9) (#&IM$A7/30(\"+U1WS-,D-FF#6%KHX)#5NR>*8A0FCB@69) ,AR=NQU\"'4YW#>QRQNM';)KTQ:E>;.(-$IM\\O,-BH@JHF"
+    "3$2=DIQ3'<  \"Q8730NASNF]@UY9VU+:_[(Q[U;5(;FH\\H(B)2*[5)SC<HHY=<2I:MNC2&=18 D.5L%QT4KSQPM_]@5:U\\<]3]:S>)OUG9+/4R<"
+    "BR3X5^\"E='3#\"*R5:1+Q,]D0URLLP  B-VB@UHC1U[WC_W-O[9>Y*AZ<>2TJ49I-)8;E#'3#)0G$L?>4   L4^;9*Q#*+3]I.6H>D2.B,A6V6JL+"
+    "U(9LW1B+8V0^H7VAK)Z(   RU@_ZS#N%D^JW,X-!IH;E&BU\"1]QP2AJ%@  BZ-#K)F&T/Y.QG*#,B8Q\"*'!#*&:1;W4$QT (#M9%AUB33:$#J%01"
+    "&F0ALVR61+.#4J,Q-!%\"Z1Y_.+?+)N9> \" K&5!=(@5&E[HW/.S[S=JVT>&)ALD@=R@D!C2B&9) ,AR:8T.<4+#OU]IT(ZK\")]LV\"I;?>*+M9A"
+    "\"(3%8A+VA \"\";)14=BHJ*2DM+^_O[N[N[XS\\S5F@0D3\\[?>0WGZN?_[#6>Z:K0;9L'DD\"42<;%+E]@H)\"8K :>T,!0'8R'AVJJZN7+%ER[M"
+    "PY15':V]L/'3H4ZYE1>R%%9/U_;VD*;A:1HA^N?>&,&@H-X9,-BMPY;4D9'1>$Q& 1UED 0#8S&!U<+M?RY<MW[MS9V]OK\\7@V;MS8WM[>U]<W]IE"
+    "1<\\/Z_][2=F7S8V?DNR*EO_'_X,P>[?XNV=HHOB[I4D4D6E:0D;@@) ;KL,X\" +*9P>A045$1\" 1Z>WM%9&AHJ*.CH[R\\/&ITB,@-9__U)Z_WK"
+    "%<^DYUOA.Y3141;.ZEH !N8   7^TE$051(U]BL\\(M9LSZ=-$G[^F1A8<_(UQ4B%<9&KU-5555:WB>%3+^$:_W7Y)C\\Z:0__?Z<[Y\\L/&GNBT?%"
+    "3\\$.N 0[X!+LP(F7L&[=.K->RF!T<+O=X?T-UZ]?+RTMC?I,_U%1:T1$9-,>:6ZH%'GMSH.1,PA;QTPD^$6Z.CN-#=)$+2TM5@\\A6>9>0HNTW\"5"
+    "W;?YB<]^QOA9)TQ\\./P4[X!+L@$NP \\==PM@!-S<W1WWFN(P7+&[=NA6Z&?YUA/>.BEHC6^O5KJ/OB;P7]H@_(B=$WH:]A3:EIED2 +**P>@P/#R"
+    "<FYL;NNERN8:'AZ,^T_>&;/F)<)9UYJ%9$@\"RD\\'CKZY>O>KU>D,W/1[/I4N7HCZSZ[*Q=X#=:<V2BBCL#04 6<5@=+APX8*(5%96BDA)24E96=G"
+    "Y\\^?-'!><@(,T 2 +&2Q8!(/!IJ:F5:M6]?3T>+W>??OV7;MVS=R1P?ZH60! %C*^)51G9^>V;=M,' H<A_,L \" +&2Q8 !K.LP\" ;$-T@ EH=P"
+    "\" [$%T0%+\"VQTL'@H (\"V(#DA*:(EFO=1;/18 0#H0'9 L;6T%$P\\ D\"6(#D@6>T,!0%8A.L $[ T% -F#Z  3T\"P) -F#Z  3T\"P) -F#Z"
+    " !ST\"P) %F\"Z !ST\"P) %F\"Z #3L\"DU &0#H@-,QCH+ ,AL1 >8AG46 ) -B XP#>LL \" ;$!U@)M99 $#&(SK 3*RS (\",1W2 R5AG 0\""
+    "9C>B E&\"=!0!D*J(#3,8Z\"P#(;$0'F(QU%@\"0V8@.,!_K+  @@Q$=8#[660! !B,Z(\"589P$ F8KH@!1BG04 9!ZB U*\"=18 D*F(#D@)VAT "
+    "(%,1'9 JVL0#-0L R#!$!Z0*-0L R$A$!Z0*-0L R$A$!Z00-0L R#Q$!Z00-0L R#Q$!Z00-0L R#Q$!Z06-0L R#!$!Z06-0L R#!$!Z069W #0("
+    "8A.B#E.(,; #()T0$I1[,D &02H@/2@3.X 2!C$!V0/JRS ( ,0'1 .K#. @ R!M$!Z< Z\"P#(&$0'I GK+  @,Q =D\":LLP\" S$!T0/JP*34 9"
+    " \"B ]*'9DD R !$!Z0/S9( D &(#D@KFB4!P.F(#D@KFB4!P.F(#D@W-J4& $>+%QV*BHJJJJJF3IT:_R4J*BI,'1*R NLL ,\"A8D:'ZNKJ=>O6S"
+    "9DSY]EGGUVT:%&LISWYY)////-,:L:&S,0Z\"P!PM.C1P>5R+5^^_)__^9^;FII^\\I.?//[XXU.F3(EXCMOM7KERY;>__>W4#Q(9A746 .!HT:-#1"
+    "45%(!#H[>T5D:&AH8Z.CO+R\\HCG+%JT*! ('#AP(.5C1,9AG04 .%=>U'O=;G=W=W?HYO7KUTM+2R.>\\^:;;P:#P<K*ROAOT-S<'''/KEV[](_32"
+    "E55558/(5DVO(1?=/YB3>>:)7.6Y-^;G\\CS;7@)>G$)=L EV &78(EUZ]:9]5+1HX/+Y;IUZU;H9OC7(<%@,)$W6+%BA;&1V4I+2XO50TB6W2[A7K"
+    "EWC:R9\\M&4EH\\2'9C=+L$ +L$.N 0[X!+2;^R Q_YNGZ [T6'9LF7SYLT3D1LW;KSSSCNYN;FAAUPNU_#PL+$W *(*;Y;4ZA<  $>X$QW:VMH^_O"
+    "AC$;EY\\Z;+Y?)ZO:&'/![/R9,G+1@=,I?6++E9-M=+/=$! !SD3IODE2M7SI\\_?_[\\^8L7+UZX<$%$M#Z&DI*2LK*R\\^?/:T^;/GUZ04&!)6-%"
+    "AJ%9$@\"<*'JO0S 8;&IJ6K5J54]/C]?KW;=OW[5KU[2'ZNKJ3IPX<?SX\\30.$IDI-/' IM0 X\"#1HX.(='9V;MNV;>S]NW?O#K]Y]NS9[=NWFS\\"
+    "N9 >MXV&!+/\")S^*A   2PQD6L!([2P* XQ =8\"4.T@0 QR$ZP&(<I D SD)T@\"UPD\"8 . 71 1:CW0$ G(7H (MQD\"8 . O1 =9C;R@ <!\""
+    "B ZS'.@L <!\"B VPAM#>4U0,! (R#Z !;H%D2 )R\"Z !;H%D2 )R\"Z \"[H%D2 !R!Z \"[H%D2 !R!Z  ;H5D2 .R/Z  ;H5D2 .R/Z  ;H5D2"
+    " .R/Z ![H5D2 &R.Z ![H5D2 &R.Z #;H5D2 .R,Z #;\"35+;I$M%@\\% # &T0&VXQ?_6EFK-4O2\\0  =D-T@!WYQ$?' P#8$]$!-J65+0  =D-"
+    "T@*W1+ D =D-T@$W1+ D ]D1T@$W1+ D ]D1T@'W1+ D -D1T@*VQ/10 V W1 ;86ZGB8VS_7ZK$  $2(#K\"YT)$6=9?KK!X+ $\"$Z #[T\\[2G-"
+    "L_EV9) + #H@/L3IMX*/FBA&9) + #H@,<@&9) + /H@,<@.VA , ^B YP +_X7YWS*MM# 8 =$!W@#(?N/<3V4 !@!T0'. 8=#P!@!T0'.$:HXX&:"
+    "!0!8B.@ QPAM#T7- @ L1'2 DU\"S  #+$1W@)*S2! #+$1W@)'[QKY6UK-($  L1'> P/O'1\\0  %B(ZP'GH>   \"Q$=X#QT/ \" A8@.<!XZ'@"
+    "# 0D0'.!(=#P!@%:(#G(J.!P\"P!-$!3D7' P!8(L_J 0 &:1T/>V1/O=3+2)*PLP<_>?!>N=?J422%2[ #+L$.,N 21&3*1U.,?2/1 0[F$Y^([)$"
+    "]FV6SU6-)P$=6#R!Y7((=< EVD &7('+FU!ECWQ@O.A05%966EO;W]W=W=T=]0G%Q\\90I4X:&ABY=NF3L[8$D^<37)5V.:)9\\<,Z#ISXZ9?4HDL("
+    "EV &78 <9< DB\\MW:[\\KOC'QCS.A075V]9,F2<^?.*8K2WMY^Z-\"AB\"<L6[;L@0<>Z.KJ*BTMO7'CQN[=NX>'AXT, 4B.7_Q6#R$A=??6M7S48"
+    "O4HDL(EV &78 <9< DB\\F?%?V;L&Z-'!Y?+M7SY\\IT[=_;V]GH\\GHT;-[:WM_?U]86>,'7JU)J:FNW;MP<\" 1'9L&%#=77U\\>/'C0T\"   X1"
+    "?3H4%%1$0@$>GM[161H:*BCHZ.\\O#P\\.@0\"@<;&1BTWB$A?7U]A86'4EVIN;HZX9]>N728,/(VJJJJL'D*RN 0[X!+L@$NP R[!$NO6K3/KI:)'"
+    "![?;'=[?</WZ]=+2TO G# X.#@X.:E]/GCQY]NS9K:VM45]JQ8H5)@W52BTMCI^8XA+L@$NP R[!#KB$]!L[X+&_VR<H^KX.+I?KUJU;H9OA7T<H*\""
+    "AX[KGG6EM;8[52 @\" 3')GUF'9LF7SYLT3D1LW;KSSSCNYN;FAAUPN5]06R&G3IM77U[_WWGL??/!!&L8*   L=R<ZM+6U??SQQR)R\\^9-E\\OE]"
+    "7I##WD\\GI,G3T9\\9UE9V>K5JP\\<.'#JE.,7J   @ 3=B0Y7KERY<N6*]G5.3HZ(5%96GCU[MJ2DI*RL[%>_^I7VT/3ITS___//<W-PU:];\\\\I"
+    ">_/'?NG#8_$0P&X]0U  ! 9HC>)AD,!IN:FE:M6M73T^/U>O?MVW?MVC7MH;JZNA,G3A07%T^<.+&^OC[T+6UM;0</'DS'D $ @'5B;@G5V=FY;=NV"
+    "L??OWKU;^^+MM]].U:   (!=<7(F  #0@>@   !T(#H    =B X  $ 'H@,  -\"!Z    '0@.@   !V(#@  0 >B P  T('H    =\" Z    '8@."
+    "  ! !Z(#  #0@>@   !T(#H    =B X  $ 'H@,  -\"!Z    '0@.@   !V(#@  0 >B P  T('H    =\" Z    '8@.  ! !Z(#  #0@>@   !T"
+    "(#H    =B [C6[=NG=5#2!:78 =<@AUP\"7; )3@=T0$  .A =    #H0'0  @ Y$!P  H$/.FM6KCO_/[U+TZMNW;T_1*P, @\"3]PS_\\@]YO>?A"
+    "/JO-2,900 V,\"  !V1L$\"  #H0'0    Z$!T  ( .1 <  * #T0$  .A =    #H0'0  @ Y$!P  H /1 0  Z)#\"W22+BHI*2TO[^_N[N[M3]R"
+    "YI4%%1T='18?4H#\"HN+IXR9<K0T-\"E2Y>L'HM!4Z=.+2PL[.WM[>OKLWHL29D^??K P,#5JU>M'HAN'H^GN+@X=//33S_]XHLO+!R/81Z/Y_[[[["
+    "]QXT9G9Z?58]$MXJ<@(E>O7G7B/XHI4Z84%Q<[^J-!^_]J3T_/9Y]]9O58C(CX4#/P89T[]Z$YGW1_:OK(JJNK5Z]>G9>7MV#! K?;?>'\"!=/?(CV"
+    ">?/+)18L6??#!!U8/Q(AERY8M6K0H/S__X8<?KJZN/G'BQ*U;MZP>E#YU=74+%R[,S\\^OK:W-S\\_OZNJR>D0&%1<7KU^__O>___V5*U>L'HMNCS["
+    "ZZ)__^9_/G3NWNKJZNKKZTJ5+?_SC'ZT>E&Z5E95_]5=_-6'\"A(<>>JBZNKJ]O=WJ$>E345&Q>O7JZA'SY\\_/S<T]>_:LU>/2Y_'''W_FF6?R\\O"
+    "(>>^RQTM+2,V?.6#TBW9Y^^NDE2Y;DY>5]^]O?=KO=%R]>M'I$^D1\\J!GXL+YW:FE*9AU<+M?RY<MW[MS9V]OK\\7@V;MS8WM[NN'3L=KN??OKI.7"
+    "/FW+AQP^JQ&#%UZM2:FIKMV[<' @$1V;!A0W5U]?'CQZT>EPXE)25///&$=@E?__K7__[O__[8L6-#0T-6CTNWW-S<5:M67;MVS>J!&.3U>M]ZZZVV"
+    "MC:K!V*<R^5:N7+EO_W;OVG_H]^P8<.<.7/^]W__U^IQZ7#JU*E3ITYI7Y>7ES_SS#.'#AVR=DAZY>3D?.<[WWGMM==Z>GHF39KT@Q_\\H*VMS5ES#"
+    "].F37OTT4=???75P<'!O+R\\O_W;OSU[]NP?_O 'J\\>5D+$?:H8_K%/2ZU!141$(!'I[>T5D:&BHHZ.CO+P\\%6^44HL6+0H$ @<.'+!Z( 8% H'&"
+    "QD8M-XA(7U]?86&AM4/2J[>W][777M,NX>;-FRZ7*R\\OM0>VI<CBQ8L__OCCGIX>JP=BT-2I4Z]<N>+Q>')S<ZT>BT&S9\\_N[^\\/_8+XXQ__V%F"
+    "Y(5Q^?O[*E2M_]:M?A?YU.TA.3LY77WTE(E]^^64P&'3<O^CBXN*.CH[!P4$1&1X>[NKJ>O#!!ZT>5*+&?J@9_K!.R8_-[7:'!\\GKUZ^7EI:FXHU2"
+    "ZLTWWPP&@Y65E58/Q*#!P4'M[[>(3)X\\>?;LV:VMK=8.2:]@,-C;V^MRN1Y^^.%''GFDM;4U=$4.,F/&C)DS9[[^^NL-#0U6C\\4(E\\LU>?+DI4N"
+    "7WG7776ZW^_CQX\\W-S58/2C>WV]W?W[]BQ8IO?O.;MV[=:FUM_<___$^K!V70@@4+NKN[G=B %0P&#QX\\^.RSSYX^?;J\\O/SHT:/_]W__9_6@]!"
+    "D>'@[_'<SM=@>#00O'H\\O8#S7#']8IF75PN5SA-77'U=<U#OH+$5]!0<%SSSW7VMKJK(G!$(_'DY>7]_GGGY>7E[O=;JN'H\\^D29-6K%CQRU_^TN"
+    "J!&'?WW7>?/GVZL;%QV[9MK[SR2F5EY;>^]2VK!Z5;<7'Q@P\\^>/GRY7_\\QW_\\V<]^IJJJ$Z=\"120O+^_QQQ\\_?/BPU0,Q2%&4K[[ZZNK5JX%"
+    " H+BX.#\\_W^H1Z7/^_/F[[[[[Z:>?GC%CQF.//>;U>G-R<JP>5*+&?J@9_K!.2708'AX.G]B,&!S2:=JT:<\\___QO?O.;(T>.6#T6@ZY>O?I?__5"
+    "?/I_ORR^_?.RQQZP>CC[?^<YWNKN[)T^>7%E9Z7:[O5[OU*E3K1Z4/@,# WOW[AT8&!\"1P<'!4Z=.*8IB]:!T^^RSSS[[[+.C1X^*2'=W]ZE3I^;."
+    "G6OUH(QXZ*&'_OC'/SJEN!ZAJJKJ_OOO_^E/?]K6UN;S^43DB2>>L'I0^@0\"@9___.>%A84+%R[\\VM>^UM[>KM5?',KPAW5*\"A97KU[U>KVAFQZ"
+    "/Y^3)DZEX(\\175E:V>O7J P<.A+JKG.4;W_A&65G9;W_[6^WFX.!@04&!M4/2Z]JU:P4%!8\\^^JB(%!865E96?O'%%\\Z:_ID\\>?*,&3-\"#;9Y"
+    ">7E._$T@HD?5B9>@F3U[]NG3IZT>A4%NM_O33S\\-_>'W]?45%159.R2]OO:UKTV<.''OWKW:S;_\\R[]T[H]#DOBP3LFL@[:Z0RNHE)24E)65G3]_"
+    "/A5OA#B*BHK6K%G3U-1TYLR9W-S<W-Q<E\\MA.X\"Y7*XE2Y9\\XQO?$)&[[KJKHJ+\"<?]*#QTZY!MQ^?+EUM96QRWTS<_/7[Y\\N;:C0$%!0555U"
+    ">]^]SNK!Z7;F3-G/![/[-FS1<3C\\5165CKT]YF9,V?^_O>_MWH4!EV^?+F\\O%S[%SUITB1%41RWLG'BQ(E__==_K?T.<]]]]RF*XM!?S#2&/ZQ3,"
+    "NL0# :;FII6K5K5T]/C]7KW[=OGW&5ISO7((X],G#BQOKX^=$];6]O!@P<M'))>/3T]__$?__'\\\\\\]W=74IBG+DR!''18<,T-W=_=9;;ZU?O_X/"
+    "?_C#M&G3#A\\^?.[<.:L'I=O-FS?W[MW[%W_Q%ZJJEI24O/_^^T[<%2HG)^>NN^[ZY)-/K!Z(0:&_2Y<O7_9ZO<>/'W?6<G$1&1P<?/OMMU]\\\\<7"
+    "+ER\\7%17MW;O7H=NC:0Q_6.>L6;WJ^/^DZG>(_/S\\K[[Z*F/Z#6&)G)P<C\\<3\" 2<.\\F< 7)R<B9,F) !_YPG3)AP\\^9-_BY92/N[-#P\\[-"
+    "R?@K90_,LOO[1Z(*;1]6']\\)]4IW9-;2;]R<(JP6\"062O+!8/!S/CG[.BFMLR0 7^7;MVZY?1+B*#W<AQ6_ 8  -8B.@   !V(#@  0 >B P  T("
+    "'H    =\" Z    '8@.  ! !Z(#  #0(4]$=NS88?4P  \"  _R_?]^;)R)+ERZU>B0  , !;D>'P<%!JT<\"  \"<@5X'  \"@ ]$!  #H0'0    "
+    "ZI/;0;0  \\/[[[UL]A&0]\\<03H:^)#@  I%SX1Z_C%!04A*^HH& !  !T(#H    =B X  $\"'V]$AV+FS[IX(WSL<#!I^W6#P\\/?NJ=O9:?P5 "
+    " #()-$^:N^Y)X'/RF#GSKJP#^7@G1>*_DD=]0F)WSFN\\%F'AOW]_0,C]C?X5B[>U9E$>@   \"$YL]:W# P,# ST?_ARS9W/W);ULW+B?%<P>/C%>"
+    "9N.AMWSZQ?G;:K:?_N3^L5?C_V6J$](_,YQQ2Q8//7\"RS5'.RXF^#(  ,!LG3OK\"@M7GFYHJ!FY)Q@\\_):OYN47GA+MD]KW5L1L0=0G)'YG(J-*"
+    "J-<A&#S\\O3%5C#OWW7///=\\[''%GX8MO:?<<_MZ=1[4_A?\";  !DN5&?IV%- R(B%1L_[.]_]X6*.\\^^T'%:JBIFBHC(S(HJ.=UQ8?3+17U\"X"
+    "G<F(&9T^/5KFXXV+%V8DQ,,=NY:O%+V]P\\,#'SX\\FFMBA$,'GYQI:]A?__ P$#__@;QO;*S<]2='U:<]HG(Z\" 3#':^^\\;1AJ5/)30T  \"R0,"
+    "[\"'PV,\\:.%.2(R:^'\"63GQRAF6\"(\\.OI6%A:&\\\\TK%AP,_6B@B<N'.Q_W,=1L;CK[Q[@7)R5GXHY$+DZ>6-F@O\\.O0S(?,7+?Q]ITS%R^O"
+    "\\;VE%5 ND!P  '\"V*&V2_1^^7\".A*0S-[5116+C2-W)7J\"LS=.>%CM-CWR G9U8H.UQX]PUY^86%]@M0  !8)5[!PI:B%\"QR9JU_=W^#;^7BL"
+    ".4BX8LO6M;/R@EV[EP\\[XWE'_8/# ST]^]O$!&M4!+-S'4;&WQO'0YVOON&+%\\\\,^IS  #(3G$*%E&$-R6$-RO$?T+B=R8@>J]#SL(?[6\\XNFG"
+    "=KLY@,+SB<&=IZ<6.HR/O\\>L71Z8BGEK:<'33:[\\6$;FPZQ5?Z-5R%BYM\\+VUB^0  $!2<G(6ACYK0UV)XSXA\\3L3&4/,XZ^>^J?]#84KY[U8,"
+    "?\"CA>O>W?]B8>$](B(U+W_X[L*<G.!3+[Q<,V]EH4]$:E[>_W+-RHZ+DC-KX3]]^/+B>87WB-2\\_'*#O''GU98VK%RYJ6%_OPW;/0  <!#M _H>G"
+    "X@T[.^_W3]X^'OWO%+Q8<OZ6;&>D/B=X\\I9LWK5ZSM_:M;UQ!+LW+EX7L?&_G^BT0$ D&W>?__]C#DY\\_GU?Y.F,RRTI17D!@  G\"YFP<(LP<Z="
+    "B^=M.JIG)@0  -A6RJ-#SJSU+0/K4_TN   @/3AT&P  Z$!T    .J2\\8 $   H*\"JP>@FF(#@  I-833SP16MR8 2A8    '7+6K%YE]1@  (!C"
+    "_']B.OE#\\OI4^0    !)14Y$KD)@@@"
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "ammclib_amclib_FW_speed_loop_s32k14x"
+    created		    "29-Jul-2015 12:19:38"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    2
+  }
+  target {
+    id			    2
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 3]
+  }
+  target {
+    id			    3
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 2 0]
+  }
+}

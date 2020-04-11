@@ -1,0 +1,68 @@
+
+%implements GMCLIB_DecouplingPMSM_SF_F16 "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GMCLIB_INCLUDED")
+      %assign ::GMCLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gmclib.h\"" + "\n")>
+   %endif 
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+  %assign f16Kd  = CAST("Number",Parameter[0].Value[0])
+  %assign s16KdShift  = CAST("Number",Parameter[1].Value[0])
+  %assign f16Kq  = CAST("Number",Parameter[2].Value[0])
+  %assign s16KqShift  = CAST("Number",Parameter[3].Value[0])
+  
+  %assign Ud     = LibBlockInputSignal(0, "", "", 0)
+  %assign Uq     = LibBlockInputSignal(1, "", "", 0)
+  %assign Id     = LibBlockInputSignal(2, "", "", 0)
+  %assign Iq     = LibBlockInputSignal(3, "", "", 0)
+  %assign AngVel = LibBlockInputSignal(4, "", "", 0)
+  %assign UdDec  = LibBlockOutputSignal(0, "", "", 0)
+  %assign UqDec  = LibBlockOutputSignal(1, "", "", 0)
+  
+  { 
+    SWLIBS_2Syst_F16 UdqDec;  
+    SWLIBS_2Syst_F16 Udq;
+	SWLIBS_2Syst_F16 Idq;
+	const SWLIBS_2Syst_F16 *const pUdq = &Udq;
+	const SWLIBS_2Syst_F16 *const pIdq = &Idq;
+    static const GMCLIB_DECOUPLINGPMSM_T_F16 param = { %<f16Kd>, %<s16KdShift>, %<f16Kq>, %<s16KqShift> };
+	static const GMCLIB_DECOUPLINGPMSM_T_F16 *const pParam = &param;
+	
+	Udq.f16Arg1 = %<Ud>;
+	Udq.f16Arg2 = %<Uq>; 
+	Idq.f16Arg1 = %<Id>;
+	Idq.f16Arg2 = %<Iq>; 
+    GMCLIB_DecouplingPMSM_F16 (&UdqDec, pUdq, pIdq, %<AngVel>, pParam);
+	%<UdDec> = UdqDec.f16Arg1;
+	%<UqDec> = UdqDec.f16Arg2;
+  }
+
+%endfunction

@@ -1,0 +1,58 @@
+%implements rtc_s32k_get_time "C"
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("rtc_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+ 
+    %% For future if there will be many instances
+    %assign instance = 0
+
+    %% This runs only one time.
+    %if !EXISTS("RTC_GET_TIME_STRUCT_NUMBER")
+        %assign ::RTC_GET_TIME_STRUCT_NUMBER = 0
+    %else
+        %assign ::RTC_GET_TIME_STRUCT_NUMBER = ::RTC_GET_TIME_STRUCT_NUMBER + 1
+    %endif
+
+    %assign year       = LibBlockOutputSignal(0,"","",0)
+    %assign month      = LibBlockOutputSignal(1,"","",0)
+    %assign day        = LibBlockOutputSignal(2,"","",0)
+    %assign hour       = LibBlockOutputSignal(3,"","",0)
+    %assign minutes    = LibBlockOutputSignal(4,"","",0)
+    %assign seconds    = LibBlockOutputSignal(5,"","",0)
+
+    rtc_timedate_t tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>;
+    // Get current time
+    RTC_DRV_GetCurrentTimeDate(RTCTIMER%<instance>, &tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>);
+
+    %<year>     = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.year;
+    %<month>    = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.month;
+    %<day>      = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.day;
+    %<hour>     = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.hour;
+    %<minutes>  = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.minutes;
+    %<seconds>  = tempTime%<::RTC_GET_TIME_STRUCT_NUMBER>.seconds;
+
+    %endif
+%endfunction

@@ -1,0 +1,43 @@
+%implements timer_s32k_lpit_isr_control "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lpit_driver.h")>
+    %<LibAddToCommonIncludes("clock_S32K1xx.h")>
+    %<LibAddToCommonIncludes("lpit_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpit_disen_sdk_params", blockPath)
+    %with sdk_params
+        %if (enable)
+            LPIT_DRV_EnableTimerChannelInterrupt(0, 1 << %<channel>);
+            LPIT_DRV_StartTimerChannels(0, 1 << %<channel>);
+        %else
+            LPIT_DRV_DisableTimerChannelInterrupt(0, 1 << %<channel>);
+            LPIT_DRV_StopTimerChannels(0, 1 << %<channel>);
+        %endif
+    %endwith
+
+    %endif
+%endfunction

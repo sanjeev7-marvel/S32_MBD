@@ -1,0 +1,1854 @@
+Model {
+  Name			  "AMCLIB_FWSpeedLoop_BAM_F16"
+  Version		  8.3
+  MdlSubVersion		  0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.2"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  SaveDefaultBlockParams  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [331.0, 6.0, 816.0, 1009.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[766.0, 834.0]
+	ZoomFactor		[0.8]
+	Offset			[-83.763593176823122, 148.04590254920618]
+      }
+    }
+  }
+  Created		  "Tue Apr 17 17:15:20 2018"
+  Creator		  "nxa18952"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxa18952"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Wed Apr 18 10:40:29 2018"
+  RTWModifiedTimeStamp	  445948635
+  ModelVersionFormat	  "1.%<AutoIncrement:2>"
+  ConfigurationManager	  "none"
+  SampleTimeColors	  off
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "disabled"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    6
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "AMCLIB_FWSpeedLoop_BAM"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "AMCLIB_FWSpeedLoop_BAM"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  CovForceBlockReductionOff on
+  CovEnableCumulative	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  CovExternalEMLEnable	  off
+  CovSFcnEnable		  off
+  CovBoundaryAbsTol	  0.000010
+  CovBoundaryRelTol	  0.010000
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      7
+      Version		      "1.14.2"
+      Array {
+	Type			"Handle"
+	Dimension		8
+	Simulink.SolverCC {
+	  $ObjectID		  8
+	  Version		  "1.14.2"
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "Auto"
+	  EnableConcurrentExecution off
+	  ConcurrentTasks	  off
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  9
+	  Version		  "1.14.2"
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SignalLogging		  on
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  SaveTime		  on
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  10
+	  Version		  "1.14.2"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    8
+	    Cell		    "BooleansAsBitfields"
+	    Cell		    "PassReuseOutputArgsAs"
+	    Cell		    "PassReuseOutputArgsThreshold"
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "UseSpecifiedMinMax"
+	    PropName		    "DisabledProps"
+	  }
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  InlineParams		  off
+	  UseIntDivNetSlope	  off
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  128
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	  ParallelExecutionInRapidAccelerator on
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  11
+	  Version		  "1.14.2"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Simplified"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "EnableAllAsError"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "warning"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnconditionalTransitionShadowingDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  12
+	  Version		  "1.14.2"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "None"
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "Unspecified"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "32-bit Generic"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  13
+	  Version		  "1.14.2"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  14
+	  Version		  "1.14.2"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  on
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  15
+	  Version		  "1.14.2"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    15
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    Cell		    "PortableWordSizes"
+	    Cell		    "GenerateWebview"
+	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "GenerateCodeReplacementReport"
+	    Cell		    "GenerateErtSFunction"
+	    Cell		    "CreateSILPILBlock"
+	    Cell		    "CodeExecutionProfiling"
+	    Cell		    "CodeProfilingSaveOptions"
+	    Cell		    "CodeProfilingInstrumentation"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "grt.tlc"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "grt_default_tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  ""
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ProcessScript		  ""
+	  ConfigurationScript	  ""
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  RTWCompilerOptimization "Off"
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
+	  DataInitializer	  ""
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      16
+	      Version		      "1.14.2"
+	      Array {
+		Type			"Cell"
+		Dimension		23
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"IgnoreTestpoints"
+		Cell			"InsertBlockDesc"
+		Cell			"InsertPolySpaceComments"
+		Cell			"SFDataObjDesc"
+		Cell			"MATLABFcnDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InternalIdentifier"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrFcnArg"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		Cell			"CustomSymbolStrUtil"
+		Cell			"ReqsInCode"
+		PropName		"DisabledProps"
+	      }
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      17
+	      Version		      "1.14.2"
+	      Array {
+		Type			"Cell"
+		Dimension		14
+		Cell			"GeneratePreprocessorConditionals"
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"GenerateAllocFcn"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		PropName		"DisabledProps"
+	      }
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   on
+	      ConcurrentExecutionCompliant on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Disable all"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.GRTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    on
+	      AutosarCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseMalloc		      off
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      RTWCAPIRootIO	      off
+	      GenerateASAP2	      off
+	      MultiInstanceErrorCode  "Error"
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition     [ 260, 130, 1340, 770 ] 
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    7
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    18
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "on"
+    RunInitForIconRedraw    "off"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Delay
+      DelayLengthSource	      "Dialog"
+      DelayLength	      "2"
+      DelayLengthUpperLimit   "100"
+      InitialConditionSource  "Dialog"
+      InitialCondition	      "0.0"
+      ExternalReset	      "None"
+      PreventDirectFeedthrough off
+      DiagnosticForOutOfRangeDelayLength "None"
+      RemoveProtectionDelayLength off
+      InputProcessing	      "Elements as channels (sample based)"
+      UseCircularBuffer	      off
+      SampleTime	      "-1"
+      StateMustResolveToSignalObject off
+      CodeGenStateStorageClass "Auto"
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+      SFunctionDeploymentMode off
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      CheckFcnCallInpInsideContextMsg off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+      ContentPreviewEnabled   off
+    }
+  }
+  System {
+    Name		    "AMCLIB_FWSpeedLoop_BAM_F16"
+    Location		    [331, 6, 1147, 1015]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "80"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "84"
+    Block {
+      BlockType		      SubSystem
+      Name		      "AMCLIB_FWSpeedLoop_F16"
+      SID		      "1"
+      Ports		      [17, 11]
+      Position		      [200, 187, 515, 683]
+      ZOrder		      84
+      RequestExecContextInheritance off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		19
+	$ClassName		"Simulink.Mask"
+	Type			"AMCLIB_FWSpeedLoop_F16"
+	Description		"Bit accurate model of the speed loop algorithm with field weakening capability in 16-bit fixed-point im"
+	"plementation."
+	Initialization		"pos = get_param(gcb, 'Position');width = pos(3) - pos(1); height = pos(4) - pos(2);tX=width/2;tY=hei"
+	"ght*0.9;"
+	Display			"color('black');port_label('input',1,'f16VelocityReq');port_label('input',2,'f16VelocityFbck');port_label('"
+	"input',3,'f16IQReqK_1');port_label('input',4,'f16IQFbck');port_label('input',5,'f16UQReq');port_label('input',6,'f16U"
+	"QLim');port_label('input',7,'f32AccW');port_label('input',8,'f32AccFW');port_label('input',9,'f16UpperLimitQ');port_l"
+	"abel('input',10,'f16LowerLimitQ');port_label('input',11,'f16InK_1Q');port_label('input',12,'f32IntegPartK_1Q');port_l"
+	"abel('input',13,'f16UpperLimitFW');port_label('input',14,'f16LowerLimitFW');port_label('input',15,'f16InK_1FW');port_"
+	"label('input',16,'f32IntegPartK_1FW');port_label('input',17,'f32RampState');port_label('output',1,'pOutRampState');po"
+	"rt_label('output',2,'pOutIntegPartK_1Q');port_label('output',3,'pOutInK_1Q');port_label('output',4,'pOutLimitFlagQ');"
+	"port_label('output',5,'pOutIntegPartK_1FW');port_label('output',6,'pOutInK_1FW');port_label('output',7,'pOutLimitFlag"
+	"FW');port_label('output',8,'pOutAccW');port_label('output',9,'pOutAccFW');port_label('output',10,'pOutIDReq');port_la"
+	"bel('output',11,'pOutIQReq');color('black');disp('AMCLIB_FWSpeedLoop_F16');color('blue');text(tX,tY, 'BAM', 'horizont"
+	"alAlignment', 'center');"
+	IconUnits		"pixels"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  12
+	  Object {
+	    $ObjectID		    20
+	    Type		    "edit"
+	    Name		    "u16NSamplesW"
+	    Prompt		    "u16NSamplesW"
+	    Value		    "u16NSamplesW"
+	  }
+	  Object {
+	    $ObjectID		    21
+	    Type		    "edit"
+	    Name		    "u16NSamplesFW"
+	    Prompt		    "u16NSamplesFW"
+	    Value		    "u16NSamplesFW"
+	  }
+	  Object {
+	    $ObjectID		    22
+	    Type		    "edit"
+	    Name		    "f16PropGainQ"
+	    Prompt		    "f16PropGainQ"
+	    Value		    "f16PropGainQ"
+	  }
+	  Object {
+	    $ObjectID		    23
+	    Type		    "edit"
+	    Name		    "s16PropGainShiftQ"
+	    Prompt		    "s16PropGainShiftQ"
+	    Value		    "s16PropGainShiftQ"
+	  }
+	  Object {
+	    $ObjectID		    24
+	    Type		    "edit"
+	    Name		    "f16IntegGainQ"
+	    Prompt		    "f16IntegGainQ"
+	    Value		    "f16IntegGainQ"
+	  }
+	  Object {
+	    $ObjectID		    25
+	    Type		    "edit"
+	    Name		    "s16IntegGainShiftQ"
+	    Prompt		    "s16IntegGainShiftQ"
+	    Value		    "s16IntegGainShiftQ"
+	  }
+	  Object {
+	    $ObjectID		    26
+	    Type		    "edit"
+	    Name		    "f16PropGainFW"
+	    Prompt		    "f16PropGainFW"
+	    Value		    "f16PropGainFW"
+	  }
+	  Object {
+	    $ObjectID		    27
+	    Type		    "edit"
+	    Name		    "s16PropGainShiftFW"
+	    Prompt		    "s16PropGainShiftFW"
+	    Value		    "s16PropGainShiftFW"
+	  }
+	  Object {
+	    $ObjectID		    28
+	    Type		    "edit"
+	    Name		    "f16IntegGainFW"
+	    Prompt		    "f16IntegGainFW"
+	    Value		    "f16IntegGainFW"
+	  }
+	  Object {
+	    $ObjectID		    29
+	    Type		    "edit"
+	    Name		    "s16IntegGainShiftFW"
+	    Prompt		    "s16IntegGainShiftFW"
+	    Value		    "s16IntegGainShiftFW"
+	  }
+	  Object {
+	    $ObjectID		    30
+	    Type		    "edit"
+	    Name		    "f32RampUp"
+	    Prompt		    "f32RampUp"
+	    Value		    "f32RampUp"
+	  }
+	  Object {
+	    $ObjectID		    31
+	    Type		    "edit"
+	    Name		    "f32RampDown"
+	    Prompt		    "f32RampDown"
+	    Value		    "f32RampDown"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"AMCLIB_FWSpeedLoop_F16"
+	Location		[433, 403, 931, 703]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16VelocityReq"
+	  SID			  "5"
+	  Position		  [40, 198, 70, 212]
+	  ZOrder		  2
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16VelocityFbck"
+	  SID			  "6"
+	  Position		  [40, 238, 70, 252]
+	  ZOrder		  3
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16IQReqK_1"
+	  SID			  "7"
+	  Position		  [40, 278, 70, 292]
+	  ZOrder		  4
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16IQFbck"
+	  SID			  "8"
+	  Position		  [40, 318, 70, 332]
+	  ZOrder		  5
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16UQReq"
+	  SID			  "9"
+	  Position		  [40, 358, 70, 372]
+	  ZOrder		  6
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16UQLim"
+	  SID			  "10"
+	  Position		  [40, 398, 70, 412]
+	  ZOrder		  7
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f32AccW"
+	  SID			  "11"
+	  Position		  [40, 438, 70, 452]
+	  ZOrder		  8
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f32AccFW"
+	  SID			  "12"
+	  Position		  [40, 478, 70, 492]
+	  ZOrder		  9
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16UpperLimitQ"
+	  SID			  "13"
+	  Position		  [40, 518, 70, 532]
+	  ZOrder		  10
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "9"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16LowerLimitQ"
+	  SID			  "14"
+	  Position		  [40, 558, 70, 572]
+	  ZOrder		  11
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "10"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16InK_1Q"
+	  SID			  "15"
+	  Position		  [40, 598, 70, 612]
+	  ZOrder		  12
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "11"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f32IntegPartK_1Q"
+	  SID			  "16"
+	  Position		  [40, 638, 70, 652]
+	  ZOrder		  13
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "12"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16UpperLimitFW"
+	  SID			  "17"
+	  Position		  [40, 678, 70, 692]
+	  ZOrder		  14
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "13"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16LowerLimitFW"
+	  SID			  "18"
+	  Position		  [40, 718, 70, 732]
+	  ZOrder		  15
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "14"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f16InK_1FW"
+	  SID			  "19"
+	  Position		  [40, 758, 70, 772]
+	  ZOrder		  16
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "15"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f32IntegPartK_1FW"
+	  SID			  "20"
+	  Position		  [40, 798, 70, 812]
+	  ZOrder		  17
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "16"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "f32RampState"
+	  SID			  "21"
+	  Position		  [40, 838, 70, 852]
+	  ZOrder		  18
+	  BackgroundColor	  "[0.854900, 0.819600, 0.776470]"
+	  Port			  "17"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  "AMCLIB_FWSpeedLoop_SF"
+	  SID			  "4"
+	  Ports			  [17, 11]
+	  Position		  [135, 165, 285, 245]
+	  ZOrder		  1
+	  FunctionName		  "AMCLIB_FWSpeedLoop_SF_F16"
+	  Parameters		  "u16NSamplesW,u16NSamplesFW,f16PropGainQ,s16PropGainShiftQ,f16IntegGainQ,s16IntegGainShiftQ,f16PropGa"
+	  "inFW,s16PropGainShiftFW,f16IntegGainFW,s16IntegGainShiftFW,f32RampUp,f32RampDown"
+	  EnableBusSupport	  off
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "copyright"
+	  SID			  "37"
+	  Ports			  []
+	  Position		  [200, 0, 275, 100]
+	  ZOrder		  31
+	  ShowName		  off
+	  RequestExecContextInheritance	off
+	  Object {
+	    $PropName		    "MaskObject"
+	    $ObjectID		    32
+	    $ClassName		    "Simulink.Mask"
+	    Display		    "text(10,90,'FILE:');text(10,75,'DESRIPTION:');text(10,60,'COPYRIGHT:');text(10,45,'VERSION:');text("
+	    "10,30,'DATE:')"
+	    IconFrame		    "off"
+	    IconUnits		    "pixels"
+	  }
+	  System {
+	    Name		    "copyright"
+	    Location		    [433, 403, 931, 703]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "copyright2"
+	  SID			  "40"
+	  Ports			  []
+	  Position		  [300, 0, 600, 100]
+	  ZOrder		  32
+	  ShowName		  off
+	  RequestExecContextInheritance	off
+	  Object {
+	    $PropName		    "MaskObject"
+	    $ObjectID		    33
+	    $ClassName		    "Simulink.Mask"
+	    Display		    "text(10,90,'AMCLIB_FWSpeedLoop_BAM_F16.mdl');text(10,75,'Speed Loop with Field Weakening.');text(10"
+	    ",60,'NXP');text(10,45,'1.0');text(10,30,'17-Apr-2018');"
+	    IconFrame		    "off"
+	    IconUnits		    "pixels"
+	  }
+	  System {
+	    Name		    "copyright2"
+	    Location		    [433, 403, 931, 703]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "logo"
+	  SID			  "33"
+	  Ports			  []
+	  Position		  [0, 0, 175, 100]
+	  ZOrder		  30
+	  ShowName		  off
+	  RequestExecContextInheritance	off
+	  Object {
+	    $PropName		    "MaskObject"
+	    $ObjectID		    34
+	    $ClassName		    "Simulink.Mask"
+	    Display		    "image(imread('logo.jpg'))"
+	    IconFrame		    "off"
+	  }
+	  System {
+	    Name		    "logo"
+	    Location		    [433, 403, 931, 703]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutRampState"
+	  SID			  "22"
+	  Position		  [340, 198, 370, 212]
+	  ZOrder		  19
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutIntegPartK_1Q"
+	  SID			  "23"
+	  Position		  [340, 238, 370, 252]
+	  ZOrder		  20
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutInK_1Q"
+	  SID			  "24"
+	  Position		  [340, 278, 370, 292]
+	  ZOrder		  21
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutLimitFlagQ"
+	  SID			  "25"
+	  Position		  [340, 318, 370, 332]
+	  ZOrder		  22
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutIntegPartK_1FW"
+	  SID			  "26"
+	  Position		  [340, 358, 370, 372]
+	  ZOrder		  23
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutInK_1FW"
+	  SID			  "27"
+	  Position		  [340, 398, 370, 412]
+	  ZOrder		  24
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutLimitFlagFW"
+	  SID			  "28"
+	  Position		  [340, 438, 370, 452]
+	  ZOrder		  25
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutAccW"
+	  SID			  "29"
+	  Position		  [340, 478, 370, 492]
+	  ZOrder		  26
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutAccFW"
+	  SID			  "30"
+	  Position		  [340, 518, 370, 532]
+	  ZOrder		  27
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "9"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutIDReq"
+	  SID			  "31"
+	  Position		  [340, 558, 370, 572]
+	  ZOrder		  28
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "10"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pOutIQReq"
+	  SID			  "32"
+	  Position		  [340, 598, 370, 612]
+	  ZOrder		  29
+	  BackgroundColor	  "[0.450980, 0.749019, 0.843137]"
+	  Port			  "11"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "f16VelocityReq"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  3
+	  SrcBlock		  "f16VelocityFbck"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  4
+	  SrcBlock		  "f16IQReqK_1"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  5
+	  SrcBlock		  "f16IQFbck"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  4
+	}
+	Line {
+	  ZOrder		  6
+	  SrcBlock		  "f16UQReq"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  5
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "f16UQLim"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  6
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "f32AccW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  7
+	}
+	Line {
+	  ZOrder		  9
+	  SrcBlock		  "f32AccFW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  8
+	}
+	Line {
+	  ZOrder		  10
+	  SrcBlock		  "f16UpperLimitQ"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  9
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "f16LowerLimitQ"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  10
+	}
+	Line {
+	  ZOrder		  12
+	  SrcBlock		  "f16InK_1Q"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  11
+	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "f32IntegPartK_1Q"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  12
+	}
+	Line {
+	  ZOrder		  14
+	  SrcBlock		  "f16UpperLimitFW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  13
+	}
+	Line {
+	  ZOrder		  15
+	  SrcBlock		  "f16LowerLimitFW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  14
+	}
+	Line {
+	  ZOrder		  16
+	  SrcBlock		  "f16InK_1FW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  15
+	}
+	Line {
+	  ZOrder		  17
+	  SrcBlock		  "f32IntegPartK_1FW"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  16
+	}
+	Line {
+	  ZOrder		  18
+	  SrcBlock		  "f32RampState"
+	  SrcPort		  1
+	  DstBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  DstPort		  17
+	}
+	Line {
+	  ZOrder		  19
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  1
+	  DstBlock		  "pOutRampState"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  20
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  2
+	  DstBlock		  "pOutIntegPartK_1Q"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  21
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  3
+	  DstBlock		  "pOutInK_1Q"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  22
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  4
+	  DstBlock		  "pOutLimitFlagQ"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  23
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  5
+	  DstBlock		  "pOutIntegPartK_1FW"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  24
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  6
+	  DstBlock		  "pOutInK_1FW"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  25
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  7
+	  DstBlock		  "pOutLimitFlagFW"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  26
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  8
+	  DstBlock		  "pOutAccW"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  27
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  9
+	  DstBlock		  "pOutAccFW"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  28
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  10
+	  DstBlock		  "pOutIDReq"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  29
+	  SrcBlock		  "AMCLIB_FWSpeedLoop_SF"
+	  SrcPort		  11
+	  DstBlock		  "pOutIQReq"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "36"
+	  Name			  "---------------------------------------------------------------------------------------------------------"
+	  "------------------------------------------------------------------------------------------"
+	  Position		  [0, 115, 587, 130]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  off
+	  FixedWidth		  off
+	  VerticalAlignment	  "top"
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay18"
+      SID		      "77"
+      Ports		      [1, 1]
+      Position		      [340, 763, 375, 797]
+      ZOrder		      77
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay19"
+      SID		      "78"
+      Ports		      [1, 1]
+      Position		      [340, 818, 375, 852]
+      ZOrder		      78
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay20"
+      SID		      "79"
+      Ports		      [1, 1]
+      Position		      [340, 873, 375, 907]
+      ZOrder		      79
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay21"
+      SID		      "80"
+      Ports		      [1, 1]
+      Position		      [340, 983, 375, 1017]
+      ZOrder		      81
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay22"
+      SID		      "81"
+      Ports		      [1, 1]
+      Position		      [340, 1038, 375, 1072]
+      ZOrder		      82
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay23"
+      SID		      "82"
+      Ports		      [1, 1]
+      Position		      [340, 1093, 375, 1127]
+      ZOrder		      83
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay24"
+      SID		      "83"
+      Ports		      [1, 1]
+      Position		      [340, 928, 375, 962]
+      ZOrder		      80
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Block {
+      BlockType		      Delay
+      Name		      "Delay25"
+      SID		      "84"
+      Ports		      [1, 1]
+      Position		      [340, 708, 375, 742]
+      ZOrder		      76
+      BlockMirror	      on
+      InputPortMap	      "u0"
+      DelayLength	      "1"
+      InitialCondition	      "0"
+    }
+    Line {
+      ZOrder		      25
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      11
+      Points		      [14, 0; 0, 65]
+      DstBlock		      "Delay25"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      32
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      9
+      Points		      [28, 0; 0, 210]
+      DstBlock		      "Delay18"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      31
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      8
+      Points		      [42, 0; 0, 310]
+      DstBlock		      "Delay19"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      29
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      6
+      Points		      [56, 0; 0, 455]
+      DstBlock		      "Delay20"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      28
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      5
+      Points		      [70, 0; 0, 555]
+      DstBlock		      "Delay24"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      27
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      3
+      Points		      [84, 0; 0, 700]
+      DstBlock		      "Delay21"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      26
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      2
+      Points		      [98, 0; 0, 800]
+      DstBlock		      "Delay22"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      30
+      SrcBlock		      "AMCLIB_FWSpeedLoop_F16"
+      SrcPort		      1
+      Points		      [112, 0; 0, 900]
+      DstBlock		      "Delay23"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      21
+      SrcBlock		      "Delay25"
+      SrcPort		      1
+      Points		      [-159, 0; 0, -470]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      3
+    }
+    Line {
+      ZOrder		      23
+      SrcBlock		      "Delay18"
+      SrcPort		      1
+      Points		      [-174, 0; 0, -375]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      8
+    }
+    Line {
+      ZOrder		      22
+      SrcBlock		      "Delay19"
+      SrcPort		      1
+      Points		      [-188, 0; 0, -460]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      7
+    }
+    Line {
+      ZOrder		      18
+      SrcBlock		      "Delay20"
+      SrcPort		      1
+      Points		      [-203, 0; 0, -275]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      15
+    }
+    Line {
+      ZOrder		      19
+      SrcBlock		      "Delay24"
+      SrcPort		      1
+      Points		      [-217, 0; 0, -300]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      16
+    }
+    Line {
+      ZOrder		      24
+      SrcBlock		      "Delay21"
+      SrcPort		      1
+      Points		      [-234, 0; 0, -505]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      11
+    }
+    Line {
+      ZOrder		      17
+      SrcBlock		      "Delay22"
+      SrcPort		      1
+      Points		      [-251, 0; 0, -530]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      12
+    }
+    Line {
+      ZOrder		      20
+      SrcBlock		      "Delay23"
+      SrcPort		      1
+      Points		      [-268, 0; 0, -435]
+      DstBlock		      "AMCLIB_FWSpeedLoop_F16"
+      DstPort		      17
+    }
+  }
+}

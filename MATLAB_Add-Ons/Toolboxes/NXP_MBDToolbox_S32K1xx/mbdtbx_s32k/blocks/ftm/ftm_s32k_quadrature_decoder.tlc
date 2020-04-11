@@ -1,0 +1,142 @@
+%implements ftm_s32k_quadrature_decoder "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("ftm_qd_driver.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_ftm_qd_sdk_params", blockPath)
+    %with sdk_params
+
+        %assign file_name = "ftm%<module>_qd_params_config"
+        %<LibAddToCommonIncludes("%<file_name>.h")>
+
+        %openfile setting_c = "%<file_name>.c"
+
+        #include "%<file_name>.h"
+
+        ftm_user_config_t  ftm%<module>_qd_InitConfig =
+        {
+            {
+                true,   /* Software trigger state */
+                false,  /* Hardware trigger 1 state */
+                false,  /* Hardware trigger 2 state */
+                false,  /* Hardware trigger 3 state */
+                false, /* Max loading point state */
+                false, /* Min loading point state */
+                FTM_SYSTEM_CLOCK, /* Update mode for INVCTRL register */
+                FTM_SYSTEM_CLOCK, /* Update mode for SWOCTRL register */
+                FTM_SYSTEM_CLOCK, /* Update mode for OUTMASK register */
+                FTM_SYSTEM_CLOCK, /* Update mode for CNTIN register */
+                false, /* Automatic clear of the trigger*/
+                FTM_UPDATE_NOW, /* Synchronization point */
+            },
+             FTM_MODE_QUADRATURE_DECODER, /* Mode of operation for FTM */
+             %<prescaler>, /* FTM clock prescaler */
+             FTM_CLOCK_SOURCE_SYSTEMCLK,   /* FTM clock source */
+             FTM_BDM_MODE_00, /* FTM debug mode */
+             false, /* Interrupt state */
+             false /* Initialization trigger */
+        };
+
+        %% need to be added in  a file. 
+        ftm_quad_decode_config_t ftm%<module>_qd_Params = {
+            %<ec_mode>,	/* Quadrature decoder mode */
+            %<cntin>,	/* Initial counter value */
+            %<mod>,	/* Maximum counter value */
+            {
+                %<filterPhaseAState>,	/* Filter state */
+                %<filterPhaseA>,	/* Filter value */
+                %<polPhaseA>	/* Phase polarity */
+            },
+            {
+                %<filterPhaseBState>,	/* Filter state */
+                %<filterPhaseA>,	/* Filter value */
+                %<polPhaseB>	/* Phase polarity */
+            }
+        };
+        %closefile setting_c
+
+        %openfile setting_h = "%<file_name>.h"
+            #include "%<CompiledModel.Name + ".h">"
+            #include "%<CompiledModel.Name + "_private.h">"
+
+            extern ftm_user_config_t  ftm%<module>_qd_InitConfig;
+            extern ftm_quad_decode_config_t ftm%<module>_qd_Params;
+        %closefile setting_h
+
+        %with pinPhaseA.user_config
+            /* Enable clock for %<port> */
+            PCC_SetClockMode(PCC, %<clock>, true);
+            /* Pin is configured for FTM function */
+            PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+        %endwith
+
+        %with pinPhaseB.user_config
+            /* Enable clock for %<port> */
+            PCC_SetClockMode(PCC, %<clock>, true);
+            /* Pin is configured for FTM function */
+            PINS_SetMuxModeSel(%<port>, %<pin>, %<mux>);
+        %endwith
+
+         /* Set FTM_%<module> clock source */
+        PCC_SetPeripheralClockControl (PCC, %<periph_clock>, true, %<clock_source>, 0, 0);
+        /* Enable clock for FTM_%<module> */
+        PCC_SetClockMode (PCC,  %<periph_clock>, true);
+
+        /* Initialize FTM instance QD decoder*/
+        static ftm_state_t ftm%<module>StateStruct;
+        FTM_DRV_Init(%<module>, &ftm%<module>_qd_InitConfig, &ftm%<module>StateStruct);
+        /* Start QD decoder*/
+        FTM_DRV_QuadDecodeStart(%<module>, &ftm%<module>_qd_Params);
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_ftm_qd_sdk_params", blockPath)
+
+    /* FTM%<sdk_params.module>: get counter value */
+    %<LibBlockOutputSignal(1, "", "", 0)> = FTM_DRV_GetQuadDir(FTM%<sdk_params.module>);
+    %<LibBlockOutputSignal(3, "", "", 0)> = FTM_DRV_GetQuadTimerOverflowDir(FTM%<sdk_params.module>);
+    %<LibBlockOutputSignal(2, "", "", 0)> = FTM_DRV_HasTimerOverflowed(FTM%<sdk_params.module>);
+    %<LibBlockOutputSignal(0, "", "", 0)> = FTM_DRV_GetCounter(FTM%<sdk_params.module>);
+    FTM_DRV_ClearTimerOverflow(FTM%<sdk_params.module>);
+
+    %endif
+%endfunction

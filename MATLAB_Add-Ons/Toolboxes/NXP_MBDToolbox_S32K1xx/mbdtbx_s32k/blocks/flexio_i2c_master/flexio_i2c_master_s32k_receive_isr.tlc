@@ -1,0 +1,101 @@
+%implements flexio_i2c_master_s32k_receive_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("flexio.h")>
+    %<LibAddToCommonIncludes("flexio_i2c_driver.h")>
+    %<LibAddToCommonIncludes("flexio_common.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+
+    %openfile declarationsBuf
+        bool rx_callback = false;
+    %closefile declarationsBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile() ,"Definitions", declarationsBuf)>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_i2c_master_receive_isr_sdk_params", blockPath)
+
+    %assign name = "fxio_i2c_%<sdk_params.user_config.InstanceNumber>_isr"
+    %assign fname = LibCreateSourceFile("Source", "Custom", "%<name>")
+    %openfile funcs
+        if(rx_callback){
+            triggerReceiveSubsystem();
+        } /* end of Rx callback */
+    %closefile funcs
+    %<LibSetSourceFileSection(fname, "Functions", funcs)>
+
+    %% trigger function must be in the ModelName.c file
+    %% so it can access various defines from there
+    %openfile triggerFcnBuffer
+        void triggerReceiveSubsystem(){
+            /* Trigger subsystem after Rx finished */
+            %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                %with SFcnSystemOutputCall[fcnCallIdx]
+                    %% skip unconnected function call outputs
+                    %if ISEQUAL(BlockToCall, "unconnected")
+                        %continue
+                    %endif
+
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                %endwith
+            %endforeach
+            rx_callback = false;
+        } /* end of triggerReceiveSubsystem */
+    %closefile triggerFcnBuffer
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", triggerFcnBuffer)>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_flexio_i2c_master_receive_isr_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %assign slaveAddr = LibBlockInputSignal(0,"","", 0)
+        %assign rxSize = LibBlockInputSignal(1,"","", 0)
+
+        /* wait for ongoing transfer to be over, if any */
+        while (FLEXIO_I2C_DRV_MasterGetStatus(&i2cMasterState%<user_config.InstanceNumber>, NULL) == STATUS_BUSY);
+
+        /* Set slave address and then get data from that slave */
+        FLEXIO_I2C_DRV_MasterSetSlaveAddr(&i2cMasterState%<user_config.InstanceNumber>, %<slaveAddr>);
+        FLEXIO_I2C_DRV_MasterReceiveData(&i2cMasterState%<user_config.InstanceNumber>,
+        %<LibBlockOutputSignalAddr(1,"","", 0)>, %<rxSize>, true);
+        rx_callback = true;
+    }
+    %endwith
+
+    %endif
+%endfunction

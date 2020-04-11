@@ -1,0 +1,69 @@
+%implements ftm_s32k_dead_time_update "C"
+
+%% Copyright (c) 2016 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign vector = FEVAL ("mbd_s32k_ftm_pwm_config_get_used_modules")
+    %foreach i = vector[0] + 1
+        %if i > 0
+            %<LibAddToCommonIncludes("ftm%<vector[i]>_pwm_params.h")>
+        %endif
+    %endforeach
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign params = FEVAL("mbd_s32k_ftm_pwm_deadtime_update_sdk_params", blockPath)
+    {
+    %if FEVAL("strcmp", "%<params.units>", "Ticks") == 1
+        %% ticks
+        uint32_t tmpDeadTimeCnt = %<LibBlockInputSignal(0, "", "", 0)>;
+        FTM_DRV_SetDeadtimeCount(FTM%<params.ftm_module>, (uint8_t) tmpDeadTimeCnt);
+        FTM_DRV_SetDeadtimePrescale(FTM%<params.ftm_module>, %<params.deadtime_prescaler>);
+    %else
+        %% nanoseconds
+        uint32_t i = 0;
+        uint32_t tmpDeadTimeInput =  %<LibBlockInputSignal(0, "", "", 0)>;
+        uint32_t tmpDeadTimeCnt = 0;
+
+        static const uint32_t prescalerTable[] = {1, 4, 16};
+        static const ftm_deadtime_ps_t prescalerConvertTable[] = {
+            FTM_DEADTIME_DIVID_BY_1,
+            FTM_DEADTIME_DIVID_BY_4,
+            FTM_DEADTIME_DIVID_BY_16
+        };
+
+        for (i = 0; i < 3; i++) {
+            tmpDeadTimeCnt = ((%<params.clockFreq>UL / 1000000UL) * tmpDeadTimeInput) / (prescalerTable[i] * 1000UL);
+            if (tmpDeadTimeCnt <= 63)
+                break;
+        }
+        if (tmpDeadTimeCnt > 63) {
+            tmpDeadTimeCnt = 63;
+        }
+
+        FTM_DRV_SetDeadtimeCount(FTM%<params.ftm_module>, (uint8_t) tmpDeadTimeCnt);
+        FTM_DRV_SetDeadtimePrescale(FTM%<params.ftm_module>, prescalerConvertTable[i]);
+    %endif
+    }
+
+    %endif
+%endfunction

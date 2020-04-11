@@ -1,0 +1,58 @@
+
+%implements GFLIB_VectorLimit_SF_F32 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign f32Limit   = CAST("Number",Parameter[0].Value[0])
+
+   %assign InD = LibBlockInputSignal(0, "", "", 0)
+   %assign InQ = LibBlockInputSignal(1, "", "", 0)
+   %assign OutD = LibBlockOutputSignal(0, "", "", 0)
+   %assign OutQ = LibBlockOutputSignal(1, "", "", 0)
+   %assign bFlag = LibBlockOutputSignal(2, "", "", 0)
+   
+   {  
+	 static const GFLIB_VECTORLIMIT_T_F32 param = { %<f32Limit> };
+	 static SWLIBS_2Syst_F32 In;
+	 static SWLIBS_2Syst_F32 Out;
+	 SWLIBS_2Syst_F32 *const pIn = &In; 
+	 SWLIBS_2Syst_F32 *const pOut = &Out; 
+	 
+	 pIn->f32Arg1 = %<InD>;
+	 pIn->f32Arg2 = %<InQ>;
+     %<bFlag> = GFLIB_VectorLimit_F32 (pOut,pIn,&param);
+	 %<OutD> = pOut->f32Arg1;
+	 %<OutQ> = pOut->f32Arg2;
+   }
+
+%endfunction

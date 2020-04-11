@@ -1,0 +1,68 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SBC Set Mode Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>SBC Set Mode Block</h1>
+        <!--Page-description-->
+        <p>SBC Set Mode performs software transition from one mode to another. The transition is achieved by writing to mode control register. The event capture registers are cleared before device is moved to sleep mode.</p>
+
+        <h2>Block Image</h2>
+        <img vspace="0" src="sbc_uja1169_set_mode_files/sbc_set_mode_block.jpg" width="250px" height="auto">
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+         <!--Table of contents-->
+        <img vspace="10" src="sbc_uja1169_set_mode_files/sbc_set_mode_param.jpg" width="350px" height="auto">
+
+        <p>The block has one parameter:</p>
+        <h3>Mode Control</h3>
+        <li>Normal
+		<p> In this mode, all the hardware on the device is available and can be activated. Voltage regulator V1 is enabled to supply the
+microcontroller. The CAN interface can be configured to be active and thus to support normal CAN communication. Depending on the SPI register settings, the watchdog may be running in
+Window or Timeout mode and the V2/VEXT output may be active.<p>
+		</li>
+		<li>Standby
+		<p> Standby mode is the first-level power-saving mode of the UJA1169, offering reduced current consumption. 
+		The transceiver is unable to transmit or receive data in Standby mode. The SPI remains enabled and V1 is still active; the watchdog is active (in Timeout
+mode) if enabled. The behavior of V2/VEXT is determined by the SPI setting.</p>
+		</li>
+		<li>Sleep
+		<p>Sleep mode is the second-level power-saving mode of the UJA1169. The difference between Sleep and Standby modes is that V1 is off in Sleep mode and temperature
+		protection is inactive.
+		Any enabled regular wake-up via CAN or WAKE or any diagnostic wake-up event will cause the UJA1169 to wake up from Sleep mode. The behavior of V2/VEXT is determined
+		by the SPI settings. The SPI and the watchdog are disabled. Autonomous bus biasing is active.</p>
+		</li>
+		<p>This block is using lpit0 channel 0 to feed the watchdog </p>
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+				<li>Configure the <a href="sbc_uja1169_config.html">UJA1169 Configuration</a> block.</li>
+				<li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <p>* To get more information refer to Hardware Manual documentation.</p>
+   </div>
+  </body>
+</html>

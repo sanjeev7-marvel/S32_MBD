@@ -1,0 +1,106 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>FlexIO SPI Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>FLEXIO SPI Configuration Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to configure the FlexIO module to emulate SPI communication (both master and slave mode).</p>
+            <p>The FlexIO module can run as master or slave and you can select on which pins to be used  (from the flexio pins available on S32k), plus the baudrate(on master).</p>
+            <p>You can also set advanced properties like CPHA, CPOL, Bit order and Transfer size (in Advanced tab)</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="flexio_config_files/flexio_spi_master_config.jpg" width="250px" height="auto">
+            <img vspace="0" src="flexio_config_files/flexio_spi_slave_config.jpg" width="250px" height="auto">
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+             <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#1">General</a></li>
+                <!--If need be for another subclass, another ul instances must be placed-->
+                <li><a href="#2">Pins</a></li>
+                <li><a href="#3">Advanced</a></li>
+            </ul>
+
+            <!--Table of contents-->
+           
+            <!--Window tab-->
+            <h4><a name="1"></a>General</h4>
+           
+            <img vspace="10" src="flexio_config_files/flexio_spi_master_config_general.jpg" width="450px" height="auto">
+            <img vspace="10" src="flexio_config_files/flexio_spi_slave_config_general.jpg" width="531px" height="auto">
+            </br>
+
+            <h3>Instance</h3>
+            <p>Select an instance of flexio to use (must be linked with transfer blocks used).</p>
+            
+            <h3>Role</h3>
+            <p>Here you select if it is running as Master or as Slave.</p>
+            
+            <h3>Mode</h3>
+            <p>Select either Polling or Interrupts mode, depending on what kind of Transfer block you want to use, as follows:</p>
+            <ul>
+                <li>Master / Slave transfer Blocks <b>(blocking)</b> - select <b>POLLING</b> </li>
+                <li>Master / Slave transfer ISR Blocks <b>(non-blocking)</b> - select <b>INTERRUPTS</b> </li>
+            </ul>
+            
+            <h3>Baud Rate</h3>
+            <p>Select the baud rate for FlexIO SPI in Hz.</p>
+            <p><b>Note:</b> Only available for Master role.</p>
+
+            <h4><a name="2"></a>Pins</h4>
+            <img vspace="10" src="flexio_config_files/flexio_spi_config_pins.jpg" width="450px" height="auto">
+            
+            <!--Tab-->
+            <h3>Pins</h3>
+            <p>Select the flexio pins to be used from the dropdown list.</p>
+            
+            <h4><a name="3"></a>Advanced</h4>
+            <img vspace="10" src="flexio_config_files/flexio_spi_config_advanced.jpg" width="450px" height="auto">
+            <h3>CPHA</h3>
+            <p>Determines the timing of the data bits relative to the clock pulses</p>
+            <ul>
+                <li>For CPHA=0, the "out" side changes the data on the trailing edge of the preceding clock cycle, while the "in" side captures the data on (or shortly after) the leading edge of the clock cycle. The "out" side holds the data valid until the trailing edge of the current clock cycle. For the first cycle, the first bit must be on the MOSI line before the leading clock edge.</li>
+                <li>For CPHA=1, the "out" side changes the data on the leading edge of the current clock cycle, while the "in" side captures the data on (or shortly after) the trailing edge of the clock cycle. The out side holds the data valid until the leading edge of the following clock cycle. For the last cycle, the slave holds the MISO line valid until slave select is deasserted.</li>
+            </ul>
+            <h3>CPOL</h3>
+            <p>Determines the polarity of the clock.</p>
+            <ul>
+                <li>CPOL=0 is a clock which idles at 0, and each cycle consists of a pulse of 1. That is, the leading edge is a rising edge, and the trailing edge is a falling edge.</li>
+                <li>CPOL=1 is a clock which idles at 1, and each cycle consists of a pulse of 0. That is, the leading edge is a falling edge, and the trailing edge is a rising edge.</li>
+            </ul>
+            <h3>Bit order</h3>
+            <p>Select the order on which bits are transmitted on the line (Most Significant Bit first or Least Significant Bit first).</p>
+            <h3>Transfer size</h3>
+            <p>Select the size of a frame, in bytes.</p>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

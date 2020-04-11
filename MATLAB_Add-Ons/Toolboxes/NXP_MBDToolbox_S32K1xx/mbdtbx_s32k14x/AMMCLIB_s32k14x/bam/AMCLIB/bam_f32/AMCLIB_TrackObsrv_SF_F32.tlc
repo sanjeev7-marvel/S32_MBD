@@ -1,0 +1,122 @@
+%% Copyright (c) 2016 NXP
+
+%implements AMCLIB_TrackObsrv_SF_F32 "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+    <LibAddToCommonIncludes("<stdbool.h>")>
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+    %assign ::cntInit = %<::cntInit> + 1
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("STDBOOL_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::STDBOOL_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include <stdbool.h>
+    %endif
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+    tBool TrackObsrv_%<::cntInit>_initialized = false;
+    AMCLIB_TRACK_OBSRV_T_F32 TrackObsrv_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+%openfile tmpParamExternBuf
+    extern tBool TrackObsrv_%<::cntInit>_initialized;
+    extern AMCLIB_TRACK_OBSRV_T_F32 TrackObsrv_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cnt = %<::cnt> + 1
+
+    %assign f32CC1sc = CAST("Number", Parameter[0].Value[0])
+    %assign f32CC2sc = CAST("Number", Parameter[1].Value[0])
+    %assign u16NShift = CAST("Number", Parameter[2].Value[0])
+    %assign f32C1 = CAST("Number", Parameter[3].Value[0])
+    %assign u16IntegNShift = CAST("Number", Parameter[4].Value[0])
+    
+    %assign f32PhaseErr = LibBlockInputSignal(0, "", "", 0)
+    %assign f32Acc = LibBlockInputSignal(1, "", "", 0)
+    %assign f32InErrK1 = LibBlockInputSignal(2, "", "", 0)
+    %assign f32UpperLimit = LibBlockInputSignal(3, "", "", 0)
+    %assign f32LowerLimit = LibBlockInputSignal(4, "", "", 0)
+    %assign f32State = LibBlockInputSignal(5, "", "", 0)
+    %assign f32InK1 = LibBlockInputSignal(6, "", "", 0)
+    %assign f32PosEst = LibBlockOutputSignal(0, "", "", 0)
+    %assign f32VelocityEst = LibBlockOutputSignal(1, "", "", 0)
+    %assign pOutAcc = LibBlockOutputSignal(2, "", "", 0)
+    %assign pOutInErrK1 = LibBlockOutputSignal(3, "", "", 0)
+    %assign pOutState = LibBlockOutputSignal(4, "", "", 0)
+    %assign pOutInK1 = LibBlockOutputSignal(5, "", "", 0)
+
+    {
+        tFrac32 f32PosEst;
+        tFrac32 f32VelocityEst;
+        
+        if (!TrackObsrv_%<::cnt>_initialized) {
+            TrackObsrv_%<::cnt>.pParamPI.f32CC1sc = %<f32CC1sc>;
+            TrackObsrv_%<::cnt>.pParamPI.f32CC2sc = %<f32CC2sc>;
+            TrackObsrv_%<::cnt>.pParamPI.f32UpperLimit = %<f32UpperLimit>;
+            TrackObsrv_%<::cnt>.pParamPI.f32LowerLimit = %<f32LowerLimit>;
+            TrackObsrv_%<::cnt>.pParamPI.u16NShift = %<u16NShift>;
+            TrackObsrv_%<::cnt>.pParamInteg.f32C1 = %<f32C1>;
+            TrackObsrv_%<::cnt>.pParamInteg.u16NShift = %<u16IntegNShift>;
+
+            AMCLIB_TrackObsrvInit_F32(&TrackObsrv_%<::cnt>);
+            
+            TrackObsrv_%<::cnt>_initialized = true;
+        }
+
+        TrackObsrv_%<::cnt>.pParamPI.f32Acc = %<f32Acc>;
+        TrackObsrv_%<::cnt>.pParamPI.f32InErrK1 = %<f32InErrK1>;
+        TrackObsrv_%<::cnt>.pParamPI.f32UpperLimit = %<f32UpperLimit>;
+        TrackObsrv_%<::cnt>.pParamPI.f32LowerLimit = %<f32LowerLimit>;
+        TrackObsrv_%<::cnt>.pParamInteg.f32State = %<f32State>;
+        TrackObsrv_%<::cnt>.pParamInteg.f32InK1 = %<f32InK1>;
+
+        AMCLIB_TrackObsrv_F32(%<f32PhaseErr>, &f32PosEst, &f32VelocityEst, &TrackObsrv_%<::cnt>);
+        
+        %<f32PosEst> = f32PosEst;
+        %<f32VelocityEst> = f32VelocityEst;
+        %<pOutAcc> = TrackObsrv_%<::cnt>.pParamPI.f32Acc;
+        %<pOutInErrK1> = TrackObsrv_%<::cnt>.pParamPI.f32InErrK1;
+        %<pOutState> = TrackObsrv_%<::cnt>.pParamInteg.f32State;
+        %<pOutInK1> = TrackObsrv_%<::cnt>.pParamInteg.f32InK1;
+    }
+
+%endfunction

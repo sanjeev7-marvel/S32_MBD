@@ -1,0 +1,31 @@
+%implements tpp_s32k_func_mode "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Output function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs (block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+		%assign blockPath = LibGetBlockPath(block)
+        %assign func_params = FEVAL("tpp_s32k_functional_mode_params", blockPath)
+
+        %with func_params
+            %if (func_params.tppFunctionalModeEn == 1) && (func_params.configBlkConfigNow == 0)
+                TPP_init_pins();
+                TPP_ConfigureGpio(&tppDrvConfig);
+                TPP_reconfig_pwm_pins();
+                TPP_Init(&tppDrvConfig, tppModeEnable);
+                toggle_restoreTppPwmPins();
+                %if (func_params.tppIntEn == 1) && (func_params.tppIsrBlocks == 1)
+                    tpp_interrupt_enable(%<func_params.tppIntPrio>);
+                %endif
+            %else
+                TPP_SetOperationalMode(&tppDrvConfig, %<func_params.tppFunctionalMode>);
+            %endif
+        %endwith
+    %endif
+%endfunction

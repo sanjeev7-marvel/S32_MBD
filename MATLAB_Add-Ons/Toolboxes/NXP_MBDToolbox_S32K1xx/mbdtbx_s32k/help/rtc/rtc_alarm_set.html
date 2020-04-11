@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>RTC Alarm Set Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>RTC Alarm Set Block</h1>
+        <!--Page-description-->
+        <p>This block allows the user to set an alarm for using the RTC module.</p>
+        <!--Library block image-->
+        <h2>Block Image</h2>
+        <img vspace="0" src="rtc_alarm_set_files/alarm_set_static.jpg" width="200px" height="auto" /></br>
+        <img vspace="0" src="rtc_alarm_set_files/alarm_set_dinamic.jpg" width="200px" height="auto" />
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>Date/Time as inputs - checked
+                <ul>
+                    <li>Year (UINT16_T)</li>
+                    <li>Month (UINT8_T)</li>
+                    <li>Day (UINT8_T)</li>
+                    <li>Hours (UINT8_T)</li>
+                    <li>Minutes (UINT8_T)</li>
+                    <li>Seconds (UINT8_T)</li>
+                </ul>
+            </li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+        <!--Table of contents-->
+        <p>The block dialog consists of the following tabs: </p>
+        <ul>
+            <li><a href="#general_tab">General</a></li>
+            <!--If need be for another subclass, another ul instances must be placed-->
+            <li><a href="#advanced_tab">Advanced</a></li>
+        </ul>
+        <!--Window tab-->
+        <h4><a name="general_tab"></a>General</h4>
+        <img vspace="10" src="rtc_alarm_set_files/alarm_set_block.jpg" width="450px" height="auto">
+        <h3>Date/Time as inputs</h3>
+        <p>When unchecked the block sets statically the alarm time with the values from the Date Time boxes. When checked the Date/Time boxes become inactive and the blocks takes Date/Time as inputs.</p>
+        <h3>Time configuration</h3>
+        <p>Sets the initial time for the RTC counter.</p>
+        <ul>
+            <li>Date - format dd/mm/yyyy</li>
+            <li>Time - format hh:mm:ss</li>
+        </ul>
+        <h3>Show advanced options</h3>
+        <p>Shows or hides the Advanced options tab.</p>
+        <!--Advanced tab-->
+        <h4><a name="advanced_tab"></a>Advanced</h4>
+        <img vspace="10" src="rtc_alarm_set_files/alarm_set_block_adv.jpg" width="450px" height="auto">
+        <!--Tab-->
+        <h3>Repeat</h3>
+        <p>When checked, enables editing the parameters for Alarm repeat.</p>
+        <h3>Repeat interval</h3>
+        <p>This field sets the interval time period between repeats.</p>
+        <h3>Repeat forever</h3>
+        <p>When checked, the field repeats the alarm forever.</p>
+        <h3>Number of repeat</h3>
+        <p>This field sets the number of the alarm repeats.</p>
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <ul>
+            <li><a href="rtc_config.html">RTC Configuration Block</a></li>
+            <li><a href="rtc_alarm_set.html">RTC Alarm ISR set</a></li>
+        </ul>
+        <!--Block-Miscellaneous-Details-->
+        <h2>Block Miscellaneous Details</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+    </div>
+</body>
+</html>

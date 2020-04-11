@@ -1,0 +1,2922 @@
+Model {
+  Name			  "ammclib_mlib_mul_s32k11x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.274"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 15
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MULSAT_F16 "
+      SID		      "590"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MULSAT_F32  "
+      SID		      "643"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MULSAT_F32F16F16 "
+      SID		      "707"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MUL_F16 "
+      SID		      "585"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MUL_F32"
+      SID		      "644"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model\nVerification/Check \nStatic Range"
+      Path		      "ammclib_mlib_mul_s32k11x/Check Static Range MUL_F32F16F16 "
+      SID		      "708"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      Path		      "ammclib_mlib_mul_s32k11x/FreeMaster_Config"
+      SID		      "736"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "ammclib_mlib_mul_s32k11x/MBD_S32K11x_Config_Information"
+      SID		      "729"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f16/MLIB_MulSat_F16"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_MulSat_F16"
+      SID		      "684"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_MulSat_F32"
+      SID		      "686"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32f16f16/MLIB_MulSat_F32F16F16"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_MulSat_F32F16F16"
+      SID		      "727"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f16/MLIB_Mul_F16"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_Mul_F16"
+      SID		      "683"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Mul_F32"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_Mul_F32"
+      SID		      "685"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "ammclib_bam_s32k11x/MLIB/bam_f32f16f16/MLIB_Mul_F32F16F16"
+      Path		      "ammclib_mlib_mul_s32k11x/MLIB_Mul_F32F16F16"
+      SID		      "726"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "ammclib_mlib_mul_s32k11x/Model Info"
+      SID		      "524"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This model tests the AMMCLIB MLIB MUL blocks\n\nValidation:\n- Run the model in Simulation and compa"
+  "re the Inputs vs Outputs results.\n- Open Freemaster (ammclib_mlib_mul_s32k11x.pmp) and compare the HW results again"
+  "st the Simulated ones"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [8.0, 8.0, 1550.0, 838.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[1]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1681.0, 833.0]
+	ZoomFactor		[0.80000000000000016]
+	Offset			[-331.67901960784229, -84.912496185303667]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAACyvwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQBAAAAQAAAAsoAAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAU9AAACygAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Wed Jul 29 12:18:26 2015"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:54:41 2019"
+  RTWModifiedTimeStamp	  485682881
+  ModelVersionFormat	  "1.%<AutoIncrement:274>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "ammclib_mlib_mul_s32k11x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "ammclib_mlib_mul_s32k11x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "5"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.001"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Individual arguments"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "auto"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "none"
+	  ParameterTunabilityLossMsg "error"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  off
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  on
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport on
+	  LaunchReport		  on
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  on
+	  GenerateTraceReport	  on
+	  GenerateTraceReportSl	  on
+	  GenerateTraceReportSf	  on
+	  GenerateTraceReportEml  on
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments on
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement on
+	      OperatorAnnotations     on
+	      SimulinkDataObjDesc     on
+	      SFDataObjDesc	      on
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      on
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments off
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      256
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant off
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  256
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant off
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  on
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases on
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      ""
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition    [ 357, 82, 1466, 794 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      ShareAcrossModelInstances	off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      Lockdown		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ParamMin		      "[]"
+      ParamMax		      "[]"
+      ParamDataTypeStr	      "Inherit: Same as input"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+  }
+  System {
+    Name		    "ammclib_mlib_mul_s32k11x"
+    Location		    [8, 8, 1558, 846]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  on
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "80"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "736"
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MULSAT_F16 "
+      SID		      "590"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [250, 657, 355, 703]
+      ZOrder		      2067
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MULSAT_F32  "
+      SID		      "643"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [250, 1102, 355, 1148]
+      ZOrder		      2119
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MULSAT_F32F16F16 "
+      SID		      "707"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [1550, 657, 1655, 703]
+      ZOrder		      2183
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MUL_F16 "
+      SID		      "585"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [250, 452, 355, 498]
+      ZOrder		      2061
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MUL_F32"
+      SID		      "644"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [250, 897, 355, 943]
+      ZOrder		      2115
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Check Static Range MUL_F32F16F16 "
+      SID		      "708"
+      Description	      "0.12 <= u <= 0.13"
+      Ports		      [1]
+      Position		      [1550, 452, 1655, 498]
+      ZOrder		      2179
+      LibraryVersion	      "1.401"
+      SourceBlock	      "simulink/Model\nVerification/Check \nStatic Range"
+      SourceType	      "Checks_SRange"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      max		      "0.13"
+      max_included	      on
+      min		      "0.12"
+      min_included	      on
+      enabled		      on
+      stopWhenAssertionFail   on
+      export		      off
+      icon		      "graphic"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MULSAT_F16_res"
+      SID		      "591"
+      Ports		      [1]
+      Position		      [250, 590, 355, 630]
+      ZOrder		      2065
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MULSAT_F32F16F16_res"
+      SID		      "709"
+      Ports		      [1]
+      Position		      [1550, 590, 1655, 630]
+      ZOrder		      2181
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MULSAT_F32_res"
+      SID		      "645"
+      Ports		      [1]
+      Position		      [250, 1035, 355, 1075]
+      ZOrder		      2117
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F16_input "
+      SID		      "710"
+      Ports		      [1]
+      Position		      [500, 380, 600, 420]
+      ZOrder		      2178
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F16_input1"
+      SID		      "584"
+      Ports		      [1]
+      Position		      [-800, 380, -700, 420]
+      ZOrder		      2060
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F16_input2"
+      SID		      "634"
+      Ports		      [1]
+      Position		      [-800, 605, -700, 645]
+      ZOrder		      2105
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F16_res"
+      SID		      "579"
+      Ports		      [1]
+      Position		      [250, 390, 355, 430]
+      ZOrder		      2055
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F32F16F16_res"
+      SID		      "712"
+      Ports		      [1]
+      Position		      [1550, 390, 1655, 430]
+      ZOrder		      2175
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F32_input1"
+      SID		      "646"
+      Ports		      [1]
+      Position		      [-800, 825, -700, 865]
+      ZOrder		      2114
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F32_input2 "
+      SID		      "647"
+      Ports		      [1]
+      Position		      [-800, 1050, -700, 1090]
+      ZOrder		      2122
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F32_input2     "
+      SID		      "711"
+      Ports		      [1]
+      Position		      [500, 605, 600, 645]
+      ZOrder		      2185
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display_MUL_F32_res"
+      SID		      "648"
+      Ports		      [1]
+      Position		      [250, 835, 355, 875]
+      ZOrder		      2111
+      ForegroundColor	      "red"
+      Format		      "long"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FreeMaster_Config"
+      SID		      "736"
+      Ports		      []
+      Position		      [706, 13, 946, 69]
+      ZOrder		      2262
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      SourceType	      "fm_s32k_config"
+      interface		      "LPUART0"
+      baudrate		      "19200"
+      rxd		      "PTB0: [LPUART0_RX | Receive]"
+      txd		      "PTB1: [LPUART0_TX | Transmit]"
+      mode		      "Short Interrupt"
+      isr_prio		      "3"
+      show_adv_opts	      on
+      use_scope		      on
+      max_scope_vars	      "8"
+      use_recorder	      on
+      max_rec_vars	      "8"
+      rec_buff_size	      "1024"
+      rec_timebase	      "0"
+      rec_timebase_unit	      "seconds"
+      comm_buffer_size_auto   on
+      comm_buffer_size	      "255"
+      comm_rqueue_size_default on
+      comm_rqueue_size	      "32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K11x_Config_Information"
+      SID		      "729"
+      Ports		      []
+      Position		      [330, -55, 658, 147]
+      ZOrder		      2255
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K144-64KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : IAR\nTarget Type : FLASH\nDownload Code after build : off\nStep Tick Interrupt Priority : 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K116"
+      mcu_target_package      "48-LQFP"
+      mcu_target_sram_size    "17KB"
+      mcu_system_clock_freq   "40"
+      mcu_xtal_freq	      "External 40"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "3"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m0plus -mthumb -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m0plus -mthumb -g"
+      gcc_target_link_opts    "-mcpu=cortex-m0plus -mthumb"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K116_17_flash.ld"
+      ghs_target_compile_opts "-mcpu=cortexm0plus -mthumb -fsoft -Ogeneral -Wundef -Wimplicit-int -Wshadow -Wtrigraphs"
+      " --no_commons --gnu_asm -gnu99 -gdwarf-2 -G "
+      ghs_target_assemble_opts "-mcpu=cortexm0plus -mthumb -fsoft --gnu_asm"
+      ghs_target_link_opts    "-mcpu=cortexm0plus -mthumb -fsoft"
+      ghs_target_default_lcf  on
+      ghs_target_user_lcf     "S32K116_17_flash.ld"
+      iar_target_compile_opts "--thumb -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--thumb"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  on
+      iar_target_user_lcf     "S32K116_17_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTB0: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTB1: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_MulSat_F16"
+      SID		      "684"
+      Ports		      [2, 1]
+      Position		      [-235, 573, -15, 642]
+      ZOrder		      2152
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f16/MLIB_MulSat_F16"
+      SourceType	      "MLIB_MulSat_F16"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_MulSat_F32"
+      SID		      "686"
+      Ports		      [2, 1]
+      Position		      [-235, 1018, -15, 1087]
+      ZOrder		      2154
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_MulSat_F32"
+      SourceType	      "MLIB_MulSat_F32"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_MulSat_F32F16F16"
+      SID		      "727"
+      Ports		      [2, 1]
+      Position		      [1070, 573, 1290, 642]
+      ZOrder		      2193
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f32f16f16/MLIB_MulSat_F32F16F16"
+      SourceType	      "MLIB_MulSat_F32F16F16"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_Mul_F16"
+      SID		      "683"
+      Ports		      [2, 1]
+      Position		      [-235, 373, -15, 442]
+      ZOrder		      2151
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f16/MLIB_Mul_F16"
+      SourceType	      "MLIB_Mul_F16"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_Mul_F32"
+      SID		      "685"
+      Ports		      [2, 1]
+      Position		      [-235, 818, -15, 887]
+      ZOrder		      2153
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f32/MLIB_Mul_F32"
+      SourceType	      "MLIB_Mul_F32"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MLIB_Mul_F32F16F16"
+      SID		      "726"
+      Ports		      [2, 1]
+      Position		      [1070, 373, 1290, 442]
+      ZOrder		      2192
+      LibraryVersion	      "1.726"
+      SourceBlock	      "ammclib_bam_s32k11x/MLIB/bam_f32f16f16/MLIB_Mul_F32F16F16"
+      SourceType	      "MLIB_Mul_F32F16F16"
+      ContentPreviewEnabled   off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MULSAT_F16_res_declaration"
+      SID		      "588"
+      Position		      [240, 220, 342, 260]
+      ZOrder		      2064
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      Priority		      "3"
+      DataStoreName	      "MULSAT_F16_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		22
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  23
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    24
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  25
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MULSAT_F16_res_write"
+      SID		      "589"
+      Ports		      [1]
+      Position		      [250, 525, 355, 565]
+      ZOrder		      2066
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      DataStoreName	      "MULSAT_F16_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MULSAT_F32F16F16_res_declaration"
+      SID		      "689"
+      Position		      [640, 240, 742, 280]
+      ZOrder		      2157
+      BackgroundColor	      "yellow"
+      Priority		      "3"
+      DataStoreName	      "MULSAT_F32F16F16_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		26
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  27
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    28
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  29
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MULSAT_F32F16F16_res_write"
+      SID		      "717"
+      Ports		      [1]
+      Position		      [1550, 525, 1655, 565]
+      ZOrder		      2182
+      BackgroundColor	      "yellow"
+      DataStoreName	      "MULSAT_F32F16F16_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MULSAT_F32_res_declaration"
+      SID		      "611"
+      Position		      [640, 180, 742, 220]
+      ZOrder		      2082
+      BackgroundColor	      "lightBlue"
+      Priority		      "3"
+      DataStoreName	      "MULSAT_F32_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		30
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  31
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    32
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  33
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MULSAT_F32_res_write"
+      SID		      "639"
+      Ports		      [1]
+      Position		      [250, 970, 355, 1010]
+      ZOrder		      2118
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "MULSAT_F32_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MUL_F16_res_declaration"
+      SID		      "580"
+      Position		      [110, 220, 212, 260]
+      ZOrder		      2056
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      Priority		      "2"
+      DataStoreName	      "MUL_F16_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		34
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  35
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    36
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  37
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MUL_F16_res_write"
+      SID		      "581"
+      Ports		      [1]
+      Position		      [250, 325, 355, 365]
+      ZOrder		      2057
+      BackgroundColor	      "[1.000000, 0.666667, 0.498039]"
+      DataStoreName	      "MUL_F16_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MUL_F32F16F16_res_declaration"
+      SID		      "688"
+      Position		      [455, 240, 557, 280]
+      ZOrder		      2156
+      BackgroundColor	      "yellow"
+      Priority		      "2"
+      DataStoreName	      "MUL_F32F16F16_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		38
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  39
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    40
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  41
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MUL_F32F16F16_res_write"
+      SID		      "718"
+      Ports		      [1]
+      Position		      [1550, 325, 1655, 365]
+      ZOrder		      2176
+      BackgroundColor	      "yellow"
+      DataStoreName	      "MUL_F32F16F16_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MUL_F32_res_declaration"
+      SID		      "610"
+      Position		      [455, 180, 557, 220]
+      ZOrder		      2081
+      BackgroundColor	      "lightBlue"
+      Priority		      "2"
+      DataStoreName	      "MUL_F32_res"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		42
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  43
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    44
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  45
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      Name		      "MUL_F32_res_write"
+      SID		      "640"
+      Ports		      [1]
+      Position		      [250, 770, 355, 810]
+      ZOrder		      2112
+      BackgroundColor	      "lightBlue"
+      DataStoreName	      "MUL_F32_res"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MUL_Input1_declaration"
+      SID		      "582"
+      Position		      [-200, 220, -98, 260]
+      ZOrder		      2058
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "MUL_Input1"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "0.5"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		46
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  47
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    48
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  49
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-1"
+      OutMax		      "1"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input1_read"
+      SID		      "583"
+      Ports		      [0, 1]
+      Position		      [-800, 440, -700, 480]
+      ZOrder		      2059
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input1"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input1_read "
+      SID		      "641"
+      Ports		      [0, 1]
+      Position		      [-800, 885, -700, 925]
+      ZOrder		      2113
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input1"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input1_read   "
+      SID		      "719"
+      Ports		      [0, 1]
+      Position		      [500, 440, 600, 480]
+      ZOrder		      2177
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "MUL_Input2_declaration"
+      SID		      "632"
+      Position		      [-85, 220, 17, 260]
+      ZOrder		      2102
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      Priority		      "1"
+      DataStoreName	      "MUL_Input2"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "0.25"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		50
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  51
+	  StorageClass		  "Custom"
+	  TypeQualifier		  ""
+	  Alias			  ""
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Volatile"
+	  SimulinkCSC.AttribClass_Simulink_Volatile {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    52
+	    HeaderFile		    ""
+	    DefinitionFile	    ""
+	    Owner		    ""
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  53
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+      OutMin		      "-1"
+      OutMax		      "1"
+      OutDataTypeStr	      "single"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input2_read"
+      SID		      "633"
+      Ports		      [0, 1]
+      Position		      [-800, 535, -700, 575]
+      ZOrder		      2104
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input2"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input2_read "
+      SID		      "642"
+      Ports		      [0, 1]
+      Position		      [-800, 980, -700, 1020]
+      ZOrder		      2121
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input2"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "MUL_Input2_read    "
+      SID		      "720"
+      Ports		      [0, 1]
+      Position		      [500, 535, 600, 575]
+      ZOrder		      2184
+      BackgroundColor	      "[0.666667, 1.000000, 0.000000]"
+      DataStoreName	      "MUL_Input2"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "524"
+      Ports		      []
+      Position		      [-210, -46, 298, 133]
+      ZOrder		      1976
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: ammclib_mlib_mul_s32k11x\\n\\nDescription: This model tests the AMMCLIB MLI"
+      "B MUL blocks\\n\\nValidation:\\n- Run the model in Simulation and compare the Inputs vs Outputs results.\\n- Ope"
+      "n Freemaster (ammclib_mlib_mul_s32k11x.pmp) and compare the HW results against the Simulated ones"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float"
+      SID		      "578"
+      Position		      [45, 387, 130, 433]
+      ZOrder		      2054
+      ShowName		      off
+      Gain		      "1/(2^15-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float1"
+      SID		      "587"
+      Position		      [45, 587, 130, 633]
+      ZOrder		      2063
+      ShowName		      off
+      Gain		      "1/(2^15-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float10"
+      SID		      "734"
+      Position		      [-505, 977, -420, 1023]
+      ZOrder		      2260
+      ShowName		      off
+      Gain		      "2^31-1"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float11"
+      SID		      "735"
+      Position		      [-495, 532, -410, 578]
+      ZOrder		      2261
+      ShowName		      off
+      Gain		      "2^15-1"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float2"
+      SID		      "653"
+      Position		      [45, 832, 130, 878]
+      ZOrder		      2110
+      ShowName		      off
+      Gain		      "1/(2^31-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float3"
+      SID		      "654"
+      Position		      [45, 1032, 130, 1078]
+      ZOrder		      2116
+      ShowName		      off
+      Gain		      "1/(2^31-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float4"
+      SID		      "721"
+      Position		      [1345, 387, 1430, 433]
+      ZOrder		      2174
+      ShowName		      off
+      Gain		      "1/(2^31-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float5"
+      SID		      "722"
+      Position		      [1345, 587, 1430, 633]
+      ZOrder		      2180
+      ShowName		      off
+      Gain		      "1/(2^31-1)"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float6"
+      SID		      "730"
+      Position		      [-475, 437, -390, 483]
+      ZOrder		      2256
+      ShowName		      off
+      Gain		      "2^15-1"
+      ParamDataTypeStr	      "int32"
+      OutDataTypeStr	      "int16"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float7"
+      SID		      "731"
+      Position		      [790, 437, 875, 483]
+      ZOrder		      2257
+      ShowName		      off
+      Gain		      "2^15-1"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float8"
+      SID		      "732"
+      Position		      [790, 532, 875, 578]
+      ZOrder		      2258
+      ShowName		      off
+      Gain		      "2^15-1"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "convert to float9"
+      SID		      "733"
+      Position		      [-505, 882, -420, 928]
+      ZOrder		      2259
+      ShowName		      off
+      Gain		      "2^31-1"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      SaturateOnIntegerOverflow	off
+    }
+    Line {
+      ZOrder		      381
+      SrcBlock		      "MUL_Input1_read"
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			731
+	DstBlock		"convert to float6"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			407
+	Points			[0, -60]
+	DstBlock		"Display_MUL_F16_input1"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      374
+      SrcBlock		      "convert to float"
+      SrcPort		      1
+      Points		      [94, 0]
+      Branch {
+	ZOrder			411
+	Points			[0, -65]
+	DstBlock		"MUL_F16_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			386
+	DstBlock		"Display_MUL_F16_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			412
+	Points			[0, 65]
+	DstBlock		"Check Static Range MUL_F16 "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      615
+      SrcBlock		      "MLIB_Mul_F16"
+      SrcPort		      1
+      DstBlock		      "convert to float"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      618
+      SrcBlock		      "MLIB_MulSat_F16"
+      SrcPort		      1
+      DstBlock		      "convert to float1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      392
+      SrcBlock		      "convert to float1"
+      SrcPort		      1
+      Points		      [88, 0]
+      Branch {
+	ZOrder			414
+	DstBlock		"Display_MULSAT_F16_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			417
+	Points			[0, -65]
+	DstBlock		"MULSAT_F16_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			395
+	Points			[0, 70]
+	DstBlock		"Check Static Range MULSAT_F16 "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      466
+      SrcBlock		      "MUL_Input2_read"
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			744
+	DstBlock		"convert to float11"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			464
+	Points			[0, 70]
+	DstBlock		"Display_MUL_F16_input2"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      732
+      SrcBlock		      "convert to float6"
+      SrcPort		      1
+      Points		      [98, 0]
+      Branch {
+	ZOrder			616
+	Points			[0, 130]
+	DstBlock		"MLIB_MulSat_F16"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			614
+	Points			[0, -70]
+	DstBlock		"MLIB_Mul_F16"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      745
+      SrcBlock		      "convert to float11"
+      SrcPort		      1
+      Points		      [129, 0]
+      Branch {
+	ZOrder			617
+	Points			[0, 70]
+	DstBlock		"MLIB_MulSat_F16"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			613
+	Points			[0, -130]
+	DstBlock		"MLIB_Mul_F16"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      477
+      SrcBlock		      "MUL_Input1_read "
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			740
+	DstBlock		"convert to float9"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			476
+	Points			[0, -60]
+	DstBlock		"Display_MUL_F32_input1"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      481
+      SrcBlock		      "convert to float2"
+      SrcPort		      1
+      Points		      [94, 0]
+      Branch {
+	ZOrder			480
+	Points			[0, -65]
+	DstBlock		"MUL_F32_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			479
+	DstBlock		"Display_MUL_F32_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			478
+	Points			[0, 65]
+	DstBlock		"Check Static Range MUL_F32"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      619
+      SrcBlock		      "MLIB_Mul_F32"
+      SrcPort		      1
+      DstBlock		      "convert to float2"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      624
+      SrcBlock		      "MLIB_MulSat_F32"
+      SrcPort		      1
+      DstBlock		      "convert to float3"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      487
+      SrcBlock		      "convert to float3"
+      SrcPort		      1
+      Points		      [88, 0]
+      Branch {
+	ZOrder			486
+	DstBlock		"Display_MULSAT_F32_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			485
+	Points			[0, -65]
+	DstBlock		"MULSAT_F32_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			484
+	Points			[0, 70]
+	DstBlock		"Check Static Range MULSAT_F32  "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      742
+      SrcBlock		      "convert to float9"
+      SrcPort		      1
+      Points		      [128, 0]
+      Branch {
+	ZOrder			623
+	Points			[0, 130]
+	DstBlock		"MLIB_MulSat_F32"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			621
+	Points			[0, -70]
+	DstBlock		"MLIB_Mul_F32"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      743
+      SrcBlock		      "convert to float10"
+      SrcPort		      1
+      Points		      [139, 0]
+      Branch {
+	ZOrder			622
+	Points			[0, 70]
+	DstBlock		"MLIB_MulSat_F32"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			620
+	Points			[0, -130]
+	DstBlock		"MLIB_Mul_F32"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      688
+      SrcBlock		      "MUL_Input1_read   "
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			733
+	DstBlock		"convert to float7"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			686
+	Points			[0, -60]
+	DstBlock		"Display_MUL_F16_input "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      692
+      SrcBlock		      "convert to float4"
+      SrcPort		      1
+      Points		      [94, 0]
+      Branch {
+	ZOrder			691
+	Points			[0, -65]
+	DstBlock		"MUL_F32F16F16_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			690
+	DstBlock		"Display_MUL_F32F16F16_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			689
+	Points			[0, 65]
+	DstBlock		"Check Static Range MUL_F32F16F16 "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      714
+      SrcBlock		      "MLIB_Mul_F32F16F16"
+      SrcPort		      1
+      DstBlock		      "convert to float4"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      717
+      SrcBlock		      "MLIB_MulSat_F32F16F16"
+      SrcPort		      1
+      DstBlock		      "convert to float5"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      698
+      SrcBlock		      "convert to float5"
+      SrcPort		      1
+      Points		      [88, 0]
+      Branch {
+	ZOrder			697
+	DstBlock		"Display_MULSAT_F32F16F16_res"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			696
+	Points			[0, -65]
+	DstBlock		"MULSAT_F32F16F16_res_write"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			695
+	Points			[0, 70]
+	DstBlock		"Check Static Range MULSAT_F32F16F16 "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      701
+      SrcBlock		      "MUL_Input2_read    "
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			735
+	DstBlock		"convert to float8"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			699
+	Points			[0, 70]
+	DstBlock		"Display_MUL_F32_input2     "
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      734
+      SrcBlock		      "convert to float7"
+      SrcPort		      1
+      Points		      [133, 0]
+      Branch {
+	ZOrder			715
+	Points			[0, 130]
+	DstBlock		"MLIB_MulSat_F32F16F16"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			712
+	Points			[0, -70]
+	DstBlock		"MLIB_Mul_F32F16F16"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      736
+      SrcBlock		      "convert to float8"
+      SrcPort		      1
+      Points		      [144, 0]
+      Branch {
+	ZOrder			716
+	Points			[0, 70]
+	DstBlock		"MLIB_MulSat_F32F16F16"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			713
+	Points			[0, -130]
+	DstBlock		"MLIB_Mul_F32F16F16"
+	DstPort			2
+      }
+    }
+    Line {
+      ZOrder		      490
+      SrcBlock		      "MUL_Input2_read "
+      SrcPort		      1
+      Points		      [49, 0]
+      Branch {
+	ZOrder			739
+	DstBlock		"convert to float10"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			488
+	Points			[0, 70]
+	DstBlock		"Display_MUL_F32_input2 "
+	DstPort			1
+      }
+    }
+    Annotation {
+      SID		      "592"
+      Name		      "S32K11x EVB Config and example description"
+      Position		      [-220, -71, 1063, 158]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1059
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "593"
+      Name		      "Data Initializations"
+      Position		      [-220, 172, 1060, 295]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1060
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "594"
+      Name		      "F16 Calculations"
+      Position		      [-870, 310, 409, 738]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1061
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "655"
+      Name		      "F32 Calculations"
+      Position		      [-870, 755, 409, 1183]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1063
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "723"
+      Name		      "F32F16F16 Calculations"
+      Position		      [430, 310, 1709, 738]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.956863, 0.980392, 0.921569]"
+      BackgroundColor	      "[0.956863, 0.980392, 0.921569]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1062
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "ammclib_mlib_mul_s32k11x"
+    created		    "29-Jul-2015 12:19:38"
+    isLibrary		    0
+    defaultActionLanguage   CLASSIC_BITOPS
+    sfVersion		    80000012
+    firstTarget		    2
+  }
+  target {
+    id			    2
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 3]
+  }
+  target {
+    id			    3
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 2 0]
+  }
+}

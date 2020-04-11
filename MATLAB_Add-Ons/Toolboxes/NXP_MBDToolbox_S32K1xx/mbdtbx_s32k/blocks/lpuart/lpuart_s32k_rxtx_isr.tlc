@@ -1,0 +1,85 @@
+%implements lpuart_s32k_rxtx_isr "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lpuart_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lpuart_isr_info", blockPath)
+    {
+        INT_SYS_SetPriority(LPUART%<info.instance>_RxTx_IRQn, %<info.prio>);
+
+        %if (info.tie == "on" || info.tcie == "on" || info.ilie == "on")
+            LPUART_DRV_InstallTxCallback(%<info.instance>, LPUART%<info.instance>_RxTx_callback, NULL);
+        %endif
+
+        %if (info.rie == "on" || info.ilie == "on")
+            LPUART_DRV_InstallRxCallback(%<info.instance>, LPUART%<info.instance>_RxTx_callback, NULL);
+        %endif
+
+        %openfile buffer
+            void LPUART%<info.instance>_RxTx_callback(void *driverState, uart_event_t event, void *userData)
+            {
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %if (info.tie == "on")
+                            if(event == UART_EVENT_TX_EMPTY){
+                                %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                            }
+                        %endif
+
+                        %if (info.tcie == "on")
+                            if(event == UART_EVENT_END_TRANSFER ){
+                                %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                            }
+                        %endif
+
+                        %if (info.rie == "on")
+                            if(event == UART_EVENT_RX_FULL){
+                                %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                            }
+                        %endif
+
+                        %if (info.ilie == "on")
+                            if(event == UART_EVENT_ERROR){
+                                %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                            }
+                        %endif
+
+                        %<LibBlockOutputSignal(1, "", "", 0)> = ((LPUART%<info.instance>)->STAT);
+                    %endwith
+                %endforeach
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+    }
+
+    %endif
+%endfunction

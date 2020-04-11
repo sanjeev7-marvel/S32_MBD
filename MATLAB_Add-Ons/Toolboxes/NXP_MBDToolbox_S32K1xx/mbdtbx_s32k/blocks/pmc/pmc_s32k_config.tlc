@@ -1,0 +1,229 @@
+%implements "pmc_s32k_config" "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+    %<LibAddToCommonIncludes("power_manager.h")>
+
+    %assign ::POWER_MODE_ITERATOR = 0
+    %assign ::POWER_MODE_ITERATOR_CALL = 0
+    %assign ::POWER_CALLBACKS_ITERATOR = 0
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+	%assign adcCmdListBlocks = FEVAL("mbd_s32k_get_referenced", "pmc_s32k_config")
+    %assign adcCmdListBlocksLen = SIZE(adcCmdListBlocks,1)
+
+    %assign sdk_params = FEVAL("mbd_s32k_pmc_config_sdk_params", blockPath)
+	%% Declaring structures for used power modes
+	%<GeneratePowerModeStructure(block, system, sdk_params)>
+
+	%% CALLBACKS
+	%with sdk_params
+        %if callback_before == "true"
+            %<GenerateCallbackFunction(block, system, "BEFORE", 0)>
+        %endif
+        %if callback_after == "true"
+            %<GenerateCallbackFunction(block, system, "AFTER", 1)>
+        %endif
+        %if callback_before_after == "true"
+            %<GenerateCallbackFunction(block, system, "BEFORE_AFTER", 2)>
+        %endif
+    %endwith
+
+	%% Declaring a structure with all power modes
+	%if ::POWER_MODE_ITERATOR == (adcCmdListBlocksLen - 1)
+        %<GeneratePowerModeStructureArray(block, system, adcCmdListBlocksLen)>
+        %if POWER_CALLBACKS_ITERATOR == 0
+            POWER_SYS_Init(&powermConfigsArr, POWERM_MODE_COUNT,(void *) 0, 0);
+        %else
+            %<GenerateCallbackStructureArray(block, system)>
+            POWER_SYS_Init(&powermConfigsArr, POWERM_MODE_COUNT, &powermStaticCallbacksConfigArr, POWERM_CALLBACK_COUNT);
+        %endif
+    %endif
+
+    %assign ::POWER_MODE_ITERATOR = ::POWER_MODE_ITERATOR + 1
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    /*Calling power mode changer*/
+    POWER_SYS_SetMode(POWERM_MODE_%<POWER_MODE_ITERATOR_CALL>, POWER_MANAGER_POLICY_AGREEMENT);
+    %assign ::POWER_MODE_ITERATOR_CALL = %<::POWER_MODE_ITERATOR_CALL> + 1
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function generates callbacks
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function GeneratePowerModeStructure(block, system, sdk_params) void
+	%% POWER MODES
+	%with sdk_params
+
+        %openfile tmpFcnBuf
+        /* Configuration structure for Power Manager Configuration%<POWER_MODE_ITERATOR> */
+        power_manager_user_config_t powerm_InitConfig%<POWER_MODE_ITERATOR> = {
+            .powerMode = POWER_MANAGER_%<mode>,    /* Power manager mode   */
+            .sleepOnExitValue = %<sleep_option>,   /* Sleep on exit value  */
+        };
+        %closefile tmpFcnBuf
+        %assign srcFile = LibGetModelDotCFile()
+        %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+	%endwith
+
+    %% Declaring extern structures for used power modes in .h file
+    %openfile tmpFcnBuf
+	extern power_manager_user_config_t powerm_InitConfig%<POWER_MODE_ITERATOR>;
+	%closefile tmpFcnBuf
+	%assign headerFile = LibGetModelDotHFile()
+	%<LibSetSourceFileSection(headerFile, "Declarations", tmpFcnBuf)>
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function generates callbacks
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function GenerateCallbackFunction(block, system, type, fcnCallIdx) void
+        %% Declaring structures for defined callbacks
+        %openfile tmpFcnBuf
+        /*! Configuration structure StaticCallbackCfg%<POWER_CALLBACKS_ITERATOR> */
+        power_manager_callback_user_config_t powerm_CallbackConfig%<POWER_CALLBACKS_ITERATOR> = {
+            .callbackFunction   = &powerm_StaticCallback%<POWER_CALLBACKS_ITERATOR>,
+            .callbackType       = POWER_MANAGER_CALLBACK_%<type>,
+            .callbackData       =(void *) 0,
+        };
+        %% Call the downstream system
+
+        %with SFcnSystemOutputCall[fcnCallIdx]
+            %% Skip unconnected function call outputs
+            %if !ISEQUAL(BlockToCall, "unconnected")
+                /*! Declaration of power manager static callback %<POWER_CALLBACKS_ITERATOR> */
+                status_t powerm_StaticCallback%<POWER_CALLBACKS_ITERATOR>(power_manager_notify_struct_t * notify, power_manager_callback_data_t * dataPtr) {
+                if (notify->targetPowerConfigIndex == POWERM_MODE_%<POWER_MODE_ITERATOR>) {
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                }
+                return STATUS_SUCCESS;
+            }
+            %endif
+        %endwith
+        %closefile tmpFcnBuf
+        %assign srcFile = LibGetModelDotCFile()
+        %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+
+        %% Declaring extern structures for used power modes in .h file
+        %openfile tmpFcnBuf
+        /*! Callback configuration structure %<POWER_CALLBACKS_ITERATOR> */
+        extern power_manager_callback_user_config_t powerm_CallbackConfig%<POWER_CALLBACKS_ITERATOR>;
+        /*! Declaration of power manager static callback %<POWER_CALLBACKS_ITERATOR> */
+        extern status_t powerm_StaticCallback%<POWER_CALLBACKS_ITERATOR>(power_manager_notify_struct_t * notify, power_manager_callback_data_t * dataPtr);
+        %closefile tmpFcnBuf
+        %assign headerFile = LibGetModelDotHFile()
+        %<LibSetSourceFileSection(headerFile, "Declarations", tmpFcnBuf)>
+        %assign ::POWER_CALLBACKS_ITERATOR = ::POWER_CALLBACKS_ITERATOR + 1
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function generates power modes structure
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function GeneratePowerModeStructureArray(block, system, adcCmdListBlocksLen) void
+    %% Generating structures in C file
+    %openfile tmpFcnBuf
+        /* Array of pointers to user configuration structures */
+        power_manager_user_config_t* powermConfigsArr[] = {
+        %foreach i = adcCmdListBlocksLen - 1
+            &powerm_InitConfig%<i>,
+        %endforeach
+        &powerm_InitConfig%<adcCmdListBlocksLen - 1>
+        };
+	%closefile tmpFcnBuf
+	%assign srcFile = LibGetModelDotCFile()
+    %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+
+    %% Generating structures in H file
+	%openfile tmpFcnBuf
+
+        %% declaring pointer array to User configuration structures
+        /* Array of pointers to User configuration structures */
+        extern power_manager_user_config_t * powermConfigsArr[];
+        %foreach i = adcCmdListBlocksLen
+            #define POWERM_MODE_%<i> (%<i>u)
+        %endforeach
+        %% Counting structures
+        /* Count of user configuration structures */
+        #define POWERM_MODE_COUNT (%<adcCmdListBlocksLen>u)
+	%closefile tmpFcnBuf
+	%assign headerFile = LibGetModelDotHFile()
+    %<LibSetSourceFileSection(headerFile, "Declarations", tmpFcnBuf)>
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function generates callbacks structure
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function GenerateCallbackStructureArray(block, system) void
+
+    %openfile tmpFcnBuf
+        /*Array of pointers to User defined Callbacks configuration structures */
+        power_manager_callback_user_config_t * powermStaticCallbacksConfigArr[] = {
+        %foreach i = POWER_CALLBACKS_ITERATOR - 1
+            &powerm_CallbackConfig%<i>,
+        %endforeach
+        &powerm_CallbackConfig%<POWER_CALLBACKS_ITERATOR - 1>
+        };
+	%closefile tmpFcnBuf
+	%assign srcFile = LibGetModelDotCFile()
+    %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+
+    %openfile tmpFcnBuf
+    %% Counting structures
+    /* Array of pointers to user configuration structures */
+    extern power_manager_callback_user_config_t * powerStaticCallbacksConfigsArr[];
+    /* Count of user configuration structures */
+    #define POWERM_CALLBACK_COUNT (%<POWER_CALLBACKS_ITERATOR>U)
+    %closefile tmpFcnBuf
+    %assign headerFile = LibGetModelDotHFile()
+    %<LibSetSourceFileSection(headerFile, "Declarations", tmpFcnBuf)>
+%endfunction

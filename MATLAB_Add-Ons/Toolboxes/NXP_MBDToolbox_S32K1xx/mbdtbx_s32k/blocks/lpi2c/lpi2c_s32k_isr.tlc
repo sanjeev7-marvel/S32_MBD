@@ -1,0 +1,101 @@
+%implements lpi2c_s32k_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Trigger subsystem function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function FcnCallTriggeredSubsystems(block) Output
+   %foreach fcnCallIdx = NumSFcnSysOutputCalls
+        %% call the downstream system
+        %with SFcnSystemOutputCall[fcnCallIdx]
+        %% skip unconnected function call outputs
+        %if !ISEQUAL(BlockToCall, "unconnected")
+            %% Call subsytem code
+            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+        %endif
+        %endwith
+    %endforeach
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %openfile fcnBuf
+        void triggerSubsystem(){
+            %<FcnCallTriggeredSubsystems(block)>
+        }
+    %closefile fcnBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", fcnBuf)>
+
+    %assign sdk_params = FEVAL("mbd_s32k_lpi2c_isr_sdk_params", blockPath)
+    %with sdk_params
+    %openfile fcnBuf
+        %assign mode = FEVAL("mbd_s32k_lpi2c_get_mode", blockPath)
+        %if ISEQUAL(mode, "Slave")
+            void lpi2c_SlaveCallback(i2c_slave_event_t slaveEvent, void *userData)
+            {
+                switch(slaveEvent)
+                {
+                    %% call subsystem for RX_REQ if needed
+                    %if ISEQUAL(user_config.rxreq, "true")
+                        case I2C_SLAVE_EVENT_RX_REQ:
+                            triggerSubsystem();
+                            break;
+                    %endif
+
+                    %% call subsystem for TX_REQ if needed
+                    %if ISEQUAL(user_config.txreq, "true")
+                        case I2C_SLAVE_EVENT_TX_REQ:
+                            triggerSubsystem();
+                            break;
+                    %endif
+
+                    %% call subsystem for txempty if needed
+                    %if ISEQUAL(user_config.txempty, "true")
+                        case I2C_SLAVE_EVENT_TX_EMPTY:
+                            triggerSubsystem();
+                            break;
+                    %endif
+
+                    %% call subsystem for rxfull if needed
+                    %if ISEQUAL(user_config.rxfull, "true")
+                        case I2C_SLAVE_EVENT_RX_FULL:
+                            triggerSubsystem();
+                            break;
+                    %endif
+
+                    %% call subsystem for stop if needed
+                    %if ISEQUAL(user_config.stop, "true")
+                        case I2C_SLAVE_EVENT_STOP:
+                            triggerSubsystem();
+                            break;
+                    %endif
+                }
+            }
+        %else
+            void lpi2c_MasterCallback(i2c_master_event_t masterEvent, void *userData)
+            {
+                %% call subsystem for masterendtransfer if needed
+                %if ISEQUAL(user_config.masterendtransfer, "true")
+                    /* I2C_MASTER_EVENT_END_TRANSFER event */
+                    triggerSubsystem();
+                %endif
+            }
+        %endif
+    %closefile fcnBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", fcnBuf)>
+    %endwith
+
+    %endif
+%endfunction

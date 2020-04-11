@@ -1,0 +1,165 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ADC Start Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+    <!--Page-title-->
+    <h1>ADC Start Block</h1>
+	<!--Page-description-->
+    <p>This block allows to configure channel parameters, start the conversion and get the result when interrupt is not configured.</p>
+    <!--Library block image-->
+	<h2>Block Image</h2>
+    <img vspace="0" src="adc_start_block_files/adc_start_block.jpg" width="320px" height="auto">
+	<!--Inputs-->
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+	<!--Outputs-->
+    <h2>Outputs:</h2>
+    <ul>
+        <li>data result (uint32)</li>
+    </ul>
+	<!--Block-Dialog-Box-->
+     <h2>Parameters and Dialog Box</h2>
+     <p>The block dialog consists of the following tabs: </p>
+
+    <!--Table of contents-->
+	<!--Window tab-->
+
+	 <img vspace="10" src="adc_start_block_files/adc_start_opt.jpg" width="400px" height="auto">
+     <h3>ADC</h3>
+     <p>Selects the ADC converter number.</p>
+
+     <h3>SC1 Register</h3>
+     <p>Select which SC1 Register is the source for the trigger.</p>
+
+	 <h3>Input Channel</h3>
+	 <p>Selects one of the input channels.</p>
+
+     <h3>Interrupt Enable</h3>
+      <p>Enables conversion complete interrupts.</p>
+
+    </tbody>
+    </table>
+    <br />
+    <b>Table 1. ADC external channels per package</b>
+    <table rules="all" cellpadding="2" cellspacing="2">
+    <tbody>
+        <tr>
+            <th width="120">Chip</td>
+            <th width="110">Package</td>
+            <th width="60">ADC0</td>
+            <th width="60">ADC1</td>
+        </tr>
+        <tr>
+            <td rowspan="2">S32K116</td>
+            <td>32 QFN</td>
+            <td>9</td>
+            <td>NA</td>
+        </tr>
+        <tr>
+        <td>48  LQFP</td>
+            <td>13</td>
+            <td>NA</td>
+        </tr>
+        <tr>
+            <td rowspan="2">S32K118</td>
+            <td>48 LQFP</td>
+            <td>13</td>
+            <td>NA</td>
+        </tr>
+        <tr>
+        <td>64  LQFP</td>
+            <td>16</td>
+            <td>NA</td>
+        </tr>
+            <td rowspan="2">S32K142</td>
+            <td>64 LQFP</td>
+            <td>16</td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <td>100 LQFP</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td rowspan="3">S32K144</td>
+            <td>64 LQFP</td>
+            <td>16</td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <td>100 LQFP</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>100 MAPBGA</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+         <tr>
+            <td rowspan="4">S32K146</td>
+            <td>64 LQFP</td>
+            <td>16</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>100 LQFP</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>144 LQFP</td>
+            <td>24</td>
+            <td>24</td>
+        </tr>
+        <tr>
+            <td>100 MAPBGA</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td rowspan="3">S32K148</td>
+            <td>144 LQFP</td>
+            <td>32</td>
+            <td>32</td>
+        </tr>
+        <tr>
+            <td>100 MAPBGA</td>
+            <td>16</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>176 LQFP</td>
+            <td>32</td>
+            <td>32</td>
+        </tr>
+    </tbody>
+    </table>
+    <br />
+
+	<!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <div>Please do the following:
+        <ol>
+            <li>Configure the <a href="adc_config_block.html">ADC Config</a> block.</li>
+        </ol>
+    </div>
+     <!--Block-Miscellaneous-Details-->
+        <h2>Block Miscellaneous Details</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+			<div>* To get more information refer to Hardware Manual documentation.</div>
+        </div>
+    </body>
+</html>

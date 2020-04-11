@@ -1,0 +1,65 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ADC Interleave Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <!--Page-title-->
+    <h1>ADC Interleave Block</h1>
+    <!--Page-description-->
+    <p>This block enables the interleaved mode for S32K14x.</p>
+    <!--Library block image-->
+    <h2>Block Image</h2>
+    <img vspace="0" src="adc_interleave_block_files/adc_interleave_block.jpg" width="320px" height="auto">
+    <!--Inputs-->
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <!--Outputs-->
+    <h2>Outputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <!--Block-Dialog-Box-->
+     <h2>Parameters and Dialog Box</h2>
+     <p>The block dialog consists of the following tabs: </p>
+
+    <!--Table of contents-->
+    <!--Window tab-->
+
+     <img vspace="10" src="adc_interleave_block_files/adc_interleave_opt.jpg" width="400px" height="auto">
+     <h3>ADC interleave pins</h3>
+     <p>Selects the ADC interleave pins.</p>
+      <p> There are several special ADC channels which support hardware interleave between multiple ADCs:</p>
+     <ul>
+         <li>PTB0 to ADC0_SE4 and ADC1_SE14</li>
+         <li>PTB1 to ADC0_SE5 and ADC1_SE15</li>
+         <li>PTB13 to ADC1_SE8 and ADC0_SE8</li>
+         <li>PTB14 to ADC1_SE9 and ADC0_SE9</li>
+    </ul>
+     <h3>Place the code in intialization function</h3>
+     <p>Allows the user to decide where the code will be placed:
+     If checked, the code will be written in initialization function; otherwise, the code will go where the block is placed.</p>
+
+    <!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <div>Please do the following:
+        <ol>
+            <li>Configure two <a href="adc_config_block.html">ADC Config</a> blocks.</li>
+        </ol>
+    </div>
+     <!--Block-Miscellaneous-Details-->
+        <h2>Block Miscellaneous Details</h2>
+        <ul>
+            <li>ADC interleaving is not supported in S32K11x devices.</li>
+        </ul>
+            <div>* To get more information refer to Hardware Manual documentation.</div>
+        </div>
+    </body>
+</html>

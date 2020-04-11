@@ -1,0 +1,2348 @@
+Model {
+  Name			  "sbc_uja1169_mode_control_s32k11x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    1
+    Outport {
+      Name		      "Out1"
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      UnitExpr		      "inherit"
+    }
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.655"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 24
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      Path		      "sbc_uja1169_mode_control_s32k11x/Digital_Input"
+      SID		      "437"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input_ISR"
+      Path		      "sbc_uja1169_mode_control_s32k11x/Digital_Input_ISR"
+      SID		      "436"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/GREEN  LED ON/BLUE_LED"
+      SID		      "746"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/GREEN  LED ON/GREEN_LED"
+      SID		      "748"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/GREEN  LED ON/RED_LED"
+      SID		      "747"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/LEDS OFF/BLUE_LED"
+      SID		      "740"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/LEDS OFF/GREEN_LED"
+      SID		      "742"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/LEDS OFF/RED_LED"
+      SID		      "741"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Communication Blocks/SPI Blocks/LPSPI_Config\n"
+      Path		      "sbc_uja1169_mode_control_s32k11x/LPSPI_Config "
+      SID		      "447"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "sbc_uja1169_mode_control_s32k11x/MBD_S32K14x_Config_Information"
+      SID		      "456"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "sbc_uja1169_mode_control_s32k11x/Model Info"
+      SID		      "416"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/RED  LED ON/BLUE_LED"
+      SID		      "743"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/RED  LED ON/GREEN_LED"
+      SID		      "745"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "sbc_uja1169_mode_control_s32k11x/RED  LED ON/RED_LED"
+      SID		      "744"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/PMC Blocks/PMC_Config"
+      Path		      "sbc_uja1169_mode_control_s32k11x/SLEEP/PMC_Config1"
+      SID		      "442"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+      Path		      "sbc_uja1169_mode_control_s32k11x/SLEEP/UJA1169_Set_Mode"
+      SID		      "457"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/PMC Blocks/PMC_Config"
+      Path		      "sbc_uja1169_mode_control_s32k11x/STANDBY/PMC_Config1"
+      SID		      "444"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+      Path		      "sbc_uja1169_mode_control_s32k11x/STANDBY/UJA1169_Set_Mode"
+      SID		      "458"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      Path		      "sbc_uja1169_mode_control_s32k11x/SW2"
+      SID		      "147"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      Path		      "sbc_uja1169_mode_control_s32k11x/SW3"
+      SID		      "209"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Config"
+      Path		      "sbc_uja1169_mode_control_s32k11x/UJA1169_Config"
+      SID		      "455"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Get_Mode"
+      Path		      "sbc_uja1169_mode_control_s32k11x/UJA1169_Get_Mode"
+      SID		      "460"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Wdog_Control"
+      Path		      "sbc_uja1169_mode_control_s32k11x/UJA1169_Wdog_Control"
+      SID		      "459"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+      Path		      "sbc_uja1169_mode_control_s32k11x/WAKE SBC/UJA1169_Set_Mode"
+      SID		      "461"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This model demonstrates how to use Power modes of SBC_UJA1169.\nInitially, the SBC is in Normal mode"
+  ", and with SW2/SW3 it goes in Standby/Sleep mode. The SBC wake-up is done by pressing SW9.\n\nValidation: \n - GREEN"
+  " Led should be on (SBC in Normal mode)\n - Press SW3 to send SBC in Standby mode(RED led should be on)\n - Press SW9"
+  " to  wake up the SBC (GREEN led on)\n - Press SW2 to send SBC in Sleep mode (All leds should be off)\n - Press SW9 t"
+  "o  wake up the SBC (GREEN led on)\n\nNotes:\nThe test requires correct factory settings: FNMC bit disabled, SBC_UJA_"
+  "SBC_SDMC_DIS disabled and slpc must be allowed.\nFor running other applications is recommended to move the SBC in FN"
+  "MC after running this example,\notherwise CAN transceiver can be disabled because SBC goes in LIMP mode due to lack "
+  "of watchdog feed.\n\nTo move SBC in FNMC state:\n   - pin RSTN (TP24) is held LOW\n   - CANH is pulled up to Vbat \n"
+  "   - CANL is pulled down to GND\n\nHW prerequisite:\n- S32K116/S32K118\n- One Power Adapter 12V"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [0.0, 0.0, 1024.0, 780.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1525.0, 950.0]
+	ZoomFactor		[0.56897374701670644]
+	Offset			[-2164.6057046979868, -220.36912751677858]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAADO/wCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAASwAAAzsAAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAPwAAACkAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Wed Feb 28 15:15:58 2018"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:55:42 2019"
+  RTWModifiedTimeStamp	  485682942
+  ModelVersionFormat	  "1.%<AutoIncrement:655>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "sbc_uja1169_mode_control_s32k11x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "sbc_uja1169_mode_control_s32k11x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.01"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Dataset"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "auto"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Simplified"
+	  MergeDetectMultiDrivingBlocksExec "error"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "error"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  on
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel on
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  on
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport on
+	  LaunchReport		  on
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  on
+	  GenerateTraceReport	  on
+	  GenerateTraceReportSl	  on
+	  GenerateTraceReportSf	  on
+	  GenerateTraceReportEml  on
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments on
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement on
+	      OperatorAnnotations     on
+	      SimulinkDataObjDesc     on
+	      SFDataObjDesc	      on
+	      MATLABFcnDesc	      on
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      on
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments on
+	      MATLABSourceComments    on
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  2048
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant on
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "mbd_ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "mbd_ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "mbd_ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "mbd_ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  on
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases on
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition    [ 336, 96, 1200, 700 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      ActionPort
+      InitializeStates	      "held"
+      PropagateVarSize	      "Only when execution is resumed"
+      DisallowConstTsAndPrmTs off
+      ActionType	      "unset"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      PropagateVarSize	      "Only when enabling"
+      ShowOutputPort	      off
+      ZeroCross		      on
+      DisallowConstTsAndPrmTs off
+      PortDimensions	      "1"
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "double"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      EnsureOutportIsVirtual  off
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+      MustResolveToSignalObject	off
+      OutputWhenUnConnected   off
+      OutputWhenUnconnectedValue "0"
+      VectorParamsAs1DForOutWhenUnconnected off
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      GeneratePreprocessorConditionals off
+      AllowZeroVariantControls off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
+      ContentPreviewEnabled   off
+      IsWebBlock	      off
+      IsObserver	      off
+    }
+    Block {
+      BlockType		      SwitchCase
+      CaseConditions	      "{1}"
+      ShowDefaultCase	      on
+      ZeroCross		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      TriggerPort
+      TriggerType	      "rising"
+      IsSimulinkFunction      off
+      FunctionVisibility      "global"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+      StatesWhenEnabling      "inherit"
+      PropagateVarSize	      "During execution"
+      ShowOutputPort	      off
+      OutputDataType	      "auto"
+      SampleTimeType	      "triggered"
+      SampleTime	      "1"
+      ZeroCross		      on
+      DisallowConstTsAndPrmTs off
+      InitialTriggerSignalState	"compatibility (no trigger on first evaluation)"
+      PortDimensions	      "-1"
+      TriggerSignalSampleTime "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      Interpolate	      on
+    }
+  }
+  System {
+    Name		    "sbc_uja1169_mode_control_s32k11x"
+    Location		    [0, 0, 1024, 780]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "57"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "748"
+    Block {
+      BlockType		      Reference
+      Name		      "Digital_Input"
+      SID		      "437"
+      Ports		      [0, 1]
+      Position		      [-2115, 274, -1910, 356]
+      ZOrder		      2255
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      SourceType	      "gpio_s32k_input"
+      gpio_pin		      "PTE4: [PTE4 | Port E I/O]"
+      pull_resistor	      "None"
+      passive_filter	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Digital_Input_ISR"
+      SID		      "436"
+      Ports		      [0, 1]
+      Position		      [-2105, 413, -1900, 497]
+      ZOrder		      2254
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input_ISR"
+      SourceType	      "gpi_s32k_isr"
+      gpio_pin		      "PTE4: [PTE4 | Port E I/O]"
+      irqc		      "on falling-edge"
+      prio		      "2"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "GREEN  LED ON"
+      SID		      "392"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [-635, 914, -460, 996]
+      ZOrder		      2174
+      ForegroundColor	      "red"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"GREEN  LED ON"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"80"
+	Block {
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "393"
+	  Position		  [405, 110, 464, 138]
+	  ZOrder		  2086
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "BLUE_LED"
+	  SID			  "746"
+	  Ports			  [1]
+	  Position		  [385, 207, 565, 293]
+	  ZOrder		  2110
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTE8: [PTE8 | Port E I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "394"
+	  Position		  [225, 235, 255, 265]
+	  ZOrder		  2079
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant2"
+	  SID			  "395"
+	  Position		  [225, 355, 255, 385]
+	  ZOrder		  2094
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant3"
+	  SID			  "396"
+	  Position		  [225, 475, 255, 505]
+	  ZOrder		  2096
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GREEN_LED"
+	  SID			  "748"
+	  Ports			  [1]
+	  Position		  [385, 447, 565, 533]
+	  ZOrder		  2112
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD15: [PTD15 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "RED_LED"
+	  SID			  "747"
+	  Ports			  [1]
+	  Position		  [385, 327, 565, 413]
+	  ZOrder		  2111
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD16: [PTD16 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Line {
+	  ZOrder		  12
+	  SrcBlock		  "Constant2"
+	  SrcPort		  1
+	  DstBlock		  "RED_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "BLUE_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "GREEN_LED"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "LEDS OFF"
+      SID		      "424"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [-1075, 919, -900, 1001]
+      ZOrder		      2183
+      ForegroundColor	      "red"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"LEDS OFF"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "425"
+	  Position		  [405, 110, 464, 138]
+	  ZOrder		  2086
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "BLUE_LED"
+	  SID			  "740"
+	  Ports			  [1]
+	  Position		  [380, 222, 560, 308]
+	  ZOrder		  2101
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTE8: [PTE8 | Port E I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "427"
+	  Position		  [230, 250, 260, 280]
+	  ZOrder		  2079
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant2"
+	  SID			  "428"
+	  Position		  [230, 370, 260, 400]
+	  ZOrder		  2094
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant3"
+	  SID			  "429"
+	  Position		  [220, 500, 250, 530]
+	  ZOrder		  2096
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GREEN_LED"
+	  SID			  "742"
+	  Ports			  [1]
+	  Position		  [380, 472, 560, 558]
+	  ZOrder		  2103
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD15: [PTD15 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "RED_LED"
+	  SID			  "741"
+	  Ports			  [1]
+	  Position		  [380, 342, 560, 428]
+	  ZOrder		  2102
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD16: [PTD16 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Line {
+	  ZOrder		  7
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "BLUE_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  8
+	  SrcBlock		  "Constant2"
+	  SrcPort		  1
+	  DstBlock		  "RED_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  9
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "GREEN_LED"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "LPSPI_Config\n"
+      SID		      "447"
+      Ports		      []
+      Position		      [-744, -39, -479, 120]
+      ZOrder		      2259
+      Priority		      "1"
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Communication Blocks/SPI Blocks/LPSPI_Config\n"
+      SourceType	      "lpspi_s32k_config"
+      InstanceNumber	      "0"
+      Role		      "Master"
+      BaudRate		      "50000"
+      ShowAdvanced	      on
+      sin		      "PTB3: [LPSPI0_SIN | LPSPI Serial Data Input]"
+      sout		      "PTB4: [LPSPI0_SOUT | LPSPI Serial Data Output]"
+      sck		      "PTB2: [LPSPI0_SCK | LPSPI Serial Clock I/O]"
+      pcs0		      "None"
+      pcs1		      "PTB5: [LPSPI0_PCS1 | Peripheral Chip Select 1]"
+      pcs2		      "None"
+      pcs3		      "not available"
+      CPHA		      "1"
+      CPOL		      "0"
+      BitOrder		      "MSB first"
+      TransferSize	      "16"
+      WhichPCS		      "1"
+      PCSPol		      "ActiveLow"
+      ContinuousTransfer      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "456"
+      Ports		      []
+      Position		      [-1280, -65, -817, 147]
+      ZOrder		      2264
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K144-64KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : IAR\nTarget Type : FLASH\nDownload Code after build : off\nStep Tick Interrupt Priority : 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K118"
+      mcu_target_package      "48-LQFP"
+      mcu_target_sram_size    "25KB"
+      mcu_system_clock_freq   "40"
+      mcu_xtal_freq	      "External 40"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "3"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m0plus -mthumb -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m0plus -mthumb -g"
+      gcc_target_link_opts    "-mcpu=cortex-m0plus -mthumb"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K118_25_flash.ld"
+      ghs_target_compile_opts "-mcpu=cortexm0plus -mthumb -fsoft -Ogeneral -Wundef -Wimplicit-int -Wshadow -Wtrigraphs"
+      " --no_commons --gnu_asm -gnu99 -gdwarf-2 -G "
+      ghs_target_assemble_opts "-mcpu=cortexm0plus -mthumb -fsoft --gnu_asm"
+      ghs_target_link_opts    "-mcpu=cortexm0plus -mthumb -fsoft"
+      ghs_target_default_lcf  off
+      ghs_target_user_lcf     "S32K118_25_flash.ld"
+      iar_target_compile_opts "--thumb -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--thumb"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  off
+      iar_target_user_lcf     "S32K118_25_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis off
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis off
+      FTM_Quadrature_Inputs_PcrCheckEnDis off
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     off
+      PIT_PcrCheckEnDis	      off
+      RTC_PcrCheckEnDis	      off
+      FlexCAN_PcrCheckEnDis   off
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    off
+      LPI2C_PcrCheckEnDis     off
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    off
+      CMP_PcrCheckEnDis	      off
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   off
+      FM_PcrCheckEnDis	      off
+      Profile_PcrCheckEnDis   off
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      off
+      CSEc_PcrCheckEnDis      off
+      eDMA_PcrCheckEnDis      off
+      ADC_PcrCheckEnDis	      off
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "416"
+      Ports		      []
+      Position		      [-2140, -126, -1422, 203]
+      ZOrder		      2180
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "on"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: sbc_uja1169_mode_control_s32k11x\\n\\nDescription: This model demonstrates "
+      "how to use Power modes of SBC_UJA1169.\\nInitially, the SBC is in Normal mode, and with SW2/SW3 it goes in Stand"
+      "by/Sleep mode. The SBC wake-up is done by pressing SW9.\\n\\nValidation: \\n - GREEN Led should be on (SBC in No"
+      "rmal mode)\\n - Press SW3 to send SBC in Standby mode(RED led should be on)\\n - Press SW9 to  wake up the SBC ("
+      "GREEN led on)\\n - Press SW2 to send SBC in Sleep mode (All leds should be off)\\n - Press SW9 to  wake up the S"
+      "BC (GREEN led on)\\n\\nNotes:\\nThe test requires correct factory settings: FNMC bit disabled, SBC_UJA_SBC_SDMC_"
+      "DIS disabled and slpc must be allowed.\\nFor running other applications is recommended to move the SBC in FNMC a"
+      "fter running this example,\\notherwise CAN transceiver can be disabled because SBC goes in LIMP mode due to lack"
+      " of watchdog feed.\\n\\nTo move SBC in FNMC state:\\n   - pin RSTN (TP24) is held LOW\\n   - CANH is pulled up t"
+      "o Vbat \\n   - CANL is pulled down to GND\\n\\nHW prerequisite:\\n- S32K116/S32K118\\n- One Power Adapter 12V"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "RED  LED ON"
+      SID		      "384"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [-855, 919, -680, 1001]
+      ZOrder		      2175
+      ForegroundColor	      "red"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"RED  LED ON"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "385"
+	  Position		  [405, 110, 464, 138]
+	  ZOrder		  2086
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "BLUE_LED"
+	  SID			  "743"
+	  Ports			  [1]
+	  Position		  [480, 192, 660, 278]
+	  ZOrder		  2107
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTE8: [PTE8 | Port E I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "386"
+	  Position		  [330, 465, 360, 495]
+	  ZOrder		  2079
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant2"
+	  SID			  "387"
+	  Position		  [330, 220, 360, 250]
+	  ZOrder		  2094
+	  Value			  "0"
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant3"
+	  SID			  "388"
+	  Position		  [330, 340, 360, 370]
+	  ZOrder		  2096
+	  OutDataTypeStr	  "boolean"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "GREEN_LED"
+	  SID			  "745"
+	  Ports			  [1]
+	  Position		  [480, 437, 660, 523]
+	  ZOrder		  2109
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD15: [PTD15 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "RED_LED"
+	  SID			  "744"
+	  Ports			  [1]
+	  Position		  [480, 312, 660, 398]
+	  ZOrder		  2108
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+	  SourceType		  "gpio_s32k_output"
+	  gpio_pin		  "PTD16: [PTD16 | Port D I/O]"
+	  init_val		  "Low"
+	  drive_strength	  "Low"
+	}
+	Line {
+	  ZOrder		  14
+	  SrcBlock		  "Constant2"
+	  SrcPort		  1
+	  DstBlock		  "BLUE_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  15
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "RED_LED"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  16
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "GREEN_LED"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "SLEEP"
+      SID		      "148"
+      Ports		      [0, 0, 1]
+      Position		      [-1048, 459, -948, 501]
+      ZOrder		      2129
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"SLEEP"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  EnablePort
+	  Name			  "Enable"
+	  SID			  "150"
+	  Ports			  []
+	  Position		  [235, 20, 255, 40]
+	  ZOrder		  -2
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "PMC_Config1"
+	  SID			  "442"
+	  Ports			  []
+	  Position		  [250, 104, 460, 186]
+	  ZOrder		  2158
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/PMC Blocks/PMC_Config"
+	  SourceType		  "pmc_s32k_config"
+	  power_mode		  "Stop System and Bus clocks (STOP1)"
+	  sleep_on_exit		  off
+	  callback_before	  off
+	  callback_after	  off
+	  callback_before_after	  off
+	  show_adv_opts		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "UJA1169_Set_Mode"
+	  SID			  "457"
+	  Ports			  []
+	  Position		  [50, 109, 210, 181]
+	  ZOrder		  2160
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.20"
+	  SourceBlock		  "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+	  SourceType		  "sbc_uja1169_s32k_set_mode"
+	  modeCtrl		  "Sleep"
+	  status		  off
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "STANDBY"
+      SID		      "215"
+      Ports		      [0, 0, 1]
+      Position		      [-663, 459, -563, 501]
+      ZOrder		      2122
+      ForegroundColor	      "red"
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"STANDBY"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  EnablePort
+	  Name			  "Enable"
+	  SID			  "216"
+	  Ports			  []
+	  Position		  [235, 20, 255, 40]
+	  ZOrder		  -2
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "PMC_Config1"
+	  SID			  "444"
+	  Ports			  []
+	  Position		  [305, 144, 515, 226]
+	  ZOrder		  2159
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/PMC Blocks/PMC_Config"
+	  SourceType		  "pmc_s32k_config"
+	  power_mode		  "Stop System and Bus clocks (STOP1)"
+	  sleep_on_exit		  off
+	  callback_before	  off
+	  callback_after	  off
+	  callback_before_after	  off
+	  show_adv_opts		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "UJA1169_Set_Mode"
+	  SID			  "458"
+	  Ports			  []
+	  Position		  [75, 154, 235, 226]
+	  ZOrder		  2161
+	  ForegroundColor	  "red"
+	  LibraryVersion	  "1.20"
+	  SourceBlock		  "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+	  SourceType		  "sbc_uja1169_s32k_set_mode"
+	  modeCtrl		  "Standby"
+	  status		  off
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "SW2"
+      SID		      "147"
+      Ports		      [0, 1]
+      Position		      [-1250, 327, -1070, 413]
+      ZOrder		      2128
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      SourceType	      "gpio_s32k_input"
+      gpio_pin		      "PTD3: [PTD3 | Port D I/O]"
+      pull_resistor	      "Pulldown"
+      passive_filter	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "SW3"
+      SID		      "209"
+      Ports		      [0, 1]
+      Position		      [-870, 312, -690, 398]
+      ZOrder		      2121
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Input"
+      SourceType	      "gpio_s32k_input"
+      gpio_pin		      "PTD5: [PTD5 | Port D I/O]"
+      pull_resistor	      "Pulldown"
+      passive_filter	      off
+    }
+    Block {
+      BlockType		      SwitchCase
+      Name		      "Switch Case"
+      SID		      "401"
+      Ports		      [1, 3]
+      Position		      [-1096, 780, -434, 840]
+      ZOrder		      2172
+      BlockRotation	      270
+      BlockMirror	      on
+      ForegroundColor	      "red"
+      NamePlacement	      "alternate"
+      CaseConditions	      "{1,4,7}"
+      ShowDefaultCase	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "UJA1169_Config"
+      SID		      "455"
+      Ports		      []
+      Position		      [-430, -23, -110, 98]
+      ZOrder		      2263
+      ForegroundColor	      "red"
+      LibraryVersion	      "1.20"
+      SourceBlock	      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Config"
+      SourceType	      "sbc_uja1169_s32k_config"
+      modeCtrl		      "NORMAL"
+      deviceModel	      "UJA1169TK/F"
+      LHCtrl		      "Floating"
+      pdc		      "higher value"
+      VextConfig	      "V2C OFF"
+      ResetTresh	      "90"
+      WdogModeCtrl	      "Autonomous"
+      NominalPer	      "128 ms"
+      Lock0		      off
+      Lock1		      off
+      Lock2		      off
+      Lock3		      off
+      Lock4		      off
+      Lock5		      off
+      Lock6		      off
+      FDcontrol		      off
+      FDPartialOK	      off
+      FDPartial		      off
+      CANmodeCtrl	      "Offline"
+      dataRate		      "50 kbit/s"
+      ID1		      "0"
+      ID2		      "0"
+      ID3		      "0"
+      ID4		      "0"
+      IDmask1		      "0"
+      IDmask2		      "0"
+      IDmask3		      "0"
+      IDmask4		      "0"
+      IdFormat		      "11-bit"
+      PartialNetwData	      "Don't care"
+      DataLength	      "0"
+      dataMask0		      "0"
+      dataMask4		      "0"
+      dataMask1		      "0"
+      dataMask5		      "0"
+      dataMask2		      "0"
+      dataMask6		      "0"
+      dataMask3		      "0"
+      dataMask7		      "0"
+      V2overv		      off
+      V2underv		      off
+      V1underv		      off
+      CANsilence	      off
+      CANfailure	      off
+      CANwkUp		      on
+      overtempWrng	      off
+      spiFailure	      off
+      risingEdge	      on
+      fallingEdge	      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "UJA1169_Get_Mode"
+      SID		      "460"
+      Ports		      [0, 1]
+      Position		      [-965, 664, -800, 736]
+      ZOrder		      2266
+      ForegroundColor	      "red"
+      LibraryVersion	      "1.20"
+      SourceBlock	      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Get_Mode"
+      SourceType	      "sbc_uja169_s32k_get_mode"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "UJA1169_Wdog_Control"
+      SID		      "459"
+      Ports		      []
+      Position		      [-355, 316, -205, 388]
+      ZOrder		      2265
+      ForegroundColor	      "red"
+      LibraryVersion	      "1.20"
+      SourceBlock	      "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Wdog_Control"
+      SourceType	      "sbc_uja1169_s32k_wdog_control"
+      reset		      on
+      mode		      off
+      ModeCtrl		      "Window"
+      period		      off
+      NominalPer	      "128 ms"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "WAKE SBC"
+      SID		      "279"
+      Ports		      [0, 0, 0, 1]
+      Position		      [-1825, 495, -1690, 587]
+      ZOrder		      2145
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"WAKE SBC"
+	Location		[0, 0, 1026, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  TriggerPort
+	  Name			  "function"
+	  SID			  "305"
+	  Ports			  []
+	  Position		  [210, 15, 230, 35]
+	  ZOrder		  2154
+	  TriggerType		  "function-call"
+	  VariantControl	  "Variant"
+	  StatesWhenEnabling	  "held"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "PMC_Config1"
+	  SID			  "445"
+	  Ports			  []
+	  Position		  [250, 89, 460, 171]
+	  ZOrder		  2160
+	  Commented		  "on"
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/PMC Blocks/PMC_Config"
+	  SourceType		  "pmc_s32k_config"
+	  power_mode		  "Normal Operating (RUN)"
+	  sleep_on_exit		  off
+	  callback_before	  off
+	  callback_after	  off
+	  callback_before_after	  off
+	  show_adv_opts		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "UJA1169_Set_Mode"
+	  SID			  "461"
+	  Ports			  []
+	  Position		  [30, 94, 190, 166]
+	  ZOrder		  2162
+	  LibraryVersion	  "1.20"
+	  SourceBlock		  "mbd_sbc_ec_toolbox/UJA116x/UJA1169_Set_Mode"
+	  SourceType		  "sbc_uja1169_s32k_set_mode"
+	  modeCtrl		  "Normal"
+	  status		  off
+	}
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out1"
+      SID		      "356"
+      Position		      [-1815, 308, -1785, 322]
+      ZOrder		      2182
+      ForegroundColor	      "red"
+      IconDisplay	      "Port number"
+    }
+    Line {
+      ZOrder		      78
+      SrcBlock		      "SW3"
+      SrcPort		      1
+      Points		      [70, 0]
+      DstBlock		      "STANDBY"
+      DstPort		      enable
+    }
+    Line {
+      ZOrder		      92
+      SrcBlock		      "SW2"
+      SrcPort		      1
+      Points		      [65, 0]
+      DstBlock		      "SLEEP"
+      DstPort		      enable
+    }
+    Line {
+      ZOrder		      239
+      SrcBlock		      "UJA1169_Get_Mode"
+      SrcPort		      1
+      Points		      [30, 0]
+      DstBlock		      "Switch Case"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      219
+      SrcBlock		      "Switch Case"
+      SrcPort		      1
+      DstBlock		      "LEDS OFF"
+      DstPort		      ifaction
+    }
+    Line {
+      ZOrder		      199
+      SrcBlock		      "Switch Case"
+      SrcPort		      2
+      DstBlock		      "RED  LED ON"
+      DstPort		      ifaction
+    }
+    Line {
+      ZOrder		      200
+      SrcBlock		      "Switch Case"
+      SrcPort		      3
+      DstBlock		      "GREEN  LED ON"
+      DstPort		      ifaction
+    }
+    Line {
+      ZOrder		      223
+      SrcBlock		      "Digital_Input_ISR"
+      SrcPort		      1
+      Points		      [140, 0]
+      DstBlock		      "WAKE SBC"
+      DstPort		      trigger
+    }
+    Line {
+      ZOrder		      226
+      SrcBlock		      "Digital_Input"
+      SrcPort		      1
+      DstBlock		      "Out1"
+      DstPort		      1
+    }
+    Annotation {
+      SID		      "417"
+      Name		      "Configuration"
+      Position		      [-1340, -128, -45, 202]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.952941, 0.952941, 0.952941]"
+      BackgroundColor	      "[0.952941, 0.952941, 0.952941]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1030
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "418"
+      Name		      "Turn ON leds according with the SBC mode"
+      Position		      [-1335, 611, -45, 1023]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1032
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "421"
+      Name		      "Control mode "
+      Position		      [-1343, 226, -48, 586]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      1031
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "sbc_uja1169_mode_control_s32k11x"
+    created		    "28-Feb-2018 15:15:58"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    2
+  }
+  target {
+    id			    2
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 3]
+  }
+  target {
+    id			    3
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 2 0]
+  }
+}

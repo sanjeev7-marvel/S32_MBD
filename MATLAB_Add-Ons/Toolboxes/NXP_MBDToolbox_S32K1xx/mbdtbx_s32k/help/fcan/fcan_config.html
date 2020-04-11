@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>FCAN Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>FCAN Configuration Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to configure the FlexCAN module.</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="fcan_config_files/fcan_config_block.jpg" width="300px" height="auto" />
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+            <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#general_tab">General</a></li>
+                <li><a href="#bit_rate_tab">Bit rate</a></li>
+                <li><a href="#can_fd_tab">CAN FD</a></li>
+                <li><a href="#rx_fifo_tab">Rx FIFO</a></li>
+                <li><a href="#pretended_networking_tab">Pretended Networking</a></li>
+            </ul>
+            <!--Table of contents-->
+            <!--General tab-->
+            <h4><a name="general_tab"></a>General</h4>
+           
+            <img vspace="10" src="fcan_config_files/fcan_config_general.jpg" width="450px" height="auto" />
+
+            <h3>CAN Bus</h3>
+            <p>Selects the CAN Bus.</p>
+
+            <h3>Operational Mode</h3>
+            <p>Configures the FlexCAN operation mode.</p>
+            <ul>
+                <li>Normal mode</li>
+                <li>Listen-only mode
+                    <p>In this mode, transmission is disabled, all error counters are frozen and the module operates in a CAN Error Passive mode.</p>
+                </li>
+                <li>Loop-back mode
+                    <p>In this mode, FlexCAN performs an internal loop back that can be used for self test operation.</p>
+                </li>
+            </ul> 
+            
+            <h3>Max number of MBs</h3>
+            <p>Sets the maximum number of Message Buffers.</p>
+            
+            <h3>Pins</h3>
+            <ul>
+                <li>
+                    <h3>Rx</h3>
+                    <p>Rx Pin Selection.</p>
+                    <p>Output legend:<br />
+                        PortPinName : [Function | Description].</p>
+                </li>
+                <li>
+                    <h3>Tx</h3>
+                    <p>Tx Pin Selection</p>
+                    <p>Legend:<br />
+                        PortPinName : [Function | Description].</p>
+                </li>
+            </ul>
+            
+            <h3>Show advanced options</h3>
+            <p>Shows or hides the advanced options.</p>
+            
+            <!--Bit rate tab-->
+            <h4><a name="bit_rate_tab"></a>Bit rate</h4>
+
+            <img vspace="15" src="fcan_config_files/fcan_config_bit_rate_std.jpg" width="450px" height="auto"/>
+            
+            <h3>CAN Engine Clock Source</h3>
+            <p>This bit selects the clock source to the CAN Protocol Interface (CPI) to be either the peripheral clock (driven by the FMPLL) or the crystal oscillator clock. The selected clock is the one fed to the prescaler to generate the Serial Clock (Sclock).
+            </p>
+            <ul>
+                <li>0 &ndash; The CAN Engine Clock Source is the oscillator clock</li>
+                <li>1 &ndash; The CAN Engine Clock Source is the peripheral bus clock</li>
+            </ul>
+            <h3>Bitrate</h3>
+                <p>Available bitrate selections for the standard frames in kbps.</p>
+                <h3>Advanced options</h3>
+                <p>Possibility to set a bitrate (kbit/s) through time segments values for standard Can frames.</p>
+                
+            <img vspace="15" src="fcan_config_files/fcan_config_bit_rate.jpg" width="450px" height="auto"/>
+            <h3>Arbitration Phase</h3>
+            <p>Configures the bitrate used for standard frames or for the arbitration phase of CAN FD frames.</p>
+            <ul>
+                
+                <li>
+                    <h3>Prescaler Divider</h3>
+                    <p>Defines the ratio between the CPI clock frequency and the Serial Clock (Sclock) frequency. The Sclock period defines the time quantum of the CAN protocol. For the reset value, the Sclock frequency is equal to the CPI clock frequency. The Maximum value of this register is 0xFF, that gives a minimum Sclock frequency equal to the CPI clock frequency divided by 256.</p>
+                </li>
+                <li>
+                    <h3>Resync Jump Width</h3>
+                    <p>Defines the maximum number of time quanta1 that a bit time can be changed by one re-synchronization. The valid programmable values are 0-3.</p>
+                </li>
+                <li>
+                    <h3>Phase Segment 1</h3>
+                    <p>Defines the length of Phase Buffer Segment 1 in the bit time. The valid programmable values are 0-7.</p>
+                </li>
+                <li>
+                    <h3>Phase Segment 2</h3>
+                    <p>Defines the length of Phase Buffer Segment 2 in the bit time. The valid programmable values are 0-7.</p>
+                </li>
+                <li>
+                    <h3>Propagation Segment</h3>
+                    <p>Defines the length of the Propagation Segment in the bit time. The valid programmable values are 0-7.</p>
+                </li>
+            </ul>
+            
+            <h3>Data Phase</h3>
+            <p>Configures the bitrate used for the data phase of CAN FD frames.</p> 
+            
+            <!--CAN FD tab-->
+            <h4><a name="can_fd_tab"></a>CAN FD</h4>
+            <p>Enables CAN with Flexible Data Rate.</p>
+
+            <img vspace="15" src="fcan_config_files/fcan_config_can_fd.jpg" width="450px" height="auto"/>
+            
+            <h3>Enable CAN FD</h3>
+            <p>Enables CAN with Flexible Data-Rate. CAN FD mode cannot be used in Rx FIFO mode.</p>
+            
+            <h3>Payload size</h3>
+            <p>Sets the payload size of the mailboxes in bytes. 
+            
+            <!--Rx FIFO tab-->
+            <h4><a name="rx_fifo_tab"></a>Rx FIFO</h4>
+
+            <img vspace="15" src="fcan_config_files/fcan_config_rx_fifo.jpg" width="450px" height="auto"/>
+            
+            <h3>Enable Rx FIFO</h3>
+            <p>Enables the Rx FIFO.</p>
+            
+            <p>The Rx FIFO is receive-only and cannot be used in CAN FD mode. The received messages are read sequentially, in the order they were received, by repeatedly reading a Message Buffer structure at the output of the FIFO</p>
+            
+            <p> When Rx FIFO is enables, MBs 0 to 5 cannot be used for normal reception and transmission because the corresponding memory region (0x80-0xDC) is used by the FIFO engine as well as additional MBs (up to 32, depending on CAN_CTRL2[RFFN] setting) which are used as Rx FIFO ID Filter Table element.</p>
+            
+            <h3>Extended ID</h3>
+            <p>Selects whether the frame format is standard or extended, used as part of the Rx FIFO reception filter.</p>
+            
+            <h3>Remote frame</h3>
+            <p>Selects whether the frame is remote or not, used as part of the Rx FIFO reception filter.</p>
+
+            
+            <h3>Num ID filters</h3>
+            <p>Defines the number of needed RX FIFO ID filters. The maximum selectable number of filters is determined by the chip.</p>
+            <p>This field must not be programmed with values that make the number of Message Buffers occupied by Rx FIFO and ID Filter exceed the number of Mailboxes present, defined by <b>Max number of MBs</b>.</p>
+            
+            <h3>ID format</h3>
+            <p>Identifies the format of the Rx FIFO ID Filter Table elements. Note that all elements of the table are configured at the same time by this field (they are all the same format).</p>
+            <ul>
+                <li>Format A: One full ID (standard and extended) per ID Filter Table element.</li>
+                <li>Format B: Two full standard IDs or two partial 14-bit (standard and extended) IDs per ID Filter Table element.</li>
+                <li>Format C: Four partial 8-bit Standard IDs per ID Filter Table element.</li>
+                <li>Format D: All frames rejected.</li>
+            </ul>
+            
+            <h3>Filter table</h3>
+            <p>The Rx FIFO ID Filter Table</p>
+            
+            <!--Pretended Networking tab-->
+            <h4><a name="pretended_networking_tab"></a>Pretended Networking</h4>
+
+            <img vspace="15" src="fcan_config_files/fcan_config_pretended_networking.jpg" width="450px" height="auto"/>
+            
+            <h3>Enable Pretended Networking</h3>
+            <p>This is a special low power mode used to receive wake up messages with low power consumption. This mode  operates in Stop mode. To enter in Pretended Networking mode FlexCAN must be in normal mode.</p>
+            
+            <h3>Match event</h3>
+            <p>Enables Wake Up by Match event.</p>
+            
+            <h3>Timeout event</h3>
+            <p>Enables Wake Up by Timeout event. This event is trigger after the specified timeout.</p>
+            
+            <h3>Enable timeout</h3>
+            <p>When this is unchecked, the timeout value is set to 0. This means the timeout is disabled.</p>
+            
+            <h3>Timeout</h3>
+            <p>This 16-bit field defines a timeout value that generates a wake up event. If the timeout counter reaches the target value, when FlexCAN is under Pretended Networking mode, then a wake up event is generated. The timeout limit can be configured from 1 to 65535 to control an internal 16-bit up-count timer to produce a trigger upon reaching this configured value. The internal timer is incremented based on periodic time ticks, which period is 64 times the CAN Bit Time unit.</p>
+            
+            <h3>Enable multiple matches</h3>
+            <p>Selects whether the Wake Up by Match event should be trigger after a specified number of filtering matches or not.</p>
+            
+            <h3>Needed matches</h3>
+            <p>Defines the number of times a given message must match the predefined filtering criteria for ID and/or Payload before generating a wake up event.</p>
+            
+            <h3>Extended ID</h3>
+            <p>Selects whether the frame format is standard or extended, used as part of the ID reception filter.</p>
+            
+            <h3>Remote frame</h3>
+            <p>Selects whether the frame is remote or not, used as part of the ID reception filter.</p>
+            
+            <h3>ID filter type</h3>
+            <p>Selects the type of ID filtering to be applied when FlexCAN is under Pretended Networking mode.</p>
+            <ul>
+                <li>Match exact &ndash; Match upon a ID contents against an exact target value, <b>ID value</b> parameter</li>
+                <li>Match greater than or equal to &ndash; Match upon a ID value greater than or equal to a specified target value, <b>ID value</b> parameter</li>
+                <li>Match less than or equal to &ndash; Match upon a ID value smaller than or equal to a specified target value, <b>ID value</b> parameter</li>
+                <li>Match in range &ndash; Match upon a ID value inside a range, greater than or equal to a specified lower limit , <b>ID value</b> parameter, and smaller than or equal a specified upper limit, <b>ID mask</b>.</li>
+            </ul>
+            
+            <h3>ID value</h3>
+            <p>This ID target value used to filter incoming message ID. The ID target value is used either for equal to, smaller than, greater than comparisons, or as the lower limit value in a ID range detection.</p>
+            
+            <h3>ID mask</h3>
+            <p>This ID target value used only as the upper limit value in ID range detection. Also, when exact ID filtering criteria is selected, this register is used to store the ID mask.</p>
+            
+            <h3>Enable payload filtering</h3>
+            <p>Selects whether payload filtering is enabled or not.</p>
+            
+            <h3>Min payload size</h3>
+            <p>Specifies the lower limit for the number of data bytes considered valid for payload comparison.</p>
+            
+            <h3>Max payload size</h3>
+            <p>Specifies the upper limit for the number of data bytes considered valid for payload comparison.</p>
+            
+            <h3>Payload filter type</h3>
+            <p>Selects the type of payload filtering to be applied when FlexCAN is under Pretended Networking mode.</p>
+            <ul>
+                <li>Match exact &ndash; Match upon a payload contents against an exact target value, <b>Payload value</b> and <b>Payload mask</b> parameter</li>
+                <li>Match greater than or equal to &ndash; Match upon a payload value greater than or equal to a specified target value, <b>Payload value</b> parameter</li>
+                <li>Match less than or equal to &ndash; Match upon a payload value smaller than or equal to a specified target value, <b>Payload value</b> parameter</li>
+                <li>Match in range &ndash; Match upon a payload value inside a range, greater than or equal to a specified lower limit, <b>Payload value</b> parameter, and smaller than or equal a specified upper limit, <b>Payload mask</b> parameter</li>
+            </ul>
+            
+            <p>Filtering does not accept remote messages (RTR=1) when payload filtering is active.</p>
+            
+            <h3>Payload value</h3>
+            <p>This value used to filter incoming message payload. It is used either for "equal to", "smaller than or equal to", "greater than or equal to" comparisons, or as the lower limit value in a payload range detection.</p>
+            
+            <h3>Payload mask</h3>
+            <p>Contains the value for the Payload Filter used only as the upper limit value in a payload range detection.</p>
+            <p>When exact payload filtering criteria is selected, this parameter is used as payload mask.</p>
+            <p>Otherwise, this parameter is unused</p>
+            
+            <div>* Read Hardware Manual documentation to get more information.</div>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

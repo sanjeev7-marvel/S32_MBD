@@ -1,0 +1,109 @@
+%implements profiler_s32k_fcn "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %if !EXISTS("RAPPID_PROFILE_SETUP")
+        %assign ::RAPPID_PROFILE_SETUP = 1
+        %<LibBlockSetIsExpressionCompliant(block)>
+        %openfile hdrBuffer
+        #include "gt_pf.h"
+        #include "profile_buffer.h"
+        #include "clock_manager.h"
+        #include "lpit_hw_access.h"
+        #include "pcc_hw_access.h"
+        %closefile hdrBuffer
+        %<LibCacheIncludes(hdrBuffer)>
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign indexVal = CAST("Number",Parameter[0].Value[0]-1)
+    %assign StartProfile  = FEVAL("mbd_s32k_profile_code", indexVal,"1")
+    %assign EndProfile    = FEVAL("mbd_s32k_profile_code", indexVal,"2")
+    %assign clock = FEVAL("mbd_s32k_get_profiler_clock")
+    %assign indices = FEVAL("mbd_s32k_get_profile_count")
+    %assign indxC =  CAST("Number", %<indices>)
+    %assign ind = FEVAL("mbd_s32k_get_profile_indices")
+    %assign showOutput = CAST("Number",Parameter[1].Value[0])
+    %assign indexVal = CAST("Number",Parameter[0].Value[0] - 1)
+
+    %if !EXISTS("RAPPID_PROFILE_BUFFER_SETUP")
+        %assign ::RAPPID_PROFILE_BUFFER_SETUP = 1
+
+        %if !EXISTS("PIT_GLOBAL_INIT")
+            %assign ::PIT_GLOBAL_INIT = 1
+            {
+                /* Un-gate pit clock*/
+                PCC_SetPeripheralClockControl(PCC, LPIT0_CLK, true, %<clock>, 0, 0);
+            }
+        %endif
+        %if !EXISTS("GLOBAL_PROFILER_INIT")
+            %assign ::GLOBAL_PROFILER_INIT = 1
+            profiler_init();
+        %endif
+
+        %assign fname = LibCreateSourceFile("Source", "Custom", "profile_buffer")
+        %openfile tmpFcnBuf
+        #include <stdint.h>
+
+        volatile uint32_t profile_buffer[%<indxC>];
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(fname , "Functions", tmpFcnBuf)>
+    %endif
+
+    %if !EXISTS("RAPPID_PROFILE_BUFFER_H_SETUP")
+        %assign ::RAPPID_PROFILE_BUFFER_H_SETUP = 1
+
+        %assign fname = LibCreateSourceFile("Header", "Custom", "profile_buffer")
+        %openfile tmpFcnBuf 
+
+        #ifndef _PROFILE_BUFFER_H_
+        #define _PROFILE_BUFFER_H_
+
+        #include <stdint.h>
+
+        extern volatile uint32_t profile_buffer[%<indxC>];
+
+        #endif
+
+        %closefile tmpFcnBuf
+        %<LibSetSourceFileSection(fname , "Defines", tmpFcnBuf)>
+
+    %endif
+
+    %<LibAddToSystemField(system,"OutputBody",StartProfile)>
+    %<LibAddToSystemField(system,"OutputTrailer",EndProfile)>
+
+    %openfile tmpbuffer
+    %if showOutput != 0
+        %<LibBlockOutputSignal(0, "", "", 0)> = profile_buffer[%<indexVal>];
+    %endif
+    %closefile tmpbuffer
+
+    %<LibAddToSystemField(system,"OutputTrailer",tmpbuffer)>
+
+    %if !EXISTS("RAPPID_PROFILE_BUFFER_INIT")
+        %assign ::RAPPID_PROFILE_BUFFER_INIT = 1
+    %endif
+
+    %endif
+%endfunction

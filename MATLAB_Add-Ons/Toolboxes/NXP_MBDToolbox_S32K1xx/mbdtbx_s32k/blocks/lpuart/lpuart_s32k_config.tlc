@@ -1,0 +1,113 @@
+%implements lpuart_s32k_config "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lpuart_driver.h")>
+    %<LibAddToCommonIncludes("lin_lpuart_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+    %<LibAddToCommonIncludes("lpuart_hw_access.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>
+
+    %endif
+
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lpuart_config_info", blockPath)
+    %assign clk_info = FEVAL("mbd_s32k_lpuart_get_clk_names", info)
+    %assign hasCts = FEVAL("mbd_s32k_lpuart_has_cts", blockPath)
+    {
+        static lpuart_state_t lpuartState;
+
+        /* Enable clock for %<info.rx.user_config.port> */
+        PCC_SetClockMode(PCC, %<clk_info.rx>, true);
+        /* Configure pin for RX function */
+        PINS_SetMuxModeSel(%<info.rx.user_config.port>, %<info.rx.user_config.pin>, %<info.rx.user_config.mux>);
+
+        /* Enable clock for %<info.tx.user_config.port> */
+        PCC_SetClockMode(PCC, %<clk_info.tx>, true);
+        /* Configure pin for TX function */
+        PINS_SetMuxModeSel(%<info.tx.user_config.port>, %<info.tx.user_config.pin>, %<info.tx.user_config.mux>);
+
+        %if %<hasCts>
+            /* Enable clock for %<info.cts.user_config.port> */
+            PCC_SetClockMode(PCC, %<clk_info.cts>, true);
+            /* Configure pin for CTS function */
+            PINS_SetMuxModeSel(%<info.cts.user_config.port>, %<info.cts.user_config.pin>, %<info.cts.user_config.mux>);
+        %endif
+        /* Enable clock for %<info.rts.user_config.port> */
+        PCC_SetClockMode(PCC, %<clk_info.rts>, true);
+
+        /* Configure pin for RTS function */
+        PINS_SetMuxModeSel(%<info.rts.user_config.port>, %<info.rts.user_config.pin>, %<info.rts.user_config.mux>);
+
+        /* Set LPUART clock source */
+        PCC_SetPeripheralClockControl(PCC, %<info.periph_clock>, true, %<info.clock_source>, 0, 0);
+        /* Enable LPUART clock */
+        PCC_SetClockMode(PCC, %<info.periph_clock>, true);
+
+        const lpuart_user_config_t lpuart%<info.instance>_config = {
+          .transferType = LPUART_USING_INTERRUPTS,
+          .baudRate = %<info.baudrate>U,
+          .parityMode = %<info.parity>,
+          .stopBitCount = %<info.stopbits>,
+          .bitCountPerChar = %<info.databits>,
+          .rxDMAChannel = 0U,
+          .txDMAChannel = 0U,
+        };
+
+        /* Initializes a LPUART instance for operation */
+        LPUART_DRV_Init(%<info.instance>, &lpuartState, &lpuart%<info.instance>_config);
+
+        %if (%<info.rxinv>) || (%<info.txinv>)  || ...
+        (%<info.bothedge>)  || (%<info.brk13_b>)
+        {
+           /* Perform additional settings that requires transmitter/receiver disabling mode*/
+           /* Disable the LPUART transmitter and receiver for setting MSBF and RXINV */
+            LPUART_SetTransmitterCmd(LPUART%<info.instance>, false);
+            LPUART_SetReceiverCmd(LPUART%<info.instance>, false);
+
+            %if (%<info.rxinv>)
+                /* Sets whether the recevied data is inverted or not */
+                LPUART_SetRxDataPolarity(LPUART%<info.instance>, %<info.rxinv>);
+            %endif
+
+            %if (%<info.txinv>)
+               /* Sets whether the transmitted data is inverted or not*/
+               LPUART_CTRL_TXINV(%<info.txinv>);
+           %endif
+
+           %if (%<info.bothedge>)
+                /* Configures the LPUART baud rate both edge sampling */
+                LPUART_EnableBothEdgeSamplingCmd(LPUART%<info.instance>);
+            %endif
+
+            %if (%<info.brk13_b>)
+                /* LPUART break character transmit length configuration */
+                LPUART_SetBreakCharTransmitLength(LPUART%<info.instance>,%<info.brk13>);
+            %endif
+        }
+        %endif
+    }
+
+    %endif
+%endfunction

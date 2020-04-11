@@ -1,0 +1,55 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>TPP ISR Enable Disable Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>TPP ISR Enable Disable Block</h1>
+	<!--Page-description-->
+	<p>The main functionality of the block is to process TPP ISRs.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="images/tpp_ISR_Enable.jpg" width="300px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>Function-Call</li>
+	</ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+         <!--Table of contents-->
+        <img vspace="10" src="images/tpp_ISR_Enable_param.jpg" width="450px" height="auto">
+        <p>The block has three parameter:</p>
+		
+		<h3>Instance</h3>
+		<p>Selects the TPP instance to be used.</p>		
+		<p><b>Note:</b>Currently limited to only 1 instace (#0).</p>
+		
+		<h3>Enable/Disable interrupt</h3>
+		<p> Enable/Disable interrupt on GPIO pin selected in "TPP config" block, tab "Pins", pin "INT" .</p>
+		
+		<h3>ISR priority</h3>
+		<p> ISR priority - sets the priority of the MCU interrupt (if enabled) else clear interrupt.</p>
+		
+
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+                <li>Configure the <a href="tpp_config.html">TPP Configuration</a> block.</li>
+				<li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+	</div>
+</body>
+</html>

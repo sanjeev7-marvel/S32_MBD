@@ -1,0 +1,62 @@
+%implements adc_s32k_interleave "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign family = FEVAL("mbd_s32k_get_target_family")
+    %if (family == "s32k14")
+        %<LibAddToCommonIncludes("adc_interleave.h")>
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign family = FEVAL("mbd_s32k_get_target_family")
+    %if (family == "s32k14")
+        %assign info = FEVAL("mbd_s32k_adc_interleave_params", blockPath)
+        %if (FEVAL("strcmp", info.adcInterleaveInit, "on") == 1)
+            SIM_HAL_SetAdcInterleaveSel(SIM, %<info.adcInterleave>);
+        %endif
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign family = FEVAL("mbd_s32k_get_target_family")
+    %if (family == "s32k14")
+        %assign info = FEVAL("mbd_s32k_adc_interleave_params", blockPath)
+        %if (FEVAL("strcmp", info.adcInterleaveInit, "off") == 1)
+            SIM_HAL_SetAdcInterleaveSel(SIM, %<info.adcInterleave>);
+        %endif
+    %endif
+
+    %endif
+%endfunction

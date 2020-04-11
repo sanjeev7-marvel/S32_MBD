@@ -1,0 +1,69 @@
+%implements get_bus_tick_s32k_fcn "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %if !EXISTS("RAPPID_GET_TICK_SETUP")
+        %assign ::RAPPID_GET_TICK_SETUP = 1
+        %<LibBlockSetIsExpressionCompliant(block)>
+        %openfile hdrBuffer
+        #include "gt_pf.h"
+        #include "clock_manager.h"
+        #include "lpit_hw_access.h"
+        #include "pcc_hw_access.h"
+        %closefile hdrBuffer
+        %<LibCacheIncludes(hdrBuffer)>
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %if !EXISTS("PIT_GLOBAL_INIT")
+        %assign ::PIT_GLOBAL_INIT = 1
+        %assign clock = FEVAL("mbd_s32k_get_profiler_clock")
+        {
+            /* Un-gate pit clock*/
+            PCC_SetPeripheralClockControl(PCC, LPIT0_CLK, true, %<clock>, 0, 0);
+        }
+    %endif
+
+    %if !EXISTS("GLOBAL_PROFILER_INIT")
+        %assign ::GLOBAL_PROFILER_INIT = 1
+        profiler_init();
+    %endif
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    {
+        %<LibBlockOutputSignal(0, "", "", 0)> = profiler_get_cnt();
+    }
+
+    %endif
+%endfunction

@@ -1,0 +1,55 @@
+%implements fcan_s32k_send "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flexcan_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign data = LibBlockInputSignalAddr(0, "", "", 0)
+    %assign length = LibBlockInputSignal(1, "", "", 0)
+
+    %assign sdk_params = FEVAL("mbd_s32k_fcan_send_sdk_params", blockPath)
+    %with sdk_params
+    {
+        flexcan_data_info_t txInfo = {
+            .msg_id_type = %<data_info.msg_id_type>,
+            .data_length = %<length>,
+            .fd_enable = %<data_info.fd_enable>,
+            .fd_padding = 0x%<data_info.fd_padding>,
+            .enable_brs = %<data_info.enable_brs>,
+            .is_remote = %<data_info.is_remote>
+        };
+
+        FLEXCAN_DRV_ConfigTxMb(%<instance>, %<mb_idx>, &txInfo, 0x%<msg_id>);
+
+        %if (mode == "Blocking")
+            %<LibBlockOutputSignal(0, "", "", 0)> = FLEXCAN_DRV_SendBlocking(%<instance>, %<mb_idx>, &txInfo, 0x%<msg_id>, %<data>, %<timeout_ms>);
+        %else
+            FLEXCAN_DRV_Send(%<instance>, %<mb_idx>, &txInfo, 0x%<msg_id>, %<data>);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

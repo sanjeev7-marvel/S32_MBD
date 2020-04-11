@@ -1,0 +1,78 @@
+%implements cmp_s32k_isr "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("cmp_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_cmp_isr_sdk_params", blockPath)
+    %with sdk_params
+        %assign isr_name = "CMP%<instance>_ISR_Callback"
+
+        {
+            CMP_Type* base = CMP%<instance>;
+            IRQn_Type irqNumber = CMP%<instance>_IRQn;
+            INT_SYS_InstallHandler(irqNumber, %<isr_name>, (isr_t *)0);
+            INT_SYS_SetPriority(irqNumber, 0x%<user_config.prio>);
+            INT_SYS_EnableIRQ(irqNumber);
+
+            CMP_SetOutputInterruptTrigger(base, %<user_config.output_trigger>);
+        }
+
+        %openfile buffer
+
+            void %<isr_name>(void)
+            {
+                CMP_Type* base = CMP%<instance>;
+
+               cmp_output_trigger_t cmpOutputFlags;
+               /* Get output flags */
+               CMP_DRV_GetOutputFlags(%<instance>, &cmpOutputFlags);
+
+               %<LibBlockOutputSignal(1,"","",0)> = (bool)(cmpOutputFlags & 2U);
+               %<LibBlockOutputSignal(2,"","",0)> = (bool)(cmpOutputFlags & 1U);
+
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+
+                    %endwith
+                %endforeach
+
+                /* Clear flags */
+                CMP_DRV_ClearOutputFlags(%<instance>);
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+    %endwith
+
+    %endif
+%endfunction

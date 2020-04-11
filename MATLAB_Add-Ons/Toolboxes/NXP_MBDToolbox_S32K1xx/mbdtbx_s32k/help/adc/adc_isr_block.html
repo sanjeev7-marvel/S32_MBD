@@ -1,0 +1,62 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ADC ISR Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>ADC ISR Block</h1>
+	<!--Page-description-->
+	<p>This block allows triggering of a subsystem on ADC conversion events and getting the conversion results, as well as the channel.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="adc_isr_block_files/adc_isr_block.jpg" width="300px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>Function-call</li>
+		<li>data result (uint32)</li>
+		<li>channel (uint8) </li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+        <p>The block dialog consists of the following tabs: </p>
+		 <img vspace="10" src="adc_isr_block_files/adc_isr_opt.jpg" width="400px" height="auto">
+		</br>
+	<!--Table of contents-->
+		<h3>ADC</h3>
+		<p>Selects the ADC converter number.</p>
+
+		<h3>Interrupt Priority (0 to 15)</h3>
+		<p>Global ISR Priority.</p>
+
+		<h3>SC1 Register</h3>
+			<p>Selects which SC1 Register is the source for the trigger.</p>
+
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<div>Please do the following:
+		<ol>
+			<li>Configure the <a href="adc_config_block.html">ADC Config</a> block.</li>
+		</ol>
+	</div>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+        <li>None</li>
+    </ul>
+	<p>* To get more information refer to Hardware Manual documentation.</p>
+   </div>
+  </body>
+</html>

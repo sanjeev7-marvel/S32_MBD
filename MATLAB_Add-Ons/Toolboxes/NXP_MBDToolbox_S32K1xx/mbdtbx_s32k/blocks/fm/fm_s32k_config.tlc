@@ -1,0 +1,451 @@
+%implements fm_s32k_config "C"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("freemaster.h")>
+    %<LibAddToCommonIncludes("freemaster_interface_init.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_block_info", blockPath)
+    %assign ::fm_block_path = blockPath
+
+    %<GenerateFmCfg(info)>
+    %<GenerateFmInterfaceInit(info)>
+
+    /* Initialize FreeMaster. */
+    freemaster_interface_init();
+    %if ((info.mode == "Long Interrupt") || (info.mode == "Short Interrupt"))
+        freemaster_interface_isr_init();
+    %endif
+    FMSTR_Init();
+
+    %endif
+%endfunction
+
+
+%function GenerateFmCfg(fm_config_info) void
+    %with fm_config_info
+
+    %assign fname = LibCreateSourceFile("Header", "Custom", "freemaster_cfg")
+    %openfile tmpFcnBuf
+    /***************************************************************************//*!
+    *
+    * @file   freemaster_cfg.h
+    *
+    * @brief  FreeMASTER Serial Communication Driver configuration file
+    *
+    *******************************************************************************/
+
+    /******************************************************************************
+    * Select interrupt or poll-driven serial communication
+    ******************************************************************************/
+    %switch mode
+    %case "Long Interrupt"
+        %assign fmstr_long_intr = 1
+        %assign fmstr_short_intr = 0
+        %assign fmstr_poll_driven = 0
+        %break
+    %case "Short Interrupt"
+        %assign fmstr_long_intr = 0
+        %assign fmstr_short_intr = 1
+        %assign fmstr_poll_driven = 0
+        %break
+    %case "Poll-driven"
+        %assign fmstr_long_intr = 0
+        %assign fmstr_short_intr = 0
+        %assign fmstr_poll_driven = 1
+        %break
+    %endswitch
+
+    #define FMSTR_LONG_INTR    %<fmstr_long_intr>        /* complete message processing in interrupt */
+    #define FMSTR_SHORT_INTR   %<fmstr_short_intr>        /* SCI FIFO-queuing done in interrupt */
+    #define FMSTR_POLL_DRIVEN  %<fmstr_poll_driven>        /* no interrupt needed, polling only */
+
+    /*****************************************************************************
+    * Select communication interface (SCI, CAN, USB CDC or Packet Driven BDM)
+    ******************************************************************************/
+    %assign fmstr_sci_base = "0x4006A000"
+    %assign fmstr_can_base = "0x40024000"
+    %if (interface == "LPUART0")
+        %assign fmstr_use_sci = 1
+        %assign fmstr_use_flexcan = 0
+        %assign fmstr_sci_base = "0x4006A000"
+    %elseif (interface == "LPUART1")
+        %assign fmstr_use_sci = 1
+        %assign fmstr_use_flexcan = 0
+        %assign fmstr_sci_base = "0x4006B000"
+    %elseif (interface == "LPUART2")
+        %assign fmstr_use_sci = 1
+        %assign fmstr_use_flexcan = 0
+        %assign fmstr_sci_base = "0x4006C000"
+    %elseif (interface == "LPUART3")
+        %assign fmstr_use_sci = 1
+        %assign fmstr_use_flexcan = 0
+        %assign fmstr_sci_base = "0x4006D000"
+    %elseif (interface == "CAN0")
+        %assign fmstr_use_sci = 0
+        %assign fmstr_use_flexcan = 1
+        %assign fmstr_can_base = "0x40024000"
+    %elseif (interface == "CAN1")
+        %assign fmstr_use_sci = 0
+        %assign fmstr_use_flexcan = 1
+        %assign fmstr_can_base = "0x40025000"
+    %elseif (interface == "CAN2")
+        %assign fmstr_use_sci = 0
+        %assign fmstr_use_flexcan = 1
+        %assign fmstr_can_base = "0x4002B000"
+
+    %endif
+
+    #define FMSTR_DISABLE        0    /* To disable all FreeMASTER functionalities */
+
+    #define FMSTR_USE_SCI        %<fmstr_use_sci>        /* To select SCI communication interface */
+    #define FMSTR_SCI_BASE       %<fmstr_sci_base>
+
+    #define FMSTR_USE_MSCAN      0
+    #define FMSTR_USE_FLEXCAN    %<fmstr_use_flexcan>        /* To select FlexCAN communication interface */
+    #define FMSTR_USE_FLEXCAN32  0
+    #define FMSTR_CAN_BASE       %<fmstr_can_base>
+
+    #define FMSTR_USE_SFIO       0    /* SFIO Toolbox has been used */
+    #define FMSTR_USE_USB_CDC    0    /* To select USB CDC communication interface */
+    #define FMSTR_USE_PDBDM      0    /* To select Packet Driven BDM communication interface (optional) */
+
+    /* select RX and TX FlexCAN Message buffers */
+    #define FMSTR_FLEXCAN_TXMB 0
+    #define FMSTR_FLEXCAN_RXMB 1
+
+    /******************************************************************************
+    * Input/output communication buffer size
+    ******************************************************************************/
+    %if (comm_buffer_size_auto == "on")
+        %assign comm_buffer_size_val = 0
+    %else
+        %assign comm_buffer_size_val = comm_buffer_size
+    %endif
+
+    #define FMSTR_COMM_BUFFER_SIZE %<comm_buffer_size_val> /* set to 0 for "automatic" */
+
+    /******************************************************************************
+    * Receive FIFO queue size (use with FMSTR_SHORT_INTR only)
+    ******************************************************************************/
+    %if (comm_rqueue_size_default == "on")
+        %assign comm_rqueue_size_val = 0
+    %else
+        %assign comm_rqueue_size_val = comm_rqueue_size
+    %endif
+
+    #define FMSTR_COMM_RQUEUE_SIZE %<comm_rqueue_size_val>   /* set to 0 for "default" */
+
+    /*****************************************************************************
+    * Support for Application Commands
+    ******************************************************************************/
+
+    #define FMSTR_USE_APPCMD       0   /* enable/disable App.Commands support */
+    #define FMSTR_APPCMD_BUFF_SIZE 0   /* App.Command data buffer size */
+    #define FMSTR_MAX_APPCMD_CALLS 1   /* how many app.cmd callbacks? (0=disable) */
+
+    /*****************************************************************************
+    * Oscilloscope support
+    ******************************************************************************/
+    %switch use_scope
+    %case "on"
+        %assign use_scope_val = 1
+        %break
+    %case "off"
+        %assign use_scope_val = 0
+        %break
+    %endswitch
+
+    #define FMSTR_USE_SCOPE       %<use_scope_val>    /* enable/disable scope support */
+    #define FMSTR_MAX_SCOPE_VARS  %<max_scope_vars>    /* max. number of scope variables (2..8) */
+
+    /*****************************************************************************
+    * Recorder support
+    ******************************************************************************/
+    %switch use_recorder
+    %case "on"
+        %assign use_recorder_val = 1
+        %break
+    %case "off"
+        %assign use_recorder_val = 0
+        %break
+    %endswitch
+
+    #define FMSTR_USE_RECORDER    %<use_recorder_val>    /* enable/disable recorder support */
+    #define FMSTR_MAX_REC_VARS    %<max_rec_vars>    /* max. number of recorder variables (2..8) */
+    #define FMSTR_REC_OWNBUFF     0    /* use user-allocated rec. buffer (1=yes) */
+
+    /* built-in recorder buffer (use when FMSTR_REC_OWNBUFF is 0) */
+    #define FMSTR_REC_BUFF_SIZE    %<rec_buff_size> /* built-in buffer size */
+
+    /* recorder time base, specifies how often the recorder is called in the user app. */
+    %switch rec_timebase_unit
+    %case "seconds"
+        %assign rec_timebase_unit_val = "FMSTR_REC_BASE_SECONDS"
+        %break
+    %case "milliseconds"
+        %assign rec_timebase_unit_val = "FMSTR_REC_BASE_MILLISEC"
+        %break
+    %case "microseconds"
+        %assign rec_timebase_unit_val = "FMSTR_REC_BASE_MICROSEC"
+        %break
+    %case "nanoseconds"
+        %assign rec_timebase_unit_val = "FMSTR_REC_BASE_NANOSEC"
+        %break
+    %endswitch
+
+    #define FMSTR_REC_TIMEBASE    %<rec_timebase_unit_val>(%<rec_timebase>) /* 0 = "unknown" */
+
+    /*****************************************************************************
+    * Target-side address translation (TSA)
+    ******************************************************************************/
+
+    #define FMSTR_USE_TSA         0    /* enable TSA functionality */
+    #define FMSTR_USE_TSA_SAFETY  0    /* enable access to TSA variables only */
+    #define FMSTR_USE_TSA_INROM   0    /* TSA tables declared as const (put to ROM) */
+
+    /*****************************************************************************
+    * Enable/Disable read/write memory commands
+    ******************************************************************************/
+
+    #define FMSTR_USE_READMEM      1   /* enable read memory commands */
+    #define FMSTR_USE_WRITEMEM     1   /* enable write memory commands */
+    #define FMSTR_USE_WRITEMEMMASK 1   /* enable write memory bits commands */
+
+    /*****************************************************************************
+    * Enable/Disable read/write variable commands (a bit faster than Read Mem)
+    ******************************************************************************/
+
+    #define FMSTR_USE_READVAR      1   /* enable read variable fast commands */
+    #define FMSTR_USE_WRITEVAR     1   /* enable write variable fast commands */
+    #define FMSTR_USE_WRITEVARMASK 1   /* enable write variable bits fast commands */
+
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Includes", tmpFcnBuf)>
+
+    %endwith
+%endfunction
+
+%function GenerateFmInterfaceInit(fm_config_info) void
+    %with fm_config_info
+
+    %assign fname = LibCreateSourceFile("Header", "Custom", "freemaster_interface_init")
+    %openfile tmpFcnBuf
+
+    void freemaster_interface_init(void);
+
+    %if ((mode == "Long Interrupt") || (mode == "Short Interrupt"))
+    void freemaster_interface_isr_init(void);
+    %endif
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Includes", tmpFcnBuf)>
+    %assign mcu = FEVAL("mbd_s32k_get_target_family")
+
+    %assign fname = LibCreateSourceFile ("Source", "Custom", "freemaster_interface_init")
+    %openfile tmpFcnBuf
+        #include "freemaster.h"
+        #include "freemaster_interface_init.h"
+        #include "device_registers.h"
+        #include "interrupt_manager.h"
+
+        %if ((interface == "LPUART0") || (interface == "LPUART1") || (interface == "LPUART2") || (interface == "LPUART3"))
+            #include "lpuart_driver.h"
+            #include "lpuart_hw_access.h"
+        %else
+            #include "flexcan_driver.h"
+            #include "flexcan_hw_access.h"
+
+            flexcan_state_t fm_canCom1_State;
+            const flexcan_user_config_t fm_canCom1_InitConfig0 = {
+                .fd_enable = false,
+                .pe_clock = FLEXCAN_CLK_SOURCE_OSC,
+                .max_num_mb = 16,
+                .num_id_filters = FLEXCAN_RX_FIFO_ID_FILTERS_8,
+                .is_rx_fifo_needed = false,
+                .flexcanMode = FLEXCAN_NORMAL_MODE,
+                .payload = FLEXCAN_PAYLOAD_SIZE_8,
+                %if (mcu == "s32k14")
+                .bitrate = {
+                    .propSeg = 2,
+                    .phaseSeg1 = 1,
+                    .phaseSeg2 = 1,
+                    .preDivider = 0,
+                    .rJumpwidth = 1
+                },
+
+                .bitrate_cbt = {
+                    .propSeg = 2,
+                    .phaseSeg1 = 1,
+                    .phaseSeg2 = 1,
+                    .preDivider = 0,
+                    .rJumpwidth = 1
+                },
+                %else
+                .bitrate = {
+                    .propSeg = 7,
+                    .phaseSeg1 = 7,
+                    .phaseSeg2 = 2,
+                    .preDivider = 0,
+                    .rJumpwidth = 1
+                },
+                .bitrate_cbt = {
+                    .propSeg = 7,
+                    .phaseSeg1 = 7,
+                    .phaseSeg2 = 2,
+                    .preDivider = 0,
+                    .rJumpwidth = 1
+                },
+                %endif
+                .transfer_type = FLEXCAN_RXFIFO_USING_INTERRUPTS,
+                .rxFifoDMAChannel = 0U
+            };
+        %endif
+
+        #include "pcc_hw_access.h"
+        #include "pins_port_hw_access.h"
+        #include "clock_manager.h"
+
+        %%FREEMASTER SERIAL INITIALIZATION
+        %if ((interface == "LPUART0") || (interface == "LPUART1") || (interface == "LPUART2") || (interface == "LPUART3"))
+
+            %switch interface
+            %case "LPUART0"
+                %assign instance = "0"
+                %break
+            %case "LPUART1"
+                %assign instance = "1"
+                %break
+            %case "LPUART2"
+                %assign instance = "2"
+                %break
+            %case "LPUART3"
+                %assign instance = "3"
+                %break
+            %endswitch
+
+            %assign pin_info = FEVAL("mbd_s32k_fm_get_pin_info", ::fm_block_path)
+            %assign pin_rx = pin_info.rx
+            %assign pin_tx = pin_info.tx
+            %assign clk_src = FEVAL("mbd_s32k_fm_get_clk")
+
+            /* FreeMaster UART init function */
+            void freemaster_interface_init(void)
+            {
+                lpuart_state_t lpuartState;
+                lpuart_user_config_t lpuartConfig;
+
+                /* RX pin settings */
+                PCC_SetClockMode(PCC, %<pin_rx.user_config.port>_CLK, true);
+                PINS_SetMuxModeSel(%<pin_rx.user_config.port>, %<pin_rx.user_config.pin>, %<pin_rx.user_config.mux>);
+
+                /* TX pin settings */
+                PCC_SetClockMode(PCC, %<pin_tx.user_config.port>_CLK, true);
+                PINS_SetMuxModeSel(%<pin_tx.user_config.port>, %<pin_tx.user_config.pin>, %<pin_tx.user_config.mux>);
+
+                /* Set LPUART clock source */
+                PCC_SetPeripheralClockControl(PCC, LPUART%<instance>_CLK, true, %<clk_src>, 0, 0);
+
+                lpuartConfig.baudRate = %<baudrate>;
+                lpuartConfig.bitCountPerChar = LPUART_8_BITS_PER_CHAR;
+                lpuartConfig.parityMode = LPUART_PARITY_DISABLED;
+                lpuartConfig.stopBitCount = LPUART_ONE_STOP_BIT;
+
+                LPUART_DRV_Init(%<instance>, &lpuartState, &lpuartConfig);
+
+                /* Enable the LPUART transmitter and receiver */
+                LPUART_SetTransmitterCmd(LPUART%<instance>, true);
+                LPUART_SetReceiverCmd(LPUART%<instance>, true);
+            }
+
+            %if ((mode == "Long Interrupt") || (mode == "Short Interrupt"))
+            void freemaster_interface_isr_init(void)
+            {
+                /* Set priority for LPUART%<instance> RxTx interrupt */
+                INT_SYS_SetPriority (LPUART%<instance>_RxTx_IRQn, %<isr_prio>);
+
+                /* Register interrupt handler*/
+                INT_SYS_InstallHandler(LPUART%<instance>_RxTx_IRQn, FMSTR_Isr, (isr_t *)0);
+
+                /* Enable LPUART%<instance> RxTx interrupt.*/
+                INT_SYS_EnableIRQ(LPUART%<instance>_RxTx_IRQn);
+            }
+            %endif
+        %elseif ((interface == "CAN0") || (interface == "CAN1") || (interface == "CAN2"))
+            %switch interface
+            %case "CAN0"
+                %assign instance = "0"
+                %break
+            %case "CAN1"
+                %assign instance = "1"
+                %break
+            %case "CAN2"
+                %assign instance = "2"
+                %break
+            %endswitch
+
+            %assign pin_info = FEVAL("mbd_s32k_fm_get_pin_info", ::fm_block_path)
+            %assign pin_rx = pin_info.rx
+            %assign pin_tx = pin_info.tx
+
+            uint8_t CanInst = %<instance>;
+            %if (mcu == "s32k14")
+                IRQn_Type CanISR = CAN%<instance>_ORed_0_15_MB_IRQn;
+            %else
+                IRQn_Type CanISR = CAN%<instance>_ORed_0_31_MB_IRQn;
+            %endif
+            /* FreeMaster CAN init function */
+            void freemaster_interface_init(void)
+            {
+                    /* RX pin settings */
+                    PCC_SetClockMode(PCC, %<pin_rx.user_config.port>_CLK, true);
+                    PINS_SetMuxModeSel(%<pin_rx.user_config.port>, %<pin_rx.user_config.pin>, %<pin_rx.user_config.mux>);
+
+                    /* TX pin settings */
+                    PCC_SetClockMode(PCC, %<pin_rx.user_config.port>_CLK, true);
+                    PINS_SetMuxModeSel(%<pin_tx.user_config.port>, %<pin_tx.user_config.pin>, %<pin_tx.user_config.mux>);
+
+                    /* Enable CAN%<instance> clock */
+                    PCC_SetClockMode(PCC, FlexCAN%<instance>_CLK, true);
+
+                /* Init CAN interface */
+                FLEXCAN_DRV_Init(CanInst, &fm_canCom1_State, &fm_canCom1_InitConfig0);
+            }
+            %if ((mode == "Long Interrupt") || (mode == "Short Interrupt"))
+            void freemaster_interface_isr_init(void)
+            {
+                /* Set priority for CAN%<instance> OR'ed Message buffer interrupt */
+                INT_SYS_SetPriority (CanISR, %<isr_prio>);
+
+                /* Register interrupt handler*/
+                INT_SYS_InstallHandler(CanISR, FMSTR_Isr, (isr_t *)0);
+
+                /* Enable CAN%<instance> RxTx interrupt.*/
+                INT_SYS_EnableIRQ(CanISR);
+            }
+            %endif
+        %endif
+
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Functions", tmpFcnBuf)>
+
+    %endwith
+%endfunction

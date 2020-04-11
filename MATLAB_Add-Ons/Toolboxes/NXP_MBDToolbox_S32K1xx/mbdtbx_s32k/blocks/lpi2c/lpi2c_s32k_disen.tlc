@@ -1,0 +1,48 @@
+%implements lpi2c_s32k_disen "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_block_info", blockPath)
+    %assign config_block = FEVAL("mbd_s32k_lpi2c_get_config_block", info.instance)
+    %assign mode = FEVAL("mbd_s32k_lpi2c_get_mode", config_block)
+
+    %with info
+    {
+        %if (mode == "Master")
+            %if (get_val(master_eot_event) == "true")
+                lpi2cMasterState%<instance>.masterCallback = (i2c_master_callback_t)lpi2c_MasterCallback;
+            %else
+                lpi2cMasterState%<instance>.masterCallback = NULL;
+            %endif
+        %else
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_TRANSMIT_DATA_INT, %<get_val(s_tdie)>);
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_RECEIVE_DATA_INT, %<get_val(s_rdie)>);
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_REPEATED_START_INT, %<get_val(s_rsie)>);
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_STOP_DETECT_INT, %<get_val(s_sdie)>);
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_BIT_ERROR_INT, %<get_val(s_beie)>);
+            LPI2C_Set_SlaveInt(LPI2C%<instance>, LPI2C_SLAVE_FIFO_ERROR_INT, %<get_val(s_feie)>);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction
+
+%% Private functions
+%function get_val(p) Output
+    %if (p == "on")
+        %return "true"
+    %else
+        %return "false"
+    %endif
+%endfunction

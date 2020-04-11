@@ -1,0 +1,66 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>UJA113x Set Mode Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>UJA113x Set Mode Block</h1>
+        <!--Page-description-->
+        <p>UJA113x Set Mode performs software transition from one mode to another. The transition is achieved by writing to mode control register. The event capture registers are cleared before device is moved to sleep mode.</p>
+
+        <h2>Block Image</h2>
+        <img vspace="0" src="sbc_uja113x_set_mode_files/sbc_uja113x_set_mode_block.jpg" width="250px" height="auto">
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+         <!--Table of contents-->
+        <img vspace="10" src="sbc_uja113x_set_mode_files/sbc_uja113x_set_mode_param.jpg" width="350px" height="auto">
+
+        <p>The block has one parameter:</p>
+        <h3>Mode Control</h3>
+        <li>Normal
+		<p> Normal mode is the active SBC operating mode. In this mode, the SBC is fully operational and all onboard hardware can be activated. Normal mode can be selected from Standby mode.</p>
+		<p>The SBC immediately exists .Normal mode if:</p>
+		</li>a reset event is triggered</li>
+		<li>Standby or Sleep mode is selected via SPI</li>
+		<li>the global chip temperature rises above the OTP activation threshold, causing the SBC to enter Overload mode</li>
+		<li>the battery voltage rises above the overvoltage detection threshold, causing the SBC to enter Overload mode </li>
+		<li>the battery supply voltage and the SMPS output voltage fall below the power-off threshold, causing the SBC to switch to Off mode</li>
+
+		<li>Standby
+		<p>Standby mode is a low-power mode in which regulator V1 is switched on.</p>
+
+		<li>Sleep
+		<p>Sleep mode is a low-power mode similar to Standby mode. However, V1 is switched off in Sleep mode.</p>
+		</li>
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+				<li>Configure the <a href="sbc_uja113x_config.html">UJA113x Configuration</a> block.</li>
+				<li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <p>* To get more information refer to Hardware Manual documentation.</p>
+   </div>
+  </body>
+</html>

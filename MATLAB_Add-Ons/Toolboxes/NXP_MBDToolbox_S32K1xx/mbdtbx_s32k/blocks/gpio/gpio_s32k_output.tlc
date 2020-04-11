@@ -1,0 +1,95 @@
+%implements gpio_s32k_output "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign pinInfo = FEVAL("mbd_s32k_get_pin_info_gpio", blockPath)
+    %assign params = FEVAL("mbd_s32k_gpo_parameters", blockPath)
+    %assign mcu_family = FEVAL("mbd_s32k_get_target_family")
+
+    %with pinInfo.user_config
+        %if !EXISTS("GPI_%<port>%<pin>_INITIALIZATION")
+            %assign ::GPI_%<port>%<pin>_INITIALIZATION = 1
+            {
+
+                %if mcu_family == "s32k14"
+                    /* Enable clock for %<port> */
+                    PCC_SetClockMode(PCC, PCC_%<port>_CLOCK, true);
+                %else
+                    /* Enable clock for %<port> */
+                    PCC_SetClockMode(PCC, %<port>_CLK, true);
+                %endif
+
+                /* Configure the output port init structure. */
+                const pin_settings_config_t gpio%<port>Pin%<pin> =
+                {
+                    .base = %<port>,
+                    .pinPortIdx = %<pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .driveSelect = %<params.dse>,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<pt>,
+                    .direction = GPIO_OUTPUT_DIRECTION,
+                    .initValue = %<params.initValue>
+                };
+
+                /* Initialize GPI%<port>%<pin>. */
+                PINS_DRV_Init(1, &gpio%<port>Pin%<pin>);
+            }
+        %endif
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+    
+    %assign pinInfo = FEVAL("mbd_s32k_get_pin_info_gpio", blockPath)
+
+    %with pinInfo.user_config
+        /* GPO%<port>%<pin> Data Signal Update */
+        if (%<LibBlockInputSignal(0, "", "", 0)>) {
+            PINS_DRV_SetPins(%<pt>, 1UL<<%<pin>);
+        } else {
+            PINS_DRV_ClearPins(%<pt>, 1UL<<%<pin>);
+        }
+    %endwith
+    
+    %endif
+%endfunction

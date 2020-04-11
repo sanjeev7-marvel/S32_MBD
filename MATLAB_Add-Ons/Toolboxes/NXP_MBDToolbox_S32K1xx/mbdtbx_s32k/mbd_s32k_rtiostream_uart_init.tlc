@@ -1,0 +1,87 @@
+%% Copyright (c) 2014 Freescale Semiconductor, Inc.
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%if !EXISTS("_RTIOSTREAM_UART_INIT_H_")
+    %assign ::_RTIOSTREAM_UART_INIT_H_ = 1
+
+    %assign mcu = FEVAL("mbd_s32k_get_target_family")
+    %assign uartInfo = FEVAL("mbd_s32k_pil_get_uart_info")
+
+    %assign fname = LibCreateSourceFile("Header", "Custom", "rtiostream_serial")
+    %openfile tmpFcnBuf
+    #ifndef _RTIOSTREAM_SERIAL_H
+    #define _RTIOSTREAM_SERIAL_H
+    #include "lpuart_driver.h"
+    #include "lpuart_hw_access.h"
+
+    #define UART_INSTANCE %<uartInfo.instance>U
+    #define UART_RxTx_IRQn LPUART%<uartInfo.instance>_RxTx_IRQn
+
+    void PIL_UART_RX_TX_IRQHandler(void *driverState, uart_event_t event, void *userData);
+
+    #endif  /* __RTIOSTREAM_SERIAL_H */
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Includes", tmpFcnBuf)>    
+
+    %assign fname = LibCreateSourceFile("Header", "Custom", "rtiostream_uart_init")
+    %openfile tmpFcnBuf
+    #ifndef _RTIOSTREAM_UART_INIT_H
+    #define _RTIOSTREAM_UART_INIT_H
+    #include <stdint.h>
+
+    void rtiostream_uart_init(uint32_t baud_rate);
+
+    #endif  /* _RTIOSTREAM_UART_INIT_H */
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Includes", tmpFcnBuf)>
+
+    %assign fname = LibCreateSourceFile ("Source", "Custom", "rtiostream_uart_init")
+    %openfile tmpFcnBuf
+    #include "rtiostream_serial.h"
+    
+    #include <string.h>
+    #include "clock_manager.h"
+    #include "lpuart_driver.h"
+    #include "lpuart_hw_access.h"
+    #include "pcc_hw_access.h"
+    #include "pins_port_hw_access.h"
+
+    /* FreeMaster UART init function */
+    void rtiostream_uart_init(uint32_t baud_rate)
+    {
+        static lpuart_state_t lpuartState;
+        lpuart_user_config_t lpuartConfig;
+        
+        /* Enable clock for %<uartInfo.rx.user_config.port> */
+        PCC_SetClockMode(PCC, %<uartInfo.rx.clk>, true);
+        /* Configure pin for RX function */
+        PINS_SetMuxModeSel(%<uartInfo.rx.user_config.port>, %<uartInfo.rx.user_config.pin>, %<uartInfo.rx.user_config.mux>);
+        
+        /* Enable clock for %<uartInfo.tx.user_config.port> */
+        PCC_SetClockMode(PCC, %<uartInfo.tx.clk>, true);
+        /* Configure pin for TX function */
+        PINS_SetMuxModeSel(%<uartInfo.tx.user_config.port>, %<uartInfo.tx.user_config.pin>, %<uartInfo.tx.user_config.mux>);
+        
+        /* Set LPUART clock source */
+        PCC_SetPeripheralClockControl(PCC, %<uartInfo.periph_clock>, true, %<uartInfo.clock_source>, 0, 0);
+       /* Enable LPUART clock */
+        PCC_SetClockMode(PCC, %<uartInfo.periph_clock>, true);
+        
+        lpuartConfig.baudRate = baud_rate;
+        lpuartConfig.bitCountPerChar = LPUART_8_BITS_PER_CHAR;
+        lpuartConfig.parityMode = LPUART_PARITY_DISABLED;
+        lpuartConfig.stopBitCount = LPUART_ONE_STOP_BIT;
+        lpuartConfig.transferType = LPUART_USING_INTERRUPTS;
+        lpuartConfig.rxDMAChannel = 0U;
+        lpuartConfig.txDMAChannel = 0U;
+        
+        /* Initializes a LPUART instance for operation */
+        LPUART_DRV_Init(%<uartInfo.instance>, &lpuartState, &lpuartConfig);
+        
+        LPUART_DRV_InstallRxCallback(%<uartInfo.instance>, PIL_UART_RX_TX_IRQHandler, NULL);
+        INT_SYS_SetPriority(LPUART%<uartInfo.instance>_RxTx_IRQn, 1);
+    }
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname , "Functions", tmpFcnBuf)>
+%endif

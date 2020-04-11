@@ -1,0 +1,5153 @@
+Model {
+  Name			  "csec_keyconfig_s32k14x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.638"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 38
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Enable"
+      Path		      "csec_keyconfig_s32k14x/CSEc_Enable"
+      SID		      "480"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt_Key"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/CSEc_Encrypt_Key_1"
+      SID		      "519"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt_Key"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/CSEc_Encrypt_Master_Key"
+      SID		      "518"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Disable"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/CSEc_Disable"
+      SID		      "484"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Green LED on/Green LED/S32K"
+      "142/Green_LED"
+      SID		      "1600"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Green LED on/Green LED/S32K"
+      "144/Green_LED"
+      SID		      "1603"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Green LED on/Green LED/S32K"
+      "146/Green_LED"
+      SID		      "1607"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Green LED on/Green LED/S32K"
+      "148/Green_LED"
+      SID		      "1610"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Red LED on/Red LED/S32K142/"
+      "Red_LED"
+      SID		      "1618"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Red LED on/Red LED/S32K144/"
+      "Red_LED"
+      SID		      "1622"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Red LED on/Red LED/S32K146/"
+      "Red_LED"
+      SID		      "1625"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Disable CSec/Turn LED yellow/Red LED on/Red LED/S32K148/"
+      "Red_LED"
+      SID		      "1628"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/CSEc_Encrypt"
+      SID		      "483"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Decrypt"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/Decrypt/CSEc_Decrypt"
+      SID		      "513"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/Decrypt/Green LED/S32K142/Green_LED"
+      SID		      "1582"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/Decrypt/Green LED/S32K144/Green_LED"
+      SID		      "1585"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/Decrypt/Green LED/S32K146/Green_LED"
+      SID		      "1589"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Encrypt Decrypt Test/Decrypt/Green LED/S32K148/Green_LED"
+      SID		      "1592"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Load_Key"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Load Key 1/CSEc_Load_Key_1"
+      SID		      "495"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Load_Key"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Load Master Key/CSEc_Load_Master_Key"
+      SID		      "482"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Blue LED off/Blue LED/S32K142/Blue_LED"
+      SID		      "1367"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Blue LED off/Blue LED/S32K144/Blue_LED"
+      SID		      "1370"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Blue LED off/Blue LED/S32K146/Blue_LED"
+      SID		      "1374"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Blue LED off/Blue LED/S32K148/Blue_LED"
+      SID		      "1377"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Green LED off/Green LED/S32K142/Green_LED"
+      SID		      "1404"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Green LED off/Green LED/S32K144/Green_LED"
+      SID		      "1407"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Green LED off/Green LED/S32K146/Green_LED"
+      SID		      "1411"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Green LED off/Green LED/S32K148/Green_LED"
+      SID		      "1414"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Red LED off/Red LED/S32K142/Red_LED"
+      SID		      "1440"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Red LED off/Red LED/S32K144/Red_LED"
+      SID		      "1444"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Red LED off/Red LED/S32K146/Red_LED"
+      SID		      "1447"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED off/Red LED off/Red LED/S32K148/Red_LED"
+      SID		      "1450"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED red/Red LED on/Red LED/S32K142/Red_LED"
+      SID		      "1566"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED red/Red LED on/Red LED/S32K144/Red_LED"
+      SID		      "1570"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED red/Red LED on/Red LED/S32K146/Red_LED"
+      SID		      "1573"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+      Path		      "csec_keyconfig_s32k14x/If Action Subsystem/Turn LED red/Red LED on/Red LED/S32K148/Red_LED"
+      SID		      "1576"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "csec_keyconfig_s32k14x/MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "csec_keyconfig_s32k14x/Model Info"
+      SID		      "74"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "This model presents basic usecases for the CSEc driver.\n\nThis application demonstrates how to use:"
+  "\n- CSEc_Enable block to enable the CSEc module by partitioning the Flash.\n- CSEc_Compute_M1M2M3 and CSEc_Load_Key "
+  "block to configure the MASTER_ECU key and the first user key, using the MASTER_ECU key as an authorization.\n- CSEc_"
+  "Encrypt and CSEc_Decrypt blocks to encrypt a plain text and decrypt the cipher text using the first user key.\n- CSE"
+  "c_Disable block to disable the CSEc module by erasing of all configured keys (including the MASTER_ECU key) using a "
+  "Challenge-Authentication process.\n  This will place the part back into factory status (the CSEc module needs to be "
+  "enabled again).\n\nOutput:\n- RGB LED is green if the encrypted plain text is the same as the one decrypted.\n- RGB "
+  "LED is red if the user key 1 couldn't be updated. This can happened if the counter wasn't increased. \n- RGB LED is "
+  "yellow if the CSEc module was disabled successfully.\n\nNote:\n- The first time when running the example on the boar"
+  "d, or after a key erase, this example should be ran from RAM. This is needed because the Flash is partitioned to ena"
+  "ble the CSEc module.\n- The user keys are non-volatile. Once the key was loaded using this example, in order to upda"
+  "te it, the counter should be increased.\n- To disable CSEc module (erase all user keys) set disable_csec_flag to 1.\n"
+  "\nHW prerequisite:\n- S32K142EVB-Q100 / S32K144EVB-Q100 / S32K146EVB-Q144 / S32K148EVB-Q144\n"
+  PreLoadFcn		  "mbd_s32k_examples_preload_cbk;"
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  PostSaveFcn		  "mbd_s32k_examples_postsave_cbk;"
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [0.0, 0.0, 1024.0, 780.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1069.0, 672.0]
+	ZoomFactor		[0.79115479115479115]
+	Offset			[-1282.0947204968943, -483.69565217391306]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAPwAAACkAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Fri Dec 25 13:15:53 2015"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:57:29 2019"
+  RTWModifiedTimeStamp	  485683049
+  ModelVersionFormat	  "1.%<AutoIncrement:638>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "csec_keyconfig_s32k14x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "csec_keyconfig_s32k14x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.1"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  on
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "1"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  off
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "ROM efficiency"
+	    PropName		    "ObjectivePriorities"
+	  }
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      OperatorAnnotations     off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k14.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  2048
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant on
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  off
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases off
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Code Generation/PIL and Download Config"
+      ConfigPrmDlgPosition    [ 164, 89, 861, 671 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      ActionPort
+      InitializeStates	      "held"
+      PropagateVarSize	      "Only when execution is resumed"
+      DisallowConstTsAndPrmTs off
+      ActionType	      "unset"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      ShareAcrossModelInstances	off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      LockScale		      off
+      ConvertRealWorld	      "Real World Value (RWV)"
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      If
+      NumInputs		      "1"
+      IfExpression	      "u1 > 0"
+      ShowElse		      on
+      ZeroCross		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Logic
+      Operator		      "AND"
+      Inputs		      "2"
+      IconShape		      "rectangular"
+      AllPortsSameDT	      on
+      OutDataTypeStr	      "Inherit: Logical (see Configuration Parameters: Optimization)"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      EnsureOutportIsVirtual  off
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+      MustResolveToSignalObject	off
+      OutputWhenUnConnected   off
+      OutputWhenUnconnectedValue "0"
+      VectorParamsAs1DForOutWhenUnconnected off
+    }
+    Block {
+      BlockType		      RelationalOperator
+      Operator		      ">="
+      InputSameDT	      on
+      OutDataTypeStr	      "Inherit: Logical (see Configuration Parameters: Optimization)"
+      ZeroCross		      on
+      SampleTime	      "-1"
+      RndMeth		      "Nearest"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      GeneratePreprocessorConditionals off
+      AllowZeroVariantControls off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
+      ContentPreviewEnabled   off
+      IsWebBlock	      off
+      IsObserver	      off
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  System {
+    Name		    "csec_keyconfig_s32k14x"
+    Location		    [0, 0, 1024, 780]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "79"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "1629"
+    Block {
+      BlockType		      Reference
+      Name		      "CSEc_Enable"
+      SID		      "480"
+      Ports		      []
+      Position		      [-790, -83, -603, 0]
+      ZOrder		      2053
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Enable"
+      SourceType	      "csec_s32k_enable"
+      csec_num_user_keys      "20 keys"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Disable CSEc Flag\nMemory"
+      SID		      "493"
+      Position		      [-1055, 115, -958, 145]
+      ZOrder		      2052
+      DataStoreName	      "disable_csec_flag"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "1"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      If
+      Name		      "If"
+      SID		      "144"
+      Ports		      [1, 1]
+      Position		      [-840, 231, -740, 269]
+      ZOrder		      1990
+      IfExpression	      "u1 == 0"
+      ShowElse		      off
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "If Action\nSubsystem"
+      SID		      "145"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [-675, 267, -605, 303]
+      ZOrder		      1991
+      TreatAsAtomicUnit	      on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"If Action\nSubsystem"
+	Location		[0, 0, 1021, 780]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "147"
+	  Position		  [-1075, -665, -1016, -637]
+	  ZOrder		  -2
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "CSEc_Encrypt_Key_1"
+	  SID			  "519"
+	  Ports			  [0, 4]
+	  Position		  [-1075, -335, -890, -200]
+	  ZOrder		  2075
+	  ForegroundColor	  "red"
+	  Priority		  "3"
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt_Key"
+	  SourceType		  "csec_s32k_encrypt_key"
+	  csec_key_id		  "KEY_1"
+	  csec_key		  "{'0x00', '0x01', '0x02', '0x03', '0x04', '0x05', '0x06', '0x07', '0x08', '0x09', '0x0a', '0x0b', '0x0c"
+	  "', '0x0d', '0x0e', '0x0f'}"
+	  csec_auth_key_id	  "MASTER_ECU"
+	  csec_auth_key		  "{'0x00', '0x01', '0x02', '0x03', '0x04', '0x05', '0x06', '0x07', '0x08', '0x09', '0x0a', '0x0b', "
+	  "'0x0c', '0x0d', '0x0e', '0x0f'}"
+	  csec_counter		  "1"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "CSEc_Encrypt_Master_Key"
+	  SID			  "518"
+	  Ports			  [0, 4]
+	  Position		  [-1075, -505, -890, -370]
+	  ZOrder		  2074
+	  ForegroundColor	  "red"
+	  Priority		  "2"
+	  LibraryVersion	  "1.1032"
+	  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt_Key"
+	  SourceType		  "csec_s32k_encrypt_key"
+	  csec_key_id		  "MASTER_ECU"
+	  csec_key		  "{'0x00', '0x01', '0x02', '0x03', '0x04', '0x05', '0x06', '0x07', '0x08', '0x09', '0x0a', '0x0b', '0x0c"
+	  "', '0x0d', '0x0e', '0x0f'}"
+	  csec_auth_key_id	  "MASTER_ECU"
+	  csec_auth_key		  "{'0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', "
+	  "'0xff', '0xff', '0xff', '0xff'}"
+	  csec_counter		  "1"
+	}
+	Block {
+	  BlockType		  DataStoreRead
+	  Name			  "CSec Disable Flag\nRead"
+	  SID			  "494"
+	  Ports			  [0, 1]
+	  Position		  [-1075, 15, -975, 45]
+	  ZOrder		  2052
+	  DataStoreName		  "disable_csec_flag"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "462"
+	  Position		  [-1075, -605, -1045, -575]
+	  ZOrder		  2015
+	  OutDataTypeStr	  "uint32"
+	}
+	Block {
+	  BlockType		  DataTypeConversion
+	  Name			  "Data Type Conversion"
+	  SID			  "571"
+	  Position		  [-825, -507, -750, -473]
+	  ZOrder		  2101
+	  OutDataTypeStr	  "uint32"
+	  RndMeth		  "Floor"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  DataTypeConversion
+	  Name			  "Data Type Conversion1"
+	  SID			  "572"
+	  Position		  [-825, -337, -750, -303]
+	  ZOrder		  2102
+	  OutDataTypeStr	  "uint32"
+	  RndMeth		  "Floor"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  DataTypeConversion
+	  Name			  "Data Type Conversion3"
+	  SID			  "575"
+	  Position		  [-1075, -132, -1000, -98]
+	  ZOrder		  2110
+	  OutDataTypeStr	  "uint32"
+	  RndMeth		  "Floor"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Disable CSec"
+	  SID			  "486"
+	  Ports			  [0, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [-765, 47, -695, 83]
+	  ZOrder		  2054
+	  Priority		  "5"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Disable CSec"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "487"
+	      Position		      [-360, -145, -301, -117]
+	      ZOrder		      -2
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "CSEc_Disable"
+	      SID		      "484"
+	      Ports		      [0, 1]
+	      Position		      [-360, -82, -175, 2]
+	      ZOrder		      2039
+	      LibraryVersion	      "1.1032"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Disable"
+	      SourceType	      "csec_s32k_disable"
+	      csec_master_key	      "{'0x00', '0x01', '0x02', '0x03', '0x04', '0x05', '0x06', '0x07', '0x08', '0x09', '0x0a',"
+	      " '0x0b', '0x0c', '0x0d', '0x0e', '0x0f'}"
+	    }
+	    Block {
+	      BlockType		      If
+	      Name		      "If3"
+	      SID		      "595"
+	      Ports		      [1, 1]
+	      Position		      [-130, -59, -60, -21]
+	      ZOrder		      2115
+	      IfExpression	      "u1 == 1"
+	      ShowElse		      off
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Turn LED yellow"
+	      SID		      "596"
+	      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+	      Position		      [-40, -13, 30, 23]
+	      ZOrder		      2117
+	      Priority		      "4"
+	      TreatAsAtomicUnit	      on
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      System {
+		Name			"Turn LED yellow"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  ActionPort
+		  Name			  "Action Port"
+		  SID			  "597"
+		  Position		  [-480, -165, -421, -137]
+		  ZOrder		  -2
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Green LED on"
+		  SID			  "1594"
+		  Ports			  []
+		  Position		  [-480, -15, -340, 55]
+		  ZOrder		  2148
+		  RequestExecContextInheritance	off
+		  Variant		  off
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    22
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Green LED on');"
+		  }
+		  System {
+		    Name		    "Green LED on"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant"
+		    SID			    "1595"
+		    Position		    [-65, 5, -35, 35]
+		    ZOrder		    2122
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "Green LED"
+		    SID			    "1596"
+		    Ports		    [1]
+		    Position		    [85, -16, 225, 56]
+		    ZOrder		    2123
+		    RequestExecContextInheritance off
+		    Variant		    on
+		    Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    23
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Green LED');\nport_label('input',1,'out')"
+		    }
+		    System {
+		    Name		    "Green LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1597"
+		    Position		    [-125, 8, -95, 22]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1598"
+		    Ports		    [1]
+		    Position		    [45, -28, 225, 58]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1599"
+		    Position		    [-155, -5, -135, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1600"
+		    Ports		    [1]
+		    Position		    [35, -38, 215, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1601"
+		    Ports		    [1]
+		    Position		    [45, 92, 225, 178]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [100, 78, 900, 600]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1602"
+		    Position		    [-120, -5, -100, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1603"
+		    Ports		    [1]
+		    Position		    [50, -38, 230, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1604"
+		    Ports		    [1, 1]
+		    Position		    [-40, -11, -10, 21]
+		    ZOrder		    2097
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1605"
+		    Ports		    [1]
+		    Position		    [45, 222, 225, 308]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1606"
+		    Position		    [-145, 0, -125, 20]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1607"
+		    Ports		    [1]
+		    Position		    [45, -33, 225, 53]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1608"
+		    Ports		    [1]
+		    Position		    [45, 357, 225, 443]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1609"
+		    Position		    [-140, 15, -120, 35]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1610"
+		    Ports		    [1]
+		    Position		    [55, -18, 235, 68]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE22: [PTE22 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1611"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-109, -87, -107, -72]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		    }
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "Constant"
+		    SrcPort		    1
+		    DstBlock		    "Green LED"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Red LED on"
+		  SID			  "1612"
+		  Ports			  []
+		  Position		  [-480, -110, -340, -40]
+		  ZOrder		  2147
+		  RequestExecContextInheritance	off
+		  Variant		  off
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    24
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Red LED on');"
+		  }
+		  System {
+		    Name		    "Red LED on"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant"
+		    SID			    "1613"
+		    Position		    [-85, -5, -55, 25]
+		    ZOrder		    2120
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "Red LED"
+		    SID			    "1614"
+		    Ports		    [1]
+		    Position		    [65, -26, 205, 46]
+		    ZOrder		    2121
+		    RequestExecContextInheritance off
+		    Variant		    on
+		    Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    25
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Red LED');\nport_label('input',1,'out')"
+		    }
+		    System {
+		    Name		    "Red LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1615"
+		    Position		    [-215, -87, -185, -73]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1616"
+		    Ports		    [1]
+		    Position		    [-45, -123, 135, -37]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1617"
+		    Position		    [-90, 0, -70, 20]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1618"
+		    Ports		    [1]
+		    Position		    [100, -33, 280, 53]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1619"
+		    Ports		    [1]
+		    Position		    [-45, -3, 135, 83]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1620"
+		    Position		    [-85, 10, -65, 30]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1621"
+		    Ports		    [1, 1]
+		    Position		    [-5, 4, 20, 36]
+		    ZOrder		    2095
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1622"
+		    Ports		    [1]
+		    Position		    [80, -23, 260, 63]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1623"
+		    Ports		    [1]
+		    Position		    [-45, 127, 135, 213]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1624"
+		    Position		    [-160, -5, -140, 15]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1625"
+		    Ports		    [1]
+		    Position		    [30, -38, 210, 48]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1626"
+		    Ports		    [1]
+		    Position		    [-45, 262, 135, 348]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1627"
+		    Position		    [-245, 25, -225, 45]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1628"
+		    Ports		    [1]
+		    Position		    [-55, -8, 125, 78]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE21: [PTE21 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1629"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-199, -182, -197, -167]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		    }
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "Constant"
+		    SrcPort		    1
+		    DstBlock		    "Red LED"
+		    DstPort		    1
+		    }
+		  }
+		}
+	      }
+	    }
+	    Line {
+	      ZOrder		      7
+	      SrcBlock		      "If3"
+	      SrcPort		      1
+	      Points		      [50, 0]
+	      DstBlock		      "Turn LED yellow"
+	      DstPort		      ifaction
+	    }
+	    Line {
+	      ZOrder		      9
+	      SrcBlock		      "CSEc_Disable"
+	      SrcPort		      1
+	      DstBlock		      "If3"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Encrypt Decrypt Test"
+	  SID			  "584"
+	  Ports			  [0, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [-604, -95, -534, -35]
+	  ZOrder		  -36
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Encrypt Decrypt Test"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "588"
+	      Position		      [30, 20, 89, 48]
+	      ZOrder		      2104
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "CSEc_Encrypt"
+	      SID		      "483"
+	      Ports		      [1, 2]
+	      Position		      [105, 88, 290, 177]
+	      ZOrder		      2018
+	      Priority		      "4"
+	      LibraryVersion	      "1.1032"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Encrypt"
+	      SourceType	      "csec_s32k_encrypt"
+	      csec_mode		      "Electronic Codebook (ECB)"
+	      csec_key_id	      "KEY_1"
+	      csec_timeout	      "0"
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Data Type Conversion2"
+	      SID		      "574"
+	      Position		      [325, 93, 400, 127]
+	      ZOrder		      2103
+	      OutDataTypeStr	      "uint32"
+	      RndMeth		      "Floor"
+	      SaturateOnIntegerOverflow	off
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Decrypt"
+	      SID		      "563"
+	      Ports		      [2, 0, 0, 0, 0, 0, 0, 1]
+	      Position		      [520, 134, 590, 221]
+	      ZOrder		      -31
+	      Priority		      "4"
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      System {
+		Name			"Decrypt"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "Cipher text"
+		  SID			  "565"
+		  Position		  [20, 108, 50, 122]
+		  ZOrder		  2090
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "Plain text"
+		  SID			  "573"
+		  Position		  [20, 173, 50, 187]
+		  ZOrder		  2099
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  ActionPort
+		  Name			  "Action Port"
+		  SID			  "566"
+		  Position		  [20, 5, 79, 33]
+		  ZOrder		  2098
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "CSEc_Decrypt"
+		  SID			  "513"
+		  Ports			  [1, 2]
+		  Position		  [115, 73, 300, 157]
+		  ZOrder		  2069
+		  Priority		  "3"
+		  LibraryVersion	  "1.1032"
+		  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Decrypt"
+		  SourceType		  "csec_s32k_decrypt"
+		  csec_mode		  "Electronic Codebook (ECB)"
+		  csec_key_id		  "KEY_1"
+		  csec_timeout		  "1"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Green LED"
+		  SID			  "1578"
+		  Ports			  [1]
+		  Position		  [575, 109, 715, 181]
+		  ZOrder		  2127
+		  RequestExecContextInheritance	off
+		  Variant		  on
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    26
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Green LED');\nport_label('input',1,'out')"
+		  }
+		  System {
+		    Name		    "Green LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1579"
+		    Position		    [-125, 8, -95, 22]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1580"
+		    Ports		    [1]
+		    Position		    [45, -28, 225, 58]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1581"
+		    Position		    [-155, -5, -135, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1582"
+		    Ports		    [1]
+		    Position		    [35, -38, 215, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1583"
+		    Ports		    [1]
+		    Position		    [45, 92, 225, 178]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1584"
+		    Position		    [-120, -5, -100, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1585"
+		    Ports		    [1]
+		    Position		    [50, -38, 230, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1586"
+		    Ports		    [1, 1]
+		    Position		    [-40, -11, -10, 21]
+		    ZOrder		    2097
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1587"
+		    Ports		    [1]
+		    Position		    [45, 222, 225, 308]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1588"
+		    Position		    [-145, 0, -125, 20]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1589"
+		    Ports		    [1]
+		    Position		    [45, -33, 225, 53]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1590"
+		    Ports		    [1]
+		    Position		    [45, 357, 225, 443]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1591"
+		    Position		    [-140, 15, -120, 35]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1592"
+		    Ports		    [1]
+		    Position		    [55, -18, 235, 68]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE22: [PTE22 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1593"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-109, -87, -107, -72]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  Logic
+		  Name			  "Logical\nOperator"
+		  SID			  "529"
+		  Ports			  [1, 1]
+		  Position		  [500, 129, 530, 161]
+		  ZOrder		  2082
+		  Inputs		  "1"
+		  AllPortsSameDT	  off
+		  OutDataTypeStr	  "boolean"
+		}
+		Block {
+		  BlockType		  RelationalOperator
+		  Name			  "Relational\nOperator"
+		  SID			  "530"
+		  Ports			  [2, 1]
+		  Position		  [410, 127, 440, 158]
+		  ZOrder		  2083
+		  Operator		  "=="
+		  InputSameDT		  off
+		  OutDataTypeStr	  "boolean"
+		}
+		Block {
+		  BlockType		  Terminator
+		  Name			  "Terminator3"
+		  SID			  "515"
+		  Position		  [345, 85, 365, 105]
+		  ZOrder		  2071
+		}
+		Line {
+		  ZOrder		  91
+		  SrcBlock		  "Cipher text"
+		  SrcPort		  1
+		  DstBlock		  "CSEc_Decrypt"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  39
+		  SrcBlock		  "CSEc_Decrypt"
+		  SrcPort		  1
+		  DstBlock		  "Terminator3"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  68
+		  SrcBlock		  "CSEc_Decrypt"
+		  SrcPort		  2
+		  DstBlock		  "Relational\nOperator"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  108
+		  SrcBlock		  "Logical\nOperator"
+		  SrcPort		  1
+		  DstBlock		  "Green LED"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  67
+		  SrcBlock		  "Relational\nOperator"
+		  SrcPort		  1
+		  DstBlock		  "Logical\nOperator"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  80
+		  SrcBlock		  "Plain text"
+		  SrcPort		  1
+		  Points		  [300, 0; 0, -30]
+		  DstBlock		  "Relational\nOperator"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      If
+	      Name		      "If4"
+	      SID		      "567"
+	      Ports		      [1, 1]
+	      Position		      [435, 91, 505, 129]
+	      ZOrder		      2098
+	      IfExpression	      "u1 == 0"
+	      ShowElse		      off
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Plain text"
+	      SID		      "509"
+	      Position		      [20, 120, 70, 150]
+	      ZOrder		      2065
+	      Value		      "[hex2dec('00'), hex2dec('11'), hex2dec('22'), hex2dec('33'), hex2dec('44'), hex2dec('55'), hex2de"
+	      "c('66'), hex2dec('77'), hex2dec('88'), hex2dec('99'), hex2dec('aa'), hex2dec('bb'), hex2dec('cc'), hex2dec('dd'"
+	      "), hex2dec('ee'), hex2dec('ff')]"
+	      OutDataTypeStr	      "uint8"
+	    }
+	    Line {
+	      ZOrder		      94
+	      SrcBlock		      "CSEc_Encrypt"
+	      SrcPort		      2
+	      DstBlock		      "Decrypt"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      96
+	      SrcBlock		      "If4"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "Decrypt"
+	      DstPort		      ifaction
+	    }
+	    Line {
+	      ZOrder		      109
+	      SrcBlock		      "CSEc_Encrypt"
+	      SrcPort		      1
+	      DstBlock		      "Data Type Conversion2"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      110
+	      SrcBlock		      "Data Type Conversion2"
+	      SrcPort		      1
+	      DstBlock		      "If4"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      33
+	      SrcBlock		      "Plain text"
+	      SrcPort		      1
+	      Points		      [10, 0]
+	      Branch {
+		ZOrder			119
+		DstBlock		"CSEc_Encrypt"
+		DstPort			1
+	      }
+	      Branch {
+		ZOrder			112
+		Points			[0, 65]
+		DstBlock		"Decrypt"
+		DstPort			2
+	      }
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  If
+	  Name			  "If"
+	  SID			  "556"
+	  Ports			  [1, 1]
+	  Position		  [-710, -509, -640, -471]
+	  ZOrder		  2094
+	  IfExpression		  "u1 == 0"
+	  ShowElse		  off
+	}
+	Block {
+	  BlockType		  If
+	  Name			  "If1"
+	  SID			  "562"
+	  Ports			  [1, 1]
+	  Position		  [-710, -339, -640, -301]
+	  ZOrder		  2096
+	  IfExpression		  "u1 == 0"
+	  ShowElse		  off
+	}
+	Block {
+	  BlockType		  If
+	  Name			  "If2"
+	  SID			  "543"
+	  Ports			  [1, 2]
+	  Position		  [-960, -134, -890, -96]
+	  ZOrder		  2108
+	  IfExpression		  "u1 == 0"
+	}
+	Block {
+	  BlockType		  If
+	  Name			  "If3"
+	  SID			  "485"
+	  Ports			  [1, 1]
+	  Position		  [-895, 11, -825, 49]
+	  ZOrder		  2053
+	  IfExpression		  "u1 == 1"
+	  ShowElse		  off
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "Init Flag\nWrite"
+	  SID			  "461"
+	  Ports			  [1]
+	  Position		  [-935, -605, -895, -575]
+	  ZOrder		  2014
+	  DataStoreName		  "init_flag"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Load Key 1"
+	  SID			  "557"
+	  Ports			  [3, 1, 0, 0, 0, 0, 0, 1]
+	  Position		  [-600, -302, -530, -198]
+	  ZOrder		  -29
+	  Priority		  "3"
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Load Key 1"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M1"
+	      SID		      "558"
+	      Position		      [20, 78, 50, 92]
+	      ZOrder		      2091
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M2"
+	      SID		      "559"
+	      Position		      [20, 108, 50, 122]
+	      ZOrder		      2092
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M3"
+	      SID		      "560"
+	      Position		      [20, 138, 50, 152]
+	      ZOrder		      2093
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "561"
+	      Position		      [20, 5, 79, 33]
+	      ZOrder		      2097
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "CSEc_Load_Key_1"
+	      SID		      "495"
+	      Ports		      [3, 1]
+	      Position		      [135, 73, 320, 157]
+	      ZOrder		      2061
+	      LibraryVersion	      "1.1032"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Load_Key"
+	      SourceType	      "csec_s32k_load_key"
+	      csec_key_id	      "KEY_1"
+	      csec_load_plain_key     off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Status"
+	      SID		      "585"
+	      Position		      [365, 108, 395, 122]
+	      ZOrder		      2103
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      80
+	      SrcBlock		      "M1"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Key_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      81
+	      SrcBlock		      "M2"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Key_1"
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      82
+	      SrcBlock		      "M3"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Key_1"
+	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      85
+	      SrcBlock		      "CSEc_Load_Key_1"
+	      SrcPort		      1
+	      DstBlock		      "Status"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Load Master Key"
+	  SID			  "551"
+	  Ports			  [3, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [-600, -471, -530, -369]
+	  ZOrder		  -27
+	  Priority		  "2"
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Load Master Key"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M1"
+	      SID		      "552"
+	      Position		      [-75, -22, -45, -8]
+	      ZOrder		      2093
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M2"
+	      SID		      "553"
+	      Position		      [-75, 8, -45, 22]
+	      ZOrder		      2094
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "M3"
+	      SID		      "554"
+	      Position		      [-75, 38, -45, 52]
+	      ZOrder		      2095
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "568"
+	      Position		      [-75, -95, -16, -67]
+	      ZOrder		      2097
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "CSEc_Load_Master_Key"
+	      SID		      "482"
+	      Ports		      [3, 1]
+	      Position		      [40, -27, 225, 57]
+	      ZOrder		      2017
+	      LibraryVersion	      "1.1032"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/CSEc Blocks/CSEc_Load_Key"
+	      SourceType	      "csec_s32k_load_key"
+	      csec_key_id	      "MASTER_ECU"
+	      csec_load_plain_key     off
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator"
+	      SID		      "583"
+	      Position		      [265, 5, 285, 25]
+	      ZOrder		      2103
+	    }
+	    Line {
+	      ZOrder		      82
+	      SrcBlock		      "M1"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Master_Key"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      83
+	      SrcBlock		      "M2"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Master_Key"
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      84
+	      SrcBlock		      "M3"
+	      SrcPort		      1
+	      DstBlock		      "CSEc_Load_Master_Key"
+	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      88
+	      SrcBlock		      "CSEc_Load_Master_Key"
+	      SrcPort		      1
+	      DstBlock		      "Terminator"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Turn LED off"
+	  SID			  "579"
+	  Ports			  []
+	  Position		  [-816, -620, -776, -560]
+	  ZOrder		  -34
+	  Priority		  "1"
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Turn LED off"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Blue LED off"
+	      SID		      "1362"
+	      Ports		      []
+	      Position		      [-110, -55, 30, 15]
+	      ZOrder		      2153
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      Object {
+		$PropName		"MaskObject"
+		$ObjectID		27
+		$ClassName		"Simulink.Mask"
+		Display			"disp('Blue LED off');"
+	      }
+	      System {
+		Name			"Blue LED off"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Blue LED"
+		  SID			  "1363"
+		  Ports			  [1]
+		  Position		  [70, -24, 210, 44]
+		  ZOrder		  2116
+		  RequestExecContextInheritance	off
+		  Variant		  on
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    28
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Blue LED');\nport_label('input',1,'out')"
+		  }
+		  System {
+		    Name		    "Blue LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1364"
+		    Position		    [-55, 68, -25, 82]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1365"
+		    Ports		    [1]
+		    Position		    [115, 32, 295, 118]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1366"
+		    Position		    [-140, 0, -120, 20]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Blue_LED"
+		    SID			    "1367"
+		    Ports		    [1]
+		    Position		    [45, -33, 225, 53]
+		    ZOrder		    2078
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD0: [PTD0 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Blue_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1368"
+		    Ports		    [1]
+		    Position		    [115, 152, 295, 238]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1369"
+		    Position		    [-165, 0, -145, 20]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Blue_LED"
+		    SID			    "1370"
+		    Ports		    [1]
+		    Position		    [0, -33, 180, 53]
+		    ZOrder		    2078
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD0: [PTD0 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1371"
+		    Ports		    [1, 1]
+		    Position		    [-85, -6, -55, 26]
+		    ZOrder		    2080
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Blue_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1372"
+		    Ports		    [1]
+		    Position		    [115, 282, 295, 368]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1373"
+		    Position		    [-170, -10, -150, 10]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Blue_LED"
+		    SID			    "1374"
+		    Ports		    [1]
+		    Position		    [15, -43, 195, 43]
+		    ZOrder		    2081
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD0: [PTD0 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Blue_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1375"
+		    Ports		    [1]
+		    Position		    [115, 417, 295, 503]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1376"
+		    Position		    [-170, -20, -150, 0]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Blue_LED"
+		    SID			    "1377"
+		    Ports		    [1]
+		    Position		    [15, -53, 195, 33]
+		    ZOrder		    2081
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE23: [PTE23 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Blue_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1378"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-39, -27, -37, -12]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "1379"
+		  Position		  [-75, -5, -45, 25]
+		  ZOrder		  2114
+		  Value			  "0"
+		  OutDataTypeStr	  "boolean"
+		}
+		Line {
+		  ZOrder		  1
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Blue LED"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Green LED off"
+	      SID		      "1398"
+	      Ports		      []
+	      Position		      [-110, -150, 30, -80]
+	      ZOrder		      2155
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      Object {
+		$PropName		"MaskObject"
+		$ObjectID		29
+		$ClassName		"Simulink.Mask"
+		Display			"disp('Green LED off');"
+	      }
+	      System {
+		Name			"Green LED off"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "1399"
+		  Position		  [-65, 5, -35, 35]
+		  ZOrder		  2122
+		  Value			  "0"
+		  OutDataTypeStr	  "boolean"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Green LED"
+		  SID			  "1400"
+		  Ports			  [1]
+		  Position		  [85, -16, 225, 56]
+		  ZOrder		  2123
+		  RequestExecContextInheritance	off
+		  Variant		  on
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    30
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Green LED');\nport_label('input',1,'out')"
+		  }
+		  System {
+		    Name		    "Green LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1401"
+		    Position		    [-125, 8, -95, 22]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1402"
+		    Ports		    [1]
+		    Position		    [45, -28, 225, 58]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1403"
+		    Position		    [-155, -5, -135, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1404"
+		    Ports		    [1]
+		    Position		    [35, -38, 215, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1405"
+		    Ports		    [1]
+		    Position		    [45, 92, 225, 178]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1406"
+		    Position		    [-120, -5, -100, 15]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1407"
+		    Ports		    [1]
+		    Position		    [50, -38, 230, 48]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1408"
+		    Ports		    [1, 1]
+		    Position		    [-40, -11, -10, 21]
+		    ZOrder		    2097
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1409"
+		    Ports		    [1]
+		    Position		    [45, 222, 225, 308]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1410"
+		    Position		    [-145, 0, -125, 20]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1411"
+		    Ports		    [1]
+		    Position		    [45, -33, 225, 53]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD16: [PTD16 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1412"
+		    Ports		    [1]
+		    Position		    [45, 357, 225, 443]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "80"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1413"
+		    Position		    [-140, 15, -120, 35]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Green_LED"
+		    SID			    "1414"
+		    Ports		    [1]
+		    Position		    [55, -18, 235, 68]
+		    ZOrder		    2096
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE22: [PTE22 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Green_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1415"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-109, -87, -107, -72]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		  }
+		}
+		Line {
+		  ZOrder		  1
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Green LED"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Red LED off"
+	      SID		      "1434"
+	      Ports		      []
+	      Position		      [-110, -245, 30, -175]
+	      ZOrder		      2154
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      Object {
+		$PropName		"MaskObject"
+		$ObjectID		31
+		$ClassName		"Simulink.Mask"
+		Display			"disp('Red LED off');"
+	      }
+	      System {
+		Name			"Red LED off"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "1435"
+		  Position		  [-85, -5, -55, 25]
+		  ZOrder		  2120
+		  Value			  "0"
+		  OutDataTypeStr	  "boolean"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Red LED"
+		  SID			  "1436"
+		  Ports			  [1]
+		  Position		  [65, -26, 205, 46]
+		  ZOrder		  2121
+		  RequestExecContextInheritance	off
+		  Variant		  on
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    32
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Red LED');\nport_label('input',1,'out')"
+		  }
+		  System {
+		    Name		    "Red LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1437"
+		    Position		    [-215, -87, -185, -73]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1438"
+		    Ports		    [1]
+		    Position		    [-45, -123, 135, -37]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1439"
+		    Position		    [-90, 0, -70, 20]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1440"
+		    Ports		    [1]
+		    Position		    [100, -33, 280, 53]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1441"
+		    Ports		    [1]
+		    Position		    [-45, -3, 135, 83]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1442"
+		    Position		    [-215, -15, -195, 5]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1443"
+		    Ports		    [1, 1]
+		    Position		    [-135, -21, -110, 11]
+		    ZOrder		    2095
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1444"
+		    Ports		    [1]
+		    Position		    [-50, -48, 130, 38]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1445"
+		    Ports		    [1]
+		    Position		    [-45, 127, 135, 213]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1446"
+		    Position		    [-160, -5, -140, 15]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1447"
+		    Ports		    [1]
+		    Position		    [30, -38, 210, 48]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1448"
+		    Ports		    [1]
+		    Position		    [-45, 262, 135, 348]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1449"
+		    Position		    [-245, 25, -225, 45]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1450"
+		    Ports		    [1]
+		    Position		    [-55, -8, 125, 78]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE21: [PTE21 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1451"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-199, -182, -197, -167]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		  }
+		}
+		Line {
+		  ZOrder		  1
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Red LED"
+		  DstPort		  1
+		}
+	      }
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Turn LED red"
+	  SID			  "539"
+	  Ports			  [0, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [-765, -73, -695, -37]
+	  ZOrder		  2113
+	  Priority		  "4"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Turn LED red"
+	    Location		    [0, 0, 1021, 780]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "540"
+	      Position		      [-480, -165, -421, -137]
+	      ZOrder		      -2
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Red LED on"
+	      SID		      "1560"
+	      Ports		      []
+	      Position		      [-480, -110, -340, -40]
+	      ZOrder		      2151
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      Object {
+		$PropName		"MaskObject"
+		$ObjectID		33
+		$ClassName		"Simulink.Mask"
+		Display			"disp('Red LED on');"
+	      }
+	      System {
+		Name			"Red LED on"
+		Location		[0, 0, 1021, 780]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "1561"
+		  Position		  [-85, -5, -55, 25]
+		  ZOrder		  2120
+		  OutDataTypeStr	  "boolean"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Red LED"
+		  SID			  "1562"
+		  Ports			  [1]
+		  Position		  [65, -26, 205, 46]
+		  ZOrder		  2121
+		  RequestExecContextInheritance	off
+		  Variant		  on
+		  Object {
+		    $PropName		    "MaskObject"
+		    $ObjectID		    34
+		    $ClassName		    "Simulink.Mask"
+		    Display		    "disp('Red LED');\nport_label('input',1,'out')"
+		  }
+		  System {
+		    Name		    "Red LED"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1563"
+		    Position		    [-215, -87, -185, -73]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K142"
+		    SID			    "1564"
+		    Ports		    [1]
+		    Position		    [-45, -123, 135, -37]
+		    ZOrder		    1
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k142"
+		    System {
+		    Name		    "S32K142"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1565"
+		    Position		    [-90, 0, -70, 20]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1566"
+		    Ports		    [1]
+		    Position		    [100, -33, 280, 53]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K144"
+		    SID			    "1567"
+		    Ports		    [1]
+		    Position		    [-45, -3, 135, 83]
+		    ZOrder		    2
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k144"
+		    System {
+		    Name		    "S32K144"
+		    Location		    [100, 78, 900, 600]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1568"
+		    Position		    [-85, 10, -65, 30]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Logic
+		    Name		    "Logical\nOperator"
+		    SID			    "1569"
+		    Ports		    [1, 1]
+		    Position		    [-5, 4, 20, 36]
+		    ZOrder		    2095
+		    Operator		    "NOT"
+		    AllPortsSameDT	    off
+		    OutDataTypeStr	    "boolean"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1570"
+		    Ports		    [1]
+		    Position		    [80, -23, 260, 63]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1032"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    1
+		    }
+		    Line {
+		    ZOrder		    2
+		    SrcBlock		    "Logical\nOperator"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K146"
+		    SID			    "1571"
+		    Ports		    [1]
+		    Position		    [-45, 127, 135, 213]
+		    ZOrder		    3
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k146"
+		    System {
+		    Name		    "S32K146"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1572"
+		    Position		    [-160, -5, -140, 15]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1573"
+		    Ports		    [1]
+		    Position		    [30, -38, 210, 48]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTD15: [PTD15 | Port D I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Block {
+		    BlockType		    SubSystem
+		    Name		    "S32K148"
+		    SID			    "1574"
+		    Ports		    [1]
+		    Position		    [-45, 262, 135, 348]
+		    ZOrder		    4
+		    RequestExecContextInheritance off
+		    Variant		    off
+		    VariantControl	    "VSS_S32k148"
+		    System {
+		    Name		    "S32K148"
+		    Location		    [0, 0, 1021, 780]
+		    Open		    off
+		    PortBlocksUseCompactNotation off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "usletter"
+		    PaperUnits		    "inches"
+		    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "1575"
+		    Position		    [-245, 25, -225, 45]
+		    ZOrder		    2080
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Reference
+		    Name		    "Red_LED"
+		    SID			    "1576"
+		    Ports		    [1]
+		    Position		    [-55, -8, 125, 78]
+		    ZOrder		    2094
+		    LibraryVersion	    "1.1019"
+		    SourceBlock		    "mbd_s32k1xx_ec_toolbox/GPIO Blocks/Digital_Output"
+		    SourceType		    "gpio_s32k_output"
+		    gpio_pin		    "PTE21: [PTE21 | Port E I/O]"
+		    init_val		    "Low"
+		    drive_strength	    "Low"
+		    }
+		    Line {
+		    ZOrder		    1
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Red_LED"
+		    DstPort		    1
+		    }
+		    }
+		    }
+		    Annotation {
+		    SID			    "1577"
+		    Name		    "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<"
+		    "html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n"
+		    "</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<"
+		    "p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent"
+		    ":0px;\"><span style=\" font-size:10px;\">1) Add </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'SubSystem')\">"
+		    "<span style=\" font-size:10px; text-decoration: underline; color:#0000ff;\">Subsystem</span></a><span style=\" f"
+		    "ont-size:10px;\"> or </span><a href=\"matlab://addvsschoiceddg_cb(gcs,'ModelReference')\"><span style=\" font-si"
+		    "ze:10px; text-decoration: underline; color:#0000ff;\">Model</span></a><span style=\" font-size:10px;\"> blocks a"
+		    "s valid variant choices.</span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-righ"
+		    "t:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">2) You cannot connect blocks at t"
+		    "his level. At simulation, connectivity is automatically </span></p>\n<p style=\" margin-top:0px; margin-bottom:0"
+		    "px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10px;\">d"
+		    "etermined, based on the active variant and port name matching.</span></p></body></html>"
+		    Tag			    "VSSAddChoiceText"
+		    Position		    [-199, -182, -197, -167]
+		    InternalMargins	    [0, 0, 0, 0]
+		    HorizontalAlignment	    "left"
+		    Interpreter		    "rich"
+		    ZOrder		    -1
+		    }
+		  }
+		}
+		Line {
+		  ZOrder		  1
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Red LED"
+		  DstPort		  1
+		}
+	      }
+	    }
+	  }
+	}
+	Line {
+	  ZOrder		  18
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Init Flag\nWrite"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  21
+	  SrcBlock		  "If3"
+	  SrcPort		  1
+	  Points		  [90, 0]
+	  DstBlock		  "Disable CSec"
+	  DstPort		  ifaction
+	}
+	Line {
+	  ZOrder		  22
+	  SrcBlock		  "CSec Disable Flag\nRead"
+	  SrcPort		  1
+	  DstBlock		  "If3"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  82
+	  SrcBlock		  "CSEc_Encrypt_Master_Key"
+	  SrcPort		  2
+	  DstBlock		  "Load Master Key"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  83
+	  SrcBlock		  "CSEc_Encrypt_Master_Key"
+	  SrcPort		  3
+	  DstBlock		  "Load Master Key"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  84
+	  SrcBlock		  "CSEc_Encrypt_Master_Key"
+	  SrcPort		  4
+	  DstBlock		  "Load Master Key"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  87
+	  SrcBlock		  "CSEc_Encrypt_Key_1"
+	  SrcPort		  2
+	  DstBlock		  "Load Key 1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  88
+	  SrcBlock		  "CSEc_Encrypt_Key_1"
+	  SrcPort		  3
+	  DstBlock		  "Load Key 1"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  89
+	  SrcBlock		  "CSEc_Encrypt_Key_1"
+	  SrcPort		  4
+	  DstBlock		  "Load Key 1"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  91
+	  SrcBlock		  "If1"
+	  SrcPort		  1
+	  Points		  [70, 0]
+	  DstBlock		  "Load Key 1"
+	  DstPort		  ifaction
+	}
+	Line {
+	  ZOrder		  97
+	  SrcBlock		  "If"
+	  SrcPort		  1
+	  Points		  [70, 0]
+	  DstBlock		  "Load Master Key"
+	  DstPort		  ifaction
+	}
+	Line {
+	  ZOrder		  102
+	  SrcBlock		  "CSEc_Encrypt_Master_Key"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  101
+	  SrcBlock		  "Data Type Conversion"
+	  SrcPort		  1
+	  DstBlock		  "If"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  103
+	  SrcBlock		  "Data Type Conversion1"
+	  SrcPort		  1
+	  DstBlock		  "If1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  104
+	  SrcBlock		  "CSEc_Encrypt_Key_1"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  133
+	  SrcBlock		  "If2"
+	  SrcPort		  1
+	  Points		  [315, 0]
+	  DstBlock		  "Encrypt Decrypt Test"
+	  DstPort		  ifaction
+	}
+	Line {
+	  ZOrder		  128
+	  SrcBlock		  "Data Type Conversion3"
+	  SrcPort		  1
+	  DstBlock		  "If2"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  129
+	  SrcBlock		  "Load Key 1"
+	  SrcPort		  1
+	  Points		  [9, 0; 0, 85; -583, 0; 0, 50]
+	  DstBlock		  "Data Type Conversion3"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  134
+	  SrcBlock		  "If2"
+	  SrcPort		  2
+	  Points		  [155, 0]
+	  DstBlock		  "Turn LED red"
+	  DstPort		  ifaction
+	}
+      }
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Init Flag\nMemory"
+      SID		      "138"
+      Position		      [-1055, 235, -1003, 265]
+      ZOrder		      1984
+      DataStoreName	      "init_flag"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      Name		      "Init Flag\nRead"
+      SID		      "139"
+      Ports		      [0, 1]
+      Position		      [-970, 235, -920, 265]
+      ZOrder		      1985
+      DataStoreName	      "init_flag"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "1"
+      Ports		      []
+      Position		      [-1055, -130, -842, 42]
+      ZOrder		      1
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K144-64KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : GCC\nTarget Type : SRAM\nDownload Code after build : (COM43, 57600)\nStep Tick Interrupt Priority"
+      " : 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K144"
+      mcu_target_package      "64-LQFP"
+      mcu_target_sram_size    "64KB"
+      mcu_system_clock_freq   "80"
+      mcu_xtal_freq	      "External 8"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "15"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "SRAM"
+      gcc_target_compile_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g"
+      gcc_target_link_opts    "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K144_64_ram.ld"
+      ghs_target_compile_opts "-cpu=cortexm4f -thumb -DARM_MATH_CM4 -fpu=vfpv4_d16 -fsingle -Ogeneral -Wundef -Wimplic"
+      "it-int -Wshadow -Wtrigraphs --no_commons --gnu_asm -gnu99 -gdwarf-2 -G"
+      ghs_target_assemble_opts "-cpu=cortexm4f -fpu=vfpv4_d16"
+      ghs_target_link_opts    "-cpu=cortexm4f -thumb -fpu=vfpv4_d16"
+      ghs_target_default_lcf  off
+      ghs_target_user_lcf     "S32K144_64_ram.ld"
+      iar_target_compile_opts "--cpu=Cortex-M4F --thumb --fpu=VFPv4_sp -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--cpu Cortex-M4F --thumb --fpu VFPv4_sp"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  off
+      iar_target_user_lcf     "S32K144_64_ram.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000000"
+      rbl_download_interface  "Serial"
+      rbl_restart_request     on
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "74"
+      Ports		      []
+      Position		      [-1075, -466, -142, -172]
+      ZOrder		      1683
+      BackgroundColor	      "[0.952941, 0.952941, 0.952941]"
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: csec_keyconfig_s32k14x\\n\\nDescription: This model presents basic usecases"
+      " for the CSEc driver.\\n\\nThis application demonstrates how to use:\\n- CSEc_Enable block to enable the CSEc mo"
+      "dule by partitioning the Flash.\\n- CSEc_Compute_M1M2M3 and CSEc_Load_Key block to configure the MASTER_ECU key "
+      "and the first user key, using the MASTER_ECU key as an authorization.\\n- CSEc_Encrypt and CSEc_Decrypt blocks t"
+      "o encrypt a plain text and decrypt the cipher text using the first user key.\\n- CSEc_Disable block to disable t"
+      "he CSEc module by erasing of all configured keys (including the MASTER_ECU key) using a Challenge-Authentication"
+      " process.\\n  This will place the part back into factory status (the CSEc module needs to be enabled again).\\n\\"
+      "nOutput:\\n- RGB LED is green if the encrypted plain text is the same as the one decrypted.\\n- RGB LED is red i"
+      "f the user key 1 couldn't be updated. This can happened if the counter wasn't increased. \\n- RGB LED is yellow "
+      "if the CSEc module was disabled successfully.\\n\\nNote:\\n- The first time when running the example on the boar"
+      "d, or after a key erase, this example should be ran from RAM. This is needed because the Flash is partitioned to"
+      " enable the CSEc module.\\n- The user keys are non-volatile. Once the key was loaded using this example, in orde"
+      "r to update it, the counter should be increased.\\n- To disable CSEc module (erase all user keys) set disable_cs"
+      "ec_flag to 1.\\n\\nHW prerequisite:\\n- S32K142EVB-Q100 / S32K144EVB-Q100 / S32K146EVB-Q144 / S32K148EVB-Q144\\n"
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Line {
+      ZOrder		      98
+      SrcBlock		      "If"
+      SrcPort		      1
+      Points		      [95, 0]
+      DstBlock		      "If Action\nSubsystem"
+      DstPort		      ifaction
+    }
+    Line {
+      ZOrder		      99
+      SrcBlock		      "Init Flag\nRead"
+      SrcPort		      1
+      DstBlock		      "If"
+      DstPort		      1
+    }
+    Annotation {
+      SID		      "600"
+      Name		      "Enable/disable flags"
+      Position		      [-1075, 95, -138, 190]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.996078, 0.968627, 0.909804]"
+      BackgroundColor	      "[0.996078, 0.968627, 0.909804]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      781
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "460"
+      Name		      "Peripherals configuration"
+      Position		      [-1075, -150, -140, 72]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.952941, 0.952941, 0.952941]"
+      BackgroundColor	      "[0.952941, 0.952941, 0.952941]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      780
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "458"
+      Name		      "Run once"
+      Position		      [-1075, 211, -140, 348]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      782
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "csec_keyconfig_s32k14x"
+    created		    "25-Dec-2015 13:15:53"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    2
+  }
+  target {
+    id			    2
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 3]
+  }
+  target {
+    id			    3
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 2 0]
+  }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Programmable Delay ISR Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+<div class="content">
+    <!--Page-title-->
+	<h1>Programmable Delay ISR Block</h1>
+	<!--Page-description-->
+	<p>This block is used to call user function on PDB Interrupt (when the counter value is equal to the IDLY register) or on PDB Sequence Error Interrupt. </p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="pdb_isr_block_files/image_block.jpg" width="300px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>Function-call</li>
+		<li>Timer Interrupt flags (uint32)</li>
+		<li>Channel 0 ADC Pre Trigger Sequence Error flags (uint32)</li>
+		<li>Channel 1 ADC Pre Trigger Sequence Error flags (uint32)</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<img vspace="10" src="pdb_isr_block_files/image_param_1.jpg" width="450px" height="auto">
+		<h3>PDB Module</h3>
+			<p>Selects which PDB module to use.</p>
+		<h3>ISR Priority</h3>
+		<p>Interrupt priority level.</p>
+		<h3>Counter Interrupt Enable (PDBIE)</h3>
+		<p>Enables the PDB interrupt. When PDBIE is set and DMAEN is cleared, PDBIF generates a PDB interrupt.</p>
+
+		<h3>Sequence Error Interrupt Enable (PDBEIE)</h3>
+		<p>Sequence error detected on PDB channel's corresponding pre-trigger.*</p>
+
+		<h3>Interrupt Delay (IDLY)</h3>
+		<p>Specifies the delay value for the channel's corresponding pre-trigger. The pre-trigger asserts when the
+		counter is equal to DLY.</p>
+		<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+	<li>Use <a href="pdb_config_block.html">PDB_Config Block</a> to configure PDB</li>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<p>*Read Hardware Manual documentation to get more information.</p>
+	</div>
+</body>
+</html>

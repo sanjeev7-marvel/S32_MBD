@@ -1,0 +1,197 @@
+%implements edma_s32k_transfer "C"
+
+%% Copyright (c) 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("edma_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_edma_transfer_sdk_params", blockPath)
+    %assign channel = sdk_params.user_config.channel
+
+    %openfile cbkBuf
+        void eDMACallback%<channel>_%<EDMA_COUNT>(void *parameter, edma_chn_status_t status){
+            /* (int)parameter represents channel number */
+            /* channel status can be EDMA_CHN_NORMAL or EDMA_CHN_ERROR */
+            if(status == EDMA_CHN_NORMAL){
+                /* Call subsystem only for normal eDMA status */
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                    %% call the downstream system
+                    %with SFcnSystemOutputCall[fcnCallIdx]
+                        %% skip unconnected function call outputs
+                        %if ISEQUAL(BlockToCall, "unconnected")
+                            %continue
+                        %endif
+
+                        %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                    %endwith
+                %endforeach
+            }
+        }
+    %closefile cbkBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", cbkBuf)>
+
+    EDMA_DRV_InstallCallback(%<channel>, eDMACallback%<channel>_%<EDMA_COUNT>, %<channel>);
+    %assign ::EDMA_COUNT = ::EDMA_COUNT + 1
+
+	%endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_edma_transfer_sdk_params", blockPath)
+    %with sdk_params
+        %% tlc defines
+        %assign SINGLE_BLOCK_TRANSFER = 1
+        %assign SCATTER_GATHER_BLOCK_TRANSFER = 2
+        %assign SRC_ADDR = 1
+        %assign DEST_ADDR = 2
+
+        %% get sdk params from m-script
+        %assign channel = user_config.channel
+        %assign dma_request_source = user_config.dma_req_src
+
+        %% block/chunk size (to transmit per minor loop)
+        %assign transfer_size = user_config.transfer_size
+
+        %% MEM2MEM / MEM2PERIPF etc
+        %assign transfer_type = user_config.transfer_type
+
+        %assign transfer_mode = user_config.transfer_mode
+
+        %switch(transfer_mode)
+            %case (SINGLE_BLOCK_TRANSFER) %% Single Block Transfer
+                /* Single Block Transfer */
+                %if (user_config.single_block_src_type == SRC_ADDR)
+                    %assign src_addr = LibBlockInputSignal(0, "", "", 0)
+                %else
+                    %assign src_addr = LibBlockInputSignalAddr(0, "", "", 0)
+                %endif
+
+                %if (user_config.single_block_dest_type == SRC_ADDR)
+                    %assign dest_addr = LibBlockInputSignal(1, "", "", 0)
+                %else
+                    %assign dest_addr = LibBlockInputSignalAddr(1, "", "", 0)
+                %endif
+
+                %% buffer size (total size to be sent)
+                %assign size = LibBlockInputSignal(2, "", "", 0)
+
+                /* Configure eDMA channel%<channel> for a single block %<transfer_type> transfer of %<size> bytes */
+                EDMA_DRV_ConfigSingleBlockTransfer(%<channel>, %<transfer_type>, (uint32_t)%<src_addr>,
+                    (uint32_t)%<dest_addr>, %<transfer_size>, %<size>);
+
+                /* Trigger a software DMA request for channel%<channel> */
+                EDMA_DRV_TriggerSwRequest(%<channel>);
+            %break
+
+            %case (SCATTER_GATHER_BLOCK_TRANSFER) %% Scatter-Gather Block Transfer
+                /* Scatter-Gather Transfer */
+                %% get sdk params from m-script
+                %assign bytes_on_each_req = user_config.bytes_on_each_req
+                %assign stcd_count = user_config.stcd_count
+                %assign src_list = user_config.src_list
+                %assign dest_list = user_config.dest_list
+                %assign sg_struct_size = user_config.sg_struct_size
+                %assign src_list_type = user_config.src_list_type
+                %assign dest_list_type = user_config.dest_list_type
+
+                int i;
+                %if (src_list_type == "Address list" || src_list_type == "Value list")
+                    uint32_t src_addrs[] = %<src_list>;
+                %else
+                    %% get all addresses from the registers selected
+                    uint32_t src_addrs[] = {
+                    %foreach list_idx = stcd_count
+                        %% see if the user wants an offset from the register base addr
+                        %if (user_config.src_list_offsets[list_idx] == 0)
+                            %<user_config.src_list_selected[list_idx]>, // %<user_config.src_list_selected_names[list_idx]>
+                        %else
+                            %<user_config.src_list_selected[list_idx]> + %<user_config.src_list_offsets[list_idx]>, // %<user_config.src_list_selected_names[list_idx]> + user-defined offset
+                        %endif
+                    %endforeach
+                    };
+                %endif
+
+                %if (dest_list_type == "Address list" || dest_list_type == "Value list")
+                    uint32_t dest_addrs[] = %<dest_list>;
+                %else
+                    uint32_t dest_addrs[] = {
+                    %% get every address linked to the selected register and put it into the vector
+                    %% attach as comment peripheral.register (which the address belongs to)
+                    %foreach list_idx = stcd_count
+                        %if (user_config.dest_list_offsets[list_idx] == 0)
+                            %<user_config.dest_list_selected[list_idx]>, // %<user_config.dest_list_selected_names[list_idx]>
+                        %else
+                            %<user_config.dest_list_selected[list_idx]> + %<user_config.dest_list_offsets[list_idx]>, // %<user_config.dest_list_selected_names[list_idx]> + user-defined offset
+                        %endif
+                    %endforeach
+                    };
+                %endif
+
+                edma_scatter_gather_list_t src_list[%<stcd_count>];
+                edma_scatter_gather_list_t dest_list[%<stcd_count>];
+                for(i=0U; i<%<stcd_count>; ++i){
+                    %% check if src_list is made up of addresses or values
+                    %if (src_list_type == "Address list" || src_list_type == "Select from a register list")
+                        src_list[i].address = src_addrs[i];
+                    %endif
+                    %if (src_list_type == "Value list")
+                        src_list[i].address = (uint32_t)&src_addrs[i];
+                    %endif
+
+                    %% check if dest_list is made up of addresses or values
+                    %if (dest_list_type == "Address list" || dest_list_type == "Select from a register list")
+                        dest_list[i].address = dest_addrs[i];
+                    %endif
+                    %if (dest_list_type == "Value list")
+                        dest_list[i].address = (uint32_t)&dest_addrs[i];
+                    %endif
+
+                    src_list[i].length = dest_list[i].length = %<sg_struct_size>;  /* actual src|dest width (in bits) */
+                    src_list[i].type = dest_list[i].type = %<transfer_type>;
+                }
+
+                edma_software_tcd_t drv_tcd[%<user_config.stcd_count+1>];
+
+                /* Configure eDMA channel%<channel> for scatter-gather %<transfer_type> */
+                EDMA_DRV_ConfigScatterGatherTransfer(%<channel>, drv_tcd, %<transfer_size>,
+                    %<bytes_on_each_req>, src_list, dest_list, %<stcd_count>);
+
+                for(i=0U; i<%<stcd_count>; ++i){
+                    EDMA_DRV_TriggerSwRequest(%<channel>);
+                }
+            %break
+        %endswitch
+    %endwith
+
+    %endif
+%endfunction

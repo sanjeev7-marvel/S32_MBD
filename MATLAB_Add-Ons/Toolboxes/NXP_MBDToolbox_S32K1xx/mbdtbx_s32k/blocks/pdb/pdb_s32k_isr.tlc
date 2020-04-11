@@ -1,0 +1,129 @@
+%implements pdb_s32k_isr "C"
+
+%% Copyright (c) 2016 - 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %<LibAddToCommonIncludes("pdb_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdkParams = FEVAL("mbd_s32k_pdb_isr_make_params", blockPath)
+
+    %with sdkParams
+        %if !EXISTS("PDB_GLOBAL_INIT")
+            %assign ::PDB_GLOBAL_INIT = 1
+            /* Table of base addresses for PDB instances. */
+            static PDB_Type * const s_pdbBase[PDB_INSTANCE_COUNT] = PDB_BASE_PTRS;
+        %endif
+
+        %if (interruptPdbEn == 1)
+            /* Set value for PDB%<numModule>_IDLY register (interrupt delay) */
+            PDB_DRV_SetValueForTimerInterrupt(%<numModule>, %<regIdly>);
+            /* Load and lock interrupt delay value */
+            PDB_DRV_LoadValuesCmd(%<numModule>);
+        %endif
+        {
+            uint32_t sc = 0;
+            PDB_Type * base = s_pdbBase[%<numModule>];
+            sc = base->SC;
+            sc &= ~((uint32_t) PDB_SC_PDBEIE_MASK |
+                  (uint32_t)PDB_SC_PDBIE_MASK);
+            %if (interruptPdbErrorEn == 1)
+            /* Enable sequence error interrupt */
+            sc |= PDB_SC_PDBEIE_MASK;
+            %endif
+            %if (interruptPdbEn == 1)
+            /* Enable PDB interrupt */
+            sc |= PDB_SC_PDBIE_MASK;
+            %endif
+            base->SC = sc;
+
+            /* Enable PDB%<numModule> interrupt and set priority for it */
+            INT_SYS_InstallHandler(PDB%<numModule>_IRQn, pdb%<numModule>_isr, (isr_t *)0);
+            INT_SYS_SetPriority(PDB%<numModule>_IRQn, %<interruptPrio>);
+            INT_SYS_EnableIRQ(PDB%<numModule>_IRQn);
+        }
+
+        %assign file_name = "pdb%<numModule>_isr"
+        %<LibAddToCommonIncludes("%<file_name>.h")>
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler body file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %openfile isr_c = "%<file_name>.c"
+            #include "%<file_name>.h"
+
+            void pdb%<numModule>_isr(void) {
+                uint32_t fPDBIF = (uint32_t)PDB_DRV_GetTimerIntFlag(%<numModule>);
+                uint32_t errCh0 = PDB_DRV_GetAdcPreTriggerSeqErrFlags(%<numModule>, 0, 0xFF);
+                uint32_t errCh1 = PDB_DRV_GetAdcPreTriggerSeqErrFlags(%<numModule>, 1, 0xFF);
+
+                %<LibBlockOutputSignal(1,"","",0)> = fPDBIF;
+                %<LibBlockOutputSignal(2,"","",0)> = errCh0;
+                %<LibBlockOutputSignal(3,"","",0)> = errCh1;
+
+                %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                  %% call the downstream system
+                  %with SFcnSystemOutputCall[fcnCallIdx]
+                    %% Skip unconnected function call outputs
+                    %if ISEQUAL(BlockToCall, "unconnected")
+                      %continue
+                    %endif
+
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                  %endwith
+                %endforeach
+
+                if (fPDBIF) {
+                    PDB_DRV_ClearTimerIntFlag(%<numModule>);
+                }
+
+                if (errCh0) {
+                    PDB_DRV_ClearAdcPreTriggerSeqErrFlags(%<numModule>, 0, errCh0);
+                }
+
+                if (errCh1) {
+                    PDB_DRV_ClearAdcPreTriggerSeqErrFlags(%<numModule>, 1, errCh1);
+                }
+            }
+        %closefile isr_c
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%  Interrupt handler declaration file
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %openfile isr_h = "%<file_name>.h"
+            #include "%<CompiledModel.Name + ".h">"
+            #include "%<CompiledModel.Name + "_private.h">"
+            #include "pdb_driver.h"
+
+            #ifndef PDB%<numModule>_ISR_H
+            #define PDB%<numModule>_ISR_H
+
+            void pdb%<numModule>_isr(void);
+
+            #endif
+        %closefile isr_h
+    %endwith
+
+    %endif
+%endfunction

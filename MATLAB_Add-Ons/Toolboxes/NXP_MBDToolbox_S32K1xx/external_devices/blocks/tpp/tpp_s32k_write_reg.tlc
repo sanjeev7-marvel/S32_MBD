@@ -1,0 +1,25 @@
+%implements tpp_s32k_write_reg "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Output function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs (block, system) Output
+    %assign blockPath = LibGetBlockPath(block)
+	%if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+	%assign reg_params = FEVAL("tpp_s32k_write_reg_params", blockPath)
+	%with reg_params
+	{
+		uint8_t spi_data_recv = 0;
+		TPP_SendCommand(&tppDrvConfig, %<reg_params.tppCommand>, %<reg_params.tppSubcommand>, &spi_data_recv);
+	}
+	%endwith
+
+    %endif
+%endfunction

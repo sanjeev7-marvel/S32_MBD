@@ -1,0 +1,95 @@
+
+%implements GDFLIB_FilterIIR2_SF_FLT "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GDFLIB_INCLUDED")
+      %assign ::GDFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gdflib.h\"" + "\n")>
+   %endif 
+   
+   %assign ::cntIIR2 = 0
+   %assign ::cntInitIIR2 = 0
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   %assign ::cntInitIIR2 = %<::cntInitIIR2> + 1
+	 
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "FIRparams")
+%openfile tmpParamBuf 
+   %if !EXISTS("GDFLIB_INCLUDED_TO_FIRPARAM")
+      %assign ::GDFLIB_INCLUDED_TO_FIRPARAM = 1
+      #include "gdflib.h"
+   %endif 
+    GDFLIB_FILTER_IIR2_T_FLT trMyFilterIIR2_%<::cntInitIIR2> = GDFLIB_FILTER_IIR2_DEFAULT_FLT ;
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+    %assign B0   = CAST("Real32",Parameter[0].Value[0])
+    %assign B1   = CAST("Real32",Parameter[1].Value[0])
+    %assign B2   = CAST("Real32",Parameter[2].Value[0])
+    %assign A1   = CAST("Real32",Parameter[3].Value[0])
+    %assign A2   = CAST("Real32",Parameter[4].Value[0])
+	
+	trMyFilterIIR2_%<::cntInitIIR2>.trFiltCoeff.fltB0 = %<B0>;  
+	trMyFilterIIR2_%<::cntInitIIR2>.trFiltCoeff.fltB1 = %<B1>; 
+	trMyFilterIIR2_%<::cntInitIIR2>.trFiltCoeff.fltB2 = %<B2>; 
+	trMyFilterIIR2_%<::cntInitIIR2>.trFiltCoeff.fltA1 = %<A1>;
+	trMyFilterIIR2_%<::cntInitIIR2>.trFiltCoeff.fltA2 = %<A2>;
+	 
+    GDFLIB_FilterIIR2Init_FLT (&trMyFilterIIR2_%<::cntInitIIR2>);
+   
+%openfile tmpParamExternBuf 
+    extern GDFLIB_FILTER_IIR2_T_FLT trMyFilterIIR2_%<::cntInitIIR2>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>   
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cntIIR2 = %<::cntIIR2> + 1
+
+    %assign fltIn = LibBlockInputSignal(0, "", "", 0)
+    %assign fltInFiltBufferX1 = LibBlockInputSignal(1, "", "", 0)
+    %assign fltInFiltBufferX2 = LibBlockInputSignal(2, "", "", 0)
+    %assign fltInFiltBufferY1 = LibBlockInputSignal(3, "", "", 0)
+    %assign fltInFiltBufferY2 = LibBlockInputSignal(4, "", "", 0)
+    %assign fltOut = LibBlockOutputSignal(0, "", "", 0)
+    %assign fltOutFiltBufferX1 = LibBlockOutputSignal(1, "", "", 0)
+    %assign fltOutFiltBufferX2 = LibBlockOutputSignal(2, "", "", 0)
+    %assign fltOutFiltBufferY1 = LibBlockOutputSignal(3, "", "", 0)
+    %assign fltOutFiltBufferY2 = LibBlockOutputSignal(4, "", "", 0)
+
+    trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferX[0] = %<fltInFiltBufferX1>;
+    trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferX[1] = %<fltInFiltBufferX2>;
+    trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferY[0] = %<fltInFiltBufferY1>;
+    trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferY[1] = %<fltInFiltBufferY2>;
+
+    %<fltOut> = GDFLIB_FilterIIR2_FLT(%<fltIn>, &trMyFilterIIR2_%<::cntIIR2>);
+
+    %<fltOutFiltBufferX1> = trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferX[0];
+    %<fltOutFiltBufferX2> = trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferX[1];
+    %<fltOutFiltBufferY1> = trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferY[0];
+    %<fltOutFiltBufferY2> = trMyFilterIIR2_%<::cntIIR2>.fltFiltBufferY[1];
+
+%endfunction

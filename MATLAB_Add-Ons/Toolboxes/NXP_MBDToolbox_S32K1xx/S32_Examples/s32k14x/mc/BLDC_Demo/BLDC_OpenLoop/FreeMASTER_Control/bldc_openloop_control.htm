@@ -1,0 +1,1044 @@
+<HTML>
+<HEAD>
+<meta name="VI60_defaultClientScript" content="VBScript">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<TITLE>New Page</TITLE>
+</HEAD>
+<BODY OnLoad = "MyOnLoad()" bgcolor="#E1E1E1">
+    <OBJECT ID="pcm" WIDTH=0 HEIGHT=0
+        CLASSID="CLSID:48A185F1-FFDB-11D3-80E3-00C04F176153">
+    </OBJECT>
+    <div align="center">
+        <table border="0" width="62%" height="88">
+            <tr>
+                <td width="53%" height="82">
+                    <p style="margin-top: 1; margin-bottom: 1"><b>NXP Model-Based Design Toolbox for S32K144 Evaluation Board</b></p>
+                    <p style="margin-top: 1; margin-bottom: 1"><b>Press SW2 or SW3 to start</b></p>
+                </td>
+                <td width="57%" height="82" valign="middle" align="center">
+                    <p align="right"><IMG src="nxp_logo_img.png" height="82"></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p align="center"></p>
+    <SCRIPT LANGUAGE="VBScript">
+
+sub MyOnLoad
+    call setTimeout ("MyStart()", 250)
+end sub
+
+sub MyStart
+    call setInterval ("Periodical0()", 50)
+    dim Max_Voltage_Command, Min_Voltage_Command,Max_Exec_Time,Max_DutyCycle_Voltage
+    dim Max_DC_Current,Max_DC_Voltage
+    dim vValue0, tValue0, retMsg
+
+    Max_Voltage_Command   = 10
+    Min_Voltage_Command   = -10
+    Max_Exec_Time         = 100
+    Max_DutyCycle_Voltage = 100
+    Max_DC_Current = 5
+    Max_DC_Voltage = 18
+	
+    <!-- Duty Cycle gauge display settings -->
+    gaugeDutyCycle.TicID             = 0
+    gaugeDutyCycle.TicStopValue      = Max_DutyCycle_Voltage
+    gaugeDutyCycle.TicDelta          = Max_DutyCycle_Voltage / 5
+    gaugeDutyCycle.TicID             = 1
+    gaugeDutyCycle.TicStopValue      = Max_DutyCycle_Voltage
+    gaugeDutyCycle.TicDelta          = Max_DutyCycle_Voltage / 25
+    gaugeDutyCycle.TicID             = 2
+    gaugeDutyCycle.TicStopValue      = Max_DutyCycle_Voltage
+    gaugeDutyCycle.TicDelta          = Max_DutyCycle_Voltage / 25
+    gaugeDutyCycle.ScaleMaxValue     = Max_DutyCycle_Voltage
+    gaugeDutyCycle.AnnularID         = 0
+    gaugeDutyCycle.AnnularStartValue = 0
+    gaugeDutyCycle.AnnularStopValue  = Max_DutyCycle_Voltage * 0.60
+    gaugeDutyCycle.AnnularID         = 1
+    gaugeDutyCycle.AnnularStartValue = Max_DutyCycle_Voltage * 0.60
+    gaugeDutyCycle.AnnularStopValue  = Max_DutyCycle_Voltage * 0.80
+    gaugeDutyCycle.AnnularID         = 2
+    gaugeDutyCycle.AnnularStartValue = Max_DutyCycle_Voltage * 0.80
+    gaugeDutyCycle.AnnularStopValue  = Max_DutyCycle_Voltage
+
+    <!-- Execution Time gauge display settings -->
+    gaugeExecTime.TicID             = 0
+    gaugeExecTime.TicStopValue      = Max_Exec_Time
+    gaugeExecTime.TicDelta          = Max_Exec_Time / 5
+    gaugeExecTime.TicID             = 1
+    gaugeExecTime.TicStopValue      = Max_Exec_Time
+    gaugeExecTime.TicDelta          = Max_Exec_Time / 25
+    gaugeExecTime.TicID             = 2
+    gaugeExecTime.TicStopValue      = Max_Exec_Time
+    gaugeExecTime.TicDelta          = Max_Exec_Time / 25
+    gaugeExecTime.ScaleMaxValue     = Max_Exec_Time
+    gaugeExecTime.AnnularID         = 0
+    gaugeExecTime.AnnularStartValue = 0
+    gaugeExecTime.AnnularStopValue  = Max_Exec_Time * 0.2
+    gaugeExecTime.AnnularID         = 1
+    gaugeExecTime.AnnularStartValue = Max_Exec_Time * 0.25
+    gaugeExecTime.AnnularStopValue  = Max_Exec_Time * 0.75
+    gaugeExecTime.AnnularID         = 2
+    gaugeExecTime.AnnularStartValue = Max_Exec_Time * 0.75
+    gaugeExecTime.AnnularStopValue  = Max_Exec_Time
+
+    <!-- Voltage gauge display settings -->
+    gaugeVoltage.TicID             = 0
+    gaugeVoltage.TicStartValue     = Min_Voltage_Command
+    gaugeVoltage.TicStopValue      = Max_Voltage_Command
+    gaugeVoltage.TicDelta          = Max_Voltage_Command / 10
+    gaugeVoltage.TicID             = 1
+    gaugeVoltage.TicStartValue     = Min_Voltage_Command
+    gaugeVoltage.TicStopValue      = Max_Voltage_Command
+    gaugeVoltage.TicDelta          = Max_Voltage_Command / 20
+    gaugeVoltage.TicID             = 2
+    gaugeVoltage.TicStartValue     = Min_Voltage_Command
+    gaugeVoltage.TicStopValue      = Max_Voltage_Command
+    gaugeVoltage.TicDelta          = Max_Voltage_Command / 50
+    gaugeVoltage.ScaleMinValue     = Min_Voltage_Command
+    gaugeVoltage.ScaleMaxValue     = Max_Voltage_Command
+    gaugeVoltage.AnnularID         = 0
+    gaugeVoltage.AnnularStartValue = Min_Voltage_Command
+    gaugeVoltage.AnnularStopValue  = Max_Voltage_Command
+    gaugeVoltage.AnnularID         = 1
+    gaugeVoltage.AnnularStartValue = Min_Voltage_Command * 0.1
+    gaugeVoltage.AnnularStopValue  = Max_Voltage_Command * 0.1
+    gaugeVoltage.AnnularID         = 2
+    gaugeVoltage.AnnularStartValue = Min_Voltage_Command
+    gaugeVoltage.AnnularStopValue  = Min_Voltage_Command - Min_Voltage_Command * 0.2
+    gaugeVoltage.AnnularID         = 3
+    gaugeVoltage.AnnularStartValue = Max_Voltage_Command - Max_Voltage_Command * 0.2
+    gaugeVoltage.AnnularStopValue  = Max_Voltage_Command
+
+    <!-- Update Voltage gauge -->
+    succ = pcm.ReadVariable("Voltage_Command", vValue0, tValue0, retMsg)
+    if succ then
+     gaugeVoltage.NeedleID = 1
+     gaugeVoltage.NeedleValue = vValue0
+    end if
+
+    <!-- Vdc gauge display settings -->
+    gaugeVdc.TicID             = 0
+    gaugeVdc.TicStopValue      = Max_DC_Voltage
+    gaugeVdc.TicDelta          = 3
+    gaugeVdc.TicID             = 1
+    gaugeVdc.TicStopValue      = Max_DC_Voltage
+    gaugeVdc.TicDelta          = 3
+    gaugeVdc.TicID             = 2
+    gaugeVdc.TicStopValue      = Max_DC_Voltage
+    gaugeVdc.TicDelta          = 3
+    gaugeVdc.ScaleMaxValue     = Max_DC_Voltage
+    gaugeVdc.AnnularID         = 0
+    gaugeVdc.AnnularStartValue = 0
+    gaugeVdc.AnnularStopValue  = 9
+    gaugeVdc.AnnularID         = 1
+    gaugeVdc.AnnularStartValue = 9
+    gaugeVdc.AnnularStopValue  = 15
+    gaugeVdc.AnnularID         = 2
+    gaugeVdc.AnnularStartValue = 15
+    gaugeVdc.AnnularStopValue  = Max_DC_Voltage
+
+    <!-- Idc gauge display settings -->
+    gaugeIdc.TicID             = 0
+    gaugeIdc.TicStopValue      = Max_DC_Current
+    gaugeIdc.TicDelta          = Max_DC_Current / 5
+    gaugeIdc.TicID             = 1
+    gaugeIdc.TicStopValue      = Max_DC_Current
+    gaugeIdc.TicDelta          = Max_DC_Current / 25
+    gaugeIdc.TicID             = 2
+    gaugeIdc.TicStopValue      = Max_DC_Current
+    gaugeIdc.TicDelta          = Max_DC_Current / 25
+    gaugeIdc.ScaleMaxValue     = Max_DC_Current
+    gaugeIdc.AnnularID         = 0
+    gaugeIdc.AnnularStartValue = 0
+    gaugeIdc.AnnularStopValue  = 1
+    gaugeIdc.AnnularID         = 1
+    gaugeIdc.AnnularStartValue = 1
+    gaugeIdc.AnnularStopValue  = 4
+    gaugeIdc.AnnularID         = 2
+    gaugeIdc.AnnularStartValue = 4
+    gaugeIdc.AnnularStopValue  = Max_DC_Current
+
+end sub
+
+
+<!-- Update UI regulary -->
+sub Periodical0
+    dim vValue0, tValue0, retMsg
+    
+    <!-- Update Duty Cycle gauge -->
+    succ = false
+    succ = pcm.ReadVariable("Duty_Cycle", vValue0, tValue0, retMsg)
+    if succ then
+        gaugeDutyCycle.NeedleValue = vValue0 * 100
+    end if
+    
+    <!-- Update Execution Time gauge -->
+    succ = pcm.ReadVariable("Execution_Time", vValue0, tValue0, retMsg)
+    if succ then
+     gaugeExecTime.NeedleID = 0
+     gaugeExecTime.NeedleValue = vValue0
+    end if 
+    
+    <!-- Update Voltage gauge -->
+    succ = pcm.ReadVariable("Voltage_Command", vValue0, tValue0, retMsg)
+    if succ then
+     gaugeVoltage.NeedleID = 0
+     gaugeVoltage.NeedleValue = vValue0
+    end if
+    
+    <!-- Update Vdc gauge -->
+    succ = pcm.ReadVariable("DC_BusVoltage", vValue0, tValue0, retMsg)
+    if succ then
+     gaugeVdc.NeedleValue = vValue0
+	   end if
+    
+    <!-- Update Idc gauge -->
+    succ = pcm.ReadVariable("DC_BusCurrent", vValue0, tValue0, retMsg)
+    if succ then
+     gaugeIdc.NeedleValue = vValue0
+    end if
+    
+end sub
+
+
+function gaugeVoltage_Change()
+    dim succ, retMsg
+    gaugeVoltage.NeedleID = 1
+    succ = pcm.WriteVariable("Voltage_Command", gaugeVoltage.NeedleValue, retMsg)
+End Function
+
+
+</SCRIPT>
+    <OBJECT CLASSID = "clsid:5220cb21-c88d-11cf-b347-00aa00a28331">
+        <PARAM NAME="LPKPath" VALUE="gmsctls.lpk">
+    </OBJECT>
+    
+    <div align="center">
+      <center>
+          <table border="1" width="445" height="71" bgcolor="#D7D7D7">
+              <tr>
+                <td width="580" height="37" align="center" valign="top" colspan="2" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                                                  <b><font face="Arial" color="#000080" size="5">BLDC Open Loop HMI</font></b>
+                </td>
+              </tr>
+              <tr>
+                  <td width="237" height="104" align="center" valign="top" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                   <OBJECT id="gaugeDutyCycle" codeBase="agauge.cab" classid="clsid:B2E0C2EA-A543-11CF-BC8C-207402C10627" width="223" height="93">
+                       <param name="_Version" value="131082">
+                       <param name="_Version" value="131082">
+                       <param name="_ExtentX" value="5900">
+                       <param name="_ExtentY" value="2461">
+                       <param name="_StockProps" value="70">
+                       <param name="Caption" value>
+                       <param name="Enabled" value="-1">
+                       <param name="BackColor" value="14277081">
+                       <param name="AutoRedraw" value="-1">
+                       <param name="BevelInner" value="2">
+                       <param name="BevelOuter" value="1">
+                       <param name="BevelWidth" value="1">
+                       <param name="BorderWidth" value="2">
+                       <param name="BorderType" value="1">
+                       <param name="Outline" value="0">
+                       <param name="OutlineAlign" value="0">
+                       <param name="OutlineColor" value="0">
+                       <param name="OutlineTitle" value="PMSM">
+                       <param name="OutlineWidth" value="1">
+                       <param name="FocusOutline" value="0">
+                       <param name="FrameBottom" value="1.15">
+                       <param name="FrameColor" value="8421440">
+                       <param name="FrameLeft" value="-0.95">
+                       <param name="FrameRight" value="1.15">
+                       <param name="FrameShape??0" value="0,100, 100,0, 900,0, 1000,100, 1000,900, 900,1000, 100,1000, 0,900">
+                       <param name="FrameStyle" value="0">
+                       <param name="FrameTop" value="-1.15">
+                       <param name="ScaleSize" value="1">
+                       <param name="ScaleDirection0" value="0">
+                       <param name="ScaleMaxValue0" value="20">
+                       <param name="ScaleMinValue0" value="0">
+                       <param name="ScaleOriginX0" value="-0.07">
+                       <param name="ScaleOriginY0" value="-5.5">
+                       <param name="ScaleStartAngle0" value="335">
+                       <param name="ScaleStopAngle0" value="25">
+                       <param name="FontSize" value="1">
+                       <param name="CaptionSize" value="3">
+                       <param name="CaptionColor0" value="16744576">
+                       <param name="CaptionFontID0" value="0">
+                       <param name="Caption0" value>
+                       <param name="CaptionX0" value="0">
+                       <param name="CaptionY0" value="-0.28">
+                       <param name="CaptionAlign0" value="2">
+                       <param name="CaptionVisible0" value="-1">
+                       <param name="CaptionFlag0" value="0">
+                       <param name="CaptionColor1" value="10485760">
+                       <param name="CaptionFontID1" value="0">
+                       <param name="Caption1" value="Duty Cycle">
+                       <param name="CaptionX1" value="0">
+                       <param name="CaptionY1" value="-0.5">
+                       <param name="CaptionAlign1" value="2">
+                       <param name="CaptionVisible1" value="-1">
+                       <param name="CaptionFlag1" value="0">
+                       <param name="CaptionColor2" value="10485760">
+                       <param name="CaptionFontID2" value="0">
+                       <param name="Caption2" value="[%]">
+                       <param name="CaptionX2" value="0">
+                       <param name="CaptionY2" value="-0.9">
+                       <param name="CaptionAlign2" value="2">
+                       <param name="CaptionVisible2" value="-1">
+                       <param name="CaptionFlag2" value="0">
+                       <param name="AnnularSize" value="3">
+                       <param name="AnnularColor0" value="65280">
+                       <param name="AnnularFloat0" value="0">
+                       <param name="AnnularFloatOffset0" value="0">
+                       <param name="AnnularInnerRadius0" value="5.75">
+                       <param name="AnnularOuterRadius0" value="6">
+                       <param name="AnnularScaleID0" value="0">
+                       <param name="AnnularStartValue0" value="0">
+                       <param name="AnnularStopValue0" value="5">
+                       <param name="AnnularVisible0" value="-1">
+                       <param name="AnnularColor1" value="8454143">
+                       <param name="AnnularFloat1" value="0">
+                       <param name="AnnularFloatOffset1" value="0">
+                       <param name="AnnularInnerRadius1" value="5.75">
+                       <param name="AnnularOuterRadius1" value="6">
+                       <param name="AnnularScaleID1" value="0">
+                       <param name="AnnularStartValue1" value="5">
+                       <param name="AnnularStopValue1" value="15">
+                       <param name="AnnularVisible1" value="-1">
+                       <param name="AnnularColor2" value="33023">
+                       <param name="AnnularFloat2" value="0">
+                       <param name="AnnularFloatOffset2" value="0">
+                       <param name="AnnularInnerRadius2" value="5.75">
+                       <param name="AnnularOuterRadius2" value="6">
+                       <param name="AnnularScaleID2" value="0">
+                       <param name="AnnularStartValue2" value="15">
+                       <param name="AnnularStopValue2" value="20">
+                       <param name="AnnularVisible2" value="-1">
+                       <param name="HubSize" value="0">
+                       <param name="NeedleSize" value="1">
+                       <param name="NeedleColor0" value="4210816">
+                       <param name="NeedleDigital0" value="0">
+                       <param name="NeedleDigitalColor0" value="0">
+                       <param name="NeedleDigitalDecimals0" value="0">
+                       <param name="NeedleDigitalFontID0" value="0">
+                       <param name="NeedleDigitalX0" value="0">
+                       <param name="NeedleDigitalY0" value="0">
+                       <param name="NeedleLength0" value="6.01">
+                       <param name="NeedleMouseControl0" value="0">
+                       <param name="NeedleScaleID0" value="0">
+                       <param name="NeedleShape??0" value>
+                       <param name="NeedleStyle0" value="1">
+                       <param name="NeedleValue0" value="0">
+                       <param name="NeedleWidth0" value="0.4">
+                       <param name="NeedleVisible0" value="-1">
+                       <param name="NeedleClip0" value="-1">
+                       <param name="TicSize" value="2">
+                       <param name="TicColor0" value="0">
+                       <param name="TicFloat0" value="0">
+                       <param name="TicDeltaValue0" value="5">
+                       <param name="TicFloatOffset0" value="0">
+                       <param name="TicFontID0" value="0">
+                       <param name="TicInnerRadius0" value="5.75">
+                       <param name="TicLabel0" value="-1">
+                       <param name="TicLabelRadius0" value="6.5">
+                       <param name="TicLabelRotated0" value="0">
+                       <param name="TicOuterRadius0" value="6.2">
+                       <param name="TicScaleID0" value="0">
+                       <param name="TicStartValue0" value="0">
+                       <param name="TicStopValue0" value="20">
+                       <param name="TicStyle0" value="0">
+                       <param name="TicWidth0" value="0">
+                       <param name="TicVisible0" value="-1">
+                       <param name="TicAutoTic0" value="0">
+                       <param name="TicCount0" value="6">
+                       <param name="TicSubCount0" value="0">
+                       <param name="TicColor1" value="0">
+                       <param name="TicFloat1" value="0">
+                       <param name="TicDeltaValue1" value="1">
+                       <param name="TicFloatOffset1" value="0">
+                       <param name="TicFontID1" value="0">
+                       <param name="TicInnerRadius1" value="5.75">
+                       <param name="TicLabel1" value="0">
+                       <param name="TicLabelRadius1" value="1">
+                       <param name="TicLabelRotated1" value="0">
+                       <param name="TicOuterRadius1" value="6">
+                       <param name="TicScaleID1" value="0">
+                       <param name="TicStartValue1" value="0">
+                       <param name="TicStopValue1" value="20">
+                       <param name="TicStyle1" value="0">
+                       <param name="TicWidth1" value="0">
+                       <param name="TicVisible1" value="-1">
+                       <param name="TicAutoTic1" value="0">
+                       <param name="TicCount1" value="6">
+                       <param name="TicSubCount1" value="0">
+                   </OBJECT>
+                  </td>
+                  <td width="516" height="202" align="center" rowspan="2" valign="top" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                   <OBJECT id="gaugeVoltage" codeBase="agauge.cab" height="203" width="334" classid="clsid:B2E0C2EA-A543-11CF-BC8C-207402C10627" VIEWASTEXT>
+                       <param name="_Version" value="131082">
+                       <param name="_Version" value="131082">
+                       <param name="_ExtentX" value="8837">
+                       <param name="_ExtentY" value="5371">
+                       <param name="_StockProps" value="70">
+                       <param name="Caption" value>
+                       <param name="Enabled" value="-1">
+                       <param name="BackColor" value="14277081">
+                       <param name="AutoRedraw" value="-1">
+                       <param name="BevelInner" value="2">
+                       <param name="BevelOuter" value="1">
+                       <param name="BevelWidth" value="1">
+                       <param name="BorderWidth" value="2">
+                       <param name="BorderType" value="1">
+                       <param name="Outline" value="0">
+                       <param name="OutlineAlign" value="2">
+                       <param name="OutlineColor" value="0">
+                       <param name="OutlineTitle" value>
+                       <param name="OutlineWidth" value="1">
+                       <param name="FocusOutline" value="0">
+                       <param name="FrameBottom" value="1.29">
+                       <param name="FrameColor" value="8421440">
+                       <param name="FrameLeft" value="-2.25">
+                       <param name="FrameRight" value="2.25">
+                       <param name="FrameShape??0" value="0,180, 100,0, 900,0, 1000,180, 1000,820, 900,1000, 100,1000, 0,820">
+                       <param name="FrameStyle" value="0">
+                       <param name="FrameTop" value="-1.5">
+                       <param name="ScaleSize" value="1">
+                       <param name="ScaleDirection0" value="0">
+                       <param name="ScaleMaxValue0" value="2000">
+                       <param name="ScaleMinValue0" value="-2000">
+                       <param name="ScaleOriginX0" value="0">
+                       <param name="ScaleOriginY0" value="-0.45">
+                       <param name="ScaleStartAngle0" value="245">
+                       <param name="ScaleStopAngle0" value="115">
+                       <param name="FontSize" value="2">
+                       <param name="CaptionSize" value="2">
+                       <param name="CaptionColor0" value="10485760">
+                       <param name="CaptionFontID0" value="0">
+                       <param name="Caption0" value="Voltage">
+                       <param name="CaptionX0" value="0">
+                       <param name="CaptionY0" value="-0.7">
+                       <param name="CaptionAlign0" value="2">
+                       <param name="CaptionVisible0" value="-1">
+                       <param name="CaptionFlag0" value="0">
+                       <param name="CaptionColor1" value="10485760">
+                       <param name="CaptionFontID1" value="1">
+                       <param name="Caption1" value="[V]">
+                       <param name="CaptionX1" value="0">
+                       <param name="CaptionY1" value="-0.9">
+                       <param name="CaptionAlign1" value="2">
+                       <param name="CaptionVisible1" value="-1">
+                       <param name="CaptionFlag1" value="0">
+                       <param name="AnnularSize" value="4">
+                       <param name="AnnularColor0" value="60280">
+                       <param name="AnnularFloat0" value="0">
+                       <param name="AnnularFloatOffset0" value="0">
+                       <param name="AnnularInnerRadius0" value="1.27">
+                       <param name="AnnularOuterRadius0" value="1.35">
+                       <param name="AnnularScaleID0" value="0">
+                       <param name="AnnularStartValue0" value="-2000">
+                       <param name="AnnularStopValue0" value="2000">
+                       <param name="AnnularVisible0" value="-1">
+                       <param name="AnnularColor1" value="500">
+                       <param name="AnnularFloat1" value="0">
+                       <param name="AnnularFloatOffset1" value="0">
+                       <param name="AnnularInnerRadius1" value="1.27">
+                       <param name="AnnularOuterRadius1" value="1.35">
+                       <param name="AnnularScaleID1" value="0">
+                       <param name="AnnularStartValue1" value="-200">
+                       <param name="AnnularStopValue1" value="200">
+                       <param name="AnnularVisible1" value="-1">
+                       <param name="AnnularColor2" value="500">
+                       <param name="AnnularFloat2" value="0">
+                       <param name="AnnularFloatOffset2" value="0">
+                       <param name="AnnularInnerRadius2" value="1.27">
+                       <param name="AnnularOuterRadius2" value="1.35">
+                       <param name="AnnularScaleID2" value="0">
+                       <param name="AnnularStartValue2" value="-2000">
+                       <param name="AnnularStopValue2" value="-1600">
+                       <param name="AnnularVisible2" value="-1">
+                       <param name="AnnularColor3" value="500">
+                       <param name="AnnularFloat3" value="0">
+                       <param name="AnnularFloatOffset3" value="0">
+                       <param name="AnnularInnerRadius3" value="1.27">
+                       <param name="AnnularOuterRadius3" value="1.35">
+                       <param name="AnnularScaleID3" value="0">
+                       <param name="AnnularStartValue3" value="1600">
+                       <param name="AnnularStopValue3" value="2000">
+                       <param name="AnnularVisible3" value="-1">
+                       <param name="HubSize" value="2">
+                       <param name="HubColor0" value="12632256">
+                       <param name="HubRadius0" value="0.119">
+                       <param name="HubScaleID0" value="0">
+                       <param name="HubStyle0" value="0">
+                       <param name="HubVisible0" value="-1">
+                       <param name="HubColor1" value="9539985">
+                       <param name="HubRadius1" value="0.089">
+                       <param name="HubScaleID1" value="0">
+                       <param name="HubStyle1" value="0">
+                       <param name="HubVisible1" value="-1">
+                       <param name="NeedleSize" value="2">
+                       <param name="NeedleColor0" value="0">
+                       <param name="NeedleDigital0" value="0">
+                       <param name="NeedleDigitalColor0" value="0">
+                       <param name="NeedleDigitalDecimals0" value="0">
+                       <param name="NeedleDigitalFontID0" value="1">
+                       <param name="NeedleDigitalX0" value="0">
+                       <param name="NeedleDigitalY0" value="-0.68">
+                       <param name="NeedleLength0" value="1.2">
+                       <param name="NeedleMouseControl0" value="0">
+                       <param name="NeedleScaleID0" value="0">
+                       <param name="NeedleShape??0" value>
+                       <param name="NeedleStyle0" value="1">
+                       <param name="NeedleValue0" value="0">
+                       <param name="NeedleWidth0" value="0.1">
+                       <param name="NeedleVisible0" value="-1">
+                       <param name="NeedleClip0" value="-1">
+                       <param name="NeedleColor1" value="10485760">
+                       <param name="NeedleDigital1" value="0">
+                       <param name="NeedleDigitalColor1" value="0">
+                       <param name="NeedleDigitalDecimals1" value="0">
+                       <param name="NeedleDigitalFontID1" value="0">
+                       <param name="NeedleDigitalX1" value="0">
+                       <param name="NeedleDigitalY1" value="0">
+                       <param name="NeedleLength1" value="0.8">
+                       <param name="NeedleMouseControl1" value="2">
+                       <param name="NeedleScaleID1" value="0">
+                       <param name="NeedleShape??1" value>
+                       <param name="NeedleStyle1" value="1">
+                       <param name="NeedleValue1" value="0">
+                       <param name="NeedleWidth1" value="0.05">
+                       <param name="NeedleVisible1" value="-1">
+                       <param name="NeedleClip1" value="-1">
+                       <param name="TicSize" value="3">
+                       <param name="TicColor0" value="0">
+                       <param name="TicFloat0" value="0">
+                       <param name="TicDeltaValue0" value="500">
+                       <param name="TicFloatOffset0" value="0">
+                       <param name="TicFontID0" value="0">
+                       <param name="TicInnerRadius0" value="1.27">
+                       <param name="TicLabel0" value="-1">
+                       <param name="TicLabelRadius0" value="1.63">
+                       <param name="TicLabelRotated0" value="0">
+                       <param name="TicOuterRadius0" value="1.47">
+                       <param name="TicScaleID0" value="0">
+                       <param name="TicStartValue0" value="-2000">
+                       <param name="TicStopValue0" value="2000">
+                       <param name="TicStyle0" value="0">
+                       <param name="TicWidth0" value="0">
+                       <param name="TicVisible0" value="-1">
+                       <param name="TicAutoTic0" value="0">
+                       <param name="TicCount0" value="6">
+                       <param name="TicSubCount0" value="0">
+                       <param name="TicColor1" value="0">
+                       <param name="TicFloat1" value="0">
+                       <param name="TicDeltaValue1" value="100">
+                       <param name="TicFloatOffset1" value="0">
+                       <param name="TicFontID1" value="0">
+                       <param name="TicInnerRadius1" value="1.27">
+                       <param name="TicLabel1" value="0">
+                       <param name="TicLabelRadius1" value="1">
+                       <param name="TicLabelRotated1" value="0">
+                       <param name="TicOuterRadius1" value="1.35">
+                       <param name="TicScaleID1" value="0">
+                       <param name="TicStartValue1" value="-2000">
+                       <param name="TicStopValue1" value="2000">
+                       <param name="TicStyle1" value="0">
+                       <param name="TicWidth1" value="0">
+                       <param name="TicVisible1" value="-1">
+                       <param name="TicAutoTic1" value="0">
+                       <param name="TicCount1" value="6">
+                       <param name="TicSubCount1" value="0">
+                       <param name="TicColor2" value="0">
+                       <param name="TicFloat2" value="0">
+                       <param name="TicDeltaValue2" value="100">
+                       <param name="TicFloatOffset2" value="0">
+                       <param name="TicFontID2" value="0">
+                       <param name="TicInnerRadius2" value="0.8">
+                       <param name="TicLabel2" value="0">
+                       <param name="TicLabelRadius2" value="1">
+                       <param name="TicLabelRotated2" value="0">
+                       <param name="TicOuterRadius2" value="0.9">
+                       <param name="TicScaleID2" value="0">
+                       <param name="TicStartValue2" value="-2000">
+                       <param name="TicStopValue2" value="2000">
+                       <param name="TicStyle2" value="0">
+                       <param name="TicWidth2" value="0">
+                       <param name="TicVisible2" value="-1">
+                       <param name="TicAutoTic2" value="0">
+                       <param name="TicCount2" value="6">
+                       <param name="TicSubCount2" value="0">
+                   </OBJECT>
+                  </td>
+              </tr>
+              <tr>
+                  <td width="237" height="92" align="center" valign="top" bordercolor="#D7D7D7" bgcolor="#D7D7D7"><font size="1"></font>
+                   <OBJECT id="gaugeExecTime" codeBase="agauge.cab" classid="clsid:B2E0C2EA-A543-11CF-BC8C-207402C10627" width="223" height="95">
+                       <param name="_Version" value="131082">
+                       <param name="_Version" value="131082">
+                       <param name="_ExtentX" value="5900">
+                       <param name="_ExtentY" value="2461">
+                       <param name="_StockProps" value="70">
+                       <param name="Caption" value>
+                       <param name="Enabled" value="-1">
+                       <param name="BackColor" value="14277081">
+                       <param name="AutoRedraw" value="-1">
+                       <param name="BevelInner" value="2">
+                       <param name="BevelOuter" value="1">
+                       <param name="BevelWidth" value="1">
+                       <param name="BorderWidth" value="2">
+                       <param name="BorderType" value="1">
+                       <param name="Outline" value="0">
+                       <param name="OutlineAlign" value="0">
+                       <param name="OutlineColor" value="0">
+                       <param name="OutlineTitle" value="PMSM">
+                       <param name="OutlineWidth" value="1">
+                       <param name="FocusOutline" value="0">
+                       <param name="FrameBottom" value="1.15">
+                       <param name="FrameColor" value="8421440">
+                       <param name="FrameLeft" value="-0.95">
+                       <param name="FrameRight" value="1.15">
+                       <param name="FrameShape??0" value="0,100, 100,0, 900,0, 1000,100, 1000,900, 900,1000, 100,1000, 0,900">
+                       <param name="FrameStyle" value="0">
+                       <param name="FrameTop" value="-1.15">
+                       <param name="ScaleSize" value="1">
+                       <param name="ScaleDirection0" value="0">
+                       <param name="ScaleMaxValue0" value="20">
+                       <param name="ScaleMinValue0" value="0">
+                       <param name="ScaleOriginX0" value="-0.07">
+                       <param name="ScaleOriginY0" value="-5.5">
+                       <param name="ScaleStartAngle0" value="335">
+                       <param name="ScaleStopAngle0" value="25">
+                       <param name="FontSize" value="1">
+                       <param name="CaptionSize" value="3">
+                       <param name="CaptionColor0" value="16744576">
+                       <param name="CaptionFontID0" value="0">
+                       <param name="Caption0" value>
+                       <param name="CaptionX0" value="0">
+                       <param name="CaptionY0" value="-0.28">
+                       <param name="CaptionAlign0" value="2">
+                       <param name="CaptionVisible0" value="-1">
+                       <param name="CaptionFlag0" value="0">
+                       <param name="CaptionColor1" value="10485760">
+                       <param name="CaptionFontID1" value="0">
+                       <param name="Caption1" value="Execution Time">
+                       <param name="CaptionX1" value="0">
+                       <param name="CaptionY1" value="-0.5">
+                       <param name="CaptionAlign1" value="2">
+                       <param name="CaptionVisible1" value="-1">
+                       <param name="CaptionFlag1" value="0">
+                       <param name="CaptionColor2" value="10485760">
+                       <param name="CaptionFontID2" value="0">
+                       <param name="Caption2" value="[usec]">
+                       <param name="CaptionX2" value="0">
+                       <param name="CaptionY2" value="-0.9">
+                       <param name="CaptionAlign2" value="2">
+                       <param name="CaptionVisible2" value="-1">
+                       <param name="CaptionFlag2" value="0">
+                       <param name="AnnularSize" value="3">
+                       <param name="AnnularColor0" value="65280">
+                       <param name="AnnularFloat0" value="0">
+                       <param name="AnnularFloatOffset0" value="0">
+                       <param name="AnnularInnerRadius0" value="5.75">
+                       <param name="AnnularOuterRadius0" value="6">
+                       <param name="AnnularScaleID0" value="0">
+                       <param name="AnnularStartValue0" value="0">
+                       <param name="AnnularStopValue0" value="5">
+                       <param name="AnnularVisible0" value="-1">
+                       <param name="AnnularColor1" value="8454143">
+                       <param name="AnnularFloat1" value="0">
+                       <param name="AnnularFloatOffset1" value="0">
+                       <param name="AnnularInnerRadius1" value="5.75">
+                       <param name="AnnularOuterRadius1" value="6">
+                       <param name="AnnularScaleID1" value="0">
+                       <param name="AnnularStartValue1" value="5">
+                       <param name="AnnularStopValue1" value="15">
+                       <param name="AnnularVisible1" value="-1">
+                       <param name="AnnularColor2" value="33023">
+                       <param name="AnnularFloat2" value="0">
+                       <param name="AnnularFloatOffset2" value="0">
+                       <param name="AnnularInnerRadius2" value="5.75">
+                       <param name="AnnularOuterRadius2" value="6">
+                       <param name="AnnularScaleID2" value="0">
+                       <param name="AnnularStartValue2" value="15">
+                       <param name="AnnularStopValue2" value="20">
+                       <param name="AnnularVisible2" value="-1">
+                       <param name="HubSize" value="0">
+                       <param name="NeedleSize" value="1">
+                       <param name="NeedleColor0" value="4210816">
+                       <param name="NeedleDigital0" value="0">
+                       <param name="NeedleDigitalColor0" value="0">
+                       <param name="NeedleDigitalDecimals0" value="0">
+                       <param name="NeedleDigitalFontID0" value="0">
+                       <param name="NeedleDigitalX0" value="0">
+                       <param name="NeedleDigitalY0" value="0">
+                       <param name="NeedleLength0" value="6.01">
+                       <param name="NeedleMouseControl0" value="0">
+                       <param name="NeedleScaleID0" value="0">
+                       <param name="NeedleShape??0" value>
+                       <param name="NeedleStyle0" value="1">
+                       <param name="NeedleValue0" value="0">
+                       <param name="NeedleWidth0" value="0.4">
+                       <param name="NeedleVisible0" value="-1">
+                       <param name="NeedleClip0" value="-1">
+                       <param name="TicSize" value="2">
+                       <param name="TicColor0" value="0">
+                       <param name="TicFloat0" value="0">
+                       <param name="TicDeltaValue0" value="5">
+                       <param name="TicFloatOffset0" value="0">
+                       <param name="TicFontID0" value="0">
+                       <param name="TicInnerRadius0" value="5.75">
+                       <param name="TicLabel0" value="-1">
+                       <param name="TicLabelRadius0" value="6.5">
+                       <param name="TicLabelRotated0" value="0">
+                       <param name="TicOuterRadius0" value="6.2">
+                       <param name="TicScaleID0" value="0">
+                       <param name="TicStartValue0" value="0">
+                       <param name="TicStopValue0" value="20">
+                       <param name="TicStyle0" value="0">
+                       <param name="TicWidth0" value="0">
+                       <param name="TicVisible0" value="-1">
+                       <param name="TicAutoTic0" value="0">
+                       <param name="TicCount0" value="6">
+                       <param name="TicSubCount0" value="0">
+                       <param name="TicColor1" value="0">
+                       <param name="TicFloat1" value="0">
+                       <param name="TicDeltaValue1" value="1">
+                       <param name="TicFloatOffset1" value="0">
+                       <param name="TicFontID1" value="0">
+                       <param name="TicInnerRadius1" value="5.75">
+                       <param name="TicLabel1" value="0">
+                       <param name="TicLabelRadius1" value="1">
+                       <param name="TicLabelRotated1" value="0">
+                       <param name="TicOuterRadius1" value="6">
+                       <param name="TicScaleID1" value="0">
+                       <param name="TicStartValue1" value="0">
+                       <param name="TicStopValue1" value="20">
+                       <param name="TicStyle1" value="0">
+                       <param name="TicWidth1" value="0">
+                       <param name="TicVisible1" value="-1">
+                       <param name="TicAutoTic1" value="0">
+                       <param name="TicCount1" value="6">
+                       <param name="TicSubCount1" value="0">
+                   </OBJECT>
+                  </td>
+              </tr>
+          </table>
+          <table border="1" width="580" height="40" bgcolor="#D7D7D7">
+              <tr>
+                  <td width="580" height="10" align="center" valign="center" colspan="3" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                  <b><font face="Arial" color="#000080" size="3">DC Bus Measurements</font></b>
+                  </td>
+              </tr>
+              
+              <tr>
+                  <td width="200" height="30" align="left" valign="top" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                   <OBJECT id="gaugeVdc" codeBase="agauge.cab" classid="clsid:B2E0C2EA-A543-11CF-BC8C-207402C10627" width="275" height="95">
+                       <param name="_Version" value="131082">
+                       <param name="_Version" value="131082">
+                       <param name="_ExtentX" value="5900">
+                       <param name="_ExtentY" value="2461">
+                       <param name="_StockProps" value="70">
+                       <param name="Caption" value>
+                       <param name="Enabled" value="-1">
+                       <param name="BackColor" value="14277081">
+                       <param name="AutoRedraw" value="-1">
+                       <param name="BevelInner" value="2">
+                       <param name="BevelOuter" value="1">
+                       <param name="BevelWidth" value="1">
+                       <param name="BorderWidth" value="2">
+                       <param name="BorderType" value="1">
+                       <param name="Outline" value="0">
+                       <param name="OutlineAlign" value="0">
+                       <param name="OutlineColor" value="0">
+                       <param name="OutlineTitle" value="PMSM">
+                       <param name="OutlineWidth" value="1">
+                       <param name="FocusOutline" value="0">
+                       <param name="FrameBottom" value="1.15">
+                       <param name="FrameColor" value="8421440">
+                       <param name="FrameLeft" value="-0.95">
+                       <param name="FrameRight" value="1.15">
+                       <param name="FrameShape??0" value="0,100, 100,0, 900,0, 1000,100, 1000,900, 900,1000, 100,1000, 0,900">
+                       <param name="FrameStyle" value="0">
+                       <param name="FrameTop" value="-1.15">
+                       <param name="ScaleSize" value="1">
+                       <param name="ScaleDirection0" value="0">
+                       <param name="ScaleMaxValue0" value="20">
+                       <param name="ScaleMinValue0" value="0">
+                       <param name="ScaleOriginX0" value="-0.07">
+                       <param name="ScaleOriginY0" value="-5.5">
+                       <param name="ScaleStartAngle0" value="335">
+                       <param name="ScaleStopAngle0" value="25">
+                       <param name="FontSize" value="1">
+                       <param name="CaptionSize" value="3">
+                       <param name="CaptionColor0" value="16744576">
+                       <param name="CaptionFontID0" value="0">
+                       <param name="Caption0" value>
+                       <param name="CaptionX0" value="0">
+                       <param name="CaptionY0" value="-0.28">
+                       <param name="CaptionAlign0" value="2">
+                       <param name="CaptionVisible0" value="-1">
+                       <param name="CaptionFlag0" value="0">
+                       <param name="CaptionColor1" value="10485760">
+                       <param name="CaptionFontID1" value="0">
+                       <param name="Caption1" value="DC Voltage">
+                       <param name="CaptionX1" value="0">
+                       <param name="CaptionY1" value="-0.5">
+                       <param name="CaptionAlign1" value="2">
+                       <param name="CaptionVisible1" value="-1">
+                       <param name="CaptionFlag1" value="0">
+                       <param name="CaptionColor2" value="10485760">
+                       <param name="CaptionFontID2" value="0">
+                       <param name="Caption2" value="[V]">
+                       <param name="CaptionX2" value="0">
+                       <param name="CaptionY2" value="-0.9">
+                       <param name="CaptionAlign2" value="2">
+                       <param name="CaptionVisible2" value="-1">
+                       <param name="CaptionFlag2" value="0">
+                       <param name="AnnularSize" value="3">
+                       <param name="AnnularColor0" value="65280">
+                       <param name="AnnularFloat0" value="0">
+                       <param name="AnnularFloatOffset0" value="0">
+                       <param name="AnnularInnerRadius0" value="5.75">
+                       <param name="AnnularOuterRadius0" value="6">
+                       <param name="AnnularScaleID0" value="0">
+                       <param name="AnnularStartValue0" value="0">
+                       <param name="AnnularStopValue0" value="5">
+                       <param name="AnnularVisible0" value="-1">
+                       <param name="AnnularColor1" value="65280">
+                       <param name="AnnularFloat1" value="0">
+                       <param name="AnnularFloatOffset1" value="0">
+                       <param name="AnnularInnerRadius1" value="5.75">
+                       <param name="AnnularOuterRadius1" value="6">
+                       <param name="AnnularScaleID1" value="0">
+                       <param name="AnnularStartValue1" value="5">
+                       <param name="AnnularStopValue1" value="15">
+                       <param name="AnnularVisible1" value="-1">
+                       <param name="AnnularColor2" value="33023">
+                       <param name="AnnularFloat2" value="0">
+                       <param name="AnnularFloatOffset2" value="0">
+                       <param name="AnnularInnerRadius2" value="5.75">
+                       <param name="AnnularOuterRadius2" value="6">
+                       <param name="AnnularScaleID2" value="0">
+                       <param name="AnnularStartValue2" value="15">
+                       <param name="AnnularStopValue2" value="20">
+                       <param name="AnnularVisible2" value="-1">
+                       <param name="HubSize" value="0">
+                       <param name="NeedleSize" value="1">
+                       <param name="NeedleColor0" value="4210816">
+                       <param name="NeedleDigital0" value="0">
+                       <param name="NeedleDigitalColor0" value="0">
+                       <param name="NeedleDigitalDecimals0" value="0">
+                       <param name="NeedleDigitalFontID0" value="0">
+                       <param name="NeedleDigitalX0" value="0">
+                       <param name="NeedleDigitalY0" value="0">
+                       <param name="NeedleLength0" value="6.01">
+                       <param name="NeedleMouseControl0" value="0">
+                       <param name="NeedleScaleID0" value="0">
+                       <param name="NeedleShape??0" value>
+                       <param name="NeedleStyle0" value="1">
+                       <param name="NeedleValue0" value="0">
+                       <param name="NeedleWidth0" value="0.4">
+                       <param name="NeedleVisible0" value="-1">
+                       <param name="NeedleClip0" value="-1">
+                       <param name="TicSize" value="2">
+                       <param name="TicColor0" value="0">
+                       <param name="TicFloat0" value="0">
+                       <param name="TicDeltaValue0" value="5">
+                       <param name="TicFloatOffset0" value="0">
+                       <param name="TicFontID0" value="0">
+                       <param name="TicInnerRadius0" value="5.75">
+                       <param name="TicLabel0" value="-1">
+                       <param name="TicLabelRadius0" value="6.5">
+                       <param name="TicLabelRotated0" value="0">
+                       <param name="TicOuterRadius0" value="6.2">
+                       <param name="TicScaleID0" value="0">
+                       <param name="TicStartValue0" value="0">
+                       <param name="TicStopValue0" value="20">
+                       <param name="TicStyle0" value="0">
+                       <param name="TicWidth0" value="0">
+                       <param name="TicVisible0" value="-1">
+                       <param name="TicAutoTic0" value="0">
+                       <param name="TicCount0" value="6">
+                       <param name="TicSubCount0" value="0">
+                       <param name="TicColor1" value="0">
+                       <param name="TicFloat1" value="0">
+                       <param name="TicDeltaValue1" value="1">
+                       <param name="TicFloatOffset1" value="0">
+                       <param name="TicFontID1" value="0">
+                       <param name="TicInnerRadius1" value="5.75">
+                       <param name="TicLabel1" value="0">
+                       <param name="TicLabelRadius1" value="1">
+                       <param name="TicLabelRotated1" value="0">
+                       <param name="TicOuterRadius1" value="6">
+                       <param name="TicScaleID1" value="0">
+                       <param name="TicStartValue1" value="0">
+                       <param name="TicStopValue1" value="20">
+                       <param name="TicStyle1" value="0">
+                       <param name="TicWidth1" value="0">
+                       <param name="TicVisible1" value="-1">
+                       <param name="TicAutoTic1" value="0">
+                       <param name="TicCount1" value="6">
+                       <param name="TicSubCount1" value="0">
+                   </OBJECT>
+                  </td>
+                  <td width="200" height="30" align="center" valign="top" bordercolor="#D7D7D7" bgcolor="#D7D7D7">
+                   <OBJECT id="gaugeIdc" codeBase="agauge.cab" classid="clsid:B2E0C2EA-A543-11CF-BC8C-207402C10627" width="275" height="95">
+                       <param name="_Version" value="131082">
+                       <param name="_Version" value="131082">
+                       <param name="_ExtentX" value="5900">
+                       <param name="_ExtentY" value="2461">
+                       <param name="_StockProps" value="70">
+                       <param name="Caption" value>
+                       <param name="Enabled" value="-1">
+                       <param name="BackColor" value="14277081">
+                       <param name="AutoRedraw" value="-1">
+                       <param name="BevelInner" value="2">
+                       <param name="BevelOuter" value="1">
+                       <param name="BevelWidth" value="1">
+                       <param name="BorderWidth" value="2">
+                       <param name="BorderType" value="1">
+                       <param name="Outline" value="0">
+                       <param name="OutlineAlign" value="0">
+                       <param name="OutlineColor" value="0">
+                       <param name="OutlineTitle" value="PMSM">
+                       <param name="OutlineWidth" value="1">
+                       <param name="FocusOutline" value="0">
+                       <param name="FrameBottom" value="1.15">
+                       <param name="FrameColor" value="8421440">
+                       <param name="FrameLeft" value="-0.95">
+                       <param name="FrameRight" value="1.15">
+                       <param name="FrameShape??0" value="0,100, 100,0, 900,0, 1000,100, 1000,900, 900,1000, 100,1000, 0,900">
+                       <param name="FrameStyle" value="0">
+                       <param name="FrameTop" value="-1.15">
+                       <param name="ScaleSize" value="1">
+                       <param name="ScaleDirection0" value="0">
+                       <param name="ScaleMaxValue0" value="20">
+                       <param name="ScaleMinValue0" value="0">
+                       <param name="ScaleOriginX0" value="-0.07">
+                       <param name="ScaleOriginY0" value="-5.5">
+                       <param name="ScaleStartAngle0" value="335">
+                       <param name="ScaleStopAngle0" value="25">
+                       <param name="FontSize" value="1">
+                       <param name="CaptionSize" value="3">
+                       <param name="CaptionColor0" value="16744576">
+                       <param name="CaptionFontID0" value="0">
+                       <param name="Caption0" value>
+                       <param name="CaptionX0" value="0">
+                       <param name="CaptionY0" value="-0.28">
+                       <param name="CaptionAlign0" value="2">
+                       <param name="CaptionVisible0" value="-1">
+                       <param name="CaptionFlag0" value="0">
+                       <param name="CaptionColor1" value="10485760">
+                       <param name="CaptionFontID1" value="0">
+                       <param name="Caption1" value="DC Current">
+                       <param name="CaptionX1" value="0">
+                       <param name="CaptionY1" value="-0.5">
+                       <param name="CaptionAlign1" value="2">
+                       <param name="CaptionVisible1" value="-1">
+                       <param name="CaptionFlag1" value="0">
+                       <param name="CaptionColor2" value="10485760">
+                       <param name="CaptionFontID2" value="0">
+                       <param name="Caption2" value="[A]">
+                       <param name="CaptionX2" value="0">
+                       <param name="CaptionY2" value="-0.9">
+                       <param name="CaptionAlign2" value="2">
+                       <param name="CaptionVisible2" value="-1">
+                       <param name="CaptionFlag2" value="0">
+                       <param name="AnnularSize" value="3">
+                       <param name="AnnularColor0" value="65280">
+                       <param name="AnnularFloat0" value="0">
+                       <param name="AnnularFloatOffset0" value="0">
+                       <param name="AnnularInnerRadius0" value="5.75">
+                       <param name="AnnularOuterRadius0" value="6">
+                       <param name="AnnularScaleID0" value="0">
+                       <param name="AnnularStartValue0" value="0">
+                       <param name="AnnularStopValue0" value="5">
+                       <param name="AnnularVisible0" value="-1">
+                       <param name="AnnularColor1" value="65280">
+                       <param name="AnnularFloat1" value="0">
+                       <param name="AnnularFloatOffset1" value="0">
+                       <param name="AnnularInnerRadius1" value="5.75">
+                       <param name="AnnularOuterRadius1" value="6">
+                       <param name="AnnularScaleID1" value="0">
+                       <param name="AnnularStartValue1" value="5">
+                       <param name="AnnularStopValue1" value="15">
+                       <param name="AnnularVisible1" value="-1">
+                       <param name="AnnularColor2" value="33023">
+                       <param name="AnnularFloat2" value="0">
+                       <param name="AnnularFloatOffset2" value="0">
+                       <param name="AnnularInnerRadius2" value="5.75">
+                       <param name="AnnularOuterRadius2" value="6">
+                       <param name="AnnularScaleID2" value="0">
+                       <param name="AnnularStartValue2" value="15">
+                       <param name="AnnularStopValue2" value="20">
+                       <param name="AnnularVisible2" value="-1">
+                       <param name="HubSize" value="0">
+                       <param name="NeedleSize" value="1">
+                       <param name="NeedleColor0" value="4210816">
+                       <param name="NeedleDigital0" value="0">
+                       <param name="NeedleDigitalColor0" value="0">
+                       <param name="NeedleDigitalDecimals0" value="0">
+                       <param name="NeedleDigitalFontID0" value="0">
+                       <param name="NeedleDigitalX0" value="0">
+                       <param name="NeedleDigitalY0" value="0">
+                       <param name="NeedleLength0" value="6.01">
+                       <param name="NeedleMouseControl0" value="0">
+                       <param name="NeedleScaleID0" value="0">
+                       <param name="NeedleShape??0" value>
+                       <param name="NeedleStyle0" value="1">
+                       <param name="NeedleValue0" value="0">
+                       <param name="NeedleWidth0" value="0.4">
+                       <param name="NeedleVisible0" value="-1">
+                       <param name="NeedleClip0" value="-1">
+                       <param name="TicSize" value="2">
+                       <param name="TicColor0" value="0">
+                       <param name="TicFloat0" value="0">
+                       <param name="TicDeltaValue0" value="5">
+                       <param name="TicFloatOffset0" value="0">
+                       <param name="TicFontID0" value="0">
+                       <param name="TicInnerRadius0" value="5.75">
+                       <param name="TicLabel0" value="-1">
+                       <param name="TicLabelRadius0" value="6.5">
+                       <param name="TicLabelRotated0" value="0">
+                       <param name="TicOuterRadius0" value="6.2">
+                       <param name="TicScaleID0" value="0">
+                       <param name="TicStartValue0" value="0">
+                       <param name="TicStopValue0" value="20">
+                       <param name="TicStyle0" value="0">
+                       <param name="TicWidth0" value="0">
+                       <param name="TicVisible0" value="-1">
+                       <param name="TicAutoTic0" value="0">
+                       <param name="TicCount0" value="6">
+                       <param name="TicSubCount0" value="0">
+                       <param name="TicColor1" value="0">
+                       <param name="TicFloat1" value="0">
+                       <param name="TicDeltaValue1" value="1">
+                       <param name="TicFloatOffset1" value="0">
+                       <param name="TicFontID1" value="0">
+                       <param name="TicInnerRadius1" value="5.75">
+                       <param name="TicLabel1" value="0">
+                       <param name="TicLabelRadius1" value="1">
+                       <param name="TicLabelRotated1" value="0">
+                       <param name="TicOuterRadius1" value="6">
+                       <param name="TicScaleID1" value="0">
+                       <param name="TicStartValue1" value="0">
+                       <param name="TicStopValue1" value="20">
+                       <param name="TicStyle1" value="0">
+                       <param name="TicWidth1" value="0">
+                       <param name="TicVisible1" value="-1">
+                       <param name="TicAutoTic1" value="0">
+                       <param name="TicCount1" value="6">
+                       <param name="TicSubCount1" value="0">
+                   </OBJECT>
+                  </td>
+              </tr>
+          </table>
+      </center>
+    </div>
+
+    <p>&nbsp;</p>
+
+</BODY>
+</HTML>

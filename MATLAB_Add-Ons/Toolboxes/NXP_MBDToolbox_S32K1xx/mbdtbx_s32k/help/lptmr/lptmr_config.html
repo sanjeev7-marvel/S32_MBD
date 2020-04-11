@@ -1,0 +1,155 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>LPTMR Configuration Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>LPTMR Configuration Block</h1>
+        <!--Page-description-->
+        <p>This block allows the user to configure the LPTMR module.</p>
+        <p>The low-power timer (LPTMR) can be configured to operate as a time counter with
+            optional prescaler, or as a pulse counter with optional glitch filter, across all power
+            modes, including the low-leakage modes. It can also continue operating through most
+            system reset events, allowing it to be used as a time of day counter.</p>
+        <!--Library block image-->
+        <h2>Block Image</h2>
+        <img vspace="0" src="lptmr_config_files/block_config.jpg" width="200px" height="auto" />
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+
+        <!--Table of contents-->
+        <p>The block dialog consists of the following tabs: </p>
+        <ul>
+            <li><a href="#general_tab">General</a></li>
+            <!--If need be for another subclass, another ul instances must be placed-->
+            <li><a href="#advanced_tab">Advanced</a></li>
+        </ul>
+
+        <!--Window tab-->
+        <h4><a name="general_tab"></a>General</h4>
+       
+        <img vspace="10" src="lptmr_config_files/block_config_general.jpg" width="450px" height="auto">
+
+        <h3>Mode Select</h3>
+        <p>Configures the running mode of the LPTMR.</p>
+        <ul>
+            <li>Time Counter Mode</li>
+            <li>Pulse Counter Mode</li>
+        </ul>
+
+        <h3>Compare Value</h3>
+        <p>Sets the compare value for the LPTMR. For Ticks the value can be chosen between 1 - 65535.</p>
+        <p> In Time Counter Mode, the value can be chosen in Ticks or Microseconds while in 
+        Pulse Counter Mode the value needs to be chosen only in Ticks units.</p>
+        
+        <h3>Compare Value Units</h3>
+        <p>Selects the compare value units Ticks/Microseconds, only for Time Counter Mode. </p>
+
+        <ul>
+            <li>Ticks</li>
+            <li>Microseconds</li>
+        </ul>
+        <p><b>Note:</b> If the desired units are Microseconds, the SDK chooses automatically the prescaler in order to obtain a better precision.</p>
+
+        <h3>Pin Source (Pulse Counter Mode)</h3>
+        <p>Configures the input source used in pulse counter mode.</p>
+        <ul>
+            <li>Count pulses from pin alternative 1 - LPTMR_ALT1 pin</li>
+            <li>Count pulses from pin alternative 2 - LPTMR_ALT2 pin</li>
+            <li>Count pulses from pin alternative 3 - LPTMR_ALT3 pin</li>
+            <li>Count pulses from TRGMUX trigger - TRGMUX output</li>
+        </ul>
+
+        <h3>Pin Polarity (Pulse Counter Mode)</h3>
+        <p>Configures the polarity of the input source in Pulse Counter mode.</p>
+        <ul>
+            <li>Count pulse on rising edge</li>
+            <li>Count pulse on falling edge</li>
+        </ul>
+
+        <h3>TRGMUX Source (Pulse Counter Mode)</h3>
+        <p>Configures the input source used for TRGMUX output.</p>
+        <p>This field is only available if <i>Count pulses from TRGMUX trigger</i>is selected in <i>Pin Select</i> field.</p>
+
+        <h3>Input Pin</h3>
+        <p>Configures the GPIO pin used as Pulse Counter Source.</p>
+
+        <h3>Show advanced options</h3>
+        <p>Shows or hides the Advanced options tab.</p>
+
+        <!--Advanced tab-->
+        <h4><a name="advanced_tab"></a>Advanced</h4>
+        <img vspace="10" src="lptmr_config_files/block_config_advanced.jpg" width="450px" height="auto">
+        
+        <!--Tab-->
+        <h3>Prescaler Clock Select</h3>
+        Selects the clock to be used by the LPTMR prescaler/glitch filter. In time counter mode, this field selects the input clock to the prescaler. In pulse counter mode, this field selects the input clock to the glitch filter.
+        <ul>
+            <li>SIRC DIV2 clock</li>
+            <li>1kHz LPO clock</li>
+            <li>RTC clock</li>
+            <li>PCC configured clock</li>
+        </ul>
+
+        <h3>Prescale Value</h3>
+        Selects the clock to be used by the LPTMR prescaler/glitch filter. In time counter mode, this field selects the input clock to the prescaler. In pulse counter mode, this field selects the input clock to the glitch filter.
+        <ul>
+            <li>Timer mode: prescaler 2, Glitch filter mode: invalid</li>
+            <li>Timer mode: prescaler 4, Glitch filter mode: 2 clocks</li>
+            <li>Timer mode: prescaler 8, Glitch filter mode: 4 clocks</li>
+            <li>Timer mode: prescaler 16, Glitch filter mode: 8 clocks</li>
+            <li>Timer mode: prescaler 32, Glitch filter mode: 16 clocks</li>
+            <li>Timer mode: prescaler 64, Glitch filter mode: 32 clocks</li>
+            <li>Timer mode: prescaler 128, Glitch filter mode: 64 clocks</li>
+            <li>Timer mode: prescaler 256, Glitch filter mode: 128 clocks</li>
+            <li>Timer mode: prescaler 512, Glitch filter mode: 256 clocks</li>
+            <li>Timer mode: prescaler 1024, Glitch filter mode: 512 clocks</li>
+            <li>Timer mode: prescaler 2048, Glitch filter mode: 1024 clocks</li>
+            <li>Timer mode: prescaler 4096, Glitch filter mode: 2048 clocks</li>
+            <li>Timer mode: prescaler 8192, Glitch filter mode: 4096 clocks</li>
+            <li>Timer mode: prescaler 16384, Glitch filter mode: 8192 clocks</li>
+            <li>Timer mode: prescaler 32768, Glitch filter mode: 16384 clocks</li>
+            <li>Timer mode: prescaler 65536, Glitch filter mode: 32768 clocks</li>
+        </ul>
+
+        <h3>Prescaler Bypass</h3>
+        <p>When unchecked, the selected prescaler clock in Time Counter mode or selected input source in Pulse Counter mode directly clocks the counter. When checked, the counter is clocked by the output of the prescaler/glitch filter.</p>
+
+        <h3>Time Free-Running Counter</h3>
+        <p>When unchecked, it configures the counter to reset whenever TCF bit is set. When checked, it configures the counter to reset on overflow.</p>
+
+        <h3>Start LPTMR counter immediatly after initialization</h3>
+        <p>When unchecked, the counter is not started after initialization done. It can be started using the LPTMR_Start_Stop block. When checked the counter is started immediatly after initialization done.</p>
+        <p>Default value is checked, even if the advanced configuration is unavailable.</p>
+        
+        <h3>Enable ISR immediatly after initialization</h3>
+        <p>When unchecked, the ISR is not enabled after initialization done. It can be enabled using the LPTMR_ISR_Disen block. When checked the counter is started immediatly after initialization done.</p>
+        <p>Default value is checked, even if the advanced configuration is unavailable.</p>
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Miscellaneous-Details-->
+        <h2>Block Miscellaneous Details</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+%implements fcan_s32k_config "C"
+
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("device_registers.h")>
+    %<LibAddToCommonIncludes("flexcan_driver.h")>
+    %<LibAddToCommonIncludes("flexcan_hw_access.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_fcan_config_sdk_params", blockPath)
+    %with sdk_params
+    {
+        %openfile declarationsBuf
+        flexcan_state_t canCom%<instance>_State;
+        %closefile declarationsBuf
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", declarationsBuf)>
+
+        %openfile externBuf
+        extern flexcan_state_t canCom%<instance>_State;
+        %closefile externBuf
+        %<LibCacheExtern(externBuf)>
+
+        %if (user_config.bitrate_endis == "true")
+            %assign bitrate_params = FEVAL("mbd_s32k_fcan_bitrate_to_time_seg_param", blockPath)
+            %assign timeSeg = FEVAL("FLEXCAN_s32k_BitrateToTimeSeg", bitrate_params.bitrate, bitrate_params.clkFreq, user_config.samplePoint, 0U)
+            %assign timeSeg2 = FEVAL("FLEXCAN_s32k_BitrateToTimeSeg", bitrate_params.bitrate, bitrate_params.clkFreq, user_config.samplePoint, 1U)
+        %endif
+        const flexcan_user_config_t canCom%<instance>_InitConfig = {
+            .fd_enable = %<user_config.fd_enable>,
+            .pe_clock = %<user_config.pe_clock>,
+            .max_num_mb = %<user_config.max_num_mb>,
+            .num_id_filters = %<user_config.num_id_filters>,
+            .is_rx_fifo_needed = %<user_config.is_rx_fifo_needed>,
+            .flexcanMode = %<user_config.flexcanMode>,
+            .payload = %<user_config.payload>,
+            %if (user_config.bitrate_endis == "true")
+            /* Bitrate: %<bitrate_params.bitrate> and clock frequency: %<bitrate_params.clkFreq>*/
+            .bitrate = {
+                .propSeg = %<timeSeg[0][0]>,
+                .phaseSeg1 = %<timeSeg[1][0]>,
+                .phaseSeg2 = %<timeSeg[2][0]>,
+                .preDivider = %<timeSeg[3][0]>,
+                .rJumpwidth = %<timeSeg[4][0]>
+            },
+            %else
+            .bitrate = {
+                .propSeg = %<user_config.bitrate.propSeg>,
+                .phaseSeg1 = %<user_config.bitrate.phaseSeg1>,
+                .phaseSeg2 = %<user_config.bitrate.phaseSeg2>,
+                .preDivider = %<user_config.bitrate.preDivider>,
+                .rJumpwidth = %<user_config.bitrate.rJumpwidth>
+            },
+            %endif
+            %if (user_config.bitrate_endis == "true")
+            /* Bitrate: %<bitrate_params.bitrate> and clock frequency: %<bitrate_params.clkFreq> for dataPhase */
+            .bitrate_cbt = {
+                .propSeg = %<timeSeg2[0][0]>,
+                .phaseSeg1 = %<timeSeg2[1][0]>,
+                .phaseSeg2 = %<timeSeg2[2][0]>,
+                .preDivider = %<timeSeg2[3][0]>,
+                .rJumpwidth = %<timeSeg2[4][0]>
+            },
+            %else
+            .bitrate_cbt = {
+                .propSeg = %<user_config.bitrate_cbt.propSeg>,
+                .phaseSeg1 = %<user_config.bitrate_cbt.phaseSeg1>,
+                .phaseSeg2 = %<user_config.bitrate_cbt.phaseSeg2>,
+                .preDivider = %<user_config.bitrate_cbt.preDivider>,
+                .rJumpwidth = %<user_config.bitrate_cbt.rJumpwidth>
+            },
+            %endif
+            .transfer_type = FLEXCAN_RXFIFO_USING_INTERRUPTS,
+            .rxFifoDMAChannel = 0U
+        };
+
+        /* CAN RX pin config */
+        PCC_SetClockMode(PCC, %<clk.rx>, true);
+        PINS_DRV_SetMuxModeSel(%<pin_info.rx_pin.user_config.port>, %<pin_info.rx_pin.user_config.pin>, %<pin_info.rx_pin.user_config.mux>);
+
+        /* CAN TX pin config */
+        PCC_SetClockMode(PCC, %<clk.tx>, true);
+        PINS_DRV_SetMuxModeSel(%<pin_info.tx_pin.user_config.port>, %<pin_info.tx_pin.user_config.pin>, %<pin_info.tx_pin.user_config.mux>);
+
+        /* Enable CAN%<instance> clock */
+        PCC_SetClockMode(PCC, %<periph_clock>, true);
+
+        FLEXCAN_DRV_Init(%<instance>, &canCom%<instance>_State, &canCom%<instance>_InitConfig);
+
+        %if (user_config.is_rx_fifo_needed == "true")
+        uint32_t idFilters[] = %<id_filter_table.idFilter>;
+
+        flexcan_id_table_t id_filter_table = {
+            .isRemoteFrame = %<id_filter_table.isRemoteFrame>,
+            .isExtendedFrame = %<id_filter_table.isExtendedFrame>,
+            .id = idFilters[0]
+        };
+
+        FLEXCAN_DRV_ConfigRxFifo(%<instance>, %<id_format>, &id_filter_table);
+        %endif
+
+        %if (pn_enable == "true")
+        flexcan_pn_config_t canCom%<instance>_PnConfig = {
+            .wakeUpTimeout = %<pn_config.wakeUpTimeout>,
+            .wakeUpMatch = %<pn_config.wakeUpMatch>,
+            .numMatches = %<pn_config.numMatches>,
+            .matchTimeout = %<pn_config.matchTimeout>,
+            .filterComb = %<pn_config.filterComb>,
+            .idFilter1 = {
+                .extendedId = %<pn_config.idFilter1.extendedId>,
+                .remoteFrame = %<pn_config.idFilter1.remoteFrame>,
+                .id = %<pn_config.idFilter1.id>
+            },
+            .idFilter2 = {
+                .extendedId = %<pn_config.idFilter2.extendedId>,
+                .remoteFrame = %<pn_config.idFilter2.remoteFrame>,
+                .id = %<pn_config.idFilter2.id>
+            },
+            .idFilterType = %<pn_config.idFilterType>,
+            .payloadFilterType = %<pn_config.payloadFilterType>,
+            .payloadFilter = {
+                .dlcLow = %<pn_config.payloadFilter.dlcLow>,
+                .dlcHigh = %<pn_config.payloadFilter.dlcHigh>,
+                .payload1 = %<pn_config.payloadFilter.payload1>,
+                .payload2 = %<pn_config.payloadFilter.payload2>
+            },
+        };
+
+        FLEXCAN_DRV_ConfigPN(%<instance>, true, &canCom%<instance>_PnConfig);
+        %endif
+    }
+    %endwith
+
+    %endif
+%endfunction

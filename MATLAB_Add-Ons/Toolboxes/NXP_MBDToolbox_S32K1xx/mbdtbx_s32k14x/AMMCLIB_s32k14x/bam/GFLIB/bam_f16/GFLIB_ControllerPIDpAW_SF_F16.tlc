@@ -1,0 +1,64 @@
+%% Copyright (c) 2019 NXP
+
+%implements GFLIB_ControllerPIDpAW_SF_F16 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GFLIB_INCLUDED")
+      %assign ::GFLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gflib.h\"" + "\n")>
+   %endif 
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+   %assign f16PropGain = CAST("Number",Parameter[0].Value[0])
+   %assign s16PropGainShift = CAST("Number",Parameter[1].Value[0])
+   %assign f16IntegGain = CAST("Number",Parameter[2].Value[0])
+   %assign s16IntegGainShift = CAST("Number",Parameter[3].Value[0])
+   %assign f16DerivGain = CAST("Number",Parameter[4].Value[0])
+   %assign s16DerivGainShift = CAST("Number",Parameter[5].Value[0])
+   %assign f16FiltCoef = CAST("Number",Parameter[6].Value[0])
+
+   %assign x = LibBlockInputSignal(0, "", "", 0)
+   %assign x1 = LibBlockInputSignal(1, "", "", 0)
+   %assign x2 = LibBlockInputSignal(2, "", "", 0)
+   %assign x3 = LibBlockInputSignal(3, "", "", 0)
+   %assign x4 = LibBlockInputSignal(4, "", "", 0)
+   %assign x5 = LibBlockInputSignal(5, "", "", 0)
+   %assign y = LibBlockOutputSignal(0, "", "", 0)
+   %assign y1 = LibBlockOutputSignal(1, "", "", 0)
+   %assign y2 = LibBlockOutputSignal(2, "", "", 0)
+   %assign y3 = LibBlockOutputSignal(3, "", "", 0)
+   %assign y4 = LibBlockOutputSignal(4, "", "", 0)
+
+   {  
+	 static GFLIB_CONTROLLER_PID_P_AW_T_F16 param = { %<f16PropGain>, %<f16IntegGain>, %<f16DerivGain>, %<f16FiltCoef>, %<s16PropGainShift>, %<s16IntegGainShift>, %<s16DerivGainShift>, 0, 0, 0, 0, 0, 0};
+	 param.f16LowerLimit =%<x2>;
+     param.f16UpperLimit = %<x1>;
+     param.f32IntegPartK_1 = %<x4>;
+     param.f16DerivPartK_1 = %<x5>;
+     param.f16InK_1 = %<x3>;
+
+     %<y> = GFLIB_ControllerPIDpAW_F16(%<x>, &param);
+	 %<y1> = param.u16LimitFlag;
+
+	 %<y2> = param.f16InK_1;
+     %<y3> = param.f32IntegPartK_1;
+     %<y4> = param.f16DerivPartK_1;
+   }
+
+%endfunction

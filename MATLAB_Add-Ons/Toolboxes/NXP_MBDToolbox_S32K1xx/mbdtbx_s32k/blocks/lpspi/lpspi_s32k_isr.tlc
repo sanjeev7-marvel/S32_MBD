@@ -1,0 +1,69 @@
+%implements lpspi_s32k_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Trigger subsystem function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function FcnCallTriggeredSubsystems(block) Output
+
+   %foreach fcnCallIdx = NumSFcnSysOutputCalls
+        %% call the downstream system
+        %with SFcnSystemOutputCall[fcnCallIdx]
+        %% skip unconnected function call outputs
+        %if !ISEQUAL(BlockToCall, "unconnected")
+            %% Call subsytem code
+            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+        %endif
+        %endwith
+    %endforeach
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lpspi_shared_function.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lpspi_isr_sdk_params", blockPath)
+    %with info
+        %if (user_config.transfer_end == "on")
+            %% write the trigger for master/slave @SPI_EVENT_END_TRANSFER event
+            %openfile fcnBuf
+            %if (user_config.role == "Master")
+                void lpspi_master_transfer_callback%<user_config.instance>(void *driverState, spi_event_t event, void *userData){
+            %else
+                void lpspi_slave_transfer_callback%<user_config.instance>(void *driverState, spi_event_t event, void *userData){
+            %endif
+                    /* Trigger subsystem at SPI_EVENT_END_TRANSFER */
+                    %<FcnCallTriggeredSubsystems(block)>
+                }
+            %closefile fcnBuf
+            %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", fcnBuf)>
+        %endif
+    %endwith
+
+    %endif
+%endfunction

@@ -1,0 +1,65 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>TPP Functional Mode Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+        <!--Page-title-->
+        <h1>TPP Functional Mode Block</h1>
+        <!--Page-description-->
+        <p>TPP Functional Mode performs software transition from one mode to another. The transition can be from a simple switch to low on Enable pins (for sleep) to a more complex one (for enable) where are made all the initialization steps.</p>
+
+        <h2>Block Image</h2>
+        <img vspace="0" src="images/tpp_functional_mode.jpg" width="300px" height="auto">
+        <!--Inputs-->
+        <h2>Inputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Outputs-->
+        <h2>Outputs:</h2>
+        <ul>
+            <li>None</li>
+        </ul>
+        <!--Block-Dialog-Box-->
+        <h2>Parameters and Dialog Box</h2>
+         <!--Table of contents-->
+        <img vspace="10" src="images/tpp_functional_mode_param.jpg" width="450px" height="auto">
+        <p>The block has two parameter:</p>
+		
+		<h3>Instance</h3>
+		<p>Selects the TPP instance to be used.</p>
+		<p><b>Note:</b>Currently limited to only 1 instace (#0).</p>
+		
+        <h3>Mode</h3>
+        <p>Available operational modes of TPP integrated circuit.</p>
+		<p><b>Note: </b>TPP available operational modes are:</p>
+		<ul>
+			<li>Sleep: When RSTB is low, the IC is in sleep mode. The current consumption of the IC is at minimum.</li>
+			<li>Standby: The RSTB input is high while one of the enable inputs is low. The IC is fully biased and operating, all the external
+						FETs are actively turned Off by both high-side and low-side gate drives. The IC is ready to enter the enable mode.</li>
+			<li>Initialization: When EN1, EN2, and RSTB all go high, the device enters the Initialization mode. Toggling the LS and then the
+								HS initializes the driver and normal operation, the Enable mode begins. </li>
+			<li>Enable: After initialization is complete, the device goes into the enable mode and operates normally. Normal operation
+						continues in this mode as long as both enable pins and RSTB are high. </li>
+			<li>FaultProtection: Can be used during interrupt processing, when output stages are automatically turned off. </li>	
+        <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+                <li>Configure the <a href="tpp_config.html">TPP Configuration</a> block.</li>
+				<li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+	
+	<p>* Read Hardware Manual documentation to get more information (<a href="https://www.nxp.com/products/power-management/motor-and-solenoid-drivers/bldc-h-bridge-stepper/3-phase-brushless-motor-pre-driver:GD3000?fpsp=1&tab=Documentation_Tab">GD3000).</a></p>
+   </div>
+  </body>
+</html>

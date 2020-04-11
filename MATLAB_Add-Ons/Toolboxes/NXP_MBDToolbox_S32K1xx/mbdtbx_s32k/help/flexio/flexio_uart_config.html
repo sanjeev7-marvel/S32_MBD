@@ -1,0 +1,93 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>FlexIO UART Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>FLEXIO UART Configuration Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to configure the FlexIO module to emulate UART communication.</p>
+            <p>The FlexIO module allows you to configure parameters of UART by selecting the baudrate and pins to be used (from the 8 flexio
+            pins available on S32k).</p>
+            <p><b>Note:</b>Parity bit is not supported.</p>
+            <p><b>Note:</b>Only single stop bit is supported.</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="flexio_config_files/flexio_uart_config.jpg" width="300px" height="auto">
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+             <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#1">General</a></li>
+                <!--If need be for another subclass, another ul instances must be placed-->
+                <li><a href="#2">Pins</a></li>
+            </ul>
+
+           
+            
+            <!--Table of contents-->
+           
+            <!--Window tab-->
+            <h4><a name="1"></a>General</h4>
+           
+            <img vspace="10" src="flexio_config_files/flexio_uart_config_general.jpg" width="450px" height="auto">
+            </br>
+
+            <h3>Instance</h3>
+            <p>Select an instance of flexio to use (must be linked with Tx/Rx blocks).</p>
+            
+            <h3>Mode</h3>
+            <p>Select either Polling or Interrupts mode, depending on what kind of Tx/Rx block you want to use, as follows:</p>
+            <ul>
+                <li>Transmit / Receive Blocks <b>(blocking)</b> - select <b>POLLING</b> </li>
+                <li>Transmit ISR / Receive ISR Blocks <b>(non-blocking)</b> - select <b>INTERRUPTS</b> </li>
+            </ul>
+            
+            <h3>Bit Count</h3>
+            <p>Insert number of bits per word to be used (significant data payload from the UART data frame).</p>
+            <ul>
+                <li><p><b>Note:</b> Bit count must be betwen 1 and 16.</p></li>
+            </ul>
+            
+            <h3>Baud Rate</h3>
+            <p>Insert the baud rate for FlexIO UART (in Hz).</p>
+            <p><b>Note:</b> Due to module limitation not any baud rate can be achieved. The driver will set a baud rate as 
+            close as possible to the requested baud rate, but there may still be substantial differences, for example if requesting a high baud 
+            rate while using a low-frequency FlexIO clock.</p>
+
+            <h4><a name="2"></a>Pins</h4>
+            <img vspace="10" src="flexio_config_files/flexio_uart_config_pins.jpg" width="450px" height="auto">
+            
+            <!--Tab-->
+            <h3>Pins</h3>
+            <p>Select the flexio pins to be used from the dropdown list.</p>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

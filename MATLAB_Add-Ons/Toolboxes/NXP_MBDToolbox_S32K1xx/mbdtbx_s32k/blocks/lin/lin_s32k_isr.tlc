@@ -1,0 +1,66 @@
+%implements lin_s32k_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Trigger subsystem function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function FcnCallTriggeredSubsystems(block) Output
+    %foreach fcnCallIdx = NumSFcnSysOutputCalls
+        %% call the downstream system
+        %with SFcnSystemOutputCall[fcnCallIdx]
+
+        %% skip unconnected function call outputs
+        %if !ISEQUAL(BlockToCall, "unconnected")
+            %% Call subsytem code
+            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+        %endif
+        %endwith
+    %endforeach
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lin_isr_sdk_params", blockPath)
+    %with info
+    {
+        %openfile buffer
+            #define LIN_XCVR_ENABLE_PIN       (9UL)
+            #define LIN_XCVR_ENABLE_MASK      (0x1u << LIN_XCVR_ENABLE_PIN)
+            #define LIN_XCVR_ENABLE_GPIO_PORT (PTE)
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", buffer)>
+
+        %openfile buffer
+            lin_callback_t lin%<instance>CallbackHandler(uint32_t instance, lin_state_t * lin1_State){
+                %<LibBlockOutputSignal(1, "", "", 0)> = lin1_State->currentEventId;
+                %<LibBlockOutputSignal(2, "", "", 0)> = lin1_State->currentId;
+
+                lin_callback_t callbackCurrent;
+                callbackCurrent = lin1_State->Callback;
+
+                %<FcnCallTriggeredSubsystems(block)>
+
+                return callbackCurrent;
+            }
+        %closefile buffer
+        %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+
+        /* Install callback function */
+        LIN_DRV_InstallCallback(%<instance>, (lin_callback_t)lin%<instance>CallbackHandler);
+    }
+    %endwith
+
+    %endif
+%endfunction

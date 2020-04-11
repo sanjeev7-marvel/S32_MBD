@@ -1,0 +1,67 @@
+%%
+%% Copyright (c) 9 NXP.
+%% All rights reserved.
+%%
+
+%% Matlab R2018b -> Simulink 9.2
+%if FEVAL("verLessThan", "Simulink", "9.2")
+    %assign numRates = %<NumSynchronousSampleTimes>
+%else
+    %assign numRates = %<NumRuntimeExportedRates>
+%endif
+
+int main(void)
+{
+    /* External mode */
+    rtParseArgsForExtMode(0, NULL);
+
+    /* External mode */
+    rtSetTFinalForExtMode(&rtmGetTFinal(%<::tSimStruct>));
+    rtExtModeCheckInit(1);
+    {
+        boolean_T rtmStopReq = false;
+        rtExtModeWaitForStartPkt(%<::tSimStruct>->extModeInfo, %<numRates>, &rtmStopReq);
+        if (rtmStopReq) {
+            rtmSetStopRequested(%<::tSimStruct>, true);
+        }
+    }
+
+    rtERTExtModeStartMsg();
+
+    /* The External Mode option selected; therefore,
+     *  simulating the model step behavior (in non real-time).
+     */
+    while ((rtmGetErrorStatus(%<::tSimStruct>) == (NULL)) && !rtmGetStopRequested
+            (%<::tSimStruct>)) {
+        /* External mode */
+        {
+            boolean_T rtmStopReq = false;
+            rtExtModePauseIfNeeded(%<::tSimStruct>->extModeInfo, %<numRates>, &rtmStopReq);
+            if (rtmStopReq) {
+                rtmSetStopRequested(%<::tSimStruct>, true);
+            }
+
+            if (rtmGetStopRequested(%<::tSimStruct>) == true) {
+                rtmSetErrorStatus(%<::tSimStruct>, "Simulation finished");
+                break;
+            }
+        }
+
+        /* External mode */
+        {
+            boolean_T rtmStopReq = false;
+            rtExtModeOneStep(%<::tSimStruct>->extModeInfo, %<numRates>, &rtmStopReq);
+            if (rtmStopReq) {
+                rtmSetStopRequested(%<::tSimStruct>, true);
+            }
+        }
+    }
+
+    /* External mode */
+    rtExtModeShutdown(%<numRates>);
+
+    /* Terminate model */
+    %<FcnMdlName()>_terminate(%<SLibModelFcnArgs("Terminate",TLC_TRUE,"")>);
+
+    return 0;
+}

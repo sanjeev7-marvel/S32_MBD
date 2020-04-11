@@ -1,0 +1,56 @@
+%implements tpp_s32k_isr "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if (CompiledModel.ConfigSet.SystemTargetFile == "mbd_s32k.tlc")
+        %<LibAddToCommonIncludes("gpio_irq.h")>
+        %<LibAddToCommonIncludes("interrupt_manager.h")>
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+    %if (CompiledModel.ConfigSet.SystemTargetFile == "mbd_s32k.tlc")
+		%assign inst = FEVAL("get_param", "gcb", "tppInstance")
+		%assign config_block_name = FEVAL("tpp_s32k_get_config_block", inst)
+        %assign tppParams = FEVAL("tpp_s32k_params", config_block_name)
+        %assign mcu_family = FEVAL("mbd_s32k_get_target_family")
+
+        {
+            %openfile buffer
+                void GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback (void)
+                {
+                    %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                        %% call the downstream system
+                        %with SFcnSystemOutputCall[fcnCallIdx]
+
+                         %% skip unconnected function call outputs
+                            %if ISEQUAL(BlockToCall, "unconnected")
+                                %continue
+                            %endif
+
+                            %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                        %endwith
+                    %endforeach
+
+                    /* Clear interrupt flag */
+                    PINS_DRV_ClearPinIntFlagCmd(%<tppParams.tppPinConfig.tppIntPin.user_config.port>, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>);
+                }
+            %closefile buffer
+            %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", buffer)>
+        }
+        %endif
+%endfunction

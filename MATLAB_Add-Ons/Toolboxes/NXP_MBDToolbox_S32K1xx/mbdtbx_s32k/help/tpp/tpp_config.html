@@ -1,0 +1,160 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>TPP Configuration Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>TPP Configuration Block</h1>
+	<!--Page-description-->
+	<p>This block is used to configure the parameters of the TPP.</p>
+	<p><b>Note: </b>Supported Three-Phase Brushless Motor Pre-Drivers are MC33GD3000, MC34GD3000, MC33937 and MC34937.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="images/tpp_config_block.jpg" width="400px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	 <!--Block-Dialog-Box-->
+       <h2>Parameters and Dialog Box</h2>
+        <p>The block dialog consists of the following tabs: </p>
+		<ul>
+                <li><a href="#1">Configuration</a></li>
+                <li><a href="#2">SPI</a></li>
+				<li><a href="#3">PWM</a></li>
+				<li><a href="#4">Pins</a></li>
+            </ul>
+    <!--Table of contents-->
+
+	<!--Window tab-->
+        <h4><a name="1"></a>Configuration</h4>
+		<p>The Configuration tab contains the following parameters:</p>
+
+		<img vspace="10" src="images/tpp_config_opt.jpg" width="400px" height="auto">
+
+		<h3>Instance</h3>
+		<p>Selects the TPP instance to be used.</p>
+		<p><b>Note:</b>Currently limited to only 1 instace (#0).</p>
+
+		<h3>Mode command</h3>
+		<p>Selects the TPP mode.</p>
+		<ul>
+			<li>Desaturation Fault Mode</li>
+			<ul>
+<!-- 				<li>0: Default: When a desaturation, or phase error event is detected on any channel, all channels turn off and generates an Interrupt, if interrupts are enabled.</li>
+				<li>1: Disable: desaturation /phase error channel shutdown is disabled, but interrupts are still possible if unmasked. </li> -->
+			<p>If DESATURATION mode is disabled (the corresponding bit is cleared), then at a desaturation event, or if a phase error event is detected on any channel, all channels turn off and generates an Interrupt, if interrupts are enabled.</p>
+			<p>If DESATURATION mode is enabled (the corresponding bit is set), then at a desaturation event/phase error channel shutdown is disabled, but interrupts are still possible if unmasked.</p>
+			</ul>
+			<li>Fullon Mode</li>
+				<ul>
+					<p>If FULLON mode is enabled, then programmed deadtime control is disabled, making it is possible to have both high and Low-side
+					drivers in a phase on simultaneously. This could be useful in special applications such as alternator regulators, or switched-reluctance
+					motor drive applications. There is no deadtime control in fullon mode. Input signals directly control the output stages, synchronized
+					with the internal clock</p>
+				</ul>
+			<li>Lock Mode</li>
+				<ul>
+				 <p>If LOCK mode is enabled, then this mode can only be cleared with a device reset. Since the mode lock mode
+					can only be set, this bit prevents any subsequent, and likely erroneous, mode, deadtime, or mask register changes from being
+					received. If an attempt is made to write to a register when mode lock is enabled, a write error fault is generated.</p>
+				</ul>
+		</ul>
+
+		<h3>TPP enable events </h3>
+		<p> Enable/disable the following events:</p>
+		<ul>
+			<li>Overtemperature</li>
+			<li>Desaturation</li>
+			<li>VLS</li>
+			<li>Overcurrent error</li>
+			<li>Phase error</li>
+			<li>Framing error</li>
+			<li>Write error</li>
+			<li>Reset</li>
+		</ul>
+		<p><b>Note:</b>When a certain event is disabled, only the interrupt is masked; the protection mechanism still works as expected.</p>
+
+		<h3>MCU interrupt</h3>
+		<p> Enable/disable the MCU interrupt for the events mentioned above (TPP enabled events).</p>
+		<p> ISR priority - sets the priority of the MCU interrupt (if enabled).</p>
+
+		<h3>TPP Deadtime</h3>
+		<p>Sets the deadtime (in ns) of the output signals (if Fullon mode is disabled).</p>
+
+		<h3>Initialize TPP immediately</h3>
+		<ul>
+			<li>If enabled, the TPP will initialize immediately, once with all the other initializations (other blocks).</li>
+			<li>If disalbed, the TPP will need to be initialized at a user-defined time, using the TPP Functional mode block.</li>
+		</ul>
+
+		<h4><a name="2"></a>SPI</h4>
+		<p>The Configuration tab contains the following parameters:</p>
+		<h3>SPI Instance</h3>
+		<p>Select which SPI instance to use (click on Config SPI for TPP to open the SPI configuration block).</p>
+
+		<p><b>Note: </b>By pressing this button, the selected SPI config block will be configured to next parameters:</p>
+		<ul>
+			<li>Role: Master</li>
+			<li>Baud Rate: 2000000. But it can be manualy modified up to 4000000 bps</li>
+			<li>CPHA: 1</li>
+			<li>CPOL: 0</li>
+			<li>Bit order: MSB first</li>
+			<li>Frame size: 8</li>
+			<li>Continous transfer: disabled</li>
+		</ul>
+		<img vspace="10" src="images/tpp_config_spi_opt.jpg" width="400px" height="auto">
+
+		<h4><a name="3"></a>PWM</h4>
+		<p>The Configuration tab contains the following parameters:</p>
+		<h3>FTM Module</h3>
+		<p>Select which FTM instance to use.</p>
+		<h3>FTM pairs</h3>
+		<p>Enable the pairs to be used.</p>
+		<h3>High side </h3>
+		<p>Enable if the first channel of the pair is high side (HS); disable otherwise (if first channel is low side (LS)).</p>
+		<img vspace="10" src="images/tpp_config_pwm_opt.jpg" width="400px" height="auto">
+
+		<h4><a name="4"></a>Pins</h4>
+		<p>The Configuration tab contains the following parameters:</p>
+		<h3>EN1</h3>
+		<p>Select the TPP Enable 1 pin.</p>
+		<h3>EN2</h3>
+		<p>Select the TPP Enable 2 pin.</p>
+		<p><b>Note:</b>Those two Enable pins can share the same GPIO pin.</p>
+		<h3>RST</h3>
+		<p>Select the TPP Reset pin.</p>
+		<h3>CS</h3>
+		<p>Select the TPP Chip Select pin.</p>
+		<h3>INT</h3>
+		<p>Select the TPP Interrupt pin.</p>
+		<img vspace="10" src="images/tpp_config_pins_opt.jpg" width="400px" height="auto">
+
+	<!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>Configure the <a href="../main_config/main_config.html">Target Configuration</a> block.</li>
+        <li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+        <li>Configure the <a href="../ftm/ftm_pwm_config_block.html">FTM Configuration</a> block.</li>
+    </ul>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+
+	<p>* Read Hardware Manual documentation to get more information (<a href="https://www.nxp.com/products/power-management/motor-and-solenoid-drivers/bldc-h-bridge-stepper/3-phase-brushless-motor-pre-driver:GD3000?fpsp=1&tab=Documentation_Tab">GD3000).</a></p>
+
+	</div>
+
+	</body>
+	</html>

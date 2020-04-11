@@ -1,0 +1,58 @@
+%implements custom_init_s32k_trigger "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %<LibAddToCommonIncludes("init_call_trigger.h")>
+
+    %% Create Routine
+    %openfile isr_h = "init_call_trigger.h"
+        #ifndef INIT_CALL_TRIGGER_H
+        #define INIT_CALL_TRIGGER_H
+        /* include part */
+        #include "%<CompiledModel.Name + ".h">"
+        #include "%<CompiledModel.Name + "_private.h">"
+        /* function prototype */
+        #ifdef __cplusplus
+        extern "C"{
+        #endif
+
+        void init_call_trigger(void);
+
+        #ifdef __cplusplus
+        }
+        #endif
+        #endif /* INIT_CALL_TRIGGER_H */
+    %closefile isr_h
+
+    %%Body
+    %openfile fname = "init_call_trigger.c"
+        #include "init_call_trigger.h"
+
+        void init_call_trigger(void)
+        {
+            %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                %with SFcnSystemOutputCall[fcnCallIdx]
+                    %% skip unconnected function call outputs
+                    %if ISEQUAL(BlockToCall, "unconnected")
+                        %continue
+                    %endif
+
+                    %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                %endwith
+            %endforeach
+        }
+    %closefile fname
+
+    init_call_trigger();
+
+    %endif
+%endfunction

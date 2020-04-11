@@ -1,0 +1,31 @@
+function RTW_rtwnameSIDMap() {
+	this.rtwnameHashMap = new Array();
+	this.sidHashMap = new Array();
+	this.rtwnameHashMap["<Root>"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx"] = {rtwname: "<Root>"};
+	this.rtwnameHashMap["<S1>"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20"] = {rtwname: "<S1>"};
+	this.rtwnameHashMap["<Root>/In"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:9"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:9"] = {rtwname: "<Root>/In"};
+	this.rtwnameHashMap["<Root>/GFLIB_Sin_F16"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20"] = {rtwname: "<Root>/GFLIB_Sin_F16"};
+	this.rtwnameHashMap["<Root>/MBD_S32K1xx_Config_Information"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:1"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:1"] = {rtwname: "<Root>/MBD_S32K1xx_Config_Information"};
+	this.rtwnameHashMap["<Root>/Out"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:10"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:10"] = {rtwname: "<Root>/Out"};
+	this.rtwnameHashMap["<S1>/f16In"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8854"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8854"] = {rtwname: "<S1>/f16In"};
+	this.rtwnameHashMap["<S1>/GFLIB_Sin_SF"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8855"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8855"] = {rtwname: "<S1>/GFLIB_Sin_SF"};
+	this.rtwnameHashMap["<S1>/copyright"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8856"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8856"] = {rtwname: "<S1>/copyright"};
+	this.rtwnameHashMap["<S1>/copyright2"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8857"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8857"] = {rtwname: "<S1>/copyright2"};
+	this.rtwnameHashMap["<S1>/logo"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8858"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8858"] = {rtwname: "<S1>/logo"};
+	this.rtwnameHashMap["<S1>/f16Out"] = {sid: "sim_sil_target_AMMCLIB_s32k1xx:20:8859"};
+	this.sidHashMap["sim_sil_target_AMMCLIB_s32k1xx:20:8859"] = {rtwname: "<S1>/f16Out"};
+	this.getSID = function(rtwname) { return this.rtwnameHashMap[rtwname];}
+	this.getRtwname = function(sid) { return this.sidHashMap[sid];}
+}
+RTW_rtwnameSIDMap.instance = new RTW_rtwnameSIDMap();

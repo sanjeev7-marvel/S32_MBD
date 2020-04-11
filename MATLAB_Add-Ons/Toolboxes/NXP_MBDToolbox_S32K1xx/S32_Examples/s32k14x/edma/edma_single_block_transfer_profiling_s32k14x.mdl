@@ -1,0 +1,3107 @@
+Model {
+  Name			  "edma_single_block_transfer_profiling_s32k14x"
+  Version		  9.0
+  SavedCharacterEncoding  "windows-1252"
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.283"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+    NumProvidedFunctions    0
+    NumRequiredFunctions    0
+    NumResetEvents	    0
+    HasInitializeEvent	    0
+    HasTerminateEvent	    0
+    IsExportFunctionModel   0
+    NumParameterArguments   0
+    NumExternalFileReferences 9
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/FreeMaster_Config"
+      SID		      "40"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/MBD_S32K14x_Config_Information"
+      SID		      "2"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "simulink/Model-Wide\nUtilities/Model Info"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Model Info"
+      SID		      "183"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Profiler_Function"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Profile copy time/Profile CPU copy time/Profiler_Funct"
+      "ion"
+      SID		      "90"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Get_bus_tick"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Profile eDMA time/Profile eDMA  transfer time/End of e"
+      "DMA transfer/Get_end_bus_tick_to_profile total_number_of_bus_ticks to_transfer_data_via_eDMA"
+      SID		      "105"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Get_bus_tick"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Profile eDMA time/Profile eDMA  transfer time/Get_the_"
+      "start_bus_tick"
+      SID		      "109"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Profiler_Function"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Profile eDMA time/Profile eDMA  transfer time/Profiler"
+      "_Function"
+      SID		      "25"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/DMA Blocks/eDMA_Transfer"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/Profile eDMA time/Profile eDMA  transfer time/eDMA_tra"
+      "nsfer1"
+      SID		      "14"
+      Type		      "LIBRARY_BLOCK"
+    }
+    ExternalFileReference {
+      Reference		      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/DMA Blocks/eDMA_Config"
+      Path		      "edma_single_block_transfer_profiling_s32k14x/eDMA_Config"
+      SID		      "1"
+      Type		      "LIBRARY_BLOCK"
+    }
+    OrderedModelArguments   1
+  }
+  LogicAnalyzerGraphicalSettings ""
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering ""
+  DiagnosticSuppressor	  "on"
+  SuppressorTable	  "22 serialization::archive 11 0 6 0 0 0 8 0"
+  CustomCodeFunctionData  ""
+  SLCCPlugin		  "on"
+  Description		  "Comparison betwen data transfer using eDMA and normal cpu copy.\n\nTransfer sizes used are as follow"
+  "s:\n4, 8, 16, 32, 64, 128, 256, 512, 768, 1024 uint32s (multiply by 4 to get number of bytes)\n\nTransfer size is ch"
+  "anged at every step, iterating circulary over this list.\n\nVerification:\nOpen freeMaster project (has the same nam"
+  "e as the model) and observe differences betwen the 2 types of transfer."
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  InitFcn		  "mbd_s32k_consistency_checks(bdroot(gcs));"
+  LastSavedArchitecture	  "win64"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [0.0, 0.0, 1024.0, 780.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[1]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1521.0, 950.0]
+	ZoomFactor		[0.90258939580764475]
+	Offset			[-147.17144808743183, -576.51092896174873]
+      }
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		6
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[0]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[640]
+	Height			[480]
+      }
+      WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAADO/wCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
+      "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAASwAAAzsAAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
+      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAPwAAACkAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
+      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAMr/////wAAAAAAAAAA/"
+      "////wEAAANa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+    }
+  }
+  HideAutomaticNames	  on
+  Created		  "Thu Nov 09 11:49:03 2017"
+  Creator		  "NXP MBDT Team"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "nxf35172"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Jul 22 07:57:34 2019"
+  RTWModifiedTimeStamp	  485683054
+  ModelVersionFormat	  "1.%<AutoIncrement:283>"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "all"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  PortDataTypeDisplayFormat "AliasTypeOnly"
+  ShowEditTimeErrors	  on
+  ShowEditTimeWarnings	  off
+  ShowEditTimeAdvisorChecks off
+  ShowPortUnits		  off
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  VariantCondition	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  ShowVisualizeInsertedRTB on
+  ShowMarkup		  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  BlockVariantConditionDataTip off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  FunctionConnectors	  off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  VisualizeLoggedSignalsWhenLoggingToFile off
+  PauseTimes		  "5"
+  NumberOfSteps		  1
+  SnapshotBufferSize	  10
+  SnapshotInterval	  10
+  NumberOfLastSnapshots	  0
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    7
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "edma_single_block_transfer_profiling_s32k14x"
+    overrideMode_	    [0.0]
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "edma_single_block_transfer_profiling_s32k14x"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      []
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  OrderedModelArguments	  on
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      8
+      Version		      "1.17.1"
+      DisabledProps	      []
+      Description	      ""
+      Array {
+	Type			"Handle"
+	Dimension		9
+	Simulink.SolverCC {
+	  $ObjectID		  9
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "2"
+	  InitialStep		  "auto"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  EnableMultiTasking	  on
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverInfoToggleStatus  off
+	  IsAutoAppliedInSIP	  off
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  SampleTimeProperty	  []
+	  DecoupledContinuousIntegration off
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  10
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  Decimation		  "1"
+	  ExternalInput		  "off"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "off"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Dataset"
+	  SignalLoggingSaveFormat "Dataset"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  VisualizeSimOutput	  on
+	  StreamToWorkspace	  off
+	  StreamVariableName	  "streamout"
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	  LoggingToFile		  off
+	  DatasetSignalFormat	  "timeseries"
+	  LoggingFileName	  "out.mat"
+	  LoggingIntervals	  "[-inf, inf]"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  11
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  DefaultParameterBehavior "Inlined"
+	  UseDivisionForNetSlopeComputation "off"
+	  UseFloatMulNetSlope	  off
+	  DefaultUnderspecifiedDataType	"double"
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  CachingGlobalReferences off
+	  GlobalBufferReuse	  on
+	  StrengthReduction	  off
+	  AdvancedOptControl	  ""
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Individual arguments"
+	  PassReuseOutputArgsThreshold 12
+	  ExpressionDepthLimit	  128
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  ActiveStateOutputEnumStorageType "Native Integer"
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  LifeSpan		  "auto"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "off"
+	  AccelVerboseBuild	  off
+	  OptimizeBlockOrder	  "off"
+	  OptimizeDataStoreBuffers on
+	  BusAssignmentInplaceUpdate on
+	  DifferentSizesBufferReuse off
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  12
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Simplified"
+	  MergeDetectMultiDrivingBlocksExec "error"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "none"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "error"
+	  TasksWithSamePriorityMsg "warning"
+	  ExportedTasksRateTransMsg "none"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "error"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "error"
+	  UnconnectedOutputMsg	  "error"
+	  UnconnectedLineMsg	  "error"
+	  UseOnlyExistingSharedCode "error"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "error"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  AllowSymbolicDim	  off
+	  RowMajorDimensionSupport off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "error"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "none"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  ChecksumConsistencyForSSReuse	"none"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorLevel1"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  SymbolicDimMinMaxWarning "warning"
+	  LossOfSymbolicDimsSimulationWarning "warning"
+	  LossOfSymbolicDimsCodeGenerationWarning "error"
+	  SymbolicDimsDataTypeCodeGenerationDiagnostic "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnreachableExecutionPathDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	  SFOutputUsedAsStateInMooreChartDiag "error"
+	  SFTemporalDelaySmallerThanSampleTimeDiag "warning"
+	  SFSelfTransitionDiag	  "warning"
+	  SFExecutionAtInitializationDiag "none"
+	  SFMachineParentedDataDiag "warning"
+	  IntegerSaturationMsg	  "warning"
+	  AllowedUnitSystems	  "all"
+	  UnitsInconsistencyMsg	  "warning"
+	  AllowAutomaticUnitConversions	on
+	  RCSCRenamedMsg	  "warning"
+	  RCSCObservableMsg	  "warning"
+	  ForceCombineOutputUpdateInSim	off
+	  UnitDatabase		  ""
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  13
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdBitPerSizeT	  32
+	  ProdBitPerPtrDiffT	  32
+	  ProdLargestAtomicInteger "Long"
+	  ProdLargestAtomicFloat  "Double"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "ARM Compatible->ARM Cortex"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetBitPerSizeT	  32
+	  TargetBitPerPtrDiffT	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	  UseEmbeddedCoderFeatures on
+	  UseSimulinkCoderFeatures on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  14
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  EnableRefExpFcnMdlSchedulingChecks on
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelDependencies	  ""
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  15
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  ""
+	  SimCustomSourceCode	  ""
+	  SimCustomHeaderCode	  ""
+	  SimCustomInitializer	  ""
+	  SimCustomTerminator	  ""
+	  SimReservedNameArray	  []
+	  SimUserSources	  ""
+	  SimUserIncludeDirs	  ""
+	  SimUserLibraries	  ""
+	  SimUserDefines	  ""
+	  SimCustomCompilerFlags  ""
+	  SimCustomLinkerFlags	  ""
+	  SFSimEcho		  on
+	  SimCtrlC		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  on
+	  SimBuildMode		  "sf_incremental_build"
+	  SimGenImportedTypeDefs  off
+	  ModelFunctionsGlobalVisibility "on"
+	  CompileTimeRecursionLimit 50
+	  EnableRuntimeRecursion  on
+	  MATLABDynamicMemAlloc	  off
+	  MATLABDynamicMemAllocThreshold 65536
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  16
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  SystemTargetFile	  "mbd_s32k.tlc"
+	  HardwareBoard		  "None"
+	  TLCOptions		  ""
+	  GenCodeOnly		  off
+	  MakeCommand		  "mbd_s32k_make_rtw COPY_MDLREF_INCLUDES=0"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  PackageName		  ""
+	  TemplateMakefile	  "mbd_s32k.tmf"
+	  PostCodeGenCommand	  ""
+	  Description		  "Model Based Design Toolbox S32K14x Code Generation Target"
+	  GenerateReport	  on
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  RTWBuildHooks		  []
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  ""
+	  CustomHeaderCode	  ""
+	  CustomInclude		  ""
+	  CustomSource		  ""
+	  CustomLibrary		  ""
+	  CustomDefine		  ""
+	  CustomLAPACKCallback	  ""
+	  CustomFFTCallback	  ""
+	  CustomInitializer	  ""
+	  CustomTerminator	  ""
+	  Toolchain		  "Automatically locate an installed toolchain"
+	  BuildConfiguration	  "Faster Builds"
+	  CustomToolchainOptions  []
+	  IncludeHyperlinkInReport on
+	  LaunchReport		  on
+	  PortableWordSizes	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  GenerateTraceInfo	  on
+	  GenerateTraceReport	  on
+	  GenerateTraceReportSl	  on
+	  GenerateTraceReportSf	  on
+	  GenerateTraceReportEml  on
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  GenerateMissedCodeReplacementReport off
+	  RTWCompilerOptimization "off"
+	  ObjectivePriorities	  []
+	  RTWCustomCompilerOptimizations ""
+	  CheckMdlBeforeBuild	  "Off"
+	  SharedConstantsCachingThreshold 1024
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      17
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      Comment		      ""
+	      ForceParamTrailComments on
+	      GenerateComments	      on
+	      CommentStyle	      "Auto"
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement on
+	      OperatorAnnotations     on
+	      SimulinkDataObjDesc     on
+	      SFDataObjDesc	      on
+	      MATLABFcnDesc	      off
+	      MangleLength	      1
+	      SharedChecksumLength    8
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrModelFcn "$R$N"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      CustomSymbolStrUtil     "$N$C"
+	      CustomSymbolStrEmxType  "emxArray_$M$N"
+	      CustomSymbolStrEmxFcn   "emx$M$N"
+	      CustomUserTokenString   ""
+	      CustomCommentsFcn	      ""
+	      DefineNamingRule	      "None"
+	      DefineNamingFcn	      ""
+	      ParamNamingRule	      "None"
+	      ParamNamingFcn	      ""
+	      SignalNamingRule	      "None"
+	      SignalNamingFcn	      ""
+	      InsertBlockDesc	      on
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      StateflowObjectComments off
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifierFile  ""
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	      ReservedNameArray	      []
+	    }
+	    Simulink.STFCustomTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      18
+	      Version		      "1.17.1"
+	      DisabledProps	      []
+	      Description	      ""
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      GenFloatMathFcnCalls    "NOT IN USE"
+	      TargetLangStandard      "C89/C90 (ANSI)"
+	      CodeReplacementLibrary  "None"
+	      UtilityFuncGeneration   "Auto"
+	      MultiwordTypeDef	      "System defined"
+	      MultiwordLength	      256
+	      GenerateFullHeader      on
+	      InferredTypesCompatibility off
+	      ExistingSharedCode      ""
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      ModelReferenceCompliant off
+	      ParMdlRefBuildCompliant off
+	      CompOptLevelCompliant   off
+	      ConcurrentExecutionCompliant off
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      CodeInterfacePackaging  "Nonreusable function"
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      RemoveDisableFunc	      off
+	      RemoveResetFunc	      on
+	      SupportVariableSizeSignals off
+	      ParenthesesLevel	      "Nominal"
+	      CastingMode	      "Nominal"
+	      MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      MDXCompliant	      off
+	      GRTInterface	      off
+	      GenerateAllocFcn	      off
+	      UseToolchainInfoCompliant	off
+	      GenerateSharedConstants on
+	      CoderGroups	      []
+	      AccessMethods	      []
+	      LookupTableObjectStructAxisOrder "1,2,3,4,..."
+	      LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+	      LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+	      ArrayLayout	      "Column-major"
+	      SystemTargetFile	      "mbd_s32k.tlc"
+	      DialogCategory	      0
+	      Array {
+		Type			"Handle"
+		Dimension		1
+		Simulink.ERTTargetCC {
+		  $BackupClass		  "Simulink.TargetCC"
+		  $ObjectID		  19
+		  Version		  "1.17.1"
+		  DisabledProps		  []
+		  Description		  ""
+		  TargetFcnLib		  "ansi_tfl_table_tmw.mat"
+		  TargetLibSuffix	  ""
+		  TargetPreCompLibLocation ""
+		  GenFloatMathFcnCalls	  "NOT IN USE"
+		  TargetLangStandard	  "C89/C90 (ANSI)"
+		  CodeReplacementLibrary  "None"
+		  UtilityFuncGeneration	  "Auto"
+		  MultiwordTypeDef	  "System defined"
+		  MultiwordLength	  256
+		  GenerateFullHeader	  on
+		  InferredTypesCompatibility off
+		  ExistingSharedCode	  ""
+		  GenerateSampleERTMain	  off
+		  GenerateTestInterfaces  off
+		  ModelReferenceCompliant off
+		  ParMdlRefBuildCompliant off
+		  CompOptLevelCompliant	  off
+		  ConcurrentExecutionCompliant off
+		  IncludeMdlTerminateFcn  on
+		  GeneratePreprocessorConditionals "Use local settings"
+		  CombineOutputUpdateFcns on
+		  CombineSignalStateStructs off
+		  SuppressErrorStatus	  off
+		  IncludeFileDelimiter	  "Auto"
+		  ERTCustomFileBanners	  on
+		  SupportAbsoluteTime	  on
+		  LogVarNameModifier	  "rt_"
+		  MatFileLogging	  off
+		  MultiInstanceERTCode	  off
+		  CodeInterfacePackaging  "Nonreusable function"
+		  SupportNonFinite	  on
+		  SupportComplex	  on
+		  PurelyIntegerCode	  off
+		  SupportContinuousTime	  off
+		  SupportNonInlinedSFcns  off
+		  RemoveDisableFunc	  off
+		  RemoveResetFunc	  on
+		  SupportVariableSizeSignals off
+		  ParenthesesLevel	  "Nominal"
+		  CastingMode		  "Nominal"
+		  MATLABClassNameForMDSCustomization "Simulink.SoftwareTarget.ERTCustomization"
+		  ModelStepFunctionPrototypeControlCompliant off
+		  CPPClassGenCompliant	  off
+		  AutosarCompliant	  off
+		  MDXCompliant		  off
+		  GRTInterface		  off
+		  GenerateAllocFcn	  off
+		  UseToolchainInfoCompliant off
+		  GenerateSharedConstants on
+		  CoderGroups		  []
+		  AccessMethods		  []
+		  LookupTableObjectStructAxisOrder "1,2,3,4,..."
+		  LUTObjectStructOrderExplicitValues "Size,Breakpoints,Table"
+		  LUTObjectStructOrderEvenSpacing "Size,Breakpoints,Table"
+		  ArrayLayout		  "Column-major"
+		  GenerateASAP2		  off
+		  ExtMode		  off
+		  ExtModeTransport	  0
+		  ExtModeStaticAlloc	  off
+		  ExtModeStaticAllocSize  1000000
+		  ExtModeTesting	  off
+		  ExtModeMexFile	  "ext_comm"
+		  ExtModeMexArgs	  ""
+		  ExtModeIntrfLevel	  "Level1"
+		  InlinedParameterPlacement "NonHierarchical"
+		  TargetOS		  "BareBoardExample"
+		  MultiInstanceErrorCode  "Error"
+		  RootIOFormat		  "Individual arguments"
+		  RTWCAPISignals	  off
+		  RTWCAPIParams		  off
+		  RTWCAPIStates		  off
+		  RTWCAPIRootIO		  off
+		  ERTSrcFileBannerTemplate "ert_code_template.cgt"
+		  ERTHdrFileBannerTemplate "ert_code_template.cgt"
+		  ERTDataSrcFileTemplate  "ert_code_template.cgt"
+		  ERTDataHdrFileTemplate  "ert_code_template.cgt"
+		  ERTCustomFileTemplate	  "example_file_process.tlc"
+		  EnableDataOwnership	  off
+		  SignalDisplayLevel	  10
+		  ParamTuneLevel	  10
+		  GlobalDataDefinition	  "Auto"
+		  DataDefinitionFile	  "global.c"
+		  GlobalDataReference	  "Auto"
+		  ERTFilePackagingFormat  "Modular"
+		  DataReferenceFile	  "global.h"
+		  PreserveExpressionOrder off
+		  PreserveIfCondition	  off
+		  ConvertIfToSwitch	  on
+		  PreserveExternInFcnDecls on
+		  PreserveStaticInFcnDecls on
+		  SuppressUnreachableDefaultCases on
+		  EnableSignedLeftShifts  on
+		  EnableSignedRightShifts on
+		  IndentStyle		  "K&R"
+		  IndentSize		  "2"
+		  EnableUserReplacementTypes off
+		  Array {
+		    Type		    "Struct"
+		    Dimension		    1
+		    MATStruct {
+		    double		    ""
+		    single		    ""
+		    int32		    ""
+		    int16		    ""
+		    int8		    ""
+		    uint32		    ""
+		    uint16		    ""
+		    uint8		    ""
+		    boolean		    ""
+		    int			    ""
+		    uint		    ""
+		    char		    ""
+		    }
+		    PropName		    "ReplacementTypes"
+		  }
+		  MaxIdInt32		  "MAX_int32_T"
+		  MinIdInt32		  "MIN_int32_T"
+		  MaxIdUint32		  "MAX_uint32_T"
+		  MaxIdInt16		  "MAX_int16_T"
+		  MinIdInt16		  "MIN_int16_T"
+		  MaxIdUint16		  "MAX_uint16_T"
+		  MaxIdInt8		  "MAX_int8_T"
+		  MinIdInt8		  "MIN_int8_T"
+		  MaxIdUint8		  "MAX_uint8_T"
+		  BooleanTrueId		  "true"
+		  BooleanFalseId	  "false"
+		  TypeLimitIdReplacementHeaderFile ""
+		  MemSecPackage		  "--- None ---"
+		  MemSecDataConstants	  "Default"
+		  MemSecDataIO		  "Default"
+		  MemSecDataInternal	  "Default"
+		  MemSecDataParameters	  "Default"
+		  MemSecFuncInitTerm	  "Default"
+		  MemSecFuncExecute	  "Default"
+		  MemSecFuncSharedUtil	  "Default"
+		  GroupConstants	  "Default"
+		  GroupRootInputs	  "Default"
+		  GroupRootOutputs	  "Default"
+		  GroupInternal		  "Default"
+		  GroupParameters	  "Default"
+		  GroupDataTransfer	  "Default"
+		  GroupSharedLocalDataStores "Default"
+		  GroupInstanceSpecificParameters "Default"
+		  GroupModelData	  "Default"
+		}
+		PropName		"Components"
+	      }
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	SlCovCC.ConfigComp {
+	  $ObjectID		  20
+	  Version		  "1.17.1"
+	  DisabledProps		  []
+	  Description		  "Simulink Coverage Configuration Component"
+	  Name			  "Simulink Coverage"
+	  CovEnable		  off
+	  CovScope		  "EntireSystem"
+	  CovIncludeTopModel	  on
+	  RecordCoverage	  off
+	  CovPath		  "/"
+	  CovSaveName		  "covdata"
+	  CovCompData		  ""
+	  CovMetricSettings	  "dw"
+	  CovFilter		  ""
+	  CovHTMLOptions	  ""
+	  CovNameIncrementing	  off
+	  CovHtmlReporting	  on
+	  CovForceBlockReductionOff on
+	  CovEnableCumulative	  on
+	  CovSaveCumulativeToWorkspaceVar on
+	  CovSaveSingleToWorkspaceVar on
+	  CovCumulativeVarName	  "covCumulativeData"
+	  CovCumulativeReport	  off
+	  CovSaveOutputData	  on
+	  CovOutputDir		  "slcov_output/$ModelName$"
+	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
+	  CovReportOnPause	  on
+	  CovModelRefEnable	  "off"
+	  CovModelRefExcluded	  ""
+	  CovExternalEMLEnable	  off
+	  CovSFcnEnable		  on
+	  CovBoundaryAbsTol	  1e-05
+	  CovBoundaryRelTol	  0.01
+	  CovUseTimeInterval	  off
+	  CovStartTime		  0
+	  CovStopTime		  0
+	  CovMcdcMode		  "Masking"
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Code Generation/Report"
+      ConfigPrmDlgPosition    [ 346, 98, 1189, 712 ]
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    8
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    21
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  WSMdlFileData		  "DataTag0"
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    HideAutomaticName	    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    MarkupType		    "model"
+    UseDisplayTextAsClickCallback off
+    AnnotationType	    "note_annotation"
+    FixedHeight		    off
+    FixedWidth		    off
+    Interpreter		    "off"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "opaque"
+    RunInitForIconRedraw    "analyze"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      ShareAcrossModelInstances	off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit via back propagation"
+      LockScale		      off
+      ConvertRealWorld	      "Real World Value (RWV)"
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      Unit		      "inherit"
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      EnsureOutportIsVirtual  off
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+      MustResolveToSignalObject	off
+      OutputWhenUnConnected   off
+      OutputWhenUnconnectedValue "0"
+      VectorParamsAs1DForOutWhenUnconnected off
+    }
+    Block {
+      BlockType		      Product
+      Inputs		      "2"
+      Multiplication	      "Element-wise(.*)"
+      CollapseMode	      "All dimensions"
+      CollapseDim	      "1"
+      InputSameDT	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as first input"
+      LockScale		      off
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      SystemSampleTime	      "-1"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Opaque		      off
+      MaskHideContents	      off
+      SFBlockType	      "NONE"
+      GeneratePreprocessorConditionals off
+      AllowZeroVariantControls off
+      PropagateVariantConditions off
+      TreatAsGroupedWhenPropagatingVariantConditions on
+      ContentPreviewEnabled   off
+      IsWebBlock	      off
+      IsObserver	      off
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      CollapseMode	      "All dimensions"
+      CollapseDim	      "1"
+      InputSameDT	      on
+      AccumDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as first input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Terminator
+    }
+    Block {
+      BlockType		      TriggerPort
+      TriggerType	      "rising"
+      IsSimulinkFunction      off
+      FunctionVisibility      "global"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+      StatesWhenEnabling      "inherit"
+      PropagateVarSize	      "During execution"
+      ShowOutputPort	      off
+      OutputDataType	      "auto"
+      SampleTimeType	      "triggered"
+      SampleTime	      "1"
+      ZeroCross		      on
+      DisallowConstTsAndPrmTs off
+      InitialTriggerSignalState	"compatibility (no trigger on first evaluation)"
+      PortDimensions	      "-1"
+      TriggerSignalSampleTime "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      Interpolate	      on
+    }
+  }
+  System {
+    Name		    "edma_single_block_transfer_profiling_s32k14x"
+    Location		    [0, 0, 1024, 780]
+    Open		    on
+    PortBlocksUseCompactNotation off
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "90"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "183"
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Array to be transfered"
+      SID		      "134"
+      Position		      [642, -40, 739, 10]
+      ZOrder		      2041
+      DataStoreName	      "src"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		22
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  23
+	  StorageClass		  "ImportedExtern"
+	  TypeQualifier		  ""
+	  Alias			  "SRC"
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Default"
+	  SimulinkCSC.AttribClass_Simulink_Default {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    24
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  25
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "CPU Time for Copy"
+      SID		      "51"
+      Position		      [647, -240, 744, -190]
+      ZOrder		      2039
+      DataStoreName	      "profiler_copy_time"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "CPU time for DMA"
+      SID		      "41"
+      Position		      [937, -243, 1034, -193]
+      ZOrder		      2038
+      DataStoreName	      "profiler_dma_cpu"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Destination of array"
+      SID		      "135"
+      Position		      [797, -40, 894, 10]
+      ZOrder		      2042
+      DataStoreName	      "dest"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      Object {
+	$PropName		"StateSignalObject"
+	$ObjectID		26
+	$ClassName		"Simulink.Signal"
+	Simulink.CoderInfo {
+	  $PropName		  "CoderInfo"
+	  $ObjectID		  27
+	  StorageClass		  "ImportedExtern"
+	  TypeQualifier		  ""
+	  Alias			  "DST"
+	  Alignment		  -1
+	  CSCPackageName	  "Simulink"
+	  ParameterOrSignal	  "Signal"
+	  CustomStorageClass	  "Default"
+	  SimulinkCSC.AttribClass_Simulink_Default {
+	    $PropName		    "CustomAttributes"
+	    $ObjectID		    28
+	  }
+	}
+	Description		""
+	DataType		"auto"
+	Min			[]
+	Max			[]
+	DocUnits		""
+	Dimensions		[-1.0]
+	DimensionsMode		"auto"
+	Complexity		"auto"
+	SampleTime		[-1.0]
+	SamplingMode		"auto"
+	InitialValue		""
+	Simulink.LoggingInfo {
+	  $PropName		  "LoggingInfo"
+	  $ObjectID		  29
+	  DataLogging		  0
+	  NameMode		  0
+	  LoggingName		  ""
+	  DecimateData		  0
+	  Decimation		  2
+	  LimitDataPoints	  0
+	  MaxPoints		  5000
+	}
+      }
+      ShowAdditionalParam     off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Difference between \nDMA copy time \nand \nCPU copy time"
+      SID		      "138"
+      Position		      [937, -40, 1034, 10]
+      ZOrder		      2046
+      DataStoreName	      "diff"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "int32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "End of DMA copy"
+      SID		      "112"
+      Position		      [937, -330, 1034, -280]
+      ZOrder		      2044
+      DataStoreName	      "finish"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FreeMaster_Config"
+      SID		      "40"
+      Ports		      []
+      Position		      [91, 168, 331, 224]
+      ZOrder		      1981
+      ForegroundColor	      "red"
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/FreeMaster_Config"
+      SourceType	      "fm_s32k_config"
+      interface		      "LPUART1"
+      baudrate		      "115200"
+      rxd		      "PTC6: [LPUART1_RX | Receive]"
+      txd		      "PTC7: [LPUART1_TX | Transmit]"
+      mode		      "Short Interrupt"
+      isr_prio		      "5"
+      show_adv_opts	      on
+      use_scope		      on
+      max_scope_vars	      "8"
+      use_recorder	      on
+      max_rec_vars	      "8"
+      rec_buff_size	      "1024"
+      rec_timebase	      "0"
+      rec_timebase_unit	      "milliseconds"
+      comm_buffer_size_auto   on
+      comm_buffer_size	      "255"
+      comm_rqueue_size_default on
+      comm_rqueue_size	      "32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "MBD_S32K14x_Config_Information"
+      SID		      "2"
+      Ports		      []
+      Position		      [-25, -350, 438, -138]
+      ZOrder		      1681
+      ForegroundColor	      "red"
+      Priority		      "1"
+      LibraryVersion	      "1.1032"
+      FontName		      "Arial"
+      FontSize		      14
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/MBD_S32K1xx_Config_Information"
+      SourceType	      "MBDTBX_EC_S32K"
+      mbdt_ver		      "0"
+      disp_str		      "Target : S32K144-64KB_SRAM\nPackage : 100-pin\nSystem clock : 80 MHz\nXTAL clock : External 8 M"
+      "Hz\nCompiler : GCC\nTarget Type : FLASH\nDownload Code after build : off\nStep Tick Interrupt Priority : 15"
+      config_params	      "[]"
+      mcu_target_name	      "S32K144"
+      mcu_target_package      "100-LQFP"
+      mcu_target_sram_size    "64KB"
+      mcu_system_clock_freq   "80"
+      mcu_xtal_freq	      "External 8"
+      mcu_steptick_timer      "LPIT Channel 0"
+      mcu_steptick_prio	      "15"
+      ds_import_enable	      on
+      target_compiler	      "GCC"
+      target_memory	      "FLASH"
+      gcc_target_compile_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O1 -g -gstrict-dwarf"
+      gcc_target_assemble_opts "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -g"
+      gcc_target_link_opts    "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16"
+      gcc_target_default_lcf  on
+      gcc_target_user_lcf     "S32K144_64_flash.ld"
+      ghs_target_compile_opts "-cpu=cortexm4f -thumb -DARM_MATH_CM4 -fpu=vfpv4_d16 -fsingle -Ogeneral -Wundef -Wimplic"
+      "it-int -Wshadow -Wtrigraphs --no_commons --gnu_asm -gnu99 -gdwarf-2 -G"
+      ghs_target_assemble_opts "-cpu=cortexm4f -fpu=vfpv4_d16"
+      ghs_target_link_opts    "-cpu=cortexm4f -thumb -fpu=vfpv4_d16"
+      ghs_target_default_lcf  off
+      ghs_target_user_lcf     "S32K144_64_flash.ld"
+      iar_target_compile_opts "--cpu=Cortex-M4F --thumb --fpu=VFPv4_sp -Ol -e --debug --dlib_config normal"
+      iar_target_assemble_opts "--cpu Cortex-M4F --thumb --fpu VFPv4_sp"
+      iar_target_link_opts    "--no_exceptions --vfe --inline"
+      iar_target_default_lcf  off
+      iar_target_user_lcf     "S32K144_64_flash.icf"
+      pil_download_enable     off
+      rbl_download_enable     on
+      rbl_start_delay	      "5000000"
+      rbl_download_interface  "OpenSDA"
+      rbl_restart_request     off
+      rbl_com_port	      "Custom"
+      rbl_com_port_custom     "COM1"
+      pil_download_rate	      "57600"
+      pil_opensda_drive	      "Custom"
+      pil_opensda_drive_custom "D"
+      pil_uart_instance	      "0"
+      pil_uart_rx	      "PTA2: [LPUART0_RX | Receive]"
+      pil_uart_tx	      "PTA3: [LPUART0_TX | Transmit]"
+      FTM_PWM_PcrCheckEnDis   on
+      FTM_Input_Edge_Inputs_PcrCheckEnDis on
+      FTM_Dual_Edge_Inputs_PcrCheckEnDis on
+      FTM_Quadrature_Inputs_PcrCheckEnDis on
+      FTM_Hall_Sensor_Inputs_PcrCheckEnDis on
+      LPTMR_PcrCheckEnDis     on
+      PIT_PcrCheckEnDis	      on
+      RTC_PcrCheckEnDis	      on
+      FlexCAN_PcrCheckEnDis   on
+      LIN_PcrCheckEnDis	      on
+      FlexIO_PcrCheckEnDis    on
+      LPI2C_PcrCheckEnDis     on
+      LPSPI_PcrCheckEnDis     on
+      LPUART_PcrCheckEnDis    on
+      CMP_PcrCheckEnDis	      on
+      GPIO_OutputPcrCheckEnDis on
+      GPIO_InputPcrCheckEnDis on
+      SBC_PcrCheckEnDis	      on
+      AMMCLIB_PcrCheckEnDis   on
+      FM_PcrCheckEnDis	      on
+      Profile_PcrCheckEnDis   on
+      ConfigParams_PcrCheckEnDis on
+      ModelRef_PcrCheckEnDis  on
+      PDB0_PcrCheckEnDis      on
+      CSEc_PcrCheckEnDis      on
+      eDMA_PcrCheckEnDis      on
+      ADC_PcrCheckEnDis	      on
+      WDOG_PcrCheckEnDis      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Model Info"
+      SID		      "183"
+      Ports		      []
+      Position		      [-60, -561, 558, -397]
+      ZOrder		      2050
+      ShowName		      off
+      LibraryVersion	      "1.401"
+      FontName		      "Arial"
+      SourceBlock	      "simulink/Model-Wide\nUtilities/Model Info"
+      SourceType	      "CMBlock"
+      SourceProductName	      "Simulink"
+      SourceProductBaseCode   "SL"
+      ContentPreviewEnabled   off
+      Frame		      "off"
+      DisplayStringWithTags   "Model Name: %<ModelName>\n\nDescription: %<Description>"
+      MaskDisplayString	      "Model Name: edma_single_block_transfer_profiling_s32k14x\\n\\nDescription: Comparison b"
+      "etwen data transfer using eDMA and normal cpu copy.\\n\\nTransfer sizes used are as follows:\\n4, 8, 16, 32, 64,"
+      " 128, 256, 512, 768, 1024 uint32s (multiply by 4 to get number of bytes)\\n\\nTransfer size is changed at every "
+      "step, iterating circulary over this list.\\n\\nVerification:\\nOpen freeMaster project (has the same name as the"
+      " model) and observe differences betwen the 2 types of transfer."
+      HorizontalTextAlignment "Left"
+      LeftAlignmentValue      "0.02"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Model Source"
+      SID		      "53"
+      Ports		      []
+      Position		      [650, -329, 734, -284]
+      ZOrder		      1990
+      BackgroundColor	      "cyan"
+      ShowName		      off
+      List {
+	ListType		RTWdata
+	TLCFile			"custcode"
+	Location		"Model Source"
+	Top			"uint32_t buff_to_send[1024];                                               \nuint32_t dest_buff[1024];        "
+	"                                          \nuint32_t transfer_count_r[10] = {4,8,16,32,64,128,256,512,768,1024};     "
+	"  \nuint32_t transfer_count_i = 0;                                             \n"
+      }
+      CopyFcn		      "cccopyfcn(gcb)"
+      OpenFcn		      "ccopenfcn('Model Source')"
+      FontName		      "Times New Roman"
+      FontSize		      12
+      FontWeight	      "bold"
+      RequestExecContextInheritance off
+      Variant		      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		30
+	$ClassName		"Simulink.Mask"
+	Type			"Model Source"
+	Help			"eval('feval(''rtwprivate'',''rtwhelpview'',''rtw_model_source_block'')');"
+	Display			"disp('Model\\nSource');"
+	Object {
+	  $PropName		  "Parameters"
+	  $ObjectID		  31
+	  $ClassName		  "Simulink.MaskParameter"
+	  Type			  "edit"
+	  Name			  "ShowInLibBrowser"
+	  Prompt		  "Simulink:masks:CustCodeMaskParam1_MP"
+	  Value			  "0"
+	  Enabled		  "off"
+	  Visible		  "off"
+	}
+      }
+      System {
+	Name			"Model Source"
+	Location		[662, 528, 845, 846]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+      }
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Number of integers (int32s) to be transfered1"
+      SID		      "157"
+      Position		      [640, -140, 737, -90]
+      ZOrder		      2047
+      DataStoreName	      "transfer_count_ref"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      InitialValue	      "[4,8,16,32,64,128,256,512,768,1024]"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Profile copy time"
+      SID		      "44"
+      Ports		      []
+      Position		      [877, 112, 977, 207]
+      ZOrder		      1993
+      Priority		      "2"
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"Profile copy time"
+	Location		[1731, -7, 3484, 1055]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Profile CPU copy time"
+	  SID			  "78"
+	  Ports			  []
+	  Position		  [315, 110, 355, 170]
+	  ZOrder		  1994
+	  TreatAsAtomicUnit	  on
+	  RTWSystemCode		  "Reusable function"
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Profile CPU copy time"
+	    Location		    [1731, -7, 3484, 1055]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Profiler_Function"
+	      SID		      "90"
+	      Ports		      [0, 1]
+	      Position		      [50, 74, 345, 156]
+	      ZOrder		      1997
+	      ForegroundColor	      "red"
+	      BackgroundColor	      "yellow"
+	      Priority		      "1"
+	      LibraryVersion	      "1.1032"
+	      FontName		      "Arial"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Profiler_Function"
+	      SourceType	      "profiler_s32k_func"
+	      profile_indx	      "2"
+	      showOut		      on
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "System Outputs"
+	      SID		      "81"
+	      Ports		      []
+	      Position		      [270, 241, 354, 286]
+	      ZOrder		      1986
+	      ForegroundColor	      "red"
+	      BackgroundColor	      "magenta"
+	      ShowName		      off
+	      Priority		      "12"
+	      List {
+		ListType		RTWdata
+		TLCFile			"custcode"
+		Location		"System Outputs Function"
+		Bottom			"                                                                                                          "
+		"                                                                                                          {         "
+		"                                                          \n    uint32_t i;                                         "
+		"                                                                                                                    "
+		"                                                                                                            \n    fo"
+		"r (i=0; i < transfer_count_r[transfer_count_i];++i) {                                                               "
+		"                                                                                                                    "
+		"                                          \n        dest_buff[i] = buff_to_send[i];                                 "
+		"                                                                                                                    "
+		"                                                                                            \n    }                 "
+		"                                                                                                                    "
+		"                                                                                                                    "
+		"                          \n    transfer_count_i = (transfer_count_i + 1) % 10;                                     "
+		"                                                                                                                    "
+		"                                                                            \n}                                     "
+		"                                                                                                                    "
+		"                                                                                                                    "
+		"          \n"
+	      }
+	      CopyFcn		      "cccopyfcn(gcb)"
+	      OpenFcn		      "ccopenfcn('System Outputs Function')"
+	      FontName		      "Times New Roman"
+	      FontSize		      12
+	      FontWeight	      "bold"
+	      RTWSystemCode	      "Reusable function"
+	      FunctionInterfaceSpec   "Allow arguments"
+	      FunctionWithSeparateData on
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      Object {
+		$PropName		"MaskObject"
+		$ObjectID		32
+		$ClassName		"Simulink.Mask"
+		Type			"System Outputs"
+		Help			"eval('feval(''rtwprivate'',''rtwhelpview'',''rtw_sys_outputs_block'')');"
+		Display			"disp('System\\nOutputs');"
+		Object {
+		  $PropName		  "Parameters"
+		  $ObjectID		  33
+		  $ClassName		  "Simulink.MaskParameter"
+		  Type			  "edit"
+		  Name			  "ShowInLibBrowser"
+		  Prompt		  "Simulink:masks:CustCodeMaskParam1_MP"
+		  Value			  "0"
+		  Enabled		  "off"
+		  Visible		  "off"
+		}
+	      }
+	      System {
+		Name			"System Outputs"
+		Location		[628, 280, 831, 653]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+	      }
+	    }
+	    Block {
+	      BlockType		      DataStoreWrite
+	      Name		      "total CPU copy time"
+	      SID		      "48"
+	      Ports		      [1]
+	      Position		      [425, 97, 525, 133]
+	      ZOrder		      1996
+	      Priority		      "15"
+	      DataStoreName	      "profiler_copy_time"
+	    }
+	    Line {
+	      ZOrder		      1
+	      SrcBlock		      "Profiler_Function"
+	      SrcPort		      1
+	      DstBlock		      "total CPU copy time"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Annotation {
+	  SID			  "170"
+	  Name			  "Profile total CPU copy time"
+	  Position		  [0, 39, 675, 260]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  on
+	  FixedWidth		  on
+	  HorizontalAlignment	  "left"
+	  VerticalAlignment	  "top"
+	  ForegroundColor	  "[0.901961, 0.901961, 1.000000]"
+	  BackgroundColor	  "[0.901961, 0.901961, 1.000000]"
+	  DropShadow		  on
+	  AnnotationType	  "area_annotation"
+	  ZOrder		  15
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Profile eDMA time"
+      SID		      "84"
+      Ports		      []
+      Position		      [715, 115, 815, 210]
+      ZOrder		      1998
+      Priority		      "3"
+      RTWSystemCode	      "Nonreusable function"
+      FunctionWithSeparateData on
+      RequestExecContextInheritance off
+      Variant		      off
+      System {
+	Name			"Profile eDMA time"
+	Location		[1729, 0, 3480, 1060]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Get current transfer\ncount and increment index"
+	  SID			  "104"
+	  Ports			  [2, 2]
+	  Position		  [235, 226, 345, 339]
+	  ZOrder		  2007
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  RequestExecContextInheritance	off
+	  SFBlockType		  "MATLAB Function"
+	  Variant		  off
+	  System {
+	    Name		    "Get current transfer\ncount and increment index"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "35"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "ref"
+	      SID		      "104::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "idx"
+	      SID		      "104::19"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      10
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "104::34"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      25
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "104::33"
+	      Tag		      "Stateflow S-Function edma_single_block_transfer_profiling_s32k14x 2"
+	      Ports		      [2, 3]
+	      Position		      [180, 100, 230, 180]
+	      ZOrder		      24
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[2 3]"
+	      SFunctionDeploymentMode off
+	      EnableBusSupport	      off
+	      SFcnIsStateOwnerBlock   off
+	      Port {
+		PortNumber		2
+		Name			"val"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"new_idx"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "104::35"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      26
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "val"
+	      SID		      "104::5"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -5
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "new_idx"
+	      SID		      "104::20"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      11
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      ZOrder		      40
+	      SrcBlock		      "ref"
+	      SrcPort		      1
+	      Points		      [120, 0]
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      41
+	      SrcBlock		      "idx"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "val"
+	      ZOrder		      42
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "val"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "new_idx"
+	      ZOrder		      43
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "new_idx"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      44
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      45
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Profile eDMA \ntransfer time"
+	  SID			  "43"
+	  Ports			  []
+	  Position		  [270, 80, 310, 140]
+	  ZOrder		  1998
+	  TreatAsAtomicUnit	  on
+	  RTWSystemCode		  "Nonreusable function"
+	  FunctionWithSeparateData on
+	  RequestExecContextInheritance	off
+	  Variant		  off
+	  System {
+	    Name		    "Profile eDMA \ntransfer time"
+	    Location		    [1729, 0, 3480, 1060]
+	    Open		    off
+	    PortBlocksUseCompactNotation off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant2"
+	      SID		      "18"
+	      Position		      [180, 300, 215, 330]
+	      ZOrder		      2009
+	      Value		      "4"
+	      OutDataTypeStr	      "uint32"
+	    }
+	    Block {
+	      BlockType		      DataStoreWrite
+	      Name		      "Data Store\nWrite"
+	      SID		      "114"
+	      Ports		      [1]
+	      Position		      [450, 415, 480, 445]
+	      ZOrder		      2032
+	      DataStoreName	      "start"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "End of eDMA transfer"
+	      SID		      "106"
+	      Ports		      [0, 0, 0, 1]
+	      Position		      [805, 230, 1045, 290]
+	      ZOrder		      -21
+	      RequestExecContextInheritance off
+	      Variant		      off
+	      System {
+		Name			"End of eDMA transfer"
+		Location		[1731, -7, 3484, 1055]
+		Open			off
+		PortBlocksUseCompactNotation off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  TriggerPort
+		  Name			  "Trigger"
+		  SID			  "108"
+		  Ports			  []
+		  Position		  [282, 10, 302, 30]
+		  ZOrder		  2014
+		  TriggerType		  "function-call"
+		  VariantControl	  "Variant"
+		  StatesWhenEnabling	  "held"
+		  PortDimensions	  "1"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Add"
+		  SID			  "120"
+		  Ports			  [2, 1]
+		  Position		  [180, 287, 210, 318]
+		  ZOrder		  2029
+		  Priority		  "5"
+		  Inputs		  "+-"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "Data Store\nRead"
+		  SID			  "141"
+		  Ports			  [0, 1]
+		  Position		  [90, 445, 175, 475]
+		  ZOrder		  2039
+		  DataStoreName		  "dma_copy_time"
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "Data Store\nRead1"
+		  SID			  "118"
+		  Ports			  [0, 1]
+		  Position		  [95, 340, 125, 370]
+		  ZOrder		  2027
+		  DataStoreName		  "start"
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "Data Store\nRead2"
+		  SID			  "119"
+		  Ports			  [0, 1]
+		  Position		  [95, 260, 125, 290]
+		  ZOrder		  2028
+		  DataStoreName		  "finish"
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "Data Store\nRead3"
+		  SID			  "143"
+		  Ports			  [0, 1]
+		  Position		  [90, 550, 175, 580]
+		  ZOrder		  2041
+		  DataStoreName		  "profiler_copy_time"
+		}
+		Block {
+		  BlockType		  DataStoreWrite
+		  Name			  "Data Store\nWrite1"
+		  SID			  "131"
+		  Ports			  [1]
+		  Position		  [430, 130, 460, 160]
+		  ZOrder		  2035
+		  DataStoreName		  "finish"
+		}
+		Block {
+		  BlockType		  DataTypeConversion
+		  Name			  "Data Type Conversion"
+		  SID			  "144"
+		  Position		  [235, 443, 310, 477]
+		  ZOrder		  2042
+		  ForegroundColor	  "cyan"
+		  OutDataTypeStr	  "int32"
+		  RndMeth		  "Floor"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  DataTypeConversion
+		  Name			  "Data Type Conversion1"
+		  SID			  "145"
+		  Position		  [240, 548, 315, 582]
+		  ZOrder		  2043
+		  ForegroundColor	  "cyan"
+		  OutDataTypeStr	  "int32"
+		  RndMeth		  "Floor"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Get_end_bus_tick_to_profile\ntotal_number_of_bus_ticks\nto_transfer_data_via_eDMA"
+		  SID			  "105"
+		  Ports			  [0, 1]
+		  Position		  [95, 114, 360, 176]
+		  ZOrder		  2012
+		  ForegroundColor	  "cyan"
+		  Priority		  "1"
+		  LibraryVersion	  "1.1032"
+		  FontName		  "Arial"
+		  SourceBlock		  "mbd_s32k1xx_ec_toolbox/Utility Blocks/Get_bus_tick"
+		  SourceType		  "get_bus_tick_s32k_func"
+		}
+		Block {
+		  BlockType		  DataStoreWrite
+		  Name			  "eDMA total\ntransfer time"
+		  SID			  "123"
+		  Ports			  [1]
+		  Position		  [250, 287, 335, 323]
+		  ZOrder		  2031
+		  DataStoreName		  "dma_copy_time"
+		}
+		Block {
+		  BlockType		  DataStoreWrite
+		  Name			  "eDMA total time\nVS\nCPU copy total time"
+		  SID			  "140"
+		  Ports			  [1]
+		  Position		  [445, 495, 475, 525]
+		  ZOrder		  2038
+		  DataStoreName		  "diff"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "sub"
+		  SID			  "142"
+		  Ports			  [2, 1]
+		  Position		  [375, 492, 405, 523]
+		  ZOrder		  2040
+		  Priority		  "5"
+		  Inputs		  "-+"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Line {
+		  ZOrder		  14
+		  SrcBlock		  "Get_end_bus_tick_to_profile\ntotal_number_of_bus_ticks\nto_transfer_data_via_eDMA"
+		  SrcPort		  1
+		  DstBlock		  "Data Store\nWrite1"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  11
+		  SrcBlock		  "Data Store\nRead2"
+		  SrcPort		  1
+		  Points		  [26, 0; 0, 20]
+		  DstBlock		  "Add"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  12
+		  SrcBlock		  "Data Store\nRead1"
+		  SrcPort		  1
+		  Points		  [26, 0; 0, -45]
+		  DstBlock		  "Add"
+		  DstPort		  2
+		}
+		Line {
+		  ZOrder		  13
+		  SrcBlock		  "Add"
+		  SrcPort		  1
+		  DstBlock		  "eDMA total\ntransfer time"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  16
+		  SrcBlock		  "sub"
+		  SrcPort		  1
+		  DstBlock		  "eDMA total time\nVS\nCPU copy total time"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  19
+		  SrcBlock		  "Data Store\nRead"
+		  SrcPort		  1
+		  DstBlock		  "Data Type Conversion"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  20
+		  SrcBlock		  "Data Type Conversion"
+		  SrcPort		  1
+		  Points		  [34, 0; 0, 40]
+		  DstBlock		  "sub"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  21
+		  SrcBlock		  "Data Store\nRead3"
+		  SrcPort		  1
+		  DstBlock		  "Data Type Conversion1"
+		  DstPort		  1
+		}
+		Line {
+		  ZOrder		  22
+		  SrcBlock		  "Data Type Conversion1"
+		  SrcPort		  1
+		  Points		  [29, 0; 0, -50]
+		  DstBlock		  "sub"
+		  DstPort		  2
+		}
+		Annotation {
+		  SID			  "154"
+		  Name			  "Calculate total eDMA transfer time and compare it to total CPU transfer time"
+		  Position		  [40, 70, 540, 622]
+		  InternalMargins	  [0, 0, 0, 0]
+		  FixedHeight		  on
+		  FixedWidth		  on
+		  HorizontalAlignment	  "left"
+		  VerticalAlignment	  "top"
+		  ForegroundColor	  "[0.901961, 0.901961, 1.000000]"
+		  BackgroundColor	  "[0.901961, 0.901961, 1.000000]"
+		  DropShadow		  on
+		  AnnotationType	  "area_annotation"
+		  ZOrder		  20
+		  FontName		  "Arial"
+		  FontSize		  12
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Get_the_start_bus_tick"
+	      SID		      "109"
+	      Ports		      [0, 1]
+	      Position		      [140, 402, 380, 458]
+	      ZOrder		      2014
+	      ForegroundColor	      "red"
+	      Priority		      "1"
+	      LibraryVersion	      "1.1032"
+	      FontName		      "Arial"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Get_bus_tick"
+	      SourceType	      "get_bus_tick_s32k_func"
+	    }
+	    Block {
+	      BlockType		      Product
+	      Name		      "Multiply\nto get\nnumber\nof bytes"
+	      SID		      "103"
+	      Ports		      [2, 1]
+	      Position		      [295, 292, 350, 323]
+	      ZOrder		      2011
+	      Priority		      "2"
+	      InputSameDT	      off
+	      OutDataTypeStr	      "uint32"
+	      RndMeth		      "Floor"
+	      SaturateOnIntegerOverflow	off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Profiler_Function"
+	      SID		      "25"
+	      Ports		      [0, 1]
+	      Position		      [585, 384, 905, 476]
+	      ZOrder		      2055
+	      ForegroundColor	      "red"
+	      LibraryVersion	      "1.1032"
+	      FontName		      "Arial"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Utility Blocks/Profiler_Function"
+	      SourceType	      "profiler_s32k_func"
+	      profile_indx	      "0"
+	      showOut		      on
+	    }
+	    Block {
+	      BlockType		      DataStoreRead
+	      Name		      "current transfer value"
+	      SID		      "169"
+	      Ports		      [0, 1]
+	      Position		      [140, 232, 250, 258]
+	      ZOrder		      2054
+	      DataStoreName	      "transfer_count_val"
+	    }
+	    Block {
+	      BlockType		      DataStoreRead
+	      Name		      "dest reference"
+	      SID		      "175"
+	      Ports		      [0, 1]
+	      Position		      [345, 205, 390, 235]
+	      ZOrder		      2057
+	      Priority		      "2"
+	      DataStoreName	      "dest"
+	    }
+	    Block {
+	      BlockType		      DataStoreWrite
+	      Name		      "eDMA config\ntime"
+	      SID		      "42"
+	      Ports		      [1]
+	      Position		      [935, 412, 1015, 448]
+	      ZOrder		      2056
+	      DataStoreName	      "profiler_dma_cpu"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "eDMA_transfer1"
+	      SID		      "14"
+	      Ports		      [3, 1]
+	      Position		      [450, 141, 755, 299]
+	      ZOrder		      1704
+	      ForegroundColor	      "red"
+	      Priority		      "5"
+	      LibraryVersion	      "1.1032"
+	      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/DMA Blocks/eDMA_Transfer"
+	      SourceType	      "edma_s32k_transfer"
+	      channel		      "0"
+	      transfer_mode	      "Single Block Transfer"
+	      transfer_type	      "EDMA_TRANSFER_MEM2MEM"
+	      transfer_size	      "EDMA_TRANSFER_SIZE_4B"
+	      single_block_src_type   "Src input is an address"
+	      single_block_dest_type  "Dest input is an address"
+	      bytes_on_each_req	      "4"
+	      sg_struct_size	      "32"
+	      src_list		      "{32768, 1}"
+	      src_list_type	      "Value list"
+	      dest_list		      "{PTD_BASE + 0xc, 0x400FF0CC}"
+	      dest_list_type	      "Address list"
+	      src_periph1	      "ADC0"
+	      src_reg1		      "SC1A"
+	      src_reg1offset	      "0"
+	      src_reg1enable	      off
+	      src_reg1_addr	      "0x4003B000"
+	      src_periph2	      "ADC0"
+	      src_reg2		      "SC1A"
+	      src_reg2offset	      "0"
+	      src_reg2enable	      off
+	      src_reg2_addr	      "0x4003B000"
+	      src_periph3	      "ADC0"
+	      src_reg3		      "SC1A"
+	      src_reg3offset	      "0"
+	      src_reg3enable	      off
+	      src_reg3_addr	      "0x4003B000"
+	      src_periph4	      "ADC0"
+	      src_reg4		      "SC1A"
+	      src_reg4offset	      "0"
+	      src_reg4enable	      off
+	      src_reg4_addr	      "0x4003B000"
+	      src_periph5	      "ADC0"
+	      src_reg5		      "SC1A"
+	      src_reg5offset	      "0"
+	      src_reg5enable	      off
+	      src_reg5_addr	      "0x4003B000"
+	      src_periph6	      "ADC0"
+	      src_reg6		      "SC1A"
+	      src_reg6offset	      "0"
+	      src_reg6enable	      off
+	      src_reg6_addr	      "0x4003B000"
+	      src_periph7	      "ADC0"
+	      src_reg7		      "SC1A"
+	      src_reg7offset	      "0"
+	      src_reg7enable	      off
+	      src_reg7_addr	      "0x4003B000"
+	      src_periph8	      "ADC0"
+	      src_reg8		      "SC1A"
+	      src_reg8offset	      "0"
+	      src_reg8enable	      off
+	      src_reg8_addr	      "0x4003B000"
+	      dest_periph1	      "ADC0"
+	      dest_reg1		      "SC1A"
+	      dest_reg1offset	      "0"
+	      dest_reg1enable	      off
+	      dest_reg1_addr	      "0x4003B000"
+	      dest_periph2	      "ADC0"
+	      dest_reg2		      "SC1A"
+	      dest_reg2offset	      "0"
+	      dest_reg2enable	      off
+	      dest_reg2_addr	      "0x4003B000"
+	      dest_periph3	      "ADC0"
+	      dest_reg3		      "SC1A"
+	      dest_reg3offset	      "0"
+	      dest_reg3enable	      off
+	      dest_reg3_addr	      "0x4003B000"
+	      dest_periph4	      "ADC0"
+	      dest_reg4		      "SC1A"
+	      dest_reg4offset	      "0"
+	      dest_reg4enable	      off
+	      dest_reg4_addr	      "0x4003B000"
+	      dest_periph5	      "ADC0"
+	      dest_reg5		      "SC1A"
+	      dest_reg5offset	      "0"
+	      dest_reg5enable	      off
+	      dest_reg5_addr	      "0x4003B000"
+	      dest_periph6	      "ADC0"
+	      dest_reg6		      "SC1A"
+	      dest_reg6offset	      "0"
+	      dest_reg6enable	      off
+	      dest_reg6_addr	      "0x4003B000"
+	      dest_periph7	      "ADC0"
+	      dest_reg7		      "SC1A"
+	      dest_reg7offset	      "0"
+	      dest_reg7enable	      off
+	      dest_reg7_addr	      "0x4003B000"
+	      dest_periph8	      "ADC0"
+	      dest_reg8		      "SC1A"
+	      dest_reg8offset	      "0"
+	      dest_reg8enable	      off
+	      dest_reg8_addr	      "0x4003B000"
+	    }
+	    Block {
+	      BlockType		      DataStoreRead
+	      Name		      "src reference"
+	      SID		      "136"
+	      Ports		      [0, 1]
+	      Position		      [280, 157, 335, 183]
+	      ZOrder		      2062
+	      Priority		      "2"
+	      DataStoreName	      "src"
+	    }
+	    Line {
+	      ZOrder		      35
+	      SrcBlock		      "dest reference"
+	      SrcPort		      1
+	      DstBlock		      "eDMA_transfer1"
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      37
+	      SrcBlock		      "src reference"
+	      SrcPort		      1
+	      DstBlock		      "eDMA_transfer1"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      25
+	      SrcBlock		      "current transfer value"
+	      SrcPort		      1
+	      Points		      [23, 0; 0, 55]
+	      DstBlock		      "Multiply\nto get\nnumber\nof bytes"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      5
+	      SrcBlock		      "Constant2"
+	      SrcPort		      1
+	      DstBlock		      "Multiply\nto get\nnumber\nof bytes"
+	      DstPort		      2
+	    }
+	    Line {
+	      ZOrder		      7
+	      SrcBlock		      "Multiply\nto get\nnumber\nof bytes"
+	      SrcPort		      1
+	      Points		      [45, 0; 0, -40]
+	      DstBlock		      "eDMA_transfer1"
+	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      9
+	      SrcBlock		      "eDMA_transfer1"
+	      SrcPort		      1
+	      Points		      [165, 0]
+	      DstBlock		      "End of eDMA transfer"
+	      DstPort		      trigger
+	    }
+	    Line {
+	      ZOrder		      16
+	      SrcBlock		      "Get_the_start_bus_tick"
+	      SrcPort		      1
+	      DstBlock		      "Data Store\nWrite"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      30
+	      SrcBlock		      "Profiler_Function"
+	      SrcPort		      1
+	      DstBlock		      "eDMA config\ntime"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      SID		      "155"
+	      Name		      "transfer data via eDMA and get the total time it takes"
+	      Position		      [70, 61, 1130, 545]
+	      InternalMargins	      [0, 0, 0, 0]
+	      FixedHeight	      on
+	      FixedWidth	      on
+	      HorizontalAlignment     "left"
+	      VerticalAlignment	      "top"
+	      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+	      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+	      DropShadow	      on
+	      AnnotationType	      "area_annotation"
+	      ZOrder		      69
+	      FontName		      "Arial"
+	      FontSize		      12
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "current transfer\ncout value"
+	  SID			  "164"
+	  Ports			  [1]
+	  Position		  [465, 240, 565, 270]
+	  ZOrder		  2052
+	  DataStoreName		  "transfer_count_val"
+	}
+	Block {
+	  BlockType		  DataStoreRead
+	  Name			  "idx"
+	  SID			  "94"
+	  Ports			  [0, 1]
+	  Position		  [80, 295, 180, 325]
+	  ZOrder		  2008
+	  DataStoreName		  "transfer_count_idx"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "new_idx"
+	  SID			  "165"
+	  Ports			  [1]
+	  Position		  [380, 297, 490, 323]
+	  ZOrder		  2053
+	  DataStoreName		  "transfer_count_idx"
+	}
+	Block {
+	  BlockType		  DataStoreRead
+	  Name			  "ref"
+	  SID			  "166"
+	  Ports			  [0, 1]
+	  Position		  [70, 240, 185, 270]
+	  ZOrder		  2054
+	  DataStoreName		  "transfer_count_ref"
+	}
+	Line {
+	  ZOrder		  10
+	  SrcBlock		  "idx"
+	  SrcPort		  1
+	  DstBlock		  "Get current transfer\ncount and increment index"
+	  DstPort		  2
+	}
+	Line {
+	  ZOrder		  11
+	  SrcBlock		  "Get current transfer\ncount and increment index"
+	  SrcPort		  1
+	  DstBlock		  "current transfer\ncout value"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  12
+	  SrcBlock		  "Get current transfer\ncount and increment index"
+	  SrcPort		  2
+	  DstBlock		  "new_idx"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  13
+	  SrcBlock		  "ref"
+	  SrcPort		  1
+	  DstBlock		  "Get current transfer\ncount and increment index"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "156"
+	  Name			  "Get time it takes for eDMA config and increment transfer_count"
+	  Position		  [10, 17, 605, 418]
+	  InternalMargins	  [0, 0, 0, 0]
+	  FixedHeight		  on
+	  FixedWidth		  on
+	  HorizontalAlignment	  "left"
+	  VerticalAlignment	  "top"
+	  ForegroundColor	  "[0.901961, 0.901961, 1.000000]"
+	  BackgroundColor	  "[0.901961, 0.901961, 1.000000]"
+	  DropShadow		  on
+	  AnnotationType	  "area_annotation"
+	  ZOrder		  107
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Start of DMA copy"
+      SID		      "111"
+      Position		      [792, -330, 889, -280]
+      ZOrder		      2043
+      DataStoreName	      "start"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "Total time for DMA copy"
+      SID		      "121"
+      Position		      [792, -240, 889, -190]
+      ZOrder		      2045
+      DataStoreName	      "dma_copy_time"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "curr_index"
+      SID		      "158"
+      Position		      [795, -140, 892, -90]
+      ZOrder		      2048
+      DataStoreName	      "transfer_count_idx"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "current transfer count"
+      SID		      "159"
+      Position		      [935, -140, 1032, -90]
+      ZOrder		      2049
+      DataStoreName	      "transfer_count_val"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+      ShowAdditionalParam     off
+      OutDataTypeStr	      "uint32"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "eDMA_Config"
+      SID		      "1"
+      Ports		      []
+      Position		      [58, -76, 363, 82]
+      ZOrder		      1666
+      ForegroundColor	      "red"
+      Priority		      "2"
+      LibraryVersion	      "1.1032"
+      SourceBlock	      "mbd_s32k1xx_ec_toolbox/Core and System Blocks/DMA Blocks/eDMA_Config"
+      SourceType	      "edma_s32k_config"
+      channel		      "0"
+      show_advanced_tab	      on
+      channel_advanced_checkbox	on
+      show_enabled	      on
+      arbitration	      "EDMA_ARBITRATION_FIXED_PRIORITY"
+      halt_on_error	      "false"
+      channel0priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel0requestsource   "EDMA_REQ_DISABLED"
+      channel0enable	      on
+      channel1priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel1requestsource   "EDMA_REQ_DISABLED"
+      channel1enable	      on
+      channel2priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel2requestsource   "EDMA_REQ_DISABLED"
+      channel2enable	      off
+      channel3priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel3requestsource   "EDMA_REQ_DISABLED"
+      channel3enable	      off
+      channel4priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel4requestsource   "EDMA_REQ_DISABLED"
+      channel4enable	      off
+      channel5priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel5requestsource   "EDMA_REQ_DISABLED"
+      channel5enable	      off
+      channel6priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel6requestsource   "EDMA_REQ_DISABLED"
+      channel6enable	      off
+      channel7priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel7requestsource   "EDMA_REQ_DISABLED"
+      channel7enable	      off
+      channel8priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel8requestsource   "EDMA_REQ_DISABLED"
+      channel8enable	      off
+      channel9priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel9requestsource   "EDMA_REQ_DISABLED"
+      channel9enable	      off
+      channel10priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel10requestsource  "EDMA_REQ_DISABLED"
+      channel10enable	      off
+      channel11priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel11requestsource  "EDMA_REQ_DISABLED"
+      channel11enable	      off
+      channel12priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel12requestsource  "EDMA_REQ_DISABLED"
+      channel12enable	      off
+      channel13priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel13requestsource  "EDMA_REQ_DISABLED"
+      channel13enable	      off
+      channel14priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel14requestsource  "EDMA_REQ_DISABLED"
+      channel14enable	      off
+      channel15priority	      "EDMA_CHN_DEFAULT_PRIORITY"
+      channel15requestsource  "EDMA_REQ_DISABLED"
+      channel15enable	      off
+    }
+    Annotation {
+      SID		      "153"
+      Name		      "Profile eDMA transfer VS normal copy transfer"
+      Position		      [675, 77, 1002, 250]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.972549, 0.952941, 0.929412]"
+      BackgroundColor	      "[0.972549, 0.952941, 0.929412]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      179
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "151"
+      Name		      "S32K14x board, eDMA and FreeMaster Config - initialization"
+      Position		      [-60, -380, 483, 249]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      177
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      SID		      "149"
+      Name		      "Data Initialization\n"
+      Position		      [545, -380, 1114, 71]
+      InternalMargins	      [0, 0, 0, 0]
+      FixedHeight	      on
+      FixedWidth	      on
+      HorizontalAlignment     "left"
+      VerticalAlignment	      "top"
+      ForegroundColor	      "[0.901961, 0.901961, 1.000000]"
+      BackgroundColor	      "[0.901961, 0.901961, 1.000000]"
+      DropShadow	      on
+      AnnotationType	      "area_annotation"
+      ZOrder		      178
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}
+MatData {
+  NumRecords		  1
+  DataRecord {
+    Tag			    DataTag0
+    Data		    "  %)30     .    D $   8    (     @         %    \"     $    \"     0         %  0 !@    $    ,    3F%M9"
+    "0  5F%L=64       X    P    !@    @    $          4    (     0    0    !         !  ! !D97-T#@   #@    &    \"     "
+    "8         !0    @    !     0    $         \"0    @          $B30 X    X    !@    @    $          4    (     0    <"
+    "    !         !     '    <VEG7W-R8P .    B     8    (    $0         !          $ ! !-0T]3 0    \\   !3:6UU;&EN:RY3"
+    ":6=N86P #@   $@    &    \"     T         !0    @    &     0    $         !@   !@       #= @    $    !     0    $  "
+    "  .    H P   8    (    \"0         %    \"     $   !P#    0         \"    < P    !24T     #@   , +   &    \"     ("
+    "         !0    @    !     0    $         !0 $  4    !    !0   $U#3U,     #@   '@+   &    \"    !$          0      "
+    "   !  0 34-/4P$    -    1FEL95=R87!P97)?7P    X    X\"P  !@    @    !          4    (    $     $    !          X  "
+    " #X 0  !@    @    )          4    (    R $   $    !          (   #( 0   @    \\   #     X    .     0 0  N $  ,@!  "
+    "           $-O9&5R26YF;P!$97-C<FEP=&EO;@!$871A5'EP90!-:6X 36%X $1O8U5N:71S $1I;65N<VEO;G, 1&EM96YS:6]N<TUO9&4 0V]M"
+    "<&QE>&ET>0!386UP;&54:6UE %-A;7!L:6YG36]D90!);FET:6%L5F%L=64 3&]G9VEN9TEN9F\\ 4VEG;F%L %-I;75L:6YK                 "
+    "         \\    .                                               !                     0    $               T    !  "
+    "   0         \"     0    $    #     0    (    $     0    ,    %     0    0    &     0    4    '     0    8    (   "
+    "  0    <    )     0    @    *     0    D    +     0    H    ,     0    L    -     0    P                         #"
+    "@         .    Z ,   8    (    $0         !          $    &    :&%N9&QE   !    $@   %-I;75L:6YK+D-O9&5R26YF;P     "
+    "   X   \"8 P  !@    @    !          4    (    !0    $    !          X    @ @  !@    @    )          4    (    \\ $"
+    "   $    !          (   #P 0   0   !    #P    ( $  \"@!  !P 0  Z $  / !             %-I;75L:6YK $-O9&5R26YF;P!3=&]R"
+    "86=E0VQA<W, 075T;P!4>7!E475A;&EF:65R  !!;&EA<P!!;&EG;FUE;G0 0U-#4&%C:V%G94YA;64 4&%R86UE=&5R3W)3:6=N86P 4VEG;F%L $"
+    "-U<W1O;5-T;W)A9V5#;&%S<P!$969A=6QT $-U<W1O;4%T=')I8G5T97, 4VEM=6QI;FM#4T, 071T<FEB0VQA<W-?4VEM=6QI;FM?1&5F875L=   "
+    "                              $    \"               /    $                                                        "
+    "  !                     0         \"                     @                    @    #          0    %          8   "
+    " '     0         (     0    $    )          $    *          L    ,          T    .     0    (                     "
+    "          X   !X    !@    @    !          4    (     0    $    !          X   !(    !@    @    -          4    (  "
+    "  !0    $    !          8    4        W0(    !     0    $         #@   #     &    \"     0         !0    @        "
+    "       $         $          .    .     8    (    !@         %    \"     $    !     0         )    \"            /\""
+    "_#@   $@    &    \"     T         !0    @    %     0    $         !@   !0       #= @    $    !     @         .    "
+    ",     8    (    !          %    \"                0         0          X    X    !@    @    $          4    (     "
+    "0    8    !         !     &    =6EN=#,R   .    ,     8    (    !@         %    \"                0         )      "
+    "    X    P    !@    @    &          4    (               !          D         #@   #     &    \"     0         !0 "
+    "   @               $         $          .    .     8    (    !@         %    \"     $    !     0         )    \"  "
+    "         !)! #@   #     &    \"     0         !0    @    !    !     $         $  $ &%U=&\\.    ,     8    (    !  "
+    "        %    \"     $    $     0         0  0 875T;PX    X    !@    @    &          4    (     0    $    !        "
+    "  D    (            \\+\\.    ,     8    (    !          %    \"     $    $     0         0  0 875T;PX    P    !@ "
+    "   @    $          4    (               !         !          #@   . !   &    \"    !$          0         !    !@  "
+    " &AA;F1L90   0   !0   !3:6UU;&EN:RY,;V=G:6YG26YF;P     .    D $   8    (     0         %    \"     (    !     0   "
+    "      .    X     8    (    \"0         %    \"    +     !     0         \"    L     $    \"    0    &    !H    F  "
+    "  *@   \"P              !3:6UU;&EN:P!,;V=G:6YG26YF;P                           0    (                             "
+    "                             0                    $                                         #@   '@    &    \"    "
+    " $         !0    @    !     0    $         #@   $@    &    \"     T         !0    @    %     0    $         !@   !"
+    "0       #= @    $    !     0         .    J     8    (     0         %    \"     (    !     0         .    .     8"
+    "    (     @         %    \"     $          0         %  0  0    $         #@   #@    &    \"     (         !0    @"
+    "    !          $         !0 $  $    !          X   \"8    !@    @    )          4    (     0   &@    !          ( "
+    "  !H      %)30     .    6     8    (     @         %    \"     $    !     0         %  0 !P    $    .    34-/4P   "
+    "&AA;F1L90    X         #@         "
+  }
+}
+#Finite State Machines
+#
+#   Stateflow 80000012
+#
+#
+Stateflow {
+  machine {
+    id			    1
+    name		    "edma_single_block_transfer_profiling_s32k14x"
+    created		    "09-Nov-2017 11:49:03"
+    isLibrary		    0
+    sfVersion		    80000012
+    firstTarget		    11
+  }
+  chart {
+    id			    2
+    machine		    1
+    name		    "Profile eDMA time/Get current transfer\ncount and increment index"
+    windowPosition	    [422 539.941 189 413]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 3600 1200 1.180555555555556]
+    treeNode		    [0 3 0 0]
+    viewObj		    2
+    ssIdHighWaterMark	    7
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "fcn"
+    }
+    firstData		    4
+    firstTransition	    9
+    firstJunction	    8
+  }
+  state {
+    id			    3
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 0]
+    superState		    SUBCHART
+    subviewer		    2
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [val, new_idx] = fcn(ref, idx)\n%#codegen\n    new_idx = mod(idx, 10) + 1;\n    val = re"
+      "f(new_idx);\nend"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    4
+    ssIdNumber		    4
+    name		    "ref"
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 0 5]
+  }
+  data {
+    id			    5
+    ssIdNumber		    5
+    name		    "val"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 4 6]
+  }
+  data {
+    id			    6
+    ssIdNumber		    6
+    name		    "idx"
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 5 7]
+  }
+  data {
+    id			    7
+    ssIdNumber		    7
+    name		    "new_idx"
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+      unit {
+	name			"inherit"
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+    linkNode		    [2 6 0]
+  }
+  junction {
+    id			    8
+    position		    [23.5747 49.5747 7]
+    chart		    2
+    subviewer		    2
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+    linkNode		    [2 0 0]
+  }
+  transition {
+    id			    9
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [28.125 13.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      8
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    2
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+    linkNode		    [2 0 0]
+  }
+  instance {
+    id			    10
+    machine		    1
+    name		    "Profile eDMA time/Get current transfer\ncount and increment index"
+    chart		    2
+  }
+  target {
+    id			    11
+    machine		    1
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    linkNode		    [1 0 12]
+  }
+  target {
+    id			    12
+    machine		    1
+    name		    "rtw"
+    linkNode		    [1 11 0]
+  }
+}

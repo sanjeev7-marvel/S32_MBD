@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Hall Sensor Block</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+    <div class="content">
+    <h1>Hall Sensor Block</h1>
+
+    <p>For 3 phase motor control sensor-ed applications the use of Hall sensors, generally 3
+sensors placed 120 degrees apart around the rotor, are deployed to detect position and
+speed. Each of the 3 sensors provides a pulse that applied to an input capture pin, can
+then be analysed and both speed and position can be deduced. To simplify the
+calculations required by the CPU on each hall sensor's input, if all 3 inputs are
+"exclusively OR'd" into one timer channel and the free running counter is refreshed on
+every edge then this can simplify the speed calculation.</p>
+
+    <h2>Block Image</h2>
+    <img vspace="0" src="hall_sensor_files/ftm_hall_sensor_block.jpg" width="350px" height="auto"/>
+
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+    <h2>Outputs:</h2>
+    <ul>
+        <li>Function-call</li>
+        <li>Counter</li>
+    </ul>
+
+    <h2>Parameters and Dialog Box</h2>
+    <p>The block dialog consists of the following tabs:</p>
+
+
+    <ul class="shifted">
+        <li><a href="#General_tab">General</a></li>
+        <li><a href="#Input_signal_tab">Input Signals</a></li>
+    </ul>
+
+
+    <h4><a name="General_tab"></a>General</h4>
+    <p>The General tab contains the following parameters:</p>
+
+    <img vspace="15" src="hall_sensor_files/ftm_hall_sensor_general.jpg" width="450px" height="auto"/>
+
+    <h3>Edge Selection</h3>
+    <p>Get the motor speed on the event chosen</p>
+    <ul>
+        <li>Rising</li>
+        <li>Falling</li>
+        <li>Rising or Falling</li>
+    </ul>
+
+    <h3>Prescale factor for input clock</h3>
+    <p>The selected prescale factor for input clock</p>
+    <ul>
+        <li>1 &ndash; 2 &ndash; 4 &ndash; 8 &ndash; 16 &ndash; 32 &ndash; 64 &ndash; 128</li>
+    </ul>
+
+    <h3>ISR Priority</h3>
+    <p>Interrupt priority level</p>
+    <ul>
+        <li>0 &ndash; 15 - S32K14x</li>
+    </ul>
+
+    <h3>Filter Enable</h3>
+    <p>When enabled will show value field</p>
+    <ul>
+        <li>Enable/Disable</li>
+    </ul>
+
+    <h4><a name="Input_signal_tab"> </a>Input Signals</h4>
+    <p>The Inputs tab contains the following parameters:</p>
+    <img vspace="15" src="hall_sensor_files/ftm_hall_sensor_inputs.jpg" width="450px" height="auto"/>
+
+    <h3>Input pin for FTM module 1 channel 1</h3>
+    <p>Defines which input pin for FTM module 1 channel 1. Pin list varies depending on the selected MCU in the main config block.</p>
+
+    <h3>Input pin for FTM module 2 channel 0</h3>
+    <p>Defines which input pin for FTM module 2 channel 0. Pin list varies depending on the selected MCU in the main config block.</p>
+
+    <h3>Input pin for FTM module 2 channel 1</h3>
+    <p>Defines which input pin for FTM module 2 channel 1. Pin list varies depending on the selected MCU in the main config block.</p>
+
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+</div>
+</body>
+</html>

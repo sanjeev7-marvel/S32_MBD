@@ -1,0 +1,117 @@
+%implements lin_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("lin_driver.h")>
+    %<LibAddToCommonIncludes("lpit_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_lin_config_info", blockPath)
+    %with info
+
+    %openfile buf
+        lin_state_t lin%<instance>_State;
+        lin_user_config_t lin_InitConfig%<instance> = {
+            .baudRate = %<baudrate>,
+            .nodeFunction = %<node_function>,
+            .autobaudEnable = %<autobaud>,
+            .timerGetTimeIntervalCallback = NULL,
+            .classicPID = NULL,
+            .numOfClassicPID = 255U,
+        };
+    %closefile buf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Definitions", buf)>
+
+    {
+        /* Enable clock for %<rx.user_config.port> */
+        PCC_SetClockMode(PCC, %<rx.user_config.port>_CLK, true);
+
+        /* Enable clock for %<tx.user_config.port> */
+        PCC_SetClockMode(PCC, %<tx.user_config.port>_CLK, true);
+
+        /* Enable clock for LIN_SLP pin (PTE9 pin) */
+        PCC_SetClockMode(PCC, PORTE_CLK, true);
+
+        /* Set LPUART clock source */
+        PCC_SetPeripheralClockControl(PCC, LPUART%<instance>_CLK, true, CLK_SRC_SOSC_DIV2, 0, 0);
+
+        pin_settings_config_t lin_pins[3] = {
+        {
+            .base          = %<rx.user_config.port>,
+            .pinPortIdx    = %<rx.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<rx.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+            .gpioBase      = NULL,
+            .digitalFilter = false,
+        },
+        {
+            .base          = %<tx.user_config.port>,
+            .pinPortIdx    = %<tx.user_config.pin>,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = %<tx.user_config.mux>,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+            .gpioBase      = NULL,
+            .digitalFilter = false,
+        },
+        {
+            .base          = PORTE,
+            .pinPortIdx    = 9u,
+            .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+            .passiveFilter = false,
+            .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+            .mux           = PORT_MUX_AS_GPIO,
+            .pinLock       = false,
+            .intConfig     = PORT_DMA_INT_DISABLED,
+            .clearIntFlag  = false,
+            .gpioBase      = PTE,
+            .direction     = GPIO_OUTPUT_DIRECTION,
+            .digitalFilter = false,
+            .initValue     = 0u,
+        }};
+        PINS_DRV_Init(3, lin_pins);
+
+        /* Set LIN transceiver sleep pin direction */
+        PINS_DRV_SetPinsDirection(LIN_XCVR_ENABLE_GPIO_PORT, LIN_XCVR_ENABLE_MASK);
+        /* Wake up LIN transceiver */
+        PINS_DRV_SetPins(LIN_XCVR_ENABLE_GPIO_PORT, LIN_XCVR_ENABLE_MASK);
+
+        /* Initialize LIN network interface */
+        LIN_DRV_Init(%<instance>, &lin_InitConfig%<instance>, &lin%<instance>_State);
+    }
+    %endwith
+
+    %endif
+%endfunction

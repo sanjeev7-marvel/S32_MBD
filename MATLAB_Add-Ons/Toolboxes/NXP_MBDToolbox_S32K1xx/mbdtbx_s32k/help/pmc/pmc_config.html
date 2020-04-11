@@ -1,0 +1,107 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>PMC Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+<body>
+    <div class="content">
+    <!--Page-title-->
+    <h1>PMC Configuration Block</h1>
+    <!--Page-title-->
+    <p>This block allows the user to handle the device power modes and trigger subsystems execution at run-time switching between power modes.
+For more information about power modes please read the <a href="https://www.nxp.com/docs/en/application-note/AN5425.pdf">AN5425, Power Management for S32K14x</a>.</p>
+    <h2>Block Image</h2>
+    <img vspace="0" src="pmc_config_files/simple_block.jpg" width="200px" height="auto" />
+    <h2>Inputs:</h2>
+    <ul>
+        <li>None</li>
+    </ul>
+
+    <h2>Outputs:</h2>
+    <ul>
+        <li>
+           <p>Callbacks - only as advanced option and only if one of the Callbacks checkbox is checked.</p>
+            <p>If calling a Callback function is required "Before","After" or "Before and after" switching between the power mode selected in the PMC_Config block, the output port will be enabled.<br/>
+            In order to connect the S-function callback, a demux with three outputs must be added like in the following image. The "Before" function must be connected on the first output, the "After on the second one and the "Before and After" function must be connected on the last output of the demux.<br/>
+            If one of the callback is not used, a terminator must be added.</p>
+            <p>The following example shows a PMC_Config block that changes the running mode to VLPS and has two callbacks: the first one is called "Before" entering the VLPS mode and the second one is called "After" the ISR Handle is executed. The "Before and after" callback is not needed so a terminator was added.</p>
+        </li>
+        <img vspace="15" src="pmc_config_files/simple_block_callbacks_example.jpg" width="600px" height="auto" />
+    </ul>
+
+    <h2>Parameters and Dialog Box</h2>
+    <p>The block dialog consists of the following tabs:</p>
+    <ul>
+        <li><a href="#general_tab">General</a></li>
+        <!--If need be for another subclass, another ul instances must be placed-->
+        <li><a href="#advanced_tab">Advanced</a></li>
+    </ul>
+
+    <!--Window tab-->
+    <h4><a name="general_tab"></a>General</h4>
+    <img vspace="15" src="pmc_config_files/image_param_1.jpg" width="450px" height="auto"/>
+
+    <h3>Power Mode</h3>
+    <p>Selects which power mode to switch in.</p>
+    <ul>
+        <li>Very Low Power Stop (VLPS)</li>
+        <li>Very Low Power Run (VLPR)</li>
+        <li>High Speed Run (HSRUN)</li>
+        <li>Normal Operating (RUN)</li>
+        <li>Stop System and Bus clocks (STOP1)</li>
+        <li>Stop System clock and keep Bus clock running (STOP2)</li>
+    </ul>
+
+    <h3>Show advanced options</h3>
+    <p>Shows or hides the Advanced options tab.</p>
+
+    <!--Advanced tab-->
+    <h4><a name="advanced_tab"></a>Advanced</h4>
+    <img vspace="15" src="pmc_config_files/image_param_2.jpg"  width="450px" height="auto"/>
+
+    <h3>Sleep  on exit from ISR</h3>
+    <p>This checkbox indicates sleep-on-exit when returning from an ISR Handler.</p>
+    <ul>
+        <li>Unchecked - Normal sleep, returns to Thread mode after returning from an ISR.</li>
+        <li>Checked - Enter sleep on return of an ISR.</li>
+    </ul>
+
+    <h3>Execute subsystem "Before" entering in selected Power Mode</h3>
+    <p>This checkbox indicates if the "Before" Callback is active.</p>
+    <ul>
+        <li>Unchecked - No subsystem called before switching to selected power mode.</li>
+        <li>Checked - First subsystem connected to the demux will be called before switching to selected power mode.</li>
+    </ul>
+
+    <h3>Execute subsystem "After" exiting from selected Power Mode</h3>
+    <p>This checkbox indicates if the "After" Callback is active.</p>
+    <ul>
+        <li>Unchecked - No subsystem called after exiting the selected power mode.</li>
+        <li>Checked - Second subsystem connected to the demux will be called after exiting selected power mode.</li>
+    </ul>
+
+    <h3>Execute subsystem "Before and After" selected Power Mode</h3>
+    <p>This checkbox indicates if the "Before and After" Callback is active.</p>
+    <ul>
+        <li>Unchecked - No subsystem called before and after selected power mode.</li>
+        <li>Checked - Last subsystem connected to the demux will be called before switching to selected power mode.</li>
+    </ul>
+
+    <!--Block-Dependency-->
+    <h2>Block Dependency</h2>
+    <ul>
+        <li>None </li>
+    </ul>
+    <!--Block-Miscellaneous-Details-->
+    <h2>Block Miscellaneous Details</h2>
+    <ul>
+        <li>VLPR &ndash; To reduce the power consumption the PLL clock is gated. To use this mode the Step Tick Timer must be
+    Suppressed and LPTMR timer must be used to generate the Step function (it uses SIRC clock as main clock and remains active
+        during VLPR mode). For more information please read the <a href="https://www.nxp.com/docs/en/application-note/AN5425.pdf">AN5425, Power Management for S32K14x</a>. As example for VLPR mode please see "pmc_sleep_on_exit_s32k14.mdl".</li>
+    </ul>
+    </div>
+</body>
+</html>

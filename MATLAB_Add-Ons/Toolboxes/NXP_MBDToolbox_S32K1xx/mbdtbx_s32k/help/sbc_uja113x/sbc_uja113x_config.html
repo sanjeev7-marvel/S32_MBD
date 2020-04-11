@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>SBC UJA113x Configuration Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>SBC UJA113x Configuration Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to configure SBC  UJA113x module.</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="sbc_uja113x_config_files/sbc_uja113x_config.jpg" width="400px" height="auto" />
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+            <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#general_tab">General</a></li>
+                <li><a href="#regulators_tab">Regulator rate</a></li>
+                <li><a href="#wdog_tab">Watchdog</a></li>
+                <li><a href="#lock_tab">Lock</a></li>
+                <li><a href="#can_tab">CAN</a></li>
+                <li><a href="#events_det_tab">Events detection</a></li>
+            </ul>
+            <!--Table of contents-->
+            <!--General tab-->
+            <h4><a name="general_tab"></a>General</h4>
+
+            <img vspace="10" src="sbc_uja113x_config_files/sbc_uja113x_config_general.jpg" width="450px" height="auto" />
+
+            <h3>Instance</h3>
+            <p> Index of SBC to configure<p>
+            <h3>Device model</h3>
+            <p> Selection of  SBC model from UJA113x family.</p>
+            <h3>Mode Control</h3>
+            <p>Selects the SBC operating mode.</p>
+            <li>Normal
+                <p>Normal mode is the active SBC operating mode. In this mode, the SBC is fully operational and all onboard hardware can be activated.</p>
+            </li>
+            <li>Standby
+                <p>Standby mode is a low-power mode in which regulator V1 is switched on.</p>
+            </li>
+            <li>Sleep
+                <p>Sleep mode is a low-power mode similar to Standby mode. V1 is switched off in Sleep mode.</p>
+            </li>
+
+            <h3> Limp Home Control</h3>
+            <p>The LIMP pin can be used to enable so called ‘limp home’ hardware in the event of an ECU failure. Detectable failure conditions include SBC overtemperature events, loss of
+           watchdog service, short circuits on pins RSTN or V1 and user-initiated or external reset events.The LIMP pin is a battery-related, active-LOW, open-drain output.<p>
+
+            <!--Regulators tab-->
+            <h4><a name="regulators_tab"></a>Regulators</h4>
+
+            <img vspace="15" src="sbc_uja113x_config_files/sbc_uja113x_config_regulators.jpg" width="450px" height="auto"/>
+
+            <h3>V2 shutdown response</h3>
+            <p>Configuration of V2 shutdown response to a baterry  undervoltage or overvoltage
+
+            <li>None
+                <p> No shut-down</p>
+            </li>
+             <li>Undervoltage
+                <p>Shut-down on undervoltage. </p>
+            </li>
+            <li>Overvoltage
+                <p>Shut-down on overvoltage. </p>
+            </li>
+            <li>Under/Overvoltage
+                <p>Shut-down on under/ overvoltage. </p>
+            </li>
+            <h3>V2 Control</h3>
+            <li>OFF : V2 off in all modes</li>
+            <li>On in Normal : V2 on in Normal mode</li>
+            <li>On in  Normal, StandBy, Reset : V2 on in Normal, Standby and Reset modes</li>
+            <li>On in Normal, StandBy, Reset, FSP </li>
+            <p></p>
+            <h3>V1 reset threshold (%)</h3>
+            <p> Sets the V1 reset threshold.</p>
+            <p></p>
+            <!--Wdog tab-->
+            <h4><a name="wdog_tab"></a>Watchdog</h4>
+            <img vspace="15" src="sbc_uja113x_config_files/sbc_uja113x_config_wdog.jpg" width="450px" height="auto"/>
+
+            <h3>Mode control</h3>
+            <p> The UJA113x  contains a watchdog that supports three operation modes: <p>
+            <li>Window
+            <p>In Window mode (available only in SBC Normal mode), a watchdog trigger event within a closed watchdog window resets the watchdog timer.</p>
+            </li>
+            <li>Timeout
+            <p>In Timeout mode, the watchdog runs continuously and can be reset at any time within the time-out time by a watchdog trigger. Watchdog Timeout mode can also be used for cyclic wake-up of the microcontroller</p>
+            </li>
+            <li>Autonomous
+            <p>In Autonomous mode, the watchdog can be off or in Timeout mode.<p>
+            </li>
+
+            <h3>Nominal period </h3>
+            <p>Eight watchdog periods are supported, from 8 ms to 4096 ms.</p>
+
+            <p></p>
+            <!--Lock tab-->
+            <h4><a name="lock_tab"></a>Lock</h4>
+            <img vspace="15" src="sbc_uja113x_config_files/sbc_uja113x_config_lock.jpg" width="450px" height="auto"/>
+            <p>Sections of the register address area can be write-protected to protect against unintended modifications. It only protects locked bits from being modified via the SPI and will not prevent the UJA113xupdating status registers.
+            For each section, if the box is checked, SPI write access is disabled, otherwise SPI write access is enabled.</p>
+            <li>General-purpose memory - lock control 0: address area 0x06 to 0x09.</li>
+            <li>Supply control - lock control 1: address area 0x10 to 0x1F.</li>
+            <li>Transceiver control- lock control 2: address area 0x20 to 0x2F.</li>
+            <li>Address  0x30 to 0x3F - lock control 3: address area 0x30 to 0x3F - HVIO1 to HVIO4 control(if HVIO bank 0 available).</li>
+            <li>Address 0x40 to 0x4F - lock control 4: address area 0x40 to 0x4F - HVIO5 to HVIO8 control(if HVIO bank 1 available).</li>
+            <li>Address 0x50 to 0x5F - lock control 5: address area 0x50 to 0x5F - Timer control.</li>
+            <li>Data mask - lock control 6: address area 0x68 to 0x6F - data mask (FD versions only).</li>
+            <p></p>
+            <!--CAN tab-->
+            <h4><a name="can_tab"></a>CAN</h4>
+
+            <img vspace="15" src="sbc_uja113x_config_files/sbc_uja113x_config_can.jpg" width="450px" height="auto"/>
+
+            <h3>Mode</h3>
+            <p>According to the device model selected, there are available one or more of the following selections:</p>
+            <li> CAN FD Control
+            <p> If checked, CAN FD tolerance is enabled, otherwise is disabled.</p>
+            </li>
+            <li> CAN partial networking control
+            <p> If checked, CAN selective wake-up is enabled.</p>
+            </li>
+            <li> CAN mode control 
+             <p> Configuration of CAN transceiver operating mode.</p>
+             <li>Offline</li>
+             <li>Active mode, undervoltage detect.</li>
+             <li>Active mode, undervoltage no detect.</li>
+             <li> Listen-only</li>
+             </li>
+            <p>Partial networking allows nodes in a CAN network to be selectively activated in response to dedicated wake-up frames (WUF). Only nodes that are functionally required are active
+            on the bus while the other nodes remain in a low-power mode until needed. If both CAN wake-up (CWE = 1) and CAN selective wake-up (CPNC = 1) are enabled,
+            and the partial networking registers are configured correctly (PNCOK = 1), the transceiver monitors the bus for dedicated CAN wake-up frames.<p>
+
+            <h3>CAN data rate</h3>
+            <p>Available data rate selections in kbit/s.</p>
+            <h3>ID</h3>
+            <p>ID registers, identifier format (0x27 to 0x2A).</p>
+            <li>0x27: bits ID07 to ID00 of the extended frame format</li>
+            <li>0x28: bits ID15 to ID08 of the extended frame format</li>
+            <li>0x29: bits ID23 to ID18 of the extended frame format, bits ID05 to ID00 of the standard frame format/bits ID17 to ID16 of the extended frame format</li>
+            <li>0x2A: bits ID28 to ID24 of the extended frame format/ bits ID10 to ID06 of the standard frame format</li>
+            <h3>ID mask </h3>
+            <p> An ID mask can be defined to allow a group of identifiers to be recognized as valid by an individual node. The identifier mask is defined in the ID mask registers, where a 1 means 'don't care'.<p>
+
+            <h3>Identifier format</h3>
+            <li>11-bit (standard)</li>
+            <li>29-bit (extended) </li>
+            <p></p>
+            <h3>Partial networking data mask</h3>
+            <li>Don't care : data length code and data field are ‘don’t care’ for wake-up </li>
+            <li>Evaluated: data length code and data field are evaluated at wake-up </li>
+            <p></p>
+            <h3>Data Length Code</h3>
+            <p>Number of data bytes expected in a CAN frame(from0 to 8).</p>
+
+            <h3>Data mask</h3>
+            <p>The data field indicates the nodes to be woken up.Within the data field, groups of nodes
+            can be predefined and associated with bits in a data mask. By comparing the incoming
+            data field with the data mask, multiple groups of nodes can be woken up simultaneously
+            with a single wake-up message.</p>
+
+            <h4><a name="events_det_tab"></a>Events detection</h4>
+
+            <img vspace="10" src="sbc_uja113x_config_files/sbc_uja113x_config_eventsDet.jpg" width="450px" height="auto" />
+            <p> The following events detection can be enabled:</p>
+            <h3>Supply events</h3>
+            <li>V2/VEXT overvoltage</li>
+            <li>V2/VEXT undervoltage</li>
+            <li>V1 undervoltage</li>
+            <p></p>
+            <h3>Transceiver events</h3>
+            <li>CAN-bus silence</li>
+            <li>CAN failure</li>
+            <li>CAN wake-up</li>
+            <li>LIN1 wake-up</li>
+            <li>LIN2 wake-up</li>
+            <p></p>
+            <h3>System events</h3>
+            <li>Overtemperature warning</li>
+            <li>SPI failure</li>
+            <p></p>
+            <h3>Wake pin events</h3>
+            <li>HVIO Pins : configure a pin as a wake-up source</li>
+            <li>Rising-edge</li>
+            <li>Falling-edge</li>
+            <p></p>
+            <div>* Read Hardware Manual documentation to get more information.</div>
+            <p></p>
+            <!--Block-Dependency-->
+        <h2>Block Dependency</h2>
+        <div>Please do the following:
+            <ul>
+                <li>Configure the <a href="../main_config/main_config.html">Target Configuration</a> block.</li>
+                <li>Configure the <a href="../lpspi/lpspi_config.html">LPSPI Configuration</a> block.</li>
+            </ul>
+        </div>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

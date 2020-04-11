@@ -1,0 +1,85 @@
+/*!
+@defgroup power_manager_s32k1xx Power Manager Driver
+@ingroup power_manager
+@brief This module covers the device-specific clock_manager functionality implemented for S32K1xx and S32MTV SOC.
+
+## Hardware background ##
+
+System mode controller (SMC) is passing the system into and out of all low-power
+Stop and Run modes. Controls the power, clocks and memories of the system to achieve
+the power consumption and functionality of that mode.
+
+
+## Driver consideration ##
+
+Power mode entry and sleep-on-exit-value are provided at
+initialization time through the power manager user configuration structure.
+With platform is S32K14x, the available power mode entries are the following ones: HSRUN, RUN, VLPR, STOP1, STOP2 and VLPS.
+With platform is S32MTV,S32K11x, the available power mode entries are the following ones: RUN, VLPR, STOP1, STOP2 and VLPS.
+
+This is an example of configuration:
+@code
+
+ power_manager_user_config_t pwrMan1_InitConfig0 = {
+     .powerMode = POWER_MANAGER_RUN,
+     .sleepOnExitValue = false,
+ };
+
+ power_manager_user_config_t *powerConfigsArr[] = {
+     &pwrMan1_InitConfig0
+ };
+
+ power_manager_callback_user_config_t * powerCallbacksConfigsArr[] = {(void *)0};
+
+ if (STATUS_SUCCESS != POWER_SYS_Init(&powerConfigsArr,1,&powerCallbacksConfigsArr,0)) {
+     ...
+ }
+ else {
+     ...
+ }
+
+ if (STATUS_SUCCESS != POWER_SYS_SetMode(0,POWER_MANAGER_POLICY_AGREEMENT)) {
+     ...
+ }
+ else {
+     ...
+ }
+
+@endcode
+
+### Compilation units ###
+
+The following files need to be compiled in the project:
+\verbatim
+${S32SDK_PATH}\platform\drivers\src\power_manager.c
+${S32SDK_PATH}\platform\drivers\src\S32K1xx\power_manager_S32K1xx.c
+${S32SDK_PATH}\platform\drivers\src\S32K1xx\power_smc_sw_access.c
+\endverbatim
+
+### Include path ###
+
+The following paths need to be added to the include path of the toolchain:
+\verbatim
+${S32SDK_PATH}\platform\drivers\inc\
+${S32SDK_PATH}\platform\drivers\src\power\
+${S32SDK_PATH}\platform\drivers\src\power\S32K1xx\
+\endverbatim
+
+### Compile symbols ###
+
+No special symbols are required for this component
+
+### Dependencies ###
+
+\ref clock_manager
+
+## Important Note
+1. When CPU switches from very low power mode to high speed mode, the clock configuration is not immediately updated.
+It may be taking longer time than expected.
+2. The power manager module will disable SPLL, FIRC, SOSC in RUN mode before MCU jumps from RUN,HSRUN
+to very low power mode. SIRC as clock source when MCU enters very low power mode.
+Driver will update Initialize clock configuration when MCU jumps from very low power mode to RUN or HSRUN mode.
+It will enable all clock source again which is configed by clock configurations. The status of enabling clock sources
+are got in the POWER_SYS_DoInit function.
+3. When CPU switches from HSRUN to STOP or VLP mode, the driver code will auto switch RUN mode before CPU enters next mode.
+*/

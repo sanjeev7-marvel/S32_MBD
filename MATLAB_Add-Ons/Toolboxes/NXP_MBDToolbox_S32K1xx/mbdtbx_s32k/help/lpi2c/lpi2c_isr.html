@@ -1,0 +1,76 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>LPI2C ISR Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>LPI2C ISR Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to trigger a subsystem upon a specific event.</p>
+
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="lpi2c_isr_files/lpi2c_isr.jpg" width="300px" height="auto">
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None.</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>Trigger - function call for a subsystem.</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+             <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#1">General</a></li>
+            </ul>
+
+            <!--Table of contents-->
+           
+            <!--Window tab-->
+            <h4><a name="1"></a>General</h4>
+           
+            <img vspace="10" src="lpi2c_isr_files/lpi2c_isr_opt.jpg" width="450px" height="auto">
+            </br>
+
+            <h3>Instance</h3>
+            <p>Select an instance of LPI2C to use (on S32K144 there is only one).</p>
+            
+            <h3>Mode</h3>
+            <p>Select the role (either Master or Slave).</p>
+            
+            <h3>Events</h3>
+            <p>Event checkboxes (depending on selected <b>Mode</b>).</p>
+            <ul><b>Master:</b>
+                <li>&nbsp;&nbsp;MASTER END TRANSFER</li>
+            </ul>
+            <ul><b>Slave:</b>
+                <li>&nbsp;&nbsp;SLAVE RX REQUEST</li>
+                <li>&nbsp;&nbsp;SLAVE TX REQUEST</li>
+                <li>&nbsp;&nbsp;SLAVE TX EMPTY</li>
+                <li>&nbsp;&nbsp;SLAVE RX FULL</li>
+                <li>&nbsp;&nbsp;SLAVE STOP</li>
+            </ul>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li><a href="lpi2c_config.html">LPI2C Configuration Block</a></li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

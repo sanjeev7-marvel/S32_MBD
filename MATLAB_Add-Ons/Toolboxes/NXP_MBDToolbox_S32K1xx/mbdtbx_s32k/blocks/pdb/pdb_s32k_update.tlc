@@ -1,0 +1,102 @@
+%implements pdb_s32k_update "C"
+
+%% Copyright (c) 2016 - 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %<LibAddToCommonIncludes("pdb_driver.h")>
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+        %assign sdk = FEVAL("mbd_s32k_pdb_update_make_params", blockPath)
+        {
+            /* Table of base addresses for PDB instances. */
+            static PDB_Type * const s_pdbBase[PDB_INSTANCE_COUNT] = PDB_BASE_PTRS;
+            /* Set the LDMOD field to a new value */
+            uint32_t sc;
+            PDB_Type * base = s_pdbBase[%<sdk.numModule>];
+            sc = base->SC;
+            sc &= ~((uint32_t)PDB_SC_LDMOD_MASK);
+            sc |= PDB_SC_LDMOD(%<sdk.regScLdmod>);
+            base->SC = sc;
+        }
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdkParams = FEVAL("mbd_s32k_pdb_update_make_params", blockPath)
+    %with sdkParams
+        %assign portInputNumber = 0
+
+        %if FEVAL("strcmp", "%<modInput>", "on")
+            /* Set value for PDB_MOD register */
+            PDB_DRV_SetTimerModulusValue(%<numModule>, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+            %assign portInputNumber = portInputNumber + 1
+        %endif
+
+        %if FEVAL("strcmp", "%<idlyEn>", "on")
+            /* Set the IDLY field to a new value */
+            PDB_DRV_SetValueForTimerInterrupt(%<numModule>, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+            %assign portInputNumber = portInputNumber + 1
+        %endif
+
+        %if FEVAL("strcmp", "%<ch0DlyEn>", "on")
+            %foreach i = 8
+                /* Initialize PDB%<numModule>_CH0_DLY%<i> register */
+                PDB_DRV_SetAdcPreTriggerDelayValue(%<numModule>, 0, %<i>, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+                %assign portInputNumber = portInputNumber + 1
+            %endforeach
+        %endif
+
+        %if FEVAL("strcmp", "%<ch1DlyEn>", "on")
+            %foreach i = 8
+                /* Initialize PDB%<numModule>_CH1_DLY%<i> register */
+                PDB_DRV_SetAdcPreTriggerDelayValue(%<numModule>, 1, %<i>, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+                %assign portInputNumber = portInputNumber + 1
+            %endforeach
+        %endif
+
+        %if FEVAL("strcmp", "%<inputPo0DlyEn>", "on")
+            /* Initialize PDB%<numModule>_PO0DLY registers */
+            PDB_DRV_SetCmpPulseOutDelayForHigh(%<numModule>, 0, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+            %assign portInputNumber = portInputNumber + 1
+        %endif
+
+        %if FEVAL("strcmp", "%<inputPo0DlyEn>", "on")
+            /* Initialize PDB%<numModule>_PO0DLY registers */
+            PDB_DRV_SetCmpPulseOutDelayForHigh(%<numModule>, 0, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+            %assign portInputNumber = portInputNumber + 1
+            PDB_DRV_SetCmpPulseOutDelayForLow(%<numModule>, 0, %<LibBlockInputSignal(portInputNumber, "", "", 0)>);
+        %endif
+
+        /* Load and lock MOD, IDLY, CHnDLYm, INTx and POyDLY registers */
+        PDB_DRV_LoadValuesCmd(%<numModule>);
+    %endwith
+
+	%endif
+%endfunction

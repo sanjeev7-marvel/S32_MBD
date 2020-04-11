@@ -1,0 +1,157 @@
+%implements fcan_s32k_receive "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flexcan_hw_access.h")>
+    %<LibAddToCommonIncludes("flexcan_driver.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+    
+    %assign sdk_params = FEVAL("mbd_s32k_fcan_receive_sdk_params", blockPath)
+    %with sdk_params
+        %if (use_rxfifo == "false")
+            %if !EXISTS("FCAN%<instance>_RX_MB_%<mb_idx>_CONFIG")
+                %assign ::FCAN%<instance>_RX_MB_%<mb_idx>_CONFIG = 1
+
+                %openfile declarationsBuf
+                flexcan_msgbuff_t canCom%<instance>_recvBuff%<mb_idx>;
+                %closefile declarationsBuf
+                %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", declarationsBuf)>
+
+                %openfile externBuf
+                extern flexcan_msgbuff_t canCom%<instance>_recvBuff%<mb_idx>;
+                %closefile externBuf
+                %<LibCacheExtern(externBuf)>
+
+                {
+                    flexcan_msgbuff_id_type_t msg_id_type = %<data_info.msg_id_type>;
+
+                    flexcan_data_info_t rxInfo = {
+                        .msg_id_type = %<data_info.msg_id_type>,
+                        .data_length = 8,
+                        .fd_enable = %<data_info.fd_enable>,
+                        .fd_padding = 0,
+                        .enable_brs = false,
+                        .is_remote = %<data_info.is_remote>
+                    };
+
+                    FLEXCAN_DRV_ConfigRxMb(%<instance>, %<mb_idx>, &rxInfo, 0x%<msg_id>);
+                    FLEXCAN_DRV_SetRxMaskType(%<instance>, FLEXCAN_RX_MASK_INDIVIDUAL);
+                    FLEXCAN_DRV_SetRxIndividualMask(%<instance>, msg_id_type, %<mb_idx>, 0x%<msg_mask>);
+                }
+            %endif
+        %else
+            %if !EXISTS("FCAN%<instance>_RX_FIFO_CONFIG")
+                %assign ::FCAN%<instance>_RX_FIFO_CONFIG = 1
+
+                %openfile declarationsBuf
+                flexcan_msgbuff_t canCom%<instance>_recvBuffFifo;
+                %closefile declarationsBuf
+                %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", declarationsBuf)>
+
+                %openfile externBuf
+                extern flexcan_msgbuff_t canCom%<instance>_recvBuffFifo;
+                %closefile externBuf
+                %<LibCacheExtern(externBuf)>
+            %endif
+        %endif
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+    
+    %assign sdk_params = FEVAL("mbd_s32k_fcan_receive_sdk_params", blockPath)
+
+    %with sdk_params
+    %if (use_rxfifo == "false")
+        %if (mode == "Blocking")
+            %assign status = LibBlockOutputSignal(0, "", "", 0)
+            %assign id = LibBlockOutputSignal(1, "", "", 0)
+            %assign data = LibBlockOutputSignalAddr(2, "", "", 0)
+            %assign length = LibBlockOutputSignal(3, "", "", 0)
+            %assign timestamp = LibBlockOutputSignal(4, "", "", 0)
+            {
+                int i;
+
+                /* Receive a frame in the recvBuff variable */
+                flexcan_msgbuff_t recvBuff;
+
+                %<status> = FLEXCAN_DRV_ReceiveBlocking(%<instance>, %<mb_idx>, &recvBuff, %<timeout_ms>);
+
+                if (%<status> == STATUS_SUCCESS) {
+                    %<id> = recvBuff.msgId;
+                    %<length> = recvBuff.dataLen;
+
+                    for(i = 0; i < recvBuff.dataLen; i++) {
+                        (%<data>)[i] = recvBuff.data[i];
+                    }
+
+                    %<timestamp> = (recvBuff.cs & CAN_CS_TIME_STAMP_MASK) >> CAN_CS_TIME_STAMP_SHIFT;
+                }
+            }
+        %else
+            FLEXCAN_DRV_Receive(%<instance>, %<mb_idx>, &canCom%<instance>_recvBuff%<mb_idx>);
+        %endif
+    %else
+        %if (mode == "Blocking")
+            %assign status = LibBlockOutputSignal(0, "", "", 0)
+            %assign id = LibBlockOutputSignal(1, "", "", 0)
+            %assign data = LibBlockOutputSignalAddr(2, "", "", 0)
+            %assign length = LibBlockOutputSignal(3, "", "", 0)
+            %assign timestamp = LibBlockOutputSignal(4, "", "", 0)
+            {
+                /* Receive a frame in the recvBuff variable */
+                flexcan_msgbuff_t recvBuff;
+
+                %<status> = FLEXCAN_DRV_RxFifoBlocking(%<instance>, &crecvBuff, %<timeout_ms>);
+
+                if (%<status> == STATUS_SUCCESS) {
+                    %<id> = recvBuff.msgId;
+                    %<length> = recvBuff.dataLen;
+
+                    for(i = 0; i < recvBuff.dataLen; i++) {
+                        (%<data>)[i] = recvBuff.data[i];
+                    }
+
+                    %<timestamp> = (recvBuff.cs & CAN_CS_TIME_STAMP_MASK) >> CAN_CS_TIME_STAMP_SHIFT;
+                }
+            }
+        %else
+            FLEXCAN_DRV_RxFifo(%<instance>, &canCom%<instance>_recvBuffFifo);
+        %endif
+    %endif
+    %endwith
+
+    %endif
+%endfunction

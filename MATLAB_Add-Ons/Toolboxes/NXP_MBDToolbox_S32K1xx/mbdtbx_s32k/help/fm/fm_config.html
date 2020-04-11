@@ -1,0 +1,109 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FreeMaster Configuration Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>FreeMaster Configuration Block</h1>
+	<!--Page-description-->
+
+	<p>
+        This block allows the user to configure the FreeMaster embedded-side software driver, which implements the
+        serial interface between the application and the host PC.<br/>
+        FreeMASTER is a PC-based application serving as a real-time monitor, visualization tool, and a graphical
+        control panel of embedded applications based on Freescale/NXP Semiconductor processing units.
+	</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="fm_config_files/fm_config_block.jpg" width="250px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<p>The block dialog consists of the following tabs:</p>
+	<ul>
+		<li><a href="#General_tab">General</a></li>
+		<li><a href="#Advanced_tab">Advanced</a></li>
+	</ul>
+	<!--Window tab-->
+	<h4><a name="General_tab"></a>General</h4>
+	<img vspace="10" src="fm_config_files/fm_config_general.jpg" width="450px" height="auto">
+	<p>The General tab contains the following parameters:</p>
+	<h3>Interface</h3>
+	<p>Selects communication interface.</p>
+	<h3>Baud Rate</h3>
+	<p>Available speed selections for the serial baud rate in kbps.</p>
+	<h3>RxD pin</h3>
+	<p>For usability RxD Pin selection is displayed as: (PortPinName: [Signal name | Description]) format.</p>
+	<h3>TxD pin</h3>
+	<p>For usability TxD Pin selection is displayed as: (PortPinName: [Signal name | Description]) format.</p>
+	<h3>Mode</h3>
+	<p>Selects interrupt or poll-driven serial communication.</p>
+	<ul>
+		<li>Long Interrupt - complete message processing in interrupt.</li>
+		<li>Short Interrupt - SCI FIFO-queuing done in interrupt.</li>
+		<li>Poll-driven -  no interrupt needed, polling only </li>
+	</ul>
+	<h3>ISR Priority</h3>
+	<p>Interrupt priority level.</p>
+	<h3>Show advanced options</h3>
+    <p>Shows or hides the Advanced options.</p>
+
+	<h4><a name="Advanced_tab"></a>Advanced</h4>
+	<img vspace="10" src="fm_config_files/fm_config_advanced.jpg" width="450px" height="auto">
+	<p>The Advanced tab contains the following parameters:</p>
+
+	<h3>Use Scope</h3>
+	<p>Enables/Disables scope support.</p>
+	<h3>Max Variables ( for oscilloscope support)</h3>
+	<p>Maximum number of scope variables (2..8).</p>
+
+	<h3>Use Recorder</h3>
+	<p>Enables/Disables recorder support.</p>
+	<h3>Max Variables (for recorder support)</h3>
+	<p>Maximum number of recorder variables (2..8).</p>
+
+	<h3>Buffer size (0 - 65536)</h3>
+	<p>User-allocated recorder buffer.</p>
+	<h3>Timebase(0 - 16384)</h3>
+	<p>Recorder time base specifies how often the recorder is called in the user application.</p>
+	<h3>Automatic buffer size</h3>
+	<ul>
+		<li>Checked - buffer size is set to 0.</li>
+		<li>Unchecked - buffer size can be set manually in Buffer size edit box.</li>
+	</ul>
+	<h3>Buffer size (1 - 255)</h3>
+	<p>Communication buffer size.</p>
+	<h3>Default FIFO receiver queue size</h3>
+	<ul>
+		<li> Checked - the default receive FIFO queue size is set to 0. </li>
+		<li> Unchecked - the receive FIFO queue size can be set manually in FIFO receiver queue size edit box. </li>
+	</ul>
+	<h3>FIFO receiver queue size (1 - 255)</h3>
+	<p>Receive FIFO queue size is used only with Short Interrupt.</p>
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	</div>
+</body>
+</html>

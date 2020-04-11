@@ -1,0 +1,95 @@
+%implements adc_s32k_start "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("adc_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info = FEVAL("mbd_s32k_adc_start_params", blockPath)
+    %assign adtrg = FEVAL ("mbd_s32k_get_adc_param", "adc_s32k_config_block", info.instance, "adtrg")
+
+    %with info
+        %if (adtrg == "hardware")
+        {
+            adc_chan_config_t adc%<instance>_chan_cfg =
+            {
+                %if (aien == "on")
+                .interruptEnable = true,
+                %else
+                .interruptEnable = false,
+                %endif
+                .channel         = %<input>
+            };
+
+            /* Initialize channel configuration of ADC%<instance>. */
+            ADC_DRV_ConfigChan(%<instance>, %<adc_r>, &adc%<instance>_chan_cfg);
+        }
+        %endif
+    %endwith
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign info  = FEVAL("mbd_s32k_adc_start_params", blockPath)
+    %assign adtrg = FEVAL ("mbd_s32k_get_adc_param", "adc_s32k_config_block", info.instance, "adtrg")
+
+    %with info
+        {
+        %if (adtrg == "software")
+            adc_chan_config_t adc%<instance>_chan_cfg =
+            {
+                %if (aien == "on")
+                .interruptEnable = true,
+                %else
+                .interruptEnable = false,
+                %endif
+                .channel         = %<input>
+            };
+            /* Initialize channel configuration of ADC%<instance>. */
+            ADC_DRV_ConfigChan(%<instance>, %<adc_r>, &adc%<instance>_chan_cfg);
+        %endif
+
+        %%if interrupt disabled, wait for result
+        %if (aien == "off")
+            uint16_t result;
+            /* Get conversion result of ADC%<instance> */
+            ADC_DRV_WaitConvDone(%<instance>);
+            ADC_DRV_GetChanResult(%<instance>, %<adc_r>, &result);
+            %<LibBlockOutputSignal(0,"","",0)> = result;
+        %endif
+        }
+    %endwith
+
+    %endif
+%endfunction

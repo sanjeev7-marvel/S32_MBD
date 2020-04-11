@@ -1,0 +1,166 @@
+%implements pdb_s32k_config "C"
+
+%% Copyright (c) 2016 - 2018 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %<LibAddToCommonIncludes("pdb_driver.h")>
+    %<LibAddToCommonIncludes("clock_manager.h")>  
+    %<LibAddToCommonIncludes("trgmux_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_pdb_config_make_params", blockPath)
+
+    %with sdk_params
+        %assign file_name = "pdb%<pdbModule>_params"
+        %<LibAddToCommonIncludes("%<file_name>.h")>
+
+        %% Generate the  pdb%<pdbModule>_params.h file
+        %openfile c_param_file = "%<file_name>.c"
+        #include "%<file_name>.h"
+
+        %if FEVAL("strcmp", "%<trigger>", "PDB_TRIGGER_IN0")
+        %% get settings for every trgmux, but call TRGMUX_DRV_Init only once (for all configs)
+        trgmux_inout_mapping_config_t pdb%<pdbModule>MappingConfig = {
+          .triggerSource = %<muxSel>,
+          .targetModule = TRGMUX_TARGET_MODULE_PDB%<pdbModule>_TRG_IN,
+          .lockTargetModuleReg = false
+        };
+        %endif
+
+        pdb_timer_config_t pdb%<pdbModule>TimerConfig = {
+            .loadValueMode = PDB_LOAD_VAL_IMMEDIATELY,
+            .seqErrIntEnable = false,
+            .clkPreDiv = %<prescaler>,
+            .clkPreMultFactor = %<multFactor>,
+            .triggerInput = %<trigger>,
+            .continuousModeEnable = %<isContinuous>,
+            .dmaEnable = false,
+            .intEnable = false
+        };
+
+        %foreach i = preTriggerCount
+        pdb_adc_pretrigger_config_t pdb%<pdbModule>Ch%<preTriggerVect[i].channel>PreTrigConfig%<preTriggerVect[i].index> = {
+            .adcPreTriggerIdx = %<preTriggerVect[i].index>,
+            .preTriggerEnable = %<preTriggerVect[i].enTrig>,
+            .preTriggerOutputEnable = %<preTriggerVect[i].enOut>,
+            .preTriggerBackToBackEnable = %<preTriggerVect[i].enBack2Back>,
+            };
+        %endforeach
+
+        %closefile c_param_file
+
+        %% Generate the  ftm%<ftmModule>_pwm_params.h file
+        %openfile h_param_file = "%<file_name>.h"
+        #ifndef PDB%<pdbModule>_PARAMS_H
+        #define PDB%<pdbModule>_PARAMS_H
+
+        #include "pdb_driver.h"
+        #include "trgmux_driver.h"
+
+        extern trgmux_inout_mapping_config_t trgmuxAllMappingConfig[];
+
+        extern trgmux_inout_mapping_config_t pdb%<pdbModule>MappingConfig;
+        extern pdb_timer_config_t pdb%<pdbModule>TimerConfig;
+
+        %foreach i = preTriggerCount
+            extern pdb_adc_pretrigger_config_t pdb%<pdbModule>Ch%<preTriggerVect[i].channel>PreTrigConfig%<preTriggerVect[i].index>;
+        %endforeach
+
+        #endif
+        %closefile h_param_file
+
+        %%declare all trgmux configs, only one time
+        %if !EXISTS("TRGMUX_ALL_CONFIG")
+            %assign ::TRGMUX_ALL_CONFIG = 1
+            %openfile trgmux_buffer
+            %assign pdbModules = FEVAL("mbd_s32k_get_pdbs")
+            %assign numOfPdbs = FEVAL("length", pdbModules)
+            %assign numOfPdbs = CAST("Number", numOfPdbs)
+            %if FEVAL("strcmp", "%<trigger>", "PDB_TRIGGER_IN0")
+                %% Mapping config is only declared here and referenced to
+                %% trgmuxAllMappingConfig; it will be populated in Start functinon (@model_initialize)
+                trgmux_inout_mapping_config_t trgmuxAllMappingConfig[%<numOfPdbs>];
+                const trgmux_user_config_t pdbTrgmuxUserConfig = {
+                  .numInOutMappingConfigs = %<numOfPdbs>,
+                  .inOutMappingConfig = trgmuxAllMappingConfig
+                };
+            %endif
+            %closefile trgmux_buffer
+            %<LibSetSourceFileSection(LibGetModelDotCFile(), "Declarations", trgmux_buffer)>
+        %endif
+
+        %if FEVAL("strcmp", "%<trigger>", "PDB_TRIGGER_IN0")
+            %% populate pdbTrgmuxUserConfig with configs from Declarations
+            %assign pdbModules = FEVAL("mbd_s32k_get_pdbs")
+            %assign numOfPdbs = FEVAL("length", pdbModules)
+            %assign numOfPdbs = CAST("Number", numOfPdbs)
+            %foreach i = numOfPdbs
+                trgmuxAllMappingConfig[%<i>] = pdb%<pdbModules[i]>MappingConfig;
+            %endforeach
+            /* Initializes TRGMUX instance for operation. */
+            TRGMUX_DRV_Init(0, &pdbTrgmuxUserConfig);
+        %endif
+
+        %if (hasPin == 1)
+          /* Enable clock for PORT%<pin.user_config.port> */
+          PCC_SetClockMode(PCC, %<pin.user_config.clock>, true);
+          /* Pin is configured for FTM function */
+          PINS_SetMuxModeSel(%<pin.user_config.port>, %<pin.user_config.pin>, %<pin.user_config.alt>);
+        %endif
+
+        /* Set PDB%<pdbModule> clock source */
+        PCC_SetPeripheralClockControl(PCC, PDB%<pdbModule>_CLK, true, %<clockSource>, 0, 0);
+        /* Enable clock for PDB%<pdbModule> */
+        PCC_SetClockMode(PCC, PDB%<pdbModule>_CLK, true);
+
+        /* Initialize PDB%<pdbModule> driver. */
+        PDB_DRV_Init(%<pdbModule>, &pdb%<pdbModule>TimerConfig);
+
+        /* Set the value to PDB modulus register */
+        PDB_DRV_SetTimerModulusValue(%<pdbModule>, %<regMod>);
+
+        %if (enableInInit == 1)
+            /* Enable PDB Module%<pdbModule> */
+            PDB_DRV_Enable(%<pdbModule>);
+        %endif
+
+        %foreach i = preTriggerCount
+            /* Configure the ADC pre_trigger %<preTriggerVect[i].index> in the PDB%<pdbModule> module */
+            PDB_DRV_ConfigAdcPreTrigger(%<pdbModule>, %<preTriggerVect[i].channel>, &pdb%<pdbModule>Ch%<preTriggerVect[i].channel>PreTrigConfig%<preTriggerVect[i].index>);
+            /* Set the ADC pre_trigger %<preTriggerVect[i].index> delay value in the PDB%<pdbModule> module */
+            PDB_DRV_SetAdcPreTriggerDelayValue(%<pdbModule>, %<preTriggerVect[i].channel>, %<preTriggerVect[i].index>, %<preTriggerVect[i].channelDelay>);
+        %endforeach
+
+        %if (regPoEn & 1)
+            /* Initialize PDB Pulse-Out */
+            PDB_DRV_SetCmpPulseOutEnable(%<pdbModule>, 1, true);
+            PDB_DRV_SetCmpPulseOutDelayForHigh(%<pdbModule>, 0, %<pulseHigh>);
+            PDB_DRV_SetCmpPulseOutDelayForLow(%<pdbModule>, 0, %<pulseLow>);
+        %endif
+
+        /* Command the PDB instance to load the fresh values */
+        PDB_DRV_LoadValuesCmd(%<pdbModule>);
+    %endwith
+
+    %endif
+%endfunction

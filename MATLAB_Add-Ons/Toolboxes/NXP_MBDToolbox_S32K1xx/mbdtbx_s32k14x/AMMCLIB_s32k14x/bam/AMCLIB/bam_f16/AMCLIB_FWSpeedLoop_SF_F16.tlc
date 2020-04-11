@@ -1,0 +1,172 @@
+%% Copyright (c) 2017 NXP
+
+%implements AMCLIB_FWSpeedLoop_SF_F16 "C"
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+     %<LibAddToCommonIncludes("<stdbool.h>")>
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+%assign ::cntInit = %<::cntInit> + 1
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("STDBOOL_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::STDBOOL_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include <stdbool.h>
+    %endif
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+bool FWSpeedLoop_%<::cntInit>_initialized = false;
+AMCLIB_FW_SPEED_LOOP_T_F16 FWSpeedLoop_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+%openfile tmpParamExternBuf
+    extern bool FWSpeedLoop_%<::cntInit>_initialized;
+    extern  AMCLIB_FW_SPEED_LOOP_T_F16 FWSpeedLoop_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+%assign ::cnt = %<::cnt> + 1
+
+%assign u16NSamplesW = CAST("Number", Parameter[0].Value[0])
+%assign u16NSamplesFW = CAST("Number", Parameter[1].Value[0])
+%assign f16PropGainQ = CAST("Number", Parameter[2].Value[0])
+%assign s16PropGainShiftQ = CAST("Number", Parameter[3].Value[0])
+%assign f16IntegGainQ = CAST("Number", Parameter[4].Value[0])
+%assign s16IntegGainShiftQ = CAST("Number", Parameter[5].Value[0])
+%assign f16PropGainFW = CAST("Number", Parameter[6].Value[0])
+%assign s16PropGainShiftFW = CAST("Number", Parameter[7].Value[0])
+%assign f16IntegGainFW = CAST("Number", Parameter[8].Value[0])
+%assign s16IntegGainShiftFW = CAST("Number", Parameter[9].Value[0])
+%assign f32RampUp = CAST("Number", Parameter[10].Value[0])
+%assign f32RampDown = CAST("Number", Parameter[11].Value[0])
+
+%assign f16VelocityReq = LibBlockInputSignal(0, "", "", 0)
+%assign f16VelocityFbck = LibBlockInputSignal(1, "", "", 0)
+%assign f16IQReqK_1 = LibBlockInputSignal(2, "", "", 0)
+%assign f16IQFbck = LibBlockInputSignal(3, "", "", 0)
+%assign f16UQReq = LibBlockInputSignal(4, "", "", 0)
+%assign f16UQLim = LibBlockInputSignal(5, "", "", 0)
+%assign f32AccW = LibBlockInputSignal(6, "", "", 0)
+%assign f32AccFW = LibBlockInputSignal(7, "", "", 0)
+%assign f16UpperLimitQ = LibBlockInputSignal(8, "", "", 0)
+%assign f16LowerLimitQ = LibBlockInputSignal(9, "", "", 0)
+%assign f16InK_1Q = LibBlockInputSignal(10, "", "", 0)
+%assign f32IntegPartK_1Q = LibBlockInputSignal(11, "", "", 0)
+%assign f16UpperLimitFW = LibBlockInputSignal(12, "", "", 0)
+%assign f16LowerLimitFW = LibBlockInputSignal(13, "", "", 0)
+%assign f16InK_1FW = LibBlockInputSignal(14, "", "", 0)
+%assign f32IntegPartK_1FW = LibBlockInputSignal(15, "", "", 0)
+%assign f32RampState = LibBlockInputSignal(16, "", "", 0)
+
+%assign pOutRampState = LibBlockOutputSignal(0, "", "", 0)
+%assign pOutIntegPartK_1Q = LibBlockOutputSignal(1, "", "", 0)
+%assign pOutInK_1Q = LibBlockOutputSignal(2, "", "", 0)
+%assign pOutLimitFlagQ = LibBlockOutputSignal(3, "", "", 0)
+%assign pOutIntegPartK_1FW = LibBlockOutputSignal(4, "", "", 0)
+%assign pOutInK_1FW = LibBlockOutputSignal(5, "", "", 0)
+%assign pOutLimitFlagFW = LibBlockOutputSignal(6, "", "", 0)
+%assign pOutAccW = LibBlockOutputSignal(7, "", "", 0)
+%assign pOutAccFW = LibBlockOutputSignal(8, "", "", 0)
+%assign pOutIDReq = LibBlockOutputSignal(9, "", "", 0)
+%assign pOutIQReq = LibBlockOutputSignal(10, "", "", 0)
+
+{
+    SWLIBS_2Syst_F16 IDQReq;
+    tFrac16 f16IQFbckLocal;
+    tFrac16 f16UQReqLocal;
+    tFrac16 f16UQLimLocal;
+
+    f16IQFbckLocal = %<f16IQFbck>;
+    f16UQReqLocal = %<f16UQReq>;
+    f16UQLimLocal = %<f16UQLim>;
+
+    if (!FWSpeedLoop_%<::cnt>_initialized) {
+
+    FWSpeedLoop_%<::cnt>.pFilterW.u16NSamples = %<u16NSamplesW>;
+    FWSpeedLoop_%<::cnt>.pFilterFW.u16NSamples = %<u16NSamplesFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f16PropGain = %<f16PropGainQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f16IntegGain = %<f16IntegGainQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.s16PropGainShift = %<s16PropGainShiftQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.s16IntegGainShift = %<s16IntegGainShiftQ>;
+
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f16PropGain = %<f16PropGainFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f16IntegGain = %<f16IntegGainFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.s16PropGainShift = %<s16PropGainShiftFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.s16IntegGainShift = %<s16IntegGainShiftFW>;
+
+    FWSpeedLoop_%<::cnt>.pRamp.f32RampUp = %<f32RampUp>;
+    FWSpeedLoop_%<::cnt>.pRamp.f32RampDown = %<f32RampDown>;
+
+    FWSpeedLoop_%<::cnt>.pIQFbck = &f16IQFbckLocal;
+    FWSpeedLoop_%<::cnt>.pUQReq = &f16UQReqLocal;
+    FWSpeedLoop_%<::cnt>.pUQLim = &f16UQLimLocal;
+
+    AMCLIB_FWSpeedLoopInit_F16 (&FWSpeedLoop_%<::cnt>);
+    FWSpeedLoop_%<::cnt>_initialized = true;
+
+}
+    FWSpeedLoop_%<::cnt>.pFilterW.f32Acc = %<f32AccW>;
+    FWSpeedLoop_%<::cnt>.pFilterFW.f32Acc = %<f32AccFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f32IntegPartK_1 = %<f32IntegPartK_1Q>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f32IntegPartK_1 = %<f32IntegPartK_1FW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f16InK_1 = %<f16InK_1Q>;
+    FWSpeedLoop_%<::cnt>.pRamp.f32State = %<f32RampState>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f16InK_1 = %<f16InK_1FW>;
+
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f16LowerLimit = %<f16LowerLimitQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWQ.f16UpperLimit = %<f16UpperLimitQ>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f16LowerLimit = %<f16LowerLimitFW>;
+    FWSpeedLoop_%<::cnt>.pPIpAWFW.f16UpperLimit = %<f16UpperLimitFW>;
+
+    IDQReq.f16Arg2 = %<f16IQReqK_1>;
+
+    AMCLIB_FWSpeedLoop_F16(%<f16VelocityReq>, %<f16VelocityFbck>, &IDQReq, &FWSpeedLoop_%<::cnt>);
+
+    %<pOutRampState> = FWSpeedLoop_%<::cnt>.pRamp.f32State;
+    %<pOutIntegPartK_1Q> = FWSpeedLoop_%<::cnt>.pPIpAWQ.f32IntegPartK_1;
+    %<pOutInK_1Q> = FWSpeedLoop_%<::cnt>.pPIpAWQ.f16InK_1;
+    %<pOutLimitFlagQ> = FWSpeedLoop_%<::cnt>.pPIpAWQ.u16LimitFlag;
+    %<pOutIntegPartK_1FW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.f32IntegPartK_1;
+    %<pOutInK_1FW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.f16InK_1;
+    %<pOutLimitFlagFW> = FWSpeedLoop_%<::cnt>.pPIpAWFW.u16LimitFlag;
+    %<pOutAccW> = FWSpeedLoop_%<::cnt>.pFilterW.f32Acc;
+    %<pOutAccFW> = FWSpeedLoop_%<::cnt>.pFilterFW.f32Acc;
+    %<pOutIDReq> = IDQReq.f16Arg1;
+    %<pOutIQReq> = IDQReq.f16Arg2;
+}
+%endfunction

@@ -1,0 +1,67 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>FlexIO I2C Master Transmit Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>FLEXIO I2C MASTER Transmit Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to perform a blocking master transmit operation.</p>
+
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="flexio_transmit_files/flexio_i2c_master_tx.jpg" width="300px" height="auto">
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>Data - vector that needs to be sent to the slave (UINT8 data type).</li>
+                <li>SendStop - should be true or false, depending on wheather you want to send stop at the end of the
+                transfer or not (eg.: use a constant with the value of "true" if you want to send some values and stop) (BOOLEAN data type)</li>
+                <li>Address - set slave address here (UINT8 data type).</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+             <p>The block dialog consists of the following tabs: </p>
+            <ul>
+                <li><a href="#1">General</a></li>
+            </ul>
+
+            <!--Table of contents-->
+           
+            <!--Window tab-->
+            <h4><a name="1"></a>General</h4>
+           
+            <img vspace="10" src="flexio_transmit_files/flexio_i2c_master_tx_opt.jpg" width="450px" height="auto">
+            </br>
+
+            <h3>Instance</h3>
+            <p>Select an instance of flexio to use (must be linked with the Config block).</p>
+            <p><b>Note:</b> The Config block linked to this block must have <b>Polling</b> mode selected.</p>
+            
+            <h3>Timeout</h3>
+            <p>Insert timeout value (in ms) for the transfer.</p>
+            
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li><a href="flexio_i2c_master_config.html">FlexIO Configuration Block</a></li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

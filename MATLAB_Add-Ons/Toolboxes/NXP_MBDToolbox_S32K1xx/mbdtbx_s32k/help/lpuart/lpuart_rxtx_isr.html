@@ -1,0 +1,64 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LPUART Receive/Transmit Interrupt Enable/Disable Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>LPUART Receive/Transmit Interrupt Enable/Disable Block</h1>
+	<!--Page-description-->
+	<p>The main functionality of the block is to enable/disable LPUART Receive/Transmit interrupts.</p>
+    <p>This block must be used with a transmit or a receive block.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="lpuart_rxtx_isr_files/lpuart_rxtx_isr_block.jpg" width="300px" height="auto" >
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>Function-Call: you can trigger a subsistem using this function call.</li>
+		<li>Status Register (LPUARTx_STAT) value (uint32)</li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<img vspace="10" src="lpuart_rxtx_isr_files/lpuart_rxtx_isr_general.jpg" width="450px" height="auto">
+
+	<h3>LPUART Module</h3>
+	<p>Select which LPUART module to use.</p>
+
+	<h3>ISR Priority</h3>
+	<p>Interrupt priority level.</p>
+
+	<h3>Transmit buffer empty</h3>
+	<p>This event is triggered when the transmit data register (LPUART_DATA) is empty.</p>
+
+	<h3>End of transfer</h3>
+	<p>This event is triggered at the end of a transfer.</p>
+
+	<h3>Receiver buffer full</h3>
+	<p>This event is triggered when the receiver data register (LPUART_DATA) is full.</p>
+
+	<h3>Error event</h3>
+	<p>This event is triggered when an error occures.</p>
+
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+	<li>Use <a href="lpuart_config.html">LPUART_Config Block</a> to configure LPUART</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+	<li>None</li>
+	</ul>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,161 @@
+%% Copyright (c) 2016 NXP
+
+%implements AMCLIB_BemfObsrvDQ_SF_F32 "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+    %if !EXISTS("AMCLIB_INCLUDED")
+        %assign ::AMCLIB_INCLUDED = 1
+        %<LibCacheIncludes("#include \"amclib.h\"" + "\n")>
+    %endif
+
+    %assign ::cnt = 0
+    %assign ::cntInit = 0
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+
+    %assign ::cntInit = %<::cntInit> + 1
+
+    %assign f32IGain = CAST("Number", Parameter[0].Value[0])
+    %assign f32UGain = CAST("Number", Parameter[1].Value[0])
+    %assign f32WIGain = CAST("Number", Parameter[2].Value[0])
+    %assign f32EGain = CAST("Number", Parameter[3].Value[0])
+    %assign s16Shift = CAST("Number", Parameter[4].Value[0])
+    %assign f32CC1sc_D = CAST("Number", Parameter[5].Value[0])
+    %assign f32CC1sc_Q = CAST("Number", Parameter[6].Value[0])
+    %assign f32CC2sc_D = CAST("Number", Parameter[7].Value[0])
+    %assign f32CC2sc_Q = CAST("Number", Parameter[8].Value[0])
+    %assign f32UpperLimit_D = CAST("Number", Parameter[9].Value[0])
+    %assign f32UpperLimit_Q = CAST("Number", Parameter[10].Value[0])
+    %assign f32LowerLimit_D = CAST("Number", Parameter[11].Value[0])
+    %assign f32LowerLimit_Q = CAST("Number", Parameter[12].Value[0])
+    %assign u16NShift = CAST("Number", Parameter[13].Value[0])
+
+%assign fFIRparams = LibCreateSourceFile("Source", "Custom", "AMCLIBparams")
+%openfile tmpParamBuf
+    %if !EXISTS("AMCLIB_INCLUDED_TO_AMCLIBPARAMS")
+        %assign ::AMCLIB_INCLUDED_TO_AMCLIBPARAMS = 1
+        #include "amclib.h"
+    %endif
+
+    AMCLIB_BEMF_OBSRV_DQ_T_F32 BemfObsrv_%<::cntInit>;
+
+%closefile tmpParamBuf
+%<LibSetSourceFileSection(fFIRparams , "Definitions", tmpParamBuf)>
+
+    AMCLIB_BemfObsrvDQInit_F32(&BemfObsrv_%<::cntInit>);
+
+    BemfObsrv_%<::cntInit>.pParamD.f32CC1sc = %<f32CC1sc_D>;
+    BemfObsrv_%<::cntInit>.pParamD.f32CC2sc = %<f32CC2sc_D>;
+    BemfObsrv_%<::cntInit>.pParamD.f32UpperLimit = %<f32UpperLimit_D>;
+    BemfObsrv_%<::cntInit>.pParamD.f32LowerLimit = %<f32LowerLimit_D>;
+    BemfObsrv_%<::cntInit>.pParamD.u16NShift = %<u16NShift>;
+    BemfObsrv_%<::cntInit>.pParamQ.f32CC1sc = %<f32CC1sc_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.f32CC2sc = %<f32CC2sc_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.f32UpperLimit = %<f32UpperLimit_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.f32LowerLimit = %<f32LowerLimit_Q>;
+    BemfObsrv_%<::cntInit>.pParamQ.u16NShift = %<u16NShift>;
+    BemfObsrv_%<::cntInit>.f32IGain = %<f32IGain>;
+    BemfObsrv_%<::cntInit>.f32UGain = %<f32UGain>;
+    BemfObsrv_%<::cntInit>.f32WIGain = %<f32WIGain>;
+    BemfObsrv_%<::cntInit>.f32EGain = %<f32EGain>;
+
+%openfile tmpParamExternBuf
+    extern AMCLIB_BEMF_OBSRV_DQ_T_F32 BemfObsrv_%<::cntInit>;
+%closefile tmpParamExternBuf
+%<LibCacheExtern(tmpParamExternBuf)>
+
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+    %assign ::cnt = %<::cnt> + 1
+
+    %assign f32IAB_A = LibBlockInputSignal(0, "", "", 0)
+    %assign f32IAB_B = LibBlockInputSignal(1, "", "", 0)
+    %assign f32UAB_A = LibBlockInputSignal(2, "", "", 0)
+    %assign f32UAB_B = LibBlockInputSignal(3, "", "", 0)
+    %assign f32Velocity = LibBlockInputSignal(4, "", "", 0)
+    %assign f32Phase = LibBlockInputSignal(5, "", "", 0)
+    %assign f32Acc_D = LibBlockInputSignal(6, "", "", 0)
+    %assign f32InerrK1_D = LibBlockInputSignal(7, "", "", 0)
+    %assign f32Acc_Q = LibBlockInputSignal(8, "", "", 0)
+    %assign f32InerrK1_Q = LibBlockInputSignal(9, "", "", 0)
+    %assign f32IObsrvIn_1L_D = LibBlockInputSignal(10, "", "", 0)
+    %assign f16IObsrvIn_1H_D = LibBlockInputSignal(11, "", "", 0)
+    %assign f32IObsrvIn_1L_Q = LibBlockInputSignal(12, "", "", 0)
+    %assign f16IObsrvIn_1H_Q = LibBlockInputSignal(13, "", "", 0)
+    %assign f32IObsrv_D = LibBlockInputSignal(14, "", "", 0)
+    %assign f32IObsrv_Q = LibBlockInputSignal(15, "", "", 0)
+    %assign f32pOutPhaseErr = LibBlockOutputSignal(0, "", "", 0)
+    %assign f32pOutEObsrv_D = LibBlockOutputSignal(1, "", "", 0)
+    %assign f32pOutEObsrv_Q = LibBlockOutputSignal(2, "", "", 0)
+    %assign f32pOutAcc_D = LibBlockOutputSignal(3, "", "", 0)
+    %assign f32pOutInErrK1_D = LibBlockOutputSignal(4, "", "", 0)
+    %assign f32pOutAcc_Q = LibBlockOutputSignal(5, "", "", 0)
+    %assign f32pOutInErrK1_Q = LibBlockOutputSignal(6, "", "", 0)
+    %assign f32pOutIObsrvIn_1L_D = LibBlockOutputSignal(7, "", "", 0)
+    %assign f16pOutIObsrvIn_1H_D = LibBlockOutputSignal(8, "", "", 0)
+    %assign f32pOutIObsrvIn_1L_Q = LibBlockOutputSignal(9, "", "", 0)
+    %assign f16pOutIObsrvIn_1H_Q = LibBlockOutputSignal(10, "", "", 0)
+    %assign f32pOutIObsrv_D = LibBlockOutputSignal(11, "", "", 0)
+    %assign f32pOutIObsrv_Q = LibBlockOutputSignal(12, "", "", 0)
+
+    {
+        SWLIBS_2Syst_F32 mcIab;
+        SWLIBS_2Syst_F32 mcUab;
+        tFrac32 f32Velocity = %<f32Velocity>;
+        tFrac32 f32Phase = %<f32Phase>;
+
+        mcIab.f32Arg1 = %<f32IAB_A>;
+        mcIab.f32Arg2 = %<f32IAB_B>;
+        mcUab.f32Arg1 = %<f32UAB_A>;
+        mcUab.f32Arg2 = %<f32UAB_B>;
+
+        BemfObsrv_%<::cnt>.pParamD.f32Acc = %<f32Acc_D>;
+        BemfObsrv_%<::cnt>.pParamD.f32InErrK1 = %<f32InerrK1_D>;
+        BemfObsrv_%<::cnt>.pParamQ.f32Acc = %<f32Acc_Q>;
+        BemfObsrv_%<::cnt>.pParamQ.f32InErrK1 = %<f32InerrK1_Q>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1L.f32Arg1 = %<f32IObsrvIn_1L_D>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1L.f32Arg2 = %<f32IObsrvIn_1L_Q>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1H.f16Arg1 = %<f16IObsrvIn_1H_D>;
+        BemfObsrv_%<::cnt>.pIObsrvIn_1H.f16Arg2 = %<f16IObsrvIn_1H_Q>;
+        BemfObsrv_%<::cnt>.pIObsrv.f32Arg1 = %<f32IObsrv_D>;
+        BemfObsrv_%<::cnt>.pIObsrv.f32Arg2 = %<f32IObsrv_Q>;
+
+        %<f32pOutPhaseErr> = AMCLIB_BemfObsrvDQ_F32(&mcIab, &mcUab, f32Velocity, f32Phase, &BemfObsrv_%<::cnt>);
+
+        %<f32pOutEObsrv_D> = BemfObsrv_%<::cnt>.pEObsrv.f32Arg1;
+        %<f32pOutEObsrv_Q> = BemfObsrv_%<::cnt>.pEObsrv.f32Arg2;
+        %<f32pOutAcc_D> = BemfObsrv_%<::cnt>.pParamD.f32Acc;
+        %<f32pOutInErrK1_D> = BemfObsrv_%<::cnt>.pParamD.f32InErrK1;
+        %<f32pOutAcc_Q> = BemfObsrv_%<::cnt>.pParamQ.f32Acc;
+        %<f32pOutInErrK1_Q> = BemfObsrv_%<::cnt>.pParamQ.f32InErrK1;
+        %<f32pOutIObsrvIn_1L_D> = BemfObsrv_%<::cnt>.pIObsrvIn_1L.f32Arg1;
+        %<f16pOutIObsrvIn_1H_D> = BemfObsrv_%<::cnt>.pIObsrvIn_1H.f16Arg1;
+        %<f32pOutIObsrvIn_1L_Q> = BemfObsrv_%<::cnt>.pIObsrvIn_1L.f32Arg2;
+        %<f16pOutIObsrvIn_1H_Q> = BemfObsrv_%<::cnt>.pIObsrvIn_1H.f16Arg2;
+        %<f32pOutIObsrv_D> = BemfObsrv_%<::cnt>.pIObsrv.f32Arg1;
+        %<f32pOutIObsrv_Q> = BemfObsrv_%<::cnt>.pIObsrv.f32Arg2;
+    }
+
+%endfunction

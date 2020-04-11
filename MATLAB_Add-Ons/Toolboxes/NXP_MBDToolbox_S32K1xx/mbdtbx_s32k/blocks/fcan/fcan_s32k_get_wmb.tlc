@@ -1,0 +1,52 @@
+%implements fcan_s32k_get_wmb "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("flexcan_hw_access.h")>
+    %<LibAddToCommonIncludes("flexcan_driver.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes at each step of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Outputs(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign id = LibBlockOutputSignal(0, "", "", 0)
+    %assign data = LibBlockOutputSignalAddr(1, "", "", 0)
+    %assign length = LibBlockOutputSignal(2, "", "", 0)
+
+    %assign sdk_params = FEVAL("mbd_s32k_fcan_get_wmb_sdk_params", blockPath)
+    %with sdk_params
+    {
+        int i;
+        flexcan_msgbuff_t wmb;
+    
+        FLEXCAN_DRV_GetWMB(%<instance>, %<wmbIndex>, &wmb);
+
+        %<id> = wmb.msgId;
+        %<length> = wmb.dataLen;
+
+        for(i = 0; i < wmb.dataLen; i++) {
+            (%<data>)[i] = wmb.data[i];
+        }
+    }
+    %endwith
+
+    %endif
+%endfunction

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>FCAN Transfer Status Block</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <div class="content">
+            <!--Page-title-->
+            <h1>FCAN Transfer Status Block</h1>
+            <!--Page-description-->
+            <p>This block allows the user to query if a FlexCAN transfer has finished.</p>
+            <!--Library block image-->
+            <h2>Block Image</h2>
+            <img vspace="0" src="fcan_transfer_status_files/fcan_transfer_status_block.jpg" width="200px" height="auto" />
+            <!--Inputs-->
+            <h2>Inputs:</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+            <!--Outputs-->
+            <h2>Outputs:</h2>
+            <ul>
+                <li>Busy (bool)
+                    <ol>
+                        <li>true - A FlexCAN transfer using the specified MB is in progress.</li>
+                        <li>false - There isn't  any FlexCAN transfer using the specified MB in progress.</li>
+                    </ol>
+                </li>
+            </ul>
+            <!--Block-Dialog-Box-->
+            <h2>Parameters and Dialog Box</h2>
+
+            <img vspace="10" src="fcan_transfer_status_files/fcan_transfer_status_mask.jpg" width="450px" height="auto" />
+
+            <h3>CAN Bus</h3>
+            <p>Selects the CAN Bus.</p>
+
+            <h3>Message Buffer</h3>
+            <p>Selects the Message Buffer for which the transfer status is queried.</p>
+            <!--Block-Dependency-->
+            <h2>Block Dependency</h2>
+            <ul>
+                <li><a href="fcan_config.html">FCAN Configuration Block</a></li>
+            </ul>
+            <!--Block-Miscellaneous-Details-->
+            <h2>Block Miscellaneous Details</h2>
+            <ul>
+                <li>None</li>
+            </ul>
+        </div>
+    </body>
+</html>

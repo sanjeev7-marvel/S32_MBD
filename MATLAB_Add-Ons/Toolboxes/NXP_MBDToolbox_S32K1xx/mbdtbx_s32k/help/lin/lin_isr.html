@@ -1,0 +1,66 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LIN Callback Block</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+	<div class="content">
+	<!--Page-title-->
+	<h1>LIN Callback Block</h1>
+	<!--Page-description-->
+	<p>This block allows the user to trigger a subsystem when LIN events are raised.</p>
+	<!--Library block image-->
+	<h2>Block Image</h2>
+	<img vspace="0" src="lin_files/lin_callback.jpg" width="250px" height="auto">
+	<!--Inputs-->
+	<h2>Inputs:</h2>
+	<ul>
+		<li>None.</li>
+	</ul>
+	<!--Outputs-->
+	<h2>Outputs:</h2>
+	<ul>
+		<li>Trigger - calls a subsystem when a LIN event is raised. Inside this subsystem, a trigger port with function-call trigger type is needed.</li>
+        <li>Event - event id that can be passed to the subsystem triggered by this block. This value can be used to handle different LIN events. The event list is as follows:
+            <ul>
+                <li>LIN_NO_EVENT = 0x00U             -  No event yet </li>
+                <li>LIN_WAKEUP_SIGNAL = 0x01U        -  Received a wakeup signal </li>
+                <li>LIN_BAUDRATE_ADJUSTED = 0x02U    -  Indicate that baudrate was adjusted to Master's baudrate</li>
+                <li>LIN_RECV_BREAK_FIELD_OK = 0x03U  -  Indicate that correct Break Field was received</li>
+                <li>LIN_SYNC_OK = 0x04U              -  Sync byte is correct</li>
+                <li>LIN_SYNC_ERROR = 0x05U           -  Sync byte is incorrect</li>
+                <li>LIN_PID_OK = 0x06U               -  PID correct</li>
+                <li>LIN_PID_ERROR = 0x07U            -  PID incorrect</li>
+                <li>LIN_FRAME_ERROR = 0x08U          -  Framing Error</li>
+                <li>LIN_READBACK_ERROR = 0x09U       -  Readback data is incorrect</li>
+                <li>LIN_CHECKSUM_ERROR = 0x0AU       -  Checksum byte is incorrect</li>
+                <li>LIN_TX_COMPLETED = 0x0BU         -  Sending data completed</li>
+                <li>LIN_RX_COMPLETED = 0x0CU         -  Receiving data completed</li>
+                <li>LIN_RX_OVERRUN = 0x0DU           -  RX overrun flag</li>
+            </ul>
+        
+        </li>
+        <li>Frame ID - the ID of the frame (PID got from header) </li>
+	</ul>
+	<!--Block-Dialog-Box-->
+	<h2>Parameters and Dialog Box</h2>
+	<img vspace="10" src="lin_files/lin_callback_general.jpg"  width="450px" height="auto">
+
+	<h3>LIN</h3>
+	<p>Selects which LIN (LPUART) module to use.</p>
+	<!--Block-Dependency-->
+	<h2>Block Dependency</h2>
+	<ul>
+		<li>Use <a href="lin_config.html">LIN_Config Block</a> to configure LIN.</li>
+	</ul>
+	<!--Block-Miscellaneous-Details-->
+	<h2>Block Miscellaneous Details:</h2>
+	<ul>
+		<li>None</li>
+	</ul>
+	</div>
+	</body>
+</html>

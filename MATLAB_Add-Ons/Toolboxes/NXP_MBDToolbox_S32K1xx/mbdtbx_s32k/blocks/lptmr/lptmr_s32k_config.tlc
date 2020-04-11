@@ -1,0 +1,132 @@
+%implements lptmr_s32k_config "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("clock_manager.h")>
+    %<LibAddToCommonIncludes("lptmr_driver.h")>
+    %<LibAddToCommonIncludes("trgmux_driver.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %% For future if there will be many instances
+    %assign instance = 0
+
+    %% Declaring extern structures for used power modes in .h file
+    %<GenerateHeaderInstances(block, system, instance)>
+
+    %assign sdk_params = FEVAL("mbd_s32k_lptmr_config_sdk_params", blockPath)
+    %% Declaring extern structures for used power modes in .c file
+    %<GenerateCodeInstances(block, system, instance, sdk_params)>
+
+    %with sdk_params
+        %if user_config.work_mode == "LPTMR_WORKMODE_PULSECOUNTER"
+            %if source_config.dedicated_pin == "true"
+                %with source_config.pin.user_config
+                    %if !EXISTS("GPI_%<port>%<pin>_INITIALIZATION")
+                        %assign ::GPI_%<port>%<pin>_INITIALIZATION = 1
+                    {
+
+                        /* Enable clock for %<port> */
+                        PCC_SetClockMode(PCC, %<clock>, true);
+
+                        /* Configure the output port init structure. */
+                        const pin_settings_config_t gpio%<port>Pin%<pin> =
+                        {
+                               .base = %<port>,
+                               .pinPortIdx = %<pin>U,
+                               .pullConfig    = PORT_INTERNAL_PULL_NOT_ENABLED,
+                               .passiveFilter = false,
+                               .driveSelect   = PORT_LOW_DRIVE_STRENGTH,
+                               .mux           = %<mux>,
+                               .pinLock       = false,
+                               .intConfig     = PORT_DMA_INT_DISABLED,
+                               .clearIntFlag  = false,
+                               .gpioBase      = NULL,
+                        };
+
+                        /* Initialize GPI%<port>%<pin>. */
+                        PINS_DRV_Init(1, &gpio%<port>Pin%<pin>);
+                    }
+                    %endif
+                %endwith
+            %endif
+
+            %if user_config.pin_select == "LPTMR_PINSELECT_TRGMUX"
+                /* TRGMUX initialization */
+                trgmux_user_config_t trgmuxLptmrConfig;
+
+                trgmux_inout_mapping_config_t trgmuxLptmrMappingConfig = {
+                    %<source_config.channel>,
+                    TRGMUX_TARGET_MODULE_LPTMR0_ALT0,
+                    false,
+                    };
+                trgmuxLptmrConfig.numInOutMappingConfigs = 1;
+                trgmuxLptmrConfig.inOutMappingConfig     = &trgmuxLptmrMappingConfig;
+                TRGMUX_DRV_Init(0, &trgmuxLptmrConfig);
+            %endif
+        %endif
+        %%Enabling clock and instances
+        PCC_SetPeripheralClockControl(PCC, LPTMR%<instance>_CLK, true, CLK_SRC_SIRC, 0, 0);
+        LPTMR_DRV_Init(INST_LPTMR%<instance>, &lptmr_GeneralConfig%<instance>, %<user_config.start_counter>);
+    %endwith
+
+    %endif
+%endfunction
+
+
+%function GenerateHeaderInstances(block, system, instance) void
+
+    %openfile tmpFcnBuf
+    /*Configuration isntance number %<instance>*/
+    #define INST_LPTMR%<instance> %<instance>U
+    /*Configuration declaration */
+    extern const lptmr_config_t lptmr_GeneralConfig%<instance>;
+	%closefile tmpFcnBuf
+	%assign headerFile = LibGetModelDotHFile()
+	%<LibSetSourceFileSection(headerFile, "Declarations", tmpFcnBuf)>
+%endfunction
+
+
+%function GenerateCodeInstances(block, system, instance, sdk_params) void
+
+	%with sdk_params
+        %openfile tmpFcnBuf
+        const lptmr_config_t lptmr_GeneralConfig%<instance> = {
+          .workMode = %<user_config.work_mode>,
+          .dmaRequest = false,
+          .interruptEnable = %<user_config.enable_isr>,
+          .freeRun = %<user_config.free_run>,
+          .compareValue = %<user_config.compare_value>U,
+          .counterUnits = %<user_config.compare_units>,
+          .clockSelect = %<user_config.counter_select>,
+          .prescaler = %<user_config.prescaler>,
+          .bypassPrescaler = %<user_config.bypass_prescaler>,
+          .pinSelect = %<user_config.pin_select>,
+          .pinPolarity = %<user_config.pin_polarity>,
+        };
+        %closefile tmpFcnBuf
+        %assign srcFile = LibGetModelDotCFile()
+        %<LibSetSourceFileSection(srcFile, "Declarations", tmpFcnBuf)>
+	%endwith
+%endfunction

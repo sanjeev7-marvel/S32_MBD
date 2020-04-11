@@ -1,0 +1,91 @@
+%implements ftm_s32k_tof_isr "C"
+
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("ftm_common.h")>
+    %<LibAddToCommonIncludes("ftm_hw_access.h")>
+    %<LibAddToCommonIncludes("interrupt_manager.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %assign module = CAST("Number", Parameter[0].Value[0]) - 1
+    %assign isrlevel = CAST("Number", Parameter[1].Value[0]) - 1
+
+    %if !EXISTS("ftm_isr_tof_init")
+      %assign ::ftm_isr_tof_init = 0
+    %endif
+
+    %if !(::ftm_isr_tof_init & (1 << module))
+        %assign ::ftm_isr_tof_init = ::ftm_isr_tof_init | (1 << module)
+        %<LibAddToCommonIncludes("ftm%<module>_tof_isr.h")>
+
+        /* FTM%<module>: ISR level */
+        INT_SYS_SetPriority(FTM%<module>_Ovf_Reload_IRQn, %<isrlevel>);
+        /* FTM%<module>: enable ISR */
+        INT_SYS_EnableIRQ(FTM%<module>_Ovf_Reload_IRQn);
+        /* FTM%<module>: install ISR Handler */
+        INT_SYS_InstallHandler(FTM%<module>_Ovf_Reload_IRQn, FTM%<module>_TOF_isr, (isr_t *)0);
+        /* FTM%<module>: enable TOF interrupt */
+        FTM_DRV_SetTimerOverflowInt(FTM%<module>, 1);    
+    %endif
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%  Interrupt handler body file
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %openfile isr_c = "ftm%<module>_tof_isr.c"
+        #include "ftm%<module>_tof_isr.h"
+        #include "ftm_common.h"
+
+        void FTM%<module>_TOF_isr(void)
+        {
+            /* FTM%<module>: check TOF ISR flag */
+            if (FTM_DRV_IsOverflowIntEnabled(FTM%<module>) && \
+                FTM_DRV_HasTimerOverflowed (FTM%<module>))
+            {
+              %foreach fcnCallIdx = NumSFcnSysOutputCalls
+                %% call the downstream system
+                %with SFcnSystemOutputCall[fcnCallIdx]
+                  %% skip unconnected function call outputs
+                  %if ISEQUAL(BlockToCall, "unconnected")
+                    %continue
+                  %endif
+                  %<LibBlockExecuteFcnCall(block, fcnCallIdx)>
+                %endwith
+              %endforeach
+              /* FTM%<module>: clear TOF ISR flag */
+              FTM_DRV_ClearTimerOverflow(FTM%<module>);
+            }
+        }
+    %closefile isr_c
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%  Interrupt handler declaration file
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %openfile isr_h = "ftm%<module>_tof_isr.h"
+        #include "%<CompiledModel.Name + ".h">"
+        #include "%<CompiledModel.Name + "_private.h">"
+
+        void FTM%<module>_TOF_isr(void);
+    %closefile isr_h
+
+    %endif
+%endfunction

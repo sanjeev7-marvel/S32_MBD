@@ -1,0 +1,398 @@
+%% Copyright (c) 2014 Freescale Semiconductor, Inc.
+%% Copyright (c) 2017 NXP.
+%% All rights reserved.
+%%
+%% Abstract:
+%%   Library file to create a main for ERT based code for a given model.
+%%
+
+%selectfile NULL_FILE
+
+%function SLibRAppIDMain(fName) void
+    %assign config_params = FEVAL("mbd_s32k_get_main_config_params")
+    %include "mbd_s32k_clock_settings.tlc"
+
+    %assign isPil = FEVAL("mbd_s32k_is_pil")
+    %assign isRtiostreamTest = FEVAL("mbd_s32k_is_rtiostreamtest")
+    %assign codeProfilingEnabled = FEVAL("mbd_s32k_code_profiling_enabled")
+
+    %if (isPil == 1) || (ExtMode == 1) || (isRtiostreamTest == 1)
+        %include "mbd_s32k_rtiostream_uart_init.tlc"
+
+        %assign cFile = SLibAddModelFile("SystemBody", "Simulink", "mbd_hw_init")
+    %else
+        %assign cFile = SLibAddModelFile("SystemBody", "Simulink", fName)
+    %endif
+
+    %assign period = FcnGetPeriodFromTID(0)
+
+    %assign customInit = FEVAL("mbd_s32k_block_exists", "custom_init_s32k14_trigger_block")
+    %assign fmasterConfigExists = FEVAL("mbd_s32k_block_exists", "fm_s32k.*_config")
+    %assign fmasterPollExists = FEVAL("mbd_s32k_block_exists", "fm_s32k.*_poll")
+
+    %assign sbcInit = FEVAL("mbd_s32k_block_exists", "sbc_uja1169_s32k_config")
+    %assign sbcUja113xInit = FEVAL("mbd_s32k_block_exists", "sbc_uja113x_s32k_config")
+
+    %assign mcu_steptick_timer = FEVAL("mbd_s32k_get_config_param", "mcu_steptick_timer")
+    %assign rbl_download_enable = FEVAL("mbd_s32k_get_config_param", "rbl_download_enable")
+
+    %openfile tmpFcnBuf
+    /* Model's headers */
+    #include "device_registers.h"
+    %% device_registers.h should be first as rtwtypes.h should be after Platform_Types.h
+    #include "%<FcnGetPublicModelHeaderFile()>"
+
+    %if (fmasterConfigExists == 1)
+    #include "freemaster.h"
+    %endif
+    %if codeProfilingEnabled == 1
+    #include "gt_pf.h"
+    %endif
+    %if (customInit == 1)
+    #include "init_call_trigger.h"
+    %endif
+    #include "interrupt_manager.h"
+    %if (isPil == 1) || (ExtMode == 1) || (isRtiostreamTest == 1)
+    #include "lpuart_driver.h"
+    #include "lpuart_hw_access.h"
+    #include "rtiostream_uart_init.h"
+    %endif
+    %if (mcu_steptick_timer == "LPIT Channel 0") || (codeProfilingEnabled == 1)
+    #include "clock_manager.h"
+    #include "lpit_driver.h"
+    #include "lpit_hw_access.h"
+    #include "pcc_hw_access.h"
+    %endif
+    #include "s32k_clock_init.h"
+    %closefile tmpFcnBuf
+    %<SLibSetModelFileAttribute(cFile, "Includes", tmpFcnBuf)>
+
+    %openfile tmpFcnBuf
+
+    %if (ExtMode == 1)
+    extern void SYSTEM_INIT_TASK(void);
+    %endif
+
+    %assign tppEnabled = FEVAL("mbd_s32k_block_exists", "tpp_s32k_config")
+    %if (tppEnabled == 1)
+    extern void TPP_IC_Init();
+    void TPP_InitializeOutputs(void)
+    {
+
+    }
+    %endif
+
+    %if (isPil == 0) && (ExtMode == 0) && (isRtiostreamTest == 0)
+    %<FcnGenerateTaskingCode()>\
+    %endif
+
+    %if (isPil == 1) || (isRtiostreamTest == 1) || (FEVAL("strcmp", rbl_download_enable, "on") == 1)
+        %assign out = FEVAL("mbd_s32k_bl_ini")
+        %<out>
+    %endif
+
+    %if (isPil == 0) && (isRtiostreamTest == 0) && (mcu_steptick_timer == "LPIT Channel 0")
+        %<FcnGenerateLpitInit()>
+    %endif
+
+    %if (isPil == 1) || (ExtMode == 1) || (isRtiostreamTest == 1)
+        void hw_init(void)
+    %else
+        void main(void)
+    %endif
+    {
+        %if "%<config_params.platform>" == "s32k14"
+        #ifdef __FPU_USED
+            /* FPU ENABLE */
+            /* Enable CP10 and CP11 coprocessors */
+            S32_SCB->CPACR |= (S32_SCB_CPACR_CP10_MASK | S32_SCB_CPACR_CP11_MASK);
+        #endif
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0)
+        /* Disable all interrupts.*/
+        INT_SYS_DisableIRQGlobal();
+        %endif
+
+        /* Clock initialization */
+        Clock_Setup();
+
+        //ftm_init();
+        %if (isPil == 0) && (isRtiostreamTest == 0)
+        /* Initialize the processor. */
+        SYSTEM_INIT_TASK();
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0) && (mcu_steptick_timer == "LPIT Channel 0")
+        /* Initialize system timer */
+        lpit0_init();
+        %endif
+
+        %if (customInit == 1)
+        /* Custom Initialization */
+        init_call_trigger();
+        %endif
+
+        %if (isPil == 1) || (isRtiostreamTest == 1)
+            rtiostream_uart_init(%<FEVAL("mbd_s32k_get_config_param", "pil_download_rate")>);
+
+            %<FcnGenerateProfilerInit()>
+        %elseif (ExtMode == 1)
+            rtiostream_uart_init(%<FEVAL("mbd_s32k_get_extmode_baudrate")>);
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0)
+        /* Enable all interrupts.*/
+        INT_SYS_EnableIRQGlobal(); /* interrupt_manager.c */
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0) && (sbcInit == 1)
+        sbc_init0();
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0) && (sbcUja113xInit == 1)
+        uja113x_init0();
+        %endif
+
+        %if (isPil == 0) && (isRtiostreamTest == 0) && (ExtMode == 0)
+        while(1) {
+            %if ((fmasterConfigExists == 1) && (fmasterPollExists == 0))
+            /* FreeMaster Polling */
+            FMSTR_Poll();
+            %endif
+        }
+        %endif
+    }
+    %closefile tmpFcnBuf
+    %<SLibSetModelFileAttribute(cFile, "Functions", tmpFcnBuf)>
+
+    %if (isRtiostreamTest == 1)
+        %<FcnGenerateRtiostreamTestMain(fName)>
+    %endif
+
+    %if (ExtMode == 1)
+        %<FcnGenerateExtModeMain()>
+    %endif
+
+    %<FcnGenerateAdditionalCode()>\
+%endfunction
+
+
+%function FcnGenerateTaskingCode() Output
+
+    %assign singleTasking = SLibSingleTasking()
+    %assign tppEnabled = FEVAL("mbd_s32k_block_exists", "tpp_s32k_config")
+    void SYSTEM_INIT_TASK(void)
+    {
+        /* Initialize model */
+        %<FcnMdlName()>_initialize(%<SLibModelFcnArgs("Initialize",TLC_TRUE,"")>);
+    }
+
+    void SYSTEM_TASK(void)
+    {
+        %if (tppEnabled == 1)
+        static bool tppInit = true;
+        if(tppInit){
+            TPP_IC_Init();
+            tppInit = false;
+        }
+        %endif
+        %if NumSynchronousSampleTimes == 1
+            %% ----------- Single rate (Single Tasking by default) -----------
+
+            %<FcnCallMdlStep("")>\
+        %elseif !singleTasking
+            %% ----------- Multirate/Multitasking -----------
+
+            %assign tid01Eq = FixedStepOpts.TID01EQ
+            boolean_T eventFlags[%<FcnNumST()>]; /* Model has %<FcnNumST()> rates */
+            %if (FcnNumST() - tid01Eq) > 2
+            int_T i;
+            %endif
+
+            %<FcnCallEventFlagsFunction("%<Name>_")>\
+
+            /* Set model inputs associated with base rate here */
+            %assign rootSystem.CurrentTID = 0
+
+            %<FcnCallMdlStep(0)>\
+
+            %if (FcnNumST() - tid01Eq) > 2
+            for (i = %<1+tid01Eq>; i < %<FcnNumST()>; i++) {
+                if (eventFlags[i]) {
+                    %<FcnCallMdlStep("i")>\
+                }
+            }
+            %else
+                %assign tid = FcnNumST()-1
+                if (eventFlags[%<tid>]) {
+                    %assign rootSystem.CurrentTID = tid
+                    /* Set model inputs associated with subrates here */
+
+                    %<FcnCallMdlStep(tid)>\
+                }
+            %endif
+        %else
+            %% ---------------------------------
+
+            %<FcnCallMdlStep(0)>\
+        %endif
+    }
+%endfunction
+
+
+%function FcnGenerateAdditionalCode() Output
+
+
+%endfunction    %% FcnGenerateAdditionalCode
+
+
+%function FcnGenerateLpitInit() Output
+    %assign config_params = FEVAL("mbd_s32k_get_main_config_params")
+    %if (NumContStates > 0)
+        %exit Model has continuous sample times which causes TIM base period to be 0
+        %assign period = 0
+    %else
+        %assign period = FcnGetPeriodFromTID(0)
+    %endif
+    %assign systemClock = FEVAL("mbd_s32k_get_system_clock")
+    %if "%<config_params.platform>" == "s32k14"
+        %assign spllClock = systemClock / 4
+    %else
+        %assign spllClock = systemClock / 2
+    %endif
+    %assign stepTickParams = FEVAL("mbd_s32k_calculate_steptick_params", %<period>, %<spllClock>)
+    %assign mcu_steptick_prio = FEVAL("mbd_s32k_get_config_param", "mcu_steptick_prio")
+
+    %if (stepTickParams.needCounterSoft == 1)
+           #define SOFT_TIMER_RELOAD_VALUE %<stepTickParams.counterReloadSoft>
+           volatile static uint32_T uiSoftTimerCntr = SOFT_TIMER_RELOAD_VALUE;
+    %endif
+
+
+    void %<config_params.lpit_function_name> (void)
+    {
+        %if (stepTickParams.needCounterSoft == 1)
+        if (--uiSoftTimerCntr == 0) {
+        %endif
+            SYSTEM_TASK();
+        %if (stepTickParams.needCounterSoft == 1)
+            uiSoftTimerCntr = SOFT_TIMER_RELOAD_VALUE;
+        }
+        %endif
+
+        LPIT_DRV_ClearInterruptFlagTimerChannels(0, (1 << 0));
+    }
+
+    void lpit0_init()
+    {
+        %if !EXISTS("PIT_GLOBAL_INIT")
+            %assign ::PIT_GLOBAL_INIT = 1
+            uint32_t busClock;
+
+            /* Un-gate pit clock*/
+            PCC_SetPeripheralClockControl(PCC, %<config_params.lpit_clock_name>, true, %<config_params.lpit_clock_source>, 0, 0);
+
+            /* Enable PIT module clock*/
+            LPIT_Enable(LPIT0, 0U);
+
+            /* Finally, update pit source clock frequency.*/
+            CLOCK_SYS_GetFreq(%<config_params.lpit_clock_name>, &busClock);
+
+            static const lpit_user_config_t lpitInit = {
+                .enableRunInDebug = false,
+                .enableRunInDoze = true
+            };
+
+            /* Initialize PIT, enable module clock, disable run in debug. */
+            LPIT_DRV_Init(0, &lpitInit);
+        %endif
+
+        static const lpit_user_channel_config_t lpit0InitStruct = {
+            .timerMode = LPIT_PERIODIC_COUNTER,
+            .periodUnits = LPIT_PERIOD_UNITS_MICROSECONDS,
+            .period = %<stepTickParams.counterReloadHard>,
+            .triggerSource = LPIT_TRIGGER_SOURCE_INTERNAL,
+            .triggerSelect = 1U,
+            .enableReloadOnTrigger = false,
+            .enableStopOnInterrupt = false,
+            .enableStartOnTrigger = false,
+            .chainChannel = false,
+            .isInterruptEnabled = true
+        };
+
+        /* Initialize PIT timer channel. */
+        LPIT_DRV_InitChannel(0, 0, &lpit0InitStruct);
+
+        /* Set priority for LPIT ISR */
+        INT_SYS_SetPriority(%<config_params.lpit_irq_num>, %<mcu_steptick_prio>);
+        INT_SYS_InstallHandler(%<config_params.lpit_irq_num>, %<config_params.lpit_irq_handler>, (isr_t *)0);
+
+        /* Start the timer. */
+        LPIT_DRV_StartTimerChannels(0, LPIT0->SETTEN | (1 << 0));
+    }
+%endfunction
+
+
+%function FcnGenerateProfilerInit() Output
+    %assign config_params = FEVAL("mbd_s32k_get_main_config_params")
+    %assign codeProfilingEnabled = FEVAL("mbd_s32k_code_profiling_enabled")
+
+    %if codeProfilingEnabled == 1
+        %if !EXISTS("PIT_GLOBAL_INIT")
+            %assign ::PIT_GLOBAL_INIT = 1
+            {
+                uint32_t busClock;
+
+                /* Un-gate pit clock*/
+                PCC_SetPeripheralClockControl(PCC, %<config_params.lpit_clock_name>, true, %<config_params.lpit_clock_source>, 0, 0);
+
+                /* Enable PIT module clock*/
+                LPIT_Enable(LPIT0, 0U);
+
+                /* Finally, update pit source clock frequency.*/
+                CLOCK_SYS_GetFreq(%<config_params.lpit_clock_name>, &busClock);
+            }
+        %endif
+
+        %if !EXISTS("GLOBAL_PROFILER_INIT")
+            %assign ::GLOBAL_PROFILER_INIT = 1
+            profiler_init();
+        %endif
+    %endif
+%endfunction
+
+%function FcnGenerateExtModeMain() Output
+
+    %assign fname = LibCreateSourceFile("Source", "Custom", "mbd_main")
+    %openfile tmpFcnBuf
+    /* Model's headers */
+    #include "%<FcnGetPublicModelHeaderFile()>"
+    #include "ext_work.h"                  /* External mode header file */
+
+    %<FcnGenerateTaskingCode()>\
+
+    %include "mbd_s32k_extmode_main.tlc"
+
+    %closefile tmpFcnBuf
+    %<LibSetSourceFileSection(fname, "Functions", tmpFcnBuf)>
+%endfunction
+
+%function FcnGenerateRtiostreamTestMain(fName) Output
+    %assign cFile = SLibAddModelFile("SystemBody", "Simulink", fName)
+
+    %openfile tmpFcnBuf
+    #include <stddef.h>
+
+    #include "rtiostreamtest.h"
+    %closefile tmpFcnBuf
+    %<SLibSetModelFileAttribute(cFile, "Includes", tmpFcnBuf)>
+
+    %openfile tmpFcnBuf
+    int main(void)
+    {
+        return rtiostreamtest(0, NULL);
+    }
+    %closefile tmpFcnBuf
+    %<SLibSetModelFileAttribute(cFile, "Functions", tmpFcnBuf)>
+%endfunction

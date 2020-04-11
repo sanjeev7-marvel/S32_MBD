@@ -1,0 +1,100 @@
+%implements cmp_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+    %<LibAddToCommonIncludes("cmp_driver.h")>
+    %<LibAddToCommonIncludes("pcc_hw_access.h")>
+    %<LibAddToCommonIncludes("pins_port_hw_access.h")>
+
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+    %assign blockPath = LibGetBlockPath(block)
+
+    %assign sdk_params = FEVAL("mbd_s32k_cmp_config_sdk_params", blockPath)
+    %assign info = FEVAL("mbd_s32k_block_info", blockPath)
+
+    %with sdk_params
+    {
+        %assign roundRobinChannels = FEVAL("dec2hex", (%<user_config.chn7> << 7) | (%<user_config.chn6> << 6) | (%<user_config.chn5> << 5) | (%<user_config.chn4> << 4) | (%<user_config.chn3> << 3) | (%<user_config.chn2> << 2) | (%<user_config.chn1> << 1) | %<user_config.chn0>)
+
+        %assign pin_info = FEVAL("mbd_s32k_config_get_pin_info", blockPath)
+        %assign clk_info = FEVAL("mbd_s32k_cmp_get_clk_names", pin_info)
+        %if (info.inpsel == "IN1, from the analog 8-1 mux")
+            /* Plus pin configuration */
+            PCC_SetClockMode(PCC, %<clk_info.inp>, true);
+            PINS_SetMuxModeSel(%<pin_info.user_config.cmp_inp_info.user_config.port>, %<pin_info.user_config.cmp_inp_info.user_config.pin>, %<pin_info.user_config.cmp_inp_info.user_config.mux>);
+        %endif
+        %if (info.innsel == "IN1, from the analog 8-1 mux")
+            /* Minus pin configuration */
+            PCC_SetClockMode(PCC, %<clk_info.inn>, true);
+            PINS_SetMuxModeSel(%<pin_info.user_config.cmp_inn_info.user_config.port>, %<pin_info.user_config.cmp_inn_info.pin>, %<pin_info.user_config.cmp_inn_info.user_config.mux>);
+        %endif
+
+        /* Out pin configuration */
+        PCC_SetClockMode(PCC, %<clk_info.out>, true);
+        PINS_SetMuxModeSel(%<pin_info.user_config.cmp_out_info.user_config.port>, %<pin_info.user_config.cmp_out_info.user_config.pin>, %< pin_info.user_config.cmp_out_info.user_config.mux>);
+
+        /* Enable CMP%<instance> clock */
+        PCC_SetClockMode(PCC, %<periph_clock>, true);
+
+        cmp_module_t cmp_general_config = {
+            .comparator = {
+                .dmaTriggerState        = false,
+                .outputInterruptTrigger = CMP_NO_EVENT,
+                .mode                   = %<user_config.mode>,
+                .filterSamplePeriod     = %<user_config.fpr>,
+                .filterSampleCount      = %<user_config.filter_cnt>,
+                .powerMode              = %<user_config.pmode>,
+                .inverterState          = %<user_config.invt>,
+                .pinState               = %<user_config.ope>,
+                .outputSelect           = %<user_config.cos>,
+                .offsetLevel            = %<user_config.offset>,
+                .hysteresisLevel        = %<user_config.hystctr>
+            },
+            .mux = {
+                .positivePortMux        = %<user_config.inpsel>,
+                .negativePortMux        = %<user_config.innsel>,
+                .positiveInputMux       = %<user_config.psel>,
+                .negativeInputMux       = %<user_config.msel>
+            },
+            .dac = {
+                .voltageReferenceSource = %<user_config.vrsel>,
+                .voltage                = %<user_config.vosel>,
+                .state                  = %<user_config.dacen>
+            },
+            .triggerMode = {
+                .roundRobinState            = %<user_config.rre>,
+                .roundRobinInterruptState   = false,
+                .fixedPort                  = %<user_config.fxmp>,
+                .fixedChannel               = %<user_config.fxmxch>,
+                .samples                    = %<user_config.nsam>,
+                .initializationDelay        = 0,
+                .roundRobinChannelsState    = 0x%<roundRobinChannels>,
+                .programedState             = 0
+            }
+        };
+
+        CMP_DRV_Init(%<instance>, &cmp_general_config);
+    }
+    %endwith
+
+    %endif
+%endfunction

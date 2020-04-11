@@ -1,0 +1,347 @@
+%implements tpp_s32k_config "C"
+
+%% Copyright (c) 2019 NXP.
+%% All rights reserved.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% function executes once per block type before code generation begins
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function BlockTypeSetup(block, system) void
+	%assign blockPath = LibGetBlockPath(block)
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+	%<LibAddToCommonIncludes("device_registers.h")>
+	%<LibAddToCommonIncludes("pins_driver.h")>
+	%<LibAddToCommonIncludes("tpp_ic_init.h")>
+	%<LibAddToCommonIncludes("common_aml.h")>
+    %endif
+%endfunction
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% function executes once and only once at the beginning of the simulation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output
+	%assign blockPath = LibGetBlockPath(block)
+    %if FEVAL("mbd_s32k_is_codegen_compatible", CompiledModel.Name)
+
+        %assign tppParams = FEVAL("tpp_s32k_params", blockPath)
+        %assign tppInstance = %<tppParams.tppInstance>
+        %assign mcu_family = FEVAL("mbd_s32k_get_target_family")
+
+        %if !EXISTS("TPP_%<tppInstance>_CONFIG_STRUCT_DEFINED")
+
+        %% Generate the  tpp_init.h file
+        %openfile h_tpp_ic_init_file = "tpp_ic_init.h"
+        #ifndef TPP_IC_INIT_H_
+        #define TPP_IC_INIT_H_
+
+        /*******************************************************************************
+        * Includes
+        *******************************************************************************/
+        #include "common_aml.h"
+        #include "gpio_aml.h"
+        #include "tpp.h"
+        #include "ftm_common.h"
+        #include "ftm_pwm_driver.h"
+        #include "pins_driver.h"
+        #include "gpio_irq.h"
+
+        /*******************************************************************************
+        * Constants and macros
+        *******************************************************************************/
+        /* Frequency of SPI communication with device in Hz. */
+        #define LPSPI_FREQ      (%<tppParams.SPI_baudRateHz>)
+
+        /* Device interrupt masks set by MASK0 and MASK1 commands. */
+        #define INIT_INTERRUPTS0 (%<tppParams.TppIntMask_0>)
+        #define INIT_INTERRUPTS1 (%<tppParams.TppIntMask_1>)
+
+        /* Device configuration set by Mode command. */
+        #define INIT_MODE        (%<tppParams.TppMode>)
+
+        /* Dead time of device in nanoseconds. */
+        #define INIT_DEADTIME    (%<tppParams.Deadtime>)
+        typedef union
+        {
+            uint16_t R;
+            struct
+            {
+                uint16_t tppIntFlag : 1;
+                uint16_t tppClearErr : 1;
+                uint16_t tppError : 1;
+                uint16_t tppInitDone : 1;
+                uint16_t Reserved : 12;
+            }B;
+        }tppStatus_t;
+        /* TPP status variables */
+        tppStatus_t    tppStatus;
+        /* TPP configuration structure */
+        tpp_drv_config_t  tppDrvConfig;
+
+        /*******************************************************************************
+        * Global function prototypes
+        *******************************************************************************/
+        void TPP_tppDrvConfig(void);
+        void TPP_IC_Init(void);
+        void TPP_init_pins(void);
+        void TPP_reconfig_pwm_pins(void);
+        void tpp_interrupt_enable(uint8_t priority);
+        void tpp_interrupt_disable(void);
+        void toggle_restoreTppPwmPins (void);
+        #endif
+        %closefile h_tpp_ic_init_file
+
+        %% Generate the  tpp_init.c file
+        %openfile c_tpp_ic_init_file = "tpp_ic_init.c"
+        #include "tpp_ic_init.h"
+        #include "pcc_hw_access.h"
+
+        %if (tppParams.tppIsrBlocks == 1)
+        extern void GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback (void);
+        %endif
+        void TPP_tppDrvConfig(void)
+        {
+            tppDrvConfig.en1PinIndex    = %<tppParams.tppPinConfig.tppEn1Pin.user_config.pin>;
+            tppDrvConfig.en1PinInstance = %<tppParams.tppPinConfig.tppEn1Pin.user_config.inst>;
+            tppDrvConfig.en2PinIndex    = %<tppParams.tppPinConfig.tppEn2Pin.user_config.pin>;
+            tppDrvConfig.en2PinInstance = %<tppParams.tppPinConfig.tppEn2Pin.user_config.inst>;
+            tppDrvConfig.rstPinIndex    = %<tppParams.tppPinConfig.tppRstPin.user_config.pin>;
+            tppDrvConfig.rstPinInstance = %<tppParams.tppPinConfig.tppRstPin.user_config.inst>;
+
+            tppDrvConfig.deviceConfig.deadtime =    INIT_DEADTIME;
+            tppDrvConfig.deviceConfig.intMask0 =    INIT_INTERRUPTS0;
+            tppDrvConfig.deviceConfig.intMask1 =    INIT_INTERRUPTS1;
+            tppDrvConfig.deviceConfig.modeMask =    INIT_MODE;
+
+            tppDrvConfig.deviceConfig.statusRegister[0U] = 0U;
+            tppDrvConfig.deviceConfig.statusRegister[1U] = 0U;
+            tppDrvConfig.deviceConfig.statusRegister[2U] = 0U;
+            tppDrvConfig.deviceConfig.statusRegister[3U] = 0U;
+
+            tppDrvConfig.csPinIndex = %<tppParams.tppPinConfig.tppCsPin.user_config.pin>;
+            tppDrvConfig.csPinInstance = %<tppParams.tppPinConfig.tppCsPin.user_config.inst>;
+            tppDrvConfig.spiInstance = %<tppParams.tppSpiInstance>;
+            tppDrvConfig.spiTppConfig.baudRateHz =    LPSPI_FREQ;
+        };
+
+        void TPP_init_pins(void)
+        {
+            pin_settings_config_t tpp_pins_InitConfigArr[5] =
+            {
+                {
+                    .base = %<tppParams.tppPinConfig.tppEn1Pin.user_config.port>,
+                    .pinPortIdx = %<tppParams.tppPinConfig.tppEn1Pin.user_config.pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .driveSelect = PORT_LOW_DRIVE_STRENGTH,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<tppParams.tppPinConfig.tppEn1Pin.user_config.pt>,
+                    .direction = GPIO_OUTPUT_DIRECTION,
+                    .digitalFilter = false,
+                    .initValue     = 0u,
+                },
+                {
+                    .base = %<tppParams.tppPinConfig.tppEn2Pin.user_config.port>,
+                    .pinPortIdx = %<tppParams.tppPinConfig.tppEn2Pin.user_config.pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .driveSelect = PORT_LOW_DRIVE_STRENGTH,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<tppParams.tppPinConfig.tppEn2Pin.user_config.pt>,
+                    .direction = GPIO_OUTPUT_DIRECTION,
+                    .digitalFilter = false,
+                    .initValue     = 0u,
+                },
+                {
+                    .base = %<tppParams.tppPinConfig.tppRstPin.user_config.port>,
+                    .pinPortIdx = %<tppParams.tppPinConfig.tppRstPin.user_config.pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .driveSelect = PORT_LOW_DRIVE_STRENGTH,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<tppParams.tppPinConfig.tppRstPin.user_config.pt>,
+                    .direction = GPIO_OUTPUT_DIRECTION,
+                    .digitalFilter = false,
+                    .initValue     = 0u,
+                },
+                {
+                    .base = %<tppParams.tppPinConfig.tppCsPin.user_config.port>,
+                    .pinPortIdx = %<tppParams.tppPinConfig.tppCsPin.user_config.pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .driveSelect = PORT_LOW_DRIVE_STRENGTH,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<tppParams.tppPinConfig.tppCsPin.user_config.pt>,
+                    .direction = GPIO_OUTPUT_DIRECTION,
+                    .digitalFilter = false,
+                    .initValue     = 1u,
+                },
+                {
+                    .base = %<tppParams.tppPinConfig.tppIntPin.user_config.port>,
+                    .pinPortIdx = %<tppParams.tppPinConfig.tppIntPin.user_config.pin>,
+                    .pullConfig = PORT_INTERNAL_PULL_NOT_ENABLED,
+                    .passiveFilter = false,
+                    .mux = PORT_MUX_AS_GPIO,
+                    .pinLock = false,
+                    .intConfig = PORT_DMA_INT_DISABLED,
+                    .clearIntFlag = true,
+                    .gpioBase = %<tppParams.tppPinConfig.tppIntPin.user_config.pt>,
+                    .direction = GPIO_INPUT_DIRECTION,
+                }
+            };
+
+            %if mcu_family == "s32k14"
+                /* Enable clock for %<tppParams.tppPinConfig.tppEn1Pin.user_config.port> */
+                PCC_SetClockMode(PCC, PCC_%<tppParams.tppPinConfig.tppEn1Pin.user_config.port>_CLOCK, true);
+                PCC_SetClockMode(PCC, PCC_%<tppParams.tppPinConfig.tppEn2Pin.user_config.port>_CLOCK, true);
+                PCC_SetClockMode(PCC, PCC_%<tppParams.tppPinConfig.tppRstPin.user_config.port>_CLOCK, true);
+                PCC_SetClockMode(PCC, PCC_%<tppParams.tppPinConfig.tppCsPin.user_config.port>_CLOCK, true);
+                PCC_SetClockMode(PCC, PCC_%<tppParams.tppPinConfig.tppIntPin.user_config.port>_CLOCK, true);
+            %else
+                /* Enable clock for %<tppParams.tppPinConfig.tppEn1Pin.user_config.port> */
+                PCC_SetClockMode(PCC, %<tppParams.tppPinConfig.tppEn1Pin.user_config.port>_CLK, true);
+                PCC_SetClockMode(PCC, %<tppParams.tppPinConfig.tppEn2Pin.user_config.port>_CLK, true);
+                PCC_SetClockMode(PCC, %<tppParams.tppPinConfig.tppRstPin.user_config.port>_CLK, true);
+                PCC_SetClockMode(PCC, %<tppParams.tppPinConfig.tppCsPin.user_config.port>_CLK, true);
+                PCC_SetClockMode(PCC, %<tppParams.tppPinConfig.tppIntPin.user_config.port>_CLK, true);
+            %endif
+            /* Initialize TPP pins */
+            PINS_DRV_Init(5, tpp_pins_InitConfigArr);
+
+            %foreach pin_idx = 6
+                PINS_SetMuxModeSel (%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.port>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>, PORT_MUX_AS_GPIO);
+                PINS_DRV_SetPinDirection(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                             GPIO_OUTPUT_DIRECTION);
+
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                       %<tppParams.tppPairPolarity[pin_idx]>);
+            %endforeach
+        };
+
+        void TPP_reconfig_pwm_pins(void)
+        {
+        %foreach pin_idx = 6
+            PINS_SetMuxModeSel (%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.port>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>, PORT_MUX_AS_GPIO);
+            PINS_DRV_SetPinDirection(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                         GPIO_OUTPUT_DIRECTION);
+
+            PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                   %<tppParams.tppPairPolarity[pin_idx]>);
+        %endforeach
+        }
+        void TPP_IC_Init(void)
+        {
+            TPP_tppDrvConfig();
+
+            %if (tppParams.initTppNow == 1)
+                TPP_init_pins();
+                TPP_ConfigureGpio(&tppDrvConfig);
+                TPP_reconfig_pwm_pins();
+                TPP_Init(&tppDrvConfig, tppModeEnable);
+                toggle_restoreTppPwmPins();
+            %endif
+
+            %if (tppParams.tppIntEn == 1) && (tppParams.tppIsrBlocks == 1)
+                tpp_interrupt_enable(%<tppParams.tppIntPrio>);
+            %endif
+        }
+
+        void toggle_restoreTppPwmPins()
+        {
+            /* Turn on LS pwm channels */
+            WAIT_AML_WaitUs(TPP_LS_TOGGLE_DELAY);
+            %foreach pin_idx = 6
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                       1u);
+            %endforeach
+
+            /* Turn off LS pwm channels */
+            WAIT_AML_WaitUs(TPP_LS_TOGGLE_DELAY);
+            %foreach pin_idx = 6
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                       %<tppParams.tppPairPolarity[pin_idx]>);
+            %endforeach
+
+            /* Turn on HS pwm channels */
+            WAIT_AML_WaitUs(TPP_HS_TOGGLE_DELAY);
+            %foreach pin_idx = 6
+
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                       0u);
+            %endforeach
+
+            /* Turn off HS pwm channels */
+            WAIT_AML_WaitUs(TPP_HS_TOGGLE_DELAY);
+            %foreach pin_idx = 6
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,
+                       %<tppParams.tppPairPolarity[pin_idx]>);
+            %endforeach
+
+            /* Turn on HS pwm channels */
+            WAIT_AML_WaitUs(TPP_HS_TOGGLE_DELAY);
+            %foreach pin_idx = 6
+                PINS_DRV_WritePin(%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pt>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>, 0u);
+            %endforeach
+
+            %foreach pin_idx = 6
+                PINS_SetMuxModeSel (%<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.port>, %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.pin>,  %<tppParams.tppPinConfig.pwmPins[pin_idx].user_config.mux>);
+            %endforeach
+        }
+
+        %if (tppParams.tppIsrBlocks == 1)
+        void tpp_interrupt_enable(uint8_t priority)
+        {
+            /* Set GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin> interrupt configuration. */
+            PINS_DRV_SetPinIntSel(%<tppParams.tppPinConfig.tppIntPin.user_config.port>, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, PORT_INT_RISING_EDGE);
+
+            %if mcu_family == "s32k14"
+                /* Set priority for GPIO%<tppParams.tppPinConfig.tppIntPin.user_config.port> ISR. */
+                INT_SYS_SetPriority (%<tppParams.tppPinConfig.tppIntPin.user_config.port>_IRQn, priority);
+                /* Enable GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port> interrupt. */
+                INT_SYS_EnableIRQ(%<tppParams.tppPinConfig.tppIntPin.user_config.port>_IRQn);
+            %else
+                /* Set priority for GPIO%<tppParams.tppPinConfig.tppIntPin.user_config.port> ISR. */
+                INT_SYS_SetPriority (PORT_IRQn, priority);
+                /* Enable GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port> interrupt. */
+                INT_SYS_EnableIRQ(PORT_IRQn);
+            %endif
+            /* Register GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin> callback function.*/
+            %if (tppParams.tppPinConfig.tppIntPin.user_config.port == "PORTA")
+                GPI_DRV_InstallCallback(0, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, &GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback);
+            %elseif (tppParams.tppPinConfig.tppIntPin.user_config.port == "PORTB")
+                GPI_DRV_InstallCallback(1, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, &GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback);
+            %elseif (tppParams.tppPinConfig.tppIntPin.user_config.port == "PORTC")
+                GPI_DRV_InstallCallback(2, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, &GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback);
+            %elseif (tppParams.tppPinConfig.tppIntPin.user_config.port == "PORTD")
+                GPI_DRV_InstallCallback(3, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, &GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback);
+            %elseif (tppParams.tppPinConfig.tppIntPin.user_config.port == "PORTE")
+                GPI_DRV_InstallCallback(4, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, &GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin>_callback);
+            %endif
+        }
+        void tpp_interrupt_disable(void)
+        {
+            /* Clear GPI%<tppParams.tppPinConfig.tppIntPin.user_config.port>%<tppParams.tppPinConfig.tppIntPin.user_config.pin> interrupt configuration. */
+            PINS_DRV_SetPinIntSel(%<tppParams.tppPinConfig.tppIntPin.user_config.port>, %<tppParams.tppPinConfig.tppIntPin.user_config.pin>, PORT_DMA_INT_DISABLED);
+        }
+        %endif
+
+        %closefile c_tpp_ic_init_file
+        %endif
+    %endif
+%endfunction

@@ -1,0 +1,66 @@
+
+%implements GMCLIB_DecouplingPMSM_SF_FLT "C"
+
+
+%% Function: BlockTypeSetup ===================================================
+%% Abstract:
+%%   Declare external variables and functions
+%%
+%function BlockTypeSetup(block, system) void
+
+   %if !EXISTS("GMCLIB_INCLUDED")
+      %assign ::GMCLIB_INCLUDED = 1
+      %<LibCacheIncludes("#include \"gmclib.h\"" + "\n")>
+   %endif 
+
+%endfunction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Start Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%function Start(block, system) Output 
+
+   
+%endfunction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Outputs Function of S-Function 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Function: Outputs ==========================================================
+%% Abstract:
+%%
+%function Outputs(block, system) Output
+
+  %assign fltKd  = CAST("Real32",Parameter[0].Value[0])
+  %assign fltKq  = CAST("Real32",Parameter[1].Value[0])
+
+  %assign Ud     = LibBlockInputSignal(0, "", "", 0)
+  %assign Uq     = LibBlockInputSignal(1, "", "", 0)
+  %assign Id     = LibBlockInputSignal(2, "", "", 0)
+  %assign Iq     = LibBlockInputSignal(3, "", "", 0)
+  %assign AngVel = LibBlockInputSignal(4, "", "", 0)
+  %assign UdDec  = LibBlockOutputSignal(0, "", "", 0)
+  %assign UqDec  = LibBlockOutputSignal(1, "", "", 0)
+  
+  { 
+    SWLIBS_2Syst_FLT UdqDec;  
+    SWLIBS_2Syst_FLT Udq;
+	SWLIBS_2Syst_FLT Idq;
+	const SWLIBS_2Syst_FLT *const pUdq = &Udq;
+	const SWLIBS_2Syst_FLT *const pIdq = &Idq;
+    static const GMCLIB_DECOUPLINGPMSM_T_FLT param = { %<fltKd>, %<fltKq> };
+	static const GMCLIB_DECOUPLINGPMSM_T_FLT *const pParam = &param;
+	
+	Udq.fltArg1 = %<Ud>;
+	Udq.fltArg2 = %<Uq>; 
+	Idq.fltArg1 = %<Id>;
+	Idq.fltArg2 = %<Iq>; 
+    GMCLIB_DecouplingPMSM_FLT(&UdqDec, pUdq, pIdq, %<AngVel>, pParam);
+	%<UdDec> = UdqDec.fltArg1;
+	%<UqDec> = UdqDec.fltArg2;
+  }
+
+%endfunction
